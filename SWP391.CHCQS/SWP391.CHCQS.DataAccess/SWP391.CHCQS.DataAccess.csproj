@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SWP391.CHCQS.Services\SWP391.CHCQS.Services.csproj" />
+    <ProjectReference Include="..\SWP391.CHCQS.Services\SWP391.CHCQS.Services.csproj">
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

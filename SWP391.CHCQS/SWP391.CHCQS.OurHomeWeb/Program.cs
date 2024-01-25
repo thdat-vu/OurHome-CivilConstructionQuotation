@@ -30,7 +30,7 @@ namespace SWP391.CHCQS.OurHomeWeb
 			{
 				endpoints.MapControllerRoute(
 				  name: "areas",
-				  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+				  pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
 				);
 			});
 
