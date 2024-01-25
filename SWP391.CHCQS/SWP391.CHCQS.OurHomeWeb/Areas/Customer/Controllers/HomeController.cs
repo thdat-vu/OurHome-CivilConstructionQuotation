@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,22 +19,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
             return View();
         }
 
-        public IActionResult Combo()
-        {
-            return View();
-        }
-
-        public IActionResult Project()
-        {
-            return View();
-        }
-
-        public IActionResult Material()
-        {
-            return View();
-        }
-
-        public IActionResult Quotation()
+        public IActionResult Privacy()
         {
             return View();
         }
