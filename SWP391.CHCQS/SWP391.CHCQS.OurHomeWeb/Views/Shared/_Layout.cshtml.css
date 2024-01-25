@@ -46,3 +46,9 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+/* Định dạng màu cho nút Sign Up và Login */
+.signup-btn, .login-btn {
+    background-color: #F27456;
+    color: #fff;
+}
