@@ -18,6 +18,9 @@
     <ProjectReference Include="..\SWP391.CHCQS.DataAccess\SWP391.CHCQS.DataAccess.csproj">
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\SWP391.CHCQS.Utility\SWP391.CHCQS.Utility.csproj">
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
