@@ -12,6 +12,10 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="wwwroot\images\material\" />
+    <Folder Include="wwwroot\images\combo\" />
+    <Folder Include="wwwroot\images\quotation\" />
+    <Folder Include="wwwroot\images\project\" />
   </ItemGroup>
 
   <ItemGroup>
