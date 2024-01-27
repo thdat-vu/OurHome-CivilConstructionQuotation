@@ -20,6 +20,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" />
 
+	<!-- Link datatables css -->
+	<link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -230,6 +232,10 @@
 	<script src="~/js/demo/chart-area-demo.js"></script>
 	<script src="~/js/demo/chart-pie-demo.js"></script>
 	<script src="https://cdn.tiny.cloud/1/9v3f6801xkjbo5g8uijy1kuncu1ltgp0khqtlsn6d9oulwdj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+	<!-- Datatable scripts -->
+	<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
