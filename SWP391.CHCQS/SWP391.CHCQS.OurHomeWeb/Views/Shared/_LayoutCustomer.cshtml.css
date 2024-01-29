@@ -1,7 +1,7 @@
 ﻿ Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. 
 
-/*a.navbar-brand {
+a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
@@ -45,10 +45,11 @@ button.accept-policy {
   width: 100%;
   white-space: nowrap;
   line-height: 60px;
-}*/
+}
 
 <<<<<<< Updated upstream
 /* Định dạng màu cho nút Sign Up và Login */
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*.signup-btn, .login-btn {
 =======
@@ -57,6 +58,9 @@ button.accept-policy {
 >>>>>>> Stashed changes
 .signup-btn, .login-btn {
 >>>>>>> XuanDat
+=======
+.signup-btn, .login-btn {
+>>>>>>> parent of c03890a (10h50.1/29/2024-DatSung: Updated UI for Customer)
     background-color: #F27456;
     color: #fff;
-}*/
+}
