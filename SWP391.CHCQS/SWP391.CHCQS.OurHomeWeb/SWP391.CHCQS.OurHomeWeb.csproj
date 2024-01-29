@@ -7,11 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Compile Remove="SWP391.CHCQS.OurHomeWeb\**" />
+    <Content Remove="Controllers\**" />
+    <Content Remove="SWP391.CHCQS.OurHomeWeb\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="SWP391.CHCQS.OurHomeWeb\**" />
+    <None Remove="Controllers\**" />
+    <None Remove="SWP391.CHCQS.OurHomeWeb\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="wwwroot\images\material\" />
+    <Folder Include="wwwroot\images\combo\" />
+    <Folder Include="wwwroot\images\quotation\" />
+    <Folder Include="wwwroot\images\project\" />
   </ItemGroup>
 
   <ItemGroup>
