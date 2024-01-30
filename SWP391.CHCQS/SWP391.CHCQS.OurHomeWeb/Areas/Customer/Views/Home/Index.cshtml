@@ -1,4 +1,8 @@
-﻿<div class="row mb-5 align-items-center">
+﻿@{
+	ViewData["Title"] = "Home";
+}
+
+<div class="row mb-5 align-items-center">
 	<div class="col mt-5">
 		<h5 class="text-muted">Home Buying Will Never Be The Same</h5>
 
@@ -7,7 +11,7 @@
 		<h5 class="text-muted">Vietnam's first consumer-centri civil<br>construction quotation platform</h5>
 
 		<div class="btn mt-sm-5" style="background-color:#F27456">
-			<a class="text-decoration-none text-white" href="">Get Quote Now</a>
+			<a class="text-decoration-none text-white" asp-area="Customer" asp-controller="Quotation" asp-action="Index">Get Quote Now</a>
 		</div>
 	</div>
 	<div class="col img-thumbnail">
@@ -73,97 +77,171 @@
 <div class="col">
 	<div class="row">
 		<div class="mt-5 mb-5 col-sm d-flex justify-content-between align-items-center">
-			<h1 style="color:#F27456" >Our Projects</h1>
+			<h1 style="color:#F27456">Our Projects</h1>
 			<div class="btn">
-				<a class="text-decoration-underline fa-1x" style="color:#F27456" href="">See All</a>
+				<a class="text-decoration-underline fa-1x" style="color:#F27456" asp-area="Customer" asp-controller="Project" asp-action="Index">See All</a>
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row m-auto">
 		<div class="col-sm-4 mb-5">
-			<div class="img-thumbnail row">
+			<div class="img-thumbnail">
 				<img src="~/images/project_bg/project_bg_4.jpg" width="100%"></img>
 				<div class="m-sm-3 text-dark">
 					<h3><b>Name: </b>Villa House</h3>
 					<p><b>Location:</b> Ho Chi Minh city</p>
-					<p><b>Scale:</b> 2 Billion</p>
+					<p><b>Price:</b> 2 Billion</p>
 					<p><b>Size:</b> 120 x 230</p>
 				</div>
-				<div class="btn" style="background-color:#F27456">
-					<a class="text-decoration-none text-white" href="">Detail</a>
+				<div class="btn w-100" style="background-color:#F27456">
+					<a class="p-5 text-decoration-none text-white" asp-area="Customer" asp-controller="Project" asp-action="Detail" asp-route-projectId="">Detail</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-4 mb-5">
-			<div class="img-thumbnail row">
+			<div class="img-thumbnail">
 				<img src="~/images/project_bg/project_bg_4.jpg" width="100%"></img>
 				<div class="m-sm-3 text-dark">
 					<h3><b>Name: </b>Villa House</h3>
 					<p><b>Location:</b> Ho Chi Minh city</p>
-					<p><b>Scale:</b> 2 Billion</p>
+					<p><b>Price:</b> 2 Billion</p>
 					<p><b>Size:</b> 120 x 230</p>
 				</div>
-				<div class="btn" style="background-color:#F27456">
-					<a class="text-decoration-none text-white" href="">Detail</a>
+				<div class="btn w-100" style="background-color:#F27456">
+					<a class="p-5 text-decoration-none text-white" asp-area="Customer" asp-controller="Project" asp-action="Detail" asp-route-projectId="">Detail</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-4 mb-5">
-			<div class="img-thumbnail row">
+			<div class="img-thumbnail">
 				<img src="~/images/project_bg/project_bg_4.jpg" width="100%"></img>
 				<div class="m-sm-3 text-dark">
 					<h3><b>Name: </b>Villa House</h3>
 					<p><b>Location:</b> Ho Chi Minh city</p>
-					<p><b>Scale:</b> 2 Billion</p>
+					<p><b>Price:</b> 2 Billion</p>
 					<p><b>Size:</b> 120 x 230</p>
 				</div>
-				<div class="btn" style="background-color:#F27456">
-					<a class="text-decoration-none text-white" href="">Detail</a>
+				<div class="btn w-100" style="background-color:#F27456">
+					<a class="p-5 text-decoration-none text-white" asp-area="Customer" asp-controller="Project" asp-action="Detail" asp-route-projectId="">Detail</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-4 mb-5">
-			<div class="img-thumbnail row">
+			<div class="img-thumbnail">
 				<img src="~/images/project_bg/project_bg_4.jpg" width="100%"></img>
 				<div class="m-sm-3 text-dark">
 					<h3><b>Name: </b>Villa House</h3>
 					<p><b>Location:</b> Ho Chi Minh city</p>
-					<p><b>Scale:</b> 2 Billion</p>
+					<p><b>Price:</b> 2 Billion</p>
 					<p><b>Size:</b> 120 x 230</p>
 				</div>
-				<div class="btn" style="background-color:#F27456">
-					<a class="text-decoration-none text-white" href="">Detail</a>
+				<div class="btn w-100" style="background-color:#F27456">
+					<a class="p-5 text-decoration-none text-white" asp-area="Customer" asp-controller="Project" asp-action="Detail" asp-route-projectId="">Detail</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-4 mb-5">
-			<div class="img-thumbnail row">
+			<div class="img-thumbnail">
 				<img src="~/images/project_bg/project_bg_4.jpg" width="100%"></img>
 				<div class="m-sm-3 text-dark">
 					<h3><b>Name: </b>Villa House</h3>
 					<p><b>Location:</b> Ho Chi Minh city</p>
-					<p><b>Scale:</b> 2 Billion</p>
+					<p><b>Price:</b> 2 Billion</p>
 					<p><b>Size:</b> 120 x 230</p>
 				</div>
-				<div class="btn" style="background-color:#F27456">
-					<a class="text-decoration-none text-white" href="">Detail</a>
+				<div class="btn w-100" style="background-color:#F27456">
+					<a class="p-5 text-decoration-none text-white" asp-area="Customer" asp-controller="Project" asp-action="Detail" asp-route-projectId="">Detail</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-4 mb-5">
-			<div class="img-thumbnail row">
+			<div class="img-thumbnail">
 				<img src="~/images/project_bg/project_bg_4.jpg" width="100%"></img>
 				<div class="m-sm-3 text-dark">
 					<h3><b>Name: </b>Villa House</h3>
 					<p><b>Location:</b> Ho Chi Minh city</p>
-					<p><b>Scale:</b> 2 Billion</p>
+					<p><b>Price:</b> 2 Billion</p>
 					<p><b>Size:</b> 120 x 230</p>
 				</div>
-				<div class="btn" style="background-color:#F27456">
-					<a class="text-decoration-none text-white" href="">Detail</a>
+				<div class="btn w-100" style="background-color:#F27456">
+					<a class="p-5 text-decoration-none text-white" asp-area="Customer" asp-controller="Project" asp-action="Detail" asp-route-projectId="">Detail</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+<hr></hr>
+
+<div class="row container align-items-center mt-5 mb-5 m-auto">
+	<div class="col-sm-6">
+		<div class="row">
+			<div class="d-flex align-items-center justify-content-between">
+				<h1 class="mt-5 mb-5" style="color:#F27456">Our Combo</h1>
+				<div class="btn">
+					<a class="text-decoration-underline fa-1x" style="color:#F27456" asp-area="Customer" asp-controller="Combo" asp-action="Index">See All</a>
+				</div>
+			</div>
+			<p>Our commitment is to deliver excellence in every aspect, ensuring your satisfaction and peace of mind. Explore our diverse range of services tailored to enhance your experience.</p>
+		</div>
+		<div class="col img-thumbnail">
+			<img class="w-100" src="~/images/project_bg/project_bg_4.jpg"></img>
+		</div>
+	</div>
+
+	<div class="col-sm-6 align-items-center">
+
+		<div class="row p-1">
+			<div class="col img-thumbnail">
+				<img src="~/images/combo_bg/combo_bg_1.jpg" class="w-100"></img>
+			</div>
+			<div class="col">
+				<h3></b>Residential Construction</h3>
+				<p><b>Price:</b> 2 Billion</p>
+				<div class="btn w-100" style="background-color:#F27456">
+					<a class="p-5 text-decoration-none text-white" asp-area="Customer" asp-controller="Combo" asp-action="Detail" asp-route-projectId="">Detail</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row p-1">
+			<div class="col img-thumbnail">
+				<img src="~/images/combo_bg/combo_bg_1.jpg" class="w-100"></img>
+			</div>
+			<div class="col">
+				<h3></b>Residential Construction</h3>
+				<p><b>Price:</b> 2 Billion</p>
+				<div class="btn w-100" style="background-color:#F27456">
+					<a class="p-5 text-decoration-none text-white" asp-area="Customer" asp-controller="Combo" asp-action="Detail" asp-route-projectId="">Detail</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row p-1">
+			<div class="col img-thumbnail">
+				<img src="~/images/combo_bg/combo_bg_1.jpg" class="w-100"></img>
+			</div>
+			<div class="col">
+				<h3></b>Residential Construction</h3>
+				<p><b>Price:</b> 2 Billion</p>
+				<div class="btn w-100" style="background-color:#F27456">
+					<a class="p-5 text-decoration-none text-white" asp-area="Customer" asp-controller="Combo" asp-action="Detail" asp-route-projectId="">Detail</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row p-1">
+			<div class="col img-thumbnail">
+				<img src="~/images/combo_bg/combo_bg_1.jpg" class="w-100"></img>
+			</div>
+			<div class="col">
+				<h3></b>Residential Construction</h3>
+				<p><b>Price:</b> 2 Billion</p>
+				<div class="btn w-100" style="background-color:#F27456">
+					<a class="p-5 text-decoration-none text-white" asp-area="Customer" asp-controller="Combo" asp-action="Detail" asp-route-projectId="">Detail</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
