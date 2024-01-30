@@ -16,10 +16,10 @@
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" />
 </head>
 <body>
-	<header>
+	<header class="sticky-top">
 		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
 			<div class="container-fluid">
-				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/Logo.png" width="150px"></img></a>
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" width="150px"></img></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 						aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -63,29 +63,28 @@
 		</main>
 	</div>
 
-	<footer class="border-top footer text-muted">
+	<footer class="border-top text-muted">
 		<div class="container">
 			<div class="col text-center mt-2">
-				<img src="~/images/Logo.png" width="150px"></img>
+				<img src="~/images/logo.png" width="200px"></img>
 			</div>
 			<div class="row mt-5 mb-5">
 				<div class="col-sm-8">
-					<h6>Contruction Company: OurHome</h6>
-					<h6>Office Address: District 9, Thu Duc City, Ho Chi Minh city</h6>
-					<h6>Hotline: 0908176623</h6>
-					<h6>Email: ourhome.construct@gmail.com</h6>
-
+					<h5>Contruction Company: OurHome</h5>
+					<h5 class="text-wrap">Office Address: District 9, Thu Duc City, Ho Chi Minh city</h5>
+					<h5>Hotline: 0908176623</h5>
+					<h5>Email: ourhome.construct@gmail.com</h5>
 				</div>
 				<div class="col-sm-4">
 					<div class="row">
 						<div class="col-sm-6">
 							<h6><b>Quick Link</b></h6>
 							<ul class="lh-lg">
-								<li><a class="text-decoration-none text-dark" href="">Home</a></li>
-								<li><a class="text-decoration-none text-dark" href="">Combo</a></li>
-								<li><a class="text-decoration-none text-dark" href="">Project</a></li>
-								<li><a class="text-decoration-none text-dark" href="">Material</a></li>
-								<li><a class="text-decoration-none text-dark" href="">Quotation</a></li>
+								<li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a></li>
+								<li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Combo" asp-action="Index">Combo</a></li>
+								<li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Project" asp-action="Index">Project</a></li>
+								<li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Material" asp-action="Index">Material</a></li>
+								<li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Quotation" asp-action="Index">Quotation</a></li>
 							</ul>
 						</div>
 						<div class="col-sm-6">
@@ -95,8 +94,8 @@
 								<li><a class="text-decoration-none text-dark" href=""><i class="fa-brands fa-x-twitter"></i> Twitter</a></li>
 								<li><a class="text-decoration-none text-dark" href=""><i class="fa-brands fa-facebook"></i> Facebook</a></li>
 							</ul>
-							<div class="btn login-btn m-0">
-								<a class="text-decoration-none text-white" href="">Contact Us</a>
+							<div class="btn m-0" style="background-color:#F27456">
+								<a class="text-decoration-none text-white" href="">Get Quote Now</a>
 							</div>
 						</div>
 					</div>
