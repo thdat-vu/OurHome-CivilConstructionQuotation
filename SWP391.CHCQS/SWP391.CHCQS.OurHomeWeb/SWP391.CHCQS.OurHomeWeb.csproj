@@ -22,13 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\material\" />
-    <Folder Include="wwwroot\images\combo\" />
-    <Folder Include="wwwroot\images\quotation\" />
-    <Folder Include="wwwroot\images\project\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SWP391.CHCQS.DataAccess\SWP391.CHCQS.DataAccess.csproj">
       <Private>True</Private>
     </ProjectReference>
