@@ -11,7 +11,7 @@ a {
   color: #0077cc;
 }
 
-.btn-primaryV2 {
+.btn-primary {
     color: #fff;
     background-color: #F27456;
     border-color: #1861ac;
@@ -53,4 +53,9 @@ button.accept-policy {
     color: #fff;
     margin: 5px 20px;
     width: 120px;
+}
+
+.btn-main:hover {
+    color: black;
+    background-color: white;
 }
