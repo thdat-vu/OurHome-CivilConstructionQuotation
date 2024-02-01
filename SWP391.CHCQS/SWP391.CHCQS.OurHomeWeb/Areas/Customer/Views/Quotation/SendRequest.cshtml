@@ -65,6 +65,10 @@
 
 		<div class="row">
 			<div class="col-sm">
+				<label><b>Construct Name:</b></label>
+				<input class="form-control"></input>
+			</div>
+			<div class="col-sm">
 				<label><b>Type of Construction:</b></label>
 				<input class="form-control"></input>
 			</div>
@@ -78,10 +82,10 @@
 			</div>
 		</div>
 
-		<div class="row text-center m-auto mt-3">
+		<div class="row">
 			<div class="col-sm">
-				<label><h5><b>Description:</b></h5></label>
-				<textarea></textarea>
+				<label><b>Description:</b></label>
+				<textarea  class="form-control"></textarea>
 			</div>
 		</div>
 
@@ -94,7 +98,7 @@
 	</form>
 </div>
 
-@section Scripts {
+@* @section Scripts {
 	<script>
 		tinymce.init({
 			selector: 'textarea',
@@ -112,4 +116,4 @@
 	@{
 		<partial name="_ValidationScriptsPartial" />
 	}
-}
+} *@
