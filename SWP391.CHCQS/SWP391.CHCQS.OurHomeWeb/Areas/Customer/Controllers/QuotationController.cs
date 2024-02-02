@@ -10,12 +10,22 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
             return View();
         }
 
-        public async Task<IActionResult> SendRequest()
+        public async Task<IActionResult> CreateRequest()
         {
             return View();  
         }
 
-        public async Task<IActionResult> ViewResponse()
+        public async Task<IActionResult> ManageRequest()
+        {
+            return View("RequestHistory");
+        }
+
+		public async Task<IActionResult> RequestHistory()
+		{
+			return View();
+		}
+
+		public async Task<IActionResult> ViewResponse()
         {
             return View();
         }
