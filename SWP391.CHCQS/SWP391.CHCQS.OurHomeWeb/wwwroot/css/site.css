@@ -16,3 +16,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.bg-main {
+    background-color: #F27456;
+    color: white;
+}
+
+.text-main {
+    color: #F27456;
+}
