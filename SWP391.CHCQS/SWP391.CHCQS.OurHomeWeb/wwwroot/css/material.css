@@ -1,0 +1,19 @@
+﻿#category-container{
+    background:#f9f9f9 none repeat scroll 0 0;
+    border: 1px solid #aaa;
+    display:table;
+    font-size:95%;
+    margin-bottom: 1em;
+    margin-top:5px;
+    padding:5px;
+    width:auto
+}
+
+a {
+    text-decoration: none;
+    color: #F27456;
+}
+
+a:hover{
+    color:black;
+}
