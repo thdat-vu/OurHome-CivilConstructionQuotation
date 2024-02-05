@@ -25,3 +25,13 @@ body {
 .text-main {
     color: #F27456;
 }
+
+.btn-main {
+    background-color: #F27456;
+    color: white;
+}
+
+.btn-main:hover {
+    color: white;
+    opacity: 0.8;
+}
