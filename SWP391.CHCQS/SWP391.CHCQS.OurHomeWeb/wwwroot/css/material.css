@@ -17,3 +17,13 @@ a {
 a:hover{
     color:black;
 }
+
+#detail-container {
+    background: #f9f9f9 none repeat scroll 0 0;
+    display: table;
+    font-size: 95%;
+    margin-bottom: 1em;
+    margin-top: 5px;
+    padding: 5px;
+    width: auto
+}
