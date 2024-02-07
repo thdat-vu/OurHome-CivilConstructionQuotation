@@ -8,8 +8,11 @@ namespace SWP391.CHCQS.OurHomeWeb
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+            builder.Services.AddControllers();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
-			var app = builder.Build();
+            var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
@@ -33,8 +36,9 @@ namespace SWP391.CHCQS.OurHomeWeb
 				  pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
 				);
 			});
-
-			app.Run();
+            app.UseSwagger();
+            app.UseSwaggerUI();
+            app.Run();
 		}
 	}
 }
