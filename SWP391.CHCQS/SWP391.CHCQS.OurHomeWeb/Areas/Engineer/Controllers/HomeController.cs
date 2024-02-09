@@ -7,7 +7,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            return View();
+            return RedirectToAction("Index", "Quotation");
         }
     }
 }
