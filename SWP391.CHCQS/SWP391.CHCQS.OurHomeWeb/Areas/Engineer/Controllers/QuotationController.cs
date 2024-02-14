@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Models;
+using SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
