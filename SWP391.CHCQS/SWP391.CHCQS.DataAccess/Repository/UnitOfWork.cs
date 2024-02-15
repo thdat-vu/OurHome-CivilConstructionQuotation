@@ -18,7 +18,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public ICustomQuotaionTaskRepository CustomQuotaionTask { get; private set; }
         public ICustomQuotationRepository CustomQuotation { get; private set; }
         public ITaskRepository Task { get; private set; }
+        public IMaterialRepository Material { get; private set; }
         public IConstructDetailRepository ConstructDetail { get; private set; }
+        
+
         public UnitOfWork(SWP391DBContext db)
         {
             _db = db;
@@ -28,6 +31,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
             CustomQuotaionTask = new CustomQuotaionTaskRepository(_db);
             CustomQuotation = new CustomQuotationRepository(_db);
             Task = new TaskRepository(_db);
+            Material = new MaterialRepository(_db);
             ConstructDetail = new ConstructDetailRepository(_db);
         }
 
