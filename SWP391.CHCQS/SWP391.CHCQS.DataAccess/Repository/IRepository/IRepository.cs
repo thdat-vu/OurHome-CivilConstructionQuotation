@@ -12,6 +12,7 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         IEnumerable<T> GetAll(string? includeProperties = null);
         T? Get(Expression<Func<T, bool>> filter, string? includeProperties = null);
         void Add(T entity);
+        void AddRange(List<T> entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
     }
