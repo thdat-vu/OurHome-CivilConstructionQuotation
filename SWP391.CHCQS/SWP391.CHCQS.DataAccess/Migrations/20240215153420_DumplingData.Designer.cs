@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWP391.CHCQS.DataAccess.Data;
 
@@ -11,9 +12,10 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    partial class SWP391DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240215153420_DumplingData")]
+    partial class DumplingData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,24 +153,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             Username = "dtuan",
                             Password = "1",
                             Role = "customer"
-                        },
-                        new
-                        {
-                            Username = "datnt",
-                            Password = "1",
-                            Role = "engineer"
-                        },
-                        new
-                        {
-                            Username = "datnx",
-                            Password = "1",
-                            Role = "manager"
-                        },
-                        new
-                        {
-                            Username = "duclm",
-                            Password = "1",
-                            Role = "seller"
                         });
                 });
 
@@ -520,22 +504,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasIndex("SellerId");
 
                     b.ToTable("CustomQuotation", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "CQ001",
-                            Acreage = "240m2",
-                            Date = new DateTime(2024, 2, 15, 23, 46, 51, 457, DateTimeKind.Local).AddTicks(7553),
-                            Description = "I want to build this house for my son and his wife, so i can live with them",
-                            EngineerId = "EN001",
-                            Location = "Dĩ An, Bình Dương",
-                            ManagerId = "MG001",
-                            RequestId = "RF001",
-                            SellerId = "SL001",
-                            Status = true,
-                            Total = 0m
-                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.FoundationType", b =>
@@ -897,19 +865,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("RequestForm", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "RF001",
-                            Acreage = "240m2",
-                            ConstructType = "CT2",
-                            CustomerId = "ID001",
-                            Description = "Customer said that this project must be finished on 3 month",
-                            GenerateDate = new DateTime(2024, 2, 15, 23, 46, 51, 457, DateTimeKind.Local).AddTicks(7517),
-                            Location = "Dĩ An, Bình Dương",
-                            Status = true
-                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RooftopType", b =>
@@ -1000,40 +955,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasIndex("Username");
 
                     b.ToTable("Staff");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "MG001",
-                            Email = "datnx@gmail.com",
-                            Gender = "Men",
-                            Name = "Nguyen Xuan Dat",
-                            PhoneNum = "0987654321",
-                            Status = true,
-                            Username = "datnx"
-                        },
-                        new
-                        {
-                            Id = "SL001",
-                            Email = "duclm@gmail.com",
-                            Gender = "Men",
-                            ManagerId = "MG001",
-                            Name = "Le Minh Duc",
-                            PhoneNum = "0987654321",
-                            Status = true,
-                            Username = "duclm"
-                        },
-                        new
-                        {
-                            Id = "EN001",
-                            Email = "datnt@gmail.com",
-                            Gender = "Men",
-                            ManagerId = "MG001",
-                            Name = "Nguyen Thanh Dat",
-                            PhoneNum = "0987654321",
-                            Status = true,
-                            Username = "datnt"
-                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.StandardQuotation", b =>
