@@ -10,6 +10,13 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     {
         IStandardQuotationRepository StandardQuotation { get; }
         IProjectRepository Project { get; }
+        ICustomQuotaionTaskRepository CustomQuotaionTask { get; }
+        ICustomQuotationRepository CustomQuotation { get; }
+        ITaskRepository Task { get; }
+        IMaterialRepository Material { get; }
+        IMaterialDetailRepository MaterialDetail { get; }
+        IConstructDetailRepository ConstructDetail { get; }
+
         void Save();
     }
 }
