@@ -15,7 +15,7 @@ namespace SWP391.CHCQS.Model
         public string Name { get; set; } = null!;
         public string? PhoneNum { get; set; }
         public string? Email { get; set; }
-        public string Gender { get; set; } = null!;
+        public string? Gender { get; set; }
         public string Username { get; set; } = null!;
 
         public virtual Account UsernameNavigation { get; set; } = null!;

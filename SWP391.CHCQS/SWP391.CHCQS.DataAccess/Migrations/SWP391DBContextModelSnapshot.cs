@@ -120,6 +120,56 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasName("PK__Account__F3DBC5731230846A");
 
                     b.ToTable("Account", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Username = "thao123",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "maitran1",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "lvm123",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "ngocanh85",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "dtuan",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "datnt",
+                            Password = "1",
+                            Role = "engineer"
+                        },
+                        new
+                        {
+                            Username = "datnx",
+                            Password = "1",
+                            Role = "manager"
+                        },
+                        new
+                        {
+                            Username = "duclm",
+                            Password = "1",
+                            Role = "seller"
+                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.BasementType", b =>
@@ -299,7 +349,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnName("email");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasMaxLength(6)
                         .IsUnicode(false)
                         .HasColumnType("varchar(6)")
@@ -329,6 +378,38 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasIndex("Username");
 
                     b.ToTable("Customer", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ID001",
+                            Name = "Nguyễn Trần Phương Thảo",
+                            Username = "thao123"
+                        },
+                        new
+                        {
+                            Id = "ID002",
+                            Name = "Trần Thị Mai",
+                            Username = "maitran1"
+                        },
+                        new
+                        {
+                            Id = "ID003",
+                            Name = "Lê Văn Minh",
+                            Username = "lvm123"
+                        },
+                        new
+                        {
+                            Id = "ID004",
+                            Name = "Ngọc Anh Nguyễn",
+                            Username = "ngocanh85"
+                        },
+                        new
+                        {
+                            Id = "ID005",
+                            Name = "Đỗ Minh Tuấn",
+                            Username = "dtuan"
+                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotaionTask", b =>
@@ -439,6 +520,22 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasIndex("SellerId");
 
                     b.ToTable("CustomQuotation", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "CQ001",
+                            Acreage = "240m2",
+                            Date = new DateTime(2024, 2, 15, 23, 46, 51, 457, DateTimeKind.Local).AddTicks(7553),
+                            Description = "I want to build this house for my son and his wife, so i can live with them",
+                            EngineerId = "EN001",
+                            Location = "Dĩ An, Bình Dương",
+                            ManagerId = "MG001",
+                            RequestId = "RF001",
+                            SellerId = "SL001",
+                            Status = true,
+                            Total = 0m
+                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.FoundationType", b =>
@@ -649,6 +746,9 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasColumnName("description");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -660,6 +760,9 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("name");
+
+                    b.Property<string>("Overview")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Scale")
                         .IsRequired()
@@ -683,6 +786,63 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Project", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "PRJ01",
+                            CustomerId = "ID001",
+                            Description = "Nhà ở gia đình",
+                            Location = "Phường Hố Nai, thành phố Biên Hòa, tỉnh Đồng Nai",
+                            Name = "NHÀ PHỐ CHỊ THẢO TẠI ĐỒNG NAI",
+                            Scale = "1 trệt, 2 lầu",
+                            Size = "5x12",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = "PRJ02",
+                            CustomerId = "ID002",
+                            Description = "Nhà ở gia đình",
+                            Location = "huyện Bến Lức, tỉnh Long An",
+                            Name = "NHÀ PHỐ CHỊ MAI",
+                            Scale = "1 trệt, 2 lầu, sân thượng",
+                            Size = "5x21",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = "PRJ03",
+                            CustomerId = "ID003",
+                            Description = "Nhà ở gia đình",
+                            Location = "Phường An Phú Đông, Quận 12",
+                            Name = "NHÀ PHỐ HIỆN ĐẠI 5 TẦNG CỦA ANH MINH",
+                            Scale = "1 trệt + 1 lửng + 2 lầu + 1 tum, sân thượng",
+                            Size = "4.5x18",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = "PRJ04",
+                            CustomerId = "ID004",
+                            Description = "Nhà ở gia đình",
+                            Location = "Phường Hiệp Bình Chánh, TP. Thủ Đức",
+                            Name = "NHÀ CHỊ NGỌC ANH",
+                            Scale = "1 trệt + 2 lầu + 1 tum, sân thượng",
+                            Size = "4.35x19.5",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = "PRJ05",
+                            CustomerId = "ID005",
+                            Description = "Nhà ở gia đình",
+                            Location = "Quận 5, TP. HCM",
+                            Name = "NHÀ 1 TRỆT 3 LẦU ANH TUẤN ",
+                            Scale = "Nhà 1 trệt 3 lầu có sân thượng",
+                            Size = "4x17",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
@@ -737,6 +897,19 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("RequestForm", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "RF001",
+                            Acreage = "240m2",
+                            ConstructType = "CT2",
+                            CustomerId = "ID001",
+                            Description = "Customer said that this project must be finished on 3 month",
+                            GenerateDate = new DateTime(2024, 2, 15, 23, 46, 51, 457, DateTimeKind.Local).AddTicks(7517),
+                            Location = "Dĩ An, Bình Dương",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RooftopType", b =>
@@ -827,6 +1000,40 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasIndex("Username");
 
                     b.ToTable("Staff");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "MG001",
+                            Email = "datnx@gmail.com",
+                            Gender = "Men",
+                            Name = "Nguyen Xuan Dat",
+                            PhoneNum = "0987654321",
+                            Status = true,
+                            Username = "datnx"
+                        },
+                        new
+                        {
+                            Id = "SL001",
+                            Email = "duclm@gmail.com",
+                            Gender = "Men",
+                            ManagerId = "MG001",
+                            Name = "Le Minh Duc",
+                            PhoneNum = "0987654321",
+                            Status = true,
+                            Username = "duclm"
+                        },
+                        new
+                        {
+                            Id = "EN001",
+                            Email = "datnt@gmail.com",
+                            Gender = "Men",
+                            ManagerId = "MG001",
+                            Name = "Nguyen Thanh Dat",
+                            PhoneNum = "0987654321",
+                            Status = true,
+                            Username = "datnt"
+                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.StandardQuotation", b =>

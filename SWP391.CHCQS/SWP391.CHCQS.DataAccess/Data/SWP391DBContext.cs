@@ -37,7 +37,7 @@ namespace SWP391.CHCQS.DataAccess.Data
         public virtual DbSet<Staff> Staff { get; set; } = null!;
         public virtual DbSet<StandardQuotation> StandardQuotations { get; set; } = null!;
         public virtual DbSet<Task> Tasks { get; set; } = null!;
-        public virtual DbSet<TaskCategory> TaskCategories { get; set; } = null!;        
+        public virtual DbSet<TaskCategory> TaskCategories { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -854,6 +854,159 @@ namespace SWP391.CHCQS.DataAccess.Data
                     .HasMaxLength(20)
                     .HasColumnName("name");
             });
+
+            //dumpling data
+
+            modelBuilder.Entity<Account>().HasData(
+                new Account { Username = "thao123", Password = "1", Role = "customer" },
+                new Account { Username = "maitran1", Password = "1", Role = "customer" },
+                new Account { Username = "lvm123", Password = "1", Role = "customer" },
+                new Account { Username = "ngocanh85", Password = "1", Role = "customer" },
+                new Account { Username = "dtuan", Password = "1", Role = "customer" },
+                new Account { Username = "datnt", Password = "1", Role = "engineer" },
+                new Account { Username = "datnx", Password = "1", Role = "manager" },
+                new Account { Username = "duclm", Password = "1", Role = "seller" }
+            );
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer { Id = "ID001", Name = "Nguyễn Trần Phương Thảo", Username = "thao123" },
+                new Customer { Id = "ID002", Name = "Trần Thị Mai", Username = "maitran1" },
+                new Customer { Id = "ID003", Name = "Lê Văn Minh", Username = "lvm123" },
+                new Customer { Id = "ID004", Name = "Ngọc Anh Nguyễn", Username = "ngocanh85" },
+                new Customer { Id = "ID005", Name = "Đỗ Minh Tuấn", Username = "dtuan" }
+            );
+
+            modelBuilder.Entity<Project>().HasData(
+                new Project
+                {
+                    Id = "PRJ01",
+                    Name = "NHÀ PHỐ CHỊ THẢO TẠI ĐỒNG NAI",
+                    CustomerId = "ID001",
+                    Description = "Nhà ở gia đình",
+                    Location = "Phường Hố Nai, thành phố Biên Hòa, tỉnh Đồng Nai",
+                    Scale = "1 trệt, 2 lầu",
+                    Size = "5x12",
+                    Status = true
+                },
+                new Project
+                {
+                    Id = "PRJ02",
+                    Name = "NHÀ PHỐ CHỊ MAI",
+                    CustomerId = "ID002",
+                    Description = "Nhà ở gia đình",
+                    Location = "huyện Bến Lức, tỉnh Long An",
+                    Scale = "1 trệt, 2 lầu, sân thượng",
+                    Size = "5x21",
+                    Status = true
+                },
+                new Project
+                {
+                    Id = "PRJ03",
+                    Name = "NHÀ PHỐ HIỆN ĐẠI 5 TẦNG CỦA ANH MINH",
+                    CustomerId = "ID003",
+                    Description = "Nhà ở gia đình",
+                    Location = "Phường An Phú Đông, Quận 12",
+                    Scale = "1 trệt + 1 lửng + 2 lầu + 1 tum, sân thượng",
+                    Size = "4.5x18",
+                    Status = true
+                },
+                new Project
+                {
+                    Id = "PRJ04",
+                    Name = "NHÀ CHỊ NGỌC ANH",
+                    CustomerId = "ID004",
+                    Description = "Nhà ở gia đình",
+                    Location = "Phường Hiệp Bình Chánh, TP. Thủ Đức",
+                    Scale = "1 trệt + 2 lầu + 1 tum, sân thượng",
+                    Size = "4.35x19.5",
+                    Status = true
+                },
+                new Project
+                {
+                    Id = "PRJ05",
+                    Name = "NHÀ 1 TRỆT 3 LẦU ANH TUẤN ",
+                    CustomerId = "ID005",
+                    Description = "Nhà ở gia đình",
+                    Location = "Quận 5, TP. HCM",
+                    Scale = "Nhà 1 trệt 3 lầu có sân thượng",
+                    Size = "4x17",
+                    Status = true
+                }
+            );
+
+            //Dmpling data for Staff
+            modelBuilder.Entity<Staff>().HasData(
+                //This one represent a Manager
+                new Staff
+                {
+                    Id = "MG001",
+                    Name = "Nguyen Xuan Dat",
+                    PhoneNum = "0987654321",
+                    Email = "datnx@gmail.com",
+                    Gender = "Men",
+                    Username = "datnx",
+                    ManagerId = null,
+                    Status = true
+                },
+
+                //This one represent a Seller
+                new Staff
+                {
+                    Id = "SL001",
+                    Name = "Le Minh Duc",
+                    PhoneNum = "0987654321",
+                    Email = "duclm@gmail.com",
+                    Gender = "Men",
+                    Username = "duclm",
+                    ManagerId = "MG001",
+                    Status = true
+                },
+
+                //This one represent a Engineer
+                new Staff
+                {
+                    Id = "EN001",
+                    Name = "Nguyen Thanh Dat",
+                    PhoneNum = "0987654321",
+                    Email = "datnt@gmail.com",
+                    Gender = "Men",
+                    Username = "datnt",
+                    ManagerId = "MG001",
+                    Status = true
+                }
+            );
+
+            modelBuilder.Entity<RequestForm>().HasData(
+                new RequestForm
+                {
+                    Id = "RF001",
+                    GenerateDate = DateTime.Now,
+                    Description = "Customer said that this project must be finished on 3 month",
+                    ConstructType = "CT2",
+                    Acreage = "240m2",
+                    Location = "Dĩ An, Bình Dương",
+                    Status = true,
+                    CustomerId = "ID001",
+                }
+            );
+
+            //Dumpling data for CustomQuotation
+            modelBuilder.Entity<CustomQuotation>().HasData(
+                new CustomQuotation
+                {
+                    Id = "CQ001",
+                    Date = DateTime.Now,
+                    Acreage = "240m2",
+                    Location = "Dĩ An, Bình Dương",
+                    Status = true,
+                    Description = "I want to build this house for my son and his wife, so i can live with them",
+                    Total = 0,
+                    SellerId = "SL001",
+                    EngineerId = "EN001",
+                    ManagerId = "MG001",
+                    RequestId = "RF001"
+                }
+
+            );;
 
             OnModelCreatingPartial(modelBuilder);
         }
