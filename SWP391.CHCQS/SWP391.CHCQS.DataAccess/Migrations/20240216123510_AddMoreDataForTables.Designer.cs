@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWP391.CHCQS.DataAccess.Data;
 
@@ -11,9 +12,10 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    partial class SWP391DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240216123510_AddMoreDataForTables")]
+    partial class AddMoreDataForTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -379,27 +381,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasIndex("RooftopId");
 
                     b.ToTable("ConstructDetail", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            QuotationId = "CQ001",
-                            Alley = "3m",
-                            Balcony = true,
-                            BasementId = "BT1",
-                            ConstructionId = "CT1",
-                            Facade = 1,
-                            Floor = 2,
-                            FoundationId = "FT1",
-                            Garden = 20m,
-                            InvestmentId = "IT1",
-                            Length = 200m,
-                            Mezzanine = 30m,
-                            RooftopFloor = 40m,
-                            RooftopId = "RT1",
-                            Room = 5,
-                            Width = 100m
-                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.ConstructionType", b =>
@@ -700,7 +681,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ001",
                             Acreage = "240m2",
-                            Date = new DateTime(2024, 2, 16, 20, 6, 0, 884, DateTimeKind.Local).AddTicks(3320),
+                            Date = new DateTime(2024, 2, 16, 19, 35, 9, 544, DateTimeKind.Local).AddTicks(1871),
                             Description = "I want to build this house for my son and his wife, so i can live with them",
                             EngineerId = "EN001",
                             Location = "Dĩ An, Bình Dương",
@@ -1449,7 +1430,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT2",
                             CustomerId = "ID001",
                             Description = "Customer said that this project must be finished on 3 month",
-                            GenerateDate = new DateTime(2024, 2, 16, 20, 6, 0, 884, DateTimeKind.Local).AddTicks(3004),
+                            GenerateDate = new DateTime(2024, 2, 16, 19, 35, 9, 544, DateTimeKind.Local).AddTicks(1837),
                             Location = "Dĩ An, Bình Dương",
                             Status = true
                         },
@@ -1460,7 +1441,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT1",
                             CustomerId = "ID002",
                             Description = "Customer said that this project must be finished on 6 month",
-                            GenerateDate = new DateTime(2024, 2, 16, 20, 6, 0, 884, DateTimeKind.Local).AddTicks(3021),
+                            GenerateDate = new DateTime(2024, 2, 16, 19, 35, 9, 544, DateTimeKind.Local).AddTicks(1850),
                             Location = "Quận 5, TP. Hồ Chí Minh",
                             Status = true
                         },
@@ -1471,7 +1452,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT3",
                             CustomerId = "ID003",
                             Description = "Customer said that this project must be finished on 12 month",
-                            GenerateDate = new DateTime(2024, 2, 16, 20, 6, 0, 884, DateTimeKind.Local).AddTicks(3024),
+                            GenerateDate = new DateTime(2024, 2, 16, 19, 35, 9, 544, DateTimeKind.Local).AddTicks(1853),
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
                             Status = true
                         });
