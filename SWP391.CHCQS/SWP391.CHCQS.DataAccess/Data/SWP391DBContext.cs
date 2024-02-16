@@ -524,13 +524,13 @@ namespace SWP391.CHCQS.DataAccess.Data
                 entity.Property(e => e.ConstructTypeId)
                     .HasMaxLength(3)
                     .IsUnicode(false)
-                    .HasColumnName("ConstructTypeID")
+                    .HasColumnName("ConstructTypeId")
                     .IsFixedLength();
 
                 entity.Property(e => e.InvestmentTypeId)
                     .HasMaxLength(3)
                     .IsUnicode(false)
-                    .HasColumnName("InvestmentTypeID")
+                    .HasColumnName("InvestmentTypeId")
                     .IsFixedLength();
 
                 entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
@@ -855,8 +855,9 @@ namespace SWP391.CHCQS.DataAccess.Data
                     .HasColumnName("name");
             });
 
-            //dumpling data
+            //Dumpling data for all Entities
 
+            //This one for Account
             modelBuilder.Entity<Account>().HasData(
                 new Account { Username = "thao123", Password = "1", Role = "customer" },
                 new Account { Username = "maitran1", Password = "1", Role = "customer" },
@@ -867,6 +868,8 @@ namespace SWP391.CHCQS.DataAccess.Data
                 new Account { Username = "datnx", Password = "1", Role = "manager" },
                 new Account { Username = "duclm", Password = "1", Role = "seller" }
             );
+
+            //This one for Customer
             modelBuilder.Entity<Customer>().HasData(
                 new Customer { Id = "ID001", Name = "Nguyễn Trần Phương Thảo", Username = "thao123" },
                 new Customer { Id = "ID002", Name = "Trần Thị Mai", Username = "maitran1" },
@@ -875,6 +878,7 @@ namespace SWP391.CHCQS.DataAccess.Data
                 new Customer { Id = "ID005", Name = "Đỗ Minh Tuấn", Username = "dtuan" }
             );
 
+            //This one for Project
             modelBuilder.Entity<Project>().HasData(
                 new Project
                 {
@@ -1006,7 +1010,629 @@ namespace SWP391.CHCQS.DataAccess.Data
                     RequestId = "RF001"
                 }
 
-            );;
+            ); ;
+
+            //Dumpling data for BasementType
+            modelBuilder.Entity<BasementType>().HasData(
+
+                new BasementType
+                {
+                    Id = "BT1",
+                    Name = "Không Hầm",
+                    UnitPrice = 0,
+                    Description = "Không có hầm"
+                },
+                new BasementType
+                {
+                    Id = "BT2",
+                    Name = "Độ Sâu 1.0 - 1.3",
+                    UnitPrice = 3400000,
+                    Description = "Hầm Độ Sâu 1.0 - 1.3 m"
+                },
+                new BasementType
+                {
+                    Id = "BT3",
+                    Name = "Độ Sâu 1.3 - 1.7",
+                    UnitPrice = 4400000,
+                    Description = "Hầm Độ Sâu 1.3 - 1.7 m"
+                },
+                new BasementType
+                {
+                    Id = "BT4",
+                    Name = "Độ sâu 1.7 - 2.0",
+                    UnitPrice = 5400000,
+                    Description = "Hầm Độ Sâu 1.7 - 2.0 m"
+                },
+                new BasementType
+                {
+                    Id = "BT5",
+                    Name = "Độ Sâu >2.0",
+                    UnitPrice = 6400000,
+                    Description = "Hầm Độ sâu Lớn Hơn 2.0 m"
+                }
+            );
+
+            //Dumpling data for ConstructionType
+            modelBuilder.Entity<ConstructionType>().HasData(
+                new ConstructionType
+                {
+                    Id = "CT1",
+                    Name = "Nhà Phố",
+                    Description = "Nhà ở thành phố đông đúc, diện tích đất hẹp.",
+                },
+                new ConstructionType
+                {
+                    Id = "CT2",
+                    Name = "Biệt thự",
+                    Description = "Quy mô lớn, kiến trúc đẹp, đất rộng.",
+                },
+                new ConstructionType
+                {
+                    Id = "CT3",
+                    Name = "Nhà cấp bốn ",
+                    Description = "Nhà cơ bản, chi phí rẻ, thông dụng, đất dài.",
+                }
+            );
+
+            //Dumpling data for FoundationType
+            modelBuilder.Entity<FoundationType>().HasData(
+                new FoundationType
+                {
+                    Id = "FT1",
+                    Name = "Móng Đơn",
+                    AreaRatio = 0.30M,
+                    UnitPrice = 3200000,
+                    Description = "Móng đơn"
+                },
+                new FoundationType
+                {
+                    Id = "FT2",
+                    Name = "Móng Bằng",
+                    AreaRatio = 0.65M,
+                    UnitPrice = 4200000,
+                    Description = "Móng bằng"
+                },
+                new FoundationType
+                {
+                    Id = "FT3",
+                    Name = "Móng Đài Cọc",
+                    AreaRatio = 0.50M,
+                    UnitPrice = 5200000,
+                    Description = "Móng đài cọc"
+                }
+            );
+
+            //Dumpling data for InvestmentType
+            modelBuilder.Entity<InvestmentType>().HasData(
+                new InvestmentType
+                {
+                    Id = "IT1",
+                    Name = "Xây nhà phần thô",
+                    Description = "Xây nhà phần thô"
+                },
+                new InvestmentType
+                {
+                    Id = "IT2",
+                    Name = "Xây nhà trọn gói",
+                    Description = "Xây nhà trọn gói"
+                },
+                new InvestmentType
+                {
+                    Id = "IT3",
+                    Name = "Mức TB",
+                    Description = "Mức trung bình"
+                },
+                new InvestmentType
+                {
+                    Id = "IT4",
+                    Name = "Mức Khá",
+                    Description = "Mức khá",
+                },
+                new InvestmentType
+                {
+                    Id = "IT5",
+                    Name = "Mức Khá +",
+                    Description = "Mức khá +",
+                }
+            );
+
+            //Dumpling data for InvestmentType 
+            modelBuilder.Entity<Material>().HasData(
+                new Material
+                {
+                    Id = "VT101",
+                    Name = "Sắt thép Việt Nhật",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "m",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT102",
+                    Name = "Xi măng đổ bê tông Holcim",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M, // Assuming UnitPrice is of type decimal
+                    Unit = "bao",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT103",
+                    Name = "Xi măng xây tô tường Hà Tiên",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "bao",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT104",
+                    Name = "Bê tông tươi Lê Phan - Hoàng Sở M250",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "m3",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT105",
+                    Name = "Cát hạt lớn",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "m3",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT106",
+                    Name = "Cát hạt vàng trung",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "m3",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT107",
+                    Name = "Đá xanh Đồng Nai",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "ton",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT108",
+                    Name = "Gạch đinh 8x8x18 Tuynel Bình Dương",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "viên",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT109",
+                    Name = "Gạch định 4x8x18 Tuynel Bình Dương",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "viên",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT110",
+                    Name = "Cáp TV Sino",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "m",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT111",
+                    Name = "Cáp TV Sino (Panasonic)",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "m",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT112",
+                    Name = "Cáp mạng Sino",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "m",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT113",
+                    Name = "Cáp mạng Sino (Panasonic)",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "m",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT114",
+                    Name = "Đế âm tường Sino",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "cái",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT115",
+                    Name = "Đường ống nóng âm tường Vesbo",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "m",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT116",
+                    Name = "Đường ống cấp nước, thoát nước Bình Minh",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "m",
+                    Status = true,
+                    CategoryId = "VT1"
+                },
+                new Material
+                {
+                    Id = "VT117",
+                    Name = "Hóa chất chống thấm ban công, sân thượng, WC Kova CF-11A, Sika - 1F",
+                    InventoryQuantity = 5000,
+                    UnitPrice = 0.0000M,
+                    Unit = "thùng",
+                    Status = true,
+                    CategoryId = "VT1"
+                }
+            );
+
+            //Dumpling data for InvestmentType 
+            modelBuilder.Entity<MaterialCategory>().HasData(
+                new MaterialCategory
+                {
+                    Id = "VT1",
+                    Name = "Vật tư thô"
+                },
+                new MaterialCategory
+                {
+                    Id = "VT2",
+                    Name = "Sơn nước sơn dầu"
+                },
+                new MaterialCategory
+                {
+                    Id = "VT3",
+                    Name = "Điện"
+                },
+                new MaterialCategory
+                {
+                    Id = "VT4",
+                    Name = "Vệ sinh"
+                },
+                new MaterialCategory
+                {
+                    Id = "VT5",
+                    Name = "Bếp"
+                },
+                new MaterialCategory
+                {
+                    Id = "VT6",
+                    Name = "Cầu thang"
+                },
+                new MaterialCategory
+                {
+                    Id = "VT7",
+                    Name = "Cửa"
+                },
+                new MaterialCategory
+                {
+                    Id = "VT8",
+                    Name = "Gạch ốp lát"
+                },
+                new MaterialCategory
+                {
+                    Id = "VT9",
+                    Name = "Trần"
+                }
+            );
+
+            //Dumpling data for Pricing
+            modelBuilder.Entity<Pricing>().HasData(
+                 new Pricing
+                 {
+                     ConstructTypeId = "CT1",
+                     InvestmentTypeId = "IT1",
+                     UnitPrice = 3400000.00m
+                 },
+                new Pricing
+                {
+                    ConstructTypeId = "CT1",
+                    InvestmentTypeId = "IT2",
+                    UnitPrice = 6000000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT1",
+                    InvestmentTypeId = "IT3",
+                    UnitPrice = 4800000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT1",
+                    InvestmentTypeId = "IT4",
+                    UnitPrice = 5400000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT1",
+                    InvestmentTypeId = "IT5",
+                    UnitPrice = 6000000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT2",
+                    InvestmentTypeId = "IT1",
+                    UnitPrice = 3600000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT2",
+                    InvestmentTypeId = "IT2",
+                    UnitPrice = 6400000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT2",
+                    InvestmentTypeId = "IT3",
+                    UnitPrice = 5000000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT2",
+                    InvestmentTypeId = "IT4",
+                    UnitPrice = 5700000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT2",
+                    InvestmentTypeId = "IT5",
+                    UnitPrice = 6400000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT3",
+                    InvestmentTypeId = "IT1",
+                    UnitPrice = 2400000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT3",
+                    InvestmentTypeId = "IT2",
+                    UnitPrice = 4700000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT3",
+                    InvestmentTypeId = "IT3",
+                    UnitPrice = 4700000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT3",
+                    InvestmentTypeId = "IT4",
+                    UnitPrice = 4700000.00m
+                },
+                new Pricing
+                {
+                    ConstructTypeId = "CT3",
+                    InvestmentTypeId = "IT5",
+                    UnitPrice = 4700000.00m
+                }
+            );
+
+            //Dumpling data for Task
+            modelBuilder.Entity<Task>().HasData(
+                new Task
+                {
+                    Id = "TKS11",
+                    Name = "Lắp đặt đường dây cáp",
+                    Description = "Lắp đặt hệ thống đường dây truyền hình cáp, internet",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK01",
+                    Name = "Tổ chức công trường",
+                    Description = "Tổ chức công trường, làm lán trại cho công nhân",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK02",
+                    Name = "Vệ sinh mặt bằng",
+                    Description = "Vệ sinh mặt bằng thi công, định vị móng, cột",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK03",
+                    Name = "Đào móng",
+                    Description = "Đào đất hố móng",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK04",
+                    Name = "Thi công phần trên",
+                    Description = "Thi công theo bản vẽ thiết kế",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK05",
+                    Name = "Thi công coffa, cốt thép, đổ bê tông móng",
+                    Description = "Thi công coffa, cốt thép, đổ bê tông móng, đà kiềng, dầm sàn các lầu, cột,... theo bản thiết kế",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK06",
+                    Name = "Xây tường gạch",
+                    Description = "Xây tường gạch 100mm, 8x8x18 theo bản thiết kế",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK07",
+                    Name = "Cán nền",
+                    Description = "Cán nền các nền lầu, sân thượng, mái và nhà vệ sinh",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK08",
+                    Name = "Thi công chống thấm",
+                    Description = "Thi công chống thấm Sê nô, sàn mái, sàn vệ sinh, sân thượng,...",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK09",
+                    Name = "Lắp đặt ống nước",
+                    Description = "Lắp đặt hệ thống đường ống cấp và thoát nước nóng lạnh",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK10",
+                    Name = "Lắp đặt đường dây điện",
+                    Description = "Lắp đặt hệ thống đường dây diện chiếu sáng, đế âm, hộp nối",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK12",
+                    Name = "Vệ sinh công trình",
+                    Description = "Vệ sinh công trình",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKB"
+                },
+                new Task
+                {
+                    Id = "TSK13",
+                    Name = "Ốp gạch sàn nhà, bếp, tường",
+                    Description = "Ốp lát gạch toàn bộ sàn của nhà, phòng bếp, tường bếp vệ sinh theo bản thiết kế",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKC"
+                },
+                new Task
+                {
+                    Id = "TSK14",
+                    Name = "Ốp gạch trang trí",
+                    Description = "Ốp gạch, đá trang trí",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKC"
+                },
+                new Task
+                {
+                    Id = "TSK15",
+                    Name = "Lắp đặt hệ thống điện và chiếu sáng",
+                    Description = "Lắp đặt hệ thống điện và chiếu sáng: công tắc, ổ cắm, bóng đèn ",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKC"
+                },
+                new Task
+                {
+                    Id = "TSK16",
+                    Name = "Lắp đặt thiết bị vệ sinh",
+                    Description = "Lắp đặt thiết bị vệ sinh: bàn cầu, lavabo, vòi nước,...",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKC"
+                },
+                new Task
+                {
+                    Id = "TSK17",
+                    Name = "Dựng cửa",
+                    Description = "Dựng bao cửa gỗ, cửa sắt",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKC"
+                },
+                new Task
+                {
+                    Id = "TSK18",
+                    Name = "Trét mát tít và sơn nước",
+                    Description = "Trét mát tít và sơn nước toàn bộ bên trong và bên ngoài nhà",
+                    UnitPrice = 4800000.00m,
+                    Status = true,
+                    CategoryId = "TKC"
+                }
+            );
+
+            //Dumpling data for TaskCategory
+            modelBuilder.Entity<TaskCategory>().HasData(
+                new TaskCategory
+                {
+                    Id = "TKB",
+                    Name = "Đầu mục cơ bản"
+                },
+                new TaskCategory
+                {
+                    Id = "TKC",
+                    Name = "Đầu mục hoàn thiện"
+                }
+            );
+
 
             OnModelCreatingPartial(modelBuilder);
         }
