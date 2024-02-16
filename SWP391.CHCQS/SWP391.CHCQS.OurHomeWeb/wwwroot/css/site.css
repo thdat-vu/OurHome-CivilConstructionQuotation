@@ -18,8 +18,9 @@ body {
 }
 
 .bg-main {
-    background-color: #F27456;
+    background-color: #F27456!important;
     color: white;
+    opacity: 1;
 }
 
 .text-main {
