@@ -866,16 +866,139 @@ namespace SWP391.CHCQS.DataAccess.Data
                 new Account { Username = "dtuan", Password = "1", Role = "customer" },
                 new Account { Username = "datnt", Password = "1", Role = "engineer" },
                 new Account { Username = "datnx", Password = "1", Role = "manager" },
-                new Account { Username = "duclm", Password = "1", Role = "seller" }
+                new Account { Username = "duclm", Password = "1", Role = "seller" },
+                new Account { Username = "anhnth", Password = "1", Role = "admin" },
+                new Account { Username = "bthuong", Password = "1", Role = "customer" },
+                new Account { Username = "phai789", Password = "1", Role = "customer" },
+                new Account { Username = "lanly22", Password = "1", Role = "customer" },
+                new Account { Username = "vnam", Password = "1", Role = "customer" },
+                new Account { Username = "hoanguyen", Password = "1", Role = "customer" }
             );
 
             //This one for Customer
             modelBuilder.Entity<Customer>().HasData(
-                new Customer { Id = "ID001", Name = "Nguyễn Trần Phương Thảo", Username = "thao123" },
-                new Customer { Id = "ID002", Name = "Trần Thị Mai", Username = "maitran1" },
-                new Customer { Id = "ID003", Name = "Lê Văn Minh", Username = "lvm123" },
-                new Customer { Id = "ID004", Name = "Ngọc Anh Nguyễn", Username = "ngocanh85" },
-                new Customer { Id = "ID005", Name = "Đỗ Minh Tuấn", Username = "dtuan" }
+                new Customer
+                {
+                    Id = "ID001",
+                    Name = "Nguyễn Trần Phương Thảo",
+                    PhoneNum = "0512369874",
+                    Email = "thaonguyen123@gmail.com",
+                    Gender = "female",
+                    Username = "thao123"
+                },
+                new Customer
+                {
+                    Id = "ID002",
+                    Name = "Trần Thị Mai",
+                    PhoneNum = "0987654321",
+                    Email = "mai.tran@email.com",
+                    Gender = "female",
+                    Username = "maitran1"
+                },
+                new Customer
+                {
+                    Id = "ID003",
+                    Name = "Lê Văn Minh",
+                    PhoneNum = "0123456789",
+                    Email = "minh.le@example.com",
+                    Gender = "male",
+                    Username = "lvm123"
+                },
+                new Customer
+                {
+                    Id = "ID004",
+                    Name = "Ngọc Anh Nguyễn",
+                    PhoneNum = "0765432198",
+                    Email = "ngocanh.nguyen@email.com",
+                    Gender = "female",
+                    Username = "ngocanh85"
+                },
+                new Customer
+                {
+                    Id = "ID005",
+                    Name = "Đỗ Minh Tuấn",
+                    PhoneNum = "0345678901",
+                    Email = "tuan.minh@example.com",
+                    Gender = "male",
+                    Username = "dtuan"
+                },
+                new Customer
+                {
+                    Id = "ID006",
+                    Name = "Bùi Thị Hương",
+                    PhoneNum = "0876543210",
+                    Email = "huong.bui@email.com",
+                    Gender = "female",
+                    Username = "bthuong"
+                },
+                new Customer
+                {
+                    Id = "ID007",
+                    Name = "Phạm Văn Hải",
+                    PhoneNum = "0567890123",
+                    Email = "hai.pham@email.com",
+                    Gender = "male",
+                    Username = "phai789"
+                },
+                new Customer
+                {
+                    Id = "ID008",
+                    Name = "Lý Thị Lan",
+                    PhoneNum = "0234567890",
+                    Email = "lan.ly@example.com",
+                    Gender = "female",
+                    Username = "lanly22"
+                },
+                new Customer
+                {
+                    Id = "ID009",
+                    Name = "Vũ Thanh Nam",
+                    PhoneNum = "0987654321",
+                    Email = "nam.vu@email.com",
+                    Gender = "male",
+                    Username = "vnam"
+                },
+                new Customer
+                {
+                    Id = "ID010",
+                    Name = "Nguyễn Thị Hoa",
+                    PhoneNum = "0456789012",
+                    Email = "hoa.nguyen@email.com",
+                    Gender = "female",
+                    Username = "hoanguyen"
+                }
+            );
+
+            //This one for RooftopType
+            modelBuilder.Entity<RooftopType>().HasData(
+                new RooftopType
+                {
+                    Id = "RT1",
+                    Name = "Mái tôn",
+                    UnitPrice = 3300000.00m,
+                    Description = "Mái tôn"
+                },
+                new RooftopType
+                {
+                    Id = "RT2",
+                    Name = "Mái BTCT",
+                    UnitPrice = 330000.00m,
+                    Description = "Mái BTCT"
+                },
+                new RooftopType
+                {
+                    Id = "RT3",
+                    Name = "Mái ngói + Xà gồ",
+                    UnitPrice = 3300000.00m,
+                    Description = "Mái ngói + Xà gồ"
+                },
+                new RooftopType
+                {
+                    Id = "RT4",
+                    Name = "Mái ngói + BTCT",
+                    UnitPrice = 3300000.00m,
+                    Description = "Mái ngói + BTCT"
+                }
             );
 
             //This one for Project
@@ -946,7 +1069,7 @@ namespace SWP391.CHCQS.DataAccess.Data
                     Name = "Nguyen Xuan Dat",
                     PhoneNum = "0987654321",
                     Email = "datnx@gmail.com",
-                    Gender = "Men",
+                    Gender = "male",
                     Username = "datnx",
                     ManagerId = null,
                     Status = true
@@ -959,7 +1082,7 @@ namespace SWP391.CHCQS.DataAccess.Data
                     Name = "Le Minh Duc",
                     PhoneNum = "0987654321",
                     Email = "duclm@gmail.com",
-                    Gender = "Men",
+                    Gender = "male",
                     Username = "duclm",
                     ManagerId = "MG001",
                     Status = true
@@ -972,9 +1095,20 @@ namespace SWP391.CHCQS.DataAccess.Data
                     Name = "Nguyen Thanh Dat",
                     PhoneNum = "0987654321",
                     Email = "datnt@gmail.com",
-                    Gender = "Men",
+                    Gender = "male",
                     Username = "datnt",
                     ManagerId = "MG001",
+                    Status = true
+                },
+                new Staff
+                {
+                    Id = "ADMIN",
+                    Name = "Nguyen Thach Ha Anh",
+                    PhoneNum = "0987654321",
+                    Email = "anhnth@gmail.com",
+                    Gender = "female",
+                    Username = "anhnth",
+                    ManagerId = null,
                     Status = true
                 }
             );
@@ -990,27 +1124,30 @@ namespace SWP391.CHCQS.DataAccess.Data
                     Location = "Dĩ An, Bình Dương",
                     Status = true,
                     CustomerId = "ID001",
+                },
+                new RequestForm
+                {
+                    Id = "RF002",
+                    GenerateDate = DateTime.Now,
+                    Description = "Customer said that this project must be finished on 6 month",
+                    ConstructType = "CT1",
+                    Acreage = "340m2",
+                    Location = "Quận 5, TP. Hồ Chí Minh",
+                    Status = true,
+                    CustomerId = "ID002",
+                },
+                new RequestForm
+                {
+                    Id = "RF003",
+                    GenerateDate = DateTime.Now,
+                    Description = "Customer said that this project must be finished on 12 month",
+                    ConstructType = "CT3",
+                    Acreage = "340m2",
+                    Location = "Long Thạnh Mỹ, TP. Thủ Đức",
+                    Status = true,
+                    CustomerId = "ID003",
                 }
             );
-
-            //Dumpling data for CustomQuotation
-            modelBuilder.Entity<CustomQuotation>().HasData(
-                new CustomQuotation
-                {
-                    Id = "CQ001",
-                    Date = DateTime.Now,
-                    Acreage = "240m2",
-                    Location = "Dĩ An, Bình Dương",
-                    Status = true,
-                    Description = "I want to build this house for my son and his wife, so i can live with them",
-                    Total = 0,
-                    SellerId = "SL001",
-                    EngineerId = "EN001",
-                    ManagerId = "MG001",
-                    RequestId = "RF001"
-                }
-
-            ); ;
 
             //Dumpling data for BasementType
             modelBuilder.Entity<BasementType>().HasData(
@@ -1633,6 +1770,46 @@ namespace SWP391.CHCQS.DataAccess.Data
                 }
             );
 
+            //Dumpling data for CustomQuotation
+            modelBuilder.Entity<CustomQuotation>().HasData(
+                new CustomQuotation
+                {
+                    Id = "CQ001",
+                    Date = DateTime.Now,
+                    Acreage = "240m2",
+                    Location = "Dĩ An, Bình Dương",
+                    Status = true,
+                    Description = "I want to build this house for my son and his wife, so i can live with them",
+                    Total = 0,
+                    SellerId = "SL001",
+                    EngineerId = "EN001",
+                    ManagerId = "MG001",
+                    RequestId = "RF001"
+                }
+            );
+
+            //Dumpling data for ConstructDetail
+            modelBuilder.Entity<ConstructDetail>().HasData(
+                new ConstructDetail
+                {
+                    QuotationId = "CQ001",
+                    Width = 100,
+                    Length = 200,
+                    Facade = 1,
+                    Alley = "3m",
+                    Floor = 2,
+                    Room = 5,
+                    Mezzanine = 30,
+                    RooftopFloor = 40,
+                    Balcony = true,
+                    Garden = 20,
+                    ConstructionId = "CT1",
+                    InvestmentId = "IT1",
+                    FoundationId = "FT1",
+                    RooftopId = "RT1",
+                    BasementId = "BT1"
+                }
+            );
 
             OnModelCreatingPartial(modelBuilder);
         }
