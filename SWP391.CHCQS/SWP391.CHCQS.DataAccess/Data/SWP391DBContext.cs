@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using SWP391.CHCQS.Model;
+using SWP391.CHCQS.Utility;
 using Task = SWP391.CHCQS.Model.Task;
 
 namespace SWP391.CHCQS.DataAccess.Data
@@ -1778,7 +1779,7 @@ namespace SWP391.CHCQS.DataAccess.Data
                     Date = DateTime.Now,
                     Acreage = "240m2",
                     Location = "Dĩ An, Bình Dương",
-                    Status = true,
+                    Status = SD.Processing,
                     Description = "I want to build this house for my son and his wife, so i can live with them",
                     Total = 0,
                     SellerId = "SL001",

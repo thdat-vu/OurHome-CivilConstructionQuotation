@@ -15,7 +15,7 @@ namespace SWP391.CHCQS.Model
         public DateTime Date { get; set; }
         public string? Acreage { get; set; }
         public string Location { get; set; } = null!;
-        public bool Status { get; set; }
+        public int Status { get; set; }
         public string? Description { get; set; }
         public decimal Total { get; set; }
         public string SellerId { get; set; } = null!;

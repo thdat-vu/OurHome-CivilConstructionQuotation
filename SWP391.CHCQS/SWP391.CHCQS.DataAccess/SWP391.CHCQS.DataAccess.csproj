@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SWP391.CHCQS.Model\SWP391.CHCQS.Model.csproj" />
+    <ProjectReference Include="..\SWP391.CHCQS.Utility\SWP391.CHCQS.Utility.csproj" />
   </ItemGroup>
 
 </Project>
