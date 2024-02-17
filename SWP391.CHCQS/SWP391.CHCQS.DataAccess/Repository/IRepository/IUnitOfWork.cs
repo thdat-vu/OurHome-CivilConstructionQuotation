@@ -16,7 +16,7 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         IMaterialRepository Material { get; }
         IMaterialDetailRepository MaterialDetail { get; }
         IConstructDetailRepository ConstructDetail { get; }
-
+        ITaskCategoryRepository TaskCategory { get; }
         void Save();
     }
 }

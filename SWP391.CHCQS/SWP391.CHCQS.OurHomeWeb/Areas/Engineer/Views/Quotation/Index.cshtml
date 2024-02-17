@@ -15,32 +15,37 @@
 
 	<div class="card-body p-4">
 
-		<table id="tblCustomQuotation" class="table table-bordered table-striped" style="width:100%">
-			<thead>
-				<tr>
-					<th>
-						Id
-					</th>
-					<th>
-						Date
-					</th>
-					<th>
-						Acreage
-					</th>
-					<th>
-						Location
-					</th>
-					<th>
-						Actions
-					</th>
-				</tr>
-			</thead>
-		</table>
+		<div class="table-responsive">
+			<table id="tblCustomQuotation" class="table-bordered table-striped text-black" style="width:100%">
+				<thead>
+					<tr>
+						<th>
+							Id
+						</th>
+						<th>
+							Date
+						</th>
+						<th>
+							Acreage
+						</th>
+						<th>
+							Location
+						</th>
+						<th>
+							Status
+						</th>
+						<th>
+							Actions
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
 	</div>
 </div>
 
 
 
 @section Scripts {
-	<script src="~/js/datatables/CustomQuotationDTB.js"></script>
+	<script src="~/js/datatables/engineerDTB/CustomQuotationDTB.js"></script>
 }
