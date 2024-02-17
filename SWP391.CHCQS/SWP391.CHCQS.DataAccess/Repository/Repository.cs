@@ -38,7 +38,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
             {
                 foreach (var incluProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query.Include(incluProp);
+                    query = query.Include(incluProp);
                 }
             }
             return query.FirstOrDefault();
@@ -51,7 +51,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
             {
                 foreach (var incluProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query.Include(incluProp);
+                    query = query.Include(incluProp);
                 }
             }
             return query.ToList();
