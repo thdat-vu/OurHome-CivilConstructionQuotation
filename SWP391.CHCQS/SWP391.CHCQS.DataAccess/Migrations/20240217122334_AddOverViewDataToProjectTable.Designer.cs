@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWP391.CHCQS.DataAccess.Data;
 
@@ -11,9 +12,10 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    partial class SWP391DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240217122334_AddOverViewDataToProjectTable")]
+    partial class AddOverViewDataToProjectTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -700,7 +702,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ001",
                             Acreage = "240m2",
-                            Date = new DateTime(2024, 2, 17, 20, 4, 6, 818, DateTimeKind.Local).AddTicks(7134),
+                            Date = new DateTime(2024, 2, 17, 19, 23, 33, 493, DateTimeKind.Local).AddTicks(7225),
                             Description = "I want to build this house for my son and his wife, so i can live with them",
                             EngineerId = "EN001",
                             Location = "Dĩ An, Bình Dương",
@@ -1284,9 +1286,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnName("customerId")
                         .IsFixedLength();
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)")
@@ -1338,7 +1337,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "PRJ01",
                             CustomerId = "ID001",
-                            Date = new DateTime(2021, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhà ở gia đình",
                             Location = "Phường Hố Nai, thành phố Biên Hòa, tỉnh Đồng Nai",
                             Name = "NHÀ PHỐ CHỊ THẢO TẠI ĐỒNG NAI",
@@ -1351,7 +1349,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "PRJ02",
                             CustomerId = "ID002",
-                            Date = new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhà ở gia đình",
                             Location = "huyện Bến Lức, tỉnh Long An",
                             Name = "NHÀ PHỐ CHỊ MAI",
@@ -1364,7 +1361,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "PRJ03",
                             CustomerId = "ID003",
-                            Date = new DateTime(2022, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhà ở gia đình",
                             Location = "Phường An Phú Đông, Quận 12",
                             Name = "NHÀ PHỐ HIỆN ĐẠI 5 TẦNG CỦA ANH MINH",
@@ -1377,7 +1373,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "PRJ04",
                             CustomerId = "ID004",
-                            Date = new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhà ở gia đình",
                             Location = "Phường Hiệp Bình Chánh, TP. Thủ Đức",
                             Name = "NHÀ CHỊ NGỌC ANH",
@@ -1390,7 +1385,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "PRJ05",
                             CustomerId = "ID005",
-                            Date = new DateTime(2022, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhà ở gia đình",
                             Location = "Quận 5, TP. HCM",
                             Name = "NHÀ 1 TRỆT 3 LẦU ANH TUẤN ",
@@ -1462,7 +1456,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT2",
                             CustomerId = "ID001",
                             Description = "Customer said that this project must be finished on 3 month",
-                            GenerateDate = new DateTime(2024, 2, 17, 20, 4, 6, 818, DateTimeKind.Local).AddTicks(6826),
+                            GenerateDate = new DateTime(2024, 2, 17, 19, 23, 33, 493, DateTimeKind.Local).AddTicks(6962),
                             Location = "Dĩ An, Bình Dương",
                             Status = true
                         },
@@ -1473,7 +1467,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT1",
                             CustomerId = "ID002",
                             Description = "Customer said that this project must be finished on 6 month",
-                            GenerateDate = new DateTime(2024, 2, 17, 20, 4, 6, 818, DateTimeKind.Local).AddTicks(6836),
+                            GenerateDate = new DateTime(2024, 2, 17, 19, 23, 33, 493, DateTimeKind.Local).AddTicks(6973),
                             Location = "Quận 5, TP. Hồ Chí Minh",
                             Status = true
                         },
@@ -1484,7 +1478,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT3",
                             CustomerId = "ID003",
                             Description = "Customer said that this project must be finished on 12 month",
-                            GenerateDate = new DateTime(2024, 2, 17, 20, 4, 6, 818, DateTimeKind.Local).AddTicks(6839),
+                            GenerateDate = new DateTime(2024, 2, 17, 19, 23, 33, 493, DateTimeKind.Local).AddTicks(6975),
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
                             Status = true
                         });

@@ -1008,56 +1008,66 @@ namespace SWP391.CHCQS.DataAccess.Data
                 {
                     Id = "PRJ01",
                     Name = "NHÀ PHỐ CHỊ THẢO TẠI ĐỒNG NAI",
+                    Date = new DateTime(2021, 6, 23),
                     CustomerId = "ID001",
                     Description = "Nhà ở gia đình",
                     Location = "Phường Hố Nai, thành phố Biên Hòa, tỉnh Đồng Nai",
                     Scale = "1 trệt, 2 lầu",
                     Size = "5x12",
-                    Status = true
+                    Status = true,
+                    Overview = "Mô hình nhà phố hiện đại vẫn được ưa chuộng nhất qua các năm bởi vẻ đẹp đơn giản nhưng gian trọng và thanh lịch. Và chị Thảo là một trong rất nhiều khách hàng lựa chọn phong cách nhà này.\r\n\r\nVới dịch vụ hoàn thiện nhà trọn gói, chị đã sở hữu cho mình được căn nhà phố hiện đại 1 trệt 2 lầu đầy đủ tiện nghi, đảm bảo thẩm mỹ và độ bền. Cùng khám phá hình ảnh của ngôi nhà qua bài viết sau nhé!"
                 },
                 new Project
                 {
                     Id = "PRJ02",
                     Name = "NHÀ PHỐ CHỊ MAI",
+                    Date = new DateTime(2021, 10, 10),
                     CustomerId = "ID002",
                     Description = "Nhà ở gia đình",
                     Location = "huyện Bến Lức, tỉnh Long An",
                     Scale = "1 trệt, 2 lầu, sân thượng",
                     Size = "5x21",
-                    Status = true
+                    Status = true,
+                    Overview = "Mô hình nhà phố hiện đại đang ngày càng trở nên phổ biến ở Việt Nam nhờ vẻ ngoài thẩm mỹ, sang trọng và chi phí xây dựng hợp lý.\r\n\r\nDưới sự hỗ trợ của dịch vụ thi công nhà trọn gói, gia đình Chị Mai tỉnh Long An thành công hoàn thiện ngôi nhà diện tích 105m2 với 1 trệt, 2 lầu theo phong cách hiện đại. Căn nhà không chỉ đáp ứng những công năng cần thiết chủ nhà yêu cầu mà còn đảm bảo yếu tố thẩm mỹ, phong thủy, chi phí tối ưu… "
                 },
                 new Project
                 {
                     Id = "PRJ03",
                     Name = "NHÀ PHỐ HIỆN ĐẠI 5 TẦNG CỦA ANH MINH",
+                    Date = new DateTime(2022, 8, 15),
                     CustomerId = "ID003",
                     Description = "Nhà ở gia đình",
                     Location = "Phường An Phú Đông, Quận 12",
                     Scale = "1 trệt + 1 lửng + 2 lầu + 1 tum, sân thượng",
                     Size = "4.5x18",
-                    Status = true
+                    Status = true,
+                    Overview = "Nhà ở không chỉ để ở, mà còn là nơi thể hiện phong cách, cá tính của gia chủ. Mỗi công trình nhà là một sản phẩm sáng tạo, mang dấu ấn riêng của người kiến trúc sư và chủ nhà.\r\n\r\nTọa lạc tại KDC Nam Long, Quận 12, ngôi nhà của anh Minh là một trong những công trình hiện đại nổi bật trong khu vực. Kiến trúc 5 tầng với kết cấu 1 trệt + 1 lửng + 2 tầng + 1 tum, căn nhà vừa đáp ứng được không gian sống thoải mái cho các thành viên, vừa tối ưu được chi phí thi công. Cùng Hưng Phú Thịnh ngắm nhìn hình ảnh thực tế của công trình này nhé."
                 },
                 new Project
                 {
                     Id = "PRJ04",
                     Name = "NHÀ CHỊ NGỌC ANH",
+                    Date = new DateTime(2022, 5, 20),
                     CustomerId = "ID004",
                     Description = "Nhà ở gia đình",
                     Location = "Phường Hiệp Bình Chánh, TP. Thủ Đức",
                     Scale = "1 trệt + 2 lầu + 1 tum, sân thượng",
                     Size = "4.35x19.5",
-                    Status = true
+                    Status = true,
+                    Overview = "Nằm giữa lòng thành phố Thủ Đức, ngôi nhà của chị Ngọc Anh là một điểm nhấn nổi bật với phong cách hiện đại, trẻ trung. Với diện tích gần 85m2, quy mô 1 trệt, 2 lầu và 1 tum sân thượng, căn nhà hoàn thiện không chỉ đáp ứng được công năng mà còn thỏa mãn được những yếu tố về thẩm mỹ, phong thủy, đem lại sự hài lòng cho gia chủ."
                 },
                 new Project
                 {
                     Id = "PRJ05",
                     Name = "NHÀ 1 TRỆT 3 LẦU ANH TUẤN ",
+                    Date = new DateTime(2022, 7, 10),
                     CustomerId = "ID005",
                     Description = "Nhà ở gia đình",
                     Location = "Quận 5, TP. HCM",
                     Scale = "Nhà 1 trệt 3 lầu có sân thượng",
                     Size = "4x17",
-                    Status = true
+                    Status = true,
+                    Overview = "Thiết kế nhà phố hiện đại 1 trệt 3 lầu sân thượng là lựa chọn hoàn hảo của nhiều gia đình ở thành phố lớn với diện tích xây dựng hạn chế. Mẫu nhà này có thể đáp ứng nhu cầu sinh hoạt tiện nghi, thoải mái nhưng vẫn đảm bảo riêng tư cho gia đình có đến 3 thế hệ cùng sinh sống."
                 }
             );
 
