@@ -700,13 +700,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ001",
                             Acreage = "240m2",
-<<<<<<< Updated upstream
-                            Date = new DateTime(2024, 2, 17, 11, 49, 48, 179, DateTimeKind.Local).AddTicks(4815),
+                            Date = new DateTime(2024, 2, 17, 21, 39, 40, 470, DateTimeKind.Local).AddTicks(3808),
                             Description = "I want to build this house for my son and his wife, so i can live with them.",
-=======
-                            Date = new DateTime(2024, 2, 17, 20, 4, 6, 818, DateTimeKind.Local).AddTicks(7134),
-                            Description = "I want to build this house for my son and his wife, so i can live with them",
->>>>>>> Stashed changes
                             EngineerId = "EN001",
                             Location = "Dĩ An, Bình Dương",
                             ManagerId = "MG001",
@@ -719,7 +714,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ002",
                             Acreage = "340m2",
-                            Date = new DateTime(2024, 2, 17, 11, 49, 48, 179, DateTimeKind.Local).AddTicks(4821),
+                            Date = new DateTime(2024, 2, 17, 21, 39, 40, 470, DateTimeKind.Local).AddTicks(3813),
                             Description = "This house must be great, so i can live with it for 500 years.",
                             EngineerId = "EN001",
                             Location = "Quận 5, TP. Hồ Chí Minh",
@@ -733,7 +728,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ003",
                             Acreage = "740m2",
-                            Date = new DateTime(2024, 2, 17, 11, 49, 48, 179, DateTimeKind.Local).AddTicks(4824),
+                            Date = new DateTime(2024, 2, 17, 21, 39, 40, 470, DateTimeKind.Local).AddTicks(3815),
                             Description = "This house for president to live, it must be nice.",
                             EngineerId = "EN001",
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
@@ -1371,7 +1366,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "PRJ01",
                             CustomerId = "ID001",
-                            Date = new DateTime(2021, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2021, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhà ở gia đình",
                             Location = "Phường Hố Nai, thành phố Biên Hòa, tỉnh Đồng Nai",
                             Name = "NHÀ PHỐ CHỊ THẢO TẠI ĐỒNG NAI",
@@ -1384,11 +1379,11 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "PRJ02",
                             CustomerId = "ID002",
-                            Date = new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2021, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhà ở gia đình",
                             Location = "huyện Bến Lức, tỉnh Long An",
                             Name = "NHÀ PHỐ CHỊ MAI",
-                            Overview = "Mô hình nhà phố hiện đại đang ngày càng trở nên phổ biến ở Việt Nam nhờ vẻ ngoài thẩm mỹ, sang trọng và chi phí xây dựng hợp lý.\r\n\r\nDưới sự hỗ trợ của dịch vụ thi công nhà trọn gói, gia đình Chị Mai tỉnh Long An thành công hoàn thiện ngôi nhà diện tích 105m2 với 1 trệt, 2 lầu theo phong cách hiện đại. Căn nhà không chỉ đáp ứng những công năng cần thiết chủ nhà yêu cầu mà còn đảm bảo yếu tố thẩm mỹ, phong thủy, chi phí tối ưu… ",
+                            Overview = "Mô hình nhà phố hiện đại đang ngày càng trở nên phổ biến ở Việt Nam nhờ vẻ ngoài thẩm mỹ, sang trọng và chi phí xây dựng hợp lý.\r\n\r\nDưới sự hỗ trợ của dịch vụ thi công nhà trọn gói, gia đình Chị Mai tỉnh Long An thành công hoàn thiện ngôi nhà diện tích 105m2 với 1 trệt, 2 lầu theo phong cách hiện đại. Căn nhà không chỉ đáp ứng những công năng cần thiết chủ nhà yêu cầu mà còn đảm bảo yếu tố thẩm mỹ, phong thủy, chi phí tối ưu",
                             Scale = "1 trệt, 2 lầu, sân thượng",
                             Size = "5x21",
                             Status = true
@@ -1397,7 +1392,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "PRJ03",
                             CustomerId = "ID003",
-                            Date = new DateTime(2022, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2021, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhà ở gia đình",
                             Location = "Phường An Phú Đông, Quận 12",
                             Name = "NHÀ PHỐ HIỆN ĐẠI 5 TẦNG CỦA ANH MINH",
@@ -1410,7 +1405,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "PRJ04",
                             CustomerId = "ID004",
-                            Date = new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhà ở gia đình",
                             Location = "Phường Hiệp Bình Chánh, TP. Thủ Đức",
                             Name = "NHÀ CHỊ NGỌC ANH",
@@ -1423,11 +1418,11 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "PRJ05",
                             CustomerId = "ID005",
-                            Date = new DateTime(2022, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2022, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhà ở gia đình",
                             Location = "Quận 5, TP. HCM",
                             Name = "NHÀ 1 TRỆT 3 LẦU ANH TUẤN ",
-                            Overview = "Thiết kế nhà phố hiện đại 1 trệt 3 lầu sân thượng là lựa chọn hoàn hảo của nhiều gia đình ở thành phố lớn với diện tích xây dựng hạn chế. Mẫu nhà này có thể đáp ứng nhu cầu sinh hoạt tiện nghi, thoải mái nhưng vẫn đảm bảo riêng tư cho gia đình có đến 3 thế hệ cùng sinh sống.",
+                            Overview = "Nằm giữa lòng thành phố Thủ Đức, ngôi nhà của chị Ngọc Anh là một điểm nhấn nổi bật với phong cách hiện đại, trẻ trung. Với diện tích gần 85m2, quy mô 1 trệt, 2 lầu và 1 tum sân thượng, căn nhà hoàn thiện không chỉ đáp ứng được công năng mà còn thỏa mãn được những yếu tố về thẩm mỹ, phong thủy, đem lại sự hài lòng cho gia chủ.",
                             Scale = "Nhà 1 trệt 3 lầu có sân thượng",
                             Size = "4x17",
                             Status = true
@@ -1495,11 +1490,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT2",
                             CustomerId = "ID001",
                             Description = "Customer said that this project must be finished on 3 month",
-<<<<<<< Updated upstream
-                            GenerateDate = new DateTime(2024, 2, 17, 11, 49, 48, 179, DateTimeKind.Local).AddTicks(4386),
-=======
-                            GenerateDate = new DateTime(2024, 2, 17, 20, 4, 6, 818, DateTimeKind.Local).AddTicks(6826),
->>>>>>> Stashed changes
+                            GenerateDate = new DateTime(2024, 2, 17, 21, 39, 40, 470, DateTimeKind.Local).AddTicks(3373),
                             Location = "Dĩ An, Bình Dương",
                             Status = true
                         },
@@ -1510,11 +1501,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT1",
                             CustomerId = "ID002",
                             Description = "Customer said that this project must be finished on 6 month",
-<<<<<<< Updated upstream
-                            GenerateDate = new DateTime(2024, 2, 17, 11, 49, 48, 179, DateTimeKind.Local).AddTicks(4412),
-=======
-                            GenerateDate = new DateTime(2024, 2, 17, 20, 4, 6, 818, DateTimeKind.Local).AddTicks(6836),
->>>>>>> Stashed changes
+                            GenerateDate = new DateTime(2024, 2, 17, 21, 39, 40, 470, DateTimeKind.Local).AddTicks(3395),
                             Location = "Quận 5, TP. Hồ Chí Minh",
                             Status = true
                         },
@@ -1525,11 +1512,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT3",
                             CustomerId = "ID003",
                             Description = "Customer said that this project must be finished on 12 month",
-<<<<<<< Updated upstream
-                            GenerateDate = new DateTime(2024, 2, 17, 11, 49, 48, 179, DateTimeKind.Local).AddTicks(4415),
-=======
-                            GenerateDate = new DateTime(2024, 2, 17, 20, 4, 6, 818, DateTimeKind.Local).AddTicks(6839),
->>>>>>> Stashed changes
+                            GenerateDate = new DateTime(2024, 2, 17, 21, 39, 40, 470, DateTimeKind.Local).AddTicks(3397),
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
                             Status = true
                         });
