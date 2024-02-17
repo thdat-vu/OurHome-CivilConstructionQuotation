@@ -17,6 +17,8 @@ body {
   margin-bottom: 60px;
 }
 
+
+/*Style for text and bg*/
 .bg-main {
     background-color: #F27456!important;
     color: white;
@@ -27,12 +29,34 @@ body {
     color: #F27456;
 }
 
+
+/*Style for main BTN*/
 .btn-main {
-    background-color: #F27456;
+    background-color: #F27456!important;
     color: white;
 }
 
 .btn-main:hover {
     color: white;
     opacity: 0.8;
+}
+
+
+/*Style for datatables*/
+#tblTask td, th {
+    padding: 2px 4px;
+    font-size: 12px;
+}
+
+#tblTask_wrapper label {
+    font-size: 12px;
+}
+
+#tblMaterial_wrapper label {
+    font-size: 12px;
+}
+
+#tblMaterial td, th {
+    padding: 2px 4px;
+    font-size: 12px;
 }
