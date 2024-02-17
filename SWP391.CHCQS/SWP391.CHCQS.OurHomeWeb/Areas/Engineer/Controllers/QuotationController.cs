@@ -24,7 +24,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		[HttpGet]
 		public IActionResult GetAll()
 		{
-			List<CustomQuotationViewModel> customQuotationVMList = _unitOfWork.CustomQuotation.GetAll().Where(x => x.Status = true).Select(x => new CustomQuotationViewModel
+			List<CustomQuotationViewModel> customQuotationVMList = _unitOfWork.CustomQuotation.GetAll().Select(x => new CustomQuotationViewModel
 			{
 				Id = x.Id,
 				Date = x.Date,
@@ -50,37 +50,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// This function return a form to create new Quotation
 		/// </summary>
 		/// <returns>A view create quotation form</returns>
-		public async Task<IActionResult> Quote(string QuotationId)
+		public async Task<IActionResult> Create()
 		{
-
 			return View();
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 		/// <summary>
 		/// This function take the quotation object from create form and create new quotation.
