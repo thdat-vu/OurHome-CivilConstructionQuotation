@@ -3,6 +3,7 @@ using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers;
+using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
@@ -24,13 +25,18 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		[HttpGet]
 		public IActionResult GetAll()
 		{
-			List<CustomQuotationViewModel> customQuotationVMList = _unitOfWork.CustomQuotation.GetAll().Select(x => new CustomQuotationViewModel
-			{
-				Id = x.Id,
-				Date = x.Date,
-				Acreage = x.Acreage,
-				Location = x.Location
-			}).ToList();
+			List<CustomQuotationViewModel> customQuotationVMList = _unitOfWork.CustomQuotation
+				.GetAll()
+				.OrderBy(x => x.Status == SD.Processing)
+				.Select(x => new CustomQuotationViewModel
+				{
+					Id = x.Id,
+					Date = x.Date,
+					Acreage = x.Acreage,
+					Location = x.Location,
+					Status = SD.GetStatusDescription(x.Status),
+				})
+				.ToList();
 
 			return Json(new { data = customQuotationVMList });
 		}
@@ -50,28 +56,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// This function return a form to create new Quotation
 		/// </summary>
 		/// <returns>A view create quotation form</returns>
-		public async Task<IActionResult> Create()
-		{
-			return View();
-		}
-
-		/// <summary>
-		/// This function take the quotation object from create form and create new quotation.
-		/// </summary>
-		/// <param name="quotation">The object Quotation to create new Quotation</param>
-		/// <returns>Result of the process (Success or Fail)</returns>
-		[HttpPost]
-		public async Task<IActionResult> Create(Quotation quotation)
-		{
-			return RedirectToAction("Index", "Quotation");
-		}
-
-		/// <summary>
-		/// This function return the view detail of the quotation be selected
-		/// </summary>
-		/// <param name="id">Id of the quotation that be selected</param>
-		/// <returns>Return view detail quotation</returns>
-		public async Task<IActionResult> Detail(string id)
+		public async Task<IActionResult> Quote(string QuotationId)
 		{
 			return View();
 		}
@@ -81,37 +66,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="id">Id of the quotation that be selected</param>
 		/// <returns>Return a form with detail of the quotation to edit</returns>
-		public async Task<IActionResult> Edit(string id)
+		public async Task<IActionResult> Edit(string QuotationId)
 		{
 			return View();
-		}
-
-		/// <summary>
-		/// This function take the quotaion info to update to the database
-		/// </summary>
-		/// <param name="quotation">Quotation object to update</param>
-		/// <returns>Result of the process (Success or Fail)</returns>
-		[HttpPost]
-		public async Task<IActionResult> Edit(Quotation quotation)
-		{
-			return View("Index");
-		}
-
-		/// <summary>
-		/// This function return the view detail of quotation be selected to delete
-		/// </summary>
-		/// <param name="Id">Id of the quotation be selected</param>
-		/// <returns>A view quotation detail</returns>
-		public async Task<IActionResult> Delete(string? Id)
-		{
-			return View();
-		}
-
-		[HttpPost]
-		[ActionName("Delete")]
-		public async Task<IActionResult> DeletePost(string? Id)
-		{
-			return RedirectToAction("Index");
 		}
 	}
 }

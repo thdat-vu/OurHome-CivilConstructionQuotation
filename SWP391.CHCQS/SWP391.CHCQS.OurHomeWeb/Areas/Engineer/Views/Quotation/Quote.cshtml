@@ -1,0 +1,95 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="row">
+	<div class="col-sm-5">
+		<div class="card shadow border-0">
+			<div class="card-header bg-main">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h2 class="text-white m-0">Task List</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table id="tblTask" class="table-bordered table-striped text-black" style="width:100%">
+						<thead>
+							<tr>
+								<th>
+									Id
+								</th>
+								<th>
+									Name
+								</th>
+								<th>
+									Unit Price
+								</th>
+								<th>
+									Category
+								</th>
+								<th>
+									Actions
+								</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-7">
+		<div class="card shadow border-0">
+			<div class="card-header bg-main">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h2 class="text-white m-0">Material List</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table id="tblMaterial" class="table-bordered table-striped text-black" style="width:100%">
+						<thead>
+							<tr>
+								<th>
+									Id
+								</th>
+								<th>
+									Name
+								</th>
+								<th>
+									Inventory Quantity
+								</th>
+								<th>
+									Unit Price
+								</th>
+								<th>
+									Unit
+								</th>
+								<th>
+									Category
+								</th>
+								<th>
+									Actions
+								</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="~/js/datatables/engineerDTB/MaterialDTB.js"></script>
+	<script src="~/js/datatables/engineerDTB/TaskDTB.js"></script>
+}
