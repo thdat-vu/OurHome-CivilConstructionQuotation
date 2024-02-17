@@ -15,8 +15,8 @@ function loadDataTable() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                        <a href="/Admin/Products/Upsert?quotationId=${data}" class = "btn btn-primary bg-main border-0"><i class="bi bi-pencil-square"></i> Quote</a>
-                        <a onClick=Delete('/Admin/Products/Delete?quotationId=${data}') class = "btn btn-primary mx-2"><i class="bi bi-eye-fill"></i> View</a>
+                        <a href="/Engineer/Quotation/Quote?QuotationId=${data}" class = "btn btn-primary bg-main border-0"><i class="bi bi-folder2-open"></i> Quote</a>
+                        <a onClick=Delete('/Engineer/Quotation/Edit?QuotationId=${data}') class = "btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Edit</a>
                     </div >`
                 },
                 "width": "15%"
