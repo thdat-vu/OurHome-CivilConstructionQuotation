@@ -14,7 +14,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
         private readonly SWP391DBContext _db;
         public StandardQuotationRepository(SWP391DBContext db) : base(db)
         {
-            _db = db;
+           _db = db;
         }
         public void Update(StandardQuotation obj)
         {

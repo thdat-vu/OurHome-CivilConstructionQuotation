@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWP391.CHCQS.Model
 {
@@ -10,24 +12,26 @@ namespace SWP391.CHCQS.Model
             CustomQuotaionTasks = new HashSet<CustomQuotaionTask>();
             MaterialDetails = new HashSet<MaterialDetail>();
         }
-
+        [Key]
         public string Id { get; set; } = null!;
-        public DateTime Date { get; set; }
         public string? Acreage { get; set; }
         public string Location { get; set; } = null!;
         public bool Status { get; set; }
         public string? Description { get; set; }
+        //số tiền mong muốn sẽ sử dụng cho việc thi công
         public decimal Total { get; set; }
-        public string SellerId { get; set; } = null!;
-        public string EngineerId { get; set; } = null!;
-        public string ManagerId { get; set; } = null!;
-        public string RequestId { get; set; } = null!;
-
-        public virtual Staff Engineer { get; set; } = null!;
-        public virtual Staff Manager { get; set; } = null!;
-        public virtual RequestForm Request { get; set; } = null!;
-        public virtual Staff Seller { get; set; } = null!;
         public virtual ConstructDetail? ConstructDetail { get; set; }
+//---------------------------------------------------------------------------------------------
+        [ForeignKey("RequestForm")]
+        public string RequestId { get; set; } = null!;
+        public virtual RequestForm Request { get; set; } = null!;
+//---------------------------------------------------------------------------------------------
+        //Chi tiết ủy quyền công việc: cho ai, thời gian nhận và thời gian hoàn thành
+        [ForeignKey("CustomQuotationDelegation")]
+        public string DelegationId { get; set; } = null!;
+        public virtual CustomQuotationDelegation Delegation { get; set; } = null!;
+//---------------------------------------------------------------------------------------------
+        //công việc Engineer phải xử lý
         public virtual ICollection<CustomQuotaionTask> CustomQuotaionTasks { get; set; }
         public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
     }

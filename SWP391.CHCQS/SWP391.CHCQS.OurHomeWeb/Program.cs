@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SWP391.CHCQS.DataAccess.Data;
+using SWP391.CHCQS.DataAccess.Repository;
 
 namespace SWP391.CHCQS.OurHomeWeb
 {
@@ -11,9 +12,12 @@ namespace SWP391.CHCQS.OurHomeWeb
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
-			builder.Services.AddDbContext<SWP391DBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+			//builder.Services.AddDbContext<SWP391DBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-			var app = builder.Build();
+			//TODO: Connect to XuanDat database
+            builder.Services.AddDbContext<SWP391DBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("XuanDatCon")));
+			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
@@ -32,11 +36,19 @@ namespace SWP391.CHCQS.OurHomeWeb
 
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapControllerRoute(
+                //define the name of role's default page routing
+
+                endpoints.MapControllerRoute(
 				  name: "areas",
 				  pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
 				);
-			});
+
+                endpoints.MapControllerRoute(
+                  name: "defaultManagerRoute",
+                  pattern: "{area=Manager}/{controller=Dashboard}/{action=Index}/{id?}"
+                );
+
+            });
 
 			app.Run();
 		}

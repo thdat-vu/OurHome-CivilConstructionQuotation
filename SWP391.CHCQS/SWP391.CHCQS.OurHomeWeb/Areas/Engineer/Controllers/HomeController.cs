@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
+namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
-    [Area("Engineer")]
+    [Area("Manager")]
     public class HomeController : Controller
     {
         public async Task<IActionResult> Index()
