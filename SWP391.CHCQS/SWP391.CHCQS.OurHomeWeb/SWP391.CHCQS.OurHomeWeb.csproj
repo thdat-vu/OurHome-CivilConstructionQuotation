@@ -31,7 +31,6 @@
     <ProjectReference Include="..\SWP391.CHCQS.DataAccess\SWP391.CHCQS.DataAccess.csproj">
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\SWP391.CHCQS.Model\SWP391.CHCQS.Model.csproj" />
     <ProjectReference Include="..\SWP391.CHCQS.Utility\SWP391.CHCQS.Utility.csproj">
       <Private>True</Private>
     </ProjectReference>
@@ -41,16 +40,6 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Areas\Engineer\ViewModels\MaterialDetailViewModel.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Manager\ViewModels\DonutChart\" />
   </ItemGroup>
 
 </Project>

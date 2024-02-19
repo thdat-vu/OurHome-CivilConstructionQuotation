@@ -12,7 +12,6 @@ namespace SWP391.CHCQS.Model
         }
 
         public string Id { get; set; } = null!;
-        //thời gian tạo Request của khách hàng
         public DateTime GenerateDate { get; set; }
         public string? Description { get; set; }
         public string? ConstructType { get; set; }
