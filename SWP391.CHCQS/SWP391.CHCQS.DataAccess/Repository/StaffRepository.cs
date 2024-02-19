@@ -4,21 +4,22 @@ using SWP391.CHCQS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository
 {
-    public class StandardQuotationRepository : Repository<StandardQuotation>, IStandardQuotationRepository
+    public class StaffRepository : Repository<Staff>, IStaffRepository
     {
         private readonly SWP391DBContext _db;
-        public StandardQuotationRepository(SWP391DBContext db) : base(db)
+        public StaffRepository(SWP391DBContext db) : base(db)
         {
-           _db = db;
+            _db = db;
         }
-        public void Update(StandardQuotation obj)
+        public void Update(Staff obj)
         {
-            _db.StandardQuotations.Update(obj);
+            _db.Staff.Update(obj);
         }
     }
 }

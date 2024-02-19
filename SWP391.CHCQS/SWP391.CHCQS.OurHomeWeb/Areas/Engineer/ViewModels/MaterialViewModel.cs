@@ -1,6 +1,6 @@
-﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels
+﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
-	public class MaterialViewModel
+	public partial class MaterialViewModel
 	{
 		public string Id { get; set; } = null!;
 		public string Name { get; set; } = null!;
