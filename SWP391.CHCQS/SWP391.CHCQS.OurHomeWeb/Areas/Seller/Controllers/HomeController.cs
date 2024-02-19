@@ -5,9 +5,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 	[Area("Seller")]
 	public class HomeController : Controller
 	{
-		public IActionResult Index()
-		{
-			return View();
-		}
-	}
+        public async Task<IActionResult> Index()
+        {
+            return RedirectToAction("Index", "Request");
+        }
+    }
 }
