@@ -30,5 +30,16 @@ namespace SWP391.CHCQS.Model
         public virtual ConstructDetail? ConstructDetail { get; set; }
         public virtual ICollection<CustomQuotaionTask> CustomQuotaionTasks { get; set; }
         public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
+
+        //ghi lại thời gian và người dc ủy quyền xử lý custom quotation
+        //thời gian dc giao request và hoàn thành điền quotation của Seller
+        public DateTime? DelegationDateSeller { get; set; }
+        public DateTime? SubmissionDateSeller { get; set; }
+        //thời gian nhận customquotation và hoàn thành (MaterialDetail + CustomQuotationTask) của engineer
+        public DateTime? RecieveDateEngineer { get; set; }
+        public DateTime? SubmissionDateEngineer { get; set; }
+        //thời gian nhận customquotation đầy đủ và chấp nhận của Manager
+        public DateTime? RecieveDateManager { get; set; }
+        public DateTime? AcceptanceDateManager { get; set; }
     }
 }
