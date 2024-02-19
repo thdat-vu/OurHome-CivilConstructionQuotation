@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
+namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
-    [Area("Seller")]
-    public class Request : Controller
+    public class MaterialController : Controller
     {
         public IActionResult Index()
         {

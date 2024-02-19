@@ -16,7 +16,7 @@ namespace SWP391.CHCQS.Model
         public string Id { get; set; } = null!;
         public string? Acreage { get; set; }
         public string Location { get; set; } = null!;
-        public bool Status { get; set; }
+        public int Status { get; set; }
         public string? Description { get; set; }
         //số tiền mong muốn sẽ sử dụng cho việc thi công
         public decimal Total { get; set; }

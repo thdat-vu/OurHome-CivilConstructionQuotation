@@ -5,13 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository.IRepository
-{
-    //Mục đích class: Tạo ra 1 repository tổng để có thể gọi các repository khác -> dễ mantain code hơn
+{    
     public interface IUnitOfWork
     {
-        
-        public IStandardQuotationRepository StandardQuotation {  get; }
-        public IStaffRepository Staff { get; }
+        IStandardQuotationRepository StandardQuotation { get; }
+        IProjectRepository Project { get; }
+        ICustomQuotaionTaskRepository CustomQuotaionTask { get; }
+        ICustomQuotationRepository CustomQuotation { get; }
+        ITaskRepository Task { get; }
+        IMaterialRepository Material { get; }
+        IMaterialDetailRepository MaterialDetail { get; }
+        IConstructDetailRepository ConstructDetail { get; }
+        ITaskCategoryRepository TaskCategory { get; }
+        IRequestRepository RequestForm { get; }
         void Save();
     }
 }
