@@ -12,11 +12,13 @@ namespace SWP391.CHCQS.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly SWP391DBContext _db;
-        public IStandardQuotationRepository StandardQuotation;
+        public IStandardQuotationRepository StandardQuotation {  get;  }
+        public IStaffRepository Staff {  get;  }
         public UnitOfWork(SWP391DBContext db)
         {
             _db = db;
             StandardQuotation = new StandardQuotationRepository(_db);
+            Staff = new StaffRepository(_db);
         }
         public void Save()
         {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers;
 
-namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
+namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
-    [Area("Engineer")]
+    [Area("Manager")]
     public class QuotationController : Controller
     {
         /// <summary>

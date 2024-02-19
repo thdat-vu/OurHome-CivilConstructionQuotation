@@ -1,4 +1,4 @@
-﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels
+﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
 	public class MaterialDetailViewModel
 	{

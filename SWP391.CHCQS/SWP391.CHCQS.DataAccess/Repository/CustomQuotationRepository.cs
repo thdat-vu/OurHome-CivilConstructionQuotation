@@ -9,16 +9,12 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository
 {
-    public class StandardQuotationRepository : Repository<StandardQuotation>, IStandardQuotationRepository
+    public class CustomQuotationRepository : Repository<CustomQuotation>, ICustomerQuotationRepository
     {
         private readonly SWP391DBContext _db;
-        public StandardQuotationRepository(SWP391DBContext db) : base(db)
+        public CustomQuotationRepository(SWP391DBContext db) : base(db)
         {
-           _db = db;
-        }
-        public void Update(StandardQuotation obj)
-        {
-            _db.StandardQuotations.Update(obj);
+            _db = db;
         }
     }
 }
