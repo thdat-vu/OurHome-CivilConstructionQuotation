@@ -1,6 +1,6 @@
 ﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels
 {
-	public class ConstructDetailViewModel
+	public partial class ConstructDetailViewModel
 	{
 		public string QuotationId { get; } = null!;
 		public decimal Width { get; }

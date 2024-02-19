@@ -1,6 +1,6 @@
 ﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels
 {
-	public class CustomQuotationViewModel
+	public partial class CustomQuotationViewModel
 	{
 		public string Id { get; set; } = null!;
 		public DateTime Date { get; set; }
