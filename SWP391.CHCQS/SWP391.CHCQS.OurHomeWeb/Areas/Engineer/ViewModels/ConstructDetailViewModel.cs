@@ -2,21 +2,21 @@
 {
 	public partial class ConstructDetailViewModel
 	{
-		public string QuotationId { get; } = null!;
-		public decimal Width { get; }
-		public decimal Length { get; }
-		public int Facade { get; }
-		public string Alley { get; } = null!;
-		public int Floor { get; }
-		public int Room { get; }
-		public decimal Mezzanine { get; }
-		public decimal RooftopFloor { get; }
-		public bool Balcony { get; }
-		public decimal Garden { get; }
-		public string ConstructionTypeName { get; } = null!;
-		public string InvestmentTypeName { get; } = null!;
-		public string FoundationTypeName { get; } = null!;
-		public string RooftopTypeName { get; } = null!;
-		public string BasementTypeName { get; } = null!;
+		public string QuotationId { get; set; } = null!;
+		public decimal Width { get; set; }
+		public decimal Length { get; set; }
+		public int Facade { get; set; }
+		public string Alley { get; set; } = null!;
+		public int Floor { get; set; }
+		public int Room { get; set; }
+		public decimal Mezzanine { get; set; }
+		public decimal RooftopFloor { get; set; }
+		public bool Balcony { get; set; }
+		public decimal Garden { get; set; }
+		public string ConstructionTypeName { get; set; } = null!;
+		public string InvestmentTypeName { get; set; } = null!;
+		public string FoundationTypeName { get; set; } = null!;
+		public string RooftopTypeName { get; set; } = null!;
+		public string BasementTypeName { get; set; } = null!;
 	}
 }

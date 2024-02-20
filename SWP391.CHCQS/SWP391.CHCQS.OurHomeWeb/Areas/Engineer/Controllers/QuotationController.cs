@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers;
 using SWP391.CHCQS.Utility;
+using System.Collections.Generic;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
@@ -58,7 +60,38 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// <returns>A view create quotation form</returns>
 		public async Task<IActionResult> Quote(string QuotationId)
 		{
-			return View();
+			ConstructDetail? constructDetail = _unitOfWork.ConstructDetail.Get(filter: c => c.QuotationId == QuotationId, includeProperties: "Construction,Investment,Foundation,Rooftop,Basement");
+			ConstructDetailViewModel constructDetailVM;
+
+			if (constructDetail == null)
+			{
+				return RedirectToAction("Error", "Home");
+			}
+			else
+			{
+				constructDetailVM = new ConstructDetailViewModel
+				{
+					QuotationId = constructDetail.QuotationId,
+					Width = constructDetail.Width,
+					Length = constructDetail.Length,
+					Facade = constructDetail.Facade,
+					Alley = constructDetail.Alley,
+					Floor = constructDetail.Floor,
+					Room = constructDetail.Room,
+					Mezzanine = constructDetail.Mezzanine,
+					RooftopFloor = constructDetail.RooftopFloor,
+					Balcony = constructDetail.Balcony,
+					Garden = constructDetail.Garden,
+					ConstructionTypeName = constructDetail.Construction.Name,
+					InvestmentTypeName = constructDetail.Investment.Name,
+					FoundationTypeName = constructDetail.Foundation.Name,
+					RooftopTypeName = constructDetail.Rooftop.Name,
+					BasementTypeName = constructDetail.Basement.Name
+				};
+
+			}
+
+			return View(constructDetailVM);
 		}
 
 		/// <summary>

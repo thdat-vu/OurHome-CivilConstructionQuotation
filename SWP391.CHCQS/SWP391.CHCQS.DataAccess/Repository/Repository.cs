@@ -36,6 +36,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
             query = query.Where(filter);
             if (!string.IsNullOrEmpty(includeProperties))
             {
+                //Ví dụ truyền vào includePreperties: "ConstructionType,BasementType" thì nó sẽ tách chuỗi rồi Inlcude();
                 foreach (var incluProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     query = query.Include(incluProp);
