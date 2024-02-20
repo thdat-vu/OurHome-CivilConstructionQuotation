@@ -10,5 +10,6 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     public interface IConstructDetailRepository : IRepository<ConstructDetail>
     {
         void Update(ConstructDetail obj);
+        string GetConstructTypeName(string id);
     }
 }

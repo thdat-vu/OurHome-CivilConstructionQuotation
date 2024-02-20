@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Manager\ViewModels\DonutChart\" />
+    <Folder Include="wwwroot\js\charts\" />
   </ItemGroup>
 
 </Project>

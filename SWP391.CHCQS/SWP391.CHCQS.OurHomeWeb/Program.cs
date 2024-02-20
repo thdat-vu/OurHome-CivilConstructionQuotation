@@ -17,7 +17,6 @@ namespace SWP391.CHCQS.OurHomeWeb
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 			var app = builder.Build();
-
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
 			{
@@ -39,6 +38,7 @@ namespace SWP391.CHCQS.OurHomeWeb
 				  name: "areas",
 				  pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
 				);
+			
 			});
 
 			app.Run();
