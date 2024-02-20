@@ -21,5 +21,9 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             _db.ConstructDetails.Update(obj);
         }
+        public string GetConstructTypeName(string id)
+        {
+            return _db.ConstructionTypes.Find(id).Name;
+        }
     }
 }

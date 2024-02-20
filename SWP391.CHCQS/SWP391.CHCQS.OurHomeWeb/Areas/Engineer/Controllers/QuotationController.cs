@@ -36,11 +36,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					Date = x.Date,
 					Acreage = x.Acreage,
 					Location = x.Location,
-					Status = SD.GetStatusDescription(x.Status),
+					Status = SD.GetQuotationStatusDescription(x.Status),
 				})
 				.ToList();
-
-			return Json(new { data = customQuotationVMList });
+           
+            return Json(new { data = customQuotationVMList });
 		}
 		#endregion
 

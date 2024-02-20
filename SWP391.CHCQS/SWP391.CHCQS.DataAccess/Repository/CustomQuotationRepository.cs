@@ -21,5 +21,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             _db.CustomQuotations.Update(obj);
         }
+        //function lấy ra tổng số Custom Quotation dc tạo bởi seller ~ số khách hàng đã sử dụng báo giá
+        public int CountCustomQuotation()
+        {
+            return _db.CustomQuotations.Count();
+        }
     }
 }

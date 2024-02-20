@@ -15,7 +15,14 @@ namespace SWP391.CHCQS.Model
         public DateTime Date { get; set; }
         public string? Acreage { get; set; }
         public string Location { get; set; } = null!;
-        public int Status { get; set; }
+		//các trạng thái
+		//seller nhận xử lý: preparing (1)
+		    //TH bị hủy ở Seller: cancle (-1) - khách hàng ko nghe máy || ko thích tư vấn
+		//engineer nhận xử lý: processing (2)
+		//manager nhận:  Pending_Approval (3)
+		//manager acceptance: Completed (4)
+		    //TH manager reject: rejected (0) -> quay lại processing khi engineer nhận (2)
+		public int Status { get; set; }
         public string? Description { get; set; }
         public decimal Total { get; set; }
         public string SellerId { get; set; } = null!;

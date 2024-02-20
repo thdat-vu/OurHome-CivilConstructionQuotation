@@ -21,5 +21,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             _db.RequestForms.Update(obj);
         }
+        //function lấy ra tổng số request được gửi
+        public int CountRequest()
+        {
+            return _db.RequestForms.Count();
+        }
     }
 }

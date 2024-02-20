@@ -38,7 +38,6 @@ namespace SWP391.CHCQS.OurHomeWeb
 			});
 
 			var app = builder.Build();
-
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
 			{
@@ -64,6 +63,7 @@ namespace SWP391.CHCQS.OurHomeWeb
 				  name: "areas",
 				  pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
 				);
+			
 			});
 
 			app.Run();
