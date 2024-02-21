@@ -10,5 +10,7 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     public interface ICustomQuotationRepository : IRepository<CustomQuotation>
     {
         void Update(CustomQuotation obj);
-    }
+        int Count();
+        CustomQuotation GetById(string id, string? includeProperties = null);
+	}
 }

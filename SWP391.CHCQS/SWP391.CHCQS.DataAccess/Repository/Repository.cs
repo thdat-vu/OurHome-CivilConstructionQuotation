@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,8 +30,13 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             dbSet.AddRange(entity);
         }
-
-        public T? Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
+		/// <summary>
+		/// This method queries a single object from a database based on a provided filter expression and allows for the inclusion of related objects in the query result.
+		/// </summary>
+		/// <param name="filter">body expression filter for Where method</param>
+		/// <param name="includeProperties">the name of foreign key you want to load data, which is a comma-separated string</param>
+		/// <returns><T></returns>
+		public T? Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
@@ -64,7 +70,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
             return query.ToList();
         }
 
-        public void Remove(T entity)
+		public void Remove(T entity)
         {
             dbSet.Remove(entity);
         }
