@@ -19,7 +19,7 @@ namespace SWP391.CHCQS.DataAccess.Data
 		{
 		}
 
-		public virtual DbSet<Account> Accounts { get; set; } = null!;
+		//public virtual DbSet<Account> Accounts { get; set; } = null!;
 		public virtual DbSet<BasementType> BasementTypes { get; set; } = null!;
 		public virtual DbSet<ConstructDetail> ConstructDetails { get; set; } = null!;
 		public virtual DbSet<ConstructionType> ConstructionTypes { get; set; } = null!;
@@ -42,28 +42,28 @@ namespace SWP391.CHCQS.DataAccess.Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Account>(entity =>
-			{
-				entity.HasKey(e => e.Username)
-					.HasName("PK__Account__F3DBC5731230846A");
+			//modelBuilder.Entity<Account>(entity =>
+			//{
+			//	entity.HasKey(e => e.Username)
+			//		.HasName("PK__Account__F3DBC5731230846A");
 
-				entity.ToTable("Account");
+			//	entity.ToTable("Account");
 
-				entity.Property(e => e.Username)
-					.HasMaxLength(20)
-					.IsUnicode(false)
-					.HasColumnName("username");
+			//	entity.Property(e => e.Username)
+			//		.HasMaxLength(20)
+			//		.IsUnicode(false)
+			//		.HasColumnName("username");
 
-				entity.Property(e => e.Password)
-					.HasMaxLength(20)
-					.IsUnicode(false)
-					.HasColumnName("password");
+			//	entity.Property(e => e.Password)
+			//		.HasMaxLength(20)
+			//		.IsUnicode(false)
+			//		.HasColumnName("password");
 
-				entity.Property(e => e.Role)
-					.HasMaxLength(10)
-					.IsUnicode(false)
-					.HasColumnName("role");
-			});
+			//	entity.Property(e => e.Role)
+			//		.HasMaxLength(10)
+			//		.IsUnicode(false)
+			//		.HasColumnName("role");
+			//});
 
 			modelBuilder.Entity<BasementType>(entity =>
 			{
@@ -163,29 +163,29 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.HasColumnType("decimal(7, 2)")
 					.HasColumnName("width");
 
-				entity.HasOne(d => d.Basement)
-					.WithMany(p => p.ConstructDetails)
-					.HasForeignKey(d => d.BasementId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Construct__basem__4D94879B");
+				//entity.HasOne(d => d.Basement)
+				//	.WithMany(p => p.ConstructDetails)
+				//	.HasForeignKey(d => d.BasementId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Construct__basem__4D94879B");
 
-				entity.HasOne(d => d.Construction)
-					.WithMany(p => p.ConstructDetails)
-					.HasForeignKey(d => d.ConstructionId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Construct__const__4E88ABD4");
+				//entity.HasOne(d => d.Construction)
+				//	.WithMany(p => p.ConstructDetails)
+				//	.HasForeignKey(d => d.ConstructionId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Construct__const__4E88ABD4");
 
-				entity.HasOne(d => d.Foundation)
-					.WithMany(p => p.ConstructDetails)
-					.HasForeignKey(d => d.FoundationId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Construct__found__4D94879B");
+				//entity.HasOne(d => d.Foundation)
+				//	.WithMany(p => p.ConstructDetails)
+				//	.HasForeignKey(d => d.FoundationId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Construct__found__4D94879B");
 
-				entity.HasOne(d => d.Investment)
-					.WithMany(p => p.ConstructDetails)
-					.HasForeignKey(d => d.InvestmentId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Construct__inves__5070F446");
+				//entity.HasOne(d => d.Investment)
+				//	.WithMany(p => p.ConstructDetails)
+				//	.HasForeignKey(d => d.InvestmentId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Construct__inves__5070F446");
 
 				entity.HasOne(d => d.Quotation)
 					.WithOne(p => p.ConstructDetail)
@@ -193,11 +193,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.OnDelete(DeleteBehavior.ClientSetNull)
 					.HasConstraintName("FK__Construct__quota__5165187F");
 
-				entity.HasOne(d => d.Rooftop)
-					.WithMany(p => p.ConstructDetails)
-					.HasForeignKey(d => d.RooftopId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Construct__rooft__52593CB8");
+				//entity.HasOne(d => d.Rooftop)
+				//	.WithMany(p => p.ConstructDetails)
+				//	.HasForeignKey(d => d.RooftopId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Construct__rooft__52593CB8");
 			});
 
 			modelBuilder.Entity<ConstructionType>(entity =>
@@ -310,29 +310,17 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.HasColumnType("money")
 					.HasColumnName("total");
 
-				entity.HasOne(d => d.Engineer)
-					.WithMany(p => p.CustomQuotationEngineers)
-					.HasForeignKey(d => d.EngineerId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__CustomQuo__engin__5629CD9C");
+			
 
-				entity.HasOne(d => d.Manager)
-					.WithMany(p => p.CustomQuotationManagers)
-					.HasForeignKey(d => d.ManagerId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__CustomQuo__manag__571DF1D5");
+			
 
-				entity.HasOne(d => d.Request)
-					.WithMany(p => p.CustomQuotations)
-					.HasForeignKey(d => d.RequestId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__CustomQuo__reque__5812160E");
+				//entity.HasOne(d => d.Request)
+				//	.WithMany(p => p.CustomQuotations)
+				//	.HasForeignKey(d => d.RequestId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__CustomQuo__reque__5812160E");
 
-				entity.HasOne(d => d.Seller)
-					.WithMany(p => p.CustomQuotationSellers)
-					.HasForeignKey(d => d.SellerId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__CustomQuo__selle__59063A47");
+				
 			});
 
 			modelBuilder.Entity<Customer>(entity =>
@@ -369,11 +357,7 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.IsUnicode(false)
 					.HasColumnName("username");
 
-				entity.HasOne(d => d.UsernameNavigation)
-					.WithMany(p => p.Customers)
-					.HasForeignKey(d => d.Username)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Customer__userna__534D60F1");
+				
 			});
 
 			modelBuilder.Entity<FoundationType>(entity =>
@@ -455,11 +439,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.HasColumnType("money")
 					.HasColumnName("unitPrice");
 
-				entity.HasOne(d => d.Category)
-					.WithMany(p => p.Materials)
-					.HasForeignKey(d => d.CategoryId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Material__catego__5812160E");
+				//entity.HasOne(d => d.Category)
+				//	.WithMany(p => p.Materials)
+				//	.HasForeignKey(d => d.CategoryId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Material__catego__5812160E");
 			});
 
 			modelBuilder.Entity<MaterialCategory>(entity =>
@@ -588,11 +572,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 
 				entity.Property(e => e.Status).HasColumnName("status");
 
-				entity.HasOne(d => d.Customer)
-					.WithMany(p => p.Projects)
-					.HasForeignKey(d => d.CustomerId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Project__custome__5AEE82B9");
+				//entity.HasOne(d => d.Customer)
+				//	.WithMany(p => p.Projects)
+				//	.HasForeignKey(d => d.CustomerId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Project__custome__5AEE82B9");
 			});
 
 			modelBuilder.Entity<RequestForm>(entity =>
@@ -634,11 +618,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 
 				entity.Property(e => e.Status).HasColumnName("status");
 
-				entity.HasOne(d => d.Customer)
-					.WithMany(p => p.RequestForms)
-					.HasForeignKey(d => d.CustomerId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__RequestFo__custo__5FB337D6");
+				//entity.HasOne(d => d.Customer)
+				//	.WithMany(p => p.RequestForms)
+				//	.HasForeignKey(d => d.CustomerId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__RequestFo__custo__5FB337D6");
 
 				entity.HasMany(d => d.Materials)
 					.WithMany(p => p.Requests)
@@ -721,16 +705,7 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.IsUnicode(false)
 					.HasColumnName("username");
 
-				entity.HasOne(d => d.Manager)
-					.WithMany(p => p.InverseManager)
-					.HasForeignKey(d => d.ManagerId)
-					.HasConstraintName("FK__Staff__managerId__628FA481");
-
-				entity.HasOne(d => d.UsernameNavigation)
-					.WithMany(p => p.Staff)
-					.HasForeignKey(d => d.Username)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Staff__username__6383C8BA");
+	
 			});
 
 			modelBuilder.Entity<StandardQuotation>(entity =>
@@ -763,11 +738,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 
 				entity.Property(e => e.Status).HasColumnName("status");
 
-				entity.HasOne(d => d.Construction)
-					.WithMany(p => p.StandardQuotations)
-					.HasForeignKey(d => d.ConstructionId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__StandardQ__const__6477ECF3");
+				//entity.HasOne(d => d.Construction)
+				//	.WithMany(p => p.StandardQuotations)
+				//	.HasForeignKey(d => d.ConstructionId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__StandardQ__const__6477ECF3");
 
 				entity.HasMany(d => d.Materials)
 					.WithMany(p => p.Quotations)
@@ -834,11 +809,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.HasColumnType("money")
 					.HasColumnName("unitPrice");
 
-				entity.HasOne(d => d.Category)
-					.WithMany(p => p.Tasks)
-					.HasForeignKey(d => d.CategoryId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Task__categoryId__656C112C");
+				//entity.HasOne(d => d.Category)
+				//	.WithMany(p => p.Tasks)
+				//	.HasForeignKey(d => d.CategoryId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Task__categoryId__656C112C");
 			});
 
 			modelBuilder.Entity<TaskCategory>(entity =>
@@ -859,22 +834,22 @@ namespace SWP391.CHCQS.DataAccess.Data
 			//Dumpling data for all Entities
 
 			//This one for Account
-			modelBuilder.Entity<Account>().HasData(
-				new Account { Username = "thao123", Password = "1", Role = "customer" },
-				new Account { Username = "maitran1", Password = "1", Role = "customer" },
-				new Account { Username = "lvm123", Password = "1", Role = "customer" },
-				new Account { Username = "ngocanh85", Password = "1", Role = "customer" },
-				new Account { Username = "dtuan", Password = "1", Role = "customer" },
-				new Account { Username = "datnt", Password = "1", Role = "engineer" },
-				new Account { Username = "datnx", Password = "1", Role = "manager" },
-				new Account { Username = "duclm", Password = "1", Role = "seller" },
-				new Account { Username = "anhnth", Password = "1", Role = "admin" },
-				new Account { Username = "bthuong", Password = "1", Role = "customer" },
-				new Account { Username = "phai789", Password = "1", Role = "customer" },
-				new Account { Username = "lanly22", Password = "1", Role = "customer" },
-				new Account { Username = "vnam", Password = "1", Role = "customer" },
-				new Account { Username = "hoanguyen", Password = "1", Role = "customer" }
-			);
+			//modelBuilder.Entity<Account>().HasData(
+			//	new Account { Username = "thao123", Password = "1", Role = "customer" },
+			//	new Account { Username = "maitran1", Password = "1", Role = "customer" },
+			//	new Account { Username = "lvm123", Password = "1", Role = "customer" },
+			//	new Account { Username = "ngocanh85", Password = "1", Role = "customer" },
+			//	new Account { Username = "dtuan", Password = "1", Role = "customer" },
+			//	new Account { Username = "datnt", Password = "1", Role = "engineer" },
+			//	new Account { Username = "datnx", Password = "1", Role = "manager" },
+			//	new Account { Username = "duclm", Password = "1", Role = "seller" },
+			//	new Account { Username = "anhnth", Password = "1", Role = "admin" },
+			//	new Account { Username = "bthuong", Password = "1", Role = "customer" },
+			//	new Account { Username = "phai789", Password = "1", Role = "customer" },
+			//	new Account { Username = "lanly22", Password = "1", Role = "customer" },
+			//	new Account { Username = "vnam", Password = "1", Role = "customer" },
+			//	new Account { Username = "hoanguyen", Password = "1", Role = "customer" }
+			//);
 
 			//This one for Customer
 			modelBuilder.Entity<Customer>().HasData(

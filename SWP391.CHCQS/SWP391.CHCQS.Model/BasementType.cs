@@ -7,7 +7,7 @@ namespace SWP391.CHCQS.Model
     {
         public BasementType()
         {
-            ConstructDetails = new HashSet<ConstructDetail>();
+            //ConstructDetails = new HashSet<ConstructDetail>();
         }
 
         public string Id { get; set; } = null!;
@@ -15,6 +15,6 @@ namespace SWP391.CHCQS.Model
         public decimal UnitPrice { get; set; }
         public string? Description { get; set; }
 
-        public virtual ICollection<ConstructDetail> ConstructDetails { get; set; }
+      
     }
 }
