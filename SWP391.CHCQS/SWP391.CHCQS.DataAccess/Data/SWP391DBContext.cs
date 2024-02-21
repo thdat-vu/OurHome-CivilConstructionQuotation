@@ -310,29 +310,29 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.HasColumnType("money")
 					.HasColumnName("total");
 
-				entity.HasOne(d => d.Engineer)
-					.WithMany(p => p.CustomQuotationEngineers)
-					.HasForeignKey(d => d.EngineerId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__CustomQuo__engin__5629CD9C");
+				//entity.HasOne(d => d.Engineer)
+				//	.WithMany(p => p.CustomQuotationEngineers)
+				//	.HasForeignKey(d => d.EngineerId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__CustomQuo__engin__5629CD9C");
 
-				entity.HasOne(d => d.Manager)
-					.WithMany(p => p.CustomQuotationManagers)
-					.HasForeignKey(d => d.ManagerId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__CustomQuo__manag__571DF1D5");
+				//entity.HasOne(d => d.Manager)
+				//	.WithMany(p => p.CustomQuotationManagers)
+				//	.HasForeignKey(d => d.ManagerId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__CustomQuo__manag__571DF1D5");
 
-				entity.HasOne(d => d.Request)
-					.WithMany(p => p.CustomQuotations)
-					.HasForeignKey(d => d.RequestId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__CustomQuo__reque__5812160E");
+				//entity.HasOne(d => d.Request)
+				//	.WithMany(p => p.CustomQuotations)
+				//	.HasForeignKey(d => d.RequestId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__CustomQuo__reque__5812160E");
 
-				entity.HasOne(d => d.Seller)
-					.WithMany(p => p.CustomQuotationSellers)
-					.HasForeignKey(d => d.SellerId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__CustomQuo__selle__59063A47");
+				//entity.HasOne(d => d.Seller)
+				//	.WithMany(p => p.CustomQuotationSellers)
+				//	.HasForeignKey(d => d.SellerId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__CustomQuo__selle__59063A47");
 			});
 
 			modelBuilder.Entity<Customer>(entity =>
@@ -721,10 +721,10 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.IsUnicode(false)
 					.HasColumnName("username");
 
-				entity.HasOne(d => d.Manager)
-					.WithMany(p => p.InverseManager)
-					.HasForeignKey(d => d.ManagerId)
-					.HasConstraintName("FK__Staff__managerId__628FA481");
+				//entity.HasOne(d => d.Manager)
+				//	.WithMany(p => p.InverseManager)
+				//	.HasForeignKey(d => d.ManagerId)
+				//	.HasConstraintName("FK__Staff__managerId__628FA481");
 
 				entity.HasOne(d => d.UsernameNavigation)
 					.WithMany(p => p.Staff)

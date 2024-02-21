@@ -8,27 +8,27 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 	/// <summary>
 	/// This controller contains methods retrieving necessary data for Custom Quotation
 	/// </summary>
-    [Area("Manager")]
-    public class CustomQuotationController : Controller
-    {
+	[Area("Manager")]
+	public class CustomQuotationController : Controller
+	{
 		private readonly IUnitOfWork _unitOfWork;
 
 		public CustomQuotationController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-        public IActionResult Index()
-        {
-           
-            return View();
-        }
+		{
+			_unitOfWork = unitOfWork;
+		}
+		public IActionResult Index()
+		{
+
+			return View();
+		}
 		/// <summary>
 		/// This method returns all pending approval CustomQuotation via CustomQuotationViewModel
 		/// </summary>
 		/// <returns>CustomQuotationViewModel</returns>
 		[HttpGet]
 		public IActionResult GetAll()
-        {
+		{
 			List<CustomQuotationViewModel> customQuotationViewModels = _unitOfWork.CustomQuotation
 				.GetAll(includeProperties: "Engineer,Manager,Seller,ConstructDetail,Request")
 				.Where(x => x.Status == SD.Pending_Approval)
@@ -42,14 +42,22 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 					EngineerName = x.Engineer.Name,
 					SellerName = x.Seller.Name,
 					ManagerName = x.Manager.Name,
-					ConstrucType = _unitOfWork.ConstructDetail.GetConstructTypeName(x.ConstructDetail.ConstructionId), 
+					ConstrucType = _unitOfWork.ConstructDetail.GetConstructTypeName(x.ConstructDetail.ConstructionId),
 					GeneratRequestDate = x.Request.GenerateDate
 				}).ToList();
 			//TODO: Test
-            Console.WriteLine(customQuotationViewModels);
-            return Json(new { data = customQuotationViewModels });
-        }
+			//Console.WriteLine(customQuotationViewModels);
+			return Json(new { data = customQuotationViewModels });
+		}
+
+		[HttpGet]
+		public IActionResult GetDetail(string id)
+		{
+			var customQuotationDetail = _unitOfWork.CustomQuotation.GetById(id, "Manager,Engineer,Seller");
+			return Json(new { data = customQuotationDetail });
+			//return View();
+		}
 	}
-    
-   
+
+
 }

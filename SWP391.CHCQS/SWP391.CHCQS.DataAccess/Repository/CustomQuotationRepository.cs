@@ -4,6 +4,7 @@ using SWP391.CHCQS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,5 +27,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             return _db.CustomQuotations.Count();
         }
-    }
+		public CustomQuotation GetById(string id, string? includeProperties = null!)
+		{
+			Expression<Func<CustomQuotation, bool>> filter = x => x.Id == id;
+			return Get(filter, includeProperties);
+		}
+	}
 }

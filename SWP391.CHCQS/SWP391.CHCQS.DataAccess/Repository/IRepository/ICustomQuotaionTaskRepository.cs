@@ -11,5 +11,6 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     {
         void Update(CustomQuotaionTask obj);
         void UpdateRange(List<CustomQuotaionTask> obj);
-    }
+
+	}
 }
