@@ -26,37 +26,33 @@ namespace SWP391.CHCQS.Model
 		public int Status { get; set; }
         public string? Description { get; set; }
         public decimal Total { get; set; }
+ 
+        public string? SellerId { get; set; } = null!;
 
-        [ForeignKey("Staff")]
-        public string SellerId { get; set; } = null!;
-		public virtual Staff Seller { get; set; } = null!;
+		public string? EngineerId { get; set; } = null!;
 
-		[ForeignKey("Staff")]
-		public string EngineerId { get; set; } = null!;
-		public virtual Staff Engineer { get; set; } = null!;
+		public string? ManagerId { get; set; } = null!;
 
-		[ForeignKey("Staff")]
-		public string ManagerId { get; set; } = null!;
-		public virtual Staff Manager { get; set; } = null!;
 
-		[ForeignKey("RequestForm")]
-		public string RequestId { get; set; } = null!;
-        public virtual RequestForm Request { get; set; } = null!;
-       
-        public virtual ConstructDetail? ConstructDetail { get; set; }
+		public string? RequestId { get; set; } = null!;
 
-        public virtual ICollection<CustomQuotaionTask> CustomQuotaionTasks { get; set; }
-        public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
+        public virtual Staff? Engineer { get; set; } = null!;
+        public virtual Staff? Manager { get; set; } = null!;
+        public virtual RequestForm? Request { get; set; } = null!;
+        public virtual Staff? Seller { get; set; } = null!;
+        public virtual ConstructDetail? ConstructDetail { get; set; } = null!;
+        public virtual ICollection<CustomQuotaionTask>? CustomQuotaionTasks { get; set; } = null!;
+		public virtual ICollection<MaterialDetail>? MaterialDetails { get; set; } = null!;
 
-        //ghi lại thời gian và người dc ủy quyền xử lý custom quotation
-        //thời gian dc giao request và hoàn thành điền quotation của Seller
-        public DateTime? DelegationDateSeller { get; set; }
-        public DateTime? SubmissionDateSeller { get; set; }
-        //thời gian nhận customquotation và hoàn thành (MaterialDetail + CustomQuotationTask) của engineer
-        public DateTime? RecieveDateEngineer { get; set; }
-        public DateTime? SubmissionDateEngineer { get; set; }
-        //thời gian nhận customquotation đầy đủ và chấp nhận của Manager
-        public DateTime? RecieveDateManager { get; set; }
-        public DateTime? AcceptanceDateManager { get; set; }
-    }
+		//ghi lại thời gian và người dc ủy quyền xử lý custom quotation
+		//thời gian dc giao request và hoàn thành điền quotation của Seller
+		public DateTime? DelegationDateSeller { get; set; } = null!;
+		public DateTime? SubmissionDateSeller { get; set; } = null!;
+		//thời gian nhận customquotation và hoàn thành (MaterialDetail + CustomQuotationTask) của engineer
+		public DateTime? RecieveDateEngineer { get; set; } = null!;
+		public DateTime? SubmissionDateEngineer { get; set; } = null!;
+		//thời gian nhận customquotation đầy đủ và chấp nhận của Manager
+		public DateTime? RecieveDateManager { get; set; } = null!;
+		public DateTime? AcceptanceDateManager { get; set; } = null!;
+	}
 }

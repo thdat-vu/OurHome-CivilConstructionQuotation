@@ -11,6 +11,5 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels
         public string? ConstrucType { get; set; }
         //ngày request form dc tạo
         public DateTime GeneratRequestDate { get; set; }
-        
 	}
 }

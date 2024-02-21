@@ -51,15 +51,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult GetDetail([FromQuery] String id)
+		public IActionResult GetDetail(string id)
 		{
-			//lấy custom quotation
-			var customQuotation = _unitOfWork.CustomQuotation.GetById(id, "Manager,Engineer,Seller,Request");
-			//var customQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == id, includeProperties: "Engineer");
-			//bổ sung object tương ứng foreign key có trong object
-			//var engineer = _unitOfWork.Staff.Get(x => x.Id == id);
-			
-			return Json(new { data = customQuotation });
+			var customQuotationDetail = _unitOfWork.CustomQuotation.GetById(id, "Manager,Engineer,Seller");
+			return Json(new { data = customQuotationDetail });
 			//return View();
 		}
 	}

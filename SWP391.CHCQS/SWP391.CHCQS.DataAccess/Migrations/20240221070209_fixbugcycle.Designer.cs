@@ -12,8 +12,8 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    [Migration("20240221032420_DeleteAccountTable")]
-    partial class DeleteAccountTable
+    [Migration("20240221070209_fixbugcycle")]
+    partial class fixbugcycle
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -94,6 +94,120 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasIndex("TaskId");
 
                     b.ToTable("StandardQuotationTask", (string)null);
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.Account", b =>
+                {
+                    b.Property<string>("Username")
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(20)")
+                        .HasColumnName("username");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(20)")
+                        .HasColumnName("password");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(10)")
+                        .HasColumnName("role");
+
+                    b.HasKey("Username")
+                        .HasName("PK__Account__F3DBC5731230846A");
+
+                    b.ToTable("Account", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Username = "thao123",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "maitran1",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "lvm123",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "ngocanh85",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "dtuan",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "datnt",
+                            Password = "1",
+                            Role = "engineer"
+                        },
+                        new
+                        {
+                            Username = "datnx",
+                            Password = "1",
+                            Role = "manager"
+                        },
+                        new
+                        {
+                            Username = "duclm",
+                            Password = "1",
+                            Role = "seller"
+                        },
+                        new
+                        {
+                            Username = "anhnth",
+                            Password = "1",
+                            Role = "admin"
+                        },
+                        new
+                        {
+                            Username = "bthuong",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "phai789",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "lanly22",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "vnam",
+                            Password = "1",
+                            Role = "customer"
+                        },
+                        new
+                        {
+                            Username = "hoanguyen",
+                            Password = "1",
+                            Role = "customer"
+                        });
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.BasementType", b =>
@@ -369,12 +483,15 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnName("phoneNum");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .IsUnicode(false)
                         .HasColumnType("varchar(20)")
                         .HasColumnName("username");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Username");
 
                     b.ToTable("Customer", (string)null);
 
@@ -529,7 +646,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnName("description");
 
                     b.Property<string>("EngineerId")
-                        .IsRequired()
                         .HasMaxLength(5)
                         .IsUnicode(false)
                         .HasColumnType("char(5)")
@@ -543,7 +659,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnName("location");
 
                     b.Property<string>("ManagerId")
-                        .IsRequired()
                         .HasMaxLength(5)
                         .IsUnicode(false)
                         .HasColumnType("char(5)")
@@ -557,7 +672,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RequestId")
-                        .IsRequired()
                         .HasMaxLength(5)
                         .IsUnicode(false)
                         .HasColumnType("char(5)")
@@ -565,7 +679,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .IsFixedLength();
 
                     b.Property<string>("SellerId")
-                        .IsRequired()
                         .HasMaxLength(5)
                         .IsUnicode(false)
                         .HasColumnType("char(5)")
@@ -603,7 +716,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ001",
                             Acreage = "240m2",
-                            Date = new DateTime(2024, 2, 21, 10, 24, 19, 589, DateTimeKind.Local).AddTicks(3213),
+                            Date = new DateTime(2024, 2, 21, 14, 2, 8, 323, DateTimeKind.Local).AddTicks(818),
                             Description = "I want to build this house for my son and his wife, so i can live with them.",
                             EngineerId = "EN001",
                             Location = "Dĩ An, Bình Dương",
@@ -617,7 +730,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ002",
                             Acreage = "340m2",
-                            Date = new DateTime(2024, 2, 21, 10, 24, 19, 589, DateTimeKind.Local).AddTicks(3216),
+                            Date = new DateTime(2024, 2, 21, 14, 2, 8, 323, DateTimeKind.Local).AddTicks(822),
                             Description = "This house must be great, so i can live with it for 500 years.",
                             EngineerId = "EN001",
                             Location = "Quận 5, TP. Hồ Chí Minh",
@@ -631,7 +744,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ003",
                             Acreage = "740m2",
-                            Date = new DateTime(2024, 2, 21, 10, 24, 19, 589, DateTimeKind.Local).AddTicks(3218),
+                            Date = new DateTime(2024, 2, 21, 14, 2, 8, 323, DateTimeKind.Local).AddTicks(825),
                             Description = "This house for president to live, it must be nice.",
                             EngineerId = "EN001",
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
@@ -1393,7 +1506,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT2",
                             CustomerId = "ID001",
                             Description = "Customer said that this project must be finished on 3 month",
-                            GenerateDate = new DateTime(2024, 2, 21, 10, 24, 19, 589, DateTimeKind.Local).AddTicks(2834),
+                            GenerateDate = new DateTime(2024, 2, 21, 14, 2, 8, 323, DateTimeKind.Local).AddTicks(440),
                             Location = "Dĩ An, Bình Dương",
                             Status = true
                         },
@@ -1404,7 +1517,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT1",
                             CustomerId = "ID002",
                             Description = "Customer said that this project must be finished on 6 month",
-                            GenerateDate = new DateTime(2024, 2, 21, 10, 24, 19, 589, DateTimeKind.Local).AddTicks(2845),
+                            GenerateDate = new DateTime(2024, 2, 21, 14, 2, 8, 323, DateTimeKind.Local).AddTicks(450),
                             Location = "Quận 5, TP. Hồ Chí Minh",
                             Status = true
                         },
@@ -1415,7 +1528,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT3",
                             CustomerId = "ID003",
                             Description = "Customer said that this project must be finished on 12 month",
-                            GenerateDate = new DateTime(2024, 2, 21, 10, 24, 19, 589, DateTimeKind.Local).AddTicks(2847),
+                            GenerateDate = new DateTime(2024, 2, 21, 14, 2, 8, 323, DateTimeKind.Local).AddTicks(453),
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
                             Status = true
                         });
@@ -1535,6 +1648,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ManagerId");
+
+                    b.HasIndex("Username");
 
                     b.ToTable("Staff");
 
@@ -1961,6 +2076,17 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.Navigation("Rooftop");
                 });
 
+            modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
+                {
+                    b.HasOne("SWP391.CHCQS.Model.Account", "UsernameNavigation")
+                        .WithMany("Customers")
+                        .HasForeignKey("Username")
+                        .IsRequired()
+                        .HasConstraintName("FK__Customer__userna__534D60F1");
+
+                    b.Navigation("UsernameNavigation");
+                });
+
             modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotaionTask", b =>
                 {
                     b.HasOne("SWP391.CHCQS.Model.CustomQuotation", "Quotation")
@@ -1984,27 +2110,19 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 {
                     b.HasOne("SWP391.CHCQS.Model.Staff", "Engineer")
                         .WithMany()
-                        .HasForeignKey("EngineerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EngineerId");
 
                     b.HasOne("SWP391.CHCQS.Model.Staff", "Manager")
                         .WithMany()
-                        .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ManagerId");
 
                     b.HasOne("SWP391.CHCQS.Model.RequestForm", "Request")
                         .WithMany("CustomQuotations")
-                        .HasForeignKey("RequestId")
-                        .IsRequired()
-                        .HasConstraintName("FK__CustomQuo__reque__5812160E");
+                        .HasForeignKey("RequestId");
 
                     b.HasOne("SWP391.CHCQS.Model.Staff", "Seller")
                         .WithMany()
-                        .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SellerId");
 
                     b.Navigation("Engineer");
 
@@ -2092,7 +2210,15 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("ManagerId");
 
+                    b.HasOne("SWP391.CHCQS.Model.Account", "UsernameNavigation")
+                        .WithMany("Staff")
+                        .HasForeignKey("Username")
+                        .IsRequired()
+                        .HasConstraintName("FK__Staff__username__6383C8BA");
+
                     b.Navigation("Manager");
+
+                    b.Navigation("UsernameNavigation");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.StandardQuotation", b =>
@@ -2115,6 +2241,13 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasConstraintName("FK__Task__categoryId__656C112C");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.Account", b =>
+                {
+                    b.Navigation("Customers");
+
+                    b.Navigation("Staff");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.BasementType", b =>

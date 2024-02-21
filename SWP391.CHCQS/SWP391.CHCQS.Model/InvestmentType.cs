@@ -7,6 +7,7 @@ namespace SWP391.CHCQS.Model
     {
         public InvestmentType()
         {
+            ConstructDetails = new HashSet<ConstructDetail>();
             Pricings = new HashSet<Pricing>();
         }
 
@@ -14,7 +15,7 @@ namespace SWP391.CHCQS.Model
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
 
-
+        public virtual ICollection<ConstructDetail> ConstructDetails { get; set; }
         public virtual ICollection<Pricing> Pricings { get; set; }
     }
 }

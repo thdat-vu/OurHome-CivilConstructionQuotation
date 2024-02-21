@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {
-	public interface IStaffRepository :IRepository<Staff>
+	public interface IStaffRepository: IRepository<Staff>
 	{
-		Staff GetById(string id, string? includeProperties = null);
+		Staff GetById(string id, string? includeProperties = null!);
 	}
 }
