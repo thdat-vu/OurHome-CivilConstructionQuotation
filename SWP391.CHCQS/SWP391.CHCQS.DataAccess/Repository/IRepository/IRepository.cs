@@ -15,5 +15,7 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         void AddRange(List<T> entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
+
+       
     }
 }

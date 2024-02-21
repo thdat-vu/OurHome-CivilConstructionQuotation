@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWP391.CHCQS.Model
 {
@@ -25,16 +26,25 @@ namespace SWP391.CHCQS.Model
 		public int Status { get; set; }
         public string? Description { get; set; }
         public decimal Total { get; set; }
-        public string SellerId { get; set; } = null!;
-        public string EngineerId { get; set; } = null!;
-        public string ManagerId { get; set; } = null!;
-        public string RequestId { get; set; } = null!;
 
-        public virtual Staff Engineer { get; set; } = null!;
-        public virtual Staff Manager { get; set; } = null!;
+        [ForeignKey("Staff")]
+        public string SellerId { get; set; } = null!;
+		public virtual Staff Seller { get; set; } = null!;
+
+		[ForeignKey("Staff")]
+		public string EngineerId { get; set; } = null!;
+		public virtual Staff Engineer { get; set; } = null!;
+
+		[ForeignKey("Staff")]
+		public string ManagerId { get; set; } = null!;
+		public virtual Staff Manager { get; set; } = null!;
+
+		[ForeignKey("RequestForm")]
+		public string RequestId { get; set; } = null!;
         public virtual RequestForm Request { get; set; } = null!;
-        public virtual Staff Seller { get; set; } = null!;
+       
         public virtual ConstructDetail? ConstructDetail { get; set; }
+
         public virtual ICollection<CustomQuotaionTask> CustomQuotaionTasks { get; set; }
         public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
 
