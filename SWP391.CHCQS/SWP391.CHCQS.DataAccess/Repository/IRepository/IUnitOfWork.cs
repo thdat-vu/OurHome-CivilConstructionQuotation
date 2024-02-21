@@ -13,7 +13,6 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         ICustomQuotaionTaskRepository CustomQuotaionTask { get; }
         ICustomQuotationRepository CustomQuotation { get; }
         ITaskRepository Task { get; }
-        IStaffRepository Staff { get; }
         IMaterialRepository Material { get; }
         IMaterialDetailRepository MaterialDetail { get; }
         IConstructDetailRepository ConstructDetail { get; }

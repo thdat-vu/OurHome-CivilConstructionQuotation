@@ -22,7 +22,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public IConstructDetailRepository ConstructDetail { get; private set; }
 		public ITaskCategoryRepository TaskCategory { get; private set; }
         public IRequestRepository RequestForm { get; private set; }
-        public IStaffRepository Staff { get; private set; }
 		public UnitOfWork(SWP391DBContext db)
         {
             _db = db;
@@ -36,7 +35,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
             ConstructDetail = new ConstructDetailRepository(_db);
             TaskCategory = new TaskCategoryRepository(_db);
             RequestForm = new RequestRepository(_db);
-            Staff = new StaffRepository(_db);   
         }
 
         public void Save()

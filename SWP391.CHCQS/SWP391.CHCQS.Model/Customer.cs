@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace SWP391.CHCQS.Model
 {
@@ -8,7 +7,8 @@ namespace SWP391.CHCQS.Model
     {
         public Customer()
         {
-
+            Projects = new HashSet<Project>();
+            RequestForms = new HashSet<RequestForm>();
         }
 
         public string Id { get; set; } = null!;
@@ -16,6 +16,10 @@ namespace SWP391.CHCQS.Model
         public string? PhoneNum { get; set; }
         public string? Email { get; set; }
         public string? Gender { get; set; }
-        public string? Username { get; set; } = null!;
+        public string Username { get; set; } = null!;
+
+        public virtual Account UsernameNavigation { get; set; } = null!;
+        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<RequestForm> RequestForms { get; set; }
     }
 }
