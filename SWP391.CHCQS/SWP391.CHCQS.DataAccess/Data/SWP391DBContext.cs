@@ -23,7 +23,7 @@ namespace SWP391.CHCQS.DataAccess.Data
 		public virtual DbSet<BasementType> BasementTypes { get; set; } = null!;
 		public virtual DbSet<ConstructDetail> ConstructDetails { get; set; } = null!;
 		public virtual DbSet<ConstructionType> ConstructionTypes { get; set; } = null!;
-		public virtual DbSet<CustomQuotaionTask> CustomQuotaionTasks { get; set; } = null!;
+		public virtual DbSet<CustomQuotationTask> CustomQuotaionTasks { get; set; } = null!;
 		public virtual DbSet<CustomQuotation> CustomQuotations { get; set; } = null!;
 		public virtual DbSet<Customer> Customers { get; set; } = null!;
 		public virtual DbSet<FoundationType> FoundationTypes { get; set; } = null!;
@@ -169,11 +169,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.OnDelete(DeleteBehavior.ClientSetNull)
 					.HasConstraintName("FK__Construct__basem__4D94879B");
 
-				entity.HasOne(d => d.Construction)
-					.WithMany(p => p.ConstructDetails)
-					.HasForeignKey(d => d.ConstructionId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Construct__const__4E88ABD4");
+				//entity.HasOne(d => d.Construction)
+				//	.WithMany(p => p.ConstructDetails)
+				//	.HasForeignKey(d => d.ConstructionId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Construct__const__4E88ABD4");
 
 				entity.HasOne(d => d.Foundation)
 					.WithMany(p => p.ConstructDetails)
@@ -219,7 +219,7 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.HasColumnName("name");
 			});
 
-			modelBuilder.Entity<CustomQuotaionTask>(entity =>
+			modelBuilder.Entity<CustomQuotationTask>(entity =>
 			{
 				entity.HasKey(e => new { e.TaskId, e.QuotationId })
 					.HasName("PK__CustomQu__EA0E34779FFE6727");
@@ -763,11 +763,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 
 				entity.Property(e => e.Status).HasColumnName("status");
 
-				entity.HasOne(d => d.Construction)
-					.WithMany(p => p.StandardQuotations)
-					.HasForeignKey(d => d.ConstructionId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__StandardQ__const__6477ECF3");
+				//entity.HasOne(d => d.Construction)
+				//	.WithMany(p => p.StandardQuotations)
+				//	.HasForeignKey(d => d.ConstructionId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__StandardQ__const__6477ECF3");
 
 				entity.HasMany(d => d.Materials)
 					.WithMany(p => p.Quotations)

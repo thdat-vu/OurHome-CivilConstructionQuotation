@@ -17,10 +17,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
 		{ 
 			_db = db;
 		}
-		public Staff GetById(string id, string? includeProperties = null!)
-		{
-			Expression<Func<Staff, bool>> filter = x => x.Id == id;
-			return Get(filter, includeProperties);
-		}
+		
 	}
 }

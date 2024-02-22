@@ -26,5 +26,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
 		{
 			_db.RooftopTypes.UpdateRange(obj);
 		}
+		public string GetName(string id) => _db.RooftopTypes.Find(id).Name;
 	}
 }

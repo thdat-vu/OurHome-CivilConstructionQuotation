@@ -44,6 +44,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
             }
             return query.FirstOrDefault();
         }
+
 		/// <summary>
 		/// The function retrieves all objects of type T from the database. It optionally includes related data specified by the includeProperties parameter
 		/// This function first constructs a query based on the provided DbSet dbSet, and if includeProperties is not null or empty, it iterates through the properties specified in the parameter and includes them in the query using the Include method. 

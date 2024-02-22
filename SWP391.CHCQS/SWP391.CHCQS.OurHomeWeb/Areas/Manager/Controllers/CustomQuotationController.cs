@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
+using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.Utility;
+using System.Linq.Expressions;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
@@ -53,10 +56,39 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		[HttpGet]
 		public IActionResult GetDetail([FromQuery]string id)
 		{
-			var customQuotationDetail = _unitOfWork.CustomQuotation.GetById(id, "Manager,Engineer,Seller");
+			var customQuotationDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "Manager,Engineer,Seller,ConstructDetail");
+			var customQuotationDetailVM = new CustomQuotationDetailViewMdel()
+			{
+				RequestId = customQuotationDetail.RequestId,
+				ConstructDetailVM = new ViewModels.ConstructDetailViewModel(),
+				QuoteGeneratedDate = customQuotationDetail.Date,
+				Enginneer = customQuotationDetail.Engineer,
+				Manager = customQuotationDetail.Manager,
+				Seller = customQuotationDetail.Seller,
+				DelegationDateSeller = customQuotationDetail.DelegationDateSeller,
+				SubmissionDateSeller = customQuotationDetail.SubmissionDateEngineer,
+				RecieveDateEngineer = customQuotationDetail.RecieveDateEngineer,
+				SubmissionDateEngineer = customQuotationDetail.SubmissionDateEngineer,
+				RecieveDateManager = customQuotationDetail.RecieveDateManager,
+				AcceptanceDateManager = customQuotationDetail.AcceptanceDateManager
+			};
+			customQuotationDetailVM.ConstructDetailVM.IsBalcony = customQuotationDetail.ConstructDetail.Balcony;
+			customQuotationDetailVM.ConstructDetailVM.TypeOfConstruct = _unitOfWork.ConstructionType.GetName(customQuotationDetail.ConstructDetail.ConstructionId);
+			customQuotationDetailVM.ConstructDetailVM.Investment = _unitOfWork.InvestmentType.GetName(customQuotationDetail.ConstructDetail.InvestmentId);
+			customQuotationDetailVM.ConstructDetailVM.Foundation = _unitOfWork.FoundationType.GetName(customQuotationDetail.ConstructDetail.FoundationId);
+			customQuotationDetailVM.ConstructDetailVM.Basement = _unitOfWork.BasementType.GetName(customQuotationDetail.ConstructDetail.BasementId);
+			customQuotationDetailVM.ConstructDetailVM.Roof = _unitOfWork.RoofType.GetName(customQuotationDetail.ConstructDetail.RooftopId);
+			customQuotationDetailVM.ConstructDetailVM.Width = customQuotationDetail.ConstructDetail.Width;
+			customQuotationDetailVM.ConstructDetailVM.Length = customQuotationDetail.ConstructDetail.Length;
+			customQuotationDetailVM.ConstructDetailVM.Facade = customQuotationDetail.ConstructDetail.Facade;
+			customQuotationDetailVM.ConstructDetailVM.Alley	 = customQuotationDetail.ConstructDetail.Alley;
+			customQuotationDetailVM.ConstructDetailVM.Floor = customQuotationDetail.ConstructDetail.Floor;
+			customQuotationDetailVM.ConstructDetailVM.Mezzanine = customQuotationDetail.ConstructDetail.Mezzanine;				
+			customQuotationDetailVM.ConstructDetailVM.RooftopFloor =customQuotationDetail.ConstructDetail.RooftopFloor;
+			customQuotationDetailVM.ConstructDetailVM.Garden = customQuotationDetail.ConstructDetail.Garden;
 			//TODO: test result of custom quotation
-			//return Json(new { data = customQuotationDetail });
-			return View(customQuotationDetail);
+			//return Json(new { data = customQuotationDetailVM });
+			return View(customQuotationDetailVM);
 		}
 	}
 

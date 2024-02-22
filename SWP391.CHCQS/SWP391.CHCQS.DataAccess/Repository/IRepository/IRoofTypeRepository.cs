@@ -11,5 +11,6 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 	{
 		void Update(RooftopType obj);
 		void UpdateRange(List<RooftopType> obj);
+		string GetName(string id);
 	}
 }

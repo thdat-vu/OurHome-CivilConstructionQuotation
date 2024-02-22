@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {
-    public interface ICustomQuotaionTaskRepository : IRepository<CustomQuotaionTask> 
+    public interface ICustomQuotaionTaskRepository : IRepository<CustomQuotationTask> 
     {
-        void Update(CustomQuotaionTask obj);
-        void UpdateRange(List<CustomQuotaionTask> obj);
+        void Update(CustomQuotationTask obj);
+        void UpdateRange(List<CustomQuotationTask> obj);
 
 	}
 }

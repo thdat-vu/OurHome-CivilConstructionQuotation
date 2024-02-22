@@ -26,7 +26,7 @@ namespace SWP391.CHCQS.Model
         public virtual ConstructionType Construction { get; set; } = null!;
         public virtual FoundationType Foundation { get; set; } = null!;
         public virtual InvestmentType Investment { get; set; } = null!;
-        public virtual CustomQuotation Quotation { get; set; } = null!;
+        public virtual CustomQuotation? Quotation { get; set; } = null!;
         public virtual RooftopType Rooftop { get; set; } = null!;
     }
 }

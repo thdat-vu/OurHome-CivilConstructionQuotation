@@ -11,5 +11,6 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 	{
 		void Update(BasementType obj);
 		void UpdateRange(List<BasementType> obj);
+		string GetName(string id);
 	}
 }

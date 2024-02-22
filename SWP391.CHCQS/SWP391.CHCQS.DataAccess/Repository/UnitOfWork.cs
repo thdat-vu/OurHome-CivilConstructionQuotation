@@ -27,6 +27,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public IFoundationTypeRepository FoundationType { get; private set; }
         public IBasementTypeRepository BasementType { get; private set; }
         public IRoofTypeRepository RoofType { get; private set; }
+        public IStaffRepository Staff { get; private set; }
 
 		public UnitOfWork(SWP391DBContext db)
         {
@@ -46,6 +47,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
             FoundationType = new FoundationTypeRepository(_db);
             BasementType = new BasementTypeRepository(_db);
             RoofType = new RoofTypeRepository(_db);
+            Staff = new StaffRepository(_db);
         }
 
         public void Save()

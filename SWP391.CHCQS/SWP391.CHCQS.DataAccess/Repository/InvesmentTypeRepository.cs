@@ -27,5 +27,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
 		{
 			_db.InvestmentTypes.UpdateRange(obj);
 		}
+		public string GetName(string id) => _db.InvestmentTypes.Find(id).Name;
 	}
 }

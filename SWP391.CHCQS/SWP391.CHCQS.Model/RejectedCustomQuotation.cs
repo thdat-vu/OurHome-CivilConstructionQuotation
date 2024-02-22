@@ -20,7 +20,7 @@ namespace SWP391.CHCQS.Model
         public virtual CustomQuotation RejectedQuotation { get; set; } = null!;
         //---------------------------------------------------------------------------------------------
         //công việc Engineer đưa lên bị reject thì đưa vào đây
-        public virtual ICollection<CustomQuotaionTask> CustomQuotaionTasks { get; set; }
+        public virtual ICollection<CustomQuotationTask> CustomQuotaionTasks { get; set; }
         public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
         //--------------------------------------------------------------------------------------------
         //Engineer đã thực hiện báo giá này

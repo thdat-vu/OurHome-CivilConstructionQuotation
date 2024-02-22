@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository
 {
-    public class CustomQuotaionTaskRepository : Repository<CustomQuotaionTask>, ICustomQuotaionTaskRepository
+    public class CustomQuotaionTaskRepository : Repository<CustomQuotationTask>, ICustomQuotaionTaskRepository
     {
         private readonly SWP391DBContext _db;
         public CustomQuotaionTaskRepository(SWP391DBContext db) : base(db)
@@ -18,12 +18,12 @@ namespace SWP391.CHCQS.DataAccess.Repository
             _db = db;
         }
 
-        public void Update(CustomQuotaionTask obj)
+        public void Update(CustomQuotationTask obj)
         {
             _db.CustomQuotaionTasks.Update(obj);
         }
 
-        public void UpdateRange(List<CustomQuotaionTask> obj)
+        public void UpdateRange(List<CustomQuotationTask> obj)
         {
             _db.CustomQuotaionTasks.UpdateRange(obj);
         }

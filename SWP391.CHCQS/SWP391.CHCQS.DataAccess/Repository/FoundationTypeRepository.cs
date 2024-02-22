@@ -27,5 +27,9 @@ namespace SWP391.CHCQS.DataAccess.Repository
 		{
 			_db.FoundationTypes.UpdateRange(obj);
 		}
+		public string GetName(string id)
+		{
+			return _db.FoundationTypes.Find(id).Name;
+		}
 	}
 }
