@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
@@ -13,7 +14,10 @@ namespace SWP391.CHCQS.OurHomeWeb
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
-			builder.Services.AddDbContext<SWP391DBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+			builder.Services.AddDbContext<SWP391DBContext>(
+				options => options
+							.UseLazyLoadingProxies()
+							.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
