@@ -13,7 +13,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		private readonly IUnitOfWork _unitOfWork;
 
 		//Khai bao Session cho TaskList neu co thi lay ra khong co thi tao moi
-		public List<CustomQuotationTaskViewModel> TaskList => HttpContext.Session.Get<List<CustomQuotationTaskViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<CustomQuotationTaskViewModel>();
+		public List<CustomQuotationTaskViewModel> TaskListSession => HttpContext.Session.Get<List<CustomQuotationTaskViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<CustomQuotationTaskViewModel>();
 
 		public TaskController(IUnitOfWork unitOfWork)
 		{
@@ -49,7 +49,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 		public async Task<IActionResult> AddToList(string TaskId)
 		{
-			var taskCart = TaskList;
+			var taskCart = TaskListSession;
 			var taskItem = taskCart.FirstOrDefault(x => x.Task.Id == TaskId);
 
 			if (taskItem == null)

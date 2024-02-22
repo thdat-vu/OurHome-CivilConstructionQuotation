@@ -12,7 +12,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		private readonly IUnitOfWork _unitOfWork;
 
 		//Khai bao Session cho MaterialList neu co thi lay ra khong co thi tao moi
-		public List<MaterialDetailViewModel> MaterialList => HttpContext.Session.Get<List<MaterialDetailViewModel>>(SessionConst.MATERIAL_LIST_KEY) ?? new List<MaterialDetailViewModel>();
+		public List<MaterialDetailViewModel> MaterialListSession => HttpContext.Session.Get<List<MaterialDetailViewModel>>(SessionConst.MATERIAL_LIST_KEY) ?? new List<MaterialDetailViewModel>();
 
 		public MaterialController(IUnitOfWork unitOfWork)
 		{
