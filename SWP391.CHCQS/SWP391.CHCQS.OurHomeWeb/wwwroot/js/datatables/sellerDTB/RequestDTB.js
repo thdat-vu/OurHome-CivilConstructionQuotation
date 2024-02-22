@@ -22,7 +22,7 @@ function loadDataTableRequest() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Engineer/Task/AddToQuote?TaskId=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
+                       <a href="/Seller/Task/AddToQuote?TaskId=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
                     </div >`
                 },
                 "width": "15%"
