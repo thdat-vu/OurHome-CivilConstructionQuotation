@@ -193,11 +193,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.OnDelete(DeleteBehavior.ClientSetNull)
 					.HasConstraintName("FK__Construct__quota__5165187F");
 
-				entity.HasOne(d => d.Rooftop)
-					.WithMany(p => p.ConstructDetails)
-					.HasForeignKey(d => d.RooftopId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Construct__rooft__52593CB8");
+				//entity.HasOne(d => d.Rooftop)
+				//	.WithMany(p => p.ConstructDetails)
+				//	.HasForeignKey(d => d.RooftopId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Construct__rooft__52593CB8");
 			});
 
 			modelBuilder.Entity<ConstructionType>(entity =>

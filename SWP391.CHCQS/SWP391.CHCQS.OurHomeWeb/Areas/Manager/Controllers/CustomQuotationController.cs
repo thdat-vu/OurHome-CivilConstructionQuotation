@@ -51,11 +51,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult GetDetail(string id)
+		public IActionResult GetDetail([FromQuery]string id)
 		{
 			var customQuotationDetail = _unitOfWork.CustomQuotation.GetById(id, "Manager,Engineer,Seller");
-			return Json(new { data = customQuotationDetail });
-			//return View();
+			//TODO: test result of custom quotation
+			//return Json(new { data = customQuotationDetail });
+			return View(customQuotationDetail);
 		}
 	}
 
