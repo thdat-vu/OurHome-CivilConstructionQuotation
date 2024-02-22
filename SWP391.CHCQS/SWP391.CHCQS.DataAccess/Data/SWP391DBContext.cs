@@ -1847,6 +1847,44 @@ namespace SWP391.CHCQS.DataAccess.Data
 					FoundationId = "FT1",
 					RooftopId = "RT1",
 					BasementId = "BT1"
+				},
+				new ConstructDetail
+				{
+					QuotationId = "CQ002",
+					Width = 100,
+					Length = 200,
+					Facade = 1,
+					Alley = "3m",
+					Floor = 2,
+					Room = 5,
+					Mezzanine = 30,
+					RooftopFloor = 40,
+					Balcony = true,
+					Garden = 20,
+					ConstructionId = "CT2",
+					InvestmentId = "IT2",
+					FoundationId = "FT2",
+					RooftopId = "RT2",
+					BasementId = "BT2"
+				},
+				new ConstructDetail
+				{
+					QuotationId = "CQ003",
+					Width = 100,
+					Length = 200,
+					Facade = 1,
+					Alley = "3m",
+					Floor = 2,
+					Room = 5,
+					Mezzanine = 30,
+					RooftopFloor = 40,
+					Balcony = true,
+					Garden = 20,
+					ConstructionId = "CT3",
+					InvestmentId = "IT3",
+					FoundationId = "FT3",
+					RooftopId = "RT3",
+					BasementId = "BT3"
 				}
 			);
 
