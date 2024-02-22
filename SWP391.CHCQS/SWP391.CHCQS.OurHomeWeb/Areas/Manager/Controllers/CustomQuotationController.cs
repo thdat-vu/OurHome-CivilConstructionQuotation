@@ -5,6 +5,7 @@ using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.Utility;
 using System.Linq.Expressions;
+using Task = SWP391.CHCQS.Model.Task;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
@@ -86,10 +87,26 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			customQuotationDetailVM.ConstructDetailVM.Mezzanine = customQuotationDetail.ConstructDetail.Mezzanine;				
 			customQuotationDetailVM.ConstructDetailVM.RooftopFloor =customQuotationDetail.ConstructDetail.RooftopFloor;
 			customQuotationDetailVM.ConstructDetailVM.Garden = customQuotationDetail.ConstructDetail.Garden;
+
+			//lấy 
 			//TODO: test result of custom quotation
 			//return Json(new { data = customQuotationDetailVM });
 			return View(customQuotationDetailVM);
 		}
+		public IEnumerable<MaterialDetail> GetMateraiDetail(string quoteId, IUnitOfWork unitOfWork)
+		{
+			return  unitOfWork.MaterialDetail.GetAll().ToList().Where(x => x.QuotationId == quoteId);
+
+			//return result;
+		}
+
+		public IActionResult Test()
+		{
+			var demo = GetMateraiDetail("CQ001", _unitOfWork);
+
+			return Json(new { data = demo });
+		}
+		
 	}
 
 
