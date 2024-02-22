@@ -3,9 +3,9 @@
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 {
     [Area("Seller")]
-    public class Quotation : Controller
+    public class QuotationController : Controller
     {
-        public IActionResult Index()
+        public IActionResult CreateConstructDetails()
         {
             return View();
         }
