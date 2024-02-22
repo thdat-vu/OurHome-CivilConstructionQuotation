@@ -3,7 +3,9 @@
 	public partial class MaterialDetailViewModel
 	{
 		public MaterialViewModel Material { get; set; }
+		public string QuotationId { get; set; }
 		public int Quantity { get; set; }
 		public decimal? Price { get; set; }
 	}
 }
+ 
