@@ -4,7 +4,9 @@ using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.Utility;
+using SWP391.CHCQS.Utility.Helpers;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
@@ -13,6 +15,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 	{
 
 		private readonly IUnitOfWork _unitOfWork;
+
+		public CustomQuotationViewModel CustomQuotation => HttpContext.Session.Get<CustomQuotationViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationViewModel();
+
 		public QuotationController(IUnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
@@ -38,8 +43,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					Status = SD.GetQuotationStatusDescription(x.Status),
 				})
 				.ToList();
-           
-            return Json(new { data = customQuotationVMList });
+
+			return Json(new { data = customQuotationVMList });
 		}
 		#endregion
 
@@ -87,9 +92,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					RooftopTypeName = constructDetail.Rooftop.Name,
 					BasementTypeName = constructDetail.Basement.Name
 				};
-
 			}
-
 			return View(constructDetailVM);
 		}
 

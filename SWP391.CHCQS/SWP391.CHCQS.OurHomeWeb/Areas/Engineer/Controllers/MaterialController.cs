@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
+using SWP391.CHCQS.Utility;
+using SWP391.CHCQS.Utility.Helpers;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
@@ -8,12 +10,18 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 	public class MaterialController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
+
+		//Khai bao Session cho MaterialList neu co thi lay ra khong co thi tao moi
+		public List<MaterialDetailViewModel> MaterialList => HttpContext.Session.Get<List<MaterialDetailViewModel>>(SessionConst.MATERIAL_LIST_KEY) ?? new List<MaterialDetailViewModel>();
+
 		public MaterialController(IUnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
 		}
 
-		#region
+		
+
+		#region API CALL LIST MATERIAL
 		/// <summary>
 		/// This function get all CustomeQuotation in Database and return it into JSON, this function ne lib Datatables to show data
 		/// </summary>
@@ -40,5 +48,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			return Json(new { data = materialVMList });
 		}
 		#endregion
+
+
+		public async Task<IActionResult> AddToList(string MaterialId)
+		{
+			return RedirectToAction("");
+		}
 	}
 }
