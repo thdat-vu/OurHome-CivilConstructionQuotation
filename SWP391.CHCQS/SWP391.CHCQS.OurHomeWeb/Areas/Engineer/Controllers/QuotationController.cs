@@ -19,6 +19,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		//Declare Session to store CustomQuotation serve to method AddToList in TaskController and MaterialController to add Task and Material.
 		public CustomQuotationViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationViewModel();
 
+		//Declare session for CustomQuotationTaskViewModel to store TaskList of the quote when add into quote. if it empty, create one
+		public List<CustomQuotationTaskViewModel> TaskListSession => HttpContext.Session.Get<List<CustomQuotationTaskViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<CustomQuotationTaskViewModel>();
+
+		
 		//Constructor of this Controller
 		public QuotationController(IUnitOfWork unitOfWork)
 		{
@@ -58,6 +62,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// <returns>A view Index</returns>
 		public async Task<IActionResult> Index()
 		{
+			//Remove all session
+			HttpContext.Session.Remove(SessionConst.TASK_LIST_KEY);
+			HttpContext.Session.Remove(SessionConst.MATERIAL_LIST_KEY);
+			HttpContext.Session.Remove(SessionConst.CUSTOM_QUOTATION_KEY);
 			return View();
 		}
 
@@ -111,6 +119,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 			//Set customQuotationViewModel after exist in database into CustomQuotationSession
 			HttpContext.Session.Set(SessionConst.CUSTOM_QUOTATION_KEY, customQuotationViewModel);
+
+			//Asign TaskListSession into ViewBag and pass it to View
+			ViewBag.TaskListSession = TaskListSession;
 
 			//return View of this Controller after nothing wrong.
 			return View(constructDetailVM);

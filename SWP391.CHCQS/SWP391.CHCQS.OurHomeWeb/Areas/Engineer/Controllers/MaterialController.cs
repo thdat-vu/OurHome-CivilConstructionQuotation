@@ -50,7 +50,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		#endregion
 
 
-		public async Task<IActionResult> AddToList(string MaterialId)
+		public async Task<IActionResult> AddToQuote(string MaterialId)
 		{
 			return RedirectToAction("");
 		}

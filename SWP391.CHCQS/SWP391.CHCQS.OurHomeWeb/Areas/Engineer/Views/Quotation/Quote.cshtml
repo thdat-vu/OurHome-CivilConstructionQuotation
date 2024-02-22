@@ -3,6 +3,11 @@
 	ViewData["Title"] = "Quote";
 }
 
+@foreach (var item in ViewBag.TaskListSession)
+{
+	<a>@item.Task.Name</a> <br></br>
+}
+
 <div class="container img-thumbnail mt-3 mb-5">
 
 	<div class="m-auto">
@@ -34,7 +39,7 @@
 			</div>
 			<div class="col-lg">
 				<label><b class="text-nowrap">Length:</b></label>
-				<p>@Model.Length</>
+				<p>@Model.Length</a>
 			</div>
 			<div class="col-lg">
 				<label><b class="text-nowrap">Facade:</b></label>
