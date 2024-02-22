@@ -15,9 +15,7 @@ namespace SWP391.CHCQS.OurHomeWeb
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddDbContext<SWP391DBContext>(
-				options => options
-							.UseLazyLoadingProxies()
-							.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+				options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
-using SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers;
 using SWP391.CHCQS.Utility;
 using System.Collections.Generic;
 
@@ -91,7 +90,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 			}
 
-			return Json(new { data = constructDetail });
+			return View(constructDetailVM);
 		}
 
 		/// <summary>
