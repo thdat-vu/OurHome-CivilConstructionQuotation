@@ -91,7 +91,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 			}
 
-			return View(constructDetailVM);
+			return Json(new { data = constructDetail });
 		}
 
 		/// <summary>
