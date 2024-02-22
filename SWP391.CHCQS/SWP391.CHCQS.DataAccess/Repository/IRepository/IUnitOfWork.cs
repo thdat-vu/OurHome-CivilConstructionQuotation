@@ -18,6 +18,11 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         IConstructDetailRepository ConstructDetail { get; }
         ITaskCategoryRepository TaskCategory { get; }
         IRequestRepository RequestForm { get; }
+        IConstructionTypeRepository ConstructionType { get; }
+        IInvestmentTypeRepository InvestmentType { get; }
+        IFoundationTypeRepository FoundationType { get; }
+        IBasementTypeRepository BasementType { get; }
+        IRoofTypeRepository RoofType { get; }
         void Save();
     }
 }

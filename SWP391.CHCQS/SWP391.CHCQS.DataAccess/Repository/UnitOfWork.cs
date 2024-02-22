@@ -22,6 +22,12 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public IConstructDetailRepository ConstructDetail { get; private set; }
 		public ITaskCategoryRepository TaskCategory { get; private set; }
         public IRequestRepository RequestForm { get; private set; }
+        public IConstructionTypeRepository ConstructionType { get; private set; }
+        public IInvestmentTypeRepository InvestmentType { get; private set; }
+        public IFoundationTypeRepository FoundationType { get; private set; }
+        public IBasementTypeRepository BasementType { get; private set; }
+        public IRoofTypeRepository RoofType { get; private set; }
+
 		public UnitOfWork(SWP391DBContext db)
         {
             _db = db;
@@ -35,6 +41,11 @@ namespace SWP391.CHCQS.DataAccess.Repository
             ConstructDetail = new ConstructDetailRepository(_db);
             TaskCategory = new TaskCategoryRepository(_db);
             RequestForm = new RequestRepository(_db);
+            ConstructionType = new ConstructionTypeRepository(_db);
+            InvestmentType = new InvesmentTypeRepository(_db);
+            FoundationType = new FoundationTypeRepository(_db);
+            BasementType = new BasementTypeRepository(_db);
+            RoofType = new RoofTypeRepository(_db);
         }
 
         public void Save()
