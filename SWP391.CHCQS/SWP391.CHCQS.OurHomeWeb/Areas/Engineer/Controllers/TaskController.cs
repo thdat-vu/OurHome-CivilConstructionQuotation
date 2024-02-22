@@ -33,10 +33,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			//Get a list of all task from database and projection into TaskViewModel
+			//Get a list of all task from database and projection into TaskViewModel but not in TaskListSession
+			//When a Task has been add into TaskListSession its will not appear in datatables
 			List<TaskViewModel> TaskVMlList = _unitOfWork.Task
 				.GetAll(includeProperties: "Category")
-				.Where(t => t.Status == true)
+				.Where(t => t.Status == true && !TaskListSession.Any(ts => ts.Task.Id == t.Id))
 				.Select(x => new TaskViewModel
 				{
 					Id = x.Id,
@@ -51,6 +52,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Return Json for datatables to read
 			return Json(new { data = TaskVMlList });
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> GetTaskListSession()
+		{
+			return Json(new { data = TaskListSession.ToList() });
+		}
+
 		#endregion
 
 		/// <summary>

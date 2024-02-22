@@ -48,7 +48,16 @@ body {
     font-size: 12px;
 }
 
+#tblCustomQuotationTask td, th {
+    padding: 2px 4px;
+    font-size: 12px;
+}
+
 #tblTask_wrapper label {
+    font-size: 12px;
+}
+
+#tblCustomQuotationTask_wrapper label {
     font-size: 12px;
 }
 

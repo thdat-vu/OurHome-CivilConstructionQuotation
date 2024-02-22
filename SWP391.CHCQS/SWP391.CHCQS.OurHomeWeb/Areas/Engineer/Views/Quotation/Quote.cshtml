@@ -3,12 +3,7 @@
 	ViewData["Title"] = "Quote";
 }
 
-@foreach (var item in ViewBag.TaskListSession)
-{
-	<a>@item.Task.Name</a> <br></br>
-}
-
-<div class="container img-thumbnail mt-3 mb-5">
+<div class="container img-thumbnail mt-3 mb-3">
 
 	<div class="m-auto">
 
@@ -94,11 +89,54 @@
 	</div>
 </div>
 
+<!--Hiện 2 bảng TaskListSession và MaterialListSession -->
+<div class="row mb-3">
+	<!--TaskList-->
+	<div class="col-lg-5">
+		<div class="card shadow border-0">
+			<div class="card-header bg-main">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h2 class="text-white m-0">Task List</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table id="tblCustomQuotationTask" class="table-bordered table-striped text-black" style="width:100%">
+						<thead>
+							<tr>
+								<th>
+									Id
+								</th>
+								<th>
+									Name
+								</th>
+								<th>
+									Unit Price
+								</th>
+								<th>
+									Price
+								</th>
+								<th>
+									Actions
+								</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
 
 <!--Hiện 2 bảng TaskList và MaterialList-->
 <div class="row">
 	<!--TaskList-->
-	<div class="col-sm-5">
+	<div class="col-lg-5">
 		<div class="card shadow border-0">
 			<div class="card-header bg-main">
 				<div class="row">
@@ -138,7 +176,7 @@
 	</div>
 
 	<!--MaterialList-->
-	<div class="col-sm-7">
+	<div class="col-lg-7">
 		<div class="card shadow border-0">
 			<div class="card-header bg-main">
 				<div class="row">
@@ -187,4 +225,5 @@
 @section Scripts {
 	<script src="~/js/datatables/engineerDTB/MaterialDTB.js"></script>
 	<script src="~/js/datatables/engineerDTB/TaskDTB.js"></script>
+	<script src="~/js/datatables/engineerDTB/CustomQuotationTaskDTB.js"></script>
 }
