@@ -122,5 +122,42 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 		}
 
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="TaskId"></param>
+		/// <returns></returns>
+		public async Task<IActionResult> DeleteFromQuote(string TaskId)
+		{
+			//Asign TaskListSession to taskCart
+			var taskCart = TaskListSession;
+
+			//Get taskItem which exist in taskCart
+			var taskItem = taskCart.Where(x => x.Task.Id == TaskId).FirstOrDefault();
+
+			//if taskItem not in taskCart
+			if (taskItem == null)
+			{
+				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				TempData["Error"] = $"Task not found with Id = {TaskId}";
+
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			}
+
+			//Delete taskItem in taskCart
+			taskCart.Remove(taskItem);
+
+			//Update TaskListSession with taskCart  
+			HttpContext.Session.Set(SessionConst.TASK_LIST_KEY, taskCart);
+
+			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			TempData["Success"] = $"Delete task successfully with Id = {TaskId}";
+
+			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+		}
+
 	}
 }
