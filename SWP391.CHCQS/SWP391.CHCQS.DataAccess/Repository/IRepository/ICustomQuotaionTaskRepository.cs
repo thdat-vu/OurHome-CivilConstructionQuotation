@@ -11,6 +11,7 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     {
         void Update(CustomQuotationTask obj);
         void UpdateRange(List<CustomQuotationTask> obj);
+        IEnumerable<CustomQuotationTask> GetTaskDetail(string quoteId, string? includeProp = null!);
 
-	}
+    }
 }

@@ -65,6 +65,20 @@ namespace SWP391.CHCQS.DataAccess.Repository
             return query.ToList();
         }
 
+        public IEnumerable<T> GetAllWithFilter(Expression<Func<T, bool>> filter,string? includeProperties = null)
+        {
+            IQueryable<T> query = dbSet;
+            query = query.Where(filter);
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var incluProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(incluProp);
+                }
+            }
+            return query.ToList();
+        }
+
         public void Remove(T entity)
         {
             dbSet.Remove(entity);

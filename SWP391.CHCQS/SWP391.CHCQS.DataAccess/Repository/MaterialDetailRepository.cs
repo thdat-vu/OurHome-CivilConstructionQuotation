@@ -25,5 +25,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             _db.MaterialDetails.UpdateRange(obj);
         }
+        public IEnumerable<MaterialDetail> GetMaterialDetail(string quoteId, string? includeProp = null!)
+        {
+            return GetAllWithFilter((x) => x.QuotationId == quoteId, includeProp);
+        }
+        
     }
 }

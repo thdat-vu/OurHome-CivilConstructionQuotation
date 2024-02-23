@@ -1,18 +1,12 @@
-﻿using SWP391.CHCQS.Model;
-
-namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels
+﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
-    public partial class MaterialDetailViewModel
+    public class MaterialDetailViewModel
     {
-        public MaterialDetailViewModel(Material material, int quantity, decimal? price)
-        {
-            Material = material;
-            Quantity = quantity;
-            Price = price;
-        }
-        public MaterialDetailViewModel()
-        {
-            
-        }
+        public string? QuoteId { get; set; }
+        public string? MaterialId { get; set; }
+        public string? MaterialName { get; set; }
+        public string? MaterialCateName { get; set; }
+        public double? Quantity { get; set; }
+        public decimal? Price { get; set; }
     }
 }

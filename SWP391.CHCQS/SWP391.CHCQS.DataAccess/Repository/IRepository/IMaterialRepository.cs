@@ -10,5 +10,6 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     public interface IMaterialRepository : IRepository<Material>
     {
         void Update(Material obj);
+        string GetName(string id);
     }
 }

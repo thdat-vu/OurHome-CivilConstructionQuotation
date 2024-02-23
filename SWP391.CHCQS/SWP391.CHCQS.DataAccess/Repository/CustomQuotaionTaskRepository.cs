@@ -27,6 +27,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             _db.CustomQuotaionTasks.UpdateRange(obj);
         }
-		
-	}
+        public IEnumerable<CustomQuotationTask> GetTaskDetail(string quoteId, string? includeProp = null!)
+        {
+            return GetAllWithFilter((x) => x.QuotationId == quoteId, includeProp);
+        }
+
+    }
 }

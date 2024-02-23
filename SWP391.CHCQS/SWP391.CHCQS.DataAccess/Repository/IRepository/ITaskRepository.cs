@@ -10,5 +10,6 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     public interface ITaskRepository : IRepository<Task>
     {
         void Update(Task obj);
+        string GetName(string id);
     }
 }
