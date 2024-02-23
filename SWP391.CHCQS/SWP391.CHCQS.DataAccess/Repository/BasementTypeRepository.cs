@@ -4,6 +4,7 @@ using SWP391.CHCQS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,5 +27,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
 		{
 			_db.BasementTypes.UpdateRange(obj);
 		}
+		public string GetName(string id) => _db.BasementTypes.Find(id).Name;
 	}
 }

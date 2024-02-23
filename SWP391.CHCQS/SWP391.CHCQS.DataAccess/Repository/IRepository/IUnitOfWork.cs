@@ -23,6 +23,8 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         IFoundationTypeRepository FoundationType { get; }
         IBasementTypeRepository BasementType { get; }
         IRoofTypeRepository RoofType { get; }
+        IMaterialCategoryRepository MaterialCategory { get; }
+
         void Save();
     }
 }

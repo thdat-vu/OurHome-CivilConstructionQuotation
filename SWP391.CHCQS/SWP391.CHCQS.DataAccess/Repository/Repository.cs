@@ -44,6 +44,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
             }
             return query.FirstOrDefault();
         }
+
 		/// <summary>
 		/// The function retrieves all objects of type T from the database. It optionally includes related data specified by the includeProperties parameter
 		/// This function first constructs a query based on the provided DbSet dbSet, and if includeProperties is not null or empty, it iterates through the properties specified in the parameter and includes them in the query using the Include method. 
@@ -54,6 +55,20 @@ namespace SWP391.CHCQS.DataAccess.Repository
 		public IEnumerable<T> GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var incluProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(incluProp);
+                }
+            }
+            return query.ToList();
+        }
+
+        public IEnumerable<T> GetAllWithFilter(Expression<Func<T, bool>> filter,string? includeProperties = null)
+        {
+            IQueryable<T> query = dbSet;
+            query = query.Where(filter);
             if (!string.IsNullOrEmpty(includeProperties))
             {
                 foreach (var incluProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))

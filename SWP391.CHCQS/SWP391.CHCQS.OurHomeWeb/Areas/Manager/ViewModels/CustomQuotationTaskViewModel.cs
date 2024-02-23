@@ -1,18 +1,10 @@
-﻿using SWP391.CHCQS.Model;
-using Task = SWP391.CHCQS.Model.Task;
-
-namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels
+﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
-    public partial class CustomQuotationTaskViewModel
+    public class CustomQuotationTaskViewModel
     {
-        public CustomQuotationTaskViewModel(Task task, decimal price)
-        {
-            Task = task;
-            Price = price;
-        }
-        public CustomQuotationTaskViewModel()
-        {
-            
-        }
+        public string? QuoteId { get; set; }
+        public string? TaskId { get; set; }
+        public string? TaskName { get; set; }
+        public decimal? Price { get; set; }
     }
 }

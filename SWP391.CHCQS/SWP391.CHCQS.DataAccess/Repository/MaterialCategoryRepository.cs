@@ -9,19 +9,13 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository
 {
-    public class MaterialRepository : Repository<Material>, IMaterialRepository
+    public class MaterialCategoryRepository : Repository<MaterialCategory>, IMaterialCategoryRepository
     {
         private readonly SWP391DBContext _db;
-
-        public MaterialRepository(SWP391DBContext db) : base(db)
+        public MaterialCategoryRepository(SWP391DBContext db) : base(db)
         {
             _db = db;
         }
-
-        public void Update(Material obj)
-        {
-            _db.Materials.Update(obj);
-        }
-        public string GetName(string id) => _db.Materials.Find(id).Name;
+        public string GetName(string id) => _db.MaterialCategories.Find(id).Name;
     }
 }

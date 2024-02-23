@@ -19,6 +19,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _unitOfWork = unitOfWork;
         }
 
+
+        
         //getAll() action
         public IActionResult Index()
         {

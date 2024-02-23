@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
+using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.Utility;
+
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
@@ -22,11 +24,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
 			return View();
 		}
-		/// <summary>
-		/// This method returns all pending approval CustomQuotation via CustomQuotationViewModel
-		/// </summary>
-		/// <returns>CustomQuotationViewModel</returns>
-		[HttpGet]
+
+       
+        /// <summary>
+        /// This method returns all pending approval CustomQuotation via CustomQuotationViewModel
+        /// </summary>
+        /// <returns>CustomQuotationViewModel</returns>
+        [HttpGet]
 		public IActionResult GetAll()
 		{
 			List<CustomQuotationViewModel> customQuotationViewModels = _unitOfWork.CustomQuotation
@@ -49,16 +53,64 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			//Console.WriteLine(customQuotationViewModels);
 			return Json(new { data = customQuotationViewModels });
 		}
-
-		[HttpGet]
-		public IActionResult GetDetail([FromQuery]string id)
+        [HttpGet]
+        public async Task<IActionResult> GetDetail([FromQuery] string id)
 		{
-			var customQuotationDetail = _unitOfWork.CustomQuotation.GetById(id, "Manager,Engineer,Seller");
+			//lưu thông tin quoteId vào session
+			HttpContext.Session.SetString("quoteId", id);
+            //var ID = HttpContext.Session.GetString("quoteId");
+            //lấy thông tin cơ bản của custom quotation
+            var customQuotationDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "Manager,Engineer,Seller,ConstructDetail");
+			var customQuotationDetailVM = new CustomQuotationDetailViewMdel()
+			{
+				RequestId = customQuotationDetail.RequestId,
+				ConstructDetailVM = new ViewModels.ConstructDetailViewModel(),
+				QuoteGeneratedDate = customQuotationDetail.Date,
+				Enginneer = customQuotationDetail.Engineer,
+				Manager = customQuotationDetail.Manager,
+				Seller = customQuotationDetail.Seller,
+				DelegationDateSeller = customQuotationDetail.DelegationDateSeller,
+				SubmissionDateSeller = customQuotationDetail.SubmissionDateEngineer,
+				RecieveDateEngineer = customQuotationDetail.RecieveDateEngineer,
+				SubmissionDateEngineer = customQuotationDetail.SubmissionDateEngineer,
+				RecieveDateManager = customQuotationDetail.RecieveDateManager,
+				AcceptanceDateManager = customQuotationDetail.AcceptanceDateManager
+			};
+			//thêm thông tin construct detail
+			customQuotationDetailVM.ConstructDetailVM.IsBalcony = customQuotationDetail.ConstructDetail.Balcony;
+			customQuotationDetailVM.ConstructDetailVM.TypeOfConstruct = _unitOfWork.ConstructionType.GetName(customQuotationDetail.ConstructDetail.ConstructionId);
+			customQuotationDetailVM.ConstructDetailVM.Investment = _unitOfWork.InvestmentType.GetName(customQuotationDetail.ConstructDetail.InvestmentId);
+			customQuotationDetailVM.ConstructDetailVM.Foundation = _unitOfWork.FoundationType.GetName(customQuotationDetail.ConstructDetail.FoundationId);
+			customQuotationDetailVM.ConstructDetailVM.Basement = _unitOfWork.BasementType.GetName(customQuotationDetail.ConstructDetail.BasementId);
+			customQuotationDetailVM.ConstructDetailVM.Roof = _unitOfWork.RoofType.GetName(customQuotationDetail.ConstructDetail.RooftopId);
+			customQuotationDetailVM.ConstructDetailVM.Width = customQuotationDetail.ConstructDetail.Width;
+			customQuotationDetailVM.ConstructDetailVM.Length = customQuotationDetail.ConstructDetail.Length;
+			customQuotationDetailVM.ConstructDetailVM.Facade = customQuotationDetail.ConstructDetail.Facade;
+			customQuotationDetailVM.ConstructDetailVM.Alley = customQuotationDetail.ConstructDetail.Alley;
+			customQuotationDetailVM.ConstructDetailVM.Floor = customQuotationDetail.ConstructDetail.Floor;
+			customQuotationDetailVM.ConstructDetailVM.Mezzanine = customQuotationDetail.ConstructDetail.Mezzanine;
+			customQuotationDetailVM.ConstructDetailVM.RooftopFloor = customQuotationDetail.ConstructDetail.RooftopFloor;
+			customQuotationDetailVM.ConstructDetailVM.Garden = customQuotationDetail.ConstructDetail.Garden;
+
+            //lưu lại id vào Session
+            
 			//TODO: test result of custom quotation
-			//return Json(new { data = customQuotationDetail });
-			return View(customQuotationDetail);
+			//return Json(new { data = ID});
+			return View(customQuotationDetailVM);
 		}
-	}
+        
+
+
+
+        //      public IActionResult Test()
+        //{
+        //	var demo = _unitOfWork.CustomQuotaionTask.GetTaskDetail("CQ001");
+
+
+        //          return Json(new { data = demo });
+        //}
+
+    }
 
 
 }

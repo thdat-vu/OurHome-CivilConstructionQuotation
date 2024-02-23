@@ -8,7 +8,7 @@ namespace SWP391.CHCQS.Model
     {
         public CustomQuotation()
         {
-            CustomQuotaionTasks = new HashSet<CustomQuotaionTask>();
+            CustomQuotaionTasks = new HashSet<CustomQuotationTask>();
             MaterialDetails = new HashSet<MaterialDetail>();
         }
 
@@ -41,12 +41,13 @@ namespace SWP391.CHCQS.Model
         public virtual RequestForm? Request { get; set; } = null!;
         public virtual Staff? Seller { get; set; } = null!;
         public virtual ConstructDetail? ConstructDetail { get; set; } = null!;
-        public virtual ICollection<CustomQuotaionTask>? CustomQuotaionTasks { get; set; } = null!;
-		public virtual ICollection<MaterialDetail>? MaterialDetails { get; set; } = null!;
 
-		//ghi lại thời gian và người dc ủy quyền xử lý custom quotation
-		//thời gian dc giao request và hoàn thành điền quotation của Seller
-		public DateTime? DelegationDateSeller { get; set; } = null!;
+        public ICollection<CustomQuotationTask>? CustomQuotaionTasks { get; set; } = null!;
+        public ICollection<MaterialDetail>? MaterialDetails { get; set; } = null!;
+
+        //ghi lại thời gian và người dc ủy quyền xử lý custom quotation
+        //thời gian dc giao request và hoàn thành điền quotation của Seller
+        public DateTime? DelegationDateSeller { get; set; } = null!;
 		public DateTime? SubmissionDateSeller { get; set; } = null!;
 		//thời gian nhận customquotation và hoàn thành (MaterialDetail + CustomQuotationTask) của engineer
 		public DateTime? RecieveDateEngineer { get; set; } = null!;

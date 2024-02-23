@@ -11,5 +11,6 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     {
         void Update(MaterialDetail obj);
         void UpdateRange(List<MaterialDetail> obj);
+        IEnumerable<MaterialDetail> GetMaterialDetail(string quoteId, string? includeProp = null!);
     }
 }

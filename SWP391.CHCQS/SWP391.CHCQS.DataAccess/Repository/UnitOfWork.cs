@@ -27,25 +27,35 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public IFoundationTypeRepository FoundationType { get; private set; }
         public IBasementTypeRepository BasementType { get; private set; }
         public IRoofTypeRepository RoofType { get; private set; }
+        public IStaffRepository Staff { get; private set; }
+        public IMaterialCategoryRepository MaterialCategory { get; private set; }
 
 		public UnitOfWork(SWP391DBContext db)
         {
             _db = db;
-            StandardQuotation = new StandardQuotationRepository(_db);
+            
             Project = new ProjectRepository(_db);
-            MaterialDetail = new MaterialDetailRepository(_db);
-            CustomQuotaionTask = new CustomQuotaionTaskRepository(_db);
+            Staff = new StaffRepository(_db);
+
+            StandardQuotation = new StandardQuotationRepository(_db);
             CustomQuotation = new CustomQuotationRepository(_db);
+
             Task = new TaskRepository(_db);
-            Material = new MaterialRepository(_db);
-            ConstructDetail = new ConstructDetailRepository(_db);
+            CustomQuotaionTask = new CustomQuotaionTaskRepository(_db);
             TaskCategory = new TaskCategoryRepository(_db);
+
+            ConstructDetail = new ConstructDetailRepository(_db);
             RequestForm = new RequestRepository(_db);
+
             ConstructionType = new ConstructionTypeRepository(_db);
             InvestmentType = new InvesmentTypeRepository(_db);
             FoundationType = new FoundationTypeRepository(_db);
             BasementType = new BasementTypeRepository(_db);
             RoofType = new RoofTypeRepository(_db);
+
+            MaterialCategory = new MaterialCategoryRepository(_db);
+            MaterialDetail = new MaterialDetailRepository(_db);
+            Material = new MaterialRepository(_db);
         }
 
         public void Save()

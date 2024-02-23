@@ -1,11 +1,7 @@
 ﻿using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SWP391.CHCQS.DataAccess.Repository
 {
@@ -18,6 +14,11 @@ namespace SWP391.CHCQS.DataAccess.Repository
 			_db = db;
 		}
 
+		public string GetName(string id)
+		{
+			return _db.ConstructionTypes.Find(id).Name;
+		}
+
 		public void Update(ConstructionType obj)
 		{
 			_db.ConstructionTypes.Update(obj);
@@ -27,5 +28,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
 		{
 			_db.ConstructionTypes.UpdateRange(obj);
 		}
+		
 	}
 }

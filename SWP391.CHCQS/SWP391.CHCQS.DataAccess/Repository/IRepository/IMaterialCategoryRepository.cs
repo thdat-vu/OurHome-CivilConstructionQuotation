@@ -3,13 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Task = SWP391.CHCQS.Model.Task;
+using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {
-    public interface ITaskRepository : IRepository<Task>
+    public interface IMaterialCategoryRepository: IRepository<MaterialCategory>
     {
-        void Update(Task obj);
         string GetName(string id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using SWP391.CHCQS.DataAccess.Data;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using System;
@@ -22,5 +23,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             _db.Tasks.Update(obj);
         }
+        public string GetName(string id) => _db.Tasks.Find(id).Name;
     }
 }

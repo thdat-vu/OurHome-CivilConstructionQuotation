@@ -23,7 +23,7 @@ namespace SWP391.CHCQS.DataAccess.Data
 		public virtual DbSet<BasementType> BasementTypes { get; set; } = null!;
 		public virtual DbSet<ConstructDetail> ConstructDetails { get; set; } = null!;
 		public virtual DbSet<ConstructionType> ConstructionTypes { get; set; } = null!;
-		public virtual DbSet<CustomQuotaionTask> CustomQuotaionTasks { get; set; } = null!;
+		public virtual DbSet<CustomQuotationTask> CustomQuotaionTasks { get; set; } = null!;
 		public virtual DbSet<CustomQuotation> CustomQuotations { get; set; } = null!;
 		public virtual DbSet<Customer> Customers { get; set; } = null!;
 		public virtual DbSet<FoundationType> FoundationTypes { get; set; } = null!;
@@ -219,7 +219,7 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.HasColumnName("name");
 			});
 
-			modelBuilder.Entity<CustomQuotaionTask>(entity =>
+			modelBuilder.Entity<CustomQuotationTask>(entity =>
 			{
 				entity.HasKey(e => new { e.TaskId, e.QuotationId })
 					.HasName("PK__CustomQu__EA0E34779FFE6727");

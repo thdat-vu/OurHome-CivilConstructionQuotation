@@ -25,5 +25,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             return _db.ConstructionTypes.Find(id).Name;
         }
-    }
+
+		
+	}
 }
