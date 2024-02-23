@@ -163,11 +163,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.HasColumnType("decimal(7, 2)")
 					.HasColumnName("width");
 
-				entity.HasOne(d => d.Basement)
-					.WithMany(p => p.ConstructDetails)
-					.HasForeignKey(d => d.BasementId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Construct__basem__4D94879B");
+				//entity.HasOne(d => d.Basement)
+				//	.WithMany(p => p.ConstructDetails)
+				//	.HasForeignKey(d => d.BasementId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Construct__basem__4D94879B");
 
 				//entity.HasOne(d => d.Construction)
 				//	.WithMany(p => p.ConstructDetails)
@@ -175,17 +175,17 @@ namespace SWP391.CHCQS.DataAccess.Data
 				//	.OnDelete(DeleteBehavior.ClientSetNull)
 				//	.HasConstraintName("FK__Construct__const__4E88ABD4");
 
-				entity.HasOne(d => d.Foundation)
-					.WithMany(p => p.ConstructDetails)
-					.HasForeignKey(d => d.FoundationId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Construct__found__4D94879B");
+				//entity.HasOne(d => d.Foundation)
+				//	.WithMany(p => p.ConstructDetails)
+				//	.HasForeignKey(d => d.FoundationId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Construct__found__4D94879B");
 
-				entity.HasOne(d => d.Investment)
-					.WithMany(p => p.ConstructDetails)
-					.HasForeignKey(d => d.InvestmentId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__Construct__inves__5070F446");
+				//entity.HasOne(d => d.Investment)
+				//	.WithMany(p => p.ConstructDetails)
+				//	.HasForeignKey(d => d.InvestmentId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__Construct__inves__5070F446");
 
 				entity.HasOne(d => d.Quotation)
 					.WithOne(p => p.ConstructDetail)

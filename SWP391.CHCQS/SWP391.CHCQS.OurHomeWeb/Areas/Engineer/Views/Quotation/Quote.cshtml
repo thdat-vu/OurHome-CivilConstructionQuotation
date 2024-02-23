@@ -3,9 +3,9 @@
 	ViewData["Title"] = "Quote";
 }
 
-<div class="container img-thumbnail mt-3 mb-5">
+<div class="container img-thumbnail mt-3 mb-3 w-100">
 
-	<div class="m-auto">
+	<div class="m-auto w-100">
 
 		<div class="mt-3 mb-5 w-100 m-auto">
 			<div class="row mt-3">
@@ -34,7 +34,7 @@
 			</div>
 			<div class="col-lg">
 				<label><b class="text-nowrap">Length:</b></label>
-				<p>@Model.Length</>
+				<p>@Model.Length</a>
 			</div>
 			<div class="col-lg">
 				<label><b class="text-nowrap">Facade:</b></label>
@@ -89,16 +89,106 @@
 	</div>
 </div>
 
+<!--Hiện 2 bảng TaskListSession và MaterialListSession -->
+<div class="row mb-3">
 
-<!--Hiện 2 bảng TaskList và MaterialList-->
-<div class="row">
 	<!--TaskList-->
-	<div class="col-sm-5">
+	<div class="col-lg-5">
 		<div class="card shadow border-0">
 			<div class="card-header bg-main">
 				<div class="row">
 					<div class="col-12 text-center">
-						<h2 class="text-white m-0">Task List</h2>
+						<h2 class="text-white m-0">Tasks of Quote</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table id="tblCustomQuotationTask" class="table-bordered table-striped text-black" style="width:100%">
+						<thead>
+							<tr>
+								<th>
+									Id
+								</th>
+								<th>
+									Name
+								</th>
+								<th>
+									Unit Price
+								</th>
+								<th>
+									Price
+								</th>
+								<th>
+									Actions
+								</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--MaterialList-->
+	<div class="col-lg-7">
+		<div class="card shadow border-0">
+			<div class="card-header bg-main">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h2 class="text-white m-0">Materials of Quote</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table id="tblMaterialDetail" class="table-bordered table-striped text-black" style="width:100%">
+						<thead>
+							<tr>
+								<th>
+									Id
+								</th>
+								<th>
+									Name
+								</th>
+								<th>
+									Unit Price
+								</th>
+								<th>
+									Unit
+								</th>
+								<th>
+									Quantity
+								</th>
+								<th>
+									Price
+								</th>
+								<th>
+									Actions
+								</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!--Hiện 2 bảng TaskList và MaterialList-->
+<div class="row">
+	<!--TaskList-->
+	<div class="col-lg-5">
+		<div class="card shadow border-0">
+			<div class="card-header bg-main">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h2 class="text-white m-0">Available Tasks</h2>
 					</div>
 				</div>
 			</div>
@@ -133,12 +223,12 @@
 	</div>
 
 	<!--MaterialList-->
-	<div class="col-sm-7">
+	<div class="col-lg-7">
 		<div class="card shadow border-0">
 			<div class="card-header bg-main">
 				<div class="row">
 					<div class="col-12 text-center">
-						<h2 class="text-white m-0">Material List</h2>
+						<h2 class="text-white m-0">Available Materials</h2>
 					</div>
 				</div>
 			</div>
@@ -182,4 +272,6 @@
 @section Scripts {
 	<script src="~/js/datatables/engineerDTB/MaterialDTB.js"></script>
 	<script src="~/js/datatables/engineerDTB/TaskDTB.js"></script>
+	<script src="~/js/datatables/engineerDTB/CustomQuotationTaskDTB.js"></script>
+	<script src="~/js/datatables/engineerDTB/MaterialDetailDTB.js"></script>
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
+using SWP391.CHCQS.Utility;
+using SWP391.CHCQS.Utility.Helpers;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
@@ -8,12 +10,20 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 	public class MaterialController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
+
+		//Khai bao Session cho MaterialList neu co thi lay ra khong co thi tao moi
+		public List<MaterialDetailViewModel> MaterialListSession => HttpContext.Session.Get<List<MaterialDetailViewModel>>(SessionConst.MATERIAL_LIST_KEY) ?? new List<MaterialDetailViewModel>();
+
+		//Declare Session to store CustomQuotation serve to method AddToList in TaskController and MaterialController to add Task and Material.
+		public CustomQuotationViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationViewModel();
 		public MaterialController(IUnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
 		}
 
-		#region
+		
+
+		#region API CALL LIST MATERIAL
 		/// <summary>
 		/// This function get all CustomeQuotation in Database and return it into JSON, this function ne lib Datatables to show data
 		/// </summary>
@@ -23,7 +33,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		{
 			List<MaterialViewModel> materialVMList = _unitOfWork.Material
 				.GetAll(includeProperties: "Category")
-				.Where(m => m.Status == true)
+				.Where(m => m.Status == true && !MaterialListSession.Any(x => x.Material.Id == m.Id))
 				.Select(x => new MaterialViewModel
 				{
 					Id = x.Id,
@@ -39,6 +49,105 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 			return Json(new { data = materialVMList });
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> GetMaterialListSession()
+		{
+			return Json(new { data = MaterialListSession.ToList() });
+		}
 		#endregion
+
+
+		public async Task<IActionResult> AddToQuote(string MaterialId)
+		{
+			//Asign MaterialListSession to taskCart
+			var materialCart = MaterialListSession;
+
+			//Get MaterialDetailViewModel and asign to materialItem from materialCart
+			var materialItem = materialCart.FirstOrDefault(x => x.Material.Id == MaterialId);
+
+			//If materialItem equal null mean the materialItem not in Session (not in session)
+			if (materialItem == null)
+			{
+				//Get a material from database by TaskId
+				var material = _unitOfWork.Material.Get(x => x.Id == MaterialId);
+
+				//Check if that material not in database
+				if (material == null)
+				{
+					//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+					TempData["Error"] = $"Material not found with Id = {MaterialId}";
+
+					//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+					return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+				}
+				else //if it not equal null
+				{
+					//Asign new MaterialDetailViewModel with projection from task for materialItem
+					materialItem = new MaterialDetailViewModel
+					{
+						Material = material,
+						QuotationId = CustomQuotationSession.Id,
+						Price = material.UnitPrice * 0.8m
+					};
+
+					//Add materialItem into materialCart
+					materialCart.Add(materialItem);
+				}
+			}
+			else // if it already in session
+			{
+				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				TempData["Error"] = $"Material already in quote with Id = {MaterialId}";
+
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			}
+
+			//Update MaterialListSession with materialCart  
+			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
+
+			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			TempData["Success"] = $"Add material successfully with Id = {MaterialId}";
+
+			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="TaskId"></param>
+		/// <returns></returns>
+		public async Task<IActionResult> DeleteFromQuote(string MaterialId)
+		{
+			//Asign MaterialListSession to materialCart
+			var materialCart = MaterialListSession;
+
+			//Get materialItem which exist in materialCart
+			var materialItem = materialCart.Where(x => x.Material.Id == MaterialId).FirstOrDefault();
+
+			//if materialItem not in materialCart
+			if (materialItem == null)
+			{
+				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				TempData["Error"] = $"Material not found with Id = {MaterialId}";
+
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			}
+
+			//Delete materialItem in materialCart
+			materialCart.Remove(materialItem);
+
+			//Update MaterialListSession with materialCart  
+			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
+
+			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			TempData["Success"] = $"Delete material successfully with Id = {MaterialId}";
+
+			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+		}
 	}
 }

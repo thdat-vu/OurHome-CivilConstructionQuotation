@@ -1,26 +1,26 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 
 /*Style for text and bg*/
 .bg-main {
-    background-color: #F27456!important;
+    background-color: #F27456 !important;
     color: white;
     opacity: 1;
 }
@@ -32,14 +32,14 @@ body {
 
 /*Style for main BTN*/
 .btn-main {
-    background-color: #F27456!important;
+    background-color: #F27456 !important;
     color: white;
 }
 
-.btn-main:hover {
-    color: white;
-    opacity: 0.8;
-}
+    .btn-main:hover {
+        color: white;
+        opacity: 0.8;
+    }
 
 
 /*Style for datatables*/
@@ -48,7 +48,26 @@ body {
     font-size: 12px;
 }
 
+#tblCustomQuotationTask td, th {
+    padding: 2px 4px;
+    font-size: 12px;
+}
+
+#tblMaterialDetail td, th {
+    padding: 2px 4px;
+    font-size: 12px;
+}
+
+#tblMaterial td, th {
+    padding: 2px 4px;
+    font-size: 12px;
+}
+
 #tblTask_wrapper label {
+    font-size: 12px;
+}
+
+#tblCustomQuotationTask_wrapper label {
     font-size: 12px;
 }
 
@@ -56,7 +75,6 @@ body {
     font-size: 12px;
 }
 
-#tblMaterial td, th {
-    padding: 2px 4px;
+#tblMaterialDetail_wrapper label {
     font-size: 12px;
 }
