@@ -22,12 +22,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //thêm thông tin task detail
             string quoteId = HttpContext.Session.GetString("quoteId");
             //thêm thông tin material detail
-            var materialDetailVM = _unitOfWork.MaterialDetail.GetMaterialDetail(quoteId)
+            var materialDetailVM = _unitOfWork.MaterialDetail.GetMaterialDetail(quoteId, "Material")
                 .Select((x) => new ViewModels.MaterialDetailViewModel
                 {
                     QuoteId = x.QuotationId,
                     MaterialId = x.MaterialId,
-                    MaterialName = _unitOfWork.Material.GetName(x.MaterialId),
+                    //MaterialName = _unitOfWork.Material.GetName(x.MaterialId),
+                    MaterialName = x.Material.Name,
+                    Unit = x.Material.Unit,
                     MaterialCateName = _unitOfWork.MaterialCategory.GetName(x.Material.CategoryId),
                     Quantity = x.Quantity,
                     Price = x.Price

@@ -14,8 +14,7 @@ function loadDataMaterialDetail() {
             { data: 'materialCateName', "width": "15%" },
             { data: 'quantity', "width": "15%" },
             { data: 'price', "width": "15%" },
-
-
+            { data: 'unit', "width": "15%" },
             {
                 data: "quoteId",
                 "render": function (data) {

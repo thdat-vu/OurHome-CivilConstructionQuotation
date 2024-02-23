@@ -169,7 +169,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			try
 			{
 				//move item from taskCart(ViewModel) to CustomQuotationTask(Model) to add to database 
-				List<CustomQuotaionTask> customQuotaionTasks = taskCart.Select(t => new CustomQuotaionTask
+				List<CustomQuotationTask> customQuotationTasks = taskCart.Select(t => new CustomQuotationTask
 				{
 					TaskId = t.Task.Id,
 					QuotationId = t.QuotationId,
@@ -186,7 +186,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				}).ToList();
 
 				//Addrange of customQuotaionTasks to database
-				_unitOfWork.CustomQuotaionTask.AddRange(customQuotaionTasks);
+				_unitOfWork.CustomQuotaionTask.AddRange(customQuotationTasks);
 
 				//Addrange of materialDetails to database
 				_unitOfWork.MaterialDetail.AddRange(materialDetails);
