@@ -78,3 +78,14 @@ body {
 #tblMaterialDetail_wrapper label {
     font-size: 12px;
 }
+
+
+/*Stype for toast notification*/
+.toast-success {
+    color: white;
+    border: none !important;
+}
+
+    .toast-success:hover {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+    }
