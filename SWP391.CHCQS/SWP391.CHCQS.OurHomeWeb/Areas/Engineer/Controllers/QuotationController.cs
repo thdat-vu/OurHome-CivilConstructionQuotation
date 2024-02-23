@@ -7,6 +7,7 @@ using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
@@ -22,7 +23,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		//Declare session for CustomQuotationTaskViewModel to store TaskList of the quote when add into quote. if it empty, create one
 		public List<CustomQuotationTaskViewModel> TaskListSession => HttpContext.Session.Get<List<CustomQuotationTaskViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<CustomQuotationTaskViewModel>();
 
-		
+		//Khai bao Session cho MaterialList neu co thi lay ra khong co thi tao moi
+		public List<MaterialDetailViewModel> MaterialListSession => HttpContext.Session.Get<List<MaterialDetailViewModel>>(SessionConst.MATERIAL_LIST_KEY) ?? new List<MaterialDetailViewModel>();
+
 		//Constructor of this Controller
 		public QuotationController(IUnitOfWork unitOfWork)
 		{
@@ -79,8 +82,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Declare constructDetail get data form Database by using _unitOfWork
 			ConstructDetail? constructDetail = _unitOfWork.ConstructDetail.Get(filter: c => c.QuotationId == QuotationId, includeProperties: "Construction,Investment,Foundation,Rooftop,Basement");
 
-			//Declare view model to pass to View.
-			ConstructDetailViewModel constructDetailVM;
+			//Check if constructDetail or customQuotationViewModel.Id not in database is true, it return error view. If not, is will execute next code.
+			if (constructDetail == null)
+			{
+				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				TempData["Error"] = $"Quotation not found";
+
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return RedirectToAction("Index", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			}
 
 			//Declare view model to set into Session CustomQuotationSession
 			CustomQuotationViewModel customQuotationViewModel = new CustomQuotationViewModel();
@@ -93,39 +103,119 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			{
 				return RedirectToAction("Error", "Home");
 			}
-			else
+
+
+			//projection data constructDetail to constructDetailVM
+			ConstructDetailViewModel constructDetailVM = new ConstructDetailViewModel
 			{
-				//projection data constructDetail to constructDetailVM
-				constructDetailVM = new ConstructDetailViewModel
-				{
-					QuotationId = constructDetail.QuotationId,
-					Width = constructDetail.Width,
-					Length = constructDetail.Length,
-					Facade = constructDetail.Facade,
-					Alley = constructDetail.Alley,
-					Floor = constructDetail.Floor,
-					Room = constructDetail.Room,
-					Mezzanine = constructDetail.Mezzanine,
-					RooftopFloor = constructDetail.RooftopFloor,
-					Balcony = constructDetail.Balcony,
-					Garden = constructDetail.Garden,
-					ConstructionTypeName = constructDetail.Construction.Name,
-					InvestmentTypeName = constructDetail.Investment.Name,
-					FoundationTypeName = constructDetail.Foundation.Name,
-					RooftopTypeName = constructDetail.Rooftop.Name,
-					BasementTypeName = constructDetail.Basement.Name
-				};
-			}
+				QuotationId = constructDetail.QuotationId,
+				Width = constructDetail.Width,
+				Length = constructDetail.Length,
+				Facade = constructDetail.Facade,
+				Alley = constructDetail.Alley,
+				Floor = constructDetail.Floor,
+				Room = constructDetail.Room,
+				Mezzanine = constructDetail.Mezzanine,
+				RooftopFloor = constructDetail.RooftopFloor,
+				Balcony = constructDetail.Balcony,
+				Garden = constructDetail.Garden,
+				ConstructionTypeName = constructDetail.Construction.Name,
+				InvestmentTypeName = constructDetail.Investment.Name,
+				FoundationTypeName = constructDetail.Foundation.Name,
+				RooftopTypeName = constructDetail.Rooftop.Name,
+				BasementTypeName = constructDetail.Basement.Name
+			};
 
 			//Set customQuotationViewModel after exist in database into CustomQuotationSession
 			HttpContext.Session.Set(SessionConst.CUSTOM_QUOTATION_KEY, customQuotationViewModel);
 
-			//Asign TaskListSession into ViewBag and pass it to View
-			ViewBag.TaskListSession = TaskListSession;
-
 			//return View of this Controller after nothing wrong.
 			return View(constructDetailVM);
 		}
+
+		/// <summary>
+		/// This function will add the TaskList and MaterialList of the Quote into Database
+		/// </summary>
+		/// <returns></returns>
+		public async Task<IActionResult> SubmitQuote()
+		{
+			//Asign TaskListSession for taskCart;
+			var taskCart = TaskListSession;
+
+			//Asign MaterialListSession for materialCart
+			var materialCart = MaterialListSession;
+
+			//if taskCart == null mean the taskCart have no task in there
+			if (taskCart == null)
+			{
+				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				TempData["Error"] = $"Task list of quote is empty";
+
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			}
+
+			//if materialCart == null mean the materialCart have no material in there
+			if (materialCart == null)
+			{
+				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				TempData["Error"] = $"Material list of quote is empty";
+
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			}
+
+			//try catch block to catch and resolve error if it occur
+			try
+			{
+				//move item from taskCart(ViewModel) to CustomQuotationTask(Model) to add to database 
+				List<CustomQuotaionTask> customQuotaionTasks = taskCart.Select(t => new CustomQuotaionTask
+				{
+					TaskId = t.Task.Id,
+					QuotationId = t.QuotationId,
+					Price = t.Price,
+				}).ToList();
+
+				//move item from materialCart(ViewModel) to MaterialDetail(Model) to add to database 
+				List<MaterialDetail> materialDetails = materialCart.Select(m => new MaterialDetail
+				{
+					MaterialId = m.Material.Id,
+					QuotationId = m.QuotationId,
+					Quantity = m.Quantity,
+					Price = m.Price,
+				}).ToList();
+
+				//Addrange of customQuotaionTasks to database
+				_unitOfWork.CustomQuotaionTask.AddRange(customQuotaionTasks);
+
+				//Addrange of materialDetails to database
+				_unitOfWork.MaterialDetail.AddRange(materialDetails);
+
+				//Savechange the database after addrange
+				_unitOfWork.Save();
+
+				//Remove all session
+				HttpContext.Session.Remove(SessionConst.TASK_LIST_KEY);
+				HttpContext.Session.Remove(SessionConst.MATERIAL_LIST_KEY);
+				HttpContext.Session.Remove(SessionConst.CUSTOM_QUOTATION_KEY);
+
+				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				TempData["Success"] = $"Submit quote successfully";
+
+				//Return back to Index of QuotationController
+				return View("Index", "Quotation");
+			}
+			catch (Exception)
+			{
+				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				TempData["Error"] = $"Something went wrong";
+
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			}
+
+		}
+
 
 		/// <summary>
 		/// This function return a form to edit exist quotation
