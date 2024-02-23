@@ -169,7 +169,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			try
 			{
 				//move item from taskCart(ViewModel) to CustomQuotationTask(Model) to add to database 
-				List<CustomQuotaionTask> customQuotaionTasks = taskCart.Select(t => new CustomQuotaionTask
+				List<CustomQuotationTask> customQuotaionTasks = taskCart.Select(t => new CustomQuotationTask
 				{
 					TaskId = t.Task.Id,
 					QuotationId = t.QuotationId,
