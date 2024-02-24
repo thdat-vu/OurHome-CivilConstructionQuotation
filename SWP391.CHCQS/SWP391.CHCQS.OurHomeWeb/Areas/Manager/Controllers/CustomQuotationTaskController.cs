@@ -25,7 +25,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //thêm thông tin task detail
             string quoteId = HttpContext.Session.GetString("quoteId");
             var taskDetail = _unitOfWork.CustomQuotaionTask.GetTaskDetail(quoteId)
-                .Select((x) => new ViewModels.CustomQuotationTaskViewModel
+                .Select((x) => new ViewModels.TaskDetailListViewModel
                 {
                     QuoteId = x.QuotationId,
                     TaskId = x.TaskId,

@@ -9,7 +9,13 @@ function loadDataTaskDetail() {
     dataTable = $('#tblTaskDetail').DataTable({
         "ajax": { url: '/Manager/CustomQuotationTask/GetDetail' },
         "columns": [
-            { data: "taskId", "width": "5%" },
+            {
+                data: "taskId",
+                "render": function (data) {
+                    return `<a href="/Manager/Task/GetDetail?id=${data}" >${data}</a>`
+                },
+                "width": "5%"
+            },
             { data: 'taskName', "width": "15%" },
             { data: 'price', "width": "15%" },
             {

@@ -27,7 +27,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             string quoteId = HttpContext.Session.GetString("quoteId");
             //thêm thông tin material detail
             var materialDetailVM = _unitOfWork.MaterialDetail.GetMaterialDetail(quoteId, "Material")
-                .Select((x) => new ViewModels.MaterialDetailViewModel
+                .Select((x) => new ViewModels.MaterialDetailListViewModel
                 {
                     QuoteId = x.QuotationId,
                     MaterialId = x.MaterialId,

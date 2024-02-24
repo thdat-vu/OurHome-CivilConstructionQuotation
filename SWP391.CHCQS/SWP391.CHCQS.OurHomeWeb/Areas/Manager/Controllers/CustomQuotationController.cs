@@ -27,10 +27,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         [HttpGet]
 		public IActionResult GetAll()
 		{
-			List<CustomQuotationViewModel> customQuotationViewModels = _unitOfWork.CustomQuotation
+			List<CustomQuotationListViewModel> customQuotationViewModels = _unitOfWork.CustomQuotation
 				.GetAll(includeProperties: "Engineer,Manager,Seller,ConstructDetail,Request")
 				.Where(x => x.Status == SD.Pending_Approval)
-				.Select(x => new CustomQuotationViewModel
+				.Select(x => new CustomQuotationListViewModel
 				{
 					Id = x.Id,
 					Date = x.Date,

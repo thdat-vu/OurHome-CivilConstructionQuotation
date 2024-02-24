@@ -25,5 +25,6 @@ namespace SWP391.CHCQS.Model
 
         public virtual ICollection<StandardQuotation> Quotations { get; set; }
         public virtual ICollection<RequestForm> Requests { get; set; }
+
     }
 }

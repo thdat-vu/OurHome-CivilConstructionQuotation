@@ -1,6 +1,6 @@
 ﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
-    public class CustomQuotationTaskViewModel
+    public class TaskDetailListViewModel
     {
         public string? QuoteId { get; set; }
         public string? TaskId { get; set; }
