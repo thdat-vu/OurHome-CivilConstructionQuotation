@@ -30,7 +30,7 @@ function DeleteFromQuote(url) {
         type: 'DELETE',
         success: function (data) {
             dataTableCQT.ajax.reload();
-            toastr.success(data.message);
+            dataTableT.ajax.reload();
         }
     });
 }

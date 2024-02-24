@@ -29,9 +29,11 @@ function AddToQuote(url) {
         type: 'GET',
         url: url,
         success: function (data) {
+            dataTableCQT.ajax.reload();
             dataTableT.ajax.reload();
         },
         error: function (data) {
+            dataTableCQT.ajax.reload();
             dataTableT.ajax.reload();
         }
     });

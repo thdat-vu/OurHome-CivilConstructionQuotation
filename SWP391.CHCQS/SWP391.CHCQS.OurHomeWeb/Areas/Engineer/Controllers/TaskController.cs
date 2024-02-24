@@ -38,47 +38,23 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 			//Declare TaskVMlList
 			List<TaskViewModel> TaskVMlList;
+			//Get a list of all task from database and projection into TaskViewModel but not in TaskListSession
+			//When a Task has been add into TaskListSession its will not appear in datatables
+			TaskVMlList = _unitOfWork.Task
+				.GetAll(includeProperties: "Category")
+				.Where(t => t.Status == true && !TaskListSession.Any(ts => ts.Task.Id == t.Id))
+				.Select(x => new TaskViewModel
+				{
+					Id = x.Id,
+					Name = x.Name,
+					Description = x.Description,
+					UnitPrice = x.UnitPrice,
+					Status = x.Status,
+					CategoryId = x.CategoryId,
+					CategoryName = x.Category.Name
+				})
+				.ToList();
 
-			//if taskCart empty it will get data from database.
-			if (taskCart.Count == 0)
-			{
-				//Get data from database to check
-				List<CustomQuotationTask> customQuotationTasks = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id).ToList();
-
-				TaskVMlList = _unitOfWork.Task
-				   .GetAll(includeProperties: "Category")
-				   .Where(t => t.Status == true && !customQuotationTasks.Any(ts => ts.Task.Id == t.Id))
-				   .Select(x => new TaskViewModel
-				   {
-					   Id = x.Id,
-					   Name = x.Name,
-					   Description = x.Description,
-					   UnitPrice = x.UnitPrice,
-					   Status = x.Status,
-					   CategoryId = x.CategoryId,
-					   CategoryName = x.Category.Name
-				   })
-				   .ToList();
-			}
-			else
-			{
-				//Get a list of all task from database and projection into TaskViewModel but not in TaskListSession
-				//When a Task has been add into TaskListSession its will not appear in datatables
-				TaskVMlList = _unitOfWork.Task
-					.GetAll(includeProperties: "Category")
-					.Where(t => t.Status == true && !TaskListSession.Any(ts => ts.Task.Id == t.Id))
-					.Select(x => new TaskViewModel
-					{
-						Id = x.Id,
-						Name = x.Name,
-						Description = x.Description,
-						UnitPrice = x.UnitPrice,
-						Status = x.Status,
-						CategoryId = x.CategoryId,
-						CategoryName = x.Category.Name
-					})
-					.ToList();
-			}
 			//Return Json for datatables to read
 			return Json(new { data = TaskVMlList });
 
@@ -87,23 +63,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetTaskListSession()
 		{
-			//Asign TaskListSession for taskCart;
-			var taskCart = TaskListSession;
-
-			//if taskCart == null mean the taskCart have no task in there
-			if (taskCart.Count == 0)
-			{
-				taskCart = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id, includeProp: null).Select(x => new CustomQuotationTaskViewModel
-				{
-					Task = _unitOfWork.Task.Get(t => t.Id == x.TaskId),
-					QuotationId = x.QuotationId,
-					Price = x.Price,
-				}).ToList();
-			}
-
-			//Update TaskListSession with taskCart  
-			HttpContext.Session.Set(SessionConst.TASK_LIST_KEY, taskCart);
-
 			return Json(new { data = TaskListSession.ToList() });
 		}
 
@@ -187,7 +146,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="TaskId"></param>
 		/// <returns></returns>
-		[HttpDelete]		
+		[HttpDelete]
 		public async Task<IActionResult> DeleteFromQuote(string TaskId)
 		{
 			//Asign TaskListSession to taskCart
