@@ -1,11 +1,11 @@
-var dataTable
+var dataTableCQT;
 $(document).ready(function () {
     loadDataTableCustomQuotationTask();
 });
 
 //Need an api method return json to use this
 function loadDataTableCustomQuotationTask() {
-    dataTable = $('#tblCustomQuotationTask').DataTable({
+    dataTableCQT = $('#tblCustomQuotationTask').DataTable({
         "ajax": { url: '/Engineer/Task/GetTaskListSession' },
         "columns": [
             { data: 'task.id', },
@@ -26,15 +26,11 @@ function loadDataTableCustomQuotationTask() {
 
 function DeleteFromQuote(url) {
     $.ajax({
-        type: 'DELETE',
         url: url,
+        type: 'DELETE',
         success: function (data) {
-            dataTable.ajax.reload();
+            dataTableCQT.ajax.reload();
             toastr.success(data.message);
-        },
-        error: function (data) {
-            dataTable.ajax.reload();
-            toastr.success(data.error);
         }
     });
 }

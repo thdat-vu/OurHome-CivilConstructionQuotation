@@ -114,7 +114,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="TaskId"></param>
 		/// <returns></returns>
-		[HttpPost]
+		[HttpGet]
 		public async Task<IActionResult> AddToQuote(string TaskId)
 		{
 			//Asign TaskListSession to taskCart
@@ -135,8 +135,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
 					TempData["Error"] = $"Task not found with Id = {TaskId}";
 
+					////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+					//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+
 					//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-					return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+					return Json(new { success = false, message = $"Add task false with Id = {TaskId}" });
+
 				}
 				else //if it not equal null
 				{
@@ -155,10 +159,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			else // if it already in session
 			{
 				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				TempData["Error"] = $"Task already in quote with Id = {TaskId}";
+				//TempData["Error"] = $"Task already in quote with Id = {TaskId}";
+
+				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+				return Json(new { success = false, message = $"Add task false with Id = {TaskId}" });
 			}
 
 			//Update TaskListSession with taskCart  

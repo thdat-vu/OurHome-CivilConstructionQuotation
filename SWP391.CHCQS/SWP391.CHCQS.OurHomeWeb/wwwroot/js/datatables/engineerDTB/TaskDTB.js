@@ -1,11 +1,11 @@
-﻿
+﻿var dataTableT;
 $(document).ready(function () {
     loadDataTableTask();
 });
 
 //Need an api method return json to use this
 function loadDataTableTask() {
-    dataTable = $('#tblTask').DataTable({
+    dataTableT = $('#tblTask').DataTable({
         "ajax": { url: '/Engineer/Task/GetAll' },
         "columns": [
             { data: 'id', },
@@ -16,8 +16,8 @@ function loadDataTableTask() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a onClick=AddToQuote('/Engineer/Task/AddToQuote?TaskId=${data}')" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
-                    </div >`
+                       <a onClick=AddToQuote('/Engineer/Task/AddToQuote?TaskId=${data}') class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
+                    </div>`
                 },
             }
         ]
@@ -26,15 +26,13 @@ function loadDataTableTask() {
 
 function AddToQuote(url) {
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: url,
         success: function (data) {
-            dataTable.ajax.reload();
-            toastr.success(data.message);
+            dataTableT.ajax.reload();
         },
         error: function (data) {
-            dataTable.ajax.reload();
-            toastr.success(data.error);
+            dataTableT.ajax.reload();
         }
     });
 }
