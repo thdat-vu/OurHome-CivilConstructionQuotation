@@ -16,6 +16,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         {
             return View();
         }
+
+        //hàm trả về material detail theo quotation mà Manager đang coi
+        //cụ thể là hàm lấy quoteId đã được lưu vào session - hành động này thực hiện ở GetDetail của CustomQuotationController
+        //MaterialDetailDTB sẽ gọi ajax đến đây để lấy dữ liệu 
         [HttpGet]
         public IActionResult GetDetail()
         {

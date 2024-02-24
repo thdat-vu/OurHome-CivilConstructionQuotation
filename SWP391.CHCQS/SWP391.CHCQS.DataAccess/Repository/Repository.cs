@@ -7,6 +7,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
+using System.Xml.Linq;
 
 namespace SWP391.CHCQS.DataAccess.Repository
 {
@@ -29,7 +31,12 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             dbSet.AddRange(entity);
         }
-
+        /// <summary>
+        ///  The provided code defines a function named Get that retrieves a single entity from a database table, applying filtering and optional property inclusion logic.
+        /// </summary>
+        /// <param name="filter">body expression ví dụ (x) => x.Id = id </param>
+        /// <param name="includeProperties">the name of foreign key you want to load data, which is a comma-separated string</param>
+        /// <returns></returns>
         public T? Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
@@ -65,6 +72,14 @@ namespace SWP391.CHCQS.DataAccess.Repository
             return query.ToList();
         }
 
+        /// <summary>
+        /// The function retrieves data from a database table and applies filtering and optional property inclusion logic. 
+        /// This function first constructs a query based on the provided DbSet dbSet,apply query and if includeProperties is not null or empty, it iterates through the properties specified in the parameter and includes them in the query using the Include method. 
+        ///  Finally, it executes the query and returns the results as a list of objects of type T.
+        /// </summary>
+        /// <param name="filter">body expression ví dụ (x) => x.Id = id </param>
+        /// <param name="includeProperties">the name of foreign key you want to load data, which is a comma-separated string</param>
+        /// <returns></returns>
         public IEnumerable<T> GetAllWithFilter(Expression<Func<T, bool>> filter,string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;

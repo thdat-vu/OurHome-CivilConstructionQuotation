@@ -17,7 +17,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         {
             return View();
         }
-
+        //hàm trả về task detail theo quotation mà Manager đang coi
+        //cụ thể là hàm lấy quoteId đã được lưu vào session - hành động này thực hiện ở GetDetail của CustomQuotationController
+        //TaskDetailDTB sẽ gọi ajax đến đây để lấy dữ liệu 
         public async Task<IActionResult> GetDetail()
         {
             //thêm thông tin task detail

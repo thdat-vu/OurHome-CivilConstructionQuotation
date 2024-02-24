@@ -10,5 +10,7 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     public interface IRequestRepository : IRepository<RequestForm>
     {
         void Update(RequestForm obj);
+        int CountRequestSum();
+        int CountCancleRequestSum();
     }
 }
