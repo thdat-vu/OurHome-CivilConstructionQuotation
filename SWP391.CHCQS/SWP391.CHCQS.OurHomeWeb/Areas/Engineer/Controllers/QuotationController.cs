@@ -230,7 +230,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="id">Id of the quotation that be selected</param>
 		/// <returns>Return a form with detail of the quotation to edit</returns>
-		public async Task<IActionResult> Edit(string QuotationId)
+		public async Task<IActionResult> SendToManager(string QuotationId)
 		{
 			return View();
 		}

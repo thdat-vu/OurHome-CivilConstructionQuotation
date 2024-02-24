@@ -37,7 +37,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Declare materialVMList
 			List<MaterialViewModel> materialVMList;
 
-			//Check if materialCart is empty , it will get data from database to show
+			//Check if materialCart is empty, it will get data from database to show
 			if (materialCart.Count == 0)
 			{
 				//Get data from database to check 

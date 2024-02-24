@@ -17,7 +17,7 @@ function loadDataTableQuotation() {
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
                        <a href="/Engineer/Quotation/Quote?QuotationId=${data}" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-folder2-open"></i> Quote</a>
-                        <a href="/Engineer/Quotation/Edit?QuotationId=${data}" class="text-nowrap btn btn-primary m-1"><i class="bi bi-pencil-square"></i> Edit</a>
+                        <a href="/Engineer/Quotation/SendToManager?QuotationId=${data}" class="text-nowrap btn btn-primary m-1"><i class="bi bi-pencil-square"></i> Send</a>
                     </div >`
                 },
             }

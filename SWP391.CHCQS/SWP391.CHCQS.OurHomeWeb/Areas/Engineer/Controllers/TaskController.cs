@@ -87,7 +87,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetTaskListSession()
 		{
-
 			//Asign TaskListSession for taskCart;
 			var taskCart = TaskListSession;
 
