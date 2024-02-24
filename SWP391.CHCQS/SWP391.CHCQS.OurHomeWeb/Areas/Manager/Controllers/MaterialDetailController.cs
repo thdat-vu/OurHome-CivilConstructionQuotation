@@ -16,6 +16,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         {
             return View();
         }
+
+        //hàm trả về material detail theo quotation mà Manager đang coi
+        //cụ thể là hàm lấy quoteId đã được lưu vào session - hành động này thực hiện ở GetDetail của CustomQuotationController
+        //MaterialDetailDTB sẽ gọi ajax đến đây để lấy dữ liệu 
         [HttpGet]
         public IActionResult GetDetail()
         {
@@ -23,7 +27,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             string quoteId = HttpContext.Session.GetString("quoteId");
             //thêm thông tin material detail
             var materialDetailVM = _unitOfWork.MaterialDetail.GetMaterialDetail(quoteId, "Material")
-                .Select((x) => new ViewModels.MaterialDetailViewModel
+                .Select((x) => new ViewModels.MaterialDetailListViewModel
                 {
                     QuoteId = x.QuotationId,
                     MaterialId = x.MaterialId,

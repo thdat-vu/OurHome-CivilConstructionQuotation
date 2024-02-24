@@ -1,7 +1,7 @@
 ﻿
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels
 {
-	public partial class CustomQuotationViewModel
+	public partial class CustomQuotationListViewModel
 	{
 		//tên những staff dc ủy quyền xử lý custom quotation
 		public string? EngineerName { get; set; }

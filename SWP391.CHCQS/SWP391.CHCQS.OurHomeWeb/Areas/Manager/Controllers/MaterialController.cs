@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
+using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using System.Net.NetworkInformation;
 
 //DatVT
@@ -121,6 +122,25 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _unitOfWork.Save();//keep track on change
             //TempData["success"] = "Product deleted successfully";
             return RedirectToAction("Index"); //redirect to Index.cshtml
+        }
+        //get detail HttpGet
+        [HttpGet]
+        [ActionName("Detail")]
+        public IActionResult GetDetail([FromQuery]string id)
+        {
+            var materialDetail = _unitOfWork.Material.Get((x) => x.Id == id);
+            var materialDetailVM = new MaterialDetailViewModel()
+            {
+                Id = materialDetail.Id,
+                MaterialName = materialDetail.Name,
+                InventoryQuantity = materialDetail.InventoryQuantity,
+                UnitPrice = materialDetail.UnitPrice,
+                Unit = materialDetail.Unit,
+                Status = materialDetail.Status,
+                CategoryName = _unitOfWork.MaterialCategory.GetName(materialDetail.CategoryId)
+            };
+            //TODO: Test result
+            return Json(new {data = materialDetailVM});
         }
     }
 }

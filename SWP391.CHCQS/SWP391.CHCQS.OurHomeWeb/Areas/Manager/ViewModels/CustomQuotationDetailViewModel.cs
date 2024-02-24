@@ -2,7 +2,7 @@
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
-	public class CustomQuotationDetailViewMdel
+	public class CustomQuotationDetailViewModel
 	{
 		public string? RequestId { get; set; }
 		public ConstructDetailViewModel? ConstructDetailVM { get; set; } 

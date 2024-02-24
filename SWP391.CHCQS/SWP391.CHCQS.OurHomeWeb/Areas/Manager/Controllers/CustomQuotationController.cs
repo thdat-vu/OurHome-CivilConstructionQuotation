@@ -7,9 +7,6 @@ using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
-	/// <summary>
-	/// This controller contains methods retrieving necessary data for Custom Quotation
-	/// </summary>
 	[Area("Manager")]
 	public class CustomQuotationController : Controller
 	{
@@ -26,17 +23,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		}
 
        
-        /// <summary>
         /// This method returns all pending approval CustomQuotation via CustomQuotationViewModel
-        /// </summary>
-        /// <returns>CustomQuotationViewModel</returns>
         [HttpGet]
 		public IActionResult GetAll()
 		{
-			List<CustomQuotationViewModel> customQuotationViewModels = _unitOfWork.CustomQuotation
+			List<CustomQuotationListViewModel> customQuotationViewModels = _unitOfWork.CustomQuotation
 				.GetAll(includeProperties: "Engineer,Manager,Seller,ConstructDetail,Request")
 				.Where(x => x.Status == SD.Pending_Approval)
-				.Select(x => new CustomQuotationViewModel
+				.Select(x => new CustomQuotationListViewModel
 				{
 					Id = x.Id,
 					Date = x.Date,
@@ -49,21 +43,22 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 					ConstrucType = _unitOfWork.ConstructDetail.GetConstructTypeName(x.ConstructDetail.ConstructionId),
 					GeneratRequestDate = x.Request.GenerateDate
 				}).ToList();
-			//TODO: Test
-			//Console.WriteLine(customQuotationViewModels);
 			return Json(new { data = customQuotationViewModels });
 		}
         [HttpGet]
+		//tại sao request Get này cần async ???
+		//Để có việc lưu quotation Id vào session thành công, sau đó datatable mới lấy quotation Id từ session ra để lấy được dữ liệu task detail và material detail tương ứng
         public async Task<IActionResult> GetDetail([FromQuery] string id)
 		{
 			//lưu thông tin quoteId vào session
 			HttpContext.Session.SetString("quoteId", id);
-            //var ID = HttpContext.Session.GetString("quoteId");
+
             //lấy thông tin cơ bản của custom quotation
             var customQuotationDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "Manager,Engineer,Seller,ConstructDetail");
-			var customQuotationDetailVM = new CustomQuotationDetailViewMdel()
+			var customQuotationDetailVM = new CustomQuotationDetailViewModel()
 			{
 				RequestId = customQuotationDetail.RequestId,
+				//khởi tạo biến constructDetailViewModel để lát nữa giữ dữ liệu
 				ConstructDetailVM = new ViewModels.ConstructDetailViewModel(),
 				QuoteGeneratedDate = customQuotationDetail.Date,
 				Enginneer = customQuotationDetail.Engineer,
@@ -76,7 +71,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 				RecieveDateManager = customQuotationDetail.RecieveDateManager,
 				AcceptanceDateManager = customQuotationDetail.AcceptanceDateManager
 			};
-			//thêm thông tin construct detail
+			//thêm thông tin cho construct detail View Model
 			customQuotationDetailVM.ConstructDetailVM.IsBalcony = customQuotationDetail.ConstructDetail.Balcony;
 			customQuotationDetailVM.ConstructDetailVM.TypeOfConstruct = _unitOfWork.ConstructionType.GetName(customQuotationDetail.ConstructDetail.ConstructionId);
 			customQuotationDetailVM.ConstructDetailVM.Investment = _unitOfWork.InvestmentType.GetName(customQuotationDetail.ConstructDetail.InvestmentId);
@@ -92,7 +87,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			customQuotationDetailVM.ConstructDetailVM.RooftopFloor = customQuotationDetail.ConstructDetail.RooftopFloor;
 			customQuotationDetailVM.ConstructDetailVM.Garden = customQuotationDetail.ConstructDetail.Garden;
 
-            //lưu lại id vào Session
             
 			//TODO: test result of custom quotation
 			//return Json(new { data = ID});

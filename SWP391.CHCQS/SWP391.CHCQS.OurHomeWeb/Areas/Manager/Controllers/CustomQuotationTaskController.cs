@@ -17,13 +17,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         {
             return View();
         }
-
+        //hàm trả về task detail theo quotation mà Manager đang coi
+        //cụ thể là hàm lấy quoteId đã được lưu vào session - hành động này thực hiện ở GetDetail của CustomQuotationController
+        //TaskDetailDTB sẽ gọi ajax đến đây để lấy dữ liệu 
         public async Task<IActionResult> GetDetail()
         {
             //thêm thông tin task detail
             string quoteId = HttpContext.Session.GetString("quoteId");
             var taskDetail = _unitOfWork.CustomQuotaionTask.GetTaskDetail(quoteId)
-                .Select((x) => new ViewModels.CustomQuotationTaskViewModel
+                .Select((x) => new ViewModels.TaskDetailListViewModel
                 {
                     QuoteId = x.QuotationId,
                     TaskId = x.TaskId,

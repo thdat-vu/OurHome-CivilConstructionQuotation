@@ -23,9 +23,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
             _db.CustomQuotations.Update(obj);
         }
         
-        public int CountCustomQuotation()
+        public int CountCustomQuotationSum()
         {
             return _db.CustomQuotations.Count();
+           
         }
 	}
 }

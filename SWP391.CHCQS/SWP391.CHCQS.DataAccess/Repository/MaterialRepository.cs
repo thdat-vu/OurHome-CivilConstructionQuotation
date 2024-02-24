@@ -23,5 +23,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
             _db.Materials.Update(obj);
         }
         public string GetName(string id) => _db.Materials.Find(id).Name;
+  
     }
 }

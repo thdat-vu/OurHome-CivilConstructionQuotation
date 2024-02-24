@@ -9,7 +9,13 @@ function loadDataMaterialDetail() {
     dataTable = $('#tblMaterialDetail').DataTable({
         "ajax": { url: '/Manager/MaterialDetail/GetDetail' },
         "columns": [
-            { data: "materialId", "width": "5%" },
+            {
+                data: "materialId",
+                "render": function (data) {
+                    return `<a href="/Manager/Material/Detail?id=${data}" >${data}</a>`
+                },
+                "width": "5%"
+            },
             { data: 'materialName', "width": "15%" },
             { data: 'materialCateName', "width": "15%" },
             { data: 'quantity', "width": "15%" },

@@ -18,7 +18,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		private readonly IUnitOfWork _unitOfWork;
 
 		//Declare Session to store CustomQuotation serve to method AddToList in TaskController and MaterialController to add Task and Material.
-		public CustomQuotationViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationViewModel();
+		public CustomQuotationListViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationListViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationListViewModel();
 
 		//Declare session for CustomQuotationTaskViewModel to store TaskList of the quote when add into quote. if it empty, create one
 		public List<CustomQuotationTaskViewModel> TaskListSession => HttpContext.Session.Get<List<CustomQuotationTaskViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<CustomQuotationTaskViewModel>();
@@ -41,10 +41,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		[HttpGet]
 		public IActionResult GetAll()
 		{
-			List<CustomQuotationViewModel> customQuotationVMList = _unitOfWork.CustomQuotation
+			List<CustomQuotationListViewModel> customQuotationVMList = _unitOfWork.CustomQuotation
 				.GetAll()
 				.OrderBy(x => x.Status == SD.Processing)
-				.Select(x => new CustomQuotationViewModel
+				.Select(x => new CustomQuotationListViewModel
 				{
 					Id = x.Id,
 					Date = x.Date,
@@ -93,7 +93,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			}
 
 			//Declare view model to set into Session CustomQuotationSession
-			CustomQuotationViewModel customQuotationViewModel = new CustomQuotationViewModel();
+			CustomQuotationListViewModel customQuotationViewModel = new CustomQuotationListViewModel();
 
 			//Get only id of customQuotationViewMode from database by using _unitOfWork
 			customQuotationViewModel.Id = _unitOfWork.CustomQuotation.Get(x => x.Id == QuotationId).Id;

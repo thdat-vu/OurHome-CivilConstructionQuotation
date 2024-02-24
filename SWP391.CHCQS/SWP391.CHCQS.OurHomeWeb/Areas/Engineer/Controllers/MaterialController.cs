@@ -15,7 +15,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		public List<MaterialDetailViewModel> MaterialListSession => HttpContext.Session.Get<List<MaterialDetailViewModel>>(SessionConst.MATERIAL_LIST_KEY) ?? new List<MaterialDetailViewModel>();
 
 		//Declare Session to store CustomQuotation serve to method AddToList in TaskController and MaterialController to add Task and Material.
-		public CustomQuotationViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationViewModel();
+		public CustomQuotationListViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationListViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationListViewModel();
 		public MaterialController(IUnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
