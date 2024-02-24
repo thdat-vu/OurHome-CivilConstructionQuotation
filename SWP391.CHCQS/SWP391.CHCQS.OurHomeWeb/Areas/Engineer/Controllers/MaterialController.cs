@@ -149,5 +149,46 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 		}
+
+		[HttpPost]
+		public async Task<IActionResult> UpdateQuantity([FromForm] string MaterialId, [FromForm] int MaterialQuantity)
+		{
+			//Asign MaterialListSession to materialCart
+			var materialCart = MaterialListSession;
+
+			//Get materialItem which exist in materialCart
+			var materialItem = materialCart.Where(x => x.Material.Id == MaterialId).FirstOrDefault();
+
+			//if materialItem not in materialCart
+			if (materialItem == null)
+			{
+				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				TempData["Error"] = $"Material not found with Id = {MaterialId}";
+
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			}
+
+			//Delete exist materialItem in materialCart
+			materialCart.Remove(materialItem);
+
+			//update Quantity and Price for materialItem
+			materialItem.Quantity = MaterialQuantity;
+			materialItem.Price = materialItem.Material.UnitPrice * materialItem.Quantity;
+
+			//Add new materialItem after update again into materialCart
+			materialCart.Add(materialItem);
+
+			//Update MaterialListSession with materialCart  
+			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
+
+			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			TempData["Success"] = $"Delete material successfully with Id = {MaterialId}";
+
+			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+		}
+
+
 	}
 }

@@ -146,7 +146,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			var materialCart = MaterialListSession;
 
 			//if taskCart == null mean the taskCart have no task in there
-			if (taskCart == null)
+			if (taskCart.Count == 0)
 			{
 				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
 				TempData["Error"] = $"Task list of quote is empty";
@@ -156,7 +156,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			}
 
 			//if materialCart == null mean the materialCart have no material in there
-			if (materialCart == null)
+			if (materialCart.Count == 0)
 			{
 				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
 				TempData["Error"] = $"Material list of quote is empty";
