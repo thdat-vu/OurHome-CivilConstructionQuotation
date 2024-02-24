@@ -1,3 +1,4 @@
+var dataTable
 $(document).ready(function () {
     loadDataTableCustomQuotationTask();
 });
@@ -15,10 +16,25 @@ function loadDataTableCustomQuotationTask() {
                 data: 'task.id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Engineer/Task/DeleteFromQuote?TaskId=${data}" class="text-nowrap btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Delete</a>
+                       <a onClick=DeleteFromQuote('/Engineer/Task/DeleteFromQuote?TaskId=${data}') class="text-nowrap btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Delete</a>
                     </div >`
                 },
             }
         ]
+    });
+}
+
+function DeleteFromQuote(url) {
+    $.ajax({
+        type: 'DELETE',
+        url: url,
+        success: function (data) {
+            dataTable.ajax.reload();
+            toastr.success(data.message);
+        },
+        error: function (data) {
+            dataTable.ajax.reload();
+            toastr.success(data.error);
+        }
     });
 }

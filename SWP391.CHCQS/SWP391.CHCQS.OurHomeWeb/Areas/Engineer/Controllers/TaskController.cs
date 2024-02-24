@@ -114,6 +114,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="TaskId"></param>
 		/// <returns></returns>
+		[HttpPost]
 		public async Task<IActionResult> AddToQuote(string TaskId)
 		{
 			//Asign TaskListSession to taskCart
@@ -163,11 +164,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Update TaskListSession with taskCart  
 			HttpContext.Session.Set(SessionConst.TASK_LIST_KEY, taskCart);
 
-			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-			TempData["Success"] = $"Add task successfully with Id = {TaskId}";
+			////Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			//TempData["Success"] = $"Add task successfully with Id = {TaskId}";
+
+			////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			return Json(new { success = true, message = $"Add task successfully with Id = {TaskId}" });
 		}
 
 
@@ -176,6 +180,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="TaskId"></param>
 		/// <returns></returns>
+		[HttpDelete]		
 		public async Task<IActionResult> DeleteFromQuote(string TaskId)
 		{
 			//Asign TaskListSession to taskCart
@@ -200,11 +205,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Update TaskListSession with taskCart  
 			HttpContext.Session.Set(SessionConst.TASK_LIST_KEY, taskCart);
 
-			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-			TempData["Success"] = $"Delete task successfully with Id = {TaskId}";
+			////Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			//TempData["Success"] = $"Delete task successfully with Id = {TaskId}";
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			return Json(new { success = true, message = $"Delete task successfully with Id = {TaskId}" });
 		}
 
 	}

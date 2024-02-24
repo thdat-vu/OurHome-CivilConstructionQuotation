@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
     loadDataTableTask();
 });
 
@@ -15,10 +16,25 @@ function loadDataTableTask() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Engineer/Task/AddToQuote?TaskId=${data}" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
+                       <a onClick=AddToQuote('/Engineer/Task/AddToQuote?TaskId=${data}')" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
                     </div >`
                 },
             }
         ]
+    });
+}
+
+function AddToQuote(url) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        success: function (data) {
+            dataTable.ajax.reload();
+            toastr.success(data.message);
+        },
+        error: function (data) {
+            dataTable.ajax.reload();
+            toastr.success(data.error);
+        }
     });
 }
