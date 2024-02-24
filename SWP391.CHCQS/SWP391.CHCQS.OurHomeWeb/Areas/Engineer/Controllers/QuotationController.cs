@@ -185,9 +185,17 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					Price = m.Price,
 				}).ToList();
 
+				//Get data from database to delete
+				var customQuotationTasksBeDelete = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id);
+				//Detele the old data after get in database
+				_unitOfWork.CustomQuotaionTask.RemoveRange(customQuotationTasksBeDelete);
 				//Addrange of customQuotaionTasks to database
 				_unitOfWork.CustomQuotaionTask.AddRange(customQuotaionTasks);
 
+				//Get data from database to delete
+				var materialDetailsBeDelete = _unitOfWork.MaterialDetail.GetMaterialDetail(CustomQuotationSession.Id);
+				//Delete the old data after get in database
+				_unitOfWork.MaterialDetail.RemoveRange(materialDetailsBeDelete);
 				//Addrange of materialDetails to database
 				_unitOfWork.MaterialDetail.AddRange(materialDetails);
 

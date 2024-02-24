@@ -248,11 +248,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.OnDelete(DeleteBehavior.ClientSetNull)
 					.HasConstraintName("FK__CustomQuo__quota__5441852A");
 
-				entity.HasOne(d => d.Task)
-					.WithMany(p => p.CustomQuotaionTasks)
-					.HasForeignKey(d => d.TaskId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__CustomQuo__taskI__534D60F1");
+				//entity.HasOne(d => d.Task)
+				//	.WithMany(p => p.CustomQuotaionTasks)
+				//	.HasForeignKey(d => d.TaskId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__CustomQuo__taskI__534D60F1");
 			});
 
 			modelBuilder.Entity<CustomQuotation>(entity =>
@@ -502,11 +502,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 
 				entity.Property(e => e.Quantity).HasColumnName("quantity");
 
-				entity.HasOne(d => d.Material)
-					.WithMany(p => p.MaterialDetails)
-					.HasForeignKey(d => d.MaterialId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__MaterialD__mater__59063A47");
+				//entity.HasOne(d => d.Material)
+				//	.WithMany(p => p.MaterialDetails)
+				//	.HasForeignKey(d => d.MaterialId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__MaterialD__mater__59063A47");
 
 				entity.HasOne(d => d.Quotation)
 					.WithMany(p => p.MaterialDetails)

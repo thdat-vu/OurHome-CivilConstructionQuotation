@@ -7,7 +7,7 @@ namespace SWP391.CHCQS.Model
     {
         public Task()
         {
-            CustomQuotaionTasks = new HashSet<CustomQuotationTask>();
+            //CustomQuotaionTasks = new HashSet<CustomQuotationTask>();
             Quotations = new HashSet<StandardQuotation>();
         }
 
@@ -19,7 +19,7 @@ namespace SWP391.CHCQS.Model
         public string CategoryId { get; set; } = null!;
 
         public virtual TaskCategory Category { get; set; } = null!;
-        public virtual ICollection<CustomQuotationTask> CustomQuotaionTasks { get; set; }
+        //public virtual ICollection<CustomQuotationTask> CustomQuotaionTasks { get; set; }
 
         public virtual ICollection<StandardQuotation> Quotations { get; set; }
     }

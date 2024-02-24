@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
@@ -21,7 +22,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			_unitOfWork = unitOfWork;
 		}
 
-		
+
 
 		#region API CALL LIST MATERIAL
 		/// <summary>
@@ -31,7 +32,37 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			List<MaterialViewModel> materialVMList = _unitOfWork.Material
+			//Asign MaterialListSession to materialCart 
+			var materialCart = MaterialListSession;
+			//Declare materialVMList
+			List<MaterialViewModel> materialVMList;
+
+			//Check if materialCart is empty , it will get data from database to show
+			if (materialCart.Count == 0)
+			{
+				//Get data from database to check 
+				List<MaterialDetail> materialDetails = _unitOfWork.MaterialDetail.GetMaterialDetail(CustomQuotationSession.Id).ToList();
+
+				materialVMList = _unitOfWork.Material
+				.GetAll(includeProperties: "Category")
+				.Where(m => m.Status == true && !materialDetails.Any(x => x.Material.Id == m.Id))
+				.Select(x => new MaterialViewModel
+				{
+					Id = x.Id,
+					Name = x.Name,
+					InventoryQuantity = x.InventoryQuantity,
+					UnitPrice = x.UnitPrice,
+					Unit = x.Unit,
+					Status = x.Status,
+					CategoryId = x.CategoryId,
+					CategoryName = x.Category.Name
+				}).ToList();
+			}
+			else //else it will get data from session to show
+			{
+				//Get a list of all material from database and projection into MaterialViewModel but not in MaterialListSession
+				//When a Task has been add into MaterialListSession its will not appear in datatables
+				materialVMList = _unitOfWork.Material
 				.GetAll(includeProperties: "Category")
 				.Where(m => m.Status == true && !MaterialListSession.Any(x => x.Material.Id == m.Id))
 				.Select(x => new MaterialViewModel
@@ -44,15 +75,35 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					Status = x.Status,
 					CategoryId = x.CategoryId,
 					CategoryName = x.Category.Name
-				})
-				.ToList();
+				}).ToList();
 
+			}
+
+			//Return Json for datatables to read
 			return Json(new { data = materialVMList });
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> GetMaterialListSession()
 		{
+			//Asign MaterialListSession for materialCart;
+			var materialCart = MaterialListSession;
+
+			//if materialCart == null mean the taskCart have no task in there
+			if (materialCart.Count == 0)
+			{
+				materialCart = _unitOfWork.MaterialDetail.GetMaterialDetail(CustomQuotationSession.Id, includeProp: null).Select(x => new MaterialDetailViewModel
+				{
+					Material = _unitOfWork.Material.Get(m => m.Id == x.MaterialId),
+					QuotationId = x.QuotationId,
+					Quantity = x.Quantity,
+					Price = x.Price,
+				}).ToList();
+			}
+
+			//Update MaterialListSession with materialCart  
+			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
+
 			return Json(new { data = MaterialListSession.ToList() });
 		}
 		#endregion
