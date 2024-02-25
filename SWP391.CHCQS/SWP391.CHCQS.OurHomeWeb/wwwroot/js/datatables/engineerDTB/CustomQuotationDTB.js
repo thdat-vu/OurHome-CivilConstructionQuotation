@@ -1,11 +1,11 @@
-﻿
+﻿var dataTableCQ;
 $(document).ready(function () {
     loadDataTableQuotation();
 });
 
 //Need an api method return json to use this
 function loadDataTableQuotation() {
-    dataTable = $('#tblCustomQuotation').DataTable({
+    dataTableCQ = $('#tblCustomQuotation').DataTable({
         "ajax": { url: '/Engineer/Quotation/GetAll' },
         "columns": [
             { data: 'id', },

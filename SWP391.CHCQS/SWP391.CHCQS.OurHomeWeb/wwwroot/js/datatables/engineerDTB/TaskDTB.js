@@ -16,7 +16,7 @@ function loadDataTableTask() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a onClick=AddToQuote('/Engineer/Task/AddToQuote?TaskId=${data}') class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
+                       <a onClick=AddToQuoteTask('/Engineer/Task/AddToQuote?TaskId=${data}') class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
                     </div>`
                 },
             }
@@ -24,7 +24,7 @@ function loadDataTableTask() {
     });
 }
 
-function AddToQuote(url) {
+function AddToQuoteTask(url) {
     $.ajax({
         type: 'GET',
         url: url,

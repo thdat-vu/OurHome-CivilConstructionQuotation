@@ -91,14 +91,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				//Check if that task not in database
 				if (task == null)
 				{
-					//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-					TempData["Error"] = $"Task not found with Id = {TaskId}";
+					////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+					//TempData["Error"] = $"Task not found with Id = {TaskId}";
 
 					////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 					//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 					//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-					return Json(new { success = false, message = $"Add task false with Id = {TaskId}" });
+					return Json(new { success = false, message = $"Task not found with Id = {TaskId}" });
 
 				}
 				else //if it not equal null
@@ -124,7 +124,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"Add task false with Id = {TaskId}" });
+				return Json(new { success = false, message = $"Task already in quote with Id = {TaskId}" });
 			}
 
 			//Update TaskListSession with taskCart  
@@ -158,11 +158,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//if taskItem not in taskCart
 			if (taskItem == null)
 			{
-				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				TempData["Error"] = $"Task not found with Id = {TaskId}";
+				////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				//TempData["Error"] = $"Task not found with Id = {TaskId}";
+
+				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+				return Json(new { success = false, message = $"Task not found with Id = {TaskId}" });
 			}
 
 			//Delete taskItem in taskCart

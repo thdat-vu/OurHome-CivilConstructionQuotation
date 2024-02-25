@@ -16,7 +16,7 @@ function loadDataTableCustomQuotationTask() {
                 data: 'task.id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a onClick=DeleteFromQuote('/Engineer/Task/DeleteFromQuote?TaskId=${data}') class="text-nowrap btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Delete</a>
+                       <a onClick=DeleteTaskFromQuote('/Engineer/Task/DeleteFromQuote?TaskId=${data}') class="text-nowrap btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Delete</a>
                     </div >`
                 },
             }
@@ -24,7 +24,7 @@ function loadDataTableCustomQuotationTask() {
     });
 }
 
-function DeleteFromQuote(url) {
+function DeleteTaskFromQuote(url) {
     $.ajax({
         url: url,
         type: 'DELETE',

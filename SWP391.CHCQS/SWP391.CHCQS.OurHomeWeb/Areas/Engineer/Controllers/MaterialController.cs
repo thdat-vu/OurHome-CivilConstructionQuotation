@@ -4,6 +4,7 @@ using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
+using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
@@ -68,12 +69,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		}
 		#endregion
 
-
+		[HttpGet]
 		public async Task<IActionResult> AddToQuote(string MaterialId)
 		{
 			//Asign MaterialListSession to taskCart
 			var materialCart = MaterialListSession;
-
 			//Get MaterialDetailViewModel and asign to materialItem from materialCart
 			var materialItem = materialCart.FirstOrDefault(x => x.Material.Id == MaterialId);
 
@@ -86,11 +86,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				//Check if that material not in database
 				if (material == null)
 				{
-					//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-					TempData["Error"] = $"Material not found with Id = {MaterialId}";
+					////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+					//TempData["Error"] = $"Material not found with Id = {MaterialId}";
+
+					////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+					//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 					//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-					return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+					return Json(new { success = false, message = $"Material not found with Id = {MaterialId}" });
 				}
 				else //if it not equal null
 				{
@@ -108,21 +111,27 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			}
 			else // if it already in session
 			{
-				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				TempData["Error"] = $"Material already in quote with Id = {MaterialId}";
+				////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				//TempData["Error"] = $"Material already in quote with Id = {MaterialId}";
+
+				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+				return Json(new { success = false, message = $"Material already in quote with Id = {MaterialId}" });
 			}
 
 			//Update MaterialListSession with materialCart  
 			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
 
-			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-			TempData["Success"] = $"Add material successfully with Id = {MaterialId}";
+			////Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			//TempData["Success"] = $"Add material successfully with Id = {MaterialId}";
+
+			////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			return Json(new { success = true, message = $"Add material successfully with Id = {MaterialId}" });
 		}
 
 		/// <summary>
@@ -130,6 +139,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="TaskId"></param>
 		/// <returns></returns>
+		[HttpDelete]
 		public async Task<IActionResult> DeleteFromQuote(string MaterialId)
 		{
 			//Asign MaterialListSession to materialCart
@@ -141,11 +151,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//if materialItem not in materialCart
 			if (materialItem == null)
 			{
-				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				TempData["Error"] = $"Material not found with Id = {MaterialId}";
+				////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				//TempData["Error"] = $"Material not found with Id = {MaterialId}";
+
+				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+				return Json(new { success = false, message = $"Material not found with Id = {MaterialId}" });
 			}
 
 			//Delete materialItem in materialCart
@@ -154,11 +167,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Update MaterialListSession with materialCart  
 			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
 
-			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-			TempData["Success"] = $"Delete material successfully with Id = {MaterialId}";
+			////Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			//TempData["Success"] = $"Delete material successfully with Id = {MaterialId}";
+
+			////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			return Json(new { success = false, message = $"Delete material successfully with Id = {MaterialId}" });
 		}
 
 		[HttpPost]
@@ -173,11 +189,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//if materialItem not in materialCart
 			if (materialItem == null)
 			{
-				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				TempData["Error"] = $"Material not found with Id = {MaterialId}";
+				////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				//TempData["Error"] = $"Material not found with Id = {MaterialId}";
+
+				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+				return Json(new { success = false, message = $"Material not found with Id = {MaterialId}" });
 			}
 
 			//Delete exist materialItem in materialCart
@@ -193,11 +212,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Update MaterialListSession with materialCart  
 			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
 
-			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-			TempData["Success"] = $"Delete material successfully with Id = {MaterialId}";
+			////Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			//TempData["Success"] = $"Update material quantity successfully with Id = {MaterialId}";
+
+			////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			return Json(new { success = true, message = $"Update material quantity successfully with Id = {MaterialId}" });
 		}
 
 
