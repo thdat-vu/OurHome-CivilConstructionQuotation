@@ -39,8 +39,10 @@ namespace SWP391.CHCQS.DataAccess.Data
 		public virtual DbSet<StandardQuotation> StandardQuotations { get; set; } = null!;
 		public virtual DbSet<Task> Tasks { get; set; } = null!;
 		public virtual DbSet<TaskCategory> TaskCategories { get; set; } = null!;
+        public virtual DbSet<RejectedCustomQuotation> RejectedCustomQuotations { get; set; } = null!;
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Account>(entity =>
 			{
