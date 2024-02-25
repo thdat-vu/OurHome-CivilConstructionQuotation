@@ -7,7 +7,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 	{
 		public IActionResult Index()
 		{
-			return View();
+			return RedirectToAction("Index", "Dashboard");
 		}
 	}
 }
