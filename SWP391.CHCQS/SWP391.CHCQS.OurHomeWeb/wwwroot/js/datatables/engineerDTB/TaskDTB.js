@@ -31,10 +31,12 @@ function AddToQuote(url) {
         success: function (data) {
             dataTableCQT.ajax.reload();
             dataTableT.ajax.reload();
+            toastr.success(data.message);
         },
         error: function (data) {
             dataTableCQT.ajax.reload();
             dataTableT.ajax.reload();
+            toastr.error(data.message);
         }
     });
 }
