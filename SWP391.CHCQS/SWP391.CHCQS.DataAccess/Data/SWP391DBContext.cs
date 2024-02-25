@@ -457,11 +457,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.HasColumnType("money")
 					.HasColumnName("unitPrice");
 
-				//entity.HasOne(d => d.Category)
-				//	.WithMany(p => p.Materials)
-				//	.HasForeignKey(d => d.CategoryId)
-				//	.OnDelete(DeleteBehavior.ClientSetNull)
-				//	.HasConstraintName("FK__Material__catego__5812160E");
+				entity.HasOne(d => d.Category)
+					.WithMany(p => p.Materials)
+					.HasForeignKey(d => d.CategoryId)
+					.OnDelete(DeleteBehavior.ClientSetNull)
+					.HasConstraintName("FK__Material__catego__5812160E");
 			});
 
 			modelBuilder.Entity<MaterialCategory>(entity =>
@@ -836,11 +836,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 					.HasColumnType("money")
 					.HasColumnName("unitPrice");
 
-				//entity.HasOne(d => d.Category)
-				//	.WithMany(p => p.Tasks)
-				//	.HasForeignKey(d => d.CategoryId)
-				//	.OnDelete(DeleteBehavior.ClientSetNull)
-				//	.HasConstraintName("FK__Task__categoryId__656C112C");
+				entity.HasOne(d => d.Category)
+					.WithMany(p => p.Tasks)
+					.HasForeignKey(d => d.CategoryId)
+					.OnDelete(DeleteBehavior.ClientSetNull)
+					.HasConstraintName("FK__Task__categoryId__656C112C");
 			});
 
 			modelBuilder.Entity<TaskCategory>(entity =>

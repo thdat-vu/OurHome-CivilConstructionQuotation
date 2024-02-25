@@ -7,13 +7,12 @@ namespace SWP391.CHCQS.Model
     {
         public MaterialCategory()
         {
-            //
-            //Materials = new HashSet<Material>();
+            Materials = new HashSet<Material>();
         }
 
         public string Id { get; set; } = null!;
         public string Name { get; set; } = null!;
 
-        //public virtual ICollection<Material> Materials { get; set; }
+        public virtual ICollection<Material> Materials { get; set; }
     }
 }

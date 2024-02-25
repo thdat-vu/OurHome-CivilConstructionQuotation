@@ -1,3 +1,4 @@
+
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
@@ -18,6 +19,5 @@ namespace SWP391.CHCQS.DataAccess.Repository
 		{ 
 			_db = db;
 		}
-	
 	}
 }
