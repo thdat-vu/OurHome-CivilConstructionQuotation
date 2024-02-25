@@ -7,10 +7,10 @@ namespace SWP391.CHCQS.Model
     {
         public Staff()
         {
-            CustomQuotationEngineers = new HashSet<CustomQuotation>();
-            CustomQuotationManagers = new HashSet<CustomQuotation>();
-            CustomQuotationSellers = new HashSet<CustomQuotation>();
-            InverseManager = new HashSet<Staff>();
+            //CustomQuotationEngineers = new HashSet<CustomQuotation>();
+            //CustomQuotationManagers = new HashSet<CustomQuotation>();
+            //CustomQuotationSellers = new HashSet<CustomQuotation>();
+            //InverseManager = new HashSet<Staff>();
         }
 
         public string Id { get; set; } = null!;
@@ -19,14 +19,14 @@ namespace SWP391.CHCQS.Model
         public string? Email { get; set; }
         public string Gender { get; set; } = null!;
         public string Username { get; set; } = null!;
-        public string? ManagerId { get; set; }
-        public bool Status { get; set; }
+        public string? ManagerId { get; set; } = null!;
+		public bool Status { get; set; }
 
-        public virtual Staff? Manager { get; set; }
-        public virtual Account UsernameNavigation { get; set; } = null!;
-        public virtual ICollection<CustomQuotation> CustomQuotationEngineers { get; set; }
-        public virtual ICollection<CustomQuotation> CustomQuotationManagers { get; set; }
-        public virtual ICollection<CustomQuotation> CustomQuotationSellers { get; set; }
-        public virtual ICollection<Staff> InverseManager { get; set; }
-    }
+		public virtual Staff? Manager { get; set; } = null!;
+		public virtual Account? UsernameNavigation { get; set; } = null!;
+  //      public virtual ICollection<CustomQuotation>? CustomQuotationEngineers { get; set; } = null!;
+  //      public virtual ICollection<CustomQuotation>? CustomQuotationManagers { get; set; } = null!;
+		//public virtual ICollection<CustomQuotation>? CustomQuotationSellers { get; set; } = null!;
+		//public virtual ICollection<Staff>? InverseManager { get; set; } = null!;
+	}
 }

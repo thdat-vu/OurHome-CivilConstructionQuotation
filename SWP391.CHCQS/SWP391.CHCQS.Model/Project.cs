@@ -11,7 +11,10 @@ namespace SWP391.CHCQS.Model
         public string Scale { get; set; } = null!;
         public string Size { get; set; } = null!;
         public string? Description { get; set; }
+        public string? Overview { get; set; }
+        public string? ImageUrl { get; set; }
         public bool Status { get; set; }
+        public DateTime Date { get; set; }
         public string CustomerId { get; set; } = null!;
 
         public virtual Customer Customer { get; set; } = null!;

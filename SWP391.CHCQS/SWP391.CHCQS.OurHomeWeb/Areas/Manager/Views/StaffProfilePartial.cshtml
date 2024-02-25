@@ -1,0 +1,53 @@
+﻿ @model Staff
+
+
+<div class="card-body">
+    <div class="row">
+        <div class="col-sm-3">
+            <p class="mb-0">ID:</p>
+        </div>
+        <div class="col-sm-9">
+            <a  href="/Manager/Staff/Detail?id=@Model.Id">@Model.Id</a>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <p class="mb-0">Name:</p>
+        </div>
+        <div class="col-sm-9">
+            <p class="text-muted mb-0">@Model.Name</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <p class="mb-0">Email:</p>
+        </div>
+        <div class="col-sm-9">
+            <p class="text-muted mb-0">@Model.Email</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <p class="mb-0">Phone:</p>
+        </div>
+        <div class="col-sm-9">
+            <p class="text-muted mb-0">@Model.PhoneNum</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <p class="mb-0">Gender:</p>
+        </div>
+        <div class="col-sm-9">
+            <p class="text-muted mb-0">@Model.Gender</p>
+        </div>
+    </div>
+    <hr>
+
+</div>
+
+
