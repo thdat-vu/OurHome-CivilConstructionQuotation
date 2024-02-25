@@ -18,7 +18,7 @@ function loadDataTableMaterial() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a onClick=AddToQuoteMaterial('/Engineer/Material/AddToQuote?MaterialId=${data}') class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
+                       <a onClick="AddToQuoteMaterial('/Engineer/Material/AddToQuote?MaterialId=${data}')" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
                     </div >`
                 },
             }

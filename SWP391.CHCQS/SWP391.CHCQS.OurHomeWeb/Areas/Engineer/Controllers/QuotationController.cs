@@ -43,7 +43,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		{
 			List<CustomQuotationListViewModel> customQuotationVMList = _unitOfWork.CustomQuotation
 				.GetAll()
-				.OrderBy(x => x.Status == SD.Processing)
+				.Where(x => x.Status == SD.Processing)
+				.OrderBy(x => x.Date)
 				.Select(x => new CustomQuotationListViewModel
 				{
 					Id = x.Id,
@@ -265,9 +266,33 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="id">Id of the quotation that be selected</param>
 		/// <returns>Return a form with detail of the quotation to edit</returns>
-		public async Task<IActionResult> SendToManager(string QuotationId)
+		/// onClick=SendQuoteToManager('/Engineer/Quotation/SendToManager?QuotationId=${data}')
+		[HttpGet]
+		public async Task<IActionResult> SendQuoteToManager(string QuotationId)
 		{
-			return View();
+			var quotation = _unitOfWork.CustomQuotation.Get(c => c.Id == QuotationId);
+			if (quotation == null)
+			{
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return Json(new { success = false, message = $"Quotation not found with Id = {QuotationId}" });
+			}
+
+			try
+			{
+				quotation.Status = SD.Pending_Approval;
+				_unitOfWork.CustomQuotation.Update(quotation);
+				_unitOfWork.Save();
+			} 
+			catch (Exception)
+			{
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return Json(new { success = false, message = $"Something went wrong" });
+			}
+
+			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			return Json(new { success = true, message = $"Send quotation successfully with Id = {QuotationId}" });
 		}
+
+
 	}
 }
