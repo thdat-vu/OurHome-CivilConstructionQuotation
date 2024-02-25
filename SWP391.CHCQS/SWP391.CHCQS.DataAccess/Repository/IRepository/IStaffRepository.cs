@@ -9,6 +9,5 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {
 	public interface IStaffRepository: IRepository<Staff>
 	{
-		
 	}
 }

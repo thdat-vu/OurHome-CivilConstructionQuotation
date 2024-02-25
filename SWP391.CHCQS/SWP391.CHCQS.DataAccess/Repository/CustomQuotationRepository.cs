@@ -23,10 +23,12 @@ namespace SWP391.CHCQS.DataAccess.Repository
             _db.CustomQuotations.Update(obj);
         }
         
-        public int CountCustomQuotationSum()
+        //function trả về số quotation dc tạo ra trong tháng
+        public int CountCustomQuotationInMonthAndYear(int month, int year)
         {
-            return _db.CustomQuotations.Count();
-           
+            //DateTime? thì có thể null nên cần làm khác 1 chút
+            Expression<Func<CustomQuotation, bool>> filter = (x) =>x.SubmissionDateSeller.Value.Month == month && x.SubmissionDateSeller.Value.Year == year;
+            return GetAllWithFilter(filter).Count() ;
         }
-	}
+    }
 }
