@@ -25,6 +25,9 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         IRoofTypeRepository RoofType { get; }
         IMaterialCategoryRepository MaterialCategory { get; }
 
+        IStaffRepository Staff { get; }
+
+
         void Save();
     }
 }

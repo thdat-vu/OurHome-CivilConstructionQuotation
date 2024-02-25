@@ -15,8 +15,10 @@ namespace SWP391.CHCQS.Model
         public string Id { get; set; } = null!;
         //---------------------------------------------------------------------------------------------
         //Xác định chi tiết công việc, vật liệu bị hủy của báo giá nào 
-        [ForeignKey("CustomQuotation")]
+
         public string RejectedQuotationId { get; set; } = null!;
+        [NotMapped]
+
         public virtual CustomQuotation RejectedQuotation { get; set; } = null!;
         //---------------------------------------------------------------------------------------------
         //công việc Engineer đưa lên bị reject thì đưa vào đây
@@ -24,12 +26,15 @@ namespace SWP391.CHCQS.Model
         public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
         //--------------------------------------------------------------------------------------------
         //Engineer đã thực hiện báo giá này
-        [ForeignKey("Staff")]
+
         public string EngineerId { get; set; } = null!;
+        [NotMapped]
         public virtual Staff Subcriber { get; set; } = null!;
         //Manager đã reject báo giá này
-        [ForeignKey("Staff")]
         public string ManagerId { get; set; } = null!;
+        [NotMapped]
         public virtual Staff Rejecter { get; set; } = null!;
+        public string? Reason { get; set; } = null!;
+
     }
 }

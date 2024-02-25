@@ -1,5 +1,6 @@
-﻿
+
 @{
+
     ViewData["Title"] = "Quotation Statistic";
 }
 <div class="card shadow mb-4">
@@ -7,13 +8,21 @@
         <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
     </div>
     <div class="">
-        <div class="chart-bar" >
+
+        <select  id="yearSelect" class="form-select" aria-label="Default select example">
+        </select>
+        <div class="chart-bar">
+
             <canvas id="myQuoteBarChart"></canvas>
         </div>
     </div>
 </div>
 
 @section Scripts {
+
+    <script src="~/js/event_load.js"></script>
     <script src="~/js/charts/QuoteStatisticChart.js"></script>
 }
+      
+
 
