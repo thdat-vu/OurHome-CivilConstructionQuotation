@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
-using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
@@ -24,7 +23,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         public async Task<IActionResult> GetDetail()
         {
             //thêm thông tin task detail
-            string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
+            string quoteId = HttpContext.Session.GetString("quoteId");
             var taskDetail = _unitOfWork.CustomQuotaionTask.GetTaskDetail(quoteId)
                 .Select((x) => new ViewModels.TaskDetailListViewModel
                 {

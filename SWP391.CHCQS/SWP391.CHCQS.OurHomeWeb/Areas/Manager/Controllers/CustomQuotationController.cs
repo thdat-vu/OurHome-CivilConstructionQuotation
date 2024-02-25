@@ -51,7 +51,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         public async Task<IActionResult> GetDetail([FromQuery] string id)
 		{
 			//lưu thông tin quoteId vào session
-			HttpContext.Session.SetString(SessionConst.QUOTATION_ID, id);
+			HttpContext.Session.SetString("quoteId", id);
 
             //lấy thông tin cơ bản của custom quotation
             var customQuotationDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "Manager,Engineer,Seller,ConstructDetail");

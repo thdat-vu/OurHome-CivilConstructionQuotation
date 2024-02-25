@@ -7,7 +7,7 @@ namespace SWP391.CHCQS.Model
     {
         public Material()
         {
-            //MaterialDetails = new HashSet<MaterialDetail>();
+            MaterialDetails = new HashSet<MaterialDetail>();
             Quotations = new HashSet<StandardQuotation>();
             Requests = new HashSet<RequestForm>();
         }
@@ -21,7 +21,7 @@ namespace SWP391.CHCQS.Model
         public string CategoryId { get; set; } = null!;
 
         public virtual MaterialCategory Category { get; set; } = null!;
-        //public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
+        public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
 
         public virtual ICollection<StandardQuotation> Quotations { get; set; }
         public virtual ICollection<RequestForm> Requests { get; set; }

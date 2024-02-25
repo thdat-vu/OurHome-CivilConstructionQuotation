@@ -38,23 +38,47 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 			//Declare TaskVMlList
 			List<TaskViewModel> TaskVMlList;
-			//Get a list of all task from database and projection into TaskViewModel but not in TaskListSession
-			//When a Task has been add into TaskListSession its will not appear in datatables
-			TaskVMlList = _unitOfWork.Task
-				.GetAll(includeProperties: "Category")
-				.Where(t => t.Status == true && !TaskListSession.Any(ts => ts.Task.Id == t.Id))
-				.Select(x => new TaskViewModel
-				{
-					Id = x.Id,
-					Name = x.Name,
-					Description = x.Description,
-					UnitPrice = x.UnitPrice,
-					Status = x.Status,
-					CategoryId = x.CategoryId,
-					CategoryName = x.Category.Name
-				})
-				.ToList();
 
+			//if taskCart empty it will get data from database.
+			if (taskCart.Count == 0)
+			{
+				//Get data from database to check
+				List<CustomQuotationTask> customQuotationTasks = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id).ToList();
+
+				TaskVMlList = _unitOfWork.Task
+				   .GetAll(includeProperties: "Category")
+				   .Where(t => t.Status == true && !customQuotationTasks.Any(ts => ts.Task.Id == t.Id))
+				   .Select(x => new TaskViewModel
+				   {
+					   Id = x.Id,
+					   Name = x.Name,
+					   Description = x.Description,
+					   UnitPrice = x.UnitPrice,
+					   Status = x.Status,
+					   CategoryId = x.CategoryId,
+					   CategoryName = x.Category.Name
+				   })
+				   .ToList();
+			}
+			else
+			{
+				//Get a list of all task from database and projection into TaskViewModel but not in TaskListSession
+				//When a Task has been add into TaskListSession its will not appear in datatables
+				TaskVMlList = _unitOfWork.Task
+					.GetAll(includeProperties: "Category")
+					.Where(t => t.Status == true && !TaskListSession.Any(ts => ts.Task.Id == t.Id))
+					.Select(x => new TaskViewModel
+					{
+						Id = x.Id,
+						Name = x.Name,
+						Description = x.Description,
+						UnitPrice = x.UnitPrice,
+						Status = x.Status,
+						CategoryId = x.CategoryId,
+						CategoryName = x.Category.Name
+					})
+					.ToList();
+			}
 			//Return Json for datatables to read
 			return Json(new { data = TaskVMlList });
 
@@ -63,6 +87,24 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetTaskListSession()
 		{
+
+			//Asign TaskListSession for taskCart;
+			var taskCart = TaskListSession;
+
+			//if taskCart == null mean the taskCart have no task in there
+			if (taskCart.Count == 0)
+			{
+				taskCart = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id, includeProp: null).Select(x => new CustomQuotationTaskViewModel
+				{
+					Task = _unitOfWork.Task.Get(t => t.Id == x.TaskId),
+					QuotationId = x.QuotationId,
+					Price = x.Price,
+				}).ToList();
+			}
+
+			//Update TaskListSession with taskCart  
+			HttpContext.Session.Set(SessionConst.TASK_LIST_KEY, taskCart);
+
 			return Json(new { data = TaskListSession.ToList() });
 		}
 
@@ -73,7 +115,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="TaskId"></param>
 		/// <returns></returns>
-		[HttpGet]
 		public async Task<IActionResult> AddToQuote(string TaskId)
 		{
 			//Asign TaskListSession to taskCart
@@ -91,15 +132,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				//Check if that task not in database
 				if (task == null)
 				{
-					////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-					//TempData["Error"] = $"Task not found with Id = {TaskId}";
-
-					////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-					//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+					//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+					TempData["Error"] = $"Task not found with Id = {TaskId}";
 
 					//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-					return Json(new { success = false, message = $"Task not found with Id = {TaskId}" });
-
+					return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 				}
 				else //if it not equal null
 				{
@@ -118,26 +155,20 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			else // if it already in session
 			{
 				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				//TempData["Error"] = $"Task already in quote with Id = {TaskId}";
-
-				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+				TempData["Error"] = $"Task already in quote with Id = {TaskId}";
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"Task already in quote with Id = {TaskId}" });
+				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 			}
 
 			//Update TaskListSession with taskCart  
 			HttpContext.Session.Set(SessionConst.TASK_LIST_KEY, taskCart);
 
-			////Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-			//TempData["Success"] = $"Add task successfully with Id = {TaskId}";
-
-			////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			TempData["Success"] = $"Add task successfully with Id = {TaskId}";
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return Json(new { success = true, message = $"Add task successfully with Id = {TaskId}" });
+			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 		}
 
 
@@ -146,7 +177,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="TaskId"></param>
 		/// <returns></returns>
-		[HttpDelete]
 		public async Task<IActionResult> DeleteFromQuote(string TaskId)
 		{
 			//Asign TaskListSession to taskCart
@@ -158,14 +188,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//if taskItem not in taskCart
 			if (taskItem == null)
 			{
-				////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				//TempData["Error"] = $"Task not found with Id = {TaskId}";
-
-				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				TempData["Error"] = $"Task not found with Id = {TaskId}";
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"Task not found with Id = {TaskId}" });
+				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 			}
 
 			//Delete taskItem in taskCart
@@ -174,11 +201,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Update TaskListSession with taskCart  
 			HttpContext.Session.Set(SessionConst.TASK_LIST_KEY, taskCart);
 
-			////Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-			//TempData["Success"] = $"Delete task successfully with Id = {TaskId}";
+			//Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+			TempData["Success"] = $"Delete task successfully with Id = {TaskId}";
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return Json(new { success = true, message = $"Delete task successfully with Id = {TaskId}" });
+			return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 		}
 
 	}

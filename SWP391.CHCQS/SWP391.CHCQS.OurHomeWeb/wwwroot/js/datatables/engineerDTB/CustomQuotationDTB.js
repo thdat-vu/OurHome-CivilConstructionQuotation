@@ -1,11 +1,10 @@
-﻿var dataTableCQ;
-$(document).ready(function () {
+﻿$(document).ready(function () {
     loadDataTableQuotation();
 });
 
 //Need an api method return json to use this
 function loadDataTableQuotation() {
-    dataTableCQ = $('#tblCustomQuotation').DataTable({
+    dataTable = $('#tblCustomQuotation').DataTable({
         "ajax": { url: '/Engineer/Quotation/GetAll' },
         "columns": [
             { data: 'id', },
@@ -17,35 +16,11 @@ function loadDataTableQuotation() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                        <a href="/Engineer/Quotation/Quote?QuotationId=${data}" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-folder2-open"></i> Quote</a>
-                        <a onClick="SendQuoteToManager('/Engineer/Quotation/SendQuoteToManager?QuotationId=${data}')" class="text-nowrap btn btn-primary m-1"><i class="bi bi-pencil-square"></i> Send</a>
+                       <a href="/Engineer/Quotation/Quote?QuotationId=${data}" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-folder2-open"></i> Quote</a>
+                        <a href="/Engineer/Quotation/Edit?QuotationId=${data}" class="text-nowrap btn btn-primary m-1"><i class="bi bi-pencil-square"></i> Edit</a>
                     </div >`
                 },
             }
         ]
-    });
-}
-
-function SendQuoteToManager(url) {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to edit this!",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Send it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function (data) {
-                    dataTableCQ.ajax.reload();
-                    // From toastr message
-                    toastr.success(data.message);
-                }
-            });
-        }
     });
 }
