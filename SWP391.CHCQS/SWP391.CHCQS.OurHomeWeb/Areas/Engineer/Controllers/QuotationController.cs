@@ -43,7 +43,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		{
 			List<CustomQuotationListViewModel> customQuotationVMList = _unitOfWork.CustomQuotation
 				.GetAll()
-				.OrderBy(x => x.Status == SD.Processing)
+				.Where(x => x.Status == SD.Processing)
+				.OrderBy(x => x.Date)
 				.Select(x => new CustomQuotationListViewModel
 				{
 					Id = x.Id,
@@ -128,6 +129,41 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 			//Set customQuotationViewModel after exist in database into CustomQuotationSession
 			HttpContext.Session.Set(SessionConst.CUSTOM_QUOTATION_KEY, customQuotationViewModel);
+
+			//Asign TaskListSession for taskCart;
+			var taskCart = TaskListSession;
+
+			//if taskCart == null mean the taskCart have no task in there
+			if (taskCart.Count == 0)
+			{
+				taskCart = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id, includeProp: null).Select(x => new CustomQuotationTaskViewModel
+				{
+					Task = _unitOfWork.Task.Get(t => t.Id == x.TaskId),
+					QuotationId = x.QuotationId,
+					Price = x.Price,
+				}).ToList();
+			}
+
+			//Update TaskListSession with taskCart  
+			HttpContext.Session.Set(SessionConst.TASK_LIST_KEY, taskCart);
+
+			//Asign MaterialListSession for materialCart;
+			var materialCart = MaterialListSession;
+
+			//if materialCart == null mean the taskCart have no task in there
+			if (materialCart.Count == 0)
+			{
+				materialCart = _unitOfWork.MaterialDetail.GetMaterialDetail(CustomQuotationSession.Id, includeProp: null).Select(x => new MaterialDetailViewModel
+				{
+					Material = _unitOfWork.Material.Get(m => m.Id == x.MaterialId),
+					QuotationId = x.QuotationId,
+					Quantity = x.Quantity,
+					Price = x.Price,
+				}).ToList();
+			}
+
+			//Update MaterialListSession with materialCart  
+			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
 
 			//return View of this Controller after nothing wrong.
 			return View(constructDetailVM);
@@ -230,9 +266,33 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <param name="id">Id of the quotation that be selected</param>
 		/// <returns>Return a form with detail of the quotation to edit</returns>
-		public async Task<IActionResult> Edit(string QuotationId)
+		/// onClick=SendQuoteToManager('/Engineer/Quotation/SendToManager?QuotationId=${data}')
+		[HttpGet]
+		public async Task<IActionResult> SendQuoteToManager(string QuotationId)
 		{
-			return View();
+			var quotation = _unitOfWork.CustomQuotation.Get(c => c.Id == QuotationId);
+			if (quotation == null)
+			{
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return Json(new { success = false, message = $"Quotation not found with Id = {QuotationId}" });
+			}
+
+			try
+			{
+				quotation.Status = SD.Pending_Approval;
+				_unitOfWork.CustomQuotation.Update(quotation);
+				_unitOfWork.Save();
+			} 
+			catch (Exception)
+			{
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return Json(new { success = false, message = $"Something went wrong" });
+			}
+
+			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			return Json(new { success = true, message = $"Send quotation successfully with Id = {QuotationId}" });
 		}
+
+
 	}
 }

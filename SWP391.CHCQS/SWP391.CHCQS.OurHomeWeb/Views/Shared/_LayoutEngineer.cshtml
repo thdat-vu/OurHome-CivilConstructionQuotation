@@ -38,7 +38,7 @@
 			</a>
 
 			<!-- Divider -->
-	@* 		<hr class="sidebar-divider my-0"> *@
+			@* 		<hr class="sidebar-divider my-0"> *@
 
 			<!-- Nav Item - Dashboard -->
 			@* 			<li class="nav-item active">
@@ -90,50 +90,50 @@
 			</li> *@
 
 			<!-- Divider -->
-@* 			<hr class="sidebar-divider"> *@
+			@* 			<hr class="sidebar-divider"> *@
 
-@* 			<!-- Heading -->
+			@* 			<!-- Heading -->
 			<div class="sidebar-heading">
-				Addons
+			Addons
 			</div> *@
 
-@* 			<!-- Nav Item - Pages Collapse Menu -->
+			@* 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-				   aria-expanded="true" aria-controls="collapsePages">
-					<i class="fas fa-fw fa-folder"></i>
-					<span>Pages</span>
-				</a>
-				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Login Screens:</h6>
-						<a class="collapse-item" href="login.html">Login</a>
-						<a class="collapse-item" href="register.html">Register</a>
-						<a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-						<div class="collapse-divider"></div>
-						<h6 class="collapse-header">Other Pages:</h6>
-						<a class="collapse-item" href="404.html">404 Page</a>
-						<a class="collapse-item" href="blank.html">Blank Page</a>
-					</div>
-				</div>
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+			aria-expanded="true" aria-controls="collapsePages">
+			<i class="fas fa-fw fa-folder"></i>
+			<span>Pages</span>
+			</a>
+			<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+			<h6 class="collapse-header">Login Screens:</h6>
+			<a class="collapse-item" href="login.html">Login</a>
+			<a class="collapse-item" href="register.html">Register</a>
+			<a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+			<div class="collapse-divider"></div>
+			<h6 class="collapse-header">Other Pages:</h6>
+			<a class="collapse-item" href="404.html">404 Page</a>
+			<a class="collapse-item" href="blank.html">Blank Page</a>
+			</div>
+			</div>
 			</li> *@
 
-@* 			<!-- Nav Item - Charts -->
+			@* 			<!-- Nav Item - Charts -->
 			<li class="nav-item">
-				<a class="nav-link" href="charts.html">
-					<i class="fas fa-fw fa-chart-area"></i>
-					<span>Charts</span>
-				</a>
+			<a class="nav-link" href="charts.html">
+			<i class="fas fa-fw fa-chart-area"></i>
+			<span>Charts</span>
+			</a>
 			</li>
 
 			<!-- Nav Item - Tables -->
 			<li class="nav-item">
-				<a class="nav-link" href="tables.html">
-					<i class="fas fa-fw fa-table"></i>
-					<span>Tables</span>
-				</a>
+			<a class="nav-link" href="tables.html">
+			<i class="fas fa-fw fa-table"></i>
+			<span>Tables</span>
+			</a>
 			</li>
- *@
+			*@
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
 
@@ -222,16 +222,20 @@
 	<!-- Custom scripts for all pages-->
 	<script src="~/js/sb-admin-2.min.js"></script>
 
-	<!-- Page level plugins -->
+	@* 	<!-- Page level plugins -->
 	<script src="~/vendor/chart.js/Chart.min.js"></script>
 
 	<!-- Page level custom scripts -->
 	<script src="~/js/demo/chart-area-demo.js"></script>
-	<script src="~/js/demo/chart-pie-demo.js"></script>
-	<script src="https://cdn.tiny.cloud/1/9v3f6801xkjbo5g8uijy1kuncu1ltgp0khqtlsn6d9oulwdj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<script src="~/js/demo/chart-pie-demo.js"></script> *@
+	@* 	<script src="https://cdn.tiny.cloud/1/9v3f6801xkjbo5g8uijy1kuncu1ltgp0khqtlsn6d9oulwdj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> *@
+
 
 	<!-- Datatable scripts -->
 	<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	<!-- Sweet Alert 2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
