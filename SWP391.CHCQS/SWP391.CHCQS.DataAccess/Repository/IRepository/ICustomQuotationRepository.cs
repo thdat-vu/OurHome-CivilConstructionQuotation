@@ -10,8 +10,8 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     public interface ICustomQuotationRepository : IRepository<CustomQuotation>
     {
         void Update(CustomQuotation obj);
-        public int CountCustomQuotationSum();
 
+        public int CountCustomQuotationInMonthAndYear(int month, int year);
 
     }
 }
