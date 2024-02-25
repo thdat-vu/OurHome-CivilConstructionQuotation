@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
@@ -24,7 +25,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         public IActionResult GetDetail()
         {
             //thêm thông tin task detail
-            string quoteId = HttpContext.Session.GetString("quoteId");
+            string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
             //thêm thông tin material detail
             var materialDetailVM = _unitOfWork.MaterialDetail.GetMaterialDetail(quoteId, "Material")
                 .Select((x) => new ViewModels.MaterialDetailListViewModel
