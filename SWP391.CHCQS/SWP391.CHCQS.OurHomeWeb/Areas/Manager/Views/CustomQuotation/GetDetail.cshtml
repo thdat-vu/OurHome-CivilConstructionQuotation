@@ -241,6 +241,9 @@
         <partial name="~/Areas/Manager/Views/StaffProfilePartial.cshtml" model="@Model.Manager">
     </div>
 </div>
+<div class="w-100 btn-group mb-3 mt-3" role="group">
+    <a href="/Manager/CustomQuotation/GetDetail?id=${data}" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check"></i>Confirm</a>
+</div>
 
 @section Scripts {
     <script src="~/js/datatables/managerDTB/TaskDetailDTB.js"></script>
