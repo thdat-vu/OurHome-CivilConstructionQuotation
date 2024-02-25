@@ -23,7 +23,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
             _db.CustomQuotations.Update(obj);
         }
         
-
         //function trả về số quotation dc tạo ra trong tháng
         public int CountCustomQuotationInMonthAndYear(int month, int year)
         {
@@ -32,5 +31,4 @@ namespace SWP391.CHCQS.DataAccess.Repository
             return GetAllWithFilter(filter).Count() ;
         }
     }
-
 }

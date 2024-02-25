@@ -48,7 +48,6 @@ namespace SWP391.CHCQS.Model
         //ghi lại thời gian và người dc ủy quyền xử lý custom quotation
         //thời gian dc giao request và hoàn thành điền quotation của Seller
         public DateTime? DelegationDateSeller { get; set; } = null!;
-
         public DateTime? SubmissionDateSeller { get; set; } = null!;
         //thời gian nhận customquotation và hoàn thành (MaterialDetail + CustomQuotationTask) của engineer
         public DateTime? RecieveDateEngineer { get; set; } = null!;
@@ -57,5 +56,4 @@ namespace SWP391.CHCQS.Model
         public DateTime? RecieveDateManager { get; set; } = null!;
         public DateTime? AcceptanceDateManager { get; set; } = null!;
     }
-
 }

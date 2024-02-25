@@ -43,28 +43,22 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item">
-				<a class="nav-link" href="index.html">
+				<a class="nav-link" href="/Manager/Home/Index">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span>
 				</a>
 			</li>
+			
 
 			<!-- Divider -->
 			<hr class="sidebar-divider mb-0">
 
 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-				   aria-expanded="true" aria-controls="collapseTwo">
-					<i class="fas fa-fw fa-cog"></i>
+				<a class="nav-link" href="/Manager/CustomQuotation/Index">
+					<i class="bi bi-file-check-fill"></i>
 					<span>Quotation</span>
 				</a>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" asp-area="" asp-controller="" asp-action="">Standard</a>
-						<a class="collapse-item" asp-area="" asp-controller="" asp-action="">Custom</a>
-					</div>
-				</div>
 			</li>
 
 			<!-- Divider -->
@@ -79,6 +73,7 @@
 				</a>
 				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" asp-area="Manager" asp-controller="StandardQuotation" asp-action="Index">Standard Quotation</a>
 						<a class="collapse-item" asp-area="" asp-controller="" asp-action="">Project</a>
 						<a class="collapse-item" asp-area="" asp-controller="" asp-action="">Combo</a>
 						<a class="collapse-item" asp-area="" asp-controller="" asp-action="">Material</a>

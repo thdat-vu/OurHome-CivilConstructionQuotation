@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWP391.CHCQS.DataAccess.Data;
 
@@ -11,9 +12,10 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    partial class SWP391DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240224095905_DeleteTaskCategoryAndTaskCycleCategoryProps")]
+    partial class DeleteTaskCategoryAndTaskCycleCategoryProps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -724,7 +726,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ001",
                             Acreage = "240m2",
-                            Date = new DateTime(2024, 2, 25, 13, 27, 13, 974, DateTimeKind.Local).AddTicks(4572),
+                            Date = new DateTime(2024, 2, 24, 16, 59, 5, 82, DateTimeKind.Local).AddTicks(1701),
                             Description = "I want to build this house for my son and his wife, so i can live with them.",
                             EngineerId = "EN001",
                             Location = "Dĩ An, Bình Dương",
@@ -738,7 +740,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ002",
                             Acreage = "340m2",
-                            Date = new DateTime(2024, 2, 25, 13, 27, 13, 974, DateTimeKind.Local).AddTicks(4575),
+                            Date = new DateTime(2024, 2, 24, 16, 59, 5, 82, DateTimeKind.Local).AddTicks(1705),
                             Description = "This house must be great, so i can live with it for 500 years.",
                             EngineerId = "EN001",
                             Location = "Quận 5, TP. Hồ Chí Minh",
@@ -752,7 +754,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ003",
                             Acreage = "740m2",
-                            Date = new DateTime(2024, 2, 25, 13, 27, 13, 974, DateTimeKind.Local).AddTicks(4577),
+                            Date = new DateTime(2024, 2, 24, 16, 59, 5, 82, DateTimeKind.Local).AddTicks(1707),
                             Description = "This house for president to live, it must be nice.",
                             EngineerId = "EN001",
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
@@ -784,15 +786,10 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnType("money")
                         .HasColumnName("price");
 
-                    b.Property<string>("RejectedCustomQuotationId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("TaskId", "QuotationId")
                         .HasName("PK__CustomQu__EA0E34779FFE6727");
 
                     b.HasIndex("QuotationId");
-
-                    b.HasIndex("RejectedCustomQuotationId");
 
                     b.ToTable("CustomQuotaionTask", (string)null);
                 });
@@ -1225,15 +1222,10 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasColumnName("quantity");
 
-                    b.Property<string>("RejectedCustomQuotationId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("QuotationId", "MaterialId")
                         .HasName("PK__Material__BCAD866D29D0C3FC");
 
                     b.HasIndex("MaterialId");
-
-                    b.HasIndex("RejectedCustomQuotationId");
 
                     b.ToTable("MaterialDetail", (string)null);
                 });
@@ -1491,31 +1483,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SWP391.CHCQS.Model.RejectedCustomQuotation", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("EngineerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ManagerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RejectedQuotationId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RejectedCustomQuotations");
-                });
-
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
                 {
                     b.Property<string>("Id")
@@ -1577,7 +1544,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT2",
                             CustomerId = "ID001",
                             Description = "Customer said that this project must be finished on 3 month",
-                            GenerateDate = new DateTime(2024, 2, 25, 13, 27, 13, 974, DateTimeKind.Local).AddTicks(4297),
+                            GenerateDate = new DateTime(2024, 2, 24, 16, 59, 5, 82, DateTimeKind.Local).AddTicks(1416),
                             Location = "Dĩ An, Bình Dương",
                             Status = true
                         },
@@ -1588,7 +1555,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT1",
                             CustomerId = "ID002",
                             Description = "Customer said that this project must be finished on 6 month",
-                            GenerateDate = new DateTime(2024, 2, 25, 13, 27, 13, 974, DateTimeKind.Local).AddTicks(4306),
+                            GenerateDate = new DateTime(2024, 2, 24, 16, 59, 5, 82, DateTimeKind.Local).AddTicks(1426),
                             Location = "Quận 5, TP. Hồ Chí Minh",
                             Status = true
                         },
@@ -1599,7 +1566,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT3",
                             CustomerId = "ID003",
                             Description = "Customer said that this project must be finished on 12 month",
-                            GenerateDate = new DateTime(2024, 2, 25, 13, 27, 13, 974, DateTimeKind.Local).AddTicks(4308),
+                            GenerateDate = new DateTime(2024, 2, 24, 16, 59, 5, 82, DateTimeKind.Local).AddTicks(1428),
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
                             Status = true
                         });
@@ -2193,10 +2160,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .IsRequired()
                         .HasConstraintName("FK__CustomQuo__quota__5441852A");
 
-                    b.HasOne("SWP391.CHCQS.Model.RejectedCustomQuotation", null)
-                        .WithMany("CustomQuotaionTasks")
-                        .HasForeignKey("RejectedCustomQuotationId");
-
                     b.HasOne("SWP391.CHCQS.Model.Task", "Task")
                         .WithMany()
                         .HasForeignKey("TaskId")
@@ -2222,7 +2185,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.MaterialDetail", b =>
                 {
                     b.HasOne("SWP391.CHCQS.Model.Material", "Material")
-                        .WithMany()
+                        .WithMany("MaterialDetails")
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2232,10 +2195,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasForeignKey("QuotationId")
                         .IsRequired()
                         .HasConstraintName("FK__MaterialD__quota__5BE2A6F2");
-
-                    b.HasOne("SWP391.CHCQS.Model.RejectedCustomQuotation", null)
-                        .WithMany("MaterialDetails")
-                        .HasForeignKey("RejectedCustomQuotationId");
 
                     b.Navigation("Material");
 
@@ -2355,10 +2314,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.Navigation("Pricings");
                 });
 
-            modelBuilder.Entity("SWP391.CHCQS.Model.RejectedCustomQuotation", b =>
+            modelBuilder.Entity("SWP391.CHCQS.Model.Material", b =>
                 {
-                    b.Navigation("CustomQuotaionTasks");
-
                     b.Navigation("MaterialDetails");
                 });
 
