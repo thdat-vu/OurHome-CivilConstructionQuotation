@@ -7,12 +7,12 @@ namespace SWP391.CHCQS.Model
     {
         public TaskCategory()
         {
-            //Tasks = new HashSet<Task>();
+            Tasks = new HashSet<Task>();
         }
 
         public string Id { get; set; } = null!;
         public string Name { get; set; } = null!;
 
-        //public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
     }
 }

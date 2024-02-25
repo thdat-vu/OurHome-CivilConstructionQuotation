@@ -12,12 +12,52 @@ namespace SWP391.CHCQS.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly SWP391DBContext _db;
-        public IStandardQuotationRepository StandardQuotation;
-        public UnitOfWork(SWP391DBContext db)
+        public IStandardQuotationRepository StandardQuotation {  get; private set; }
+        public IProjectRepository Project {  get; private set; }
+        public IMaterialDetailRepository MaterialDetail { get; private set; }
+        public ICustomQuotaionTaskRepository CustomQuotaionTask { get; private set; }
+        public ICustomQuotationRepository CustomQuotation { get; private set; }
+        public ITaskRepository Task { get; private set; }
+        public IMaterialRepository Material { get; private set; }
+        public IConstructDetailRepository ConstructDetail { get; private set; }
+		public ITaskCategoryRepository TaskCategory { get; private set; }
+        public IRequestRepository RequestForm { get; private set; }
+        public IConstructionTypeRepository ConstructionType { get; private set; }
+        public IInvestmentTypeRepository InvestmentType { get; private set; }
+        public IFoundationTypeRepository FoundationType { get; private set; }
+        public IBasementTypeRepository BasementType { get; private set; }
+        public IRoofTypeRepository RoofType { get; private set; }
+        public IStaffRepository Staff { get; private set; }
+        public IMaterialCategoryRepository MaterialCategory { get; private set; }
+
+		public UnitOfWork(SWP391DBContext db)
         {
             _db = db;
+            
+            Project = new ProjectRepository(_db);
+            Staff = new StaffRepository(_db);
+
             StandardQuotation = new StandardQuotationRepository(_db);
+            CustomQuotation = new CustomQuotationRepository(_db);
+
+            Task = new TaskRepository(_db);
+            CustomQuotaionTask = new CustomQuotaionTaskRepository(_db);
+            TaskCategory = new TaskCategoryRepository(_db);
+
+            ConstructDetail = new ConstructDetailRepository(_db);
+            RequestForm = new RequestRepository(_db);
+
+            ConstructionType = new ConstructionTypeRepository(_db);
+            InvestmentType = new InvesmentTypeRepository(_db);
+            FoundationType = new FoundationTypeRepository(_db);
+            BasementType = new BasementTypeRepository(_db);
+            RoofType = new RoofTypeRepository(_db);
+
+            MaterialCategory = new MaterialCategoryRepository(_db);
+            MaterialDetail = new MaterialDetailRepository(_db);
+            Material = new MaterialRepository(_db);
         }
+
         public void Save()
         {
             _db.SaveChanges();
