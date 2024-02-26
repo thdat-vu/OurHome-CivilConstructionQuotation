@@ -12,25 +12,35 @@ namespace SWP391.CHCQS.Model
     public class RejectedCustomQuotation
     {
         [Key]
-        public string Id { get; set; } = null!;
+        public string Id { get; set; }
+
+        // Ngày bị reject
+        public DateTime Date { get; set; }
+
         //---------------------------------------------------------------------------------------------
-        //Xác định chi tiết công việc, vật liệu bị hủy của báo giá nào 
-        public string RejectedQuotationId { get; set; } = null!;
-        [NotMapped]
-        public virtual CustomQuotation RejectedQuotation { get; set; } = null!;
+        // Xác định chi tiết công việc, vật liệu bị hủy của báo giá nào 
+        [ForeignKey("RejectedQuotation")]
+        public string? RejectedQuotationId { get; set; } = null!;
+        public virtual CustomQuotation? RejectedQuotation { get; set; } = null!;
+
         //---------------------------------------------------------------------------------------------
-        //công việc Engineer đưa lên bị reject thì đưa vào đây
-        public virtual ICollection<CustomQuotationTask> CustomQuotaionTasks { get; set; }
-        public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
-        //--------------------------------------------------------------------------------------------
-        //Engineer đã thực hiện báo giá này
-        public string EngineerId { get; set; } = null!;
-        [NotMapped]
-        public virtual Staff Subcriber { get; set; } = null!;
-        //Manager đã reject báo giá này
-        public string ManagerId { get; set; } = null!;
-        [NotMapped]
-        public virtual Staff Rejecter { get; set; } = null!;
-        public string? Reason { get; set; } = null!;
+        // Engineer đã thực hiện báo giá này
+        [ForeignKey("Engineer")]
+        public string? EngineerId { get; set; } = null!;
+        public virtual Staff? Engineer { get; set; } =  null!;
+
+        //---------------------------------------------------------------------------------------------
+        // Manager đã reject báo giá này
+        [ForeignKey("Manager")]
+        public string? ManagerId { get; set; } = null!;
+        public virtual Staff? Manager { get; set; } =  null!;
+
+        //---------------------------------------------------------------------------------------------
+        // Người thực hiện báo giá này
+        [ForeignKey("Subcriber")]
+        public string? SubcriberId { get; set; } = null!;
+        public virtual Staff? Subcriber { get; set; } = null!;
+
+        public string? Reason { get; set; }
     }
 }

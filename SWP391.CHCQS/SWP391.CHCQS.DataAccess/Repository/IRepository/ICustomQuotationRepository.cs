@@ -12,6 +12,6 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         void Update(CustomQuotation obj);
 
         public int CountCustomQuotationInMonthAndYear(int month, int year);
-
+       // public void UpdateStatus(string id, int status);
     }
 }
