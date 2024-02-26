@@ -235,6 +235,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				//Addrange of materialDetails to database
 				_unitOfWork.MaterialDetail.AddRange(materialDetails);
 
+				var total = materialCart.Sum(x => x.Price) + taskCart.Sum(x => x.Price);
+
+				//update total price of customQuotation after submit
+				var customQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == CustomQuotationSession.Id);
+				customQuotation.Total = (decimal)total;
+				_unitOfWork.CustomQuotation.Update(customQuotation);
+
 				//Savechange the database after addrange
 				_unitOfWork.Save();
 
