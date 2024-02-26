@@ -16,7 +16,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 
         #region
         /// <summary>
-        /// This function get all CustomeQuotation in Database and return it into JSON, this function ne lib Datatables to show data
+        /// This function get all CustomerQuotation in Database and return it into JSON, this function ne lib Datatables to show data
         /// </summary>
         /// <returns></returns>
         [HttpGet]
