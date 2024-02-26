@@ -28,11 +28,11 @@ function loadDataTableQuotation() {
 
 function SendQuoteToManager(url) {
     Swal.fire({
-        title: "Are you sure?",
+        title: "Are want to send to Manager?",
         text: "You won't be able to edit this!",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#F27456",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, Send it!"
     }).then((result) => {
