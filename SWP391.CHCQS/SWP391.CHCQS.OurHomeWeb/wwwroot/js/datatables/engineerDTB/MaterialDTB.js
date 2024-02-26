@@ -30,9 +30,15 @@ function AddToQuoteMaterial(url) {
         type: 'GET',
         url: url,
         success: function (data) {
-            dataTableMD.ajax.reload();
-            dataTableM.ajax.reload();
-            toastr.success(data.message);
+            if (!data.success) {
+                dataTableMD.ajax.reload();
+                dataTableM.ajax.reload();
+                toastr.error(data.message);
+            } else {
+                dataTableMD.ajax.reload();
+                dataTableM.ajax.reload();
+                toastr.success(data.message);
+            }
         },
         error: function (data) {
             dataTableMD.ajax.reload();

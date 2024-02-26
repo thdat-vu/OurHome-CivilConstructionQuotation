@@ -285,6 +285,20 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				return Json(new { success = false, message = $"Quotation not found with Id = {QuotationId}" });
 			}
 
+			var materialDetails = _unitOfWork.MaterialDetail.GetMaterialDetail(quotation.Id);
+			if (materialDetails.Count() == 0)
+			{
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return Json(new { success = false, message = $"This quotation was not complete!" });
+			}
+
+			var customQuotationTasks = _unitOfWork.CustomQuotaionTask.GetTaskDetail(quotation.Id);
+			if (customQuotationTasks.Count() == 0)
+			{
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return Json(new { success = false, message = $"This quotation was not complete!" });
+			}
+
 			try
 			{
 				quotation.Status = SD.Pending_Approval;

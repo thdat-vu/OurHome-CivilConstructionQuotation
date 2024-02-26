@@ -29,9 +29,15 @@ function DeleteTaskFromQuote(url) {
         url: url,
         type: 'DELETE',
         success: function (data) {
-            dataTableCQT.ajax.reload();
-            dataTableT.ajax.reload();
-            toastr.success(data.message);
+            if (!data.success) {
+                dataTableCQT.ajax.reload();
+                dataTableT.ajax.reload();
+                toastr.error(data.message);
+            } else {
+                dataTableCQT.ajax.reload();
+                dataTableT.ajax.reload();
+                toastr.success(data.message);
+            }
         },
         error: function (data) {
             dataTableCQT.ajax.reload();

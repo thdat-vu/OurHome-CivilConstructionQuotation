@@ -41,9 +41,19 @@ function SendQuoteToManager(url) {
                 url: url,
                 type: 'GET',
                 success: function (data) {
+                    if (!data.success) {
+                        dataTableCQ.ajax.reload();
+                        toastr.error(data.message);
+                    }
+                    else {
+                        dataTableCQ.ajax.reload();
+                        // From toastr message
+                        toastr.success(data.message);
+                    }
+                },
+                error: function (data) {
                     dataTableCQ.ajax.reload();
-                    // From toastr message
-                    toastr.success(data.message);
+                    toastr.error(data.message);
                 }
             });
         }

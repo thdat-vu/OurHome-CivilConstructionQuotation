@@ -64,8 +64,13 @@ function UpdateMaterialQuantity(url, formId) {
         type: 'POST',
         data: formData,
         success: function (data) {
-            dataTableMD.ajax.reload();
-            toastr.success(data.message);
+            if (!data.success) {
+                dataTableMD.ajax.reload();
+                toastr.error(data.message);
+            } else {
+                dataTableMD.ajax.reload();
+                toastr.success(data.message);
+            }
         },
         error: function (data) {
             dataTableMD.ajax.reload();
