@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWP391.CHCQS.DataAccess.Data;
 
@@ -11,9 +12,10 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    partial class SWP391DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240226083413_RebuiltRejectTable")]
+    partial class RebuiltRejectTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

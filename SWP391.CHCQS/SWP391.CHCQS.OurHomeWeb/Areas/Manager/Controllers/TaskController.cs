@@ -20,7 +20,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         }
         [HttpGet]
         [ActionName("Detail")]
-        public IActionResult GetDetail([FromQuery] string id)
+        public async Task<IActionResult> GetDetail([FromQuery] string id)
         {
             var taskDetail = _unitOfWork.Task.Get((x) => x.Id == id, "Category");
             //TODO: Test result

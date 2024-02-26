@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.Utility;
@@ -7,92 +8,148 @@ using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
-	[Area("Manager")]
-	public class CustomQuotationController : Controller
-	{
-		private readonly IUnitOfWork _unitOfWork;
+    [Area("Manager")]
+    public class CustomQuotationController : Controller
+    {
+        private readonly IUnitOfWork _unitOfWork;
 
-		public CustomQuotationController(IUnitOfWork unitOfWork)
-		{
-			_unitOfWork = unitOfWork;
-		}
-		public IActionResult Index()
-		{
+        public CustomQuotationController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+        public IActionResult Index()
+        {
 
-			return View();
-		}
+            return View();
+        }
 
-       
-        /// This method returns all pending approval CustomQuotation via CustomQuotationViewModel
+
+        /// This method returns all pending approval CustomQuotation via CustomQuotationListViewModel
         [HttpGet]
-		public IActionResult GetAll()
-		{
-			List<CustomQuotationListViewModel> customQuotationViewModels = _unitOfWork.CustomQuotation
-				.GetAll(includeProperties: "Engineer,Manager,Seller,ConstructDetail,Request")
-				.Where(x => x.Status == SD.Pending_Approval)
-				.Select(x => new CustomQuotationListViewModel
-				{
-					Id = x.Id,
-					Date = x.Date,
-					Acreage = x.Acreage,
-					Location = x.Location,
-					Status = SD.GetQuotationStatusDescription(x.Status),
-					EngineerName = x.Engineer.Name,
-					SellerName = x.Seller.Name,
-					ManagerName = x.Manager.Name,
-					ConstrucType = _unitOfWork.ConstructDetail.GetConstructTypeName(x.ConstructDetail.ConstructionId),
-					GeneratRequestDate = x.Request.GenerateDate
-				}).ToList();
-			return Json(new { data = customQuotationViewModels });
-		}
+        public IActionResult GetAll()
+        {
+            List<CustomQuotationListViewModel> customQuotationViewModels = _unitOfWork.CustomQuotation
+                .GetAll(includeProperties: "Engineer,Manager,Seller,ConstructDetail,Request")
+                .Where(x => x.Status == SD.Pending_Approval)
+                .Select(x => new CustomQuotationListViewModel
+                {
+                    Id = x.Id,
+                    Date = x.Date,
+                    Acreage = x.Acreage,
+                    Location = x.Location,
+                    Status = SD.GetQuotationStatusDescription(x.Status),
+                    EngineerName = x.Engineer.Name,
+                    SellerName = x.Seller.Name,
+                    ManagerName = x.Manager.Name,
+                    ConstrucType = _unitOfWork.ConstructDetail.GetConstructTypeName(x.ConstructDetail.ConstructionId),
+                    GeneratRequestDate = x.Request.GenerateDate
+                }).ToList();
+            return Json(new { data = customQuotationViewModels });
+        }
         [HttpGet]
-		//tại sao request Get này cần async ???
-		//Để có việc lưu quotation Id vào session thành công, sau đó datatable mới lấy quotation Id từ session ra để lấy được dữ liệu task detail và material detail tương ứng
         public async Task<IActionResult> GetDetail([FromQuery] string id)
-		{
-			//lưu thông tin quoteId vào session
-			HttpContext.Session.SetString(SessionConst.QUOTATION_ID, id);
+        {
+            //mọi thông tin đưa lên sẽ dc đưa vào VM dưới đây giữ 
+            var quotationVM = new CustomQuotationVM();
+            //lưu thông tin quoteId vào session
+            HttpContext.Session.SetString(SessionConst.QUOTATION_ID, id);
 
             //lấy thông tin cơ bản của custom quotation
             var customQuotationDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "Manager,Engineer,Seller,ConstructDetail");
-			var customQuotationDetailVM = new CustomQuotationDetailViewModel()
-			{
-				RequestId = customQuotationDetail.RequestId,
-				//khởi tạo biến constructDetailViewModel để lát nữa giữ dữ liệu
-				ConstructDetailVM = new ViewModels.ConstructDetailViewModel(),
-				QuoteGeneratedDate = customQuotationDetail.Date,
-				Enginneer = customQuotationDetail.Engineer,
-				Manager = customQuotationDetail.Manager,
-				Seller = customQuotationDetail.Seller,
-				DelegationDateSeller = customQuotationDetail.DelegationDateSeller,
-				SubmissionDateSeller = customQuotationDetail.SubmissionDateEngineer,
-				RecieveDateEngineer = customQuotationDetail.RecieveDateEngineer,
-				SubmissionDateEngineer = customQuotationDetail.SubmissionDateEngineer,
-				RecieveDateManager = customQuotationDetail.RecieveDateManager,
-				AcceptanceDateManager = customQuotationDetail.AcceptanceDateManager
-			};
-			//thêm thông tin cho construct detail View Model
-			customQuotationDetailVM.ConstructDetailVM.IsBalcony = customQuotationDetail.ConstructDetail.Balcony;
-			customQuotationDetailVM.ConstructDetailVM.TypeOfConstruct = _unitOfWork.ConstructionType.GetName(customQuotationDetail.ConstructDetail.ConstructionId);
-			customQuotationDetailVM.ConstructDetailVM.Investment = _unitOfWork.InvestmentType.GetName(customQuotationDetail.ConstructDetail.InvestmentId);
-			customQuotationDetailVM.ConstructDetailVM.Foundation = _unitOfWork.FoundationType.GetName(customQuotationDetail.ConstructDetail.FoundationId);
-			customQuotationDetailVM.ConstructDetailVM.Basement = _unitOfWork.BasementType.GetName(customQuotationDetail.ConstructDetail.BasementId);
-			customQuotationDetailVM.ConstructDetailVM.Roof = _unitOfWork.RoofType.GetName(customQuotationDetail.ConstructDetail.RooftopId);
-			customQuotationDetailVM.ConstructDetailVM.Width = customQuotationDetail.ConstructDetail.Width;
-			customQuotationDetailVM.ConstructDetailVM.Length = customQuotationDetail.ConstructDetail.Length;
-			customQuotationDetailVM.ConstructDetailVM.Facade = customQuotationDetail.ConstructDetail.Facade;
-			customQuotationDetailVM.ConstructDetailVM.Alley = customQuotationDetail.ConstructDetail.Alley;
-			customQuotationDetailVM.ConstructDetailVM.Floor = customQuotationDetail.ConstructDetail.Floor;
-			customQuotationDetailVM.ConstructDetailVM.Mezzanine = customQuotationDetail.ConstructDetail.Mezzanine;
-			customQuotationDetailVM.ConstructDetailVM.RooftopFloor = customQuotationDetail.ConstructDetail.RooftopFloor;
-			customQuotationDetailVM.ConstructDetailVM.Garden = customQuotationDetail.ConstructDetail.Garden;
+            //đưa thông tin cho class có vai trò view
+            quotationVM.QuotationDetailVM = new CustomQuotationDetailViewModel()
+            {
+                QuoteId = customQuotationDetail.Id,
+                RequestId = customQuotationDetail.RequestId,
+                //khởi tạo biến constructDetailViewModel để lát nữa giữ dữ liệu
+                ConstructDetailVM = new ViewModels.ConstructDetailViewModel(),
+                QuoteGeneratedDate = customQuotationDetail.Date,
+                Enginneer = customQuotationDetail.Engineer,
+                Manager = customQuotationDetail.Manager,
+                Seller = customQuotationDetail.Seller,
+                DelegationDateSeller = customQuotationDetail.DelegationDateSeller,
+                SubmissionDateSeller = customQuotationDetail.SubmissionDateEngineer,
+                RecieveDateEngineer = customQuotationDetail.RecieveDateEngineer,
+                SubmissionDateEngineer = customQuotationDetail.SubmissionDateEngineer,
+                RecieveDateManager = customQuotationDetail.RecieveDateManager,
+                AcceptanceDateManager = customQuotationDetail.AcceptanceDateManager
+            };
+            //thêm thông tin cho construct detail View Model
+            quotationVM.QuotationDetailVM.ConstructDetailVM.IsBalcony = customQuotationDetail.ConstructDetail.Balcony;
+            quotationVM.QuotationDetailVM.ConstructDetailVM.TypeOfConstruct = _unitOfWork.ConstructionType.GetName(customQuotationDetail.ConstructDetail.ConstructionId);
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Investment = _unitOfWork.InvestmentType.GetName(customQuotationDetail.ConstructDetail.InvestmentId);
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Foundation = _unitOfWork.FoundationType.GetName(customQuotationDetail.ConstructDetail.FoundationId);
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Basement = _unitOfWork.BasementType.GetName(customQuotationDetail.ConstructDetail.BasementId);
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Roof = _unitOfWork.RoofType.GetName(customQuotationDetail.ConstructDetail.RooftopId);
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Width = customQuotationDetail.ConstructDetail.Width;
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Length = customQuotationDetail.ConstructDetail.Length;
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Facade = customQuotationDetail.ConstructDetail.Facade;
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Alley = customQuotationDetail.ConstructDetail.Alley;
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Floor = customQuotationDetail.ConstructDetail.Floor;
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Mezzanine = customQuotationDetail.ConstructDetail.Mezzanine;
+            quotationVM.QuotationDetailVM.ConstructDetailVM.RooftopFloor = customQuotationDetail.ConstructDetail.RooftopFloor;
+            quotationVM.QuotationDetailVM.ConstructDetailVM.Garden = customQuotationDetail.ConstructDetail.Garden;
 
+
+            //TODO: test result of custom quotation
+            //return Json(new { data = ID});
+            return View(quotationVM);
+        }
+
+        //hàm xử lý quyết định của manager từ chối detail của Engineer trong custom quotation
+        [HttpPost]
+        public IActionResult RejectDetail(CustomQuotationVM model)
+        {
+            //đưa dữ liệu cho đối tượng có thể dc thêm vào database
+            var rejectQuotationId = model.RejectQuotationDetailVM.RejectQuotationId;
+            var rejectCustomQuotationDetail = new RejectedCustomQuotation()
+            {
+                Id = SD.TempId,
+                RejectedQuotationId = rejectQuotationId,
+                ManagerId = model.RejectQuotationDetailVM.RejecterId,
+                EngineerId = model.RejectQuotationDetailVM.SubcriberId,
+                Date = DateTime.Now,
+                Reason = model.RejectQuotationDetailVM.Reason
+            };
+            //lưu lại các thông tin cần thiết và bảng rejectcustomquotation
+            _unitOfWork.RejectedCustomQuotation.Add(rejectCustomQuotationDetail);
+
+            /*
+             * 
+             * 
+             * 
+             * 
+             Cần thực hiện lưu lại task detail và material detail của custom quotation
+
+
+
+
+
+             */
+
+
+            //lấy target custom quotation bị reject ra trong custom quotation table
+            var target = _unitOfWork.CustomQuotation.Get((x) => x.Id == rejectQuotationId);
+
+            //Thực hiện thay đổi trạng thái thành processing
+            target.Status = SD.Processing;
+            //Thực hiện xóa đi Manager đã nhận quotation sau đó reject
+            target.ManagerId = null;
+            target.Manager = null;
+            //thực hiện xóa thời gian đã submit của engineer
+            target.SubmissionDateEngineer = null;
+            //Thực hiện xóa thời gian nhận của Manager
+            target.RecieveDateManager = null;
+
+            //Update lại custom quotation trong custom quotation table
+            _unitOfWork.CustomQuotation.Update(target);
+            _unitOfWork.Save();
             
-			//TODO: test result of custom quotation
-			//return Json(new { data = ID});
-			return View(customQuotationDetailVM);
-		}
-        
+            //điều hướng người dùng lại trang index 
+            return RedirectToAction("Index");
+
+        }
+
 
 
 

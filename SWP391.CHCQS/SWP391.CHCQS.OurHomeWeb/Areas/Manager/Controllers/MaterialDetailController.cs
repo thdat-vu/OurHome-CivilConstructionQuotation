@@ -24,6 +24,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult GetDetail()
         {
+            
             //thêm thông tin task detail
             string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
             //thêm thông tin material detail

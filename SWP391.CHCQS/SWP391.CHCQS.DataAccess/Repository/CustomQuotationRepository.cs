@@ -30,5 +30,12 @@ namespace SWP391.CHCQS.DataAccess.Repository
             Expression<Func<CustomQuotation, bool>> filter = (x) =>x.SubmissionDateSeller.Value.Month == month && x.SubmissionDateSeller.Value.Year == year;
             return GetAllWithFilter(filter).Count() ;
         }
+        //public void UpdateStatus(string id, int status)
+        //{
+        //    var target = Get((x) => x.Id == id);
+        //    target.Status = status;
+        //    //thực hiện update đối tượng
+        //    Update(target);
+        //}
     }
 }
