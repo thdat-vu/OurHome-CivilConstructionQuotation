@@ -240,6 +240,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				//update total price of customQuotation after submit
 				var customQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == CustomQuotationSession.Id);
 				customQuotation.Total = (decimal)total;
+				customQuotation.SubmissionDateEngineer = DateTime.Now;
 				_unitOfWork.CustomQuotation.Update(customQuotation);
 
 				//Savechange the database after addrange
