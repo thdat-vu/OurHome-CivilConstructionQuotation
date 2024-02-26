@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWP391.CHCQS.Model
 {
@@ -7,7 +8,7 @@ namespace SWP391.CHCQS.Model
     {
         public RequestForm()
         {
-            CustomQuotations = new HashSet<CustomQuotation>();
+            
             Materials = new HashSet<Material>();
         }
 
@@ -23,8 +24,8 @@ namespace SWP391.CHCQS.Model
         public string CustomerId { get; set; } = null!;
 
         public virtual Customer Customer { get; set; } = null!;
-        public virtual ICollection<CustomQuotation> CustomQuotations { get; set; }
-
+        
+        public CustomQuotation? CustomQuotation { get; set; }
         public virtual ICollection<Material> Materials { get; set; }
     }
 }

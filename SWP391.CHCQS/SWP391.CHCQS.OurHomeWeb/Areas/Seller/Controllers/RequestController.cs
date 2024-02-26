@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels;
 
@@ -14,9 +15,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             _unitOfWork = unitOfWork;
         }
 
+
         #region
         /// <summary>
-        /// This function get all CustomerQuotation in Database and return it into JSON, this function ne lib Datatables to show data
+        /// This function get all Customer's Request in Database and return it into JSON, this function ne lib Datatables to show data
         /// </summary>
         /// <returns></returns>
         [HttpGet]
