@@ -102,7 +102,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					{
 						Material = material,
 						QuotationId = CustomQuotationSession.Id,
-						Price = material.UnitPrice * 0.8m
+						Price = material.UnitPrice
 					};
 
 					//Add materialItem into materialCart

@@ -103,12 +103,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				}
 				else //if it not equal null
 				{
+					var width = _unitOfWork.ConstructDetail.Get(x => x.QuotationId == CustomQuotationSession.Id).Width;
+					var length = _unitOfWork.ConstructDetail.Get(x => x.QuotationId == CustomQuotationSession.Id).Length;
+					var acreage = width * length;
 					//Asign new CustomQuotationTaskViewModel with projection from task for taskItem
 					taskItem = new CustomQuotationTaskViewModel
 					{
 						Task = task,
 						QuotationId = CustomQuotationSession.Id,
-						Price = task.UnitPrice * 0.8m
+						Price = task.UnitPrice * acreage,
 					};
 
 					//Add taskItem into taskCart

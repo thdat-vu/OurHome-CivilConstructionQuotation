@@ -10,7 +10,6 @@ function loadDataTableMaterial() {
         "columns": [
             { data: 'id', },
             { data: 'name', },
-            { data: 'inventoryQuantity', },
             { data: 'unitPrice', },
             { data: 'unit', },
             { data: 'categoryName', },
