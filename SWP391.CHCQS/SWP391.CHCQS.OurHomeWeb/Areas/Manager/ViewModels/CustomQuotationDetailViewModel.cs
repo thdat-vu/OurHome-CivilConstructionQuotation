@@ -4,6 +4,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
 	public class CustomQuotationDetailViewModel
 	{
+		public string QuoteId { get; set; }
 		public string? RequestId { get; set; }
 		public ConstructDetailViewModel? ConstructDetailVM { get; set; } 
 		public DateTime QuoteGeneratedDate { get; set; }

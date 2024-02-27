@@ -32,5 +32,6 @@ namespace SWP391.CHCQS.Model
         [NotMapped]
         public virtual Staff Rejecter { get; set; } = null!;
         public string? Reason { get; set; } = null!;
+        public DateTime Date {  get; set; }
     }
 }
