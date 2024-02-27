@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SWP391.CHCQS.DataAccess.Repository
 {
     public class RejectedCustomQuotationRepository : Repository<RejectedCustomQuotation>, IRejectedCustomQuotationRepository
