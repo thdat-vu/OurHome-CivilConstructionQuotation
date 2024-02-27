@@ -5,7 +5,7 @@
         public decimal? Total;
         public IEnumerable<string>? CustomQuotaionTasks { get; set; } = null!;
         public IEnumerable<string>? MaterialDetails { get; set; } = null!;
-        public string? SubmissionDateEngineer { get; set; } = null!;
-        public string? RecieveDateManager { get; set; } = null!;
+        public DateTime? SubmissionDateEngineer { get; set; }
+        public DateTime? RecieveDateManager { get; set; } 
     }
 }

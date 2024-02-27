@@ -13,4 +13,8 @@
     <PackageReference Include="SendGrid" Version="9.29.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SWP391.CHCQS.Model\SWP391.CHCQS.Model.csproj" />
+  </ItemGroup>
+
 </Project>
