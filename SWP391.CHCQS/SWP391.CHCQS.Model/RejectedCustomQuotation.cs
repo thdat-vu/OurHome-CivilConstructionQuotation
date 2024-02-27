@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.Model
 {
-    //class chứa các custom quotation bị từ chối bởi quản lý
     public class RejectedCustomQuotation
     {
         [Key]
@@ -20,27 +19,25 @@ namespace SWP391.CHCQS.Model
         //---------------------------------------------------------------------------------------------
         // Xác định chi tiết công việc, vật liệu bị hủy của báo giá nào 
         [ForeignKey("RejectedQuotation")]
-        public string? RejectedQuotationId { get; set; } = null!;
-        public virtual CustomQuotation? RejectedQuotation { get; set; } = null!;
+        public string RejectedQuotationId { get; set; }
+        public virtual CustomQuotation RejectedQuotation { get; set; }
 
         //---------------------------------------------------------------------------------------------
         // Engineer đã thực hiện báo giá này
         [ForeignKey("Engineer")]
-        public string? EngineerId { get; set; } = null!;
-        public virtual Staff? Engineer { get; set; } =  null!;
+        public string EngineerId { get; set; }
+        public virtual Staff Engineer { get; set; }
 
         //---------------------------------------------------------------------------------------------
         // Manager đã reject báo giá này
         [ForeignKey("Manager")]
-        public string? ManagerId { get; set; } = null!;
-        public virtual Staff? Manager { get; set; } =  null!;
+        public string ManagerId { get; set; }
+        public virtual Staff Manager { get; set; }
 
         //---------------------------------------------------------------------------------------------
-        // Người thực hiện báo giá này
-        [ForeignKey("Subcriber")]
-        public string? SubcriberId { get; set; } = null!;
-        public virtual Staff? Subcriber { get; set; } = null!;
+  
 
         public string? Reason { get; set; }
     }
+
 }
