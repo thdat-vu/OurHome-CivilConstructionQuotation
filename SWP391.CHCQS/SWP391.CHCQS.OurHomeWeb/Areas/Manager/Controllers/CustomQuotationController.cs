@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.Utility;
+using SWP391.CHCQS.Utility.Helpers;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
 
 
@@ -14,8 +17,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
     public class CustomQuotationController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public CustomQuotationController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _environment;
+        //private FileManipulater _fileManipulater= new FileManipulater();
+        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment)
         {
             _unitOfWork = unitOfWork;
         }
@@ -51,6 +55,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDetail([FromQuery] string id)
         {
+            
             //mọi thông tin đưa lên sẽ dc đưa vào VM dưới đây giữ 
             var quotationVM = new CustomQuotationVM();
             //lưu thông tin quoteId vào session
@@ -58,7 +63,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
             //lấy thông tin cơ bản của custom quotation
             var customQuotationDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "Manager,Engineer,Seller,ConstructDetail");
-            //gán thời gian manager nhận dc đơn pending approving
+            //cập nhật thời gian manager nhận dc đơn pending approving
             if(customQuotationDetail.RecieveDateManager == null)
             {
                 customQuotationDetail.RecieveDateManager = DateTime.Now;
@@ -223,16 +228,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             rejectQuotationDetail.Total = total;
 
             //gán 2 tham số thời gian 
-            rejectQuotationDetail.SubmissionDateEngineer = submit.ToString();
-            rejectQuotationDetail.RecieveDateManager = recieve.ToString();
+            rejectQuotationDetail.SubmissionDateEngineer = submit;
+            rejectQuotationDetail.RecieveDateManager = recieve;
 
             //Lưu trữ lại id của các task
             rejectQuotationDetail.CustomQuotaionTasks = _unitOfWork.CustomQuotaionTask.GetAllWithFilter((x) => x.QuotationId == rejectQuoteId).Select((x) => x.TaskId);
             //lưu lại id của material dc sử dụng
             rejectQuotationDetail.MaterialDetails = _unitOfWork.MaterialDetail.GetAllWithFilter((x) => x.QuotationId == rejectQuoteId).Select((x) => x.MaterialId);
 
-            //sử dụng quoteID làm tên cho fileName luôn
-            string fileName = rejectQuoteId;
+            
             try
             {
                 //lấy đường dẫn staic file có dẫn đến folder reject-quotation-file - nơi chứa thông tin của các custom quotation đã bị reject
@@ -241,11 +245,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                 if (!Directory.Exists(targetFolder))
                 {
                     Directory.CreateDirectory(targetFolder);
-                }
-                //cập nhật lại đường dẫn
-                targetFolder += $"\\{fileName}";
+				}
+				//sử dụng quoteID làm tên cho fileName luôn
+				string fileName = rejectQuoteId;
+
+				//cập nhật lại đường dẫn
+				targetFolder += $"\\{fileName.Trim()}.txt";
+
                 //Tiến hành lưu trữ
-                SaveJsonToFile(targetFolder, rejectQuotationDetail);
+                FileManipulater<RejectQuotationDetail>.SaveJsonToFile(targetFolder, rejectQuotationDetail);
             }
             catch (Exception ex)
             {
@@ -253,27 +261,26 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             }
             return RedirectToAction("Index");
         }
-        [NonAction]
-        private void SaveJsonToFile(string filePath, RejectQuotationDetail json, bool append = true)
+        
+		public IActionResult Test()
         {
-            //Serialize RejectQuotationDetail
-            var option = new JsonSerializerOptions();
+			//lấy đường dẫn staic file có dẫn đến folder reject-quotation-file - nơi chứa thông tin của các custom quotation đã bị reject
+			string targetFolder = Path.Combine(_environment.WebRootPath, "reject-quotation-file");
+			//nếu đường dẫn ko tồn tại thì tạo ra
+			if (!Directory.Exists(targetFolder))
+			{
+				Directory.CreateDirectory(targetFolder);
+			}
+	
+		
 
-            option.WriteIndented = true;
-            string result = JsonSerializer.Serialize<RejectQuotationDetail>(json, option);
+			//cập nhật lại đường dẫn
+			targetFolder += $"\\CQ001.txt";
 
-            // Mở tệp tin để ghi
-            using (StreamWriter sw = new StreamWriter(filePath, append))
-            {
-                // Ghi chuỗi JSON vào tệp tin, cùng với dấu xuống dòng để phân biệt giữa các đối tượng
-                sw.WriteLine(result);
-            }
-        }
-        public IActionResult Test()
-        {
+			
+			var data = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
 
-
-            return View();
+            return Json( new {data = data  });
         }
 
     }
