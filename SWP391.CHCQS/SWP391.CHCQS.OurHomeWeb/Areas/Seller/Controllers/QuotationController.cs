@@ -147,33 +147,27 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             }
 
         }
-        //#region
-        ///// <summary>
-        ///// This function get all Quotation in Database and return it into JSON, this function ne lib Datatables to show data
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpGet]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //    List<QuotationViewModel> QuotationVMlList = _unitOfWork.CustomQuotation
-        //        .GetAll(includeProperties: "Seller")
-        //        .Where(t => t.Status == true)
-        //        .Select(x => new QuotationViewModel
-        //        {
-        //            Id = x.Id,
-        //            GenerateDate = x.GenerateDate,
-        //            Description = x.Description,
-        //            ConstructType = x.ConstructType,
-        //            Acreage = x.Acreage,
-        //            Location = x.Location,
-        //        })
-        //        .ToList();
+        #region
+        /// <summary>
+        /// This function get all Quotation in Database and return it into JSON, this function ne lib Datatables to show data
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+		public async Task<IActionResult> GetAll()
+		{
+			List<CustomQuotation> CustomQuotationList = _unitOfWork.CustomQuotation
+				.GetAll()
+				.ToList();
 
-        //    return Json(new { data = QuotationVMlList });
-        //}
-        //#endregion
+			return Json(new { data = CustomQuotationList });
+		}
+		#endregion
 
-        public IActionResult Details()
+        public IActionResult ViewQuotation()
+        {
+            return View();
+        }
+		public IActionResult Details()
         {
             return View();
         }
