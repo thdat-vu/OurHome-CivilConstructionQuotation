@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWP391.CHCQS.Model
 {
+    [Serializable]
     public partial class CustomQuotation
     {
+   
         public CustomQuotation()
         {
             CustomQuotaionTasks = new HashSet<CustomQuotationTask>();

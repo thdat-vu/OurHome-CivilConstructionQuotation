@@ -8,30 +8,36 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.Model
 {
-    //class chứa các custom quotation bị từ chối bởi quản lý
     public class RejectedCustomQuotation
     {
         [Key]
-        public string Id { get; set; } = null!;
+        public string Id { get; set; }
+
+        // Ngày bị reject
+        public DateTime Date { get; set; }
+
         //---------------------------------------------------------------------------------------------
-        //Xác định chi tiết công việc, vật liệu bị hủy của báo giá nào 
-        public string RejectedQuotationId { get; set; } = null!;
-        [NotMapped]
-        public virtual CustomQuotation RejectedQuotation { get; set; } = null!;
+        // Xác định chi tiết công việc, vật liệu bị hủy của báo giá nào 
+        [ForeignKey("RejectedQuotation")]
+        public string RejectedQuotationId { get; set; }
+        public virtual CustomQuotation RejectedQuotation { get; set; }
+
         //---------------------------------------------------------------------------------------------
-        //công việc Engineer đưa lên bị reject thì đưa vào đây
-        public virtual ICollection<CustomQuotationTask> CustomQuotaionTasks { get; set; }
-        public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
-        //--------------------------------------------------------------------------------------------
-        //Engineer đã thực hiện báo giá này
-        public string EngineerId { get; set; } = null!;
-        [NotMapped]
-        public virtual Staff Subcriber { get; set; } = null!;
-        //Manager đã reject báo giá này
-        public string ManagerId { get; set; } = null!;
-        [NotMapped]
-        public virtual Staff Rejecter { get; set; } = null!;
-        public string? Reason { get; set; } = null!;
-        public DateTime Date {  get; set; }
+        // Engineer đã thực hiện báo giá này
+        [ForeignKey("Engineer")]
+        public string EngineerId { get; set; }
+        public virtual Staff Engineer { get; set; }
+
+        //---------------------------------------------------------------------------------------------
+        // Manager đã reject báo giá này
+        [ForeignKey("Manager")]
+        public string ManagerId { get; set; }
+        public virtual Staff Manager { get; set; }
+
+        //---------------------------------------------------------------------------------------------
+  
+
+        public string? Reason { get; set; }
     }
+
 }

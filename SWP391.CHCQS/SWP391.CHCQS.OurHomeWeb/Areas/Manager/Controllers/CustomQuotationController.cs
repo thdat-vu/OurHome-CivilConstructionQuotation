@@ -61,6 +61,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
             //lấy thông tin cơ bản của custom quotation
             var customQuotationDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "Manager,Engineer,Seller,ConstructDetail");
+            //gán thời gian manager nhận dc đơn pending approving
+            if(customQuotationDetail.RecieveDateManager == null)
+            {
+                customQuotationDetail.RecieveDateManager = DateTime.Now;
+            }
             //đưa thông tin cho class có vai trò view
             quotationVM.QuotationDetailVM = new CustomQuotationDetailViewModel()
             {
