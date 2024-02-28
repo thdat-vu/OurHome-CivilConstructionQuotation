@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWP391.CHCQS.DataAccess.Data;
 
@@ -11,9 +12,10 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    partial class SWP391DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240226082150_addRelationshipCustomQuotation-RequestForm")]
+    partial class addRelationshipCustomQuotationRequestForm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -741,7 +743,10 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             Id = "CQ002",
                             Acreage = "340m2",
                             Date = new DateTime(2024, 2, 26, 15, 21, 49, 695, DateTimeKind.Local).AddTicks(2232),
+                            Description = "This house must be great, so i can live with it for 500 years.",
+                            EngineerId = "EN001",
                             Location = "Quận 5, TP. Hồ Chí Minh",
+                            ManagerId = "MG001",
                             RequestId = "RF002",
                             SellerId = "SL001",
                             Status = 2,
@@ -783,10 +788,15 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnType("money")
                         .HasColumnName("price");
 
+                    b.Property<string>("RejectedCustomQuotationId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("TaskId", "QuotationId")
                         .HasName("PK__CustomQu__EA0E34779FFE6727");
 
                     b.HasIndex("QuotationId");
+
+                    b.HasIndex("RejectedCustomQuotationId");
 
                     b.ToTable("CustomQuotaionTask", (string)null);
                 });
@@ -1219,10 +1229,15 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasColumnName("quantity");
 
+                    b.Property<string>("RejectedCustomQuotationId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("QuotationId", "MaterialId")
                         .HasName("PK__Material__BCAD866D29D0C3FC");
 
                     b.HasIndex("MaterialId");
+
+                    b.HasIndex("RejectedCustomQuotationId");
 
                     b.ToTable("MaterialDetail", (string)null);
                 });
@@ -1485,33 +1500,22 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("EngineerId")
-                        .HasColumnType("char(5)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ManagerId")
-                        .HasColumnType("char(5)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RejectedQuotationId")
-                        .HasColumnType("char(6)");
-
-                    b.Property<string>("SubcriberId")
-                        .HasColumnType("char(5)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EngineerId");
-
-                    b.HasIndex("ManagerId");
-
-                    b.HasIndex("RejectedQuotationId");
-
-                    b.HasIndex("SubcriberId");
 
                     b.ToTable("RejectedCustomQuotations");
                 });
@@ -2193,6 +2197,10 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .IsRequired()
                         .HasConstraintName("FK__CustomQuo__quota__5441852A");
 
+                    b.HasOne("SWP391.CHCQS.Model.RejectedCustomQuotation", null)
+                        .WithMany("CustomQuotaionTasks")
+                        .HasForeignKey("RejectedCustomQuotationId");
+
                     b.HasOne("SWP391.CHCQS.Model.Task", "Task")
                         .WithMany()
                         .HasForeignKey("TaskId")
@@ -2229,6 +2237,10 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .IsRequired()
                         .HasConstraintName("FK__MaterialD__quota__5BE2A6F2");
 
+                    b.HasOne("SWP391.CHCQS.Model.RejectedCustomQuotation", null)
+                        .WithMany("MaterialDetails")
+                        .HasForeignKey("RejectedCustomQuotationId");
+
                     b.Navigation("Material");
 
                     b.Navigation("Quotation");
@@ -2262,33 +2274,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasConstraintName("FK__Project__custome__5AEE82B9");
 
                     b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.RejectedCustomQuotation", b =>
-                {
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Engineer")
-                        .WithMany()
-                        .HasForeignKey("EngineerId");
-
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Manager")
-                        .WithMany()
-                        .HasForeignKey("ManagerId");
-
-                    b.HasOne("SWP391.CHCQS.Model.CustomQuotation", "RejectedQuotation")
-                        .WithMany()
-                        .HasForeignKey("RejectedQuotationId");
-
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Subcriber")
-                        .WithMany()
-                        .HasForeignKey("SubcriberId");
-
-                    b.Navigation("Engineer");
-
-                    b.Navigation("Manager");
-
-                    b.Navigation("RejectedQuotation");
-
-                    b.Navigation("Subcriber");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
@@ -2372,6 +2357,13 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.InvestmentType", b =>
                 {
                     b.Navigation("Pricings");
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.RejectedCustomQuotation", b =>
+                {
+                    b.Navigation("CustomQuotaionTasks");
+
+                    b.Navigation("MaterialDetails");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
