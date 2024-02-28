@@ -34,7 +34,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         
         public IActionResult Create()
         {
-            
+            //add MaterialViewModel to pass Properties.
 			MaterialViewModel materialVM = new()
 			{
 				CategoryList = _unitOfWork.MaterialCategory.GetAll().Select(u => new SelectListItem
