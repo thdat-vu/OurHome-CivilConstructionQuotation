@@ -22,7 +22,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
 
         
-        //getAll() action
+        
         public IActionResult Index()
         {
             List<Material> objMaterialList = _unitOfWork.Material.GetAll().ToList();
@@ -30,12 +30,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return View(objMaterialList); //redirect to Index.cshtml + objList
         }
 
-        //Create Action
+        
         public IActionResult Create()
         {
-            //redirect to Create.cshtml
             return View();
-
         }
 
         //Create request HttpPOST
@@ -142,5 +140,16 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //TODO: Test result
             return Json(new {data = materialDetailVM});
         }
-    }
+		#region API CALLS
+		[HttpGet]
+		public IActionResult GetAll()
+        {
+			List<Material> objMaterialList = _unitOfWork.Material.GetAll(includeProperties:"Category").ToList();
+			return Json(new { data = objMaterialList }); //json + material list for data table.
+		}
+
+
+		#endregion
+	}
+
 }

@@ -120,5 +120,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //TempData["success"] = "Product deleted successfully";
             return RedirectToAction("Index"); //redirect to Index.cshtml
         }
-    }
+
+		#region API CALL
+        public IActionResult GetAll()
+        {
+			List<StandardQuotation> objStandardQuotationList = _unitOfWork.StandardQuotation.GetAll().ToList();
+			
+			return Json( new { data = objStandardQuotationList });
+		}
+		#endregion
+	}
 }
