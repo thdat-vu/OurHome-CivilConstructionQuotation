@@ -1,16 +1,15 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+    //Layout = "~/Views/Shared/_LayoutManager.cshtml";
 }
 
-@* <h1>Index</h1> *@
 
 <div class="card shadow border-0 my-4">
 	<div class="card-header bg-main ml-0 py-3">
 		<div class="row">
 			<div class="col-12 text-center">
-				<h2 class="text-white py-2">Quotation Statistic</h2>
+				<h2 class="text-white py-2">Combo List</h2>
 			</div>
 		</div>
 	</div>
@@ -18,38 +17,26 @@
 	<div class="card-body p-4">
 
 		<div class="table-responsive">
-			<table id="tblCustomQuotation" class="table-bordered table-striped text-black" style="width:100%">
+			<table id="tblMaterial" class="table-bordered table-striped text-black" style="width:100%">
 				<thead>
 					<tr>
 						<th>
 							Id
 						</th>
 						<th>
-							Date
+							Name
 						</th>
 						<th>
-							Acreage
+							Description
 						</th>
 						<th>
-							Location
-						</th>
-						<th>
-							Construct
+							Price
 						</th>
 						<th>
 							Status
 						</th>
 						<th>
-							Seller
-						</th>
-						<th>
-							Engineer
-						</th>
-						<th>
-							Manager
-						</th>
-						<th>
-							Actions
+							Construction Type
 						</th>
 					</tr>
 				</thead>
@@ -57,7 +44,3 @@
 		</div>
 	</div>
 </div>
-
-@section Scripts {
-	<script src="~/js/datatables/managerDTB/CustomQuotationDTB.js"></script>
-}

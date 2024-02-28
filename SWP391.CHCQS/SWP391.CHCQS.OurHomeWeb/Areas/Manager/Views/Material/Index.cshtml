@@ -1,8 +1,61 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutManager";
+    //Layout = "~/Views/Shared/_LayoutManager";
 }
 
-<h1>Index</h1>
 
+<div class="card shadow border-0 my-4">
+	<div class="card-header bg-main ml-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-white py-2">Material List</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="card-body p-4">
+		<div class="row pb-3">
+			<div class="col-6">
+			</div>
+			<div class="col-6 text-end">
+				<a asp-area="Manager" asp-controller="Material" asp-action="Create" class="btn btn-primary btn-main">
+					<i class="bi bi-plus-circle"></i>  Create New Material
+				</a>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table id="tblMaterial" class="table-bordered table-striped text-black" style="width:100%">
+				<thead>
+					<tr>
+						<th>
+							Id
+						</th>
+						<th>
+							Name
+						</th>
+						<th>
+							Quantity
+						</th>
+						<th>
+							Unit Price
+						</th>
+						<th>
+							Unit
+						</th>
+						<th>
+							Category
+						</th>
+						<th>
+							Actions
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="~/js/datatables//managerDTB/MaterialDTB.js"></script>
+}
