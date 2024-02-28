@@ -213,8 +213,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _unitOfWork.CustomQuotation.Update(target);
             _unitOfWork.Save();
 
-            //Thông báo đã reject thành công
-            TempData["Success"] = "Reject Successfull";
             //điều hướng người dùng lại trang index 
             return RedirectToAction("Index");
 
@@ -264,44 +262,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return RedirectToAction("Index");
         }
         
-
-        //hàm xử lý quyết định approve của manager
-        public IActionResult ApproveDetail(string id)
-        {
-            //lấy ra custom quotation
-            var customQuotation = _unitOfWork.CustomQuotation.Get((x) => x.Id == id);
-            //thêm thời gian approve của manager
-            customQuotation.AcceptanceDateManager = DateTime.Now;
-
-            //update status thành completed - tức đã dc duyệt 
-            customQuotation.Status = SD.Completed;
-
-
-            /*
-             *
-             *
-             *
-             *
-             *Thực hiện gửi email cho người dùng
-             *
-             *
-             *
-             */
-
-
-
-            _unitOfWork.CustomQuotation.Update(customQuotation);
-            _unitOfWork.Save();
-
-            //Thông báo approve thành công
-            TempData["Success"] = "Quotation has been send";
-
-            //chuyển người dùng về lại danh sách
-            return RedirectToAction("Index");
-        }
-
-
-
 		public IActionResult Test()
         {
 			//lấy đường dẫn staic file có dẫn đến folder reject-quotation-file - nơi chứa thông tin của các custom quotation đã bị reject
