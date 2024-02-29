@@ -226,14 +226,16 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			/*
              *
              *
-             *
-             *
              *Thực hiện gửi email cho người dùng
-             *
-             *
-             *
              */
 			EmailSender.SendInfoToEmail("datsung.dev@gmail.com", "TestHTML", HTMLTemplate.Get());
+			/*
+             *Lưu trữ các string cần hiển thị cho email vào List
+             *
+             */
+
+
+
 
 			_unitOfWork.CustomQuotation.Update(customQuotation);
 			_unitOfWork.Save();
