@@ -6,7 +6,7 @@ $(document).ready(function () {
 //Need an api method return json to use this
 function loadDataTableQuotation() {
     dataTableCQ = $('#tblCustomQuotation').DataTable({
-        "ajax": { url: '/Engineer/Quotation/GetAll' },
+        "ajax": { url: '/Engineer/Quotation/GetRejected' },
         "columns": [
             { data: 'id', },
             { data: 'date', },

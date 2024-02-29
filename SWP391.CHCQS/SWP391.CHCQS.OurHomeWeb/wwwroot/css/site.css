@@ -29,6 +29,10 @@ body {
     color: #F27456;
 }
 
+.text-pointer {
+    cursor: pointer;
+}
+
 
 /*Style for main BTN*/
 .btn-main {

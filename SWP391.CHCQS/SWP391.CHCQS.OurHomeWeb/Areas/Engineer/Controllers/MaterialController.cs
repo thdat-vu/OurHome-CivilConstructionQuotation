@@ -67,6 +67,47 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		{
 			return Json(new { data = MaterialListSession.ToList() });
 		}
+
+
+		[HttpGet]
+		public async Task<IActionResult> GetMaterialListHistory()
+		{
+			List<MaterialDetailViewModel> materialDetailViewModel;
+			materialDetailViewModel = _unitOfWork.MaterialDetail.GetMaterialDetail("CQ001", includeProp: "Material").Select(x => new MaterialDetailViewModel
+			{
+				Material = x.Material,
+				QuotationId = x.QuotationId,
+				Quantity = x.Quantity,
+				Price = x.Price,
+			}).ToList();
+			return Json(new { data = materialDetailViewModel });
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		[HttpGet]
+		[ActionName("Detail")]
+		public IActionResult GetDetail([FromQuery] string MaterialId)
+		{
+			var materialDetail = _unitOfWork.Material.Get((x) => x.Id == MaterialId, includeProperties: "Category");
+			var materialDetailVM = new MaterialViewModel()
+			{
+				Id = materialDetail.Id,
+				Name = materialDetail.Name,
+				InventoryQuantity = materialDetail.InventoryQuantity,
+				UnitPrice = materialDetail.UnitPrice,
+				Unit = materialDetail.Unit,
+				Status = materialDetail.Status,
+				CategoryId = materialDetail.CategoryId,
+				CategoryName = materialDetail.Category.Name
+			};
+			//TODO: Test result
+			return Json(new { data = materialDetailVM });
+		}
+
 		#endregion
 
 		[HttpGet]
@@ -102,7 +143,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					{
 						Material = material,
 						QuotationId = CustomQuotationSession.Id,
-						Price = material.UnitPrice * 0.8m
+						Price = material.UnitPrice
 					};
 
 					//Add materialItem into materialCart

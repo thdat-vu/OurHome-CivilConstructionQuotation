@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWP391.CHCQS.DataAccess.Data;
 
@@ -11,9 +12,10 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    partial class SWP391DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240226083413_RebuiltRejectTable")]
+    partial class RebuiltRejectTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -713,9 +715,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.HasIndex("RequestId")
-                        .IsUnique()
-                        .HasFilter("[requestId] IS NOT NULL");
+                    b.HasIndex("RequestId");
 
                     b.HasIndex("SellerId");
 
@@ -726,7 +726,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ001",
                             Acreage = "240m2",
-                            Date = new DateTime(2024, 2, 26, 15, 21, 49, 695, DateTimeKind.Local).AddTicks(2228),
+                            Date = new DateTime(2024, 2, 26, 15, 34, 12, 759, DateTimeKind.Local).AddTicks(5003),
                             Description = "I want to build this house for my son and his wife, so i can live with them.",
                             EngineerId = "EN001",
                             Location = "Dĩ An, Bình Dương",
@@ -740,8 +740,11 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ002",
                             Acreage = "340m2",
-                            Date = new DateTime(2024, 2, 26, 15, 21, 49, 695, DateTimeKind.Local).AddTicks(2232),
+                            Date = new DateTime(2024, 2, 26, 15, 34, 12, 759, DateTimeKind.Local).AddTicks(5007),
+                            Description = "This house must be great, so i can live with it for 500 years.",
+                            EngineerId = "EN001",
                             Location = "Quận 5, TP. Hồ Chí Minh",
+                            ManagerId = "MG001",
                             RequestId = "RF002",
                             SellerId = "SL001",
                             Status = 2,
@@ -751,7 +754,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ003",
                             Acreage = "740m2",
-                            Date = new DateTime(2024, 2, 26, 15, 21, 49, 695, DateTimeKind.Local).AddTicks(2234),
+                            Date = new DateTime(2024, 2, 26, 15, 34, 12, 759, DateTimeKind.Local).AddTicks(5009),
                             Description = "This house for president to live, it must be nice.",
                             EngineerId = "EN001",
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
@@ -1577,7 +1580,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT2",
                             CustomerId = "ID001",
                             Description = "Customer said that this project must be finished on 3 month",
-                            GenerateDate = new DateTime(2024, 2, 26, 15, 21, 49, 695, DateTimeKind.Local).AddTicks(1797),
+                            GenerateDate = new DateTime(2024, 2, 26, 15, 34, 12, 759, DateTimeKind.Local).AddTicks(4739),
                             Location = "Dĩ An, Bình Dương",
                             Status = true
                         },
@@ -1588,7 +1591,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT1",
                             CustomerId = "ID002",
                             Description = "Customer said that this project must be finished on 6 month",
-                            GenerateDate = new DateTime(2024, 2, 26, 15, 21, 49, 695, DateTimeKind.Local).AddTicks(1810),
+                            GenerateDate = new DateTime(2024, 2, 26, 15, 34, 12, 759, DateTimeKind.Local).AddTicks(4752),
                             Location = "Quận 5, TP. Hồ Chí Minh",
                             Status = true
                         },
@@ -1599,7 +1602,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT3",
                             CustomerId = "ID003",
                             Description = "Customer said that this project must be finished on 12 month",
-                            GenerateDate = new DateTime(2024, 2, 26, 15, 21, 49, 695, DateTimeKind.Local).AddTicks(1812),
+                            GenerateDate = new DateTime(2024, 2, 26, 15, 34, 12, 759, DateTimeKind.Local).AddTicks(4754),
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
                             Status = true
                         });
@@ -2169,8 +2172,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasForeignKey("ManagerId");
 
                     b.HasOne("SWP391.CHCQS.Model.RequestForm", "Request")
-                        .WithOne("CustomQuotation")
-                        .HasForeignKey("SWP391.CHCQS.Model.CustomQuotation", "RequestId");
+                        .WithMany("CustomQuotations")
+                        .HasForeignKey("RequestId");
 
                     b.HasOne("SWP391.CHCQS.Model.Staff", "Seller")
                         .WithMany()
@@ -2376,7 +2379,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
                 {
-                    b.Navigation("CustomQuotation");
+                    b.Navigation("CustomQuotations");
                 });
 #pragma warning restore 612, 618
         }

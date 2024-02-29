@@ -1,12 +1,12 @@
 ﻿
 $(window).on("load", function () {
-    var yearList;
+    
     $.ajax({
         url: "/Manager/Dashboard/GetYearList",
         type: "GET",
         dataType: "json",
         success: function (response) {
-            yearList = response.data;
+            var yearList = response.data;
             //console.log(yearList[0]);
             for (var i = 0; i < yearList.length; i++) {
                 
@@ -34,6 +34,6 @@ $(window).on("load", function () {
 
 
 $('#yearSelect').on("change", function(){
-    console.log("Bo m da change");
-    handleDrawChart(this.value)
+    year = this.value;
+    handleDrawChart(year);
 });

@@ -51,21 +51,23 @@
 			<!-- Divider -->
 			<hr class="sidebar-divider">
 
-			<!-- Heading -->
+			@* 			<!-- Heading -->
 			<div class="sidebar-heading">
-				Interface
-			</div>
+			Interface
+			</div> *@
 
 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
 				   aria-expanded="true" aria-controls="collapseTwo">
 					<i class="fas fa-fw fa-cog"></i>
-					<span>Tasks</span>
+					<span>Quotations</span>
 				</a>
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" asp-area="Engineer" asp-controller="Quotation" asp-action="Index">Quotations</a>
+						<a class="collapse-item" asp-area="Engineer" asp-controller="Quotation" asp-action="Index">Waiting</a>
+						@* 						<a class="collapse-item" asp-area="Engineer" asp-controller="Quotation" asp-action="Rejected">Rejected</a> *@
+						<a class="collapse-item" asp-area="Engineer" asp-controller="Quotation" asp-action="History">History</a>
 					</div>
 				</div>
 			</li>
