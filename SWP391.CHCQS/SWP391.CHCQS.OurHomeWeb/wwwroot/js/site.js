@@ -45,7 +45,7 @@ function ShowTaskDetail(url) {
     </div>
 `,
                 focusConfirm: false,
-                confirmButtonText: "Back",
+             
             });
         },
     });
@@ -75,8 +75,8 @@ function ShowMaterialDetail(url) {
         </div>
     </div>
 `,
+               
                 focusConfirm: false,
-                confirmButtonText: "Back",
             });
         },
     });
