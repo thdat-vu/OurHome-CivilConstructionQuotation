@@ -31,7 +31,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public IMaterialCategoryRepository MaterialCategory { get; private set; }
         public IRejectedCustomQuotationRepository RejectedCustomQuotation { get; private set; }
 
-        public IRejectedCustomQuotationRepository RejectedCustomQuotation { get; private set; }
 
 		public UnitOfWork(SWP391DBContext db)
         {
