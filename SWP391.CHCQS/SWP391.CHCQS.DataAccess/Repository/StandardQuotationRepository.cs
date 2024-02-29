@@ -18,7 +18,18 @@ namespace SWP391.CHCQS.DataAccess.Repository
         }
         public void Update(StandardQuotation obj)
         {
-            _db.StandardQuotations.Update(obj);
-        }
+			//_db.StandardQuotations.Update(obj);
+			//step 1: retrieve object from database 
+			var objFromDb = _db.StandardQuotations.SingleOrDefault(u => u.Id == obj.Id);
+			
+			//step 2: pass Properties from obj to objFromDb
+			if (objFromDb != null)
+			{
+				objFromDb.Name = obj.Name;
+				objFromDb.Description = obj.Description;
+				objFromDb.Price = obj.Price;
+				objFromDb.ConstructionId = obj.ConstructionId;
+			}
+		}
     }
 }
