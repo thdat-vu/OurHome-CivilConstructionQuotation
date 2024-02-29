@@ -8,9 +8,13 @@ function loadDataTableMaterial() {
     dataTableM = $('#tblMaterial').DataTable({
         "ajax": { url: '/Engineer/Material/GetAll' },
         "columns": [
-            { data: 'id', },
+            {
+                data: "id",
+                "render": function (data) {
+                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
+                },
+            },
             { data: 'name', },
-            { data: 'inventoryQuantity', },
             { data: 'unitPrice', },
             { data: 'unit', },
             { data: 'categoryName', },
@@ -31,9 +35,15 @@ function AddToQuoteMaterial(url) {
         type: 'GET',
         url: url,
         success: function (data) {
-            dataTableMD.ajax.reload();
-            dataTableM.ajax.reload();
-            toastr.success(data.message);
+            if (!data.success) {
+                dataTableMD.ajax.reload();
+                dataTableM.ajax.reload();
+                toastr.error(data.message);
+            } else {
+                dataTableMD.ajax.reload();
+                dataTableM.ajax.reload();
+                toastr.success(data.message);
+            }
         },
         error: function (data) {
             dataTableMD.ajax.reload();

@@ -8,4 +8,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
         public CustomQuotationDetailViewModel? QuotationDetailVM { get; set; }
         public RejectCustomQuotationDetailVM? RejectQuotationDetailVM { get; set; }
     }
+
+  
 }

@@ -8,7 +8,12 @@ function loadDataTableMaterialDetail() {
     dataTableMD = $('#tblMaterialDetail').DataTable({
         "ajax": { url: '/Engineer/Material/GetMaterialListSession' },
         "columns": [
-            { data: 'material.id', },
+            {
+                data: 'material.id',
+                "render": function (data) {
+                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
+                },
+            },
             { data: 'material.name', },
             { data: 'material.unitPrice', },
             { data: 'material.unit', },
@@ -64,8 +69,13 @@ function UpdateMaterialQuantity(url, formId) {
         type: 'POST',
         data: formData,
         success: function (data) {
-            dataTableMD.ajax.reload();
-            toastr.success(data.message);
+            if (!data.success) {
+                dataTableMD.ajax.reload();
+                toastr.error(data.message);
+            } else {
+                dataTableMD.ajax.reload();
+                toastr.success(data.message);
+            }
         },
         error: function (data) {
             dataTableMD.ajax.reload();

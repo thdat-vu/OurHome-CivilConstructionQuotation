@@ -1,6 +1,4 @@
-﻿@model ﻿CustomQuotationVM
-
-
+﻿@model CustomQuotationVM
 @{
     ViewData["Title"] = "Detail";
     //biến để hiển thị lên view
@@ -251,7 +249,7 @@
 
     
     <!--khi reject dữ liệu ở form sẽ dc đẩy xuống-->
-    <form asp-controller="CustomQuotation" asp-action="RejectDetail" method="post">
+    <form asp-controller="CustomQuotation" asp-action="RejectDetail" method="post" asp-model="model">
         <!--quotation id sẽ dc reject-->
         <input asp-for="@rejectQuotationDetailVM.RejectQuotationId" type="hidden" value="@quotationDetailVM.QuoteId" />
         <!--manager id - người đã thực hiện reject-->

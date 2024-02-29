@@ -8,7 +8,12 @@ function loadDataTableCustomQuotationTask() {
     dataTableCQT = $('#tblCustomQuotationTask').DataTable({
         "ajax": { url: '/Engineer/Task/GetTaskListSession' },
         "columns": [
-            { data: 'task.id', },
+            {
+                data: 'task.id',
+                "render": function (data) {
+                    return `<a class="text-main text-pointer" onClick="ShowTaskDetail('/Engineer/Task/Detail?TaskId=${data}')" >${data}</a>`
+                },
+            },
             { data: 'task.name', },
             { data: 'task.unitPrice', },
             { data: 'price', },
@@ -29,9 +34,15 @@ function DeleteTaskFromQuote(url) {
         url: url,
         type: 'DELETE',
         success: function (data) {
-            dataTableCQT.ajax.reload();
-            dataTableT.ajax.reload();
-            toastr.success(data.message);
+            if (!data.success) {
+                dataTableCQT.ajax.reload();
+                dataTableT.ajax.reload();
+                toastr.error(data.message);
+            } else {
+                dataTableCQT.ajax.reload();
+                dataTableT.ajax.reload();
+                toastr.success(data.message);
+            }
         },
         error: function (data) {
             dataTableCQT.ajax.reload();

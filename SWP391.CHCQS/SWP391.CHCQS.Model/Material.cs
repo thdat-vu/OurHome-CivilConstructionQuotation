@@ -19,7 +19,7 @@ namespace SWP391.CHCQS.Model
         public string Unit { get; set; } = null!;
         public bool Status { get; set; }
         public string CategoryId { get; set; } = null!;
-
+        
         public virtual MaterialCategory Category { get; set; } = null!;
         //public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
 

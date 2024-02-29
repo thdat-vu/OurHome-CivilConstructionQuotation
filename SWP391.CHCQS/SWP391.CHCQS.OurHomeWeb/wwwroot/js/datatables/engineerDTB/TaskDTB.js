@@ -8,7 +8,12 @@ function loadDataTableTask() {
     dataTableT = $('#tblTask').DataTable({
         "ajax": { url: '/Engineer/Task/GetAll' },
         "columns": [
-            { data: 'id', },
+            {
+                data: "id",
+                "render": function (data) {
+                    return `<a class="text-main text-pointer" onClick="ShowTaskDetail('/Engineer/Task/Detail?TaskId=${data}')" >${data}</a>`
+                },
+            },
             { data: 'name', },
             { data: 'unitPrice', },
             { data: 'categoryName', },
@@ -29,9 +34,15 @@ function AddToQuoteTask(url) {
         type: 'GET',
         url: url,
         success: function (data) {
-            dataTableCQT.ajax.reload();
-            dataTableT.ajax.reload();
-            toastr.success(data.message);
+            if (!data.success) {
+                dataTableCQT.ajax.reload();
+                dataTableT.ajax.reload();
+                toastr.error(data.message);
+            } else {
+                dataTableCQT.ajax.reload();
+                dataTableT.ajax.reload();
+                toastr.success(data.message);
+            }
         },
         error: function (data) {
             dataTableCQT.ajax.reload();

@@ -29,6 +29,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public IRoofTypeRepository RoofType { get; private set; }
         public IStaffRepository Staff { get; private set; }
         public IMaterialCategoryRepository MaterialCategory { get; private set; }
+        public IRejectedCustomQuotationRepository RejectedCustomQuotation { get; private set; }
 
         public IRejectedCustomQuotationRepository RejectedCustomQuotation { get; private set; }
 
