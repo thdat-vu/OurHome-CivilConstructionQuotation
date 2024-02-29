@@ -63,7 +63,27 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		{
 			List<CustomQuotationListViewModel> customQuotationVMList = _unitOfWork.CustomQuotation
 				.GetAll()
-				.Where(x => x.Status == SD.Pending_Approval)
+				.Where(x => x.Status == SD.Pending_Approval || x.Status == SD.Completed)
+				.OrderBy(x => x.Date)
+				.Select(x => new CustomQuotationListViewModel
+				{
+					Id = x.Id,
+					Date = x.Date,
+					Acreage = x.Acreage,
+					Location = x.Location,
+					Status = SD.GetQuotationStatusDescription(x.Status),
+				})
+				.ToList();
+
+			return Json(new { data = customQuotationVMList });
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> GetRejected()
+		{
+			List<CustomQuotationListViewModel> customQuotationVMList = _unitOfWork.CustomQuotation
+				.GetAll()
+				.Where(x => x.Status == SD.Rejected)
 				.OrderBy(x => x.Date)
 				.Select(x => new CustomQuotationListViewModel
 				{
@@ -99,6 +119,19 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		/// </summary>
 		/// <returns></returns>
 		public async Task<IActionResult> History()
+		{
+			//Remove all session
+			HttpContext.Session.Remove(SessionConst.TASK_LIST_KEY);
+			HttpContext.Session.Remove(SessionConst.MATERIAL_LIST_KEY);
+			HttpContext.Session.Remove(SessionConst.CUSTOM_QUOTATION_KEY);
+			return View();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public async Task<IActionResult> Rejected()
 		{
 			//Remove all session
 			HttpContext.Session.Remove(SessionConst.TASK_LIST_KEY);
