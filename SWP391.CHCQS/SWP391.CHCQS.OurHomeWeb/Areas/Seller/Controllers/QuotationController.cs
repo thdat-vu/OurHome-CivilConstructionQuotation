@@ -36,7 +36,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 Status = SD.Preparing,
                 Description = requestForm.Description,
                 Total = 0,
-
             });
             ViewBag.CustomQuotation = customQuotation;
 
@@ -83,6 +82,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             {
                 // Tạo một đối tượng ConstructDetail mới với các giá trị đã chọn từ ViewModel
                 CustomQuotation? customQuotation = JsonSerializer.Deserialize<CustomQuotation>(hiddenData);
+                customQuotation.SubmissionDateSeller = DateTime.Now;
                
                 ConstructDetail constructDetail = new ConstructDetail
                 {
@@ -110,7 +110,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 _unitOfWork.Save();
 
                 TempData["success"] = "Construct Detail created successfully";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ViewQuotation", "Quotation");
             }
             else
             {
