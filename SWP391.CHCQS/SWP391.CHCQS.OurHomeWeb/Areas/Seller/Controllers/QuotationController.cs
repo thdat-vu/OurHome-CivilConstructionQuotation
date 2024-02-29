@@ -160,57 +160,21 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 				.ToList();
 
 			return Json(new { data = CustomQuotationList });
-		}
+        }
         #endregion
 
-        //#region
-        ///// <summary>
-        ///// This function get all Customer's Request in Database and return it into JSON, this function ne lib Datatables to show data
-        ///// </summary>
-        ///// <returns></returns>
-        ////[HttpGet]
-        ////public async Task<IActionResult> GetAllConstructDetail()
-        ////{
-        ////	List<QuotationViewModel> QuotationVM = _unitOfWork.ConstructDetail
-        ////		.GetAll(includeProperties: "CustomQuotation")
-        ////		.Where(t => t != null)
-        ////		.Select(x => new QuotationViewModel
-        ////		{
-        ////			Id = x.Id,
-        ////			Date = x.Date,
-        ////			Description = x.Description,
-        ////			ConstructType = x.ConstructType,
-        ////			Acreage = x.Acreage,
-        ////			Location = x.Location,
-        ////			Alley = x.Alley,
-        ////			Balcony = x.Balcony,
-        ////                  BasementId = x.BasementId,
-        ////                  ConstructionId = x.ConstructionId,
-        ////                  Facade = x.Facade,
-        ////                  Floor = x.Floor,
-        ////                  FoundationId = x.FoundationId,
-        ////                  Garden = x.Garden,
-        ////                  InvestmentId = x.InvestmentId,
-        ////                  Length = x.Length,
-        ////                  Mezzanine = x.Mezzanine,
-        ////                  RooftopFloor = x.RooftopFloor,
-        ////                  RooftopId = x.RooftopId,
-        ////                  Room = x.Room,
-        ////                  Width = x.Width
-        ////		})
-        ////		.ToList();
-
-        ////	return Json(new { data = QuotationVM });
-        ////}
-        //#endregion
 
         public IActionResult ViewQuotation()
         {
             return View();
         }
-		public IActionResult Details()
+		public IActionResult Details(string id)
         {
-            return View();
+            QuotationViewModel quotationViewModel = new QuotationViewModel{
+                //ConstructDetail = _unitOfWork.ConstructDetail.Get(x=> x.QuotationId == id),
+                CustomQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == id, includeProperties: "ConstructDetail")
+            };
+            return View(quotationViewModel);
         }
     }
 }

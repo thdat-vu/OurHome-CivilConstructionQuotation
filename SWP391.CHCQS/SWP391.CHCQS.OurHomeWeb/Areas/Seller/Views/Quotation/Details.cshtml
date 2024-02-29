@@ -1,22 +1,40 @@
-﻿
+﻿@model SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels.QuotationViewModel
 
 <div id="content" class="details">
     <div class="container" style="position:relative">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                <div class="box-shadow m-b-15">
+                <div class="box-shadow" style="margin-top: 1.5em">
                     <div class="col-xs-12">
                         <div class="row">
-                            <div class="title col-xs-12">
-                                <h1>Title</h1>
+                            <div class="title col-xs-12" style="background-color: #F27456 !important; border-radius: 10px; margin-bottom: 1em; padding: 1em">
+                                <h1 style="justify-content: center; display: flex; color:white">Custom Quotation Details</h1>
                             </div>
                             <div class="p-b-15 col-xs-12" style="border: 1px solid #ccc">
                                 <div class="row">
-                                    <div class="col-xs-12 m-b-15" style="margin-bottom:1.5em">
-                                        <span style="font-size:1.5em">Thông tin yêu cầu</span>
+                                    <div class="col-xs-12" style="margin-bottom:1.5em">
+                                      
                                         <div style="float:right !important"> </div>
-                                        <div class="project_description text-justify m-t-15">
-                                            <p></p>
+                                        <div class="project_description text-justify" style="margin-top: 1.5em">
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">QuotationID: @Model.CustomQuotation.Id</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Generate Date: @Model.CustomQuotation.Date</p>
+                                            <p style ="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Location: @Model.CustomQuotation.Location</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Acreage: @Model.CustomQuotation.Acreage</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Balcony: @Model.CustomQuotation.ConstructDetail.Balcony</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">BasementId: @Model.CustomQuotation.ConstructDetail.BasementId</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">ConstructionId: @Model.CustomQuotation.ConstructDetail.ConstructionId</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">FoundationId: @Model.CustomQuotation.ConstructDetail.FoundationId</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">InvestmentId: @Model.CustomQuotation.ConstructDetail.InvestmentId</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">RooftopId: @Model.CustomQuotation.ConstructDetail.RooftopId</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Width: @Model.CustomQuotation.ConstructDetail.Width</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Length: @Model.CustomQuotation.ConstructDetail.Length</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Facade: @Model.CustomQuotation.ConstructDetail.Facade</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Alley: @Model.CustomQuotation.ConstructDetail.Alley</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Floor: @Model.CustomQuotation.ConstructDetail.Floor</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Room: @Model.CustomQuotation.ConstructDetail.Room</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Mezzanine: @Model.CustomQuotation.ConstructDetail.Mezzanine</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Rooftop Floor: @Model.CustomQuotation.ConstructDetail.RooftopFloor</p>
+                                            <p style="font-size:1.5em; width: 100% ;justify-content:space-between;gap: 1em; display: flex">Garden: @Model.CustomQuotation.ConstructDetail.Garden</p>
                                         </div>
                                     </div>
                                 </div>

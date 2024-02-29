@@ -20,7 +20,7 @@ function loadDataTableRequest() {
                        <a href="/Seller/Quotation/Details?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> View Details</a>
                     </div >`
                 },
-                "width": "20%"
+                "width": "15%"
             }
         ]
     });
