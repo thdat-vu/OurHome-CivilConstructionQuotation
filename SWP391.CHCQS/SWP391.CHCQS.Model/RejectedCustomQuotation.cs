@@ -35,8 +35,6 @@ namespace SWP391.CHCQS.Model
         public virtual Staff Manager { get; set; }
 
         //---------------------------------------------------------------------------------------------
-  
-
         public string? Reason { get; set; }
     }
 

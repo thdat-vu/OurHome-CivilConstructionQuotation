@@ -12,8 +12,8 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    [Migration("20240227100205_rebuilRejectTable")]
-    partial class rebuilRejectTable
+    [Migration("20240229060340_rebuildTable")]
+    partial class rebuildTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -728,7 +728,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ001",
                             Acreage = "240m2",
-                            Date = new DateTime(2024, 2, 27, 17, 2, 4, 791, DateTimeKind.Local).AddTicks(6987),
+                            Date = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6415),
                             Description = "I want to build this house for my son and his wife, so i can live with them.",
                             EngineerId = "EN001",
                             Location = "Dĩ An, Bình Dương",
@@ -742,7 +742,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ002",
                             Acreage = "340m2",
-                            Date = new DateTime(2024, 2, 27, 17, 2, 4, 791, DateTimeKind.Local).AddTicks(6990),
+                            Date = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6418),
                             Description = "This house must be great, so i can live with it for 500 years.",
                             EngineerId = "EN001",
                             Location = "Quận 5, TP. Hồ Chí Minh",
@@ -756,7 +756,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ003",
                             Acreage = "740m2",
-                            Date = new DateTime(2024, 2, 27, 17, 2, 4, 791, DateTimeKind.Local).AddTicks(6993),
+                            Date = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6421),
                             Description = "This house for president to live, it must be nice.",
                             EngineerId = "EN001",
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
@@ -1580,7 +1580,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT2",
                             CustomerId = "ID001",
                             Description = "Customer said that this project must be finished on 3 month",
-                            GenerateDate = new DateTime(2024, 2, 27, 17, 2, 4, 791, DateTimeKind.Local).AddTicks(6724),
+                            GenerateDate = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6112),
                             Location = "Dĩ An, Bình Dương",
                             Status = true
                         },
@@ -1591,7 +1591,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT1",
                             CustomerId = "ID002",
                             Description = "Customer said that this project must be finished on 6 month",
-                            GenerateDate = new DateTime(2024, 2, 27, 17, 2, 4, 791, DateTimeKind.Local).AddTicks(6733),
+                            GenerateDate = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6120),
                             Location = "Quận 5, TP. Hồ Chí Minh",
                             Status = true
                         },
@@ -1602,7 +1602,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT3",
                             CustomerId = "ID003",
                             Description = "Customer said that this project must be finished on 12 month",
-                            GenerateDate = new DateTime(2024, 2, 27, 17, 2, 4, 791, DateTimeKind.Local).AddTicks(6735),
+                            GenerateDate = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6121),
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
                             Status = true
                         });
