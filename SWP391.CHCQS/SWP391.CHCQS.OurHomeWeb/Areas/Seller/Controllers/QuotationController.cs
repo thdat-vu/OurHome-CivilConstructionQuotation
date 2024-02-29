@@ -160,16 +160,22 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 				.ToList();
 
 			return Json(new { data = CustomQuotationList });
-		}
-		#endregion
+
+        }
+        #endregion
+
 
         public IActionResult ViewQuotation()
         {
             return View();
         }
-		public IActionResult Details()
+		public IActionResult Details(string id)
         {
-            return View();
+            QuotationViewModel quotationViewModel = new QuotationViewModel{
+                //ConstructDetail = _unitOfWork.ConstructDetail.Get(x=> x.QuotationId == id),
+                CustomQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == id, includeProperties: "ConstructDetail")
+            };
+            return View(quotationViewModel);
         }
     }
 }
