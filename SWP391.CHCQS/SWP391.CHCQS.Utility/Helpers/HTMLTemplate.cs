@@ -8,12 +8,10 @@ namespace SWP391.CHCQS.Utility.Helpers
 {
 	public class HTMLTemplate
 	{
-		public static string Get()
+		public static string Get(string name, string generateDate, decimal total)
 		{
-			return @"
-    <p>Hello valued customer, we are sending you a response to your request on 24/02/2024. Your total amount due is $XXX, inclusive of the following items:</p>
-    
-		";
+			return @$"
+    <p>Hello {name}, we are sending you a response to your request on {generateDate}. Your total amount due is {total}đ, inclusive of the following items:</p>";
 		}
 	}
 }
