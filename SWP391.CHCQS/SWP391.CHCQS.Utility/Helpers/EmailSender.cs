@@ -96,7 +96,7 @@ namespace SWP391.CHCQS.Utility.Helpers
 			mess.Subject = subject;
 			mess.To.Add(new MailAddress(toEmail));
 
-			bodyBuilder.HtmlBody = String.Format(html); ;
+			bodyBuilder.HtmlBody = String.Format(html); 
 
 			mess.Body = bodyBuilder.HtmlBody;
 
