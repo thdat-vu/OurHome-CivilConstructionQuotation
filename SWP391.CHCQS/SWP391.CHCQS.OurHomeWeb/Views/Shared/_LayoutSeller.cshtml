@@ -31,7 +31,7 @@
 		<ul class="navbar-nav bg-main sidebar sidebar-dark accordion" id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a asp-area="Seller" asp-controller="Home" asp-action="Index" style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center">
+			<a style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 				<div class="sidebar-brand-icon">
 					<img src="~/images/logo.png" width="100%"></img>
 				</div>
@@ -50,7 +50,13 @@
 
 			<hr class="sidebar-divider my-0">
 
-			<!-- Nav Item - Create View Quotation -->
+			<!-- Nav Item - Create Construct Detail -->
+			<li class="nav-item active">
+				<a class="nav-link" asp-area="Seller" asp-controller="Quotation" asp-action="CreateConstructDetails">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Create Construct Detail</span>
+				</a>
+			</li>
 
 			<li class="nav-item active">
 				<a class="nav-link" asp-area="Seller" asp-controller="Quotation" asp-action="ViewQuotation">
