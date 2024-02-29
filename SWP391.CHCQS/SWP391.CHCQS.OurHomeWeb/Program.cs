@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Services.SignalR;
 
 namespace SWP391.CHCQS.OurHomeWeb
 {
@@ -18,11 +18,13 @@ namespace SWP391.CHCQS.OurHomeWeb
 				options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+			//Thêm service SignalR
+			builder.Services.AddSignalR();
 
 			//Câu lệnh đăng ký một dịch vụ bộ nhớ phân phối (distributed memory cache) trong container dịch vụ của ứng dụng.
 			builder.Services.AddDistributedMemoryCache();
 
-			
+
 			//đăng ký dịch vụ phiên (session) trong ứng dụng
 			//đăng ký dịch vụ phiên trong container dịch vụ của ứng dụng.
 			builder.Services.AddSession(options =>
@@ -55,6 +57,9 @@ namespace SWP391.CHCQS.OurHomeWeb
 
 			app.UseAuthorization();
 
+			//Khai báo app có sử dụng signalR
+			app.MapHub<SignalServer>("/signalServer");
+
 			//Khai báo app có sử dụng Session thì truy cập HttpContext.Session mới được
 			//Khai báo trước app.UseRouting(); app.UseAuthorization(); sau app.UseEndpoints app.Run();
 			app.UseSession();
@@ -65,7 +70,7 @@ namespace SWP391.CHCQS.OurHomeWeb
 				  name: "areas",
 				  pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
 				);
-			
+
 			});
 
 			app.Run();

@@ -1,0 +1,12 @@
+{
+  "CustomQuotaionTasks": [
+    "TKS11",
+    "TSK01"
+  ],
+  "MaterialDetails": {
+    "VT101": 0,
+    "VT102": 0
+  },
+  "SubmissionDateEngineer": "2024-03-01T00:32:05.6392514",
+  "RecieveDateManager": null
+}
