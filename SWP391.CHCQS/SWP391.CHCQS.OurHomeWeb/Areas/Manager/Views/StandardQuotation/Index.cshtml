@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Index";
     //Layout = "~/Views/Shared/_LayoutManager.cshtml";
-	
 }
 
 
@@ -16,17 +15,9 @@
 	</div>
 
 	<div class="card-body p-4">
-		<div class="row pb-3">
-			<div class="col-6">
-			</div>
-			<div class="col-6 text-end">
-				<a asp-area="Manager" asp-controller="StandardQuotation" asp-action="Create" class="btn btn-primary btn-main">
-					<i class="bi bi-plus-circle"></i>  Create New Combo
-				</a>
-			</div>
-		</div>
+
 		<div class="table-responsive">
-			<table id="tblStandardQuotation" class="table-bordered table-striped text-black" style="width:100%">
+			<table id="tblMaterial" class="table-bordered table-striped text-black" style="width:100%">
 				<thead>
 					<tr>
 						<th>
@@ -47,16 +38,9 @@
 						<th>
 							Construction Type
 						</th>
-						<th>
-							Actions
-						</th>
 					</tr>
 				</thead>
 			</table>
 		</div>
 	</div>
 </div>
-
-@section Scripts {
-	<script src="~/js/datatables//managerDTB/StandardQuotationDTB.js"></script>
-}

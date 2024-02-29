@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
@@ -34,31 +33,20 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         
         public IActionResult Create()
         {
-            //add MaterialViewModel to pass Properties.
-			MaterialViewModel materialVM = new()
-			{
-				CategoryList = _unitOfWork.MaterialCategory.GetAll().Select(u => new SelectListItem
-				{
-					Text = u.Name,
-					Value = u.Id.ToString()
-				}),
-				Material = new Material()
-			};
-            return View(materialVM);
-		}
+            return View();
+        }
 
         //Create request HttpPOST
         [HttpPost]
-        public IActionResult Create (MaterialViewModel obj)
+        public IActionResult Create (Material obj)
         {
-            
-                obj.Material.Status = true; //change status into true;
-                _unitOfWork.Material.Add(obj.Material); //Add MaterialVM to Material table
+            if (ModelState.IsValid) //if obj is valid
+            {
+                _unitOfWork.Material.Add(obj); //Add Material to Material table
                 _unitOfWork.Save(); //keep track on change
-				TempData["success"] = "Product created successfully";
-				return RedirectToAction("Index"); //after adding, return to previous action and reload the page
-            
-            //return View(obj); //return previous action + invalid object
+                return RedirectToAction("Index"); //after adding, return to previous action and reload the page
+            }
+            return View(obj); //return previous action + invalid object
         }
         //Edit Action
         public IActionResult Edit (string? id)
@@ -67,7 +55,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             {
                 return NotFound();//return status not found aka 404
             }
-            //step 1:retrieve Material from DB
+            //retrieve Material from DB
             Material? materialFromDb = _unitOfWork.Material.Get(u => u.Id == id);
 
             //catch not found exception
@@ -75,77 +63,64 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             {
                 return NotFound();//return status not found aka 404
             }
-			//step 2: pass the Material obj Properties to MaterialViewModel instance
-			//step 2.1: create MaterialViewModel
-            MaterialViewModel materialVM = new()
-            {
-                CategoryList = _unitOfWork.MaterialCategory.GetAll().Select(u => new SelectListItem
-                {
-                    Text= u.Name,
-                    Value = u.Id.ToString()
-                }),
-                Material = new Material()
-            };
-			//step 2.1: pass Material to MaterialViewModel
-			materialVM.Material= materialFromDb;
-			return View(materialVM); //return View + retrieved Material
+            return View(materialFromDb); //return View + retrieved Material
 
             
         }
         //Edit request with HttpPOST method
         [HttpPost]
-        public IActionResult Edit(MaterialViewModel obj)
+        public IActionResult Edit(Material obj)
         {
 
 
-           // if (ModelState.IsValid) //model is valid
-            //{
-                _unitOfWork.Material.Update(obj.Material); //Update Material to Material table
+            if (ModelState.IsValid) //model is valid
+            {
+                _unitOfWork.Material.Update(obj); //Update Material to Material table
                 _unitOfWork.Save(); //keep track on change
-                TempData["success"] = "Material edited successfully";
+               //TempData["success"] = "Material edited successfully";
                 return RedirectToAction("Index"); //after updating, return to previous action and reload the page
-            //}
-            //return View();//return previous action if model is invalid
+            }
+            return View();//return previous action if model is invalid
         }
 
         //Delete Action
-        //public IActionResult Delete(string? id)
-        //{
-        //    //catch null id exception
-        //    if (id == null)
-        //    {
-        //        return NotFound(); //return status not found aka 404
-        //    }
+        public IActionResult Delete(string? id)
+        {
+            //catch null id exception
+            if (id == null)
+            {
+                return NotFound(); //return status not found aka 404
+            }
 
-        //    //retrieve Material from DB
-        //    Material? materialFromDb = _unitOfWork.Material.Get(u => u.Id == id);
+            //retrieve Material from DB
+            Material? materialFromDb = _unitOfWork.Material.Get(u => u.Id == id);
 
-        //    if( materialFromDb == null)
-        //    {
-        //        return NotFound(); //return status not found aka 404
-        //    }
+            if( materialFromDb == null)
+            {
+                return NotFound(); //return status not found aka 404
+            }
                 
-        //    return View(materialFromDb); //return Delete.cshtml + materialFromDb
+            return View(materialFromDb); //return Delete.cshtml + materialFromDb
 
 
-        //}
-        ////delete request HttpPost, actionname=Delete
-        //[HttpPost, ActionName("Delete")]
-        //public IActionResult DeletePOST(string? id)
-        //{
-        //    //retrieve Material from Db
-        //    Material? obj = _unitOfWork.Material.Get(u => u.Id == id);
-        //    //handle id null exception
-        //    if (obj == null)
-        //    {
-        //        return NotFound();//return status not found aka 404
-        //    }
+        }
+        //delete request HttpPost, actionname=Delete
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(string? id)
+        {
+            //retrieve Material from Db
+            Material? obj = _unitOfWork.Material.Get(u => u.Id == id);
+            //handle id null exception
+            if (obj == null)
+            {
+                return NotFound();//return status not found aka 404
+            }
         
-        //    _unitOfWork.Material.Remove(obj); //just temporary
-        //    _unitOfWork.Save();//keep track on change
-        //    //TempData["success"] = "Product deleted successfully";
-        //    return RedirectToAction("Index"); //redirect to Index.cshtml
-        //}
+            _unitOfWork.Material.Remove(obj); //just temporary
+            _unitOfWork.Save();//keep track on change
+            //TempData["success"] = "Product deleted successfully";
+            return RedirectToAction("Index"); //redirect to Index.cshtml
+        }
         //get detail HttpGet
         [HttpGet]
         [ActionName("Detail")]
