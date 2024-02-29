@@ -153,13 +153,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-		public async Task<IActionResult> GetAllQuotation()
+		public async Task<IActionResult> GetAll()
 		{
 			List<CustomQuotation> CustomQuotationList = _unitOfWork.CustomQuotation
 				.GetAll()
 				.ToList();
 
 			return Json(new { data = CustomQuotationList });
+
         }
         #endregion
 

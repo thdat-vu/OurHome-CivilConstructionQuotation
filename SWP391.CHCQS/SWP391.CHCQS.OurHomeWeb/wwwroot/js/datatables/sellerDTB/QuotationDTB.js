@@ -5,14 +5,14 @@
 //Need an api method return json to use this
 function loadDataTableRequest() {
     dataTable = $('#tblQuotation').DataTable({
-        "ajax": { url: '/Seller/Quotation/GetAllQuotation' },
+        "ajax": { url: '/Seller/Quotation/GetAll' },
         "columns": [
             { data: 'id', "width": "5%" },
             { data: 'date', "width": "15%" },
-            { data: 'acreage', "width": "5%" },
+            { data: 'acreage', "width": "15%" },
             { data: 'location', "width": "15%" },
             { data: 'description', "width": "35%" },
-            { data: 'status', "width": "5%" },
+            { data: 'status', "width": "15%" },
             {
                 data: 'id',
                 "render": function (data) {
@@ -25,4 +25,3 @@ function loadDataTableRequest() {
         ]
     });
 }
-
