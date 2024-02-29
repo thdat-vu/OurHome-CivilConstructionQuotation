@@ -8,7 +8,12 @@ function loadDataTableTask() {
     dataTableT = $('#tblTask').DataTable({
         "ajax": { url: '/Engineer/Task/GetAll' },
         "columns": [
-            { data: 'id', },
+            {
+                data: "id",
+                "render": function (data) {
+                    return `<a class="text-main text-pointer" onClick="ShowTaskDetail('/Engineer/Task/Detail?TaskId=${data}')" >${data}</a>`
+                },
+            },
             { data: 'name', },
             { data: 'unitPrice', },
             { data: 'categoryName', },

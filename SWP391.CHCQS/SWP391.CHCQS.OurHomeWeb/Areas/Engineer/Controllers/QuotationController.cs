@@ -179,9 +179,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//if taskCart == null mean the taskCart have no task in there
 			if (taskCart.Count == 0)
 			{
-				taskCart = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id, includeProp: null).Select(x => new CustomQuotationTaskViewModel
+				taskCart = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task").Select(x => new CustomQuotationTaskViewModel
 				{
-					Task = _unitOfWork.Task.Get(t => t.Id == x.TaskId),
+					Task = x.Task,
 					QuotationId = x.QuotationId,
 					Price = x.Price,
 				}).ToList();
@@ -196,9 +196,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//if materialCart == null mean the taskCart have no task in there
 			if (materialCart.Count == 0)
 			{
-				materialCart = _unitOfWork.MaterialDetail.GetMaterialDetail(CustomQuotationSession.Id, includeProp: null).Select(x => new MaterialDetailViewModel
+				materialCart = _unitOfWork.MaterialDetail.GetMaterialDetail(CustomQuotationSession.Id, includeProp: "Material").Select(x => new MaterialDetailViewModel
 				{
-					Material = _unitOfWork.Material.Get(m => m.Id == x.MaterialId),
+					Material = x.Material,
 					QuotationId = x.QuotationId,
 					Quantity = x.Quantity,
 					Price = x.Price,
@@ -407,6 +407,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				RooftopTypeName = constructDetail.Rooftop.Name,
 				BasementTypeName = constructDetail.Basement.Name
 			};
+
+			//Set customQuotationViewModel after exist in database into CustomQuotationSession
+			HttpContext.Session.Set(SessionConst.CUSTOM_QUOTATION_KEY, customQuotationViewModel);
 
 			return View(constructDetailVM);
 		}

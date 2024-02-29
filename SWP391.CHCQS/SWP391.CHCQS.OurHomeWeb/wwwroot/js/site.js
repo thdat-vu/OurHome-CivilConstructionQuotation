@@ -20,3 +20,64 @@ function BackToIndex(url) {
         }
     });
 }
+
+//This function handle show TaskDetail when click on TaskId
+function ShowTaskDetail(url) {
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (data) {
+            Swal.fire({
+                icon: "info",
+                html: `<div class="container">
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Id:</strong> ${data.data.id}</li>
+                    <li class="list-group-item"><strong>Name:</strong> ${data.data.name}</li>
+                    <li class="list-group-item"><strong>Description:</strong> ${data.data.description}</li>
+                    <li class="list-group-item"><strong>Unit Price:</strong> ${data.data.unitPrice}</li>
+                    <li class="list-group-item"><strong>Category Id:</strong> ${data.data.categoryId}</li>
+                    <li class="list-group-item"><strong>Category:</strong> ${data.data.categoryName}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+`,
+                focusConfirm: false,
+                confirmButtonText: "Back",
+            });
+        },
+    });
+}
+
+//This fuction handle show MaterialDetail when click on MaterialId
+function ShowMaterialDetail(url) {
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (data) {
+            Swal.fire({
+                icon: "info",
+                html: `<div class="container">
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Id:</strong> ${data.data.id}</li>
+                    <li class="list-group-item"><strong>Name:</strong> ${data.data.name}</li>
+                    <li class="list-group-item"><strong>Description:</strong> ${data.data.description}</li>
+                    <li class="list-group-item"><strong>Unit Price:</strong> ${data.data.unitPrice}</li>
+                    <li class="list-group-item"><strong>Unit:</strong> ${data.data.unit}</li>
+                    <li class="list-group-item"><strong>Category Id:</strong> ${data.data.categoryId}</li>
+                    <li class="list-group-item"><strong>Category:</strong> ${data.data.categoryName}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+`,
+                focusConfirm: false,
+                confirmButtonText: "Back",
+            });
+        },
+    });
+}

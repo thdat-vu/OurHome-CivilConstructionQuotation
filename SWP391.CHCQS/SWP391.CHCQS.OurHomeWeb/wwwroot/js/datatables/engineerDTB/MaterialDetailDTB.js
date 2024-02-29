@@ -8,7 +8,12 @@ function loadDataTableMaterialDetail() {
     dataTableMD = $('#tblMaterialDetail').DataTable({
         "ajax": { url: '/Engineer/Material/GetMaterialListSession' },
         "columns": [
-            { data: 'material.id', },
+            {
+                data: 'material.id',
+                "render": function (data) {
+                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
+                },
+            },
             { data: 'material.name', },
             { data: 'material.unitPrice', },
             { data: 'material.unit', },

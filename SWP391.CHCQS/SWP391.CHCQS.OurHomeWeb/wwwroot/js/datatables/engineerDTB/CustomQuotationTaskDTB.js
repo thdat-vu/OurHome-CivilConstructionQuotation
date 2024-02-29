@@ -8,7 +8,12 @@ function loadDataTableCustomQuotationTask() {
     dataTableCQT = $('#tblCustomQuotationTask').DataTable({
         "ajax": { url: '/Engineer/Task/GetTaskListSession' },
         "columns": [
-            { data: 'task.id', },
+            {
+                data: 'task.id',
+                "render": function (data) {
+                    return `<a class="text-main text-pointer" onClick="ShowTaskDetail('/Engineer/Task/Detail?TaskId=${data}')" >${data}</a>`
+                },
+            },
             { data: 'task.name', },
             { data: 'task.unitPrice', },
             { data: 'price', },

@@ -1,6 +1,6 @@
 ﻿@model ConstructDetailViewModel
 @{
-	ViewData["Title"] = "Quote";
+	ViewData["Title"] = "Detail";
 }
 
 <div class="card mt-3 mb-3 w-100">
@@ -119,7 +119,7 @@
 											Price
 										</th>
 										<th>
-											Actions
+											Category
 										</th>
 									</tr>
 								</thead>
@@ -163,9 +163,9 @@
 										</th>
 										<th>
 											Price
-										</th>
+										</th>		
 										<th>
-											Actions
+											Category
 										</th>
 									</tr>
 								</thead>
@@ -180,5 +180,6 @@
 </div>
 
 @section Scripts {
-	
+	<script src="~/js/datatables/engineerDTB/CustomQuotationTaskHistoryDTB.js"></script>
+	<script src="~/js/datatables/engineerDTB/MaterialDetailHistoryDTB.js"></script>
 }

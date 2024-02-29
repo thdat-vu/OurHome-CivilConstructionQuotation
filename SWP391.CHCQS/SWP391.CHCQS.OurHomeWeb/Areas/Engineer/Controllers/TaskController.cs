@@ -66,6 +66,46 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			return Json(new { data = TaskListSession.ToList() });
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> GetTaskListHistory()
+		{
+			List<CustomQuotationTaskViewModel> customQuotationTaskViewModels;
+			customQuotationTaskViewModels = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task")
+				.Select(x => new CustomQuotationTaskViewModel
+				{
+					Task = x.Task,
+					QuotationId = x.QuotationId,
+					Price = x.Price,
+				}).ToList();
+
+			return Json(new { data = customQuotationTaskViewModels });
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="TaskId"></param>
+		/// <returns></returns>
+		[HttpGet]
+		[ActionName("Detail")]
+		public async Task<IActionResult> GetDetail([FromQuery] string TaskId)
+		{
+			var taskDetail = _unitOfWork.Task.Get((x) => x.Id == TaskId, "Category");
+			var taskDetailVM = new TaskViewModel
+			{
+				Id = taskDetail.Id,
+				Name = taskDetail.Name,
+				Description = taskDetail.Description,
+				UnitPrice = taskDetail.UnitPrice,
+				Status = taskDetail.Status,
+				CategoryId = taskDetail.CategoryId,
+				CategoryName = taskDetail.Category.Name
+
+			};
+			//TODO: Test result
+			return Json(new { data = taskDetailVM });
+		}
+
 		#endregion
 
 		/// <summary>
