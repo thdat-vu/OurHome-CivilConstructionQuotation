@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using SelectPdf;
 using SendGrid.Helpers.Mail.Model;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
@@ -16,7 +15,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _environment;
-        //private FileManipulater _fileManipulater= new FileManipulater();
         public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment)
         {
             _unitOfWork = unitOfWork;
@@ -25,7 +23,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
         public IActionResult Index()
         {
-
             return View();
         }
 
@@ -51,6 +48,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                 }).ToList();
             return Json(new { data = customQuotationViewModels });
         }
+
         [HttpGet]
         public async Task<IActionResult> GetDetail([FromQuery] string id)
         {
@@ -229,10 +227,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return RedirectToAction("Index");
         }
 
-      
+
 
         //Action được tạo ra để render ra 1 html template HỖ TRỢ cho việc tạo ra pdf - được sử dụng để attach theo email báo giá
-        public IActionResult ExportQuotationPDF(string quoteId)
+        [ActionName("Review")]   
+        public IActionResult ReviewQuotationPDF(string quoteId)
         {
             //Tiến hành lấy quotation đầy đủ ra
             var info = _unitOfWork.CustomQuotation.Get((x) => x.Id == quoteId, "Engineer,Manager,Request,Seller,ConstructDetail");
@@ -261,31 +260,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             pdf.Materials = new List<MaterialDetail>(_unitOfWork.MaterialDetail.GetAllWithFilter((x) => x.QuotationId == info.Id, "Material"));
             return View(pdf);
         }
-        public async Task<IActionResult> ExportPDF()
-        {
-            // Domain của ứng dụng web
-            string domain = "https://localhost:7048/"; // Thay đổi thành domain thực tế của bạn
-
-            // Tạo một HttpClient
-            HttpClient client = new HttpClient();
-
-            // Gọi action và nhận HTML trả về
-            string htmlContent = await client.GetStringAsync($"{domain}/Manager/CustomQuotation/ExportQuotationPDF?quoteId=CQ001");
-
-                // In ra HTML trả về
-                Console.WriteLine(htmlContent);
-            
-            return Json(new {data = htmlContent});
-        }
+       
 
         public IActionResult Test()
         {
-            HtmlToPdf converter = new HtmlToPdf();
-            string filePath = Url.Action("ExportQuotationPDF", "Customquotation",new {quoteId = "CQ001"});
-            filePath = "https://localhost:7048" + filePath;
-            var url = Url.Action("ExportQuotationPDF", new { quoteId = "CQ001" });
-            PdfDocument doc = converter.ConvertUrl(url);
-           //doc.Save("test.pdf");
             return Json(new {data = "Done"});
         }
 
