@@ -29,13 +29,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             //hiểu nôm na là phải có CustomQuotation id trước khi có thằng ConstructDetail id
             var customQuotation = JsonSerializer.Serialize(new CustomQuotation
             {
-                Id = "temp",
+                Id = "temp1",
                 Date = DateTime.Now,
                 Acreage = requestForm.Acreage,
                 Location = requestForm.Location,
-                Status = SD.Preparing,
+                Status = SD.Processing,
                 Description = requestForm.Description,
                 Total = 0,
+                RequestId = requestForm.Id
             });
             ViewBag.CustomQuotation = customQuotation;
 
@@ -100,16 +101,20 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                     Room = constructDetailVM.ConstructDetail.Room,
                     FoundationId = constructDetailVM.ConstructDetail.FoundationId,
                     RooftopId = constructDetailVM.ConstructDetail.RooftopId,
-                    QuotationId = "temp",
+                    QuotationId = "temp1",
                   
                 };
-
                 // Thêm ConstructDetail vào unit of work và lưu thay đổi
                 _unitOfWork.CustomQuotation.Add(customQuotation);
                 _unitOfWork.ConstructDetail.Add(constructDetail);
+
+                var requestForm = _unitOfWork.RequestForm.Get(x => x.Id == customQuotation.RequestId);
+                requestForm.Status = false;
+                _unitOfWork.RequestForm.Update(requestForm);
+
                 _unitOfWork.Save();
 
-                TempData["success"] = "Construct Detail created successfully";
+				TempData["success"] = "Construct Detail created successfully";
                 return RedirectToAction("ViewQuotation", "Quotation");
             }
             else
