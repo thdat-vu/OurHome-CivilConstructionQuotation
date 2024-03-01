@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.Utility.Helpers
 {
-	public class QuotationExporter
+	public class FileExporter
 	{
 		private static string ExportHTML(string template)
 		{

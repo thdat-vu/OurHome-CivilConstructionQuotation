@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Tls;
+using SelectPdf;
+using SendGrid.Helpers.Mail.Model;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
@@ -220,7 +221,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //lấy địa chỉ mail
             //bytes is parameter.
             
-            EmailSender.SendInfoToEmailAsync("datnxse172264@fpt.edu.vn", "CC","Xinchao", targetFolder);
+            EmailSender.SendInfoToEmail("datnxse172264@fpt.edu.vn", "CC","Quotation của bạn đã xong");
 
             //Tiến hành toast info
             TempData["Success"] = "Quotation has been sent";
@@ -231,8 +232,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
       
 
         //Action được tạo ra để render ra 1 html template HỖ TRỢ cho việc tạo ra pdf - được sử dụng để attach theo email báo giá
-        [ActionName("PDFQuotation")]
-        public IActionResult GetDetailQuotationTableHTML(string quoteId)
+        public IActionResult ExportQuotationPDF(string quoteId)
         {
             //Tiến hành lấy quotation đầy đủ ra
             var info = _unitOfWork.CustomQuotation.Get((x) => x.Id == quoteId, "Engineer,Manager,Request,Seller,ConstructDetail");
@@ -261,22 +261,32 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             pdf.Materials = new List<MaterialDetail>(_unitOfWork.MaterialDetail.GetAllWithFilter((x) => x.QuotationId == info.Id, "Material"));
             return View(pdf);
         }
-        public IActionResult Test()
+        public async Task<IActionResult> ExportPDF()
         {
-            var pathCreater = new PathCreater(_environment);
-            string targetFolder = pathCreater.CreateFilePathInRoot("1.pdf", "pdf");
-            //lấy địa chỉ mail
-            //bytes is parameter.
+            // Domain của ứng dụng web
+            string domain = "https://localhost:7048/"; // Thay đổi thành domain thực tế của bạn
 
-            EmailSender.SendInfoToEmailAsync("datnxse172264@fpt.edu.vn", "CC", "Xinchao", targetFolder);
-            return Json(new { notify = "done" });
+            // Tạo một HttpClient
+            HttpClient client = new HttpClient();
+
+            // Gọi action và nhận HTML trả về
+            string htmlContent = await client.GetStringAsync($"{domain}/Manager/CustomQuotation/ExportQuotationPDF?quoteId=CQ001");
+
+                // In ra HTML trả về
+                Console.WriteLine(htmlContent);
+            
+            return Json(new {data = htmlContent});
         }
 
-        public void ExportPDF(PDFQuotation quotation)
+        public IActionResult Test()
         {
-            
-
-
+            HtmlToPdf converter = new HtmlToPdf();
+            string filePath = Url.Action("ExportQuotationPDF", "Customquotation",new {quoteId = "CQ001"});
+            filePath = "https://localhost:7048" + filePath;
+            var url = Url.Action("ExportQuotationPDF", new { quoteId = "CQ001" });
+            PdfDocument doc = converter.ConvertUrl(url);
+           //doc.Save("test.pdf");
+            return Json(new {data = "Done"});
         }
 
     }
