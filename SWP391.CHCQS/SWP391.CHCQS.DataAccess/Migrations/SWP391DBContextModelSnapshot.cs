@@ -726,7 +726,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ001",
                             Acreage = "240m2",
-                            Date = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6415),
+                            Date = new DateTime(2024, 3, 1, 10, 48, 4, 193, DateTimeKind.Local).AddTicks(7199),
                             Description = "I want to build this house for my son and his wife, so i can live with them.",
                             EngineerId = "EN001",
                             Location = "Dĩ An, Bình Dương",
@@ -740,7 +740,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ002",
                             Acreage = "340m2",
-                            Date = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6418),
+                            Date = new DateTime(2024, 3, 1, 10, 48, 4, 193, DateTimeKind.Local).AddTicks(7203),
                             Description = "This house must be great, so i can live with it for 500 years.",
                             EngineerId = "EN001",
                             Location = "Quận 5, TP. Hồ Chí Minh",
@@ -754,7 +754,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         {
                             Id = "CQ003",
                             Acreage = "740m2",
-                            Date = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6421),
+                            Date = new DateTime(2024, 3, 1, 10, 48, 4, 193, DateTimeKind.Local).AddTicks(7204),
                             Description = "This house for president to live, it must be nice.",
                             EngineerId = "EN001",
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
@@ -1578,7 +1578,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT2",
                             CustomerId = "ID001",
                             Description = "Customer said that this project must be finished on 3 month",
-                            GenerateDate = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6112),
+                            GenerateDate = new DateTime(2024, 3, 1, 10, 48, 4, 193, DateTimeKind.Local).AddTicks(6538),
                             Location = "Dĩ An, Bình Dương",
                             Status = true
                         },
@@ -1589,7 +1589,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT1",
                             CustomerId = "ID002",
                             Description = "Customer said that this project must be finished on 6 month",
-                            GenerateDate = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6120),
+                            GenerateDate = new DateTime(2024, 3, 1, 10, 48, 4, 193, DateTimeKind.Local).AddTicks(6548),
                             Location = "Quận 5, TP. Hồ Chí Minh",
                             Status = true
                         },
@@ -1600,7 +1600,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                             ConstructType = "CT3",
                             CustomerId = "ID003",
                             Description = "Customer said that this project must be finished on 12 month",
-                            GenerateDate = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6121),
+                            GenerateDate = new DateTime(2024, 3, 1, 10, 48, 4, 193, DateTimeKind.Local).AddTicks(6550),
                             Location = "Long Thạnh Mỹ, TP. Thủ Đức",
                             Status = true
                         });
@@ -2295,10 +2295,10 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
                 {
                     b.HasOne("SWP391.CHCQS.Model.Customer", "Customer")
-                        .WithMany("RequestForms")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
-                        .IsRequired()
-                        .HasConstraintName("FK__RequestFo__custo__5FB337D6");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
                 });
@@ -2357,8 +2357,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
                 {
                     b.Navigation("Projects");
-
-                    b.Navigation("RequestForms");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotation", b =>

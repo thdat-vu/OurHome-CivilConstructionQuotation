@@ -636,11 +636,11 @@ namespace SWP391.CHCQS.DataAccess.Data
 
 				entity.Property(e => e.Status).HasColumnName("status");
 
-				entity.HasOne(d => d.Customer)
-					.WithMany(p => p.RequestForms)
-					.HasForeignKey(d => d.CustomerId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK__RequestFo__custo__5FB337D6");
+				//entity.HasOne(d => d.Customer)
+				//	.WithMany(p => p.RequestForms)
+				//	.HasForeignKey(d => d.CustomerId)
+				//	.OnDelete(DeleteBehavior.ClientSetNull)
+				//	.HasConstraintName("FK__RequestFo__custo__5FB337D6");
 
 				entity.HasMany(d => d.Materials)
 					.WithMany(p => p.Requests)

@@ -8,7 +8,7 @@ namespace SWP391.CHCQS.Model
         public Customer()
         {
             Projects = new HashSet<Project>();
-            RequestForms = new HashSet<RequestForm>();
+            //RequestForms = new HashSet<RequestForm>();
         }
 
         public string Id { get; set; } = null!;
@@ -20,6 +20,6 @@ namespace SWP391.CHCQS.Model
 
         public virtual Account UsernameNavigation { get; set; } = null!;
         public virtual ICollection<Project> Projects { get; set; }
-        public virtual ICollection<RequestForm> RequestForms { get; set; }
+        //public virtual ICollection<RequestForm> RequestForms { get; set; }
     }
 }
