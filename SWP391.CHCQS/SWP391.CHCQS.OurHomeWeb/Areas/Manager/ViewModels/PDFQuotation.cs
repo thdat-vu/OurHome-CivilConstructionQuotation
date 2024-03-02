@@ -21,6 +21,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
         public string SellerName { get; set; }
         public string EngineerName { get; set; }
         
-
+        public string CustomerName { get; set; }
     }
 }

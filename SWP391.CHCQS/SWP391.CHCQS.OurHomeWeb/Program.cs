@@ -3,6 +3,7 @@
 using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using System.Configuration;
 
 namespace SWP391.CHCQS.OurHomeWeb
 {
@@ -17,7 +18,7 @@ namespace SWP391.CHCQS.OurHomeWeb
 			builder.Services.AddDbContext<SWP391DBContext>(
 				options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+		
 
 			//Câu lệnh đăng ký một dịch vụ bộ nhớ phân phối (distributed memory cache) trong container dịch vụ của ứng dụng.
 			builder.Services.AddDistributedMemoryCache();
@@ -67,7 +68,7 @@ namespace SWP391.CHCQS.OurHomeWeb
 				);
 			
 			});
-
+			
 			app.Run();
 		}
 	}

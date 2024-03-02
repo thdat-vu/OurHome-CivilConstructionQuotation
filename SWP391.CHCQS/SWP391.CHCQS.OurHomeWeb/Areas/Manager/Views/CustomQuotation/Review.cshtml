@@ -15,9 +15,11 @@
     <script src="~/js/pdf.js"></script>
 
     <style>
-        .container {
+        .container-fluid {
             width: 700px;
-            align-items: center
+            align-items: center;
+            margin: auto;
+            width: 50%;
         }
         /* Áp dụng đường kẻ bên trong cơ của bảng */
         .table-bordered th,
@@ -29,6 +31,7 @@
             table-layout: fixed;
         }
 
+
             /* Đảm bảo các cột trong bảng có chiều ngang bằng nhau */
             .table th,
             .table td {
@@ -38,8 +41,8 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid d-flex justify-content-center" id="invoice">
-        <div class="container text-center m-auto ">
+    <div class="container-fluid" id="invoice">
+        <div class="container  " style="text-align:center">
             <h3>Quotation @Model.Id:</h3>
             <h3>Request @Model.RequestId on @Model.GenerateDateRequest</h3>
             <div class="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -52,6 +55,10 @@
                         <div class="col-lg">
                             <label><b class="text-nowrap">Location: </b></label>
                             <p>@Model.Location</p>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Customer: </b></label>
+                            <p>@Model.CustomerName</p>
                         </div>
                     </div>
                 </div>
@@ -123,7 +130,7 @@
                 </div>
                 <div class="text-center">
                     <h3>Staff's Delegation</h3>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" style="margin:auto">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Seller</th>

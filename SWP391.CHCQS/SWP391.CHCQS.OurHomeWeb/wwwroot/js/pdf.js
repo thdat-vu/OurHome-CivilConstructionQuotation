@@ -6,10 +6,11 @@
             //console.log(window);
             var opt = {
                 margin: 1,
-                filename: '/pdf/myfile.pdf',
+                filename: 'myfile.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                output: 'C:\\Users\\84859\\Downloads\\DelegateInsideOut'
             };
             html2pdf().from(invoice).set(opt).save();
             console.log("done");

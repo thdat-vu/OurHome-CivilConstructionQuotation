@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using SendGrid.Helpers.Mail.Model;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
@@ -15,10 +14,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _environment;
-        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment)
+        private readonly IConfiguration _configuration;
+        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
             _environment = environment;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -81,7 +82,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                 RecieveDateEngineer = customQuotationDetail.RecieveDateEngineer,
                 SubmissionDateEngineer = customQuotationDetail.SubmissionDateEngineer,
                 RecieveDateManager = customQuotationDetail.RecieveDateManager,
-                AcceptanceDateManager = customQuotationDetail.AcceptanceDateManager
+                AcceptanceDateManager = customQuotationDetail.AcceptanceDateManager,
+                Total = customQuotationDetail.Total,
             };
             //thêm thông tin cho construct detail View Model
             quotationVM.QuotationDetailVM.ConstructDetailVM.IsBalcony = customQuotationDetail.ConstructDetail.Balcony;
@@ -195,7 +197,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
         public IActionResult ApproveDetail(string id)
         {
-            var quotation = _unitOfWork.CustomQuotation.Get((x) => x.Id == id);
+            var quotation = _unitOfWork.CustomQuotation.Get((x) => x.Id == id, "Request");
             //cập nhật thời gian approve của Manager
             quotation.AcceptanceDateManager = DateTime.Now;
 
@@ -207,19 +209,20 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _unitOfWork.CustomQuotation.Update(quotation);
             _unitOfWork.Save();
 
-            //lấy thông tin người dùng
-
             /*
 			 * Gửi mail cho người dùng
 			 - Lấy thông tin người dùng
 			 - Lấy thông tin dữ liệu để gửi mail người dùng
 			 */
-            var pathCreater = new PathCreater(_environment);
-            string targetFolder = pathCreater.CreateFilePathInRoot( "1.pdf", "pdf");
-            //lấy địa chỉ mail
-            //bytes is parameter.
-            
-            EmailSender.SendInfoToEmail("datnxse172264@fpt.edu.vn", "CC","Quotation của bạn đã xong");
+            //tiến hành lấy thông tin cơ bản của khách hàng
+            var customer = _unitOfWork.Customer.Get((x) => x.Id == quotation.Request.CustomerId);
+            var customerName = customer.Name;
+            var customerMail = customer.Email;
+            //tiến hành gửi mail
+            var emailSender = new EmailSender(_configuration);
+            emailSender.SendInfoToEmail(customerMail, customerName, id);
+
+            // EmailSender.SendInfoToEmail();
 
             //Tiến hành toast info
             TempData["Success"] = "Quotation has been sent";
@@ -255,16 +258,19 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             pdf.ManagerName = info.Manager.Name;
             pdf.SellerName = info.Seller.Name;
             pdf.EngineerName = info.Engineer.Name;
+            pdf.CustomerName = _unitOfWork.Customer.Get((x) => x.Id == info.Request.CustomerId).Name;
             //tiên hành lấy taskdetail và materialdetail
             pdf.Tasks = new List<CustomQuotationTask>(_unitOfWork.CustomQuotaionTask.GetAllWithFilter((x) => x.QuotationId == info.Id, "Task"));
             pdf.Materials = new List<MaterialDetail>(_unitOfWork.MaterialDetail.GetAllWithFilter((x) => x.QuotationId == info.Id, "Material"));
+            
             return View(pdf);
         }
        
 
         public IActionResult Test()
         {
-            return Json(new {data = "Done"});
+            
+            return Json(new {data = "nothingDone"});
         }
 
     }
