@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
@@ -15,11 +16,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _configuration;
-        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration)
+        private readonly IServiceProvider _serviceProvider;
+        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration, IServiceProvider serviceProvider)
         {
             _unitOfWork = unitOfWork;
             _environment = environment;
             _configuration = configuration;
+            _serviceProvider = serviceProvider;
         }
 
         public IActionResult Index()
@@ -262,16 +265,18 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //tiên hành lấy taskdetail và materialdetail
             pdf.Tasks = new List<CustomQuotationTask>(_unitOfWork.CustomQuotaionTask.GetAllWithFilter((x) => x.QuotationId == info.Id, "Task"));
             pdf.Materials = new List<MaterialDetail>(_unitOfWork.MaterialDetail.GetAllWithFilter((x) => x.QuotationId == info.Id, "Material"));
-            
+         
             return View(pdf);
         }
-       
+
+      
 
         public IActionResult Test()
         {
-            
-            return Json(new {data = "nothingDone"});
+
+            return Json(new {data = ""});
         }
+
 
     }
 
