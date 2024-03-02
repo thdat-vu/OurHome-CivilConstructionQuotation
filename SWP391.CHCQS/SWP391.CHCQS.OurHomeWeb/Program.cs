@@ -58,7 +58,7 @@ namespace SWP391.CHCQS.OurHomeWeb
 			app.UseAuthorization();
 
 			//Khai báo app có sử dụng signalR
-			app.MapHub<SignalServer>("/signalServer");
+			app.MapHub<NotificationHub>("/notificationServer");
 
 			//Khai báo app có sử dụng Session thì truy cập HttpContext.Session mới được
 			//Khai báo trước app.UseRouting(); app.UseAuthorization(); sau app.UseEndpoints app.Run();

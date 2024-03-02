@@ -18,7 +18,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 	{
 		//Declare _uniteOfWork represent to DBContext to get Data form Database.
 		private readonly IUnitOfWork _unitOfWork;
-		private readonly IHubContext<SignalServer> _hubContext;
+		private readonly IHubContext<NotificationHub> _hubContext;
 
 		//Declare Session to store CustomQuotation serve to method AddToList in TaskController and MaterialController to add Task and Material.
 		public CustomQuotationListViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationListViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationListViewModel();
@@ -30,7 +30,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		public List<MaterialDetailViewModel> MaterialListSession => HttpContext.Session.Get<List<MaterialDetailViewModel>>(SessionConst.MATERIAL_LIST_KEY) ?? new List<MaterialDetailViewModel>();
 
 		//Constructor of this Controller
-		public QuotationController(IUnitOfWork unitOfWork, IHubContext<SignalServer> hubContext)
+		public QuotationController(IUnitOfWork unitOfWork, IHubContext<NotificationHub> hubContext)
 		{
 			_unitOfWork = unitOfWork;
 			_hubContext = hubContext;
@@ -359,9 +359,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		public async Task<IActionResult> SendQuoteToManager(string QuotationId)
 		{
 
-			//Gui thong bao den client
-			await _hubContext.Clients.All.SendAsync("refreshCustomQuotations");
-
 			var quotation = _unitOfWork.CustomQuotation.Get(c => c.Id == QuotationId);
 			if (quotation == null)
 			{
@@ -396,6 +393,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			}
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+
+			//Gui thong bao den client
+			await _hubContext.Clients.All.SendAsync("refreshCustomQuotations");
+
 			return Json(new { success = true, message = $"Send quotation successfully with Id = {QuotationId}" });
 		}
 

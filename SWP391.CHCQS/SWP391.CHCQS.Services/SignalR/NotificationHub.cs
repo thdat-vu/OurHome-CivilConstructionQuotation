@@ -2,7 +2,7 @@
 
 namespace SWP391.CHCQS.Services.SignalR
 {
-	public class SignalServer : Hub
+	public class NotificationHub : Hub
 	{
 	}
 }
