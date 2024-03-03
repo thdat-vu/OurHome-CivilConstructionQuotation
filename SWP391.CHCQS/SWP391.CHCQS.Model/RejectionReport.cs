@@ -14,8 +14,11 @@ namespace SWP391.CHCQS.Model
         [MaxLength(10)]
         public string Id { get; set; }
 
-        // Ngày bị reject
-        public DateTime Date { get; set; }
+        public DateTime? SubmitDay { get; set; } //ngày engineer submit báo giá
+        public DateTime? ReceiveDay { get; set; } //ngày manager xem báo giá
+
+        public DateTime? RejectedDay { get; set; } //ngày manager reject báo giá
+        
 
         //---------------------------------------------------------------------------------------------
         // Xác định chi tiết công việc, vật liệu bị hủy của báo giá nào 

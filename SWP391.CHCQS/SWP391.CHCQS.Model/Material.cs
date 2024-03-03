@@ -10,8 +10,7 @@ namespace SWP391.CHCQS.Model
         public Material()
         {
             //MaterialDetails = new HashSet<MaterialDetail>();
-            Combos = new HashSet<Combo>();
-            Requests = new HashSet<RequestForm>();
+            Combos = new HashSet<Combo>();            
         }
         [MaxLength(10)]
         public string Id { get; set; } = null!;
@@ -28,8 +27,7 @@ namespace SWP391.CHCQS.Model
         //public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
         [MaxLength(200)]
         public string? ImageUrl { get; set; }
-        public virtual ICollection<Combo> Combos { get; set; }
-        public virtual ICollection<RequestForm> Requests { get; set; }
+        public virtual ICollection<Combo> Combos { get; set; }        
 
     }
 }

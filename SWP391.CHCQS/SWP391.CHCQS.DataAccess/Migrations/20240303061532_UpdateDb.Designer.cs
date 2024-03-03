@@ -808,7 +808,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime?>("ReceiveDate")
+                    b.Property<DateTime>("ReceiveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RequestId")
@@ -821,7 +821,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime?>("SubmitDate")
+                    b.Property<DateTime>("SubmitDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

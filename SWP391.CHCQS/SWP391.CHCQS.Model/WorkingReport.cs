@@ -22,8 +22,8 @@ namespace SWP391.CHCQS.Model
         [ForeignKey("RequestId")]
         public virtual RequestForm RequestForm { get; set; } = null!;
 
-        public DateTime? ReceiveDate { get; set; }
-        public DateTime? SubmitDate { get; set; }
+        public DateTime ReceiveDate { get; set; }
+        public DateTime SubmitDate { get; set; }
 
     }
 }
