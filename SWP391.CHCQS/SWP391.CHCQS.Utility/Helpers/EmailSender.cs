@@ -99,11 +99,11 @@ namespace SWP391.CHCQS.Utility.Helpers
 			string url = $"{_configuration["Environment:LocalDomain"]}{_configuration["MailSettings:ActionLinkNoPara"]}?quoteId={quoteId}";
 			string mailContent = $@"
 <p>Welcome {customerName} !</p>
-<p>Thank you for reaching out to us regarding the quotation request. Your inquiry has been received and is currently under review by our team.</p>
-<p>We will endeavor to provide you with a response as promptly as possible, ensuring thorough consideration of your requirements.</p>
-<p>Once again, we extend our gratitude for choosing our services. Wishing you a splendid day ahead!</p>
+<p>Thank you for contacting us to use our construction quote request service. We received your request and it was reviewed by our team.</p>
+<p>We've tried to respond to you as quickly as possible and made sure to thoroughly review your requests.</p>
+<p>Once again, we would like to express our sincere thanks for choosing our service. Wishing you a wonderful day ahead!</p>
     
-<p>For further information, please visit <a href='{url}'>here</a>.</p>
+<p>For further information of quotation, please visit <a href='{url}'>here</a>.</p>
     
 <p>Yours sincerely,</p>
 <p>Our Home Architecture</p>
