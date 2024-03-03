@@ -38,7 +38,7 @@ namespace SWP391.CHCQS.DataAccess.Data
         public virtual DbSet<ProjectImage> ProjectImages { get; set; } = null!;
         public virtual DbSet<RequestForm> RequestForms { get; set; } = null!;
         public virtual DbSet<RooftopType> RooftopTypes { get; set; } = null!;
-        public virtual DbSet<Staff> Staff { get; set; } = null!;
+        public virtual DbSet<Staff> Staffs { get; set; } = null!;
         public virtual DbSet<Combo> Combos { get; set; } = null!;
         public virtual DbSet<Task> Tasks { get; set; } = null!;
         public virtual DbSet<TaskCategory> TaskCategories { get; set; } = null!;
