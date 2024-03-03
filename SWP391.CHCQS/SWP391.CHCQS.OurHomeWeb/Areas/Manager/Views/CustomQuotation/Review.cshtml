@@ -1,9 +1,15 @@
-﻿@model PDFQuotation;
-@{
-    Layout = null;
-}
+﻿@{
+//@model PDFQuotation; 
 
-<!DOCTYPE html>
+
+}
+@{
+     Layout = null;
+ 
+     
+}
+<!--
+
 <html lang="en">
 
 <head>
@@ -158,7 +164,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{
+                            @{/*
                                 foreach (var item in Model.Tasks)
                                 {
                                     <tr>
@@ -167,6 +173,7 @@
                                         <td>@item.Task.UnitPrice</td>
                                     </tr>
                                 }
+                                */
                             }
                         </tbody>
                     </table>
@@ -183,16 +190,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{
-                                foreach (var item in Model.Tasks)
+                            @{/*
+    foreach (var item in Model.Tasks)
                                 {
-                                    <tr>
-                                        <td>@item.Task.Name</td>
+                                <tr>
+                                    <td>@item.Task.Name</td>
                                         <td>@item.Task.Description</td>
                                         <td>@item.Task.UnitPrice</td>
                                         <td>@item.Price</td>
-                                    </tr>
-                                }
+                                        </tr>
+                                    }
+                                */
                             }
                         </tbody>
                     </table>
@@ -215,5 +223,6 @@
     </div>
 </body>
 </html>
+-->
 
 
