@@ -70,7 +70,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		public async Task<IActionResult> GetTaskListHistory()
 		{
 			List<CustomQuotationTaskViewModel> customQuotationTaskViewModels;
-			customQuotationTaskViewModels = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task")
+			customQuotationTaskViewModels = _unitOfWork.TaskDetail.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task")
 				.Select(x => new CustomQuotationTaskViewModel
 				{
 					Task = x.Task,

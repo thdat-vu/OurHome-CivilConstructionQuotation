@@ -213,10 +213,40 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _unitOfWork.CustomQuotation.Update(quotation);
             _unitOfWork.Save();
 
-            /*
-			 * Gửi mail cho người dùng
-			 - Lấy thông tin người dùng
-			 - Lấy thông tin dữ liệu để gửi mail người dùng
+			//cập nhật lại đường dẫn
+			targetFolder += $"\\CQ001.txt";
+
+
+			var data = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
+
+
+			//_unitOfWork.CustomQuotation.Update(customQuotation);
+			_unitOfWork.Save();
+
+			//Thông báo approve thành công
+			TempData["Success"] = "Quotation has been send";
+
+			//chuyển người dùng về lại danh sách
+			return RedirectToAction("Index");
+		}
+		public IActionResult ApproveDetail(string id)
+		{
+			var quotation = _unitOfWork.CustomQuotation.Get((x) => x.Id == id);
+
+			//****************BUG****************
+			////cập nhật thời gian approve của Manager
+			//quotation.AcceptanceDateManager = DateTime.Now;
+			//**********************************
+
+			//thay đổi status cho custom quotation
+			quotation.Status = SD.Completed;
+
+
+			//tiến hành cập nhật xuống database
+			_unitOfWork.CustomQuotation.Update(quotation);
+			_unitOfWork.Save();
+			/*
+			 gửi email cho người dùng
 			 */
             //tiến hành lấy thông tin cơ bản của khách hàng
             var customer = _unitOfWork.Customer.Get((x) => x.Id == quotation.Request.CustomerId);

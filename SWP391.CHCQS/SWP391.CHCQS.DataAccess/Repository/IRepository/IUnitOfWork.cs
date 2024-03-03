@@ -8,9 +8,9 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {    
     public interface IUnitOfWork
     {
-        IStandardQuotationRepository StandardQuotation { get; }
+        IComboRepository Combo { get; }
         IProjectRepository Project { get; }
-        ICustomQuotaionTaskRepository CustomQuotaionTask { get; }
+        ITaskDetailRepository TaskDetail { get; }
         ICustomQuotationRepository CustomQuotation { get; }
         ITaskRepository Task { get; }
         IMaterialRepository Material { get; }
