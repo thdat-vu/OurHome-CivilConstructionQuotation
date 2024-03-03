@@ -16,7 +16,7 @@ namespace SWP391.CHCQS.Model
         }
         [MaxLength(10)]
         public string Id { get; set; } = null!;
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         [MaxLength(30)]
         public string? Acreage { get; set; }
         [MaxLength(100)]

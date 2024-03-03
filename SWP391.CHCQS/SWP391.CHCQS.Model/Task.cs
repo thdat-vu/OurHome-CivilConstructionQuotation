@@ -13,7 +13,7 @@ namespace SWP391.CHCQS.Model
         }
         [MaxLength(10)]
         public string Id { get; set; } = null!;
-        [MaxLength(30)]
+        [MaxLength(200)]
         public string Name { get; set; } = null!;
         [MaxLength(500)]
         public string? Description { get; set; }

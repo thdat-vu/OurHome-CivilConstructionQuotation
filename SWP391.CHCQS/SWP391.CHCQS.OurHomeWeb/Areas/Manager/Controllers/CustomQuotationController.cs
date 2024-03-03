@@ -140,7 +140,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 				ManagerId = model.RejectQuotationDetailVM.RejecterId,
 				EngineerId = model.RejectQuotationDetailVM.SubcriberId,
 				//cập nhật thời gian reject
-				Date = DateTime.Now,
+				//**************BUG**************
+				//Date = DateTime.Now,
+				//*******************************
 				Reason = model.RejectQuotationDetailVM.Reason
 			};
 			//lưu lại các thông tin cần thiết và bảng rejectcustomquotation
@@ -186,7 +188,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		}
 
 		[NonAction]
-		public IActionResult SaveFile(string rejectQuoteId, DateTime? submit, DateTime? recieve, decimal? total)
+		public IActionResult SaveFile(string rejectQuoteId, DateTime submit, DateTime recieve, decimal? total)
 		{
 			//tạo đối tượng lưu trữ lại detail của quote bị reject
 			RejectQuotationDetail rejectQuotationDetail = new();

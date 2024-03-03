@@ -12,8 +12,8 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    [Migration("20240303075119_FixAccount")]
-    partial class FixAccount
+    [Migration("20240303090243_FixBug")]
+    partial class FixBug
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -262,7 +262,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Username");
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Customers");
                 });
@@ -277,7 +278,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -552,9 +553,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("EngineerId")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -569,10 +567,19 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<DateTime?>("ReceiveDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("RejectedDay")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("RejectedQuotationId")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime?>("SubmitDay")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -616,17 +623,12 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("MaterialId")
-                        .HasColumnType("nvarchar(10)");
-
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("MaterialId");
 
                     b.ToTable("RequestForms");
                 });
@@ -694,9 +696,10 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.HasIndex("Username");
+                    b.HasIndex("Username")
+                        .IsUnique();
 
-                    b.ToTable("Staff");
+                    b.ToTable("Staffs");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Task", b =>
@@ -716,8 +719,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
@@ -802,7 +805,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime?>("ReceiveDate")
+                    b.Property<DateTime>("ReceiveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RequestId")
@@ -815,7 +818,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime?>("SubmitDate")
+                    b.Property<DateTime>("SubmitDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -922,8 +925,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
                 {
                     b.HasOne("SWP391.CHCQS.Model.Account", "Account")
-                        .WithMany("Customers")
-                        .HasForeignKey("Username")
+                        .WithOne("Customers")
+                        .HasForeignKey("SWP391.CHCQS.Model.Customer", "Username")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1047,10 +1050,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SWP391.CHCQS.Model.Material", null)
-                        .WithMany("Requests")
-                        .HasForeignKey("MaterialId");
-
                     b.Navigation("Customer");
                 });
 
@@ -1061,8 +1060,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasForeignKey("ManagerId");
 
                     b.HasOne("SWP391.CHCQS.Model.Account", "Account")
-                        .WithMany("Staff")
-                        .HasForeignKey("Username")
+                        .WithOne("Staff")
+                        .HasForeignKey("SWP391.CHCQS.Model.Staff", "Username")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1151,11 +1150,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.InvestmentType", b =>
                 {
                     b.Navigation("Pricings");
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.Material", b =>
-                {
-                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Project", b =>

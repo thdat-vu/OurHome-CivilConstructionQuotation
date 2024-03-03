@@ -28,7 +28,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
         //function trả về số quotation dc tạo ra trong tháng
         public int CountCustomQuotationInMonthAndYear(int month, int year)
         {
-            //    //DateTime? thì có thể null nên cần làm khác 1 chút
+            //    //DateTime thì có thể null nên cần làm khác 1 chút
             //    //Expression<Func<CustomQuotation, bool>> filter = (x) =>x.SubmissionDateSeller.Value.Month == month && x.SubmissionDateSeller.Value.Year == year;
             //return GetAllWithFilter(filter).Count();
             return 0;
