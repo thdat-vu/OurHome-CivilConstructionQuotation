@@ -31,7 +31,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public IMaterialCategoryRepository MaterialCategory { get; private set; }
         public IRejectedCustomQuotationRepository RejectedCustomQuotation { get; private set; }
         public ICustomerRepository Customer { get; private set; }
-
+        public IWorkingReportRepository WorkingReport { get; private set; }
 		public UnitOfWork(SWP391DBContext db)
         {
             _db = db;
@@ -60,6 +60,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
             Material = new MaterialRepository(_db);
             RejectedCustomQuotation = new RejectedCustomQuotationRepository(_db);
             Customer = new CustomerRepository(_db);
+            WorkingReport = new WorkingReportRepository(_db);
         }
 
         public void Save()

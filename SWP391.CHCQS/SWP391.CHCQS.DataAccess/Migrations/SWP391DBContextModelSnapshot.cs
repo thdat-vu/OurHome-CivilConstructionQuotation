@@ -1043,7 +1043,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
                 {
                     b.HasOne("SWP391.CHCQS.Model.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("RequestForms")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1132,6 +1132,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
                 {
                     b.Navigation("Projects");
+
+                    b.Navigation("RequestForms");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotation", b =>

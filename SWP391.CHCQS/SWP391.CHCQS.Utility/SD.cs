@@ -8,6 +8,8 @@ namespace SWP391.CHCQS.Utility
 {
 	public class SD //static detail
 	{
+		//từ khóa mở đầu cho request
+		public const string requestIdKey = "RF";
 		//từ khóa mở đầu cho mỗi id staff tùy theo role
 		public const string SellerIdKey = "SL";
         public const string EngineertIdKey = "EN";

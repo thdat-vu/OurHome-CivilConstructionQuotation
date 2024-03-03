@@ -2,7 +2,7 @@
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
-    public class RejectCustomQuotationDetailVM
+    public class RejectReportVM
     {
         //chứa id quotation detail bị reject
         public string RejectQuotationId { get; set; }

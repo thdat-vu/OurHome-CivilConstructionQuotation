@@ -6,7 +6,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
     public class CustomQuotationVM
     {
         public CustomQuotationDetailViewModel? QuotationDetailVM { get; set; }
-        public RejectCustomQuotationDetailVM? RejectQuotationDetailVM { get; set; }
+        public RejectReportVM? RejectReportlVM { get; set; }
     }
 
   
