@@ -12,6 +12,7 @@ using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
+using EmailSender = SWP391.CHCQS.Utility.Helpers.EmailSender;
 
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
@@ -62,7 +63,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         public async Task<IActionResult> GetDetail([FromQuery] string id)
         {
 
-            
+
             //lưu thông tin quoteId vào session
             HttpContext.Session.SetString(SessionConst.QUOTATION_ID, id);
 
@@ -110,13 +111,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             };
             //thêm thông tin cho construct detail View Model từ CustomQuotation cqDetail
             var constructDetailVM = quotationVM.QuotationDetailVM.ConstructDetailVM;
-           constructDetailVM.IsBalcony = cqDetail.ConstructDetail.Balcony;
+            constructDetailVM.IsBalcony = cqDetail.ConstructDetail.Balcony;
             constructDetailVM.TypeOfConstruct = _unitOfWork.ConstructionType.GetName(cqDetail.ConstructDetail.ConstructionId);
             constructDetailVM.Investment = _unitOfWork.InvestmentType.GetName(cqDetail.ConstructDetail.InvestmentId);
             constructDetailVM.Foundation = _unitOfWork.FoundationType.GetName(cqDetail.ConstructDetail.FoundationId);
-           constructDetailVM.Basement = _unitOfWork.BasementType.GetName(cqDetail.ConstructDetail.BasementId);
-           constructDetailVM.Roof = _unitOfWork.RoofType.GetName(cqDetail.ConstructDetail.RooftopId);
-           constructDetailVM.Width = cqDetail.ConstructDetail.Width;
+            constructDetailVM.Basement = _unitOfWork.BasementType.GetName(cqDetail.ConstructDetail.BasementId);
+            constructDetailVM.Roof = _unitOfWork.RoofType.GetName(cqDetail.ConstructDetail.RooftopId);
+            constructDetailVM.Width = cqDetail.ConstructDetail.Width;
             constructDetailVM.Length = cqDetail.ConstructDetail.Length;
             constructDetailVM.Facade = cqDetail.ConstructDetail.Facade;
             constructDetailVM.Alley = cqDetail.ConstructDetail.Alley;
@@ -253,7 +254,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _unitOfWork.CustomQuotation.Update(quotation);
             //tiến hành cập nhật xuống WorkingReports table
             _unitOfWork.WorkingReport.Update(report);
-            
+
             _unitOfWork.Save();
 
             /*
@@ -329,48 +330,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         }
 
 
-			var data = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
 
 
-			//_unitOfWork.CustomQuotation.Update(customQuotation);
-			_unitOfWork.Save();
-
-			//Thông báo approve thành công
-			TempData["Success"] = "Quotation has been send";
-
-			//chuyển người dùng về lại danh sách
-			return RedirectToAction("Index");
-		}
-		public IActionResult ApproveDetail(string id)
-		{
-			var quotation = _unitOfWork.CustomQuotation.Get((x) => x.Id == id);
-
-			//****************BUG****************
-			////cập nhật thời gian approve của Manager
-			//quotation.AcceptanceDateManager = DateTime.Now;
-			//**********************************
-
-			//thay đổi status cho custom quotation
-			quotation.Status = SD.Completed;
-
-
-			//tiến hành cập nhật xuống database
-			_unitOfWork.CustomQuotation.Update(quotation);
-			_unitOfWork.Save();
-			/*
-			 gửi email cho người dùng
-			 */
-			Utility.Helpers.EmailSender.SendInfoToEmail("datsung.dev@gmail.com", "CC", "<p>CMM</p>");
-
-			//Tiến hành toast info
-			TempData["Success"] = "Quotation has been sent";
-			//điều hướng người dùng về danh sách pending approve
-			return RedirectToAction("Index");	
-		}
-
-
-
-
+    }
 
 
 }
