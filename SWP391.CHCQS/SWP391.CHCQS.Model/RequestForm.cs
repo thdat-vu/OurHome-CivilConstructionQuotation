@@ -24,8 +24,9 @@ namespace SWP391.CHCQS.Model
         public string Location { get; set; } = null!;
         //true: vẫn dag xử lý, còn hiệu lực
         //false: ko còn hiệu lực
-        public bool Status { get; set; }
-        [MaxLength(10)]
+        [MaxLength(20)]
+        public string Status { get; set; }
+
         public string CustomerId { get; set; } = null!;
         public virtual Customer Customer { get; set; } = null!;
         public CustomQuotation? CustomQuotation { get; set; }

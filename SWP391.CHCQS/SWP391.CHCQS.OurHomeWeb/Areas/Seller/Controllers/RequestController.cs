@@ -2,6 +2,7 @@
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels;
+using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 {
@@ -25,7 +26,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         {
             List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
-                .Where(t => t.Status == true)
+                .Where(t => t.Status == SD.RequestStatusPending)
                 .Select(x => new RequestViewModel
                 {
                     Id = x.Id,
@@ -56,7 +57,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 		{
 			List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
 				.GetAll(includeProperties: "Customer")
-				.Where(t => t.Status == false)
+				.Where(t => t.Status == SD.RequestStatusApproved)
 				.Select(x => new RequestViewModel
 				{
 					Id = x.Id,

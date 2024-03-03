@@ -31,14 +31,12 @@ namespace SWP391.CHCQS.Model
         //---------------------------------------------------------------------------------------------
         // Engineer đã thực hiện báo giá này
         [ForeignKey("Engineer")]
-        [MaxLength(10)]
         public string EngineerId { get; set; }
         public virtual Staff Engineer { get; set; }
 
         //---------------------------------------------------------------------------------------------
         // Manager đã reject báo giá này
         [ForeignKey("Manager")]
-        [MaxLength(10)]
         public string ManagerId { get; set; }
         public virtual Staff Manager { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using SWP391.CHCQS.Model;
@@ -8,20 +9,17 @@ using Task = SWP391.CHCQS.Model.Task;
 
 namespace SWP391.CHCQS.DataAccess.Data
 {
-    public partial class SWP391DBContext : DbContext
-    {
-        public SWP391DBContext()
-        {
-        }
+    public partial class SWP391DBContext : IdentityDbContext
+    {      
 
         public SWP391DBContext(DbContextOptions<SWP391DBContext> options)
             : base(options)
         {
         }
 
+        public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
         public virtual DbSet<WorkingReport> WorkingReports { get; set; } = null!;
         public virtual DbSet<UserConnections> UserConnections { get; set; } = null!;
-        public virtual DbSet<Account> Accounts { get; set; } = null!;
         public virtual DbSet<BasementType> BasementTypes { get; set; } = null!;
         public virtual DbSet<ConstructDetail> ConstructDetails { get; set; } = null!;
         public virtual DbSet<ConstructionType> ConstructionTypes { get; set; } = null!;
@@ -44,6 +42,10 @@ namespace SWP391.CHCQS.DataAccess.Data
         public virtual DbSet<TaskCategory> TaskCategories { get; set; } = null!;
         public virtual DbSet<RejectionReport> RejectionReports { get; set; } = null!;
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

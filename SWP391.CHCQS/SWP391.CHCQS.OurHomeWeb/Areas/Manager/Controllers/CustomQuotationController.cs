@@ -281,7 +281,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			/*
 			 gửi email cho người dùng
 			 */
-			EmailSender.SendInfoToEmail("datsung.dev@gmail.com", "CC", "<p>CMM</p>");
+			Utility.Helpers.EmailSender.SendInfoToEmail("datsung.dev@gmail.com", "CC", "<p>CMM</p>");
 
 			//Tiến hành toast info
 			TempData["Success"] = "Quotation has been sent";

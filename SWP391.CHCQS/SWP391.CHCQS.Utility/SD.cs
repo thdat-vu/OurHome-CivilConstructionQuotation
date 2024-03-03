@@ -18,6 +18,18 @@ namespace SWP391.CHCQS.Utility
 		public const int Cancelled = -1; //customer not listen the call or not interested, this status is only available before Processing (2)
 		public const int Rejected = 0; //manager reject task
 
+		//request status
+		public const string RequestStatusPending = "Pending";
+		public const string RequestStatusApproved = "Approved";
+		public const string RequestStatusRejected = "Rejected";
+
+		//roles for application
+		public const string Role_Admin = "Admin";
+		public const string Role_Manager = "Manager";
+		public const string Role_Engineer = "Engineer";
+		public const string Role_Seller = "Seller";
+		public const string Role_Customer = "Customer";
+
 		/// <summary>
 		/// This method is a helper to get Description of Status.
 		/// Input is an int of Status.

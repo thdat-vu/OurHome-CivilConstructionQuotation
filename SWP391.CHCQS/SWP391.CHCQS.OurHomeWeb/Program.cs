@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Services.NotificationHub;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb
 {
@@ -16,8 +19,13 @@ namespace SWP391.CHCQS.OurHomeWeb
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddDbContext<SWP391DBContext>(
 				options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<SWP391DBContext>().AddDefaultTokenProviders();
+			builder.Services.AddRazorPages();
+
+			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+			builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 			//Câu lệnh đăng ký một dịch vụ bộ nhớ phân phối (distributed memory cache) trong container dịch vụ của ứng dụng.
 			builder.Services.AddDistributedMemoryCache();
@@ -54,8 +62,9 @@ namespace SWP391.CHCQS.OurHomeWeb
 			app.UseStaticFiles();
 
 			app.UseRouting();
-
+            app.UseAuthentication();//before authorization
 			app.UseAuthorization();
+			app.MapRazorPages();
 
 			//Khai báo app có sử dụng Session thì truy cập HttpContext.Session mới được
 			//Khai báo trước app.UseRouting(); app.UseAuthorization(); sau app.UseEndpoints app.Run();

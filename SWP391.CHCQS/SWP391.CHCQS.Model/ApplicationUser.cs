@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.Model
 {
-    public class ApplicationUser
-    {
-        [MaxLength(10)]
-        public string Id { get; set; } = null!;
+    public class ApplicationUser :IdentityUser
+    {        
         [MaxLength(100)]
+        [Required]
         public string Name { get; set; } = null!;
         [MaxLength(12), MinLength(9)]
         public string? PhoneNum { get; set; }
