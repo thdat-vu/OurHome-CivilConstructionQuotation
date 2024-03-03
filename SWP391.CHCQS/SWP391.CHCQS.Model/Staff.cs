@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SWP391.CHCQS.Model
 {
@@ -12,13 +13,19 @@ namespace SWP391.CHCQS.Model
             //CustomQuotationSellers = new HashSet<CustomQuotation>();
             //InverseManager = new HashSet<Staff>();
         }
-
+        [MaxLength(10)]
         public string Id { get; set; } = null!;
+        [MaxLength(30)]
         public string Name { get; set; } = null!;
+        [MaxLength(12), MinLength(9)]
         public string? PhoneNum { get; set; }
+        [MaxLength(30)]
         public string? Email { get; set; }
+        [MaxLength(10)]
         public string Gender { get; set; } = null!;
+        [MaxLength(30)]
         public string Username { get; set; } = null!;
+        [MaxLength(10)]
         public string? ManagerId { get; set; } = null!;
 		public bool Status { get; set; }
 

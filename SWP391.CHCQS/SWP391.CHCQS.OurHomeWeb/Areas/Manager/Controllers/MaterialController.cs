@@ -156,7 +156,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             {
                 Id = materialDetail.Id,
                 MaterialName = materialDetail.Name,
-                InventoryQuantity = materialDetail.InventoryQuantity,
                 UnitPrice = materialDetail.UnitPrice,
                 Unit = materialDetail.Unit,
                 Status = materialDetail.Status,

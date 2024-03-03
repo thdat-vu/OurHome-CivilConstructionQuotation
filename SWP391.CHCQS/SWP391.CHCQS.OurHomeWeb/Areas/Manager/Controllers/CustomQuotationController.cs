@@ -47,9 +47,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 					Acreage = x.Acreage,
 					Location = x.Location,
 					Status = SD.GetQuotationStatusDescription(x.Status),
-					EngineerName = x.Engineer.Name,
-					SellerName = x.Seller.Name,
-					ManagerName = x.Manager.Name,
+
+					//****************BUG****************
+					//EngineerName = x.Engineer.Name,
+					//SellerName = x.Seller.Name,
+					//ManagerName = x.Manager.Name,
+					//**********************************
+
+
 					ConstrucType = _unitOfWork.ConstructDetail.GetConstructTypeName(x.ConstructDetail.ConstructionId),
 					GeneratRequestDate = x.Request.GenerateDate
 				}).ToList();
@@ -66,12 +71,17 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
 			//lấy thông tin cơ bản của custom quotation
 			var customQuotationDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "Manager,Engineer,Seller,ConstructDetail");
+
+
 			//cập nhật thời gian manager nhận dc đơn pending approving
-			if (customQuotationDetail.RecieveDateManager == null)
-			{
-				customQuotationDetail.RecieveDateManager = DateTime.Now;
-			}
+			//***********BUG**************
+			//if (customQuotationDetail.RecieveDateManager == null)
+			//{
+			//	customQuotationDetail.RecieveDateManager = DateTime.Now;
+			//}
 			//đưa thông tin cho class có vai trò view
+			//****************BUG****************
+
 			quotationVM.QuotationDetailVM = new CustomQuotationDetailViewModel()
 			{
 				QuoteId = customQuotationDetail.Id,
@@ -79,15 +89,20 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 				//khởi tạo biến constructDetailViewModel để lát nữa giữ dữ liệu
 				ConstructDetailVM = new ViewModels.ConstructDetailViewModel(),
 				QuoteGeneratedDate = customQuotationDetail.Date,
-				Enginneer = customQuotationDetail.Engineer,
-				Manager = customQuotationDetail.Manager,
-				Seller = customQuotationDetail.Seller,
-				DelegationDateSeller = customQuotationDetail.DelegationDateSeller,
-				SubmissionDateSeller = customQuotationDetail.SubmissionDateEngineer,
-				RecieveDateEngineer = customQuotationDetail.RecieveDateEngineer,
-				SubmissionDateEngineer = customQuotationDetail.SubmissionDateEngineer,
-				RecieveDateManager = customQuotationDetail.RecieveDateManager,
-				AcceptanceDateManager = customQuotationDetail.AcceptanceDateManager
+
+				//**************BUG**************
+				//Enginneer = customQuotationDetail.Engineer,
+				//Manager = customQuotationDetail.Manager,
+				//Seller = customQuotationDetail.Seller,
+				//DelegationDateSeller = customQuotationDetail.DelegationDateSeller,
+				//SubmissionDateSeller = customQuotationDetail.SubmissionDateEngineer,
+				//RecieveDateEngineer = customQuotationDetail.RecieveDateEngineer,
+				//SubmissionDateEngineer = customQuotationDetail.SubmissionDateEngineer,
+				//RecieveDateManager = customQuotationDetail.RecieveDateManager,
+				//AcceptanceDateManager = customQuotationDetail.AcceptanceDateManager
+				//*******************************
+
+
 			};
 			//thêm thông tin cho construct detail View Model
 			quotationVM.QuotationDetailVM.ConstructDetailVM.IsBalcony = customQuotationDetail.ConstructDetail.Balcony;
@@ -118,7 +133,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		{
 			//đưa dữ liệu cho đối tượng có thể dc thêm vào database
 			var rejectQuotationId = model.RejectQuotationDetailVM.RejectQuotationId;
-			var rejectCustomQuotationDetail = new RejectedCustomQuotation()
+			var rejectCustomQuotationDetail = new RejectionReport()
 			{
 				Id = SD.TempId,
 				RejectedQuotationId = rejectQuotationId,
@@ -141,16 +156,25 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
              * 
              Cần thực hiện lưu lại task detail và material detail của custom quotatation
             */
-			SaveFile(target.Id, target.SubmissionDateEngineer, target.RecieveDateManager, target.Total);
+
+
+			//*************BUG**************
+			//SaveFile(target.Id, target.SubmissionDateEngineer, target.RecieveDateManager, target.Total);
+			//*****************************
 
 
 			//Thực hiện thay đổi trạng thái thành cancled
 			target.Status = SD.Rejected;
 
-			//thực hiện xóa thời gian đã submit của engineer
-			target.SubmissionDateEngineer = null;
-			//Thực hiện xóa thời gian nhận của Manager
-			target.RecieveDateManager = null;
+
+			//****************BUG****************
+			////thực hiện xóa thời gian đã submit của engineer
+			//target.SubmissionDateEngineer = null;
+			////Thực hiện xóa thời gian nhận của Manager
+			//target.RecieveDateManager = null;
+			//**********************************
+
+
 
 			//Update lại custom quotation trong custom quotation table
 			_unitOfWork.CustomQuotation.Update(target);
@@ -175,7 +199,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			rejectQuotationDetail.RecieveDateManager = recieve;
 
 			//Lưu trữ lại id của các task
-			rejectQuotationDetail.CustomQuotaionTasks = _unitOfWork.CustomQuotaionTask.GetAllWithFilter((x) => x.QuotationId == rejectQuoteId).Select((x) => x.TaskId);
+			rejectQuotationDetail.CustomQuotaionTasks = _unitOfWork.TaskDetail.GetAllWithFilter((x) => x.QuotationId == rejectQuoteId).Select((x) => x.TaskId);
 			//lưu lại id của material dc sử dụng
 			rejectQuotationDetail.MaterialDetails = _unitOfWork.MaterialDetail.GetAllWithFilter((x) => x.QuotationId == rejectQuoteId)
 				.ToDictionary(
@@ -239,8 +263,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		public IActionResult ApproveDetail(string id)
 		{
 			var quotation = _unitOfWork.CustomQuotation.Get((x) => x.Id == id);
-			//cập nhật thời gian approve của Manager
-			quotation.AcceptanceDateManager = DateTime.Now;
+
+			//****************BUG****************
+			////cập nhật thời gian approve của Manager
+			//quotation.AcceptanceDateManager = DateTime.Now;
+			//**********************************
 
 			//thay đổi status cho custom quotation
 			quotation.Status = SD.Completed;
