@@ -83,7 +83,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             {
                 // Tạo một đối tượng ConstructDetail mới với các giá trị đã chọn từ ViewModel
                 CustomQuotation? customQuotation = JsonSerializer.Deserialize<CustomQuotation>(hiddenData);
-                customQuotation.SubmissionDateSeller = DateTime.Now;
+
+                //***********BUG***********
+                //customQuotation.SubmissionDateSeller = DateTime.Now;
+                //***********BUG***********
                
                 ConstructDetail constructDetail = new ConstructDetail
                 {
