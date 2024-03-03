@@ -13,13 +13,7 @@ function loadDataTableRequest() {
             { data: 'location', "width": "15%" },
             { data: 'description', "width": "35%" },
             {
-                data: 'status',
-                "render": function (data) {
-                    if (data == 2) {
-                        return 'Processing';
-                    }
-                },
-                "width": "15%"
+                data: 'status', "width": "15%"
             },
             {
                 data: 'id',

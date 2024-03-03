@@ -15,7 +15,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		private readonly IUnitOfWork _unitOfWork;
 
 		//Declare session for CustomQuotationTaskViewModel to store TaskList of the quote when add into quote. if it empty, create one
-		public List<CustomQuotationTaskViewModel> TaskListSession => HttpContext.Session.Get<List<CustomQuotationTaskViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<CustomQuotationTaskViewModel>();
+		public List<TaskDetailViewModel> TaskListSession => HttpContext.Session.Get<List<TaskDetailViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<TaskDetailViewModel>();
 
 		//Declare Session to store CustomQuotation serve to method AddToList in TaskController and MaterialController to add Task and Material.
 		public CustomQuotationListViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationListViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationListViewModel();
@@ -69,9 +69,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetTaskListHistory()
 		{
-			List<CustomQuotationTaskViewModel> customQuotationTaskViewModels;
-			customQuotationTaskViewModels = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task")
-				.Select(x => new CustomQuotationTaskViewModel
+			List<TaskDetailViewModel> customQuotationTaskViewModels;
+			customQuotationTaskViewModels = _unitOfWork.TaskDetail.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task")
+				.Select(x => new TaskDetailViewModel
 				{
 					Task = x.Task,
 					QuotationId = x.QuotationId,
@@ -147,7 +147,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					var length = _unitOfWork.ConstructDetail.Get(x => x.QuotationId == CustomQuotationSession.Id).Length;
 					var acreage = width * length;
 					//Asign new CustomQuotationTaskViewModel with projection from task for taskItem
-					taskItem = new CustomQuotationTaskViewModel
+					taskItem = new TaskDetailViewModel
 					{
 						Task = task,
 						QuotationId = CustomQuotationSession.Id,

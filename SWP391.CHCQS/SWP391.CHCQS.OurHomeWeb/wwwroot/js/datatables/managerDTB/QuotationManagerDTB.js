@@ -1,15 +1,16 @@
-﻿$(document).ready(function () {
+﻿var dataTableCQ;
+$(document).ready(function () {
     loadDataTableCustomQuotationManager();
 });
 
 //Need an api method return json to use this
 function loadDataTableCustomQuotationManager() {
-    dataTable = $('#tblCustomQuotation').DataTable({
+    dataTableCQ = $('#tblCustomQuotation').DataTable({
         "ajax": { url: '/Manager/CustomQuotation/GetAll' },
         "columns": [
             { data: 'id', "width": "5%" },
             { data: 'generatRequestDate', "width": "15%" },
-            { data: 'acreage', "width": "15%" }, 
+            { data: 'acreage', "width": "15%" },
             { data: 'location', "width": "5%" },
             { data: 'construcType', "width": "5%" },
             { data: 'status', "width": "5%" },

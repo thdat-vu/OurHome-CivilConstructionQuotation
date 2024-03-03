@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWP391.CHCQS.Model
 {
-    public partial class Staff
+    public partial class Staff : ApplicationUser
     {
         public Staff()
         {
@@ -11,19 +13,11 @@ namespace SWP391.CHCQS.Model
             //CustomQuotationManagers = new HashSet<CustomQuotation>();
             //CustomQuotationSellers = new HashSet<CustomQuotation>();
             //InverseManager = new HashSet<Staff>();
-        }
-
-        public string Id { get; set; } = null!;
-        public string Name { get; set; } = null!;
-        public string? PhoneNum { get; set; }
-        public string? Email { get; set; }
-        public string Gender { get; set; } = null!;
-        public string Username { get; set; } = null!;
+        }        
         public string? ManagerId { get; set; } = null!;
-		public bool Status { get; set; }
-
+        [ForeignKey("ManagerId")]		
+        
 		public virtual Staff? Manager { get; set; } = null!;
-		public virtual Account? UsernameNavigation { get; set; } = null!;
   //      public virtual ICollection<CustomQuotation>? CustomQuotationEngineers { get; set; } = null!;
   //      public virtual ICollection<CustomQuotation>? CustomQuotationManagers { get; set; } = null!;
 		//public virtual ICollection<CustomQuotation>? CustomQuotationSellers { get; set; } = null!;

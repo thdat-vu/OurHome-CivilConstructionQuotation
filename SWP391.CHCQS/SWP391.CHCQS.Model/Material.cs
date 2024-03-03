@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWP391.CHCQS.Model
 {
@@ -8,23 +10,24 @@ namespace SWP391.CHCQS.Model
         public Material()
         {
             //MaterialDetails = new HashSet<MaterialDetail>();
-            Quotations = new HashSet<StandardQuotation>();
-            Requests = new HashSet<RequestForm>();
+            Combos = new HashSet<Combo>();            
         }
-
+        [MaxLength(10)]
         public string Id { get; set; } = null!;
+        [MaxLength(100)]
         public string Name { get; set; } = null!;
-        public int InventoryQuantity { get; set; }
         public decimal UnitPrice { get; set; }
+        [MaxLength(30)]
         public string Unit { get; set; } = null!;
         public bool Status { get; set; }
+        [MaxLength(10)]
         public string CategoryId { get; set; } = null!;
-        
+        [ForeignKey("CategoryId")]
         public virtual MaterialCategory Category { get; set; } = null!;
         //public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
-
-        public virtual ICollection<StandardQuotation> Quotations { get; set; }
-        public virtual ICollection<RequestForm> Requests { get; set; }
+        [MaxLength(200)]
+        public string? ImageUrl { get; set; }
+        public virtual ICollection<Combo> Combos { get; set; }        
 
     }
 }

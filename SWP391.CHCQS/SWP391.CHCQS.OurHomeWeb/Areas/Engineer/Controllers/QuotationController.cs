@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
+using SWP391.CHCQS.Services.NotificationHub;
 using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
 using System.Collections.Generic;
@@ -21,7 +23,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		public CustomQuotationListViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationListViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationListViewModel();
 
 		//Declare session for CustomQuotationTaskViewModel to store TaskList of the quote when add into quote. if it empty, create one
-		public List<CustomQuotationTaskViewModel> TaskListSession => HttpContext.Session.Get<List<CustomQuotationTaskViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<CustomQuotationTaskViewModel>();
+		public List<TaskDetailViewModel> TaskListSession => HttpContext.Session.Get<List<TaskDetailViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<TaskDetailViewModel>();
 
 		//Khai bao Session cho MaterialList neu co thi lay ra khong co thi tao moi
 		public List<MaterialDetailViewModel> MaterialListSession => HttpContext.Session.Get<List<MaterialDetailViewModel>>(SessionConst.MATERIAL_LIST_KEY) ?? new List<MaterialDetailViewModel>();
@@ -52,6 +54,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					Acreage = x.Acreage,
 					Location = x.Location,
 					Status = SD.GetQuotationStatusDescription(x.Status),
+					Total = x.Total,
 				})
 				.ToList();
 
@@ -72,6 +75,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					Acreage = x.Acreage,
 					Location = x.Location,
 					Status = SD.GetQuotationStatusDescription(x.Status),
+					Total = x.Total,
 				})
 				.ToList();
 
@@ -92,6 +96,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					Acreage = x.Acreage,
 					Location = x.Location,
 					Status = SD.GetQuotationStatusDescription(x.Status),
+					Total = x.Total,
 				})
 				.ToList();
 
@@ -148,13 +153,17 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		{
 			//Update RecieveDateEngineer 
 			var customQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == QuotationId);
-			if (customQuotation.RecieveDateEngineer == null)
-			{
-				customQuotation.RecieveDateEngineer = DateTime.Now;
-				_unitOfWork.CustomQuotation.Update(customQuotation);
-				_unitOfWork.Save();
 
-			}
+			//**********BUG**********
+			//if (customQuotation.RecieveDateEngineer == null)
+			//{
+			//    customQuotation.RecieveDateEngineer = DateTime.Now;
+			//    _unitOfWork.CustomQuotation.Update(customQuotation);
+			//    _unitOfWork.Save();
+
+			//}
+			//**********BUG**********
+
 
 			//Declare constructDetail get data form Database by using _unitOfWork
 			ConstructDetail? constructDetail = _unitOfWork.ConstructDetail.Get(filter: c => c.QuotationId == QuotationId, includeProperties: "Construction,Investment,Foundation,Rooftop,Basement");
@@ -212,7 +221,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//if taskCart == null mean the taskCart have no task in there
 			if (taskCart.Count == 0)
 			{
-				taskCart = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task").Select(x => new CustomQuotationTaskViewModel
+				taskCart = _unitOfWork.TaskDetail.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task").Select(x => new TaskDetailViewModel
 				{
 					Task = x.Task,
 					QuotationId = x.QuotationId,
@@ -281,7 +290,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			try
 			{
 				//move item from taskCart(ViewModel) to CustomQuotationTask(Model) to add to database 
-				List<CustomQuotationTask> customQuotaionTasks = taskCart.Select(t => new CustomQuotationTask
+				List<TaskDetail> taskDetails = taskCart.Select(t => new TaskDetail
 				{
 					TaskId = t.Task.Id,
 					QuotationId = t.QuotationId,
@@ -298,11 +307,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				}).ToList();
 
 				//Get data from database to delete
-				var customQuotationTasksBeDelete = _unitOfWork.CustomQuotaionTask.GetTaskDetail(CustomQuotationSession.Id);
+				var customQuotationTasksBeDelete = _unitOfWork.TaskDetail.GetTaskDetail(CustomQuotationSession.Id);
 				//Detele the old data after get in database
-				_unitOfWork.CustomQuotaionTask.RemoveRange(customQuotationTasksBeDelete);
-				//Addrange of customQuotaionTasks to database
-				_unitOfWork.CustomQuotaionTask.AddRange(customQuotaionTasks);
+				_unitOfWork.TaskDetail.RemoveRange(customQuotationTasksBeDelete);
+				//Addrange of taskDetails to database
+				_unitOfWork.TaskDetail.AddRange(taskDetails);
 
 				//Get data from database to delete
 				var materialDetailsBeDelete = _unitOfWork.MaterialDetail.GetMaterialDetail(CustomQuotationSession.Id);
@@ -311,12 +320,18 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				//Addrange of materialDetails to database
 				_unitOfWork.MaterialDetail.AddRange(materialDetails);
 
-				var total = materialCart.Sum(x => x.Price) + taskCart.Sum(x => x.Price);
-
 				//update total price of customQuotation after submit
 				var customQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == CustomQuotationSession.Id);
-				customQuotation.Total = (decimal)total;
-				customQuotation.SubmissionDateEngineer = DateTime.Now;
+
+				//Calculate Total of the Quotation
+				customQuotation.Total = CalculateQuotationTotalPrice(CustomQuotationSession.Id, taskDetails, materialDetails);
+
+
+				//**********BUG**********
+				//customQuotation.SubmissionDateEngineer = DateTime.Now;
+				//**********BUG**********
+
+
 				_unitOfWork.CustomQuotation.Update(customQuotation);
 
 				//Savechange the database after addrange
@@ -368,7 +383,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				return Json(new { success = false, message = $"This quotation was not complete!" });
 			}
 
-			var customQuotationTasks = _unitOfWork.CustomQuotaionTask.GetTaskDetail(quotation.Id);
+			var customQuotationTasks = _unitOfWork.TaskDetail.GetTaskDetail(quotation.Id);
 			if (customQuotationTasks.Count() == 0)
 			{
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
@@ -445,6 +460,33 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			HttpContext.Session.Set(SessionConst.CUSTOM_QUOTATION_KEY, customQuotationViewModel);
 
 			return View(constructDetailVM);
+		}
+
+
+		public decimal CalculateQuotationTotalPrice(string QuotationId, List<TaskDetail> taskDetails, List<MaterialDetail> materialDetails)
+		{
+			decimal result = 0;
+
+			//Get contrucdetail to gain infor for calculated
+			ConstructDetail constructDetail = _unitOfWork.ConstructDetail.Get(x => x.QuotationId == QuotationId, includeProperties: "Foundation,Rooftop,Basement");
+
+			//Get acreage of contruction
+			var acreage = constructDetail.Width * constructDetail.Length;
+
+			//Get price on one meter.
+			var priceOnMeters = (decimal)_unitOfWork.Pricing.Get(x => x.ConstructTypeId == constructDetail.ConstructionId && x.InvestmentTypeId == constructDetail.InvestmentId).UnitPrice;
+
+			//Get price of tasks and materils on quotation
+			var totalPriceTaskAndMaterial = (decimal)materialDetails.Sum(x => x.Price) + taskDetails.Sum(x => x.Price);
+
+			//total acreage to calculate with priceOnMeters
+			var totalFactor = (decimal)(constructDetail.Basement.AreaFactor + constructDetail.Foundation.AreaFactor + constructDetail.Rooftop.AreaFactor) * acreage;
+
+			//result equal to price on 1 meter multiply with total acreage and plus with price of tasks and materials
+			result = priceOnMeters * totalFactor + totalPriceTaskAndMaterial;
+
+			//return result after calculated
+			return result;
 		}
 
 	}

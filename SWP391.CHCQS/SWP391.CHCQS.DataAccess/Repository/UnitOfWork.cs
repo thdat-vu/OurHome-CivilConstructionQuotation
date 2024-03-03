@@ -12,10 +12,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly SWP391DBContext _db;
-        public IStandardQuotationRepository StandardQuotation {  get; private set; }
+        public IComboRepository Combo {  get; private set; }
         public IProjectRepository Project {  get; private set; }
         public IMaterialDetailRepository MaterialDetail { get; private set; }
-        public ICustomQuotaionTaskRepository CustomQuotaionTask { get; private set; }
+        public ITaskDetailRepository TaskDetail { get; private set; }
         public ICustomQuotationRepository CustomQuotation { get; private set; }
         public ITaskRepository Task { get; private set; }
         public IMaterialRepository Material { get; private set; }
@@ -31,6 +31,11 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public IMaterialCategoryRepository MaterialCategory { get; private set; }
         public IRejectedCustomQuotationRepository RejectedCustomQuotation { get; private set; }
 
+        public ICustomerRepository Customer { get; private set; }
+        public IWorkingReportRepository WorkingReport { get; private set; }
+
+        public IPricingRepository Pricing { get; private set; }
+
 
 		public UnitOfWork(SWP391DBContext db)
         {
@@ -39,11 +44,11 @@ namespace SWP391.CHCQS.DataAccess.Repository
             Project = new ProjectRepository(_db);
             Staff = new StaffRepository(_db);
 
-            StandardQuotation = new StandardQuotationRepository(_db);
+            Combo = new ComboRepository(_db);
             CustomQuotation = new CustomQuotationRepository(_db);
 
             Task = new TaskRepository(_db);
-            CustomQuotaionTask = new CustomQuotaionTaskRepository(_db);
+            TaskDetail = new TaskDetailRepository(_db);
             TaskCategory = new TaskCategoryRepository(_db);
 
             ConstructDetail = new ConstructDetailRepository(_db);
@@ -59,6 +64,12 @@ namespace SWP391.CHCQS.DataAccess.Repository
             MaterialDetail = new MaterialDetailRepository(_db);
             Material = new MaterialRepository(_db);
             RejectedCustomQuotation = new RejectedCustomQuotationRepository(_db);
+
+            Customer = new CustomerRepository(_db);
+            WorkingReport = new WorkingReportRepository(_db);
+
+            Pricing = new PricingRepository(_db);
+
         }
 
         public void Save()

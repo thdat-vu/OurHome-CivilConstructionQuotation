@@ -6,7 +6,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
 	public class StandardQuotationViewModel
 	{
-		public StandardQuotation StandardQuotation { get; set; }
+		public Combo StandardQuotation { get; set; }
 
 		[ValidateNever]
 		public IEnumerable<SelectListItem> ConstructionTypeList { get; set; }
