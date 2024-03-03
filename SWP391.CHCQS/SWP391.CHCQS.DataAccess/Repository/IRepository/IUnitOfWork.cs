@@ -26,6 +26,7 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         IMaterialCategoryRepository MaterialCategory { get; }
         IStaffRepository Staff { get; }
         IRejectedCustomQuotationRepository RejectedCustomQuotation { get; }
+        ICustomerRepository Customer { get; }
         void Save();
     }
 }

@@ -10,41 +10,41 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
     //register Area
     [Area("Manager")]
-    public class MaterialController : Controller
+    public class ProjectController : Controller
     {
         //init IUnitOfWork
         private readonly IUnitOfWork _unitOfWork;
 
         //ctor
-        public MaterialController(IUnitOfWork unitOfWork)
+        public ProjectController(IUnitOfWork unitOfWork)
         {
-			_unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
 
         
-        
+        //TODO: Add a project datatable.js and call an api to retrieve the table
         public IActionResult Index()
         {
-            List<Material> objMaterialList = _unitOfWork.Material.GetAll().ToList();
+            List<Project> objProjectList = _unitOfWork.Project.GetAll().ToList();
             //return View();
-            return View(objMaterialList); //redirect to Index.cshtml + objList
+            return View(objProjectList); //redirect to Index.cshtml + objList
         }
 
-        
+        //TODO: CREATE ProjectVM + fix that 
         public IActionResult Create()
         {
-            //add MaterialViewModel to pass Properties.
-			MaterialViewModel materialVM = new()
+			//add ProjectVM to pass Properties.
+			ProjectViewModel projectVM = new()
 			{
-				CategoryList = _unitOfWork.MaterialCategory.GetAll().Select(u => new SelectListItem
+				CustomerList = _unitOfWork.Customer.GetAll().Select(u => new SelectListItem
 				{
 					Text = u.Name,
 					Value = u.Id.ToString()
 				}),
-				Material = new Material()
+				Project = new Project()
 			};
-            return View(materialVM);
+            return View(projectVM);
 		}
 
         //Create request HttpPOST
@@ -169,11 +169,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		[HttpGet]
 		public IActionResult GetAll()
         {
-			List<Material> objMaterialList = _unitOfWork.Material.GetAll(includeProperties:"Category").ToList();
-			return Json(new { data = objMaterialList }); //json + material list for data table.
+			List<Project> objProjectList = _unitOfWork.Project.GetAll(includeProperties:"Customer").ToList();
+			return Json(new { data = objProjectList }); //json + project list for data table.
 		}
-
-
 		#endregion
 	}
 
