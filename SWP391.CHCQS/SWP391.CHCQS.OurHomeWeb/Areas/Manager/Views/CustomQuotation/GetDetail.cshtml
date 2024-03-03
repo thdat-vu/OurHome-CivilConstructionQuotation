@@ -4,7 +4,7 @@
     //biến để hiển thị lên view
     var quotationDetailVM = Model.QuotationDetailVM;
     //biến có chủ đích đưa dữ liệu xuống dưới
-    var rejectQuotationDetailVM = Model.RejectReportlVM;
+    var rejectReportVM = Model.RejectReportVM;
 }
 
 <div class="row">
@@ -253,21 +253,21 @@
 
 
         <!--khi reject dữ liệu ở form sẽ dc đẩy xuống-->
-        <form asp-controller="CustomQuotation" asp-action="RejectDetail" method="post" asp-model="model">
+        <form asp-area="Manager" asp-controller="CustomQuotation" asp-action="RejectDetail" method="post">
             <!--quotation id sẽ dc reject-->
-            <input asp-for="@rejectQuotationDetailVM.RejectQuotationId" type="hidden" value="@quotationDetailVM.QuoteId" />
+            <input asp-for="@rejectReportVM.RejectQuotationId" type="hidden" value="@quotationDetailVM.QuoteId" />
             <!--manager id - người đã thực hiện reject-->
-            <input asp-for="@rejectQuotationDetailVM.RejecterId" type="hidden" value="@quotationDetailVM.Manager.Id" />
+            <input asp-for="@rejectReportVM.RejecterId" type="hidden" value="@quotationDetailVM.Manager.Id" />
             <!--engineer id - người đã làm detail cho customquotation-->
-            <input asp-for="@rejectQuotationDetailVM.SubcriberId" type="hidden" value="@quotationDetailVM.Enginneer.Id" />
+            <input asp-for="@rejectReportVM.SubcriberId" type="hidden" value="@quotationDetailVM.Enginneer.Id" />
 
             <!--reason - cần dài hơn 20 ký tự -->
 
             <div class="form-outline mt-3">
                 <label><b class="text-nowrap" for="textAreaExample">Reason</b></label>
 
-                <textarea asp-for="@rejectQuotationDetailVM.Reason" placeholder="The reason in case of rejection" class="form-control" id="textAreaExample1" rows="4"></textarea>
-                <span asp-validation-for="@rejectQuotationDetailVM.Reason" class="text-danger text-nowrap"></span>
+                <textarea asp-for="@rejectReportVM.Reason" placeholder="The reason in case of rejection" class="form-control" id="textAreaExample1" rows="4"></textarea>
+                <span asp-validation-for="@rejectReportVM.Reason" class="text-danger text-nowrap"></span>
             </div>
             <!--Nút reject và approve-->
             <div class="row">
@@ -281,14 +281,15 @@
             </div>
         </form>
     </div>
-    @section Scripts {
-        <script src="~/js/datatables/managerDTB/TaskDetailDTB.js"></script>
-        <script src="~/js/datatables/managerDTB/MaterialDetailDTB.js"></script>
+</div>
+@section Scripts {
+    <script src="~/js/datatables/managerDTB/TaskDetailDTB.js"></script>
+    <script src="~/js/datatables/managerDTB/MaterialDetailDTB.js"></script>
 
-    }
+}
 
-    @section ValidationScripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
+@section ValidationScripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+}

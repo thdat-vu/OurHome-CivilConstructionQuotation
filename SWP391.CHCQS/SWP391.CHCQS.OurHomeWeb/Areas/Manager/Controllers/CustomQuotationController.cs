@@ -67,12 +67,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             HttpContext.Session.SetString(SessionConst.QUOTATION_ID, id);
 
             //lấy đối tượng customquotation full thông tin từ CustomQuotation table
-            var cqDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "Manager,Engineer,Seller,ConstructDetail");
+            var cqDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "ConstructDetail");
 
             //lấy working report của manager trong working report
             var managerWorkreport = _unitOfWork.WorkingReport.GetBaseOnRequestAndStaffKey(cqDetail.RequestId, SD.ManagerIdKey);
             //lấy working report của engineer trong working report
-            var engineerWorkreport = _unitOfWork.WorkingReport.GetBaseOnRequestAndStaffKey(cqDetail.RequestId, SD.ManagerIdKey);
+            var engineerWorkreport = _unitOfWork.WorkingReport.GetBaseOnRequestAndStaffKey(cqDetail.RequestId, SD.EngineertIdKey);
             //lấy thời gian seller recieve trong working report
             var sellerWorkreport = _unitOfWork.WorkingReport.GetBaseOnRequestAndStaffKey(cqDetail.RequestId, SD.SellerIdKey);
 
@@ -137,13 +137,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         public IActionResult RejectDetail(CustomQuotationVM model)
         {
             //lấy id của quotation bị reject đưa cho biến rejectReportId giữ
-            var rejectQuotationId = model.RejectReportlVM.RejectQuotationId;
+            var rejectQuotationId = model.RejectReportVM.RejectQuotationId;
 
 
             //Working Report của Engineer 
-            var EngineerWorkReport = _unitOfWork.WorkingReport.GetBaseOnRequestAndStaffKey(Helper.TransferId(rejectQuotationId, SD.requestIdKey), SD.EngineertIdKey);
+            var engineerWorkReport = _unitOfWork.WorkingReport.GetBaseOnRequestAndStaffKey(Helper.TransferId(rejectQuotationId, SD.requestIdKey), SD.EngineertIdKey);
             //Working Report của Manager
-            var ManagerWorkReport = _unitOfWork.WorkingReport.GetBaseOnRequestAndStaffKey(Helper.TransferId(rejectQuotationId, SD.requestIdKey), SD.ManagerIdKey);
+            var managerWorkReport = _unitOfWork.WorkingReport.GetBaseOnRequestAndStaffKey(Helper.TransferId(rejectQuotationId, SD.requestIdKey), SD.ManagerIdKey);
             //tạo đối tượng RejectionReport - đối tượng dc sử dụng để lưu xuống RejectionReports table
             var rejectReport = new RejectionReport()
             {
@@ -154,11 +154,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                 //id của quotation bị reject
                 RejectedQuotationId = rejectQuotationId,
                 //thời gian submit quotation bị reject của Enginner từ WorkingReports table
-                SubmitDay = EngineerWorkReport.SubmitDate,
+                SubmitDay = engineerWorkReport.SubmitDate,
+                //id engineer đã làm report đó
+                EngineerId = engineerWorkReport.StaffId,
                 //thời gian recieve quotation bị reject của Manager từ WorkingReports table
-                ReceiveDay = ManagerWorkReport.ReceiveDate,
+                ReceiveDay = managerWorkReport.ReceiveDate,
+                //id của manager đã reject report
+                ManagerId = managerWorkReport.StaffId,
                 //lý do reject tổng quát
-                Reason = model.RejectReportlVM.Reason
+                Reason = model.RejectReportVM.Reason
             };
             //Thêm vào RejectionReports table 
             _unitOfWork.RejectedCustomQuotation.Add(rejectReport);
@@ -178,13 +182,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             rejectCustomQuotation.Status = SD.Rejected;
 
             //Xóa thời gian submission của Enginner trong WorkingReports table
-            EngineerWorkReport.SubmitDate = null;
+            engineerWorkReport.SubmitDate = null;
             //Xóa thời gian Receive của Manager trong WorkingReports table
-            ManagerWorkReport.ReceiveDate = null;
+            managerWorkReport.ReceiveDate = null;
 
             //Update WorkingReport cho Engineer và Manager
-            _unitOfWork.WorkingReport.Update(EngineerWorkReport);
-            _unitOfWork.WorkingReport.Update(ManagerWorkReport);
+            _unitOfWork.WorkingReport.Update(engineerWorkReport);
+            _unitOfWork.WorkingReport.Update(managerWorkReport);
             //LƯU LẠI
             _unitOfWork.Save();
 

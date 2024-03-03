@@ -69,7 +69,7 @@ namespace SWP391.CHCQS.Services
             }
             return _instance;
         }
-       
+        //lần lượt sl, en, mg
         public Tuple<int, int, int> GetDelegationIndex()
         {
             //gán giá trị trả về cho Tuple
@@ -93,6 +93,12 @@ namespace SWP391.CHCQS.Services
             return Tuple.Create(sl, en, mg);
         }
 
+        //Cách gọi ra AppState: AppState.Instance(_unitOfWork).GetDelegationIndex()
+        //var demo = AppState.Instance(_unitOfWork).GetDelegationIndex()
+        //demo.Item1
+        //demo.Item2
+        //demo.Item3
 
+        //để lấy StaffId cho seller  thì query:  _unitOfWork.Staff.Where((x) = >x.Id.Contains(SD.SelerIdKey)).SkipWhile((entity, index) => index < demo.Item1).FirstOrdefault().Id;
     }
 }
