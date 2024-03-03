@@ -13,12 +13,10 @@ namespace SWP391.CHCQS.Utility.Helpers
 	public class EmailSender : IEmailSender
 	{
 		public string SendGridSecret { get; set; }
-		private readonly IConfiguration _configuration;
 
 		public EmailSender(IConfiguration _config)
 		{
 			SendGridSecret = _config.GetValue<string>("SendGrid:SecretKey");
-			_configuration = _config;
 		}
 
 		public Task SendEmailAsync(string email, string subject, string htmlMessage)
@@ -87,29 +85,19 @@ namespace SWP391.CHCQS.Utility.Helpers
 		 Now we just need to set the message body and we're done
 		 message.Body = builder.ToMessageBody();
 		*/
-		public  Task SendInfoToEmail(string toEmail, string customerName, string quoteId)
+		public static Task SendInfoToEmail(string toEmail, string subject, string html)
 		{
-			var fromMail = _configuration["MailSettings:Mail"];
-			var fromPassword = _configuration["MailSettings:FromKeyPassword"];
-            MailMessage mess = new MailMessage();
-			mess.From = new MailAddress(fromMail);
-			mess.Subject = _configuration["MailSettings:Subject"];
-            mess.To.Add(new MailAddress(toEmail));
+			var bodyBuilder = new BodyBuilder();
+			string fromMail = "ourhomeswp391@gmail.com";
+			string fromPassword = "kusvqhpurbksspvb";
 
-			string url = $"{_configuration["Environment:LocalDomain"]}{_configuration["MailSettings:ActionLinkNoPara"]}?quoteId={quoteId}";
-			string mailContent = $@"
-<p>Welcome {customerName} !</p>
-<p>Thank you for contacting us to use our construction quote request service. We received your request and it was reviewed by our team.</p>
-<p>We've tried to respond to you as quickly as possible and made sure to thoroughly review your requests.</p>
-<p>Once again, we would like to express our sincere thanks for choosing our service. Wishing you a wonderful day ahead!</p>
-    
-<p>For further information of quotation, please visit <a href='{url}'>here</a>.</p>
-    
-<p>Yours sincerely,</p>
-<p>Our Home Architecture</p>
-";
-            var bodyBuilder = new BodyBuilder();
-            bodyBuilder.HtmlBody = String.Format(mailContent); 
+			MailMessage mess = new MailMessage();
+			mess.From = new MailAddress(fromMail);
+			mess.Subject = subject;
+			mess.To.Add(new MailAddress(toEmail));
+
+			bodyBuilder.HtmlBody = String.Format(html); 
+
 			mess.Body = bodyBuilder.HtmlBody;
 
 			mess.IsBodyHtml = true;

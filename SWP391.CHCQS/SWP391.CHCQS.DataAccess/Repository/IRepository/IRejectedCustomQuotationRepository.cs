@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {
-    public interface IRejectedCustomQuotationRepository: IRepository<RejectionReport>
+    public interface IRejectedCustomQuotationRepository: IRepository<RejectedCustomQuotation>
     {
-        void Update(RejectionReport model);
+        void Update(RejectedCustomQuotation model);
     }
 }

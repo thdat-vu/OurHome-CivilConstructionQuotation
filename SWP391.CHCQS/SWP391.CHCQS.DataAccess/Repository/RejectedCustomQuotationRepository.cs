@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository
 {
-    public class RejectedCustomQuotationRepository : Repository<RejectionReport>, IRejectedCustomQuotationRepository
+    public class RejectedCustomQuotationRepository : Repository<RejectedCustomQuotation>, IRejectedCustomQuotationRepository
     {
         private readonly SWP391DBContext _db;
         public RejectedCustomQuotationRepository(SWP391DBContext db) : base(db)
         {
             _db = db;
         }
-        public void Update(RejectionReport model)
+        public void Update(RejectedCustomQuotation model)
         {
-            _db.RejectionReports.Update(model);
+            _db.RejectedCustomQuotations.Update(model);
         }
     }
 }

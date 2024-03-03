@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SWP391.CHCQS.Model;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 {
@@ -13,8 +12,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 
         public async Task<IActionResult> CreateRequest()
         {
-            RequestForm requestForm = new RequestForm();
-            return View(requestForm);  
+            return View();  
         }
 
         public async Task<IActionResult> ManageRequest()

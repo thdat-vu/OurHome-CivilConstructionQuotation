@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace SWP391.CHCQS.Model
 {
@@ -10,12 +9,11 @@ namespace SWP391.CHCQS.Model
         {
             //ConstructDetails = new HashSet<ConstructDetail>();
         }
-        [MaxLength(10)]
+
         public string Id { get; set; } = null!;
-        [MaxLength(100)]
         public string Name { get; set; } = null!;
-        public decimal? AreaFactor { get; set; }
-        [MaxLength(500)]
+        public decimal? AreaRatio { get; set; }
+        public decimal UnitPrice { get; set; }
         public string? Description { get; set; }
 
         //public virtual ICollection<ConstructDetail> ConstructDetails { get; set; }

@@ -28,6 +28,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
 			if (objFromDb != null) 
             {
 				objFromDb.Name = obj.Name;
+                objFromDb.InventoryQuantity = obj.InventoryQuantity;
                 objFromDb.UnitPrice = obj.UnitPrice;
                 objFromDb.Unit = obj.Unit;
                 objFromDb.CategoryId = obj.CategoryId;

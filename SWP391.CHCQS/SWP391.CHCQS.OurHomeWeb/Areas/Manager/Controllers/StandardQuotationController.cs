@@ -24,7 +24,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		//getAll() action
 		public IActionResult Index()
 		{
-			List<Combo> objStandardQuotationList = _unitOfWork.Combo.GetAll().ToList();
+			List<StandardQuotation> objStandardQuotationList = _unitOfWork.StandardQuotation.GetAll().ToList();
 			//return View();
 			return View(objStandardQuotationList); //redirect to Index.cshtml + objList
 		}
@@ -40,7 +40,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 					Text = u.Name,
 					Value = u.Id.ToString(),
 				}),
-				StandardQuotation = new Combo()
+				StandardQuotation = new StandardQuotation()
 			};
 			return View(standardQuotationVM);
 
@@ -53,9 +53,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			//if (ModelState.IsValid) //if obj is valid
 			//{
 			obj.StandardQuotation.Status = true;
-			_unitOfWork.Combo.Add(obj.StandardQuotation); //Add Combo to Combo table
+			_unitOfWork.StandardQuotation.Add(obj.StandardQuotation); //Add StandardQuotation to StandardQuotation table
 			_unitOfWork.Save(); //keep track on change
-			TempData["success"] = "Combo added successfully";
+			TempData["success"] = "StandardQuotation added successfully";
 			return RedirectToAction("Index"); //after adding, return to previous action and reload the page
 											  //}
 											  //return View(obj); //return previous action + invalid object
@@ -67,8 +67,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			{
 				return NotFound();//return status not found aka 404
 			}
-			//step 1: retrieve Combo from DB
-			Combo? standardQuotationFromDb = _unitOfWork.Combo.Get(u => u.Id == id);
+			//step 1: retrieve StandardQuotation from DB
+			StandardQuotation? standardQuotationFromDb = _unitOfWork.StandardQuotation.Get(u => u.Id == id);
 
 			//catch not found exception
 			if (standardQuotationFromDb == null)
@@ -84,12 +84,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 					Text = u.Name,
 					Value = u.Id.ToString()
 				}),
-				StandardQuotation = new Combo()
+				StandardQuotation = new StandardQuotation()
 			};
 			//step 2.1: pass Material to MaterialViewModel
 			standardQuotationVM.StandardQuotation = standardQuotationFromDb;
 
-			return View(standardQuotationVM); //return View + retrieved Combo
+			return View(standardQuotationVM); //return View + retrieved StandardQuotation
 
 		}
 		//Edit request with HttpPOST method
@@ -100,9 +100,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
 			//if (ModelState.IsValid) //model is valid
 			//{
-				_unitOfWork.Combo.Update(obj.StandardQuotation); //Update Combo to Combo table
+				_unitOfWork.StandardQuotation.Update(obj.StandardQuotation); //Update StandardQuotation to StandardQuotation table
 				_unitOfWork.Save(); //keep track on change
-				TempData["success"] = "Combo edited successfully";
+				TempData["success"] = "StandardQuotation edited successfully";
 				return RedirectToAction("Index"); //after updating, return to previous action and reload the page
 			//}
 			//return View();//return previous action if model is invalid
@@ -117,8 +117,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		//        return NotFound(); //return status not found aka 404
 		//    }
 
-		//    //retrieve Combo from DB
-		//    Combo? materialFromDb = _unitOfWork.Combo.Get(u => u.Id == id);
+		//    //retrieve StandardQuotation from DB
+		//    StandardQuotation? materialFromDb = _unitOfWork.StandardQuotation.Get(u => u.Id == id);
 
 		//    if( materialFromDb == null)
 		//    {
@@ -133,15 +133,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		//[HttpPost, ActionName("Delete")]
 		//public IActionResult DeletePOST(string? id)
 		//{
-		//    //retrieve Combo from Db
-		//    Combo? obj = _unitOfWork.Combo.Get(u => u.Id == id);
+		//    //retrieve StandardQuotation from Db
+		//    StandardQuotation? obj = _unitOfWork.StandardQuotation.Get(u => u.Id == id);
 		//    //handle id null exception
 		//    if (obj == null)
 		//    {
 		//        return NotFound();//return status not found aka 404
 		//    }
 
-		//    _unitOfWork.Combo.Remove(obj); //just temporary
+		//    _unitOfWork.StandardQuotation.Remove(obj); //just temporary
 		//    _unitOfWork.Save();//keep track on change
 		//    //TempData["success"] = "Product deleted successfully";
 		//    return RedirectToAction("Index"); //redirect to Index.cshtml
@@ -150,7 +150,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		#region API CALL
 		public IActionResult GetAll()
 		{
-			List<Combo> objStandardQuotationList = _unitOfWork.Combo.GetAll(includeProperties: "Construction").ToList();
+			List<StandardQuotation> objStandardQuotationList = _unitOfWork.StandardQuotation.GetAll(includeProperties: "Construction").ToList();
 
 			return Json(new { data = objStandardQuotationList });
 		}

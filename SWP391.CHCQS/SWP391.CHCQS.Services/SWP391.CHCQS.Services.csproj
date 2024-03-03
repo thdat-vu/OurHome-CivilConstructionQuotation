@@ -6,12 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SWP391.CHCQS.DataAccess\SWP391.CHCQS.DataAccess.csproj" />
-  </ItemGroup>
-
 </Project>

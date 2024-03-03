@@ -47,6 +47,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			{
 				Id = x.Id,
 				Name = x.Name,
+				InventoryQuantity = x.InventoryQuantity,
 				UnitPrice = x.UnitPrice,
 				Unit = x.Unit,
 				Status = x.Status,
@@ -96,6 +97,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			{
 				Id = materialDetail.Id,
 				Name = materialDetail.Name,
+				InventoryQuantity = materialDetail.InventoryQuantity,
 				UnitPrice = materialDetail.UnitPrice,
 				Unit = materialDetail.Unit,
 				Status = materialDetail.Status,
