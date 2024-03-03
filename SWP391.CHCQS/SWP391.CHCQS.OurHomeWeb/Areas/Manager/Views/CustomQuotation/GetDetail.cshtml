@@ -4,7 +4,7 @@
     //biến để hiển thị lên view
     var quotationDetailVM = Model.QuotationDetailVM;
     //biến có chủ đích đưa dữ liệu xuống dưới
-    var rejectQuotationDetailVM = Model.RejectQuotationDetailVM;
+    var rejectReportVM = Model.RejectReportVM;
 }
 
 <div class="row">
@@ -91,200 +91,205 @@
                 <div class="col-lg">
                     <label><b class="text-nowrap">Garden:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Garden</p>
+
                 </div>
+                <div class="col-lg" style="color:red">
+                    <label><b class="text-nowrap">Total:</b></label>
+                    <p>@quotationDetailVM.Total </p>
+                </div>
+
             </div>
-
         </div>
-    </div>
 
 
-    <!--Hiện 2 bảng TaskListSession và MaterialListSession -->
-    <div class="row mb-3">
+        <!--Hiện 2 bảng TaskListSession và MaterialListSession -->
+        <div class="row mb-3">
 
-        <!--TaskList-->
-        <div class="col-lg-5">
-            <div class="card shadow border-0">
-                <div class="card-header bg-main">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <h2 class="text-white m-0">Tasks</h2>
+            <!--TaskList-->
+            <div class="col-lg-5">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-main">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white m-0">Tasks</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table id="tblTaskDetail" class="table-bordered table-striped text-black" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Id
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-                <div class="card-body">
-
-                    <div class="table-responsive">
-                        <table id="tblTaskDetail" class="table-bordered table-striped text-black" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Id
-                                    </th>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th>
-                                        Price
-                                    </th>
-                                    <th>
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
             </div>
-        </div>
-        <!--MaterialList-->
-        <div class="col-lg-7">
-            <div class="card shadow border-0">
-                <div class="card-header bg-main">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <h2 class="text-white m-0">Materials </h2>
+            <!--MaterialList-->
+            <div class="col-lg-7">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-main">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white m-0">Materials </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table id="tblMaterialDetail" class="table-bordered table-striped text-black" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Id
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Category
+                                        </th>
+                                        <th>
+                                            Quantity
+                                        </th>
+
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Unit
+                                        </th>
+                                        <th>
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-                <div class="card-body">
-
-                    <div class="table-responsive">
-                        <table id="tblMaterialDetail" class="table-bordered table-striped text-black" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Id
-                                    </th>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th>
-                                        Category
-                                    </th>
-                                    <th>
-                                        Quantity
-                                    </th>
-
-                                    <th>
-                                        Price
-                                    </th>
-                                    <th>
-                                        Unit
-                                    </th>
-                                    <th>
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!--Khu vự hiển thị thời gian làm việc và kết thúc của seller và engineer-->
-    <div class="row">
-        <div class="container img-thumbnail mt-3 mb-5">
-            <div class="mt-3 mb-5 w-100 m-auto">
-                <h3 class="text-center"><b>Working Time</b></h3>
-                <hr class="w-75 m-auto"></hr>
-            </div>
-            <div class="row mt-3">
-                <div class="col-lg">
-                    <b class="text-nowrap">Seller</b>
-                </div>
-                <div class="col-lg">
-                    <label><b class="text-nowrap">Delegation: </b></label>
-                    <p>@quotationDetailVM.DelegationDateSeller</p>
-                </div>
-                <div class="col-lg">
-                    <label><b class="text-nowrap">Submission:</b></label>
-                    <p>@quotationDetailVM.SubmissionDateSeller</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg">
-                    <b class="text-nowrap">Engineer</b>
-                </div>
-                <div class="col-lg">
-                    <label><b class="text-nowrap">Recieve:</b></label>
-                    <p>@quotationDetailVM.RecieveDateEngineer</p>
-                </div>
-                <div class="col-lg">
-                    <label><b class="text-nowrap">Submission:</b></label>
-                    <p>@quotationDetailVM.SubmissionDateEngineer</p>
-                </div>
             </div>
 
         </div>
-    </div>
 
-
-    <!--Khu vực hiển thị nhân viên đảm nhiệm -->
-    <div class="d-flex justify-content-center">
-        <div class="border">
-            <div class="col text-center mt-3">
-                <p class="mb-0 text-center"><b>Seller</b></p>
-            </div>
-            <partial name="~/Areas/Manager/Views/StaffProfilePartial.cshtml" model="@quotationDetailVM.Seller">
-        </div>
-        <div class="border">
-            <div class=" col text-center mt-3">
-                <p class="mb-0"><b>Engineer</b></p>
-            </div>
-            <partial name="~/Areas/Manager/Views/StaffProfilePartial.cshtml" model="@quotationDetailVM.Enginneer">
-        </div>
-        <div class="border">
-            <div class="col text-center mt-3">
-                <p class="mb-0"><b>Manager</b></p>
-            </div>
-            <partial name="~/Areas/Manager/Views/StaffProfilePartial.cshtml" model="@quotationDetailVM.Manager">
-        </div>
-    </div>
-
-    
-    <!--khi reject dữ liệu ở form sẽ dc đẩy xuống-->
-    <form asp-controller="CustomQuotation" asp-action="RejectDetail" method="post" asp-model="model">
-        <!--quotation id sẽ dc reject-->
-        <input asp-for="@rejectQuotationDetailVM.RejectQuotationId" type="hidden" value="@quotationDetailVM.QuoteId" />
-        <!--manager id - người đã thực hiện reject-->
-        <input asp-for="@rejectQuotationDetailVM.RejecterId" type="hidden" value="@quotationDetailVM.Manager.Id" />
-        <!--engineer id - người đã làm detail cho customquotation-->
-        <input asp-for="@rejectQuotationDetailVM.SubcriberId" type="hidden" value="@quotationDetailVM.Enginneer.Id" />
-       
-        <!--reason - cần dài hơn 20 ký tự -->
-           
-        <div class="form-outline mt-3">
-            <label><b class="text-nowrap" for="textAreaExample">Reason</b></label>
-            
-            <textarea  asp-for="@rejectQuotationDetailVM.Reason" placeholder="The reason in case of rejection" class="form-control" id="textAreaExample1" rows="4"></textarea>
-            <span asp-validation-for="@rejectQuotationDetailVM.Reason" class="text-danger text-nowrap"></span>
-        </div>
-        <!--Nút reject và approve-->
+        <!--Khu vự hiển thị thời gian làm việc và kết thúc của seller và engineer-->
         <div class="row">
-            <div class="w-100 btn-group mb-3 mt-3 col-md-6" role="group">
-                <button type="submit" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check"></i>Rejected</button>
-            </div>
-            <div class="w-100 btn-group mb-3 mt-3 col-md-6" role="group">
-                <a href="/Manager/CustomQuotation/ApproveDetail?id=@quotationDetailVM.QuoteId" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check"></i>Approve</a>
-            </div>
+            <div class="container img-thumbnail mt-3 mb-5">
+                <div class="mt-3 mb-5 w-100 m-auto">
+                    <h3 class="text-center"><b>Working Time</b></h3>
+                    <hr class="w-75 m-auto"></hr>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg">
+                        <b class="text-nowrap">Seller</b>
+                    </div>
+                    <div class="col-lg">
+                        <label><b class="text-nowrap">Delegation: </b></label>
+                        <p>@quotationDetailVM.DelegationDateSeller</p>
+                    </div>
+                    <div class="col-lg">
+                        <label><b class="text-nowrap">Submission:</b></label>
+                        <p>@quotationDetailVM.SubmissionDateSeller</p>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-lg">
+                        <b class="text-nowrap">Engineer</b>
+                    </div>
+                    <div class="col-lg">
+                        <label><b class="text-nowrap">Recieve:</b></label>
+                        <p>@quotationDetailVM.RecieveDateEngineer</p>
+                    </div>
+                    <div class="col-lg">
+                        <label><b class="text-nowrap">Submission:</b></label>
+                        <p>@quotationDetailVM.SubmissionDateEngineer</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </form>
+
+
+        <!--Khu vực hiển thị nhân viên đảm nhiệm -->
+        <div class="d-flex justify-content-center">
+            <div class="border">
+                <div class="col text-center mt-3">
+                    <p class="mb-0 text-center"><b>Seller</b></p>
+                </div>
+                <partial name="~/Areas/Manager/Views/StaffProfilePartial.cshtml" model="@quotationDetailVM.Seller">
+            </div>
+            <div class="border">
+                <div class=" col text-center mt-3">
+                    <p class="mb-0"><b>Engineer</b></p>
+                </div>
+                <partial name="~/Areas/Manager/Views/StaffProfilePartial.cshtml" model="@quotationDetailVM.Enginneer">
+            </div>
+            <div class="border">
+                <div class="col text-center mt-3">
+                    <p class="mb-0"><b>Manager</b></p>
+                </div>
+                <partial name="~/Areas/Manager/Views/StaffProfilePartial.cshtml" model="@quotationDetailVM.Manager">
+            </div>
+        </div>
+
+
+        <!--khi reject dữ liệu ở form sẽ dc đẩy xuống-->
+        <form asp-area="Manager" asp-controller="CustomQuotation" asp-action="RejectDetail" method="post">
+            <!--quotation id sẽ dc reject-->
+            <input asp-for="@rejectReportVM.RejectQuotationId" type="hidden" value="@quotationDetailVM.QuoteId" />
+            <!--manager id - người đã thực hiện reject-->
+            <input asp-for="@rejectReportVM.RejecterId" type="hidden" value="@quotationDetailVM.Manager.Id" />
+            <!--engineer id - người đã làm detail cho customquotation-->
+            <input asp-for="@rejectReportVM.SubcriberId" type="hidden" value="@quotationDetailVM.Enginneer.Id" />
+
+            <!--reason - cần dài hơn 20 ký tự -->
+
+            <div class="form-outline mt-3">
+                <label><b class="text-nowrap" for="textAreaExample">Reason</b></label>
+
+                <textarea asp-for="@rejectReportVM.Reason" placeholder="The reason in case of rejection" class="form-control" id="textAreaExample1" rows="4"></textarea>
+                <span asp-validation-for="@rejectReportVM.Reason" class="text-danger text-nowrap"></span>
+            </div>
+            <!--Nút reject và approve-->
+            <div class="row">
+                <div class="w-100 btn-group mb-3 mt-3 col-md-6" role="group">
+                    <button type="submit" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check"></i>Rejected</button>
+                </div>
+                <div class="w-100 btn-group mb-3 mt-3 col-md-6" role="group">
+                    <a href="/Manager/CustomQuotation/ApproveDetail?id=@quotationDetailVM.QuoteId" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check"></i>Approve</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
 </div>
 @section Scripts {
     <script src="~/js/datatables/managerDTB/TaskDetailDTB.js"></script>
     <script src="~/js/datatables/managerDTB/MaterialDetailDTB.js"></script>
-    
+
 }
 
- @section ValidationScripts {
-     @{
+@section ValidationScripts {
+    @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-     }
- }
+    }
+}

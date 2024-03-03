@@ -12,6 +12,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 		public Staff? Enginneer { get; set; } = null!;
 		public Staff? Manager { get; set; } = null!;
 		public Staff? Seller { get; set; } = null!;
+		public decimal Total {  get; set; }
 
 		//ghi lại thời gian và người dc ủy quyền xử lý custom quotation
 		//thời gian dc giao request và hoàn thành điền quotation của Seller
