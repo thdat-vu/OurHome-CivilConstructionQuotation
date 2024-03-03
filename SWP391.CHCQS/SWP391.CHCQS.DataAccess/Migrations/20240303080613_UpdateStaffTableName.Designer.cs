@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWP391.CHCQS.DataAccess.Data;
 
@@ -11,9 +12,10 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    partial class SWP391DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240303080613_UpdateStaffTableName")]
+    partial class UpdateStaffTableName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1040,7 +1042,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
                 {
                     b.HasOne("SWP391.CHCQS.Model.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("RequestForms")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1133,6 +1135,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
                 {
                     b.Navigation("Projects");
+
+                    b.Navigation("RequestForms");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotation", b =>

@@ -12,8 +12,8 @@ using SWP391.CHCQS.DataAccess.Data;
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
     [DbContext(typeof(SWP391DBContext))]
-    [Migration("20240303064908_FixAccountCustomer")]
-    partial class FixAccountCustomer
+    [Migration("20240303075119_FixAccount")]
+    partial class FixAccount
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -687,17 +687,14 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("UsernameNavigationUsername")
+                        .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ManagerId");
 
-                    b.HasIndex("UsernameNavigationUsername");
+                    b.HasIndex("Username");
 
                     b.ToTable("Staff");
                 });
@@ -1063,13 +1060,15 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("ManagerId");
 
-                    b.HasOne("SWP391.CHCQS.Model.Account", "UsernameNavigation")
+                    b.HasOne("SWP391.CHCQS.Model.Account", "Account")
                         .WithMany("Staff")
-                        .HasForeignKey("UsernameNavigationUsername");
+                        .HasForeignKey("Username")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
 
                     b.Navigation("Manager");
-
-                    b.Navigation("UsernameNavigation");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Task", b =>
