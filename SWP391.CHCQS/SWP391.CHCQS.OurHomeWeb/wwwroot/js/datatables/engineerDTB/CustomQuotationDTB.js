@@ -12,6 +12,7 @@ function loadDataTableQuotation() {
             { data: 'date', },
             { data: 'acreage', },
             { data: 'location', },
+            { data: 'total', },
             { data: 'status', },
             {
                 data: 'id',

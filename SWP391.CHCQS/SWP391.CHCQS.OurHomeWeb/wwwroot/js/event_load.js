@@ -37,3 +37,5 @@ $('#yearSelect').on("change", function(){
     year = this.value;
     handleDrawChart(year);
 });
+
+
