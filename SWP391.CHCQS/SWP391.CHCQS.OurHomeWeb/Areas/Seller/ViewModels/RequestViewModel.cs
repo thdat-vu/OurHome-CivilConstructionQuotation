@@ -8,7 +8,7 @@
         public string ConstructType { get; set; }
         public string Acreage { get; set; }
         public string Location {  get; set; }
-        public bool Status { get; set; }
+        public bool? Status { get; set; }
         public string CusName { get; set; }
         public string CusPhone { get; set; }
         public string CusEmail { get; set; }
