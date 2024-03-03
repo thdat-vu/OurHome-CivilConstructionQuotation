@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Services.NotificationHub;
 
 namespace SWP391.CHCQS.OurHomeWeb
 {
@@ -39,6 +39,8 @@ namespace SWP391.CHCQS.OurHomeWeb
 				options.Cookie.IsEssential = true;
 			});
 
+			builder.Services.AddSignalR();
+			
 			var app = builder.Build();
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
@@ -58,6 +60,8 @@ namespace SWP391.CHCQS.OurHomeWeb
 			//Khai báo app có sử dụng Session thì truy cập HttpContext.Session mới được
 			//Khai báo trước app.UseRouting(); app.UseAuthorization(); sau app.UseEndpoints app.Run();
 			app.UseSession();
+
+			app.MapHub<NotificationHub>("/notificationServer");
 
 			app.UseEndpoints(endpoints =>
 			{

@@ -258,12 +258,9 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("UsernameNavigationUsername")
-                        .HasColumnType("nvarchar(100)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UsernameNavigationUsername");
+                    b.HasIndex("Username");
 
                     b.ToTable("Customers");
                 });
@@ -925,11 +922,13 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
                 {
-                    b.HasOne("SWP391.CHCQS.Model.Account", "UsernameNavigation")
+                    b.HasOne("SWP391.CHCQS.Model.Account", "Account")
                         .WithMany("Customers")
-                        .HasForeignKey("UsernameNavigationUsername");
+                        .HasForeignKey("Username")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("UsernameNavigation");
+                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotation", b =>
