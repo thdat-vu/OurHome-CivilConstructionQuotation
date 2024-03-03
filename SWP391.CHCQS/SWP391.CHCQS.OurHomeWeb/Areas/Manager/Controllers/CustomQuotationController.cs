@@ -5,8 +5,10 @@ using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
+using SWP391.CHCQS.Services;
 using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
@@ -16,13 +18,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _configuration;
-        private readonly IServiceProvider _serviceProvider;
-        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration, IServiceProvider serviceProvider)
+        private readonly IAppState _appState;
+        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
             _environment = environment;
             _configuration = configuration;
-            _serviceProvider = serviceProvider;
         }
 
         public IActionResult Index()
@@ -273,8 +274,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
         public IActionResult Test()
         {
-
-            return Json(new {data = ""});
+            var test = AppState.Instance(_unitOfWork).GetDelegationIndex();
+            return Json(test);
         }
 
 
