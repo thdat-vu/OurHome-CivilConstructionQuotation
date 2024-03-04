@@ -266,7 +266,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             var customerName = customer.Name;
             var customerMail = customer.Email;
             //tiến hành gửi mail
-            var emailSender = new EmailSender(_configuration);
+            var emailSender = new EmailSender(_configuration, _environment);
             emailSender.SendInfoToEmail(customerMail, customerName, id);
 
             //Tiến hành toast info

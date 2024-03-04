@@ -12,7 +12,7 @@ function loadDataTaskDetail() {
             {
                 data: "taskId",
                 "render": function (data) {
-                    return `<a href="/Manager/Task/Detail?id=${data}" >${data}</a>`
+                    return `<a class="text-main text-pointer" onClick="ShowTaskDetail('/Engineer/Task/Detail?TaskId=${data}')" >${data}</a>`
                 },
                 "width": "5%"
             },

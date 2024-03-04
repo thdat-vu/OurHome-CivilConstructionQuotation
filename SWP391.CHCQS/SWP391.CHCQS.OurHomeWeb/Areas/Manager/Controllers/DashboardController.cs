@@ -59,5 +59,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             var yearList = _unitOfWork.RequestForm.GetYearList();
             return Json(new { data = yearList });
         }
+
+		
     }
 }
