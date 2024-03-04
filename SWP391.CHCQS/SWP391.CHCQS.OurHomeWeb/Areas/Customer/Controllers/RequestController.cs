@@ -48,6 +48,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 			var claimsIdentity = (ClaimsIdentity)User.Identity;
 			var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 			requestForm.CustomerId = userId;
+			requestForm.Customer = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+			_unitOfWork.RequestForm.Add(requestForm);
+			_unitOfWork.Save();
 
 			
 			TempData["Success"] = "Request has been sent successfully";

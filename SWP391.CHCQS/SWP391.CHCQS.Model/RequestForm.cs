@@ -28,9 +28,9 @@ namespace SWP391.CHCQS.Model
         public string Status { get; set; }
 
         public string CustomerId { get; set; } = null!;
-                                        
+        [ForeignKey("CustomerId")]                                        
         
-        public virtual Customer Customer { get; set; } = null!;
+        public virtual ApplicationUser Customer { get; set; } = null!;
         public CustomQuotation? CustomQuotation { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace SWP391.CHCQS.Model
 {
     public partial class Staff : ApplicationUser
     {
-        public Staff()
+        public Staff() : base()
         {
             //CustomQuotationEngineers = new HashSet<CustomQuotation>();
             //CustomQuotationManagers = new HashSet<CustomQuotation>();

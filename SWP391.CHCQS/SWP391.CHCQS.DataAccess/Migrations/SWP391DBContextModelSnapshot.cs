@@ -921,29 +921,22 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<string>("ManagerId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.HasIndex("ManagerId");
+
                     b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
-                {
-                    b.HasBaseType("SWP391.CHCQS.Model.ApplicationUser");
-
-                    b.HasDiscriminator().HasValue("Customer");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Staff", b =>
                 {
                     b.HasBaseType("SWP391.CHCQS.Model.ApplicationUser");
-
-                    b.Property<string>("ManagerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasIndex("ManagerId");
 
                     b.HasDiscriminator().HasValue("Staff");
                 });
@@ -1153,8 +1146,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Project", b =>
                 {
-                    b.HasOne("SWP391.CHCQS.Model.Customer", "Customer")
-                        .WithMany("Projects")
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Customer")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1175,13 +1168,13 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RejectionReport", b =>
                 {
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Engineer")
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Engineer")
                         .WithMany()
                         .HasForeignKey("EngineerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Manager")
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Manager")
                         .WithMany()
                         .HasForeignKey("ManagerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1202,8 +1195,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
                 {
-                    b.HasOne("SWP391.CHCQS.Model.Customer", "Customer")
-                        .WithMany("RequestForms")
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Customer")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1249,7 +1242,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Staff")
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Staff")
                         .WithMany()
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1260,7 +1253,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.Navigation("Staff");
                 });
 
-            modelBuilder.Entity("SWP391.CHCQS.Model.Staff", b =>
+            modelBuilder.Entity("SWP391.CHCQS.Model.ApplicationUser", b =>
                 {
                     b.HasOne("SWP391.CHCQS.Model.Staff", "Manager")
                         .WithMany()
@@ -1296,13 +1289,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
                 {
                     b.Navigation("CustomQuotation");
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
-                {
-                    b.Navigation("Projects");
-
-                    b.Navigation("RequestForms");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,7 +4,7 @@
 
 namespace SWP391.CHCQS.DataAccess.Migrations
 {
-    public partial class ExtendsIdentityUser : Migration
+    public partial class UpdateApplicationUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,9 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Staffs");
+
+            migrationBuilder.DropTable(
+                name: "UserConnections");
 
             migrationBuilder.DropTable(
                 name: "Accounts");
@@ -82,6 +85,30 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 oldType: "nvarchar(10)",
                 oldMaxLength: 10);
 
+            migrationBuilder.AlterColumn<string>(
+                name: "Name",
+                table: "AspNetUserTokens",
+                type: "nvarchar(450)",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(128)",
+                oldMaxLength: 128);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "LoginProvider",
+                table: "AspNetUserTokens",
+                type: "nvarchar(450)",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(128)",
+                oldMaxLength: 128);
+
+            migrationBuilder.AddColumn<string>(
+                name: "ConnectionId",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
             migrationBuilder.AddColumn<string>(
                 name: "Discriminator",
                 table: "AspNetUsers",
@@ -109,12 +136,23 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 maxLength: 100,
                 nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "PhoneNum",
-                table: "AspNetUsers",
-                type: "nvarchar(12)",
-                maxLength: 12,
-                nullable: true);
+            migrationBuilder.AlterColumn<string>(
+                name: "ProviderKey",
+                table: "AspNetUserLogins",
+                type: "nvarchar(450)",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(128)",
+                oldMaxLength: 128);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "LoginProvider",
+                table: "AspNetUserLogins",
+                type: "nvarchar(450)",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(128)",
+                oldMaxLength: 128);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_ManagerId",
@@ -200,6 +238,10 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
+                name: "ConnectionId",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
                 name: "Discriminator",
                 table: "AspNetUsers");
 
@@ -213,10 +255,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
             migrationBuilder.DropColumn(
                 name: "Name",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "PhoneNum",
                 table: "AspNetUsers");
 
             migrationBuilder.AlterColumn<string>(
@@ -264,6 +302,42 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(450)");
 
+            migrationBuilder.AlterColumn<string>(
+                name: "Name",
+                table: "AspNetUserTokens",
+                type: "nvarchar(128)",
+                maxLength: 128,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(450)");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "LoginProvider",
+                table: "AspNetUserTokens",
+                type: "nvarchar(128)",
+                maxLength: 128,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(450)");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "ProviderKey",
+                table: "AspNetUserLogins",
+                type: "nvarchar(128)",
+                maxLength: 128,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(450)");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "LoginProvider",
+                table: "AspNetUserLogins",
+                type: "nvarchar(128)",
+                maxLength: 128,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(450)");
+
             migrationBuilder.CreateTable(
                 name: "Accounts",
                 columns: table => new
@@ -275,6 +349,18 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Username);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserConnections",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    ConnectionId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserConnections", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(

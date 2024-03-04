@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,5 +21,10 @@ namespace SWP391.CHCQS.Model
         public string? Gender { get; set; }
 
         public string? ConnectionId { get; set; }
-    }
+
+		public string? ManagerId { get; set; } = null!;
+		[ForeignKey("ManagerId")]
+
+		public virtual Staff? Manager { get; set; } = null!;
+	}
 }
