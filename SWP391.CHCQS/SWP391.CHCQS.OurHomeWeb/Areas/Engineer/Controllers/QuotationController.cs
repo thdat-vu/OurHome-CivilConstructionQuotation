@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
@@ -19,8 +20,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		//Declare _uniteOfWork represent to DBContext to get Data form Database.
 		private readonly IUnitOfWork _unitOfWork;
 
-		//Declare Session to store CustomQuotation serve to method AddToList in TaskController and MaterialController to add Task and Material.
-		public CustomQuotationListViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationListViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationListViewModel();
+		//Declare NotificationHub
+		private readonly IHubContext<NotificationHub> _hubContext;
+
+		//Delcare Identity User
+		private UserManager<IdentityUser> _userManager;
+
+        //Declare Session to store CustomQuotation serve to method AddToList in TaskController and MaterialController to add Task and Material.
+        public CustomQuotationListViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationListViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationListViewModel();
 
 		//Declare session for CustomQuotationTaskViewModel to store TaskList of the quote when add into quote. if it empty, create one
 		public List<TaskDetailViewModel> TaskListSession => HttpContext.Session.Get<List<TaskDetailViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<TaskDetailViewModel>();
@@ -29,9 +36,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		public List<MaterialDetailViewModel> MaterialListSession => HttpContext.Session.Get<List<MaterialDetailViewModel>>(SessionConst.MATERIAL_LIST_KEY) ?? new List<MaterialDetailViewModel>();
 
 		//Constructor of this Controller
-		public QuotationController(IUnitOfWork unitOfWork)
+		public QuotationController(IUnitOfWork unitOfWork, IHubContext<NotificationHub> hubContext, UserManager<IdentityUser> userManager)
 		{
 			_unitOfWork = unitOfWork;
+			_hubContext = hubContext;
+			_userManager = userManager;
 		}
 
 
@@ -402,6 +411,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				return Json(new { success = false, message = $"Something went wrong" });
 			}
 
+
+			//Send notification to Manager
+
+
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 			return Json(new { success = true, message = $"Send quotation successfully with Id = {QuotationId}" });
 		}
@@ -480,7 +493,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			var totalPriceTaskAndMaterial = (decimal)materialDetails.Sum(x => x.Price) + taskDetails.Sum(x => x.Price);
 
 			//total acreage to calculate with priceOnMeters
-			var totalFactor = (decimal)(constructDetail.Basement.AreaFactor + constructDetail.Foundation.AreaFactor + constructDetail.Rooftop.AreaFactor) * acreage;
+			var totalFactor = (decimal)(constructDetail.Basement.AreaFactor + constructDetail.Foundation.AreaFactor + constructDetail.Rooftop.AreaFactor) * acreage * constructDetail.Floor;
 
 			//result equal to price on 1 meter multiply with total acreage and plus with price of tasks and materials
 			result = priceOnMeters * totalFactor + totalPriceTaskAndMaterial;
@@ -488,6 +501,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//return result after calculated
 			return result;
 		}
+
+
+		public async Task<IActionResult> Test()
+		{
+			await _hubContext.Clients.All.SendAsync("Engineer", "You have recieve new Quotation");
+			return View("Index");
+        }
 
 	}
 }
