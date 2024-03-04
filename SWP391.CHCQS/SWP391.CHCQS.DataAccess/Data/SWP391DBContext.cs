@@ -18,8 +18,7 @@ namespace SWP391.CHCQS.DataAccess.Data
         }
 
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
-        public virtual DbSet<WorkingReport> WorkingReports { get; set; } = null!;
-        public virtual DbSet<UserConnections> UserConnections { get; set; } = null!;
+        public virtual DbSet<WorkingReport> WorkingReports { get; set; } = null!;        
         public virtual DbSet<BasementType> BasementTypes { get; set; } = null!;
         public virtual DbSet<ConstructDetail> ConstructDetails { get; set; } = null!;
         public virtual DbSet<ConstructionType> ConstructionTypes { get; set; } = null!;

@@ -37,7 +37,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                     Location = x.Location,
                     Status = x.Status,
                     CusName = x.Customer.Name,
-                    CusPhone = x.Customer.PhoneNum,
+                    CusPhone = x.Customer.PhoneNumber,
                     CusEmail = x.Customer.Email,
                     CusGender = x.Customer.Gender
                 })
@@ -68,7 +68,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 					Location = x.Location,
 					Status = x.Status,
 					CusName = x.Customer.Name,
-					CusPhone = x.Customer.PhoneNum,
+					CusPhone = x.Customer.PhoneNumber,
 					CusEmail = x.Customer.Email,
 					CusGender = x.Customer.Gender
 				})

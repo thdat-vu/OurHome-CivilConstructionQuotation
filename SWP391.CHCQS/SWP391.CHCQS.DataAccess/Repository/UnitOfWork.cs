@@ -36,8 +36,9 @@ namespace SWP391.CHCQS.DataAccess.Repository
 
         public IPricingRepository Pricing { get; private set; }
 
+        public IApplicationUserRepository ApplicationUser { get; private set; }
 
-		public UnitOfWork(SWP391DBContext db)
+        public UnitOfWork(SWP391DBContext db)
         {
             _db = db;
             

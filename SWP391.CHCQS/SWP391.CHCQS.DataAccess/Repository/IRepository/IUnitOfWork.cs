@@ -8,6 +8,7 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {    
     public interface IUnitOfWork
     {
+        IApplicationUserRepository ApplicationUser { get; }
         IComboRepository Combo { get; }
         IProjectRepository Project { get; }
         ITaskDetailRepository TaskDetail { get; }

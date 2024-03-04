@@ -26,6 +26,11 @@ namespace SWP391.CHCQS.OurHomeWeb
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<SWP391DBContext>().AddDefaultTokenProviders();
+			builder.Services.ConfigureApplicationCookie(options => {
+				options.LoginPath = $"/Identity/Account/Login";
+				options.LogoutPath = $"/Identity/Account/Logout";
+				options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+			});
 			builder.Services.AddRazorPages();
 
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

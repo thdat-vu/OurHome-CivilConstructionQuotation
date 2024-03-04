@@ -1,4 +1,4 @@
-﻿@model RequestForm
+﻿@model RequestVM
 @{
 	ViewData["Title"] = "Create Request";
 }
@@ -18,36 +18,34 @@
 
 <div class="container img-thumbnail mt-5 mb-5">
 
-	<form class="row m-auto">		
+	<form class="row m-auto" method="post">		
 
 		<div class="mt-5 mb-5 w-75 m-auto">
 			<h3 class="text-center"><b>Your Details</b></h3>
 			<hr></hr>
 		</div>
 
-		<div class="row">
-			<div class="col-lg">
-				<label><b>Construct Name:</b></label>
-				<input asp-for="ConstructType" class="form-control"></input>
-			</div>
+		<div class="row">			
 			<div class="col-lg">
 				<label><b class="text-nowrap">Type of Construction:</b></label>
-				<input class="form-control"></input>
+				<select asp-for="RequestForm.ConstructType" asp-items="@Model.ConstructionTypes" class="form-select">
+					<option selected disabled>-- Select Construction Type --</option>
+				</select>
 			</div>
 			<div class="col-lg">
 				<label><b>Location:</b></label>
-				<input class="form-control"></input>
-			</div>
+				<input asp-for="RequestForm.Location" class="form-control"></input>
+			</div>			
 			<div class="col-lg">
 				<label><b>Acreage:</b></label>
-				<input class="form-control"></input>
+				<input asp-for="RequestForm.Acreage" class="form-control" placeholder="0m x 0m"></input>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-sm">
 				<label><b>Description:</b></label>
-				<textarea rows="6"  class="form-control"></textarea>
+				<textarea asp-for="RequestForm.Description" rows="6" class="form-control"></textarea>
 			</div>
 		</div>
 

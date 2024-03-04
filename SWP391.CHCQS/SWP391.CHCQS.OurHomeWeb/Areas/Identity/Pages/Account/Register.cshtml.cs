@@ -15,7 +15,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using SWP391.CHCQS.Model;
@@ -104,6 +106,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             public string? Role { get; set; }
+
+            [ValidateNever]
+            public IEnumerable<SelectListItem> Roles { get; set; }
         }
 
 
@@ -117,7 +122,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
 				 _roleManager.CreateAsync(new IdentityRole(SD.Role_Seller)).GetAwaiter().GetResult();
 				 _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).GetAwaiter().GetResult();
 			}
-            
+            Input = new InputModel
+            {
+                Roles = _roleManager.Roles.Select(r => new SelectListItem
+                {
+                    Text = r.Name,
+                    Value = r.Name
+                })
+            };
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -137,7 +149,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, SD.Role_Customer);
+                    await _userManager.AddToRoleAsync(user, Input.Role);
 
                     _logger.LogInformation("User created a new account with password.");
 
@@ -160,7 +172,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+
+                        return RedirectToAction("Index", "Home", new { area = Input.Role });
+
                     }
                 }
                 foreach (var error in result.Errors)
