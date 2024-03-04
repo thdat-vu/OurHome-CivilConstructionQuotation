@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
@@ -9,28 +10,39 @@ using System.Threading.Tasks;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
 	[Area("Engineer")]
-	public class MaterialController : Controller
+    [Authorize(Roles = SD.Role_Engineer)]
+    public class MaterialController : Controller
 	{
-		private readonly IUnitOfWork _unitOfWork;
+
+
+        #region ============ DECLARE ============
+
+		//Declare database 
+        private readonly IUnitOfWork _unitOfWork;
 
 		//Khai bao Session cho MaterialList neu co thi lay ra khong co thi tao moi
 		public List<MaterialDetailViewModel> MaterialListSession => HttpContext.Session.Get<List<MaterialDetailViewModel>>(SessionConst.MATERIAL_LIST_KEY) ?? new List<MaterialDetailViewModel>();
 
 		//Declare Session to store CustomQuotation serve to method AddToList in TaskController and MaterialController to add Task and Material.
 		public CustomQuotationListViewModel CustomQuotationSession => HttpContext.Session.Get<CustomQuotationListViewModel>(SessionConst.CUSTOM_QUOTATION_KEY) ?? new CustomQuotationListViewModel();
+
+		//Ctor of this controller
 		public MaterialController(IUnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
 		}
 
 
+        #endregion ============ DECLARE ============
 
-		#region API CALL LIST MATERIAL
-		/// <summary>
-		/// This function get all CustomeQuotation in Database and return it into JSON, this function ne lib Datatables to show data
-		/// </summary>
-		/// <returns></returns>
-		[HttpGet]
+
+
+        #region ============ API ============
+        /// <summary>
+        /// This function get all CustomeQuotation in Database and return it into JSON, this function ne lib Datatables to show data
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
 			//Asign MaterialListSession to materialCart 
@@ -106,7 +118,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			return Json(new { data = materialDetailVM });
 		}
 
-		#endregion
+		
 
 		[HttpGet]
 		public async Task<IActionResult> AddToQuote(string MaterialId)
@@ -262,5 +274,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		}
 
 
-	}
+        #endregion ============ API ============
+
+    }
 }

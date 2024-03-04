@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
     [Area("Engineer")]
-    [Authorize]
+    [Authorize(Roles = SD.Role_Engineer)]
     public class QuotationController : Controller
     {
 
