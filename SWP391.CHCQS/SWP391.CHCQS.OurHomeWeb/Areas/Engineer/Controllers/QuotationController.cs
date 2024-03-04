@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -16,9 +17,12 @@ using System.Threading.Tasks;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
     [Area("Engineer")]
+    [Authorize]
     public class QuotationController : Controller
     {
 
+
+        #region ============ DECLARE ============
 
 
         //Declare _uniteOfWork represent to DBContext to get Data form Database.
@@ -45,8 +49,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
         }
 
 
+        #endregion ============ DECLARE ============
 
-        #region ==== API CALL =====
+
+
+        #region ============ API ============
 
 
         /// <summary>
@@ -213,7 +220,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
         }
 
 
-        #endregion ==== API CALL ====
+        #endregion ============ API ============
+
+
+
+        #region ============ ACTIONS ============
 
 
         /// <summary>
@@ -530,6 +541,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
         }
 
 
+        #endregion ============ ACTIONS ============
+
+
+
+        #region ============ FUNCTIONS ============
+
+
         /// <summary>
         /// This function calculate the total of quotation
         /// </summary>
@@ -573,5 +591,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             return claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
+
+
+        #endregion ============ FUNCTIONS 
+
+
     }
 }
