@@ -44,8 +44,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
             
             Project = new ProjectRepository(_db);
             Staff = new StaffRepository(_db);
+			Customer = new CustomerRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
 
-            Combo = new ComboRepository(_db);
+			Combo = new ComboRepository(_db);
             CustomQuotation = new CustomQuotationRepository(_db);
 
             Task = new TaskRepository(_db);
@@ -66,7 +68,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
             Material = new MaterialRepository(_db);
             RejectedCustomQuotation = new RejectedCustomQuotationRepository(_db);
 
-            Customer = new CustomerRepository(_db);
+            
             WorkingReport = new WorkingReportRepository(_db);
 
             Pricing = new PricingRepository(_db);

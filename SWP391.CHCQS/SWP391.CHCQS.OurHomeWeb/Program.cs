@@ -10,6 +10,7 @@ using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Services;
 using SWP391.CHCQS.Services.NotificationHub;
 using NotificationHub = SWP391.CHCQS.Services.NotificationHub.NotificationHub;
+using SWP391.CHCQS.Model;
 
 namespace SWP391.CHCQS.OurHomeWeb
 {

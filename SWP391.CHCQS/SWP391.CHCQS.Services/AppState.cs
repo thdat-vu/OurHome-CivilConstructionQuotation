@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Utility;
 
@@ -6,9 +7,10 @@ namespace SWP391.CHCQS.Services
 {
     public  class AppState
     {
-        
-        private readonly IUnitOfWork _unitOfWork;
-        private static AppState _instance;
+                
+        //private readonly RoleManager<IdentityRole> _roleManager;
+		private readonly UserManager<IdentityUser> _userManager;
+		private static AppState _instance;
         public int SLIndex { get; set; }
         public int ENIndex { get; set; }
         public int MGIndex { get; set; }
@@ -19,11 +21,11 @@ namespace SWP391.CHCQS.Services
 
         private readonly Random _random = new ();
 
-        private AppState(IUnitOfWork unitOfWork) {
-            _unitOfWork = unitOfWork;
-            SLMax = _unitOfWork.Staff.GetAllWithFilter((x) => x.Id.Contains(SD.SellerIdKey)).Count();
-            ENMax = _unitOfWork.Staff.GetAllWithFilter((x) => x.Id.Contains(SD.EngineertIdKey)).Count();
-            MGMax = _unitOfWork.Staff.GetAllWithFilter((x) => x.Id.Contains(SD.ManagerIdKey)).Count();
+        private AppState(UserManager<IdentityUser> userManager) {
+            _userManager = userManager;
+            SLMax =  userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Count();
+            ENMax = userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Count();
+            MGMax = userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Count();
 
             SLIndex =  _random.Next(1, SLMax);
             ENIndex = _random.Next(1, ENMax);
@@ -32,7 +34,7 @@ namespace SWP391.CHCQS.Services
         }
 
         private static readonly object _lock = new object();
-        public static AppState Instance(IUnitOfWork unitOfWork)
+        public static AppState Instance(UserManager<IdentityUser> userManager)
         {
             //nếu _instance chưa dc tạo thì tạo ra - Singleton
             if(_instance == null)
@@ -43,26 +45,26 @@ namespace SWP391.CHCQS.Services
                     //check phát nữa cho chắc ko nó ko có là toang
                     if(_instance == null)
                     {
-                        _instance = new AppState(unitOfWork);
+                        _instance = new AppState(userManager);
                     }
                 }
-                _instance = new AppState(unitOfWork);
+                _instance = new AppState(userManager);
             }//nếu có rồi thì tiến hành kiểm tra số lượng nhân viên còn trung khớp hay ko
             else
             {
                 lock (_lock)
                 {
-                    if (_instance.SLMax != unitOfWork.Staff.GetAllWithFilter((x) => x.Id.Contains(SD.SellerIdKey)).Count())
+                    if (_instance.SLMax != userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Count())
                     {
-                        _instance.SLMax = unitOfWork.Staff.GetAllWithFilter((x) => x.Id.Contains(SD.SellerIdKey)).Count();
+                        _instance.SLMax = userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Count();
                     }
-                    if (_instance.ENMax != unitOfWork.Staff.GetAllWithFilter((x) => x.Id.Contains(SD.EngineertIdKey)).Count())
+                    if (_instance.ENMax != userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Count())
                     {
-                        _instance.ENMax = unitOfWork.Staff.GetAllWithFilter((x) => x.Id.Contains(SD.EngineertIdKey)).Count();
+                        _instance.ENMax = userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Count();
                     }
-                    if (_instance.MGMax != unitOfWork.Staff.GetAllWithFilter((x) => x.Id.Contains(SD.ManagerIdKey)).Count())
+                    if (_instance.MGMax != userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Count())
                     {
-                        _instance.MGMax = unitOfWork.Staff.GetAllWithFilter((x) => x.Id.Contains(SD.ManagerIdKey)).Count();
+                        _instance.MGMax = userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Count();
                     }
                 }
 
