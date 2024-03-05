@@ -7,9 +7,9 @@
     var rejectReportVM = Model.RejectReportVM;
 }
 
-<div class="row">
+<div class=" contain-fluid row">
 
-    <div class="container img-thumbnail mb-3">
+    <div class="p-3 img-thumbnail mb-3">
 
         <div class="">
 
@@ -119,7 +119,7 @@
                     <div class="card-body">
 
                         <div class="table-responsive">
-                            <table id="tblTaskDetail" class="table-bordered table-striped text-black" style="width:100%">
+                            <table id="tblTaskDetail" class="border-0 table-bordered table-striped text-black" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>
@@ -260,9 +260,15 @@
             <input asp-for="@rejectReportVM.RejecterId" type="hidden" value="@quotationDetailVM.Manager.Id" />
             <!--engineer id - người đã làm detail cho customquotation-->
             <input asp-for="@rejectReportVM.SubcriberId" type="hidden" value="@quotationDetailVM.Enginneer.Id" />
-
+            <!--ngày submit của engineer-->
+            <input asp-for="@rejectReportVM.SubmissionEngineerDate" type="hidden" value="@quotationDetailVM.SubmissionDateEngineer"/>
+            <!--ngày recieve của manager-->
+            <input asp-for="@rejectReportVM.RecieveManagerDate" type="hidden" value="@quotationDetailVM.RecieveDateManager" />
+            <!--manager id-->
+            <input asp-for="@rejectReportVM.ManagerId" type="hidden" value="@quotationDetailVM.Manager.Id" />
+            <!--engineer id-->
+            <input asp-for="@rejectReportVM.EngineerId" type="hidden" value="@quotationDetailVM.Enginneer.Id" />
             <!--reason - cần dài hơn 20 ký tự -->
-
             <div class="form-outline mt-3">
                 <label><b class="text-nowrap" for="textAreaExample">Reason</b></label>
 

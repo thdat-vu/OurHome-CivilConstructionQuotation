@@ -14,28 +14,27 @@ function loadDataMaterialDetail() {
                 "render": function (data) {
                     return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
                 },
-                "width": "5%"
+       
             },
-            { data: 'materialName', "width": "15%" },
-            { data: 'materialCateName', "width": "15%" },
-            { data: 'quantity', "width": "15%" },
-            { data: 'price', "width": "15%" },
-            { data: 'unit', "width": "15%" },
+            { data: 'materialName'},
+            { data: 'materialCateName' },
+            { data: 'quantity'},
+            { data: 'price'},
+            { data: 'unit' },
             {
-                data: null,
+                data: "materialId",
                 "render": function (data) {
                     // Generate a unique form ID using the material ID
-                    var formId = 'updateQuantityForm' + data.material.id;
+                    var formId = 'updateQuantityForm' + data;
 
                     return `<form class="text-nowrap" id="${formId}" method="post">
-                       <textarea name="${data.material.id}" placeholder="The reason in case of rejection" class="form-control" id="textAreaExample1" rows="4"></textarea>
-                        <input type="text" name="MaterialId" hidden value="${data.material.id}">
-                        <button class="btn-main text-white border-0 rounded p-1" type="button" onclick="UpdateMaterialQuantity('/Engineer/Material/UpdateQuantity', '${formId}')">
-                           <i class="bi bi-check-lg"></i>
+                       <textarea name="${data}" placeholder="The reason in case of rejection" class="form-control" id="textAreaExample1" rows="4"></textarea>
+                        <input type="text" name="MaterialId" hidden value="${data}">
+                        <button class="btn-main text-nowrap border-0 rounded p-1 w-100 type="button" onclick="UpdateMaterialQuantity('/Engineer/Material/UpdateQuantity', '${formId}')">
+                         <i class="bi bi-check-lg">Note</i>
                         </button>
                     </form>`
-                }
-                "width": "15%"
+                },
             }
         ]
     });

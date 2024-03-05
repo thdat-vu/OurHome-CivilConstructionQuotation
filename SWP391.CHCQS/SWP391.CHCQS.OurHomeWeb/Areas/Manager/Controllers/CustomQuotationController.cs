@@ -1,4 +1,5 @@
 using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
@@ -11,6 +12,7 @@ using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.Services;
 using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
+using System.Composition;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text.Json;
@@ -21,6 +23,7 @@ using EmailSender = SWP391.CHCQS.Utility.Helpers.EmailSender;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
 	[Area("Manager")]
+	[Authorize(Roles = SD.Role_Manager)]
 	public class CustomQuotationController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
@@ -43,7 +46,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		private ClaimsIdentity GetCurrentIdentity()
 		{
 			return (ClaimsIdentity)User.Identity;
-
 		}
 		private string GetCurrentUserId()
 		{
@@ -54,17 +56,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		public async Task<IActionResult> GetAll()
 		{
 			var userId = GetCurrentUserId();
-
 			//lấy ra danh sách requestfrom mà manager đó đảm nhiệm duyệt
 			List<string> requestIdList = _unitOfWork.WorkingReport.GetAllWithFilter((x) => x.StaffId == userId)
 				.Select(x => x.RequestId)
 				.Distinct()
 				.ToList();
 			List<WorkingReport> workingReports = null;
-
 			//khai báo list giữ các customquotationVm
 			List<CustomQuotationListViewModel> customQuotationViewModels = new List<CustomQuotationListViewModel>();
-
 			//lấy ra id của staff tham gia vào requestid
 			foreach (var id in requestIdList)
 			{
@@ -72,8 +71,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 				string enName = null;
 				string mgName = null;
 
-				var wokingReport =  _unitOfWork.WorkingReport.GetAllWithFilter((x) => x.RequestId == id);
-				foreach (var workReport in wokingReport)
+				var workingReport =  _unitOfWork.WorkingReport.GetAllWithFilter((x) => x.RequestId == id);
+				foreach (var workReport in workingReport)
 				{
 					//lấy nhân viên ra
 					var staff=  await _userManager.FindByIdAsync(workReport.StaffId);
@@ -105,7 +104,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 				};
 				customQuotationViewModels.Add(cqVM);
 			}
-			return Json(new { data = customQuotationViewModels });
+            //Thực hiện filter chỉ lấy ra những customquotation dag pending approve
+            customQuotationViewModels = customQuotationViewModels.Where(x => x.Status == SD.GetQuotationStatusDescription(SD.Pending_Approval)).ToList();
+
+            return Json(new { data = customQuotationViewModels });
 		}
 
 		[HttpGet]
@@ -113,13 +115,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		{
 			//lưu thông tin quoteId vào session
 			HttpContext.Session.SetString(SessionConst.QUOTATION_ID, id);
-
 			//lấy đối tượng customquotation full thông tin từ CustomQuotation table
 			var cqDetail = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "ConstructDetail");
-
 			//lấy working report của các staff trong working report
 			var workReport = _unitOfWork.WorkingReport.GetAllWithFilter((x) => x.RequestId == cqDetail.RequestId);
-
 			//tạo đối tượng VM để đưa lên View (đối tượng này còn có 1 vai trò khác đó là RejectDetail sẽ chứa thông tin reject customquotation)
 			var quotationVM = new CustomQuotationVM();
 			//TIẾN HÀNH CẬP NHẬT THÔNG TIN CHO CustomQuotationDetailViewModel
@@ -134,17 +133,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 				Manager = null,
 				Enginneer = null,
 				Seller = null,
-
 				DelegationDateSeller = null,
 				SubmissionDateSeller =null,
-
 				RecieveDateManager = null,
 				//ko cần cập nhật accept của manager khi view Detail
 				AcceptanceDateManager = null,
-
 				RecieveDateEngineer = null,
 				SubmissionDateEngineer = null,
-
 				Total = cqDetail.Total,
 			};
 			//thêm thông tin cho construct detail View Model từ CustomQuotation cqDetail
@@ -163,7 +158,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			constructDetailVM.Mezzanine = cqDetail.ConstructDetail.Mezzanine;
 			constructDetailVM.RooftopFloor = cqDetail.ConstructDetail.RooftopFloor;
 			constructDetailVM.Garden = cqDetail.ConstructDetail.Garden;
-
 			//tiến hành lấy id của từng staff sau đó gán Staff cho từng biến lưu trữ tương ứng với mỗi role
 			ApplicationUser seller = null;
 			ApplicationUser engineer = null;
@@ -205,7 +199,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			quotationVM.QuotationDetailVM.Seller = seller;
 			quotationVM.QuotationDetailVM.Enginneer = engineer;
 			quotationVM.QuotationDetailVM.Manager = manager;
-
 			//TODO: test result of custom quotation
 			//return Json(new { data = ID});
 			return View(quotationVM);
@@ -218,7 +211,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		{
 			//lấy id của quotation bị reject đưa cho biến rejectReportId giữ
 			var rejectQuotationId = model.RejectReportVM.RejectQuotationId;
-
 
 			//Working Report của Engineer 
 			//var engineerWorkReport = _unitOfWork.WorkingReport.GetBaseOnRequestAndStaffKey(Helper.TransferId(rejectQuotationId, SD.requestIdKey), SD.EngineertIdKey);
@@ -234,13 +226,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 				//id của quotation bị reject
 				RejectedQuotationId = rejectQuotationId,
 				//thời gian submit quotation bị reject của Enginner từ WorkingReports table
-				//SubmitDay = engineerWorkReport.SubmitDate,
+				SubmitDay = model.RejectReportVM.SubmissionEngineerDate,
 				//id engineer đã làm report đó
-				//EngineerId = engineerWorkReport.StaffId,
+				EngineerId = model.RejectReportVM.EngineerId,
 				//thời gian recieve quotation bị reject của Manager từ WorkingReports table
-				//ReceiveDay = managerWorkReport.ReceiveDate,
+				ReceiveDay = model.RejectReportVM.RecieveManagerDate,
 				//id của manager đã reject report
-				//ManagerId = managerWorkReport.StaffId,
+				ManagerId = model.RejectReportVM.ManagerId,
 				//lý do reject tổng quát
 				Reason = model.RejectReportVM.Reason
 			};
@@ -261,17 +253,19 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			//Thực hiện thay đổi trạng thái của customquotation trong CustomQuotations table thành rejected
 			rejectCustomQuotation.Status = SD.Rejected;
 
-			//Xóa thời gian submission của Enginner trong WorkingReports table
-			//engineerWorkReport.SubmitDate = null;
-			//Xóa thời gian Receive của Manager trong WorkingReports table
-			//managerWorkReport.ReceiveDate = null;
+			var engineerWorkReport = _unitOfWork.WorkingReport.Get(x => x.StaffId == model.RejectReportVM.EngineerId);
+            //Xóa thời gian submission của Enginner trong WorkingReports table
+            engineerWorkReport.SubmitDate = null;
 
-			//Update WorkingReport cho Engineer và Manager
-			//_unitOfWork.WorkingReport.Update(engineerWorkReport);
-			//_unitOfWork.WorkingReport.Update(managerWorkReport);
-			//LƯU LẠI
-			_unitOfWork.Save();
+            var managerWorkReport = _unitOfWork.WorkingReport.Get(x => x.StaffId == model.RejectReportVM.ManagerId);
+            //Xóa thời gian Receive của Manager trong WorkingReports table
+            managerWorkReport.ReceiveDate = null;
 
+            //Update WorkingReport cho Engineer và Manager
+            _unitOfWork.WorkingReport.Update(engineerWorkReport);
+            _unitOfWork.WorkingReport.Update(managerWorkReport);
+            //LƯU LẠI
+            _unitOfWork.Save();
 
 			//Toast Info lên là reject thành công
 			TempData["Success"] = "Reject Successfull";
@@ -318,21 +312,31 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public IActionResult ApproveDetail(string id)
+		public async Task<IActionResult> ApproveDetailAsync(string id)
 		{
 			var quotation = _unitOfWork.CustomQuotation.Get((x) => x.Id == id, "Request");
 
 			//thay đổi status cho custom quotation
 			quotation.Status = SD.Completed;
 
-			//cập nhật thời gian submit của manager vào WorkingReport table
-			//var report = _unitOfWork.WorkingReport.GetBaseOnRequestAndStaffKey(quotation.RequestId, SD.ManagerIdKey);
-			//report.SubmitDate = DateTime.Now;
+            //cập nhật thời gian submit của manager vào WorkingReport table
+            var workingReport = _unitOfWork.WorkingReport.GetAllWithFilter((x) => x.RequestId == id);
+            foreach (var workReport in workingReport)
+            {
+                //lấy nhân viên ra
+                var staff = await _userManager.FindByIdAsync(workReport.StaffId);
+                //xác nhận role của nhân viên đó
+                var role = await _userManager.GetRolesAsync(staff);
+                if (role.First() == SD.Role_Manager)
+				{
+                   workReport.SubmitDate = DateTime.Now;
+                    //tiến hành cập nhật xuống WorkingReports table
+                    _unitOfWork.WorkingReport.Update(workReport);
+                }
+            }
 
-			//tiến hành cập nhật xuống CustomQuotations table
-			_unitOfWork.CustomQuotation.Update(quotation);
-			//tiến hành cập nhật xuống WorkingReports table
-			//_unitOfWork.WorkingReport.Update(report);
+            //tiến hành cập nhật xuống CustomQuotations table
+            _unitOfWork.CustomQuotation.Update(quotation);
 
 			_unitOfWork.Save();
 
