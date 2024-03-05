@@ -18,12 +18,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
             _db = db;
         }
 
-        public WorkingReport GetBaseOnRequestAndStaffKey(string requestId, string staffKeyId)
-        => Get((x) => x.RequestId == requestId && x.StaffId.StartsWith(staffKeyId), "Staff");
-
-        public string GetStaffNameBaseOnRequestAndStaffKey(string requestId, string staffKeyId)
-         => GetBaseOnRequestAndStaffKey(requestId, staffKeyId).Staff.Name;
-
         public void Update(WorkingReport obj)
         => _db.WorkingReports.Update(obj);
 

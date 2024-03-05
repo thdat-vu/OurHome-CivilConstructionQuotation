@@ -32,6 +32,8 @@ namespace SWP391.CHCQS.OurHomeWeb
 				options.LogoutPath = $"/Identity/Account/Logout";
 				options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 			});
+
+
 			builder.Services.AddRazorPages();
 
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
