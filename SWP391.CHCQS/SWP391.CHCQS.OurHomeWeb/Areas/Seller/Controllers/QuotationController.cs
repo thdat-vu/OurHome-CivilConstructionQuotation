@@ -112,7 +112,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 _unitOfWork.ConstructDetail.Add(constructDetail);
 
                 var requestForm = _unitOfWork.RequestForm.Get(x => x.Id == customQuotation.RequestId);
-                requestForm.Status = false;
+                requestForm.Status = SD.RequestStatusApproved;
                 _unitOfWork.RequestForm.Update(requestForm);
 
                 _unitOfWork.Save();
@@ -163,8 +163,17 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         [HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			List<CustomQuotation> CustomQuotationList = _unitOfWork.CustomQuotation
-				.GetAll()
+			List<QuotationStatusViewModel> CustomQuotationList = _unitOfWork.CustomQuotation
+				.GetAll().Select(x => new QuotationStatusViewModel
+                {
+                    Id = x.Id,
+                    Date = x.Date,
+                    Acreage = x.Acreage,
+                    Location = x.Location,
+                    Status = SD.GetQuotationStatusDescription(x.Status),
+                    Description = x.Description,
+                    
+                })
 				.ToList();
 
 			return Json(new { data = CustomQuotationList });

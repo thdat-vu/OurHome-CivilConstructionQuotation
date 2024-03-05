@@ -49,27 +49,20 @@
 
 							<ul class="dropdown-menu">
 								<li class="">
-									<a class="dropdown-item" asp-area="Customer" asp-controller="Quotation" asp-action="Index">Quick Quote</a>
+									<a class="dropdown-item" asp-area="Customer" asp-controller="Request" asp-action="Index">Quick Quote</a>
 								</li>
 								<li class="">
-									<a class="dropdown-item" asp-area="Customer" asp-controller="Quotation" asp-action="CreateRequest">Create Request</a>
+									<a class="dropdown-item" asp-area="Customer" asp-controller="Request" asp-action="CreateRequest">Create Request</a>
 								</li>
 								<li class="">
-									<a class="dropdown-item" asp-area="Customer" asp-controller="Quotation" asp-action="ManageRequest">Manage Request</a>
+									<a class="dropdown-item" asp-area="Customer" asp-controller="Request" asp-action="ManageRequest">Manage Request</a>
 								</li>
 							</ul>
 						</li>
 
 					</ul>
 
-					<div class="nav-item row w-25">
-						<div class="col m-1 btn-group rounded-1">
-							<a asp-area="Customer" asp-controller="Project" asp-action="Detail" class="btn btn-main text-nowrap">Sign Up</a>
-						</div>
-						<div class="col m-1 btn-group rounded-1">
-							<a asp-area="Customer" asp-controller="Project" asp-action="Detail" class="btn btn-main text-nowrap">Login</a>
-						</div>
-					</div>
+					<partial name="_LoginPartial" />
 
 				</div>
 			</div>

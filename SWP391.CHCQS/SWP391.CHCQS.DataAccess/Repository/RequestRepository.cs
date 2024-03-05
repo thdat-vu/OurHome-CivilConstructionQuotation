@@ -33,7 +33,7 @@ namespace SWP391.CHCQS.DataAccess.Repository
         //function lấy ra tổng số cancled request có trong database theo tháng
         public int CountCancledRequestInMonthAndYear(int month, int year)
         {   //false: request status là đã hủy
-            Expression<Func<RequestForm, bool>> filter = (x) => x.GenerateDate.Month == month && x.GenerateDate.Year == year && x.Status == false;
+            Expression<Func<RequestForm, bool>> filter = (x) => x.GenerateDate.Month == month && x.GenerateDate.Year == year && x.Status == SD.RequestStatusRejected;
             return GetAllWithFilter(filter).Count();
         }
         //function trả về danh sách các năm có có tồn tại request

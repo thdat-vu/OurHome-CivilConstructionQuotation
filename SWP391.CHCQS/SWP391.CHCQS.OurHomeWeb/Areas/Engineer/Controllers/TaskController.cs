@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
@@ -10,9 +11,15 @@ using System.Runtime.CompilerServices;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 {
 	[Area("Engineer")]
-	public class TaskController : Controller
+    [Authorize(Roles = SD.Role_Engineer)]
+    public class TaskController : Controller
 	{
-		private readonly IUnitOfWork _unitOfWork;
+
+
+        #region ============ DECLARE ============
+
+
+        private readonly IUnitOfWork _unitOfWork;
 
 		//Declare session for CustomQuotationTaskViewModel to store TaskList of the quote when add into quote. if it empty, create one
 		public List<TaskDetailViewModel> TaskListSession => HttpContext.Session.Get<List<TaskDetailViewModel>>(SessionConst.TASK_LIST_KEY) ?? new List<TaskDetailViewModel>();
@@ -25,12 +32,19 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			_unitOfWork = unitOfWork;
 		}
 
-		#region API CALL TASK LIST
-		/// <summary>
-		/// This function get all CustomeQuotation in Database and return it into JSON, this function ne lib Datatables to show data
-		/// </summary>
-		/// <returns></returns>
-		[HttpGet]
+
+        #endregion ============ DECLARE ============
+
+
+
+        #region ============ API ============
+
+
+        /// <summary>
+        /// This function get all CustomeQuotation in Database and return it into JSON, this function ne lib Datatables to show data
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
 			//Asign TaskListSession  for taskCart;
@@ -106,14 +120,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			return Json(new { data = taskDetailVM });
 		}
 
-		#endregion
 
-		/// <summary>
-		/// This fuction will add a Task into CustomQuotationTask in session when input a TaskId
-		/// </summary>
-		/// <param name="TaskId"></param>
-		/// <returns></returns>
-		[HttpGet]
+        
+
+        /// <summary>
+        /// This fuction will add a Task into CustomQuotationTask in session when input a TaskId
+        /// </summary>
+        /// <param name="TaskId"></param>
+        /// <returns></returns>
+        [HttpGet]
 		public async Task<IActionResult> AddToQuote(string TaskId)
 		{
 			//Asign TaskListSession to taskCart
@@ -224,5 +239,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			return Json(new { success = true, message = $"Delete task successfully with Id = {TaskId}" });
 		}
 
-	}
+
+        #endregion ============ API ============
+
+
+    }
 }

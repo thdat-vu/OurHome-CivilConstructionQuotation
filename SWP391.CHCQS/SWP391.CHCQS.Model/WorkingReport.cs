@@ -12,18 +12,16 @@ namespace SWP391.CHCQS.Model
     {
         [Key]
         public int Id { get; set; }
-        [MaxLength(10)]
+
         public string StaffId { get; set; } = null!;
         [ForeignKey("StaffId")]
-        public virtual Staff Staff { get; set; } = null!;
+        public virtual ApplicationUser Staff { get; set; } = null!;
 
         [MaxLength(10)]
         public string RequestId { get; set; } = null!;
         [ForeignKey("RequestId")]
         public virtual RequestForm RequestForm { get; set; } = null!;
 
-
-        //thêm dấu hỏi nha
         public DateTime? ReceiveDate { get; set; }
         public DateTime? SubmitDate { get; set; }
 

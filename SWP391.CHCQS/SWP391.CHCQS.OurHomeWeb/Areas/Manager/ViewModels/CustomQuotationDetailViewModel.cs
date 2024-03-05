@@ -9,9 +9,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 		public ConstructDetailViewModel? ConstructDetailVM { get; set; } 
 		public DateTime? QuoteGeneratedDate { get; set; }
 
-		public Staff? Enginneer { get; set; } = null!;
-		public Staff? Manager { get; set; } = null!;
-		public Staff? Seller { get; set; } = null!;
+		public ApplicationUser? Enginneer { get; set; } = null!;
+		public ApplicationUser? Manager { get; set; } = null!;
+		public ApplicationUser? Seller { get; set; } = null!;
 		public decimal Total {  get; set; }
 
 		//ghi lại thời gian và người dc ủy quyền xử lý custom quotation

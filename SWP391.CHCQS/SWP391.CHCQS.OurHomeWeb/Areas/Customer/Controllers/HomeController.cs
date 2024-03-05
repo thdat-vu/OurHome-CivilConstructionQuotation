@@ -2,7 +2,9 @@
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Models;
+using SWP391.CHCQS.Utility;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 {
@@ -19,7 +21,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
         }
 
         public async Task<IActionResult> Index()
-        {
+        {            
             List<Project> projectList = _unitOfWork.Project.GetAll().Take(6).ToList();
             return View(projectList);
         }

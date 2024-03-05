@@ -18,15 +18,7 @@ function loadDataTableRequest() {
             { data: 'acreage', "width": "15%" },
             { data: 'location', "width": "15%" },
             {
-                data: 'status',
-                "render": function (data) {
-                    if (data === true) {
-                        return 'Processing';
-                    } else {
-                        return 'Completed';
-                    }
-                },
-                "width": "15%"
+                data: 'status', "width": "15%"
             },
             { data: 'description', "width": "25%" },
             {

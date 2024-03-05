@@ -3,8 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Services.NotificationHub;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Services;
-using SWP391.CHCQS.Services.SignalR;
+using SWP391.CHCQS.Services.NotificationHub;
+using NotificationHub = SWP391.CHCQS.Services.NotificationHub.NotificationHub;
+using SWP391.CHCQS.Model;
 
 namespace SWP391.CHCQS.OurHomeWeb
 {
@@ -14,14 +20,22 @@ namespace SWP391.CHCQS.OurHomeWeb
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<SWP391DBContext>(
-                options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+			// Add services to the container.
+			builder.Services.AddControllersWithViews();
+			builder.Services.AddDbContext<SWP391DBContext>(
+				options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            
-            //builder.Services.AddSingle<IAppState, AppState>();
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<SWP391DBContext>().AddDefaultTokenProviders();
+			builder.Services.ConfigureApplicationCookie(options => {
+				options.LoginPath = $"/Identity/Account/Login";
+				options.LogoutPath = $"/Identity/Account/Logout";
+				options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+			});
+			builder.Services.AddRazorPages();
+
+			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+			builder.Services.AddScoped<IEmailSender, EmailSender>();
 
             //Thêm service SignalR
             builder.Services.AddSignalR();
@@ -55,12 +69,15 @@ namespace SWP391.CHCQS.OurHomeWeb
                 app.UseHsts();
             }
 
+			app.UseRouting();
+            app.UseAuthentication();//before authorization
+			app.UseAuthorization();
+			app.MapRazorPages();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
 
-            app.UseAuthorization();
+            
 
             //Khai báo app có sử dụng signalR
             app.MapHub<NotificationHub>("/notificationServer");

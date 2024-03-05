@@ -1,4 +1,5 @@
 using Humanizer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -12,6 +13,7 @@ using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
+using EmailSender = SWP391.CHCQS.Utility.Helpers.EmailSender;
 
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
@@ -20,13 +22,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
     public class CustomQuotationController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _configuration;
-        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration)
+        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration, UserManager<IdentityUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _environment = environment;
             _configuration = configuration;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -62,7 +66,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         public async Task<IActionResult> GetDetail([FromQuery] string id)
         {
 
-            
+
             //lưu thông tin quoteId vào session
             HttpContext.Session.SetString(SessionConst.QUOTATION_ID, id);
 
@@ -110,13 +114,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             };
             //thêm thông tin cho construct detail View Model từ CustomQuotation cqDetail
             var constructDetailVM = quotationVM.QuotationDetailVM.ConstructDetailVM;
-           constructDetailVM.IsBalcony = cqDetail.ConstructDetail.Balcony;
+            constructDetailVM.IsBalcony = cqDetail.ConstructDetail.Balcony;
             constructDetailVM.TypeOfConstruct = _unitOfWork.ConstructionType.GetName(cqDetail.ConstructDetail.ConstructionId);
             constructDetailVM.Investment = _unitOfWork.InvestmentType.GetName(cqDetail.ConstructDetail.InvestmentId);
             constructDetailVM.Foundation = _unitOfWork.FoundationType.GetName(cqDetail.ConstructDetail.FoundationId);
-           constructDetailVM.Basement = _unitOfWork.BasementType.GetName(cqDetail.ConstructDetail.BasementId);
-           constructDetailVM.Roof = _unitOfWork.RoofType.GetName(cqDetail.ConstructDetail.RooftopId);
-           constructDetailVM.Width = cqDetail.ConstructDetail.Width;
+            constructDetailVM.Basement = _unitOfWork.BasementType.GetName(cqDetail.ConstructDetail.BasementId);
+            constructDetailVM.Roof = _unitOfWork.RoofType.GetName(cqDetail.ConstructDetail.RooftopId);
+            constructDetailVM.Width = cqDetail.ConstructDetail.Width;
             constructDetailVM.Length = cqDetail.ConstructDetail.Length;
             constructDetailVM.Facade = cqDetail.ConstructDetail.Facade;
             constructDetailVM.Alley = cqDetail.ConstructDetail.Alley;
@@ -253,7 +257,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _unitOfWork.CustomQuotation.Update(quotation);
             //tiến hành cập nhật xuống WorkingReports table
             _unitOfWork.WorkingReport.Update(report);
-            
+
             _unitOfWork.Save();
 
             /*
@@ -324,17 +328,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
         public IActionResult Test()
         {
-            var test = AppState.Instance(_unitOfWork).GetDelegationIndex();
+            var test = AppState.Instance(_userManager).GetDelegationIndex();
             return Json(test);
         }
 
 
+
+
     }
-
-
-
-
-
 
 
 }
