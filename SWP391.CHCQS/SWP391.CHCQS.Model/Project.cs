@@ -25,7 +25,7 @@ namespace SWP391.CHCQS.Model
         public DateTime Date { get; set; }
         public string CustomerId { get; set; } = null!;
         [ForeignKey("CustomerId")]
-        public virtual Customer Customer { get; set; } = null!;
+        public virtual ApplicationUser Customer { get; set; } = null!;
 
         public virtual ICollection<ProjectImage> Images { get; set; }
     }

@@ -1,4 +1,5 @@
 using Humanizer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -21,13 +22,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
     public class CustomQuotationController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _configuration;
-        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration)
+        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration, UserManager<IdentityUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _environment = environment;
             _configuration = configuration;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -325,7 +328,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
         public IActionResult Test()
         {
-            var test = AppState.Instance(_unitOfWork).GetDelegationIndex();
+            var test = AppState.Instance(_userManager).GetDelegationIndex();
             return Json(test);
         }
 

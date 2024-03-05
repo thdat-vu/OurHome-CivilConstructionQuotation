@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -16,16 +17,17 @@ namespace SWP391.CHCQS.DataAccess.Data
             : base(options)
         {
         }
-
-        public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
-        public virtual DbSet<WorkingReport> WorkingReports { get; set; } = null!;
-        public virtual DbSet<UserConnections> UserConnections { get; set; } = null!;
+		//public virtual DbSet<Customer> Customers { get; set; } = null!;
+		//public virtual DbSet<Staff> Staffs { get; set; } = null!;
+        public virtual DbSet<IdentityUserRole<string>> UserRoles { get; set; } = null!;
+		public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
+        public virtual DbSet<WorkingReport> WorkingReports { get; set; } = null!;        
         public virtual DbSet<BasementType> BasementTypes { get; set; } = null!;
         public virtual DbSet<ConstructDetail> ConstructDetails { get; set; } = null!;
         public virtual DbSet<ConstructionType> ConstructionTypes { get; set; } = null!;
         public virtual DbSet<TaskDetail> TaskDetails { get; set; } = null!;
         public virtual DbSet<CustomQuotation> CustomQuotations { get; set; } = null!;
-        public virtual DbSet<Customer> Customers { get; set; } = null!;
+        
         public virtual DbSet<FoundationType> FoundationTypes { get; set; } = null!;
         public virtual DbSet<InvestmentType> InvestmentTypes { get; set; } = null!;
         public virtual DbSet<Material> Materials { get; set; } = null!;
@@ -36,7 +38,7 @@ namespace SWP391.CHCQS.DataAccess.Data
         public virtual DbSet<ProjectImage> ProjectImages { get; set; } = null!;
         public virtual DbSet<RequestForm> RequestForms { get; set; } = null!;
         public virtual DbSet<RooftopType> RooftopTypes { get; set; } = null!;
-        public virtual DbSet<Staff> Staffs { get; set; } = null!;
+        
         public virtual DbSet<Combo> Combos { get; set; } = null!;
         public virtual DbSet<Task> Tasks { get; set; } = null!;
         public virtual DbSet<TaskCategory> TaskCategories { get; set; } = null!;

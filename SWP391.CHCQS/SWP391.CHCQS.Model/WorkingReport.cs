@@ -15,7 +15,7 @@ namespace SWP391.CHCQS.Model
 
         public string StaffId { get; set; } = null!;
         [ForeignKey("StaffId")]
-        public virtual Staff Staff { get; set; } = null!;
+        public virtual ApplicationUser Staff { get; set; } = null!;
 
         [MaxLength(10)]
         public string RequestId { get; set; } = null!;

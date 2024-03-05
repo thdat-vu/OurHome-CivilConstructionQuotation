@@ -14,16 +14,29 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using SWP391.CHCQS.Utility;
+using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using System.Security.Claims;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, 
+            ILogger<LoginModel> logger, 
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            IUnitOfWork unitOfWork)
         {
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _unitOfWork = unitOfWork;
             _signInManager = signInManager;
             _logger = logger;
         }
@@ -115,7 +128,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                                        
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    var role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
+
+                    return RedirectToAction("Index", "Home", new { area = role });
+                    
+                    //return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {

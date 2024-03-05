@@ -10,6 +10,7 @@ using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Services;
 using SWP391.CHCQS.Services.NotificationHub;
 using NotificationHub = SWP391.CHCQS.Services.NotificationHub.NotificationHub;
+using SWP391.CHCQS.Model;
 
 namespace SWP391.CHCQS.OurHomeWeb
 {
@@ -26,6 +27,11 @@ namespace SWP391.CHCQS.OurHomeWeb
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<SWP391DBContext>().AddDefaultTokenProviders();
+			builder.Services.ConfigureApplicationCookie(options => {
+				options.LoginPath = $"/Identity/Account/Login";
+				options.LogoutPath = $"/Identity/Account/Logout";
+				options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+			});
 			builder.Services.AddRazorPages();
 
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

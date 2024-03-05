@@ -22,13 +22,15 @@ namespace SWP391.CHCQS.Model
         public string? Acreage { get; set; }
         [MaxLength(200)]
         public string Location { get; set; } = null!;
-        //true: vẫn dag xử lý, còn hiệu lực
-        //false: ko còn hiệu lực
+        
+
         [MaxLength(20)]
         public string Status { get; set; }
 
         public string CustomerId { get; set; } = null!;
-        public virtual Customer Customer { get; set; } = null!;
+        [ForeignKey("CustomerId")]                                        
+        
+        public virtual ApplicationUser Customer { get; set; } = null!;
         public CustomQuotation? CustomQuotation { get; set; }
     }
 }
