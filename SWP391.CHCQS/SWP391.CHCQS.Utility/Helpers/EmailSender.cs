@@ -91,22 +91,26 @@ namespace SWP391.CHCQS.Utility.Helpers
 		 Now we just need to set the message body and we're done
 		 message.Body = builder.ToMessageBody();
 		*/
-		public Task SendInfoToEmail(string toEmail, string customerName, string quoteId)
+		public bool SendInfoToEmail(string toEmail, string customerName, string quoteId)
 		{
-			var fromMail = _configuration["MailSettings:Mail"];
-			var fromPassword = _configuration["MailSettings:FromKeyPassword"];
-			MailMessage mess = new MailMessage();
-			mess.From = new MailAddress(fromMail);
-			mess.Subject = _configuration["MailSettings:Subject"];
+			try
+			{
+				if (toEmail == null || toEmail.Equals(String.Empty))
+					return false;
+				var fromMail = _configuration["MailSettings:Mail"];
+				var fromPassword = _configuration["MailSettings:FromKeyPassword"];
+				MailMessage mess = new MailMessage();
+				mess.From = new MailAddress(fromMail);
+				mess.Subject = _configuration["MailSettings:Subject"];
 
-			mess.To.Add(new MailAddress(toEmail));
-			var hostAddress = String.Empty;
-			if (_environment.IsDevelopment())
-				hostAddress = _configuration["Environment:LocalDomain"];
-			if (_environment.IsProduction())
-				hostAddress = _configuration["Environment:IISExpress"];
-			string url = $"{hostAddress}{_configuration["MailSettings:ActionLinkNoPara"]}?quoteId={quoteId}";
-			string mailContent = $@"
+				mess.To.Add(new MailAddress(toEmail));
+				var hostAddress = String.Empty;
+				if (_environment.IsDevelopment())
+					hostAddress = _configuration["Environment:LocalDomain"];
+				if (_environment.IsProduction())
+					hostAddress = _configuration["Environment:IISExpress"];
+				string url = $"{hostAddress}{_configuration["MailSettings:ActionLinkNoPara"]}?quoteId={quoteId}";
+				string mailContent = $@"
 <p>Welcome {customerName} !</p>
 <p>Thank you for contacting us to use our construction quote request service. We received your request and it was reviewed by our team.</p>
 <p>We've tried to respond to you as quickly as possible and made sure to thoroughly review your requests.</p>
@@ -117,20 +121,25 @@ namespace SWP391.CHCQS.Utility.Helpers
 <p>Yours sincerely,</p>
 <p>Our Home Architecture</p>
 ";
-			var bodyBuilder = new BodyBuilder();
-			bodyBuilder.HtmlBody = String.Format(mailContent);
-			mess.Body = bodyBuilder.HtmlBody;
+				var bodyBuilder = new BodyBuilder();
+				bodyBuilder.HtmlBody = String.Format(mailContent);
+				mess.Body = bodyBuilder.HtmlBody;
 
-			mess.IsBodyHtml = true;
+				mess.IsBodyHtml = true;
 
-			var smtp = new SmtpClient("smtp.gmail.com")
+				var smtp = new SmtpClient("smtp.gmail.com")
+				{
+					Port = 587,
+					Credentials = new NetworkCredential(fromMail, fromPassword),
+					EnableSsl = true
+				};
+				smtp.Send(mess);
+			}catch (Exception e)
 			{
-				Port = 587,
-				Credentials = new NetworkCredential(fromMail, fromPassword),
-				EnableSsl = true
-			};
-			smtp.Send(mess);
-			return Task.CompletedTask;
+				Console.Write(e.ToString());
+				return false;
+			}
+			return true;
 		}
 
 	}

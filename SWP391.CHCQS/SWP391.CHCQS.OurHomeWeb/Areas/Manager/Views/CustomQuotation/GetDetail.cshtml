@@ -261,7 +261,7 @@
             <!--engineer id - người đã làm detail cho customquotation-->
             <input asp-for="@rejectReportVM.SubcriberId" type="hidden" value="@quotationDetailVM.Enginneer.Id" />
             <!--ngày submit của engineer-->
-            <input asp-for="@rejectReportVM.SubmissionEngineerDate" type="hidden" value="@quotationDetailVM.SubmissionDateEngineer"/>
+            <input asp-for="@rejectReportVM.SubmissionEngineerDate" type="hidden" value="@quotationDetailVM.SubmissionDateEngineer" />
             <!--ngày recieve của manager-->
             <input asp-for="@rejectReportVM.RecieveManagerDate" type="hidden" value="@quotationDetailVM.RecieveDateManager" />
             <!--manager id-->
@@ -278,12 +278,11 @@
             <!--Nút reject và approve-->
             <div class="row">
                 <div class="w-100 btn-group mb-3 mt-3 col-md-6" role="group">
-                    <button type="submit" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check"></i>Rejected</button>
+                    <button type="submit" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-x">Rejected</i></button>
                 </div>
                 <div class="w-100 btn-group mb-3 mt-3 col-md-6" role="group">
-                    <a href="/Manager/CustomQuotation/ApproveDetail?id=@quotationDetailVM.QuoteId" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check"></i>Approve</a>
+                    <a href="/Manager/CustomQuotation/ApproveDetail?id=@quotationDetailVM.QuoteId&managerId=@quotationDetailVM.Manager.Id" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check">Approve</i></a>
                 </div>
-
             </div>
         </form>
     </div>

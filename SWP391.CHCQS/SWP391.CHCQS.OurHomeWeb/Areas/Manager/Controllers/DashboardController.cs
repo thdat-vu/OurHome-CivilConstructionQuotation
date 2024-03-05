@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
+using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
     //[XuanDat]   
     //Mục tiêu của controller: tập hợp dữ liệu thống kê vào 1 nơi để dễ dàng truy xuất
     [Area("Manager")]
+    [Authorize(Roles = SD.Role_Manager)]
     public class DashboardController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
