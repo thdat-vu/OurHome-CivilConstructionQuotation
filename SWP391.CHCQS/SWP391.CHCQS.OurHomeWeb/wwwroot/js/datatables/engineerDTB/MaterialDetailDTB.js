@@ -52,11 +52,13 @@ function DeleteMaterialFromQuote(url) {
         success: function (data) {
             dataTableMD.ajax.reload();
             dataTableM.ajax.reload();
+            dataTableCQB.ajax.reload();
             toastr.success(data.message);
         },
         error: function (data) {
             dataTableMD.ajax.reload();
             dataTableM.ajax.reload();
+            dataTableCQB.ajax.reload();
             toastr.error(data.message);
         }
     });
@@ -71,14 +73,17 @@ function UpdateMaterialQuantity(url, formId) {
         success: function (data) {
             if (!data.success) {
                 dataTableMD.ajax.reload();
+                dataTableCQB.ajax.reload();
                 toastr.error(data.message);
             } else {
                 dataTableMD.ajax.reload();
+                dataTableCQB.ajax.reload();
                 toastr.success(data.message);
             }
         },
         error: function (data) {
             dataTableMD.ajax.reload();
+            dataTableCQB.ajax.reload();
             toastr.error(data.message);
         }
     });
