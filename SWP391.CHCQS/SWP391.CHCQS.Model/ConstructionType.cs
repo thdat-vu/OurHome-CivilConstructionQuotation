@@ -15,6 +15,7 @@ namespace SWP391.CHCQS.Model
         [MaxLength(10)]
         public string Id { get; set; } = null!;
         [MaxLength(100)]
+        [Display(Name = "Construction Type")]
         public string Name { get; set; } = null!;
         [MaxLength(500)]
         public string? Description { get; set; }
