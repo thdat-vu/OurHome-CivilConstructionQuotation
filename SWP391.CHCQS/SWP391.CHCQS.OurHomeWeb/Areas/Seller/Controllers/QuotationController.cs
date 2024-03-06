@@ -29,7 +29,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             //hiểu nôm na là phải có CustomQuotation id trước khi có thằng ConstructDetail id
             var customQuotation = JsonSerializer.Serialize(new CustomQuotation
             {
-                Id = "temp1",
+                Id = CreateQuotationId(id),
                 Date = DateTime.Now,
                 Acreage = requestForm.Acreage,
                 Location = requestForm.Location,
@@ -104,7 +104,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                     Room = constructDetailVM.ConstructDetail.Room,
                     FoundationId = constructDetailVM.ConstructDetail.FoundationId,
                     RooftopId = constructDetailVM.ConstructDetail.RooftopId,
-                    QuotationId = "temp1",
+                    QuotationId = customQuotation.Id
                   
                 };
                 // Thêm ConstructDetail vào unit of work và lưu thay đổi
@@ -194,5 +194,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             };
             return View(quotationViewModel);
         }
+
+        public string CreateQuotationId(string requestId)
+        {
+            string number = requestId.Substring(2);
+            return SD.quotationIdKey + number;
+		}
     }
 }
