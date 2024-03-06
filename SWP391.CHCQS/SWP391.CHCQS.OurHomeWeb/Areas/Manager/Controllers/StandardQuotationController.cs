@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
+using SWP391.CHCQS.Utility;
 using System.Net.NetworkInformation;
 
 //DatVT
@@ -53,6 +54,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			//if (ModelState.IsValid) //if obj is valid
 			//{
 			obj.StandardQuotation.Status = true;
+			obj.StandardQuotation.Id = SD.TempId;
 			_unitOfWork.Combo.Add(obj.StandardQuotation); //Add Combo to Combo table
 			_unitOfWork.Save(); //keep track on change
 			TempData["success"] = "Combo added successfully";
@@ -109,48 +111,49 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		}
 
 		//Delete Action
-		//public IActionResult Delete(string? id)
-		//{
-		//    //catch null id exception
-		//    if (id == null)
-		//    {
-		//        return NotFound(); //return status not found aka 404
-		//    }
+		public IActionResult Delete(string? id)
+		{
+			//catch null id exception
+			if (id == null)
+			{
+				return NotFound(); //return status not found aka 404
+			}
 
-		//    //retrieve Combo from DB
-		//    Combo? materialFromDb = _unitOfWork.Combo.Get(u => u.Id == id);
+			//retrieve Combo from DB
+			Combo? materialFromDb = _unitOfWork.Combo.Get(u => u.Id == id, includeProperties: "Construction");
 
-		//    if( materialFromDb == null)
-		//    {
-		//        return NotFound(); //return status not found aka 404
-		//    }
+			if (materialFromDb == null)
+			{
+				return NotFound(); //return status not found aka 404
+			}
 
-		//    return View(materialFromDb); //return Delete.cshtml + materialFromDb
+			return View(materialFromDb); //return Delete.cshtml + materialFromDb
 
 
-		//}
+		}
 		//delete request HttpPost, actionname=Delete
-		//[HttpPost, ActionName("Delete")]
-		//public IActionResult DeletePOST(string? id)
-		//{
-		//    //retrieve Combo from Db
-		//    Combo? obj = _unitOfWork.Combo.Get(u => u.Id == id);
-		//    //handle id null exception
-		//    if (obj == null)
-		//    {
-		//        return NotFound();//return status not found aka 404
-		//    }
+		[HttpPost, ActionName("Delete")]
+		public IActionResult DeletePOST(string? id)
+		{
+			//retrieve Combo from Db
+			Combo? obj = _unitOfWork.Combo.Get(u => u.Id == id);
+			//handle id null exception
+			if (obj == null)
+			{
+				return NotFound();//return status not found aka 404
+			}
 
-		//    _unitOfWork.Combo.Remove(obj); //just temporary
-		//    _unitOfWork.Save();//keep track on change
-		//    //TempData["success"] = "Product deleted successfully";
-		//    return RedirectToAction("Index"); //redirect to Index.cshtml
-		//}
+			//change the status in to false
+			obj.Status = false;
+			_unitOfWork.Save();//keep track on change
+							   //TempData["success"] = "Product deleted successfully";
+			return RedirectToAction("Index"); //redirect to Index.cshtml
+		}
 
 		#region API CALL
 		public IActionResult GetAll()
 		{
-			List<Combo> objStandardQuotationList = _unitOfWork.Combo.GetAll(includeProperties: "Construction").ToList();
+			List<Combo> objStandardQuotationList = _unitOfWork.Combo.GetAllWithFilter(filter: sq => sq.Status == true,includeProperties: "Construction").ToList();
 
 			return Json(new { data = objStandardQuotationList });
 		}

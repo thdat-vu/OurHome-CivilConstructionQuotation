@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
+using SWP391.CHCQS.Utility;
 using System.Net.NetworkInformation;
 
 //DatVT
@@ -53,9 +54,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         {
             
                 obj.Material.Status = true; //change status into true;
-                _unitOfWork.Material.Add(obj.Material); //Add MaterialVM to Material table
+                obj.Material.Id = SD.TempId;
+
+				_unitOfWork.Material.Add(obj.Material); //Add MaterialVM to Material table
                 _unitOfWork.Save(); //keep track on change
-				TempData["success"] = "Product created successfully";
+				TempData["success"] = "Material created successfully";
 				return RedirectToAction("Index"); //after adding, return to previous action and reload the page
             
             //return View(obj); //return previous action + invalid object
