@@ -11,6 +11,7 @@ function loadDataTableQuotationBill() {
         "paging": false,
         "searching": false,
         "ordering": false,
+        "info": false,
         "columns": [
             { data: 'priceOnAcreage', },
             { data: 'acreage', },

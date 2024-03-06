@@ -85,6 +85,49 @@
 			</div>
 		</div>
 
+		<!-- Hiện bill của Custom Quotation -->
+		<div class="row mb-3">
+			<div class="table-responsive">
+
+				<table id="tblCustomQuotationBill" class="table-bordered table-striped text-black" style="width:100%">
+					<thead>
+						<tr>
+							<th>
+								Price on Acreage
+							</th>
+							<th>
+								Acreage
+							</th>
+							<th>
+								Foundation
+							</th>
+							<th>
+								Basement
+							</th>
+							<th>
+								Rooftop
+							</th>
+							<th>
+								Balcony
+							</th>
+							<th>
+								Total Acreage
+							</th>
+							<th>
+								Price Task
+							</th>
+							<th>
+								Price Material
+							</th>
+							<th>
+								Total Price
+							</th>
+						</tr>
+					</thead>
+				</table>
+
+			</div>
+		</div>
 
 		<!--Hiện 2 bảng TaskListSession và MaterialListSession -->
 		<div class="row mb-3">
@@ -180,6 +223,7 @@
 </div>
 
 @section Scripts {
+	<script src="~/js/datatables/engineerDTB/CustomQuotationBillDTB.js"></script>
 	<script src="~/js/datatables/engineerDTB/CustomQuotationTaskHistoryDTB.js"></script>
 	<script src="~/js/datatables/engineerDTB/MaterialDetailHistoryDTB.js"></script>
 }
