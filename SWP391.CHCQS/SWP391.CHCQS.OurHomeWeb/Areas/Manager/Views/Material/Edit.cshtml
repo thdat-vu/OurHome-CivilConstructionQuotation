@@ -12,7 +12,7 @@
     <div class="card-body p-4">
         <form method="post" class="row">
             <div class="border p-3">
-                @*<div asp-validation-summary="ModelOnly"></div>*@
+                
                 <div class="form-floating py-2 col-12">
                     <input asp-for="Material.Id" class="form-control border-0 shadow" disabled/>
                     <input asp-for="Material.Id" type="hidden" />
@@ -24,21 +24,27 @@
                     <label asp-for="Material.Name" class="ms-2"></label>
                     <span asp-validation-for="Material.Name" class="text-danger"></span>
                 </div>
-                <div class="form-floating py-2 col-12">
-                    @* ***************Bug*****************
-                        <input asp-for="Material.InventoryQuantity" class="form-control border-0 shadow" />
-                    <label asp-for="Material.InventoryQuantity" class="ms-2"></label>
-                    <span asp-validation-for="Material.InventoryQuantity" class="text-danger"></span> *@
-                </div>
+                
                 <div class="form-floating py-2 col-12">
                     <input asp-for="Material.UnitPrice" class="form-control border-0 shadow" />
                     <label asp-for="Material.UnitPrice" class="ms-2"></label>
                     <span asp-validation-for="Material.UnitPrice" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="Material.Unit" class="form-control border-0 shadow" />
+                    @* <input asp-for="Material.Unit" class="form-control border-0 shadow" /> *@
+                    <select asp-for="Material.Unit" class="form-select border-0 shadow">
+                        <option disabled selected>--Select Unit--</option>
+                        <option >mét</option>
+                        <option>mét vuông</option>
+                        <option >mét khối</option>
+                        <option >tấn</option>
+                        <option>thùng</option>
+                        <option>bao</option>
+                        <option>viên</option>
+                        <option>cái</option>
+                    </select>                    
                     <label asp-for="Material.Unit" class="ms-2"></label>
-                    <span asp-validation-for="Material.Unit" class="text-danger"></span>
+                    <@* span asp-validation-for="Material.Unit" class="text-danger"></span> *@
                 </div>
                 <div class="form-floating py-2 col-12">
                     <select asp-for="Material.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
@@ -53,7 +59,7 @@
                         <button type="submit" class="btn btn-primary form-control btn-main"> Edit </button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-controller="Category" asp-action="Index" class="btn btn-outline-primary border form-control">
+                        <a asp-controller="Material" asp-action="Index" class="btn btn-outline-primary border form-control">
                             Back to List
                         </a>
                     </div>

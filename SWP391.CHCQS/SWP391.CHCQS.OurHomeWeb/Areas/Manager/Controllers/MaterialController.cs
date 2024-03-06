@@ -109,43 +109,45 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         }
 
         //Delete Action
-        //public IActionResult Delete(string? id)
-        //{
-        //    //catch null id exception
-        //    if (id == null)
-        //    {
-        //        return NotFound(); //return status not found aka 404
-        //    }
+        public IActionResult Delete(string? id)
+        {
+            //catch null id exception
+            if (id == null)
+            {
+                return NotFound(); //return status not found aka 404
+            }
 
-        //    //retrieve Material from DB
-        //    Material? materialFromDb = _unitOfWork.Material.Get(u => u.Id == id);
+            //retrieve Material from DB
+            Material? materialFromDb = _unitOfWork.Material.Get(u => u.Id == id, includeProperties: "Category");
 
-        //    if( materialFromDb == null)
-        //    {
-        //        return NotFound(); //return status not found aka 404
-        //    }
-                
-        //    return View(materialFromDb); //return Delete.cshtml + materialFromDb
+            if (materialFromDb == null)
+            {
+                return NotFound(); //return status not found aka 404
+            }
+
+            return View(materialFromDb); //return Delete.cshtml + materialFromDb
 
 
-        //}
-        ////delete request HttpPost, actionname=Delete
-        //[HttpPost, ActionName("Delete")]
-        //public IActionResult DeletePOST(string? id)
-        //{
-        //    //retrieve Material from Db
-        //    Material? obj = _unitOfWork.Material.Get(u => u.Id == id);
-        //    //handle id null exception
-        //    if (obj == null)
-        //    {
-        //        return NotFound();//return status not found aka 404
-        //    }
-        
-        //    _unitOfWork.Material.Remove(obj); //just temporary
-        //    _unitOfWork.Save();//keep track on change
-        //    //TempData["success"] = "Product deleted successfully";
-        //    return RedirectToAction("Index"); //redirect to Index.cshtml
-        //}
+        }
+        //delete request HttpPost, actionname=Delete
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(string? id)
+        {
+            //retrieve Material from Db
+            Material? obj = _unitOfWork.Material.Get(u => u.Id == id);
+            //handle id null exception
+            if (obj == null)
+            {
+                return NotFound();//return status not found aka 404
+            }
+
+            //change the status in to false
+            obj.Status = false;
+            _unitOfWork.Save();//keep track on change
+            //TempData["success"] = "Product deleted successfully";
+            return RedirectToAction("Index"); //redirect to Index.cshtml
+        }
+
         //get detail HttpGet
         [HttpGet]
         [ActionName("Detail")]
@@ -168,7 +170,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		[HttpGet]
 		public IActionResult GetAll()
         {
-			List<Material> objMaterialList = _unitOfWork.Material.GetAll(includeProperties:"Category").ToList();
+            List<Material> objMaterialList = _unitOfWork.Material.GetAllWithFilter(filter: m => m.Status == true, includeProperties:"Category").ToList();
 			return Json(new { data = objMaterialList }); //json + material list for data table.
 		}
 

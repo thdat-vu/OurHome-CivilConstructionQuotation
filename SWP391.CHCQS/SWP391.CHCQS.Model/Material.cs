@@ -16,11 +16,13 @@ namespace SWP391.CHCQS.Model
         public string Id { get; set; } = null!;
         [MaxLength(100)]
         public string Name { get; set; } = null!;
+        [Display(Name = "Unit Price")]
         public decimal UnitPrice { get; set; }
         [MaxLength(30)]
         public string Unit { get; set; } = null!;
         public bool Status { get; set; }
         [MaxLength(10)]
+        [Display(Name = "Category Type")]
         public string CategoryId { get; set; } = null!;
         [ForeignKey("CategoryId")]
         public virtual MaterialCategory Category { get; set; } = null!;
