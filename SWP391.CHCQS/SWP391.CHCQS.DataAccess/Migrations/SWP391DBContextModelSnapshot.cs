@@ -934,13 +934,6 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("SWP391.CHCQS.Model.Staff", b =>
-                {
-                    b.HasBaseType("SWP391.CHCQS.Model.ApplicationUser");
-
-                    b.HasDiscriminator().HasValue("Staff");
-                });
-
             modelBuilder.Entity("ComboMaterial", b =>
                 {
                     b.HasOne("SWP391.CHCQS.Model.Combo", null)
@@ -1255,7 +1248,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
             modelBuilder.Entity("SWP391.CHCQS.Model.ApplicationUser", b =>
                 {
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Manager")
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Manager")
                         .WithMany()
                         .HasForeignKey("ManagerId");
 
