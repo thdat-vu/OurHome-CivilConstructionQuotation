@@ -73,6 +73,14 @@ namespace SWP391.CHCQS.Utility
             }
         }
 
+        //gender list
+        public enum GenderList
+        {
+            Male,
+            Female,
+            Other
+        }
+
         
     }
 }

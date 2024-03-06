@@ -23,6 +23,6 @@ namespace SWP391.CHCQS.Model
 		public string? ManagerId { get; set; } = null!;
 		[ForeignKey("ManagerId")]
 
-		public virtual Staff? Manager { get; set; } = null!;
+		public virtual ApplicationUser? Manager { get; set; } = null!;
 	}
 }

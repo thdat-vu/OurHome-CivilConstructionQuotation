@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\**" />
     <Compile Remove="SWP391.CHCQS.OurHomeWeb\**" />
-    <Content Remove="Controllers\**" />
     <Content Remove="SWP391.CHCQS.OurHomeWeb\**" />
-    <EmbeddedResource Remove="Controllers\**" />
     <EmbeddedResource Remove="SWP391.CHCQS.OurHomeWeb\**" />
-    <None Remove="Controllers\**" />
     <None Remove="SWP391.CHCQS.OurHomeWeb\**" />
   </ItemGroup>
 
@@ -47,6 +43,12 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Base\Data\" />
+    <Folder Include="Areas\Base\Models\" />
+    <Folder Include="Areas\Base\Views\" />
   </ItemGroup>
 
 </Project>

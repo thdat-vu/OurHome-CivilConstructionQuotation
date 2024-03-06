@@ -8,7 +8,13 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Model;
+using SWP391.CHCQS.Utility;
+using Task = System.Threading.Tasks.Task;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account.Manage
 {
@@ -16,13 +22,16 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IUnitOfWork _unitOfWork;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -58,6 +67,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            [Required]
+            public string Name { get; set; }
+            public string Gender { get; set; }
+
+            [ValidateNever]
+            public List<SelectListItem> GenderList { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -65,12 +80,24 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
+            var applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == user.Id);  
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Name = applicationUser.Name,
+                Gender = applicationUser.Gender,
+                GenderList = new List<SelectListItem>()
             };
+            foreach(var gender in Enum.GetValues(typeof(SD.GenderList)))
+            {
+                Input.GenderList.Add(new SelectListItem
+                {
+                    Value = gender.ToString(),
+                    Text = gender.ToString()
+                });
+            }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -88,6 +115,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+            var applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == user.Id);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -109,6 +137,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+            
+            if (Input.Name != applicationUser.Name)
+            {
+                applicationUser.Name = Input.Name;
+            }
+            applicationUser.Gender = Input.Gender;
+            _unitOfWork.ApplicationUser.Update(applicationUser);
+            _unitOfWork.Save();
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
