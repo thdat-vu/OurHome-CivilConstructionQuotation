@@ -1,4 +1,47 @@
 {
-  "CustomQuotaionTasks": [],
-  "MaterialDetails": {}
+  "TaskDetailNotes": {
+    "TSK001": "\u0111a",
+    "TSK002": "sau vay ?",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 0,
+      "Note": "123"
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT103": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
 }
+
+{
+  "TaskDetailNotes": {
+    "TSK001": "ha",
+    "TSK004": "1",
+    "TSK002": "",
+    "TSK003": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 0,
+      "Note": "qqq"
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT103": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+

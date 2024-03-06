@@ -1,4 +1,8 @@
-﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
+﻿using SWP391.CHCQS.Model;
+using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
+using SWP391.CHCQS.OurHomeWeb.Models;
+
+namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
     public class MaterialDetailListViewModel
     {
@@ -9,5 +13,6 @@
         public string? MaterialCateName { get; set; }
         public double? Quantity { get; set; }
         public decimal? Price { get; set; }
+        public KeyValuePair<string, MaterialNote> Note { get; set; }
     }
 }
