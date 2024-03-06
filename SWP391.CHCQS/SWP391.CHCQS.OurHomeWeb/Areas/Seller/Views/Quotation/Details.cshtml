@@ -1,5 +1,7 @@
 ﻿@model SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels.QuotationViewModel
-
+@{
+	ViewData["Title"] = "Details";
+}
 <div class="card mt-3 mb-3 w-100">
 
 	<div class="m-auto w-100">
@@ -23,11 +25,11 @@
 				<label><b class="text-nowrap">Date:</b></label>
 				<p>@Model.CustomQuotation.Date</p>
 			</div>
-			<div class="col-lg">
-				@* **************BUG************** 
+			@* <div class="col-lg">
+				**************BUG************** 
 					<label><b class="text-nowrap">SubmissionDateSeller:</b></label>
-				<p>@Model.CustomQuotation.SubmissionDateSeller</p> *@
-			</div>
+				<p>@Model.CustomQuotation.SubmissionDateSeller</p> 
+			</div> *@
 			<div class="col-lg">
 				<label><b class="text-nowrap">Location:</b></label>
 				<p>@Model.CustomQuotation.Location</p>
