@@ -28,24 +28,24 @@
 		<div class="row">			
 			<div class="col-lg">
 				<label><b class="text-nowrap">Type of Construction:</b></label>
-				<select asp-for="RequestForm.ConstructType" asp-items="@Model.ConstructionTypes" class="form-select">
+				<select asp-for="ConstructType" asp-items="@Model.ConstructionTypes" class="form-select">
 					<option selected disabled>-- Select Construction Type --</option>
 				</select>
 			</div>
 			<div class="col-lg">
 				<label><b>Location:</b></label>
-				<input asp-for="RequestForm.Location" class="form-control"></input>
+				<input asp-for="Location" class="form-control"></input>
 			</div>			
 			<div class="col-lg">
 				<label><b>Acreage:</b></label>
-				<input asp-for="RequestForm.Acreage" class="form-control" placeholder="0m x 0m"></input>
+				<input asp-for="Acreage" class="form-control" placeholder="0m x 0m"></input>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-sm">
 				<label><b>Description:</b></label>
-				<textarea asp-for="RequestForm.Description" rows="6" class="form-control"></textarea>
+				<textarea asp-for="Description" rows="6" class="form-control"></textarea>
 			</div>
 		</div>
 
