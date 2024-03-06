@@ -59,9 +59,13 @@ namespace SWP391.CHCQS.DataAccess.Repository
 		/// </summary>
 		/// <param name="includeProperties">the name of foreign key you want to load data, which is a comma-separated string.</param>
 		/// <returns>IEnumerable<T></returns>
-		public IEnumerable<T> GetAll(string? includeProperties = null)
+		public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (filter != null)
+            {
+				query = query.Where(filter);
+            }
             if (!string.IsNullOrEmpty(includeProperties))
             {
                 foreach (var incluProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))

@@ -1,9 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
+﻿
 @{
 	ViewData["Title"] = "Request History";
 }
@@ -14,16 +9,13 @@
 		</h3>
 		<i class="fa-solid fa-arrow-right-long"></i>
 		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Quotation" asp-action="Index">Quotation</a>
+			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="Index">Quotation</a>
 		</h3>
 		<i class="fa-solid fa-arrow-right-long"></i>
 		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Quotation" asp-action="RequestHistory">Manage Request</a>
+			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="RequestHistory">Manage Request</a>
 		</h3>
-		<i class="fa-solid fa-arrow-right-long"></i>
-		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Quotation" asp-action="RequestHistory">Request History</a>
-		</h3>
+		
 	</div>
 </div>
 
@@ -31,58 +23,43 @@
 
 <partial name="_QuotationSubNav"></partial>
 
-<div class="row img-thumbnail w-50 text-wrap m-auto text-center mt-2">
-	<div class="col">
-		<p class="m-0 text-dark">Request History</p>
+<h1 class="text-center my-4" style="color: #F27456">Request History</h1>
+
+<div class="card-body p-4">
+	<div class="table-responsive">
+		<table id="tblRequestHistory" class="table-bordered table-striped text-black" style="width:100%">
+			<thead>
+				<tr>
+					<th>
+						No.
+					</th>
+					<th>
+						Generate Date
+					</th>
+					<th>
+						Construction Type
+					</th>
+					<th>
+						Acreage
+					</th>
+					<th>
+						Location
+					</th>
+					<th>
+						Status
+					</th>
+					<th>
+						Description
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+
+		</table>
 	</div>
 </div>
 
-<div class="table-responsive">
-	<table id="tblRequestHistory" class="table table-bordered table-striped mt-3" style="width:100%">
-		<thead>
-			<tr>
-				<th>
-					Contruct Name
-				</th>
-				<th>
-					Type of Contruction
-				</th>
-				<th>
-					Location
-				</th>
-				<th>
-					Acreage
-				</th>
-				<th>
-					Date
-				</th>
-				<th>
-					Description
-				</th>
-				<th>
-
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>House's DatSung</td>
-				<td>Villa</td>
-				<td>Tra Vinh</td>
-				<td>240m2</td>
-				<td>20/1/2024</td>
-				<td>I want to build a house base on my old parent house</td>
-				<td class="text-center">
-					<div class="col-sm m-1 btn-group rounded-1"  role="group">
-						<a asp-area="Customer" asp-controller="Quotation" asp-action="ViewResponse" class="btn btn-main">Response</a>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-
-	</table>
-</div>
 
 @section Scripts {
-	<script src="~/js/datatables/quotation.js"></script>
+	<script src="~/js/datatables/customerDTB/RequestDTB.js"></script>
 }

@@ -15,8 +15,6 @@ namespace SWP391.CHCQS.Model
         [Required]
         public string Name { get; set; } = null!;
 
-        [MaxLength(100)]
-        public string? Email { get; set; }
         [MaxLength(10)]
         public string? Gender { get; set; }
 
