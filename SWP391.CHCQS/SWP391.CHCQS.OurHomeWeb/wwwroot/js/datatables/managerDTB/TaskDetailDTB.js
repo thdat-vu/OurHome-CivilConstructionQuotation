@@ -12,20 +12,25 @@ function loadDataTaskDetail() {
             {
                 data: "taskId",
                 "render": function (data) {
-                    return `<a href="/Manager/Task/Detail?id=${data}" >${data}</a>`
+                    return `<a class="text-main text-pointer" onClick="ShowTaskDetail('/Engineer/Task/Detail?TaskId=${data}')" >${data}</a>`
                 },
-                "width": "5%"
             },
-            { data: 'taskName', "width": "15%" },
-            { data: 'price', "width": "15%" },
+            { data: 'taskName' },
+            { data: 'price'},
             {
-                data: "quoteId",
+                data: "taskId",
                 "render": function (data) {
-                    return `<div class="w-100 btn-group" role="group">
-                       <a href="/Manager/CustomQuotation/GetDetail?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i>Delete</a>
-                    </div >`
+                    // Generate a unique form ID using the material ID
+                    var formId = 'updateQuantityForm' + data;
+
+                    return `<form class="text-nowrap" id="${formId}" method="post">
+                       <textarea name="${data}" placeholder="The reason in case of rejection" class="form-control" id="textAreaExample1" rows="4"></textarea>
+                        <input type="text" name="MaterialId" hidden value="${data}">
+                        <button class="btn-main text-nowrap border-0 rounded p-1 w-100 type="button" onclick="UpdateMaterialQuantity('/Engineer/Material/UpdateQuantity', '${formId}')">
+                         <i class="bi bi-check-lg">Note</i>
+                        </button>
+                    </form>`
                 },
-                "width": "15%"
             }
         ]
     });

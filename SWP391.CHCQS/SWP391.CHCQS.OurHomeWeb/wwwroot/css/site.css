@@ -56,7 +56,13 @@ body {
     padding: 2px 4px;
     font-size: 12px;
 }
-
+#tblTaskDetail {
+    padding: 2px 4px;
+    font-size: 12px;
+}
+#tblTaskDetail_wrapper label {
+    font-size: 12px;
+}
 #tblMaterialDetail td, th {
     padding: 2px 4px;
     font-size: 12px;

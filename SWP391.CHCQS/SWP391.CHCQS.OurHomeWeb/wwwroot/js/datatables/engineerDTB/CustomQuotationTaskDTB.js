@@ -37,16 +37,19 @@ function DeleteTaskFromQuote(url) {
             if (!data.success) {
                 dataTableCQT.ajax.reload();
                 dataTableT.ajax.reload();
+                dataTableCQB.ajax.reload();
                 toastr.error(data.message);
             } else {
                 dataTableCQT.ajax.reload();
                 dataTableT.ajax.reload();
+                dataTableCQB.ajax.reload();
                 toastr.success(data.message);
             }
         },
         error: function (data) {
             dataTableCQT.ajax.reload();
             dataTableT.ajax.reload();
+            dataTableCQB.ajax.reload();
             toastr.error(data.message);
         }
     });

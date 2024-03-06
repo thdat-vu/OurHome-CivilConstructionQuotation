@@ -213,10 +213,42 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
             }
 
             //Send notification to Manager
-
-
+            await _hubContext.Clients.All.SendAsync("RecieveQuotationFromEngineer", "Engineer", "You was recieve a new Quotation");
             //Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
             return Json(new { success = true, message = $"Send quotation successfully with Id = {QuotationId}" });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetQuotationBill()
+        {
+            //Asign TaskListSession for taskCart;
+            var taskCart = TaskListSession;
+
+            //Asign MaterialListSession for materialCart
+            var materialCart = MaterialListSession;
+
+            //move item from taskCart(ViewModel) to CustomQuotationTask(Model) to add to database 
+            List<TaskDetail> taskDetails = taskCart.Select(t => new TaskDetail
+            {
+                TaskId = t.Task.Id,
+                QuotationId = t.QuotationId,
+                Price = t.Price,
+            }).ToList();
+
+            //move item from materialCart(ViewModel) to MaterialDetail(Model) to add to database 
+            List<MaterialDetail> materialDetails = materialCart.Select(m => new MaterialDetail
+            {
+                MaterialId = m.Material.Id,
+                QuotationId = m.QuotationId,
+                Quantity = m.Quantity,
+                Price = m.Price,
+            }).ToList();
+
+            List<CustomQuotationBillViewModel> customQuotationBillVMList = new();
+            CustomQuotationBillViewModel bill = CalculateQuotationTotalPrice(CustomQuotationSession.Id, taskDetails, materialDetails);
+
+			customQuotationBillVMList.Add(bill);
+			return Json(new { data = customQuotationBillVMList });
         }
 
 
@@ -451,7 +483,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
                 var customQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == CustomQuotationSession.Id);
 
                 //Calculate Total of the Quotation
-                customQuotation.Total = CalculateQuotationTotalPrice(CustomQuotationSession.Id, taskDetails, materialDetails);
+                customQuotation.Total = CalculateQuotationTotalPrice(CustomQuotationSession.Id, taskDetails, materialDetails).TotalPrice;
 
                 _unitOfWork.CustomQuotation.Update(customQuotation);
 
@@ -555,27 +587,35 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
         /// <param name="taskDetails">Task list of quotation</param>
         /// <param name="materialDetails">Material list of quotation</param>
         /// <returns></returns>
-        public decimal CalculateQuotationTotalPrice(string QuotationId, List<TaskDetail> taskDetails, List<MaterialDetail> materialDetails)
+        public CustomQuotationBillViewModel CalculateQuotationTotalPrice(string QuotationId, List<TaskDetail> taskDetails, List<MaterialDetail> materialDetails)
         {
-            decimal result = 0;
+            var result = new CustomQuotationBillViewModel();
 
             //Get contrucdetail to gain infor for calculated
             ConstructDetail constructDetail = _unitOfWork.ConstructDetail.Get(x => x.QuotationId == QuotationId, includeProperties: "Foundation,Rooftop,Basement");
 
-            //Get acreage of contruction
-            var acreage = constructDetail.Width * constructDetail.Length;
-
             //Get price on one meter.
-            var priceOnMeters = (decimal)_unitOfWork.Pricing.Get(x => x.ConstructTypeId == constructDetail.ConstructionId && x.InvestmentTypeId == constructDetail.InvestmentId).UnitPrice;
+            result.PriceOnAcreage = (decimal)_unitOfWork.Pricing.Get(x => x.ConstructTypeId == constructDetail.ConstructionId && x.InvestmentTypeId == constructDetail.InvestmentId).UnitPrice;
 
-            //Get price of tasks and materils on quotation
-            var totalPriceTaskAndMaterial = (decimal)materialDetails.Sum(x => x.Price) + taskDetails.Sum(x => x.Price);
 
-            //total acreage to calculate with priceOnMeters
-            var totalFactor = (decimal)(constructDetail.Basement.AreaFactor + constructDetail.Foundation.AreaFactor + constructDetail.Rooftop.AreaFactor) * acreage * constructDetail.Floor;
+            result.Acreage = (decimal)(constructDetail.Length * constructDetail.Width);
+
+            result.FoundationAcreage = (decimal)(result.Acreage * constructDetail.Foundation.AreaFactor);
+
+            result.BasementAcreage = (decimal)(result.Acreage * constructDetail.Basement.AreaFactor);
+
+            result.BalconyAcreage = (constructDetail.Balcony == false) ? 0 : ((decimal)0.3 * (decimal)(constructDetail.Floor * result.Acreage));
+
+            result.TotalPriceMaterial = (decimal)materialDetails.Sum(x => x.Price);
+
+            result.TotalPriceTask = (decimal)taskDetails.Sum(x => x.Price);
+
+            result.RooftopAcreage = (decimal)(result.Acreage * constructDetail.Rooftop.AreaFactor);
+
+            result.TotalAcreage = (decimal)(result.Acreage * constructDetail.Floor + constructDetail.Mezzanine + constructDetail.RooftopFloor + constructDetail.Garden + result.FoundationAcreage + result.BalconyAcreage + result.RooftopAcreage + result.BasementAcreage);
 
             //result equal to price on 1 meter multiply with total acreage and plus with price of tasks and materials
-            result = priceOnMeters * totalFactor + totalPriceTaskAndMaterial;
+            result.TotalPrice = result.PriceOnAcreage * result.TotalAcreage + result.TotalPriceMaterial + result.TotalPriceTask;
 
             //return result after calculated
             return result;
