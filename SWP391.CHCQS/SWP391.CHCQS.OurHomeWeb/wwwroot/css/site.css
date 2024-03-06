@@ -1,4 +1,4 @@
-html {
+﻿html {
     font-size: 14px;
 }
 
@@ -84,7 +84,7 @@ body {
 }
 
 
-/*Stype for toast notification*/
+/*Style for toast notification*/
 .toast-success {
     color: white;
     border: none !important;
@@ -92,4 +92,32 @@ body {
 
     .toast-success:hover {
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+    }
+
+/* Style for login logout button */
+.btn {
+    color: white !important; 
+}
+
+    .btn.login {
+        color: #F27456 !important;
+        background-color: white !important;
+        border: 1px solid;
+    }
+
+    .btn.register {
+        background-color: #F27456 !important;
+        border: 1px solid;
+    }
+
+    .btn.login:hover {
+        color: white !important;
+        background-color: #F27456 !important;
+        transition: ease 0.3s;
+    }
+
+    .btn.register:hover {
+        color: #F27456 !important;
+        background-color: white !important;
+        transition: ease 0.3s;
     }
