@@ -213,8 +213,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
             }
 
             //Send notification to Manager
-
-
+            await _hubContext.Clients.All.SendAsync("RecieveQuotationFromEngineer", "Engineer", "You was recieve a new Quotation");
             //Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
             return Json(new { success = true, message = $"Send quotation successfully with Id = {QuotationId}" });
         }
