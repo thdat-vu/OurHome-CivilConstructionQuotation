@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.CodeAnalysis;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels;
+using SWP391.CHCQS.Services.NotificationHub;
 using SWP391.CHCQS.Utility;
 using System.Text.Json;
 
@@ -13,10 +15,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
     public class QuotationController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
-        public QuotationController(IUnitOfWork unitOfWork)
+        public QuotationController(IUnitOfWork unitOfWork, IHubContext<NotificationHub> hubContext)
         {
             _unitOfWork = unitOfWork;
+            _hubContext = hubContext;
         }
 
 
@@ -119,6 +123,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 
 
 				TempData["success"] = "Construct Detail created successfully";
+                _hubContext.Clients.All.SendAsync("RecieveQuotationFromSeller");
                 return RedirectToAction("ViewQuotation", "Quotation");
             }
             else
