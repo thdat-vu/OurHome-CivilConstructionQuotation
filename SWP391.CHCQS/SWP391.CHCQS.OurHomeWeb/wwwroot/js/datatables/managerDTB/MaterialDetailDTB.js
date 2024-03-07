@@ -10,7 +10,6 @@ $(document).ready(function () {
 //Need an api method return json to use this
 function loadDataMaterialDetail() {
     dataTableCQ = $('#tblMaterialDetail').DataTable({
-        "serverSide": true,
         "ajax": { url: '/Manager/MaterialDetail/GetDetail' },
         "columns": [
             {

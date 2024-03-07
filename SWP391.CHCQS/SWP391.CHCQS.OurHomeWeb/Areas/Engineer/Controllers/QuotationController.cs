@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
+using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
 using SWP391.CHCQS.Services.NotificationHub;
 using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
@@ -28,6 +29,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		//Declare _uniteOfWork represent to DBContext to get Data form Database.
 		private readonly IUnitOfWork _unitOfWork;
 
+		private readonly IWebHostEnvironment _environment;
+
 		//Declare NotificationHub
 		private readonly IHubContext<NotificationHub> _hubContext;
 
@@ -42,10 +45,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 
 		//Constructor of this Controller
-		public QuotationController(IUnitOfWork unitOfWork, IHubContext<NotificationHub> hubContext)
+		public QuotationController(IUnitOfWork unitOfWork, IHubContext<NotificationHub> hubContext, IWebHostEnvironment environment)
 		{
 			_unitOfWork = unitOfWork;
 			_hubContext = hubContext;
+			_environment = environment;
 		}
 
 
@@ -431,6 +435,117 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			return View(constructDetailVM);
 		}
 
+		/// <summary>
+		/// This function return a form to add Task and Material to CustomQuotation represent CustomQuotationTask and MaterialDetail.
+		/// </summary>
+		/// <returns>A view create quotation form</returns>
+		public async Task<IActionResult> Retake(string QuotationId)
+		{
+			//Update RecieveDateEngineer 
+			try
+			{
+				var customQuotation = _unitOfWork.CustomQuotation
+					.Get(x => x.Id == QuotationId);
+				var workingReport = _unitOfWork.WorkingReport
+					.Get(wr => wr.StaffId == GetCurrentUserId() && wr.RequestId == customQuotation.RequestId);
+				if (workingReport != null)
+					if (workingReport.ReceiveDate == null)
+						workingReport.ReceiveDate = DateTime.Now;
+				_unitOfWork.WorkingReport.Update(workingReport);
+				_unitOfWork.Save();
+			}
+			catch (Exception)
+			{
+				TempData["Error"] = $"Something went wrong!";
+				return RedirectToAction("Index", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			}
+
+			//Declare constructDetail get data form Database by using _unitOfWork
+			var constructDetail = _unitOfWork.ConstructDetail.Get(filter: c => c.QuotationId == QuotationId, includeProperties: "Construction,Investment,Foundation,Rooftop,Basement");
+
+			//Check if constructDetail or customQuotationViewModel. Id not in database is true, it return error view. If not, is will execute next code.
+			if (constructDetail == null)
+			{
+				TempData["Error"] = $"Quotation not found";
+				return RedirectToAction("Index", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+			}
+
+			//Declare view model to set into Session CustomQuotationSession
+			CustomQuotationListViewModel customQuotationViewModel = new CustomQuotationListViewModel();
+
+			//Get only id of customQuotationViewMode from database by using _unitOfWork
+			customQuotationViewModel.Id = _unitOfWork.CustomQuotation.Get(x => x.Id == QuotationId).Id;
+
+			//Check if constructDetail or customQuotationViewModel.Id not in database is true, it return error view. If not, is will execute next code.
+			if (constructDetail == null || customQuotationViewModel.Id == null)
+			{
+				return RedirectToAction("Error", "Home");
+			}
+
+
+			//projection data constructDetail to constructDetailVM
+			ConstructDetailViewModel constructDetailVM = new ConstructDetailViewModel
+			{
+				QuotationId = constructDetail.QuotationId,
+				Width = constructDetail.Width,
+				Length = constructDetail.Length,
+				Facade = constructDetail.Facade,
+				Alley = constructDetail.Alley,
+				Floor = constructDetail.Floor,
+				Room = constructDetail.Room,
+				Mezzanine = constructDetail.Mezzanine,
+				RooftopFloor = constructDetail.RooftopFloor,
+				Balcony = constructDetail.Balcony,
+				Garden = constructDetail.Garden,
+				ConstructionTypeName = constructDetail.Construction.Name,
+				InvestmentTypeName = constructDetail.Investment.Name,
+				FoundationTypeName = constructDetail.Foundation.Name,
+				RooftopTypeName = constructDetail.Rooftop.Name,
+				BasementTypeName = constructDetail.Basement.Name
+			};
+
+			//Set customQuotationViewModel after exist in database into CustomQuotationSession
+			HttpContext.Session.Set(SessionConst.CUSTOM_QUOTATION_KEY, customQuotationViewModel);
+
+			//Asign TaskListSession for taskCart;
+			var taskCart = TaskListSession;
+
+			//if taskCart == null mean the taskCart have no task in there
+			if (taskCart.Count == 0)
+			{
+				taskCart = _unitOfWork.TaskDetail.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task").Select(x => new TaskDetailViewModel
+				{
+					Task = x.Task,
+					QuotationId = x.QuotationId,
+					Price = x.Price,
+				}).ToList();
+			}
+
+			//Update TaskListSession with taskCart  
+			HttpContext.Session.Set(SessionConst.TASK_LIST_KEY, taskCart);
+
+			//Asign MaterialListSession for materialCart;
+			var materialCart = MaterialListSession;
+
+			//if materialCart == null mean the taskCart have no task in there
+			if (materialCart.Count == 0)
+			{
+				materialCart = _unitOfWork.MaterialDetail.GetMaterialDetail(CustomQuotationSession.Id, includeProp: "Material").Select(x => new MaterialDetailViewModel
+				{
+					Material = x.Material,
+					QuotationId = x.QuotationId,
+					Quantity = x.Quantity,
+					Price = x.Price,
+				}).ToList();
+			}
+
+			//Update MaterialListSession with materialCart  
+			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
+
+			//return View of this Controller after nothing wrong.
+			return View(constructDetailVM);
+		}
+
 
 		/// <summary>
 		/// This function will add the TaskList and MaterialList of the Quote into Database
@@ -654,6 +769,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 		#endregion ============ FUNCTIONS 
 
+
+		public async Task<IActionResult> Test()
+		{
+			var pathCreater = new PathCreater(_environment);
+			string targetFolder = pathCreater.CreateFilePathInRoot(CustomQuotationSession.Id.Trim() + ".txt", "reject-quotation-file");
+			var reason = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
+			return Json(new { data = reason });
+		}
 
 	}
 }

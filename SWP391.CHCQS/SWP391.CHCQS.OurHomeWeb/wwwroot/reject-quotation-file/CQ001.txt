@@ -1,0 +1,34 @@
+{
+  "TaskDetailNotes": {
+    "TSK001": "Qu\u00E1 m\u1EAFt kh\u00F4ng ch\u1ED1t \u0111\u01B0\u1EE3c \u0111\u00E2u",
+    "TSK002": "V\u1EC7 sinh m\u1EB7t b\u1EB1ng t\u1EADn 4960000 \u00E0"
+  },
+  "MaterialDetailNotes": {
+    "VT1001": {
+      "Quantity": 0,
+      "Note": "S\u1EAFt th\u00E9p vi\u1EC7t Nh\u1EADt r\u1EA5t k\u00E9m ch\u1ECBu l\u1EF1c"
+    },
+    "VT1002": {
+      "Quantity": 0,
+      "Note": "xi m\u0103ng holcim b\u00E1n kh\u00F4ng l\u1EDDi, y\u00EAu c\u00E2u t\u0103ng th\u00EAm 1000 bao n\u1EEFa"
+    }
+  }
+}
+
+{
+  "TaskDetailNotes": {
+    "TSK001": "Qu\u00E1 m\u1EAFt kh\u00F4ng ch\u1ED1t \u0111\u01B0\u1EE3c \u0111\u00E2u",
+    "TSK002": "V\u1EC7 sinh m\u1EB7t b\u1EB1ng t\u1EADn 4960000 \u00E0"
+  },
+  "MaterialDetailNotes": {
+    "VT1001": {
+      "Quantity": 0,
+      "Note": "S\u1EAFt th\u00E9p vi\u1EC7t Nh\u1EADt r\u1EA5t k\u00E9m ch\u1ECBu l\u1EF1c"
+    },
+    "VT1002": {
+      "Quantity": 0,
+      "Note": "xi m\u0103ng holcim b\u00E1n kh\u00F4ng l\u1EDDi, y\u00EAu c\u00E2u t\u0103ng th\u00EAm 1000 bao n\u1EEFa"
+    }
+  }
+}
+
