@@ -10,7 +10,7 @@
 		<div class="mt-3 mb-5 w-100 m-auto">
 			<div class="row mt-3">
 				<div class="ml-3 rounded-1 float-left">
-					<a onClick="BackToIndex('/Engineer/Quotation/Index')" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Back</a>
+					<a onClick="BackToIndex('/Engineer/Quotation/Rejected')" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Back</a>
 				</div>
 			</div>
 			<h3 class="text-center"><b>Construct Detail</b></h3>
@@ -129,50 +129,45 @@
 			</div>
 		</div>
 
-		<!-- Reason -->
+		<!-- Reason Reject -->
 		<div class="row mb-3">
-			<div class="table-responsive">
+			<div class="col">
+				<div class="card shadow border-0">
+					<div class="card-header bg-main">
+						<div class="row">
+							<div class="col-12 text-center">
+								<h2 class="text-white m-0">Tasks of Quote</h2>
+							</div>
+						</div>
+					</div>
 
-				<table id="tblCustomQuotationReason" class="table-bordered table-striped text-black" style="width:100%">
-					<thead>
-						<tr>
-							<th>
-								Price on Acreage
-							</th>
-							<th>
-								Acreage
-							</th>
-							<th>
-								Foundation
-							</th>
-							<th>
-								Basement
-							</th>
-							<th>
-								Rooftop
-							</th>
-							<th>
-								Balcony
-							</th>
-							<th>
-								Total Acreage
-							</th>
-							<th>
-								Price Task
-							</th>
-							<th>
-								Price Material
-							</th>
-							<th>
-								Total Price
-							</th>
-						</tr>
-					</thead>
-				</table>
+					<div class="card-body">
 
+						<div class="table-responsive">
+							<table id="tblCustomQuotationReason" class="table-bordered table-striped text-black" style="width:100%">
+								<thead>
+									<tr>
+										<th>
+											Id
+										</th>
+										<th>
+											Name
+										</th>
+										<th>
+											Quantity
+										</th>
+										<th>
+											Reason
+										</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+
+					</div>
+				</div>
 			</div>
 		</div>
-
 
 		<!--Hiện 2 bảng TaskListSession và MaterialListSession -->
 		<div class="row mb-3">
@@ -362,6 +357,7 @@
 
 @section Scripts {
 	<script src="~/js/datatables/engineerDTB/CustomQuotationBillDTB.js"></script>
+	<script src="~/js/datatables/engineerDTB/ReasonRejectedDTB.js"></script>
 	<script src="~/js/datatables/engineerDTB/CustomQuotationTaskDTB.js"></script>
 	<script src="~/js/datatables/engineerDTB/MaterialDetailDTB.js"></script>
 	<script src="~/js/datatables/engineerDTB/MaterialDTB.js"></script>

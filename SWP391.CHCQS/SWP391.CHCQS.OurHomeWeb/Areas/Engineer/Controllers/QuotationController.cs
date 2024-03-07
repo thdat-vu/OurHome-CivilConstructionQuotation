@@ -11,6 +11,7 @@ using SWP391.CHCQS.Services.NotificationHub;
 using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -274,6 +275,43 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			return Json(new { data = customQuotationBillVMList });
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		[HttpGet]
+		public async Task<IActionResult> GetReasonRejected()
+		{
+			try
+			{
+				var pathCreater = new PathCreater(_environment);
+				string targetFolder = pathCreater.CreateFilePathInRoot(CustomQuotationSession.Id.Trim() + ".txt", "reject-quotation-file");
+				var reasons = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
+				var reason = reasons.LastOrDefault();
+
+				List<ReasonRejectViewModel> taskRejectReason = reason.TaskDetailNotes.Select(x => new ReasonRejectViewModel
+				{
+					Id = x.Key,
+					Name = _unitOfWork.Task.GetName(x.Key),
+					Reason = x.Value,
+				}).ToList();
+
+				List<ReasonRejectViewModel> materialRejectReason = reason.MaterialDetailNotes.Select(x => new ReasonRejectViewModel
+				{
+					Id = x.Key,
+					Name = _unitOfWork.Material.GetName(x.Key),
+					Quantity = x.Value.Quantity,
+					Reason = x.Value.Note,
+				}).ToList();
+
+				List<ReasonRejectViewModel> reasonRejects = taskRejectReason.Concat(materialRejectReason).ToList();
+				return Json(new { data = reasonRejects });
+			}
+			catch
+			{
+				return Json(new { data = "" });
+			}
+		}
 
 		#endregion ============ API ============
 
@@ -633,7 +671,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				TempData["Success"] = $"Submit quote successfully";
 
 				//Return back to Index of QuotationController
-				return View("Index", "Quotation");
+				if (customQuotation.Status == SD.Rejected)
+				{
+					return RedirectToAction("Rejected", "Quotation");
+				}
+
+				return RedirectToAction("Index", "Quotation");
 			}
 			catch (Exception)
 			{
@@ -769,14 +812,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 		#endregion ============ FUNCTIONS 
 
-
-		public async Task<IActionResult> Test()
-		{
-			var pathCreater = new PathCreater(_environment);
-			string targetFolder = pathCreater.CreateFilePathInRoot(CustomQuotationSession.Id.Trim() + ".txt", "reject-quotation-file");
-			var reason = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
-			return Json(new { data = reason });
-		}
 
 	}
 }
