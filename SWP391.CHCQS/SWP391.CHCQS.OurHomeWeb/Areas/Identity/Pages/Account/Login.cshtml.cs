@@ -26,7 +26,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IHubContext<NotificationHub> _hubContext;
         private readonly IUnitOfWork _unitOfWork;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
@@ -35,14 +34,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             ILogger<LoginModel> logger, 
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            IUnitOfWork unitOfWork, IHubContext<NotificationHub> hubContext)
+            IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _unitOfWork = unitOfWork;
             _signInManager = signInManager;
             _logger = logger;
-            _hubContext = hubContext;
         }
 
         /// <summary>
@@ -135,8 +133,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
                                         
                     var user = await _userManager.FindByEmailAsync(Input.Email);
                     var role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
-
-                    _hubContext.Clients.All.SendAsync("OnConnection");
 
                     return RedirectToAction("Index", "Home", new { area = role });
                     

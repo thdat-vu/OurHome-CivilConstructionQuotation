@@ -40,9 +40,8 @@ connection.on("RecieveQuotationFromSeller", function (user, message) {
 
 connection.on("RecieveRequestFromCustomer", function (user, message) {
     //Your datatable need to reload
-    //dataTableCQ.ajax.reload();
+    dataTableRQ.ajax.reload();
     //toastr.success(`${user}: ${message}`);
-    console.log("Reload" + user + message);
 });
 
 

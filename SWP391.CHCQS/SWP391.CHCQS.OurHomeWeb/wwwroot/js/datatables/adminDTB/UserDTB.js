@@ -1,4 +1,4 @@
-﻿
+﻿var dataTable;
 $(document).ready(function () {
     loadDataTableRequest();
 });
@@ -13,16 +13,56 @@ function loadDataTableRequest() {
             { data: 'gender', "width": "10%" },
             { data: 'phoneNumber', "width": "15%" },
             { data: 'manager.name', "width": "15%" },
-            { data: '', "width": "15%"},
+            { data: 'role', "width": "15%"},
             {
-                data: 'requestId',
+                data: { id: "id", lockoutEnd: "lockoutEnd"},
                 "render": function (data) {
-                    return `<div class="w-100 btn-group" role="group">
-                       <a href="/Customer/Request/ViewResponse?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Response</a>
-                    </div >`
-                },
-                "width": "20%"
+                    var today = new Date().getTime();
+                    var lockout = new Date(data.lockoutEnd).getTime();
+                    if (lockout > today) {
+                        // user is currently locked
+                        return `
+                            <div class="text-center">
+                                <a onclick=LockUnlock('${data.id}') class = "btn btn-danger text-white" style="cursor:pointer; width:100px;">
+                                    <i class="bi bi-lock-fill"></i> Lock
+                                </a>
+                                <a href="/admin/user/RoleManagement?userId=${data.id}" class = "btn btn-danger text-white" style="cursor:pointer; width:150px;">
+                                    <i class="bi bi-pencil-square"></i> Permission
+                                </a>
+                            </div>
+                        `;
+                    }
+                    else {
+                        return `
+                            <div class="text-center">
+                                <a onclick=LockUnlock('${data.id}') class = "btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                    <i class="bi bi-unlock-fill"></i> Unlock
+                                </a>
+                                <a href="/admin/user/RoleManagement?userId=${data.id}" class = "btn btn-danger text-white" style="cursor:pointer; width:150px;">
+                                    <i class="bi bi-pencil-square"></i> Permission
+                                </a>
+                            </div>
+                        `;
+                    }
+                }
             }
         ]
+    });
+}
+function LockUnlock(id) {
+    $.ajax({
+        type: "POST",
+        url: '/Admin/User/LockUnlock',
+        data: JSON.stringify(id),
+        contentType: "application/json",
+        success: function (data) {
+            if (data.success) {
+                toastr.success(data.message);
+                dataTable.ajax.reload();
+            }
+            else {
+                toastr.error(data.message);
+            }
+        }
     });
 }
