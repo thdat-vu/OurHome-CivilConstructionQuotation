@@ -406,8 +406,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                 if (role.First() == SD.Role_Manager)
                     pdf.ManagerName = staff.Name;
             }
-
-            pdf.CustomerName = _unitOfWork.Customer.Get((x) => x.Id == info.Request.CustomerId).Name;
+            //Lỗi đây nè ~ 
+            //pdf.CustomerName = _unitOfWork.Customer.Get((x) => x.Id == info.Request.CustomerId).Name;
+            //sửa lại lấy dc tên khách hàng ra
+            pdf.CustomerName = (_userManager.FindByIdAsync(info.Request.CustomerId).GetAwaiter().GetResult() as ApplicationUser).Name;
             //tiên hành lấy taskdetail và materialdetail
             pdf.Tasks = new List<TaskDetail>(_unitOfWork.TaskDetail.GetAllWithFilter((x) => x.QuotationId == info.Id, "Task"));
             pdf.Materials = new List<MaterialDetail>(_unitOfWork.MaterialDetail.GetAllWithFilter((x) => x.QuotationId == info.Id, "Material"));
