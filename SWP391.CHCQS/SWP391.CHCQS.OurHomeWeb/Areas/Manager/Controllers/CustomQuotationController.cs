@@ -518,6 +518,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             var test = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
             return Json(new { data = test });
         }
+        public IActionResult Test2()
+        {
+            var test = AppState.Instance(_userManager).GetDelegationIndex();
+            return Json(new { data = test });
+        }
     }
 }
 
