@@ -67,15 +67,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 			var delegationService = AppState.Instance(_userManager).GetDelegationIndex();
 			var sellerId = _userManager.GetUsersInRoleAsync(SD.Role_Seller)
 				.GetAwaiter().GetResult()
-				.SkipWhile((entity,index) => index < delegationService.Item1)
+				.SkipWhile((entity,index) => index < delegationService.Item1 -1)
 				.FirstOrDefault().Id;
 			var engineerId = _userManager.GetUsersInRoleAsync(SD.Role_Engineer)
 				.GetAwaiter().GetResult()
-				.SkipWhile((entity, index) => index < delegationService.Item2)
+				.SkipWhile((entity, index) => index < delegationService.Item2 -1)
 				.FirstOrDefault().Id;
 			var managerId = _userManager.GetUsersInRoleAsync(SD.Role_Manager)
 				.GetAwaiter().GetResult()
-				.SkipWhile((entity, index) => index < delegationService.Item3)
+				.SkipWhile((entity, index) => index < delegationService.Item3 -1)
 				.FirstOrDefault().Id;
 			var sellerReport = new WorkingReport
 			{
