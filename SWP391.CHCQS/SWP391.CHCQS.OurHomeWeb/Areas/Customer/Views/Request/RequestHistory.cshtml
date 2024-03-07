@@ -1,65 +1,73 @@
-﻿
-@{
-	ViewData["Title"] = "Request History";
+﻿@{
+    ViewData["Title"] = "Request History";
 }
 <div class="d-flex img-thumbnail justify-content-center">
-	<div class="d-flex align-items-center">
-		<h3 class="p-3">
-			<a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
-		</h3>
-		<i class="fa-solid fa-arrow-right-long"></i>
-		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="Index">Quotation</a>
-		</h3>
-		<i class="fa-solid fa-arrow-right-long"></i>
-		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="RequestHistory">Manage Request</a>
-		</h3>
-		
-	</div>
+    <div class="d-flex align-items-center">
+        <h3 class="p-3">
+            <a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+        </h3>
+        <i class="fa-solid fa-arrow-right-long"></i>
+        <h3 class="p-3">
+            <a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="Index">Quotation</a>
+        </h3>
+        <i class="fa-solid fa-arrow-right-long"></i>
+        <h3 class="p-3">
+            <a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="RequestHistory">Manage Request</a>
+        </h3>
+
+    </div>
 </div>
 
 <hr></hr>
 
 <partial name="_QuotationSubNav"></partial>
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-main ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Request History</h2>
+            </div>
+        </div>
+    </div>
 
-<h1 class="text-center my-4" style="color: #F27456">Request History</h1>
+    <div class="card-body p-4">
+        <div class="table-responsive">
+            <table id="tblRequestHistory" class="table-bordered table-striped text-black" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            No.
+                        </th>
+                        <th>
+                            Generate Date
+                        </th>
+                        <th>
+                            Construction Type
+                        </th>
+                        <th>
+                            Acreage
+                        </th>
+                        <th>
+                            Location
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
 
-<div class="card-body p-4">
-	<div class="table-responsive">
-		<table id="tblRequestHistory" class="table-bordered table-striped text-black" style="width:100%">
-			<thead>
-				<tr>
-					<th>
-						No.
-					</th>
-					<th>
-						Generate Date
-					</th>
-					<th>
-						Construction Type
-					</th>
-					<th>
-						Acreage
-					</th>
-					<th>
-						Location
-					</th>
-					<th>
-						Status
-					</th>
-					<th>
-						Description
-					</th>
-					<th></th>
-				</tr>
-			</thead>
-
-		</table>
-	</div>
+            </table>
+        </div>
+    </div>
 </div>
 
 
 @section Scripts {
-	<script src="~/js/datatables/customerDTB/RequestDTB.js"></script>
+    <script src="~/js/datatables/customerDTB/RequestDTB.js"></script>
 }
