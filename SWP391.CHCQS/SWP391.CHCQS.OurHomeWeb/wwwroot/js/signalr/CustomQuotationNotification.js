@@ -33,7 +33,7 @@ connection.on("RecieveQuotationFromEngineer", function (user, message) {
 
 connection.on("RecieveQuotationFromSeller", function (user, message) {
     //Your datatable need to reload
-    //dataTableCQ.ajax.reload();
+    dataTableCQ.ajax.reload();
     //toastr.success(`${user}: ${message}`);
     console.log("Reload" + user + message);
 });
