@@ -15,6 +15,7 @@ using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
 using System.Composition;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 
 using EmailSender = SWP391.CHCQS.Utility.Helpers.EmailSender;
@@ -61,6 +62,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                 .Select(x => x.RequestId)
                 .Distinct()
                 .ToList();
+            requestIdList = _unitOfWork.CustomQuotation.GetAllWithFilter(x => requestIdList.Any(r => r == x.RequestId)).Select(x => x.RequestId).ToList();
+
             List<WorkingReport> workingReports = null;
             //khai báo list giữ các customquotationVm
             List<CustomQuotationListViewModel> customQuotationViewModels = new List<CustomQuotationListViewModel>();
