@@ -13,6 +13,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 		public string Location { get; set; }
 		public string Scale { get; set; }
 		public string Size { get; set; }
+		public bool Status { get; set; }
 		public string? Description { get; set; }
 		public string? Overview { get; set; }
 		public DateTime Date { get; set; }

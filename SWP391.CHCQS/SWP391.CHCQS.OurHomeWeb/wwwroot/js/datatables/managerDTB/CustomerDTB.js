@@ -43,7 +43,7 @@ function fillFormFields(customerId) {
             var customer = data;
 
             // Fill in the form fields with customer details
-            $('#Name').val(customer.name);
+            $('#CustomerName').val(customer.name);
             $('#CustomerId').val(customer.id);
         },
         error: function (error) {

@@ -1,5 +1,86 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model ProjectVM
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-main ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Material</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border p-3">
+                @*<div asp-validation-summary="ModelOnly"></div>*@
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Id" class="form-control border-0 shadow" disabled />
+                    <input asp-for="Id" type="hidden" />
+                    <label asp-for="Id" class="ms-2"></label>
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Name" class="form-control border-0 shadow" />
+                    <label asp-for="Name" class="ms-2"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Location" class="form-control border-0 shadow" />
+                    <label asp-for="Location" class="ms-2"></label>
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Scale" class="form-control border-0 shadow" />
+                    <label asp-for="Scale" class="ms-2"></label>
+                    <span asp-validation-for="Scale" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Size" class="form-control border-0 shadow" />
+                    <label asp-for="Size" class="ms-2"></label>
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Description" class="form-control border-0 shadow" />
+                    <label asp-for="Description" class="ms-2"></label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Overview" class="form-control border-0 shadow" />
+                    <label asp-for="Overview" class="ms-2"></label>
+                    <span asp-validation-for="Overview" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Date" class="form-control border-0 shadow" />
+                    <label asp-for="Date" class="ms-2"></label>
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="CustomerId" class="form-control border-0 shadow" />
+                    <label asp-for="CustomerId" class="ms-2"></label>
+                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="CustomerName" class="form-control border-0 shadow" />
+                    <label asp-for="CustomerName" class="ms-2"></label>
+                    <span asp-validation-for="CustomerName" class="text-danger"></span>
+                </div>
+
+                
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control btn-main"> Edit </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="StandardQuotation" asp-action="Index" class="btn btn-outline-primary border form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+
+</div>
