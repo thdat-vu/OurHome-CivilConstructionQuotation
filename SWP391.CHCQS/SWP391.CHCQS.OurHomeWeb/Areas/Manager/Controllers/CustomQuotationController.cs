@@ -15,6 +15,7 @@ using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
 using System.Composition;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 
 using EmailSender = SWP391.CHCQS.Utility.Helpers.EmailSender;
@@ -61,6 +62,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                 .Select(x => x.RequestId)
                 .Distinct()
                 .ToList();
+            requestIdList = _unitOfWork.CustomQuotation.GetAllWithFilter(x => requestIdList.Any(r => r == x.RequestId)).Select(x => x.RequestId).ToList();
+
             List<WorkingReport> workingReports = null;
             //khai báo list giữ các customquotationVm
             List<CustomQuotationListViewModel> customQuotationViewModels = new List<CustomQuotationListViewModel>();
@@ -406,8 +409,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                 if (role.First() == SD.Role_Manager)
                     pdf.ManagerName = staff.Name;
             }
-
-            pdf.CustomerName = _unitOfWork.Customer.Get((x) => x.Id == info.Request.CustomerId).Name;
+            //Lỗi đây nè ~ 
+            //pdf.CustomerName = _unitOfWork.Customer.Get((x) => x.Id == info.Request.CustomerId).Name;
+            //sửa lại lấy dc tên khách hàng ra
+            pdf.CustomerName = (_userManager.FindByIdAsync(info.Request.CustomerId).GetAwaiter().GetResult() as ApplicationUser).Name;
             //tiên hành lấy taskdetail và materialdetail
             pdf.Tasks = new List<TaskDetail>(_unitOfWork.TaskDetail.GetAllWithFilter((x) => x.QuotationId == info.Id, "Task"));
             pdf.Materials = new List<MaterialDetail>(_unitOfWork.MaterialDetail.GetAllWithFilter((x) => x.QuotationId == info.Id, "Material"));
@@ -514,6 +519,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             var pathCreater = new PathCreater(_environment);
             string targetFolder = pathCreater.CreateFilePathInRoot("CQ003".Trim() + ".txt", "reject-quotation-file");
             var test = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
+            return Json(new { data = test });
+        }
+        public IActionResult Test2()
+        {
+            var test = AppState.Instance(_userManager).GetDelegationIndex();
             return Json(new { data = test });
         }
     }
