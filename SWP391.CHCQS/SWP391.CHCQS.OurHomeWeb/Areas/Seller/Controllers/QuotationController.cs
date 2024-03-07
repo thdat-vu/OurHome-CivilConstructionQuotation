@@ -117,6 +117,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 
                 _unitOfWork.Save();
 
+
 				TempData["success"] = "Construct Detail created successfully";
                 return RedirectToAction("ViewQuotation", "Quotation");
             }
