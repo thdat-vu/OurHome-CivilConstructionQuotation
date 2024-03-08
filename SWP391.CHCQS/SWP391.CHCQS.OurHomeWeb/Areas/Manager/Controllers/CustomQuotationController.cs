@@ -404,7 +404,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         public IActionResult TakeNoteMaterial(string materialId, int quantity, string materialNote)
         {
             string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
-            var url = $"/Manager/CustomQuotation/GetDetail?id={quoteId}";
+            //id #tblmaterialDetail nằm ở GetDetail ở View
+            var url = $"/Manager/CustomQuotation/GetDetail?id={quoteId}#tblMaterialDetail";
             var message = $"Take note successful for material {materialId}";
             try
             {
@@ -445,7 +446,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         public IActionResult TakeNoteTask(string taskId, string taskNote)
         {
             string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
-            var url = $"/Manager/CustomQuotation/GetDetail?id={quoteId}";
+            //id #tblTaskDetail nằm ở GetDetail ở View
+            var url = $"/Manager/CustomQuotation/GetDetail?id={quoteId}#tblTaskDetail";
             var message = $"Take note successful for Task {taskId}";
             try
             {
