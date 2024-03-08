@@ -228,28 +228,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		{
 			//Asign TaskListSession for taskCart;
 			var taskCart = TaskListSession;
-			if (taskCart.Count == 0)
-			{
-				taskCart = _unitOfWork.TaskDetail.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task").Select(x => new TaskDetailViewModel
-				{
-					Task = x.Task,
-					QuotationId = x.QuotationId,
-					Price = x.Price,
-				}).ToList();
-			}
 
 			//Asign MaterialListSession for materialCart
 			var materialCart = MaterialListSession;
-			if (materialCart.Count == 0)
-			{
-				materialCart = _unitOfWork.MaterialDetail.GetMaterialDetail(CustomQuotationSession.Id, includeProp: "Material").Select(x => new MaterialDetailViewModel
-				{
-					Material = x.Material,
-					QuotationId = x.QuotationId,
-					Quantity = x.Quantity,
-					Price = x.Price,
-				}).ToList();
-			}
 
 			//move item from taskCart(ViewModel) to CustomQuotationTask(Model) to add to database 
 			List<TaskDetail> taskDetails = taskCart.Select(t => new TaskDetail
@@ -745,6 +726,41 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 			//Set customQuotationViewModel after exist in database into CustomQuotationSession
 			HttpContext.Session.Set(SessionConst.CUSTOM_QUOTATION_KEY, customQuotationViewModel);
+
+			//Asign TaskListSession for taskCart;
+			var taskCart = TaskListSession;
+
+			//if taskCart == null mean the taskCart have no task in there
+			if (taskCart.Count == 0)
+			{
+				taskCart = _unitOfWork.TaskDetail.GetTaskDetail(CustomQuotationSession.Id, includeProp: "Task").Select(x => new TaskDetailViewModel
+				{
+					Task = x.Task,
+					QuotationId = x.QuotationId,
+					Price = x.Price,
+				}).ToList();
+			}
+
+			//Update TaskListSession with taskCart  
+			HttpContext.Session.Set(SessionConst.TASK_LIST_KEY, taskCart);
+
+			//Asign MaterialListSession for materialCart;
+			var materialCart = MaterialListSession;
+
+			//if materialCart == null mean the taskCart have no task in there
+			if (materialCart.Count == 0)
+			{
+				materialCart = _unitOfWork.MaterialDetail.GetMaterialDetail(CustomQuotationSession.Id, includeProp: "Material").Select(x => new MaterialDetailViewModel
+				{
+					Material = x.Material,
+					QuotationId = x.QuotationId,
+					Quantity = x.Quantity,
+					Price = x.Price,
+				}).ToList();
+			}
+
+			//Update MaterialListSession with materialCart  
+			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
 
 			return View(constructDetailVM);
 		}

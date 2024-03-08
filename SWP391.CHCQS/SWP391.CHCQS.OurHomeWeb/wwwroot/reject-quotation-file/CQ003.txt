@@ -45,3 +45,31 @@
 }
 
 
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK008": "",
+    "TSK009": "",
+    "TSK002": "",
+    "TSK003": ""
+  },
+  "MaterialDetailNotes": {
+    "VT1007": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT1008": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT1010": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT1012": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
