@@ -24,7 +24,7 @@ function loadDataMaterialDetail() {
             {
                 data: null,
                 "render": function (data) {
-                    return `<p>${data.note.value.quantity ?? 0}</p>`
+                    return `<p>${data.quantity ?? 0}</p>`
                 },
             },
             { data: 'price'},
