@@ -47,9 +47,9 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid" id="invoice">
-        <div class="container  " style="text-align:center">
-            <h3>Quotation @Model.Id:</h3>
+    <div class="container-fluid" id="invoice" style="border:1px solid #ccc">
+        <div class="container col-xs-12 my-3" style="text-align:center">
+            <h3 style="font-size:1.5em" class="text-main">Quotation @Model.Id:</h3>
             <h3>Request @Model.RequestId on @Model.GenerateDateRequest</h3>
             <div class="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
                 <div>
@@ -210,16 +210,7 @@
         <div class="mt-3 text-red">
             <h3 style="color:red;">Total Price for your construction: @Model.Total</h3>
         </div>
-        <div class="">
-            <div class="row">
-                <div class="col">
-                    <button type="button" class="btn btn-primary">Cancle</button>
-                </div>
-                <div class="col">
-                    <button type="button" id="send" class="btn btn-secondary">Send</button>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </body>
 </html>

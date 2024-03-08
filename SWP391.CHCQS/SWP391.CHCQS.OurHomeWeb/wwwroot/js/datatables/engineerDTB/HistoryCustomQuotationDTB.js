@@ -9,7 +9,17 @@ function loadDataTableHistoryQuotation() {
         "ajax": { url: '/Engineer/Quotation/GetHistory' },
         "columns": [
             { data: 'id', },
-            { data: 'date', },
+            {
+                data: 'date',
+                "render": function (data) {
+                    // Chuyển đổi ngày thành chuỗi định dạng dd/MM/yyyy
+                    let date = new Date(data);
+                    let day = ("0" + date.getDate()).slice(-2);
+                    let month = ("0" + (date.getMonth() + 1)).slice(-2);
+                    let year = date.getFullYear();
+                    return `${day}/${month}/${year}`;
+                },
+            },
             { data: 'acreage', },
             { data: 'location', },
             { data: 'total', },

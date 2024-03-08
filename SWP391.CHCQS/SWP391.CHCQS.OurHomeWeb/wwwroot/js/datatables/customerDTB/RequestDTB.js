@@ -9,7 +9,18 @@ function loadDataTableRequest() {
         "ajax": { url: '/Customer/Request/GetRequestHistory' },
         "columns": [
             { data: 'numberOfOrder', "width": "5%" },
-            { data: 'generateDate', "width": "10%" },   
+            {
+                data: 'generateDate',
+                "render": function (data) {
+                    // Chuyển đổi ngày thành chuỗi định dạng dd/MM/yyyy
+                    let date = new Date(data);
+                    let day = ("0" + date.getDate()).slice(-2);
+                    let month = ("0" + (date.getMonth() + 1)).slice(-2);
+                    let year = date.getFullYear();
+                    return `${day}/${month}/${year}`;
+                },
+                "width": "10%"
+            },   
             { data: 'constructType', "width": "10%" },
             { data: 'acreage', "width": "10%" },
             { data: 'location', "width": "15%" },

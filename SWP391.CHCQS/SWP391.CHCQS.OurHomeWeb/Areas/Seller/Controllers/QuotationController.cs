@@ -14,17 +14,28 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
     [Area("Seller")]
     public class QuotationController : Controller
     {
+        #region ============ DECLARE ============
+        //Declare _uniteOfWork represent to DBContext to get Data form Database.
         private readonly IUnitOfWork _unitOfWork;
+
+        //Declare NotificationHub
         private readonly IHubContext<NotificationHub> _hubContext;
 
+        //Constructor of this Controller
         public QuotationController(IUnitOfWork unitOfWork, IHubContext<NotificationHub> hubContext)
         {
             _unitOfWork = unitOfWork;
             _hubContext = hubContext;
         }
+        #endregion ============ DECLARE ============
 
+        #region ============ ACTIONS ============
 
-
+        /// <summary>
+        /// This function enable for user create a quotation and add construct detail into DB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult CreateConstructDetails(string? id)
         {
@@ -161,7 +172,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             }
 
         }
-        #region
+        #endregion ============ ACTIONS ============
+
+        #region ============ API ============
         /// <summary>
         /// This function get all Quotation in Database and return it into JSON, this function ne lib Datatables to show data
         /// </summary>
@@ -187,7 +200,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         }
         #endregion
 
-
+        #region ============ FUNCTIONS ============ 
         public IActionResult ViewQuotation()
         {
             return View();
@@ -206,5 +219,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             string number = requestId.Substring(2);
             return SD.quotationIdKey + number;
 		}
+        #endregion ============ FUNCTIONS ============
     }
 }
