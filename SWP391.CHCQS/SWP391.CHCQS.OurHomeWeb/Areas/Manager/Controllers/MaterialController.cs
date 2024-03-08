@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
@@ -10,21 +11,23 @@ using System.Net.NetworkInformation;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
     //register Area
-    [Area("Manager")]
+    [Area(SD.Role_Manager)]
+    [Authorize(Roles = SD.Role_Manager)]
     public class MaterialController : Controller
     {
         //init IUnitOfWork
         private readonly IUnitOfWork _unitOfWork;
-
+        private readonly IWebHostEnvironment _webHostEnvironment; //inject IWebHostEnvironment to access wwwroot folder
         //ctor
-        public MaterialController(IUnitOfWork unitOfWork)
+        public MaterialController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
 
-        
-        
+
+
         public IActionResult Index()
         {
             List<Material> objMaterialList = _unitOfWork.Material.GetAll().ToList();
@@ -32,41 +35,55 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return View(objMaterialList); //redirect to Index.cshtml + objList
         }
 
-        
+
         public IActionResult Create()
         {
             //add MaterialViewModel to pass Properties.
-			MaterialViewModel materialVM = new()
-			{
-				CategoryList = _unitOfWork.MaterialCategory.GetAll().Select(u => new SelectListItem
-				{
-					Text = u.Name,
-					Value = u.Id.ToString()
-				}),
-				Material = new Material()
-			};
+            MaterialViewModel materialVM = new()
+            {
+                CategoryList = _unitOfWork.MaterialCategory.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
+                Material = new Material()
+            };
             return View(materialVM);
-		}
+        }
 
         //Create request HttpPOST
         [HttpPost]
-        public IActionResult Create (MaterialViewModel obj)
+        public IActionResult Create(MaterialViewModel materialVM, IFormFile? file)
         {
-            
-                obj.Material.Status = true; //change status into true;
-                obj.Material.Id = SD.TempId;
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            materialVM.Material.Status = true; //change status into true;
+            materialVM.Material.Id = SD.TempId;
+            //handle the file
+            //step1: check if the file name null or not
+            if (file != null)
+            {
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//save a new name for filename
+                //product image location
+                string materialPath = Path.Combine(wwwRootPath, @"images\material");
+                //copy file's content to fileStream
+                using (var fileStream = new FileStream(Path.Combine(materialPath, fileName), FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                //pass the filename path to ImageUrl Property
+                materialVM.Material.ImageUrl = @"\images\material\" + fileName;
+            }
+            _unitOfWork.Material.Add(materialVM.Material); //Add MaterialVM to Material table
+            _unitOfWork.Save(); //keep track on change
+            TempData["success"] = "Material created successfully";
+            return RedirectToAction("Index"); //after adding, return to previous action and reload the page
 
-				_unitOfWork.Material.Add(obj.Material); //Add MaterialVM to Material table
-                _unitOfWork.Save(); //keep track on change
-				TempData["success"] = "Material created successfully";
-				return RedirectToAction("Index"); //after adding, return to previous action and reload the page
-            
-            //return View(obj); //return previous action + invalid object
+            //return View(materialVM); //return previous action + invalid object
         }
         //Edit Action
-        public IActionResult Edit (string? id)
+        public IActionResult Edit(string? id)
         {
-            if(id == null) //id is null
+            if (id == null) //id is null
             {
                 return NotFound();//return status not found aka 404
             }
@@ -74,39 +91,61 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             Material? materialFromDb = _unitOfWork.Material.Get(u => u.Id == id);
 
             //catch not found exception
-            if(materialFromDb == null)
+            if (materialFromDb == null)
             {
                 return NotFound();//return status not found aka 404
             }
-			//step 2: pass the Material obj Properties to MaterialViewModel instance
-			//step 2.1: create MaterialViewModel
+            //step 2: pass the Material materialVM Properties to MaterialViewModel instance
+            //step 2.1: create MaterialViewModel
             MaterialViewModel materialVM = new()
             {
                 CategoryList = _unitOfWork.MaterialCategory.GetAll().Select(u => new SelectListItem
                 {
-                    Text= u.Name,
+                    Text = u.Name,
                     Value = u.Id.ToString()
                 }),
                 Material = new Material()
             };
-			//step 2.1: pass Material to MaterialViewModel
-			materialVM.Material= materialFromDb;
-			return View(materialVM); //return View + retrieved Material
+            //step 2.1: pass Material to MaterialViewModel
+            materialVM.Material = materialFromDb;
+            return View(materialVM); //return View + retrieved Material
 
-            
+
         }
         //Edit request with HttpPOST method
         [HttpPost]
-        public IActionResult Edit(MaterialViewModel obj)
+        public IActionResult Edit(MaterialViewModel materialVM, IFormFile? file)
         {
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            if (file != null)
+            {
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//save a new name for filename
+                //product image location
+                string materialPath = Path.Combine(wwwRootPath, @"images\material");
 
-
-           // if (ModelState.IsValid) //model is valid
+                if(!string.IsNullOrEmpty(materialVM.Material.ImageUrl))
+                {
+                    //delete the old image
+                    var oldImagePath = Path.Combine(wwwRootPath, materialVM.Material.ImageUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+                //copy file's content to fileStream
+                using (var fileStream = new FileStream(Path.Combine(materialPath, fileName), FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                //pass the filename path to ImageUrl Property
+                materialVM.Material.ImageUrl = @"\images\material\" + fileName;
+            }
+            // if (ModelState.IsValid) //model is valid
             //{
-                _unitOfWork.Material.Update(obj.Material); //Update Material to Material table
-                _unitOfWork.Save(); //keep track on change
-                TempData["success"] = "Material edited successfully";
-                return RedirectToAction("Index"); //after updating, return to previous action and reload the page
+            _unitOfWork.Material.Update(materialVM.Material); //Update Material to Material table
+            _unitOfWork.Save(); //keep track on change
+            TempData["success"] = "Material edited successfully";
+            return RedirectToAction("Index"); //after updating, return to previous action and reload the page
             //}
             //return View();//return previous action if model is invalid
         }
@@ -154,7 +193,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         //get detail HttpGet
         [HttpGet]
         [ActionName("Detail")]
-        public IActionResult GetDetail([FromQuery]string id)
+        public IActionResult GetDetail([FromQuery] string id)
         {
             var materialDetail = _unitOfWork.Material.Get((x) => x.Id == id);
             var materialDetailVM = new MaterialDetailViewModel()
@@ -167,18 +206,22 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                 CategoryName = _unitOfWork.MaterialCategory.GetName(materialDetail.CategoryId)
             };
             //TODO: Test result
-            return Json(new {data = materialDetailVM});
+            return Json(new { data = materialDetailVM });
         }
-		#region API CALLS
-		[HttpGet]
-		public IActionResult GetAll()
+        #region API CALLS
+        /// <summary>
+        /// This method return Json of Material List so that Database of Material can read.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            List<Material> objMaterialList = _unitOfWork.Material.GetAllWithFilter(filter: m => m.Status == true, includeProperties:"Category").ToList();
-			return Json(new { data = objMaterialList }); //json + material list for data table.
-		}
+            List<Material> objMaterialList = _unitOfWork.Material.GetAllWithFilter(filter: m => m.Status == true, includeProperties: "Category").ToList();
+            return Json(new { data = objMaterialList }); //json + material list for data table.
+        }
 
 
-		#endregion
-	}
+        #endregion
+    }
 
 }

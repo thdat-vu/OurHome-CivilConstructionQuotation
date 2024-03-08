@@ -21,6 +21,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 		public string? CustomerId { get; set; }
         [Display(Name = "Customer Name")]
         public string? CustomerName { get; set; }
-
+		public List<ProjectImage> Images { get; set; }
 	}
 }

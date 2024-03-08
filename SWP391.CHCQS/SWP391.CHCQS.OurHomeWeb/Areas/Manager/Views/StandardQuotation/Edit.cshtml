@@ -10,53 +10,74 @@
     </div>
 
     <div class="card-body p-4">
-        <form method="post" class="row">
-            <div class="border p-3">
-                @*<div asp-validation-summary="ModelOnly"></div>*@
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="StandardQuotation.Id" class="form-control border-0 shadow" disabled />
-                    <input asp-for="StandardQuotation.Id" type="hidden" />
-                    <label asp-for="StandardQuotation.Id" class="ms-2"></label>
-                    <span asp-validation-for="StandardQuotation.Id" class="text-danger"></span>
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="StandardQuotation.Name" class="form-control border-0 shadow" />
-                    <label asp-for="StandardQuotation.Name" class="ms-2"></label>
-                    <span asp-validation-for="StandardQuotation.Name" class="text-danger"></span>
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="StandardQuotation.Description" class="form-control border-0 shadow" />
-                    <label asp-for="StandardQuotation.Description" class="ms-2"></label>
-                    <span asp-validation-for="StandardQuotation.Description" class="text-danger"></span>
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="StandardQuotation.Price" class="form-control border-0 shadow" />
-                    <label asp-for="StandardQuotation.Price" class="ms-2"></label>
-                    <span asp-validation-for="StandardQuotation.Price" class="text-danger"></span>
-                </div>
-               
-                <div class="form-floating py-2 col-12">
-                    <select asp-for="StandardQuotation.ConstructionId" asp-items="@Model.ConstructionTypeList" class="form-select border-0 shadow">
-                        <option disabled selected>--Select Category--</option>
-                    </select>
-                    <label asp-for="StandardQuotation.ConstructionId" class="ms-2"></label>
-                    <span asp-validation-for="StandardQuotation.ConstructionId" class="text-danger"></span>
-                </div>
+        <div class="row">
 
-                <div class="row pt-2">
-                    <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-primary form-control btn-main"> Edit </button>
+            <div class="col-10">
+                <form method="post" class="row" enctype="multipart/form-data">
+                    <div class="border p-3">
+                        @*<div asp-validation-summary="ModelOnly"></div>*@
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="StandardQuotation.Id" class="form-control border-0 shadow" disabled />
+                            <input asp-for="StandardQuotation.Id" type="hidden" />
+                            <label asp-for="StandardQuotation.Id" class="ms-2"></label>
+                            <span asp-validation-for="StandardQuotation.Id" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="StandardQuotation.Name" class="form-control border-0 shadow" />
+                            <label asp-for="StandardQuotation.Name" class="ms-2"></label>
+                            <span asp-validation-for="StandardQuotation.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="StandardQuotation.Description" class="form-control border-0 shadow" />
+                            <label asp-for="StandardQuotation.Description" class="ms-2"></label>
+                            <span asp-validation-for="StandardQuotation.Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="StandardQuotation.Price" class="form-control border-0 shadow" />
+                            <label asp-for="StandardQuotation.Price" class="ms-2"></label>
+                            <span asp-validation-for="StandardQuotation.Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="StandardQuotation.ConstructionId" asp-items="@Model.ConstructionTypeList" class="form-select border-0 shadow">
+                                <option disabled selected>--Select Category--</option>
+                            </select>
+                            <label asp-for="StandardQuotation.ConstructionId" class="ms-2"></label>
+                            <span asp-validation-for="StandardQuotation.ConstructionId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating py-2 col-12">
+                            <input type="file" name="file" class="form-control border-0 shadow" />
+                            <label asp-for="StandardQuotation.ImageUrl" class="ms-2"></label>
+                        </div>
+
+                        <div class="row pt-2">
+                            <div class="col-6 col-md-3">
+                                <button type="submit" class="btn btn-primary form-control btn-main"> Edit </button>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="StandardQuotation" asp-action="Index" class="btn btn-main border form-control">
+                                    Back to List
+                                </a>
+                            </div>
+                        </div>
+
+
                     </div>
-                    <div class="col-6 col-md-3">
-                        <a asp-controller="StandardQuotation" asp-action="Index" class="btn btn-main border form-control">
-                            Back to List
-                        </a>
-                    </div>
-                </div>
-
-
+                </form>
             </div>
-        </form>
+
+            <div class="col-2">
+                <img src="@Model.StandardQuotation.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+            </div>
+        </div>
+        
     </div>
 
 </div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

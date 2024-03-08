@@ -49,6 +49,9 @@
     <Folder Include="Areas\Base\Data\" />
     <Folder Include="Areas\Base\Models\" />
     <Folder Include="Areas\Base\Views\" />
+    <Folder Include="wwwroot\images\material\" />
+    <Folder Include="wwwroot\images\combo\" />
+    <Folder Include="wwwroot\images\project\" />
   </ItemGroup>
 
 </Project>

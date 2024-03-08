@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
@@ -15,16 +16,18 @@ using static System.Formats.Asn1.AsnWriter;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
     //register Area
-    [Area("Manager")]
+    [Area(SD.Role_Manager)]
+    [Authorize(Roles = SD.Role_Manager)]
     public class ProjectController : Controller
     {
         //init IUnitOfWork
         private readonly IUnitOfWork _unitOfWork;
-
+        
         //ctor
-        public ProjectController(IUnitOfWork unitOfWork)
+        public ProjectController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            
         }
 
 
@@ -47,40 +50,44 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
         //Create request HttpPOST
         [HttpPost]
-        public IActionResult Create(ProjectVM obj)
+        public IActionResult Create(ProjectVM projectVM, IFormFile? file)
         {
-
-            obj.Status = true; //change status into true;
-            obj.Id = SD.TempId;
+            
+            projectVM.Status = true; //change status into true;
+            projectVM.Id = SD.TempId;
             DateTime parsedDate;
             if (DateTime.TryParseExact(Request.Form["Date"], "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate))
             {
-                obj.Date = parsedDate;
+                projectVM.Date = parsedDate;
             }
             else
             {
                 ModelState.AddModelError("Date", "Invalid date format");
             }
+
+
             Project project = new Project()
             {
-                Id = obj.Id,
-                Name = obj.Name,
-                Location = obj.Location,
-                Scale = obj.Scale,
-                Size = obj.Size,
-                Status = obj.Status,
-                Description = obj.Description,
-                Overview = obj.Overview,
-                Date = obj.Date,
-                CustomerId = obj.CustomerId
+                Id = projectVM.Id,
+                Name = projectVM.Name,
+                Location = projectVM.Location,
+                Scale = projectVM.Scale,
+                Size = projectVM.Size,
+                Status = projectVM.Status,
+                Description = projectVM.Description,
+                Overview = projectVM.Overview,
+                Date = projectVM.Date,
+                CustomerId = projectVM.CustomerId
 
             };
+
+            
             _unitOfWork.Project.Add(project); //Add ProjectVM to Project table
             _unitOfWork.Save(); //keep track on change
             TempData["success"] = "Project created successfully";
             return RedirectToAction("Index"); //after adding, return to previous action and reload the page
 
-            //return View(obj); //return previous action + invalid object
+            //return View(projectVM); //return previous action + invalid object
         }
         //Edit Action
         public IActionResult Edit(string? id)
@@ -97,7 +104,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             {
                 return NotFound();//return status not found aka 404
             }
-            //step 2: pass the Material obj Properties to MaterialViewModel instance
+            //step 2: pass the Material projectVM Properties to MaterialViewModel instance
             //step 2.1: create MaterialViewModel
             ProjectVM projectVM = new()
             {
@@ -187,25 +194,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return RedirectToAction("Index"); //redirect to Index.cshtml
         }
 
-        //get detail HttpGet
-        //[HttpGet]
-        //[ActionName("Detail")]
-        //public IActionResult GetDetail([FromQuery]string id)
-        //{
-        //    var materialDetail = _unitOfWork.Material.Get((x) => x.Id == id);
-        //    var materialDetailVM = new MaterialDetailViewModel()
-        //    {
-        //        Id = materialDetail.Id,
-        //        MaterialName = materialDetail.Name,
-        //        UnitPrice = materialDetail.UnitPrice,
-        //        Unit = materialDetail.Unit,
-        //        Status = materialDetail.Status,
-        //        CategoryName = _unitOfWork.MaterialCategory.GetName(materialDetail.CategoryId)
-        //    };
-        //    //TODO: Test result
-        //    return Json(new {data = materialDetailVM});
-        //}
+       
         #region API CALLS
+        /// <summary>
+        /// this method return a Json Of Project List so that Project DataTable can read.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetAll()
         {

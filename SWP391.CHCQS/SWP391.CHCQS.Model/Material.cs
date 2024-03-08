@@ -28,6 +28,8 @@ namespace SWP391.CHCQS.Model
         public virtual MaterialCategory Category { get; set; } = null!;
         //public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
         [MaxLength(200)]
+
+        [Display(Name = "Image")]
         public string? ImageUrl { get; set; }
         public virtual ICollection<Combo> Combos { get; set; }        
 

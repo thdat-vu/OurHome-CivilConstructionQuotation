@@ -31,6 +31,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
                 objFromDb.UnitPrice = obj.UnitPrice;
                 objFromDb.Unit = obj.Unit;
                 objFromDb.CategoryId = obj.CategoryId;
+                if (obj.ImageUrl != null)
+                {
+                    objFromDb.ImageUrl = obj.ImageUrl;
+                }
 			}
         }
         public string GetName(string id) => _db.Materials.Find(id).Name;
