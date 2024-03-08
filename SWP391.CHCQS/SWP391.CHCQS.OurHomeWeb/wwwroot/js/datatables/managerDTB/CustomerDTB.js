@@ -13,7 +13,14 @@ function loadDataCustomer() {
         "ajax": { url: '/Manager/Customer/GetAll' },
         "columns": [
 
-            { data: 'id', "width": "30%" },
+            {
+                data: 'id',
+                "render": function (data) {
+                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Customer/Detail?CustomerId=${data}')" >${data}</a>`
+                },
+                
+                "width": "30%"
+            },
             { data: 'name', "width": "30%" },
             {
                 data: null,

@@ -45,6 +45,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         }
 
         #region APICALLGETCUSTOMER
+
+        /// <summary>
+        /// This method return a Json of List of customer so that Customer Data table can read.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> GetAll()
         {
             //lấy list user thuộc role customer : data type là identity
