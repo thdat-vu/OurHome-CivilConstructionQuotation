@@ -147,7 +147,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //change the status in to false
             obj.Status = false;
             _unitOfWork.Save();//keep track on change
-            //TempData["success"] = "Product deleted successfully";
+            TempData["success"] = "Material deleted successfully";
             return RedirectToAction("Index"); //redirect to Index.cshtml
         }
 

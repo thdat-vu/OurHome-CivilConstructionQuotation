@@ -44,7 +44,7 @@
                         <option>cái</option>
                     </select>                    
                     <label asp-for="Material.Unit" class="ms-2"></label>
-                    <@* span asp-validation-for="Material.Unit" class="text-danger"></span> *@
+                    @* span asp-validation-for="Material.Unit" class="text-danger"></span> *@
                 </div>
                 <div class="form-floating py-2 col-12">
                     <select asp-for="Material.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
@@ -59,7 +59,7 @@
                         <button type="submit" class="btn btn-primary form-control btn-main"> Edit </button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-controller="Material" asp-action="Index" class="btn btn-outline-primary border form-control">
+                        <a asp-controller="Material" asp-action="Index" class="btn btn-main border form-control">
                             Back to List
                         </a>
                     </div>

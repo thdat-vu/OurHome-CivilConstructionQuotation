@@ -1,10 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.Utility;
+using System.Drawing;
+using System.Globalization;
 using System.Net.NetworkInformation;
+using System.Xml.Linq;
+using static System.Formats.Asn1.AsnWriter;
 
 //DatVT
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
@@ -23,8 +28,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         }
 
 
-        
-        
+
+
         public IActionResult Index()
         {
             List<Project> objProjectList = _unitOfWork.Project.GetAll().ToList();
@@ -32,116 +37,155 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return View(objProjectList); //redirect to Index.cshtml + objList
         }
 
-        
+
         public IActionResult Create()
         {
-			//add ProjectViewModel to pass Properties.
-			ProjectVM productVM = new();
+            //add ProjectViewModel to pass Properties.
+            ProjectVM productVM = new();
             return View(productVM);
-		}
+        }
 
         //Create request HttpPOST
-    //    [HttpPost]
-    //    public IActionResult Create (ProjectVM obj)
-    //    {
-            
-    //            obj.Project.Status = true; //change status into true;
-    //            obj.Project.Id = SD.TempId;
+        [HttpPost]
+        public IActionResult Create(ProjectVM obj)
+        {
 
-				//_unitOfWork.Project.Add(obj.Project); //Add ProjectVM to Project table
-			 //   _unitOfWork.Save(); //keep track on change
-				//TempData["success"] = "Project created successfully";
-				//return RedirectToAction("Index"); //after adding, return to previous action and reload the page
-            
-    //        //return View(obj); //return previous action + invalid object
-    //    }
+            obj.Status = true; //change status into true;
+            obj.Id = SD.TempId;
+            DateTime parsedDate;
+            if (DateTime.TryParseExact(Request.Form["Date"], "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate))
+            {
+                obj.Date = parsedDate;
+            }
+            else
+            {
+                ModelState.AddModelError("Date", "Invalid date format");
+            }
+            Project project = new Project()
+            {
+                Id = obj.Id,
+                Name = obj.Name,
+                Location = obj.Location,
+                Scale = obj.Scale,
+                Size = obj.Size,
+                Status = obj.Status,
+                Description = obj.Description,
+                Overview = obj.Overview,
+                Date = obj.Date,
+                CustomerId = obj.CustomerId
+
+            };
+            _unitOfWork.Project.Add(project); //Add ProjectVM to Project table
+            _unitOfWork.Save(); //keep track on change
+            TempData["success"] = "Project created successfully";
+            return RedirectToAction("Index"); //after adding, return to previous action and reload the page
+
+            //return View(obj); //return previous action + invalid object
+        }
         //Edit Action
-   //     public IActionResult Edit (string? id)
-   //     {
-   //         if(id == null) //id is null
-   //         {
-   //             return NotFound();//return status not found aka 404
-   //         }
-   //         //step 1:retrieve Material from DB
-   //         Material? materialFromDb = _unitOfWork.Material.Get(u => u.Id == id);
+        public IActionResult Edit(string? id)
+        {
+            if (id == null) //id is null
+            {
+                return NotFound();//return status not found aka 404
+            }
+            //step 1:retrieve Project from DB
+            Project? projectFromDb = _unitOfWork.Project.Get(u => u.Id == id, includeProperties: "Customer");
 
-   //         //catch not found exception
-   //         if(materialFromDb == null)
-   //         {
-   //             return NotFound();//return status not found aka 404
-   //         }
-			////step 2: pass the Material obj Properties to MaterialViewModel instance
-			////step 2.1: create MaterialViewModel
-   //         MaterialViewModel materialVM = new()
-   //         {
-   //             CategoryList = _unitOfWork.MaterialCategory.GetAll().Select(u => new SelectListItem
-   //             {
-   //                 Text= u.Name,
-   //                 Value = u.Id.ToString()
-   //             }),
-   //             Material = new Material()
-   //         };
-			////step 2.1: pass Material to MaterialViewModel
-			//materialVM.Material= materialFromDb;
-			//return View(materialVM); //return View + retrieved Material
-
-            
-   //     }
+            //catch not found exception
+            if (projectFromDb == null)
+            {
+                return NotFound();//return status not found aka 404
+            }
+            //step 2: pass the Material obj Properties to MaterialViewModel instance
+            //step 2.1: create MaterialViewModel
+            ProjectVM projectVM = new()
+            {
+                Id = projectFromDb.Id,
+                Name = projectFromDb.Name,
+                Location = projectFromDb.Location,
+                Scale = projectFromDb.Scale,
+                Size = projectFromDb.Size,
+                Status = projectFromDb.Status,
+                Description = projectFromDb.Description,
+                Overview = projectFromDb.Overview,
+                Date = projectFromDb.Date,
+                CustomerId = projectFromDb.CustomerId,
+                CustomerName = projectFromDb.Customer.Name
+            };
+            //step 2.1: pass ProjectVM to ProjectVM
+            //projectVM.Material = materialFromDb;
+            return View(projectVM); //return View + retrieved 
+        }
         //Edit request with HttpPOST method
         [HttpPost]
-        //public IActionResult Edit(MaterialViewModel obj)
-        //{
+        public IActionResult Edit(ProjectVM obj)
+        {
 
 
-        //   // if (ModelState.IsValid) //model is valid
-        //    //{
-        //        _unitOfWork.Material.Update(obj.Material); //Update Material to Material table
-        //        _unitOfWork.Save(); //keep track on change
-        //        TempData["success"] = "Material edited successfully";
-        //        return RedirectToAction("Index"); //after updating, return to previous action and reload the page
-        //    //}
-        //    //return View();//return previous action if model is invalid
-        //}
+            // if (ModelState.IsValid) //model is valid
+            //{
+            //step 1:retrieve Project from DB
+            Project? projectFromDb = _unitOfWork.Project.Get(u => u.Id == obj.Id, includeProperties: "Customer");
+            //catch not found exception
+            if (projectFromDb == null)
+            {
+                return NotFound();//return status not found aka 404
+            }
+            projectFromDb.Name = obj.Name;
+            projectFromDb.Location = obj.Location;
+            projectFromDb.Scale = obj.Scale;
+            projectFromDb.Size = obj.Size;
+            projectFromDb.Description = obj.Description;
+            projectFromDb.Overview = obj.Overview;
+            projectFromDb.Date = obj.Date;
+            projectFromDb.CustomerId = obj.CustomerId;
+            _unitOfWork.Save(); //keep track on change
+            TempData["success"] = "Project edited successfully";
+            return RedirectToAction("Index"); //after updating, return to previous action and reload the page
+                                              //    //}
+                                              //    //return View();//return previous action if model is invalid
+        }
 
         //Delete Action
-        //public IActionResult Delete(string? id)
-        //{
-        //    //catch null id exception
-        //    if (id == null)
-        //    {
-        //        return NotFound(); //return status not found aka 404
-        //    }
+        public IActionResult Delete(string? id)
+        {
+            //catch null id exception
+            if (id == null)
+            {
+                return NotFound(); //return status not found aka 404
+            }
 
-        //    //retrieve Material from DB
-        //    Material? materialFromDb = _unitOfWork.Material.Get(u => u.Id == id, includeProperties: "Category");
+            //retrieve projectFromDb from DB
+            Project? projectFromDb = _unitOfWork.Project.Get(u => u.Id == id, includeProperties: "Customer");
 
-        //    if (materialFromDb == null)
-        //    {
-        //        return NotFound(); //return status not found aka 404
-        //    }
+            if (projectFromDb == null)
+            {
+                return NotFound(); //return status not found aka 404
+            }
 
-        //    return View(materialFromDb); //return Delete.cshtml + materialFromDb
+            return View(projectFromDb); //return Delete.cshtml + projectFromDb
 
 
-        //}
+        }
         //delete request HttpPost, actionname=Delete
-        //[HttpPost, ActionName("Delete")]
-        //public IActionResult DeletePOST(string? id)
-        //{
-        //    //retrieve Material from Db
-        //    Material? obj = _unitOfWork.Material.Get(u => u.Id == id);
-        //    //handle id null exception
-        //    if (obj == null)
-        //    {
-        //        return NotFound();//return status not found aka 404
-        //    }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(string? id)
+        {
+            //retrieve Material from Db
+            Project? obj = _unitOfWork.Project.Get(u => u.Id == id);
+            //handle id null exception
+            if (obj == null)
+            {
+                return NotFound();//return status not found aka 404
+            }
 
-        //    //change the status in to false
-        //    obj.Status = false;
-        //    _unitOfWork.Save();//keep track on change
-        //    //TempData["success"] = "Product deleted successfully";
-        //    return RedirectToAction("Index"); //redirect to Index.cshtml
-        //}
+            //change the status in to false
+            obj.Status = false;
+            _unitOfWork.Save();//keep track on change
+            TempData["success"] = "Project deleted successfully";
+            return RedirectToAction("Index"); //redirect to Index.cshtml
+        }
 
         //get detail HttpGet
         //[HttpGet]
@@ -161,16 +205,16 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         //    //TODO: Test result
         //    return Json(new {data = materialDetailVM});
         //}
-		#region API CALLS
-		[HttpGet]
-		public IActionResult GetAll()
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
         {
             List<Project> objProjectList = _unitOfWork.Project.GetAllWithFilter(filter: p => p.Status == true, includeProperties: "Customer").ToList();
-			return Json(new { data = objProjectList }); //json + material list for data table.
-		}
+            return Json(new { data = objProjectList }); //json + material list for data table.
+        }
 
 
-		#endregion
-	}
+        #endregion
+    }
 
 }
