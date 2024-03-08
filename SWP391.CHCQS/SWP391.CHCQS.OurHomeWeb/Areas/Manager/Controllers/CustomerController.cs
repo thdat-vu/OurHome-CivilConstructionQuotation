@@ -23,10 +23,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return View();
         }
 
-        public IActionResult GetCustomerDetails(string CustomerId)
+        public IActionResult GetCustomerDetails(string id)
         {
             //retrieve Detail of customer
-            var customerDetail = _unitOfWork.ApplicationUser.Get((x) => x.Id == CustomerId);
+            var customerDetail = _unitOfWork.ApplicationUser.Get((x) => x.Id == id);
 
 
             if (customerDetail == null)
@@ -36,7 +36,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //create CustomerVM based on customerDetail
             var customerDetailVM = new CustomerVM()
             {
-                Id = CustomerId,
+                Id = id,
                 Name = customerDetail.Name
 
             };

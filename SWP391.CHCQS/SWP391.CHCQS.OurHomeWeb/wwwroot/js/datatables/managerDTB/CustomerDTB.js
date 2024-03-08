@@ -12,44 +12,29 @@ function loadDataCustomer() {
     dataTableCM = $('#tblCustomer').DataTable({
         "ajax": { url: '/Manager/Customer/GetAll' },
         "columns": [
-            
+
             { data: 'id', "width": "30%" },
             { data: 'name', "width": "30%" },
-           
             {
-                data: "id",
-                "render": function (data) {
-                    return `<div class="w-100 btn-group" role="group">
-                       
-                       <button class="btn btn-primary btn-main border-0 m-1" onclick="fillFormFields(${data})">
-                        <i class="bi bi-plus-square"></i>Add
-                    </button>
-
-                    </div >`
-                },
-                "width": "40%"
+                data: null,
+                render: function (data) {
+                    return `<div class="text-center">
+                        <a class="btn btn-main" onclick="fillForm('${data.id}',' ${data.name}')">Add</a>
+                    </div>`
+                }
             }
+            
         ]
     });
 }
 
-function fillFormFields(customerId) {
-    // Fetch customer details based on the customerId using an API or other method
-    $.ajax({
-        url: `/Manager/Customer/GetCustomerDetails?id=${customerId}`,
-        method: 'GET',
-        success: function (data) {
-            // Assuming the API returns JSON data with 'id' and 'name' properties
-            var customer = data;
 
-            // Fill in the form fields with customer details
-            $('#CustomerName').val(customer.name);
-            $('#CustomerId').val(customer.id);
-        },
-        error: function (error) {
-            console.error('Error fetching customer details:', error);
-        }
-    });
+
+function fillForm(id, name) {
+    var idField = document.getElementById('CustomerId');
+    var nameField = document.getElementById('CustomerName');
+    idField.value = id;
+    nameField.value = name;
+    idField.ajax.reload();
+    nameField.ajax.reload();
 }
-
-
