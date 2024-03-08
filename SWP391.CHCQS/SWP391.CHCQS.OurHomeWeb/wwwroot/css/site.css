@@ -127,3 +127,21 @@ body {
         background-color: white !important;
         transition: ease 0.3s;
     }
+
+.navbar-nav .nav-item .nav-link.active,
+.dropdown-menu .dropdown-item.active,
+.dropdown-menu .dropdown-item:hover {
+    color: #F27456 !important; 
+    background-color: #ffffff !important; 
+}
+
+#manage {
+    transition: transform 0.3s ease;
+}
+
+    #manage:hover {
+        transform: scale(1.3);
+        color:#F27456
+    }
+
+

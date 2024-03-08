@@ -34,7 +34,7 @@
 		<ul class="navbar-nav bg-main sidebar sidebar-dark accordion" id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+			<a asp-area="Seller" asp-controller="Home" asp-action="Index" style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center">
 				<div class="sidebar-brand-icon">
 					<img src="~/images/logo.png" width="100%"></img>
 				</div>
@@ -44,28 +44,27 @@
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Customer Request -->
-			<li class="nav-item active">
-				<a class="nav-link" asp-area="Seller" asp-controller="Home" asp-action="Index">
-					<i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>Customer Request</span>
-				</a>
-			</li>
 
+			<li class="nav-item active">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+				   aria-expanded="true" aria-controls="collapseTwo">
+					<i class="fas fa-fw fa-cog"></i>
+					<span>Request</span>
+				</a>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" asp-area="Seller" asp-controller="Home" asp-action="Index">Request</a>
+						<a class="collapse-item" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestCompleted">Completed</a>
+						<a class="collapse-item" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestCompleted">Rejected</a>
+					</div>
+				</div>
+			</li>
 			<hr class="sidebar-divider my-0">
 
 			<li class="nav-item active">
 				<a class="nav-link" asp-area="Seller" asp-controller="Quotation" asp-action="ViewQuotation">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>View Custom Quotation</span>
-				</a>
-			</li>
-
-			<hr class="sidebar-divider my-0">
-
-			<li class="nav-item active">
-				<a class="nav-link" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestCompleted">
-					<i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>Customer Request completed</span>
 				</a>
 			</li>
 
