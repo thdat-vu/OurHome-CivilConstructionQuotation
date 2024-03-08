@@ -2,6 +2,7 @@ using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
@@ -11,6 +12,7 @@ using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Models;
 using SWP391.CHCQS.Services;
+using SWP391.CHCQS.Services.NotificationHub;
 using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
 using System.Composition;
@@ -31,12 +33,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _configuration;
-        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration, UserManager<IdentityUser> userManager)
+        private readonly IHubContext<NotificationHub> _hubContext;
+        public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration, UserManager<IdentityUser> userManager, IHubContext<NotificationHub> hubContext)
         {
             _unitOfWork = unitOfWork;
             _environment = environment;
             _configuration = configuration;
             _userManager = userManager;
+            _hubContext = hubContext;
         }
 
 
@@ -204,7 +208,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
         //hàm xử lý quyết định của manager - từ chối detail của Engineer trong custom quotation
         [HttpPost]
-        public IActionResult RejectDetail(CustomQuotationVM model)
+        public async Task<IActionResult> RejectDetail(CustomQuotationVM model)
         {
             #region    Lưu dữ liệu vào bảng RejectionReports
             //lấy id của quotation bị reject đưa cho biến rejectReportId giữ
@@ -292,6 +296,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             HttpContext.Session.Set<RejectQuotationDetail>(rejectQuotationId, null);
             //Toast Info lên là reject thành công
             TempData["Success"] = "Reject Successfull";
+
+            await _hubContext.Clients.All.SendAsync("RecieveRejectFromManager", "Manager", "You was recieve a new Quotation");
             //điều hướng người dùng lại trang index để coi List
             return RedirectToAction("Index");
         }

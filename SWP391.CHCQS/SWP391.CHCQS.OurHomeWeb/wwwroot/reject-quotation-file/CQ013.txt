@@ -29,3 +29,251 @@
   }
 }
 
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 12,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 33,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 11,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 12,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 33,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 11,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 12,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 33,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 11,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 12,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 33,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 11,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 12,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 33,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 11,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 12,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 33,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 11,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 12,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 33,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 11,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 12,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 33,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 22,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 11,
+      "Note": ""
+    }
+  }
+}
+
