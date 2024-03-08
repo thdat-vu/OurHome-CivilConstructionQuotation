@@ -28,21 +28,22 @@ connection.on("RecieveQuotationFromEngineer", function (user, message) {
     /*dataTableCQ.ajax.reload();*/
     /*toastr.success(`${user}: ${message}`);*/
     dataTableCQ.ajax.reload();
-    console.log("Reload" + user + message);
 });
 
 connection.on("RecieveQuotationFromSeller", function (user, message) {
     //Your datatable need to reload
     dataTableCQ.ajax.reload();
     //toastr.success(`${user}: ${message}`);
-    console.log("Reload" + user + message);
 });
 
 connection.on("RecieveRequestFromCustomer", function (user, message) {
     //Your datatable need to reload
     //dataTableCQ.ajax.reload();
     //toastr.success(`${user}: ${message}`);
-    console.log("Reload" + user + message);
 });
 
-
+connection.on("RecieveRejectFromManager", function (user, message) {
+    //Your datatable need to reload
+    dataTableCQ.ajax.reload();
+    //toastr.success(`${user}: ${message}`);
+});
