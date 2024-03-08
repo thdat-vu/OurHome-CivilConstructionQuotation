@@ -44,15 +44,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         {
             return View();
         }
-        private ClaimsIdentity GetCurrentIdentity()
-        {
-            return (ClaimsIdentity)User.Identity;
-        }
-        private string GetCurrentUserId()
-        {
-            return GetCurrentIdentity().FindFirst(ClaimTypes.NameIdentifier).Value;
-        }
-        /// This method returns all pending approval CustomQuotation via CustomQuotationListViewModel
+        
+        //Hàm trả về danh sách customQuotation cần dc xử lý bởi staff đang login
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -113,6 +106,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return Json(new { data = customQuotationViewModels });
         }
 
+        //Hàm đi tới chi tiết của customQuotation mà Manager cần xem
         [HttpGet]
         public async Task<IActionResult> GetDetail([FromQuery] string id)
         {
@@ -206,7 +200,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //return Json(new { data = ID});
             return View(quotationVM);
         }
-
+        #region     Actions Xử lý Decision cho Manager 
 
         //hàm xử lý quyết định của manager - từ chối detail của Engineer trong custom quotation
         [HttpPost]
@@ -264,7 +258,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _unitOfWork.WorkingReport.Update(managerWorkReport);
             #endregion
 
-            #region     Lưu trữ các take note và detail xuống file
+            #region     Lưu trữ các take note xuống file, bổ sung thêm các task,material detail dù ko có note
 
             //Tiến hành lấy RejectQuotationDetaiol từ session
             var rejectQuoteDetail = GetRejectQuotationDetailFromSession();
@@ -277,13 +271,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                     rejectQuoteDetail.TaskDetailNotes.Add(x, "");
             });
             //Material
-            List<string> materialDetail = _unitOfWork.MaterialDetail.GetAllWithFilter(x => x.QuotationId == rejectQuotationId).Select(x => x.MaterialId).ToList();
+            List<MaterialDetail> materialDetail = _unitOfWork.MaterialDetail.GetAllWithFilter(x => x.QuotationId == rejectQuotationId).ToList();
             materialDetail.ForEach(x =>
             {
-                if (!rejectQuoteDetail.MaterialDetailNotes.ContainsKey(x))
-                    rejectQuoteDetail.MaterialDetailNotes.Add(x, new MaterialNote()
+                if (!rejectQuoteDetail.MaterialDetailNotes.ContainsKey(x.MaterialId))
+                    rejectQuoteDetail.MaterialDetailNotes.Add(x.MaterialId, new MaterialNote()
                     {
-                        Quantity = 0,
+                        Quantity = x.Quantity,
                         Note = ""
                     });
             });
@@ -299,25 +293,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //Toast Info lên là reject thành công
             TempData["Success"] = "Reject Successfull";
             //điều hướng người dùng lại trang index để coi List
-            return RedirectToAction("Index");
-        }
-
-        [NonAction]
-        public IActionResult SaveNoteToFile(string quoteId, RejectQuotationDetail data)
-        {
-            try
-            {
-                var pathCreater = new PathCreater(_environment);
-                string targetFolder = pathCreater.CreateFilePathInRoot(quoteId.Trim() + ".txt", "reject-quotation-file");
-                //Tiến hành lưu trữ
-                FileManipulater<RejectQuotationDetail>.SaveJsonToFile(targetFolder, data);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                TempData["Error"] = "Something happens. Saving Rejected Quotation Detail Fail";
-                return RedirectToAction("Index");
-            }
             return RedirectToAction("Index");
         }
 
@@ -362,7 +337,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //điều hướng người dùng về danh sách pending approve
             return RedirectToAction("Index");
         }
+        #endregion
 
+        #region     Actions đưa người dùng tới coi CustomQuotation đã tối giản cho giống PDF, có thể tải pdf xuống
         //Action được tạo ra để render ra 1 html template HỖ TRỢ cho việc tạo ra pdf - được sử dụng để attach theo email báo giá
         [ActionName("Review")]
         public async Task<IActionResult> ReviewQuotationPDF(string quoteId)
@@ -419,7 +396,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
             return View(pdf);
         }
+        #endregion
 
+        #region     Action để thực hiện TakeNote 
         //Đây là non aciton để lưu trự đối tượng RejectQuotationDetail vào trong session với mỗi phiên truy cập vào customquotation
         [HttpPost]
         public IActionResult TakeNoteMaterial(string materialId, int quantity, string materialNote)
@@ -495,7 +474,39 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             TempData["Success"] = message;
             return Redirect(url);
         }
+        #endregion
 
+        #region     NonAction để hỗ trợ các Action lớn
+        //hàm hỗ trợ cho actions
+        [NonAction]
+        public IActionResult SaveNoteToFile(string quoteId, RejectQuotationDetail data)
+        {
+            try
+            {
+                var pathCreater = new PathCreater(_environment);
+                string targetFolder = pathCreater.CreateFilePathInRoot(quoteId.Trim() + ".txt", "reject-quotation-file");
+                //Tiến hành lưu trữ
+                FileManipulater<RejectQuotationDetail>.SaveJsonToFile(targetFolder, data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                TempData["Error"] = "Something happens. Saving Rejected Quotation Detail Fail";
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+        [NonAction]
+        private ClaimsIdentity GetCurrentIdentity()
+        {
+            return (ClaimsIdentity)User.Identity;
+        }
+        [NonAction]
+        private string GetCurrentUserId()
+        {
+            return GetCurrentIdentity().FindFirst(ClaimTypes.NameIdentifier).Value;
+        }
+        [NonAction]
         private RejectQuotationDetail GetRejectQuotationDetailFromSession()
         {
             var quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
@@ -514,6 +525,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return rejectDetail;
         }
 
+        #endregion
+
+        #region     Test Place
         public IActionResult Test()
         {
             var pathCreater = new PathCreater(_environment);
@@ -526,6 +540,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             var test = AppState.Instance(_userManager).GetDelegationIndex();
             return Json(new { data = test });
         }
+        #endregion
+
     }
 }
 

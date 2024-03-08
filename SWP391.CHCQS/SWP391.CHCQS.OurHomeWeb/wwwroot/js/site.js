@@ -81,3 +81,4 @@ function ShowMaterialDetail(url) {
         },
     });
 }
+
