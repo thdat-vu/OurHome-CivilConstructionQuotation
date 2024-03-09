@@ -20,12 +20,21 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 
         #endregion ============ DECLARE ============
 
-        #region ============ API ============
-        /// <summary>
-        /// This function get all Customer's Request in Database and return it into JSON, this function ne lib Datatables to show data
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
+        #region ============ ACTIONS ============
+        public async Task<IActionResult> RejectRequest(int id)
+        {
+
+            return View(id);    
+        }
+
+		#endregion ============ ACTIONS ============
+
+		#region ============ API ============
+		/// <summary>
+		/// This function get all Customer's Request in Database and return it into JSON, this function ne lib Datatables to show data
+		/// </summary>
+		/// <returns></returns>
+		[HttpGet]
         public async Task<IActionResult> GetAll()
         {
             List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm

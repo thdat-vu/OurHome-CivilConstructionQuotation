@@ -4,8 +4,8 @@
 
 //Need an api method return json to use this
 function loadDataTableRequest() {
-    dataTable = $('#tblQuotation').DataTable({
-        "ajax": { url: '/Seller/Quotation/GetAll' },
+    dataTable = $('#tblReject').DataTable({
+        "ajax": { url: '/Seller/Reject/GetAllReject' },
         "columns": [
             { data: 'id', "width": "5%" },
             {
@@ -30,8 +30,7 @@ function loadDataTableRequest() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Seller/Quotation/Details?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> View Details</a>
-                       <a href="/Seller/Quotation/EditConstructDetails?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Edit Construct Details</a>
+                       <a href="/Seller/Request/UndoRejectRequest?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Undo Reject Request</a>
                     </div >`
                 },
                 "width": "35%"

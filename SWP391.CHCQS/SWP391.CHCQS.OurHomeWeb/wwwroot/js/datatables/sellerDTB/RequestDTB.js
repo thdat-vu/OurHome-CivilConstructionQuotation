@@ -37,6 +37,7 @@ function loadDataTableRequest() {
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
                        <a href="/Seller/Quotation/CreateConstructDetails?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Create Construct Details</a>
+                       <a href="/Seller/Request/RejectRequest?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Reject Quotation</a>
                     </div >`
                 },
                 "width": "35%"
