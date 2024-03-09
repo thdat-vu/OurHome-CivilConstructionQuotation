@@ -8,19 +8,31 @@
         </div>
     </div>
     <div class="card-body p-4">
-        <table id="tblUser" class="table table-bordered table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Gender</th>
-                    <th>Phone Number</th>
-                    <th>Manager</th>
-                    <th>Role</th>
-                    <th></th>
-                </tr>
-            </thead>
-        </table>
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-main">
+                    <i class="bi bi-plus-circle"></i>  Create New Account
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="tblUser" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Phone Number</th>
+                        <th>Manager</th>
+                        <th>Role</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        
     </div>
 </div>
 @section Scripts {

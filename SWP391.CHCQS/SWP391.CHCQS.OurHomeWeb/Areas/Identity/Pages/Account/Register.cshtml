@@ -16,11 +16,21 @@
         </div>
 
         <div class="col-md-6" style="padding: 40px 30px 40px 40px">
-            <div class="row align-items-center">
-                <div class="justify-content-center align-items-center">
-                    <h4>Welcome to our services</h4>
-                    <h4>We are happy to have you with us</h4>
-                </div>
+            <div class="row align-items-center text-center">
+                @if (User.IsInRole(SD.Role_Admin))
+                {
+                    <h4>Register New User <br />
+                        ADMIN PORTAL
+                    </h4>
+                }
+                else
+                {
+                    <div class="justify-content-center align-items-center">
+                        <h4>Welcome to our services</h4>
+                        <h4>We are happy to have you with us</h4>
+                    </div>
+                }
+                
 
                 <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <hr />
@@ -63,13 +73,16 @@
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="mb-1">
-                        <div class="form-floating mb-3">
-                            <select asp-for="Input.Role" asp-items="@Model.Input.Roles" class="form-select">
-                                <option disabled selected>----Select Role----</option>
-                            </select>
+                    @if (User.IsInRole(SD.Role_Admin))
+                    {
+                        <div class="mb-1">
+                            <div class="form-floating mb-3">
+                                <select asp-for="Input.Role" asp-items="@Model.Input.Roles" class="form-select">
+                                    <option disabled selected>----Select Role----</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    }
 
                     <div class="mb-3">
                         <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary fs-6">Register</button>
@@ -77,9 +90,13 @@
                     </div>
                     
                 </form>
-                <div class="row">
+                @if (!User.IsInRole(SD.Role_Admin))
+                {
+                    <div class="row">
                         <small>Already have an account? <a href="/Identity/Account/Login">Log in</a></small>
-                </div>
+                    </div>
+                }
+
             </div>
 
         </div>

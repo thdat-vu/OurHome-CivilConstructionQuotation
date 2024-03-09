@@ -168,8 +168,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, Input.Role);
-                    user.PhoneNumber = Input.Phone; 
+                    if (!string.IsNullOrEmpty(Input.Role)){
+                        await _userManager.AddToRoleAsync(user, Input.Role);
+                    } else
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.Role_Customer);
+                    }
+                    user.PhoneNumber = Input.Phone;
 
                     _logger.LogInformation("User created a new account with password.");
 
@@ -191,7 +196,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        if (User.IsInRole(SD.Role_Admin))
+                        {
+                            TempData["success"] = "New User Created Successfully";
+                        }
+                        else
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                        }
 
                         return RedirectToAction("Index", "Home", new { area = Input.Role });
 
