@@ -231,6 +231,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 		[HttpPost]
 		public async Task<IActionResult> UpdateQuantity([FromForm] string MaterialId, [FromForm] int MaterialQuantity)
 		{
+			if (MaterialQuantity > 999999999 || MaterialQuantity < 1)
+			{
+				return Json(new { success = false, message = $"Material quantity of {MaterialId} is invalid" });
+			}
+
 			//Asign MaterialListSession to materialCart
 			var materialCart = MaterialListSession;
 
