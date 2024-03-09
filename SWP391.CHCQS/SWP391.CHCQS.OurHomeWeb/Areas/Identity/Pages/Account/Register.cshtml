@@ -73,6 +73,23 @@
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
                     </div>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input asp-for="Input.Name" class="form-control form-control-lg bg-light fs-6" aria-required="true" />
+                            <label asp-for="Input.Name"></label>
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @if (!User.IsInRole(SD.Role_Admin))
+                    {
+                        <div class="mb-1">
+                            <div class="form-floating mb-3">
+                                <select asp-for="Input.Gender" asp-items="@Model.Input.GenderList" class="form-select">
+                                </select>
+                                <label asp-for="Input.Gender"></label>
+                            </div>
+                        </div>
+                    }
                     @if (User.IsInRole(SD.Role_Admin))
                     {
                         <div class="mb-1">

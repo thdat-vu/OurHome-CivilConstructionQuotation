@@ -10,7 +10,7 @@ function loadDataTableRequest() {
         "columns": [
             { data: 'name', "width": "10%" },   
             { data: 'email', "width": "15%" },
-            { data: 'gender', "width": "5%" },
+            { data: 'userName', "width": "10%" },
             { data: 'phoneNumber', "width": "15%" },
             { data: 'manager.name', "width": "15%" },
             { data: 'role', "width": "15%" },
@@ -45,7 +45,7 @@ function loadDataTableRequest() {
                         `;
                     }
                 },
-                "width": "25%"
+                "width": "20%"
             }
         ]
     });
