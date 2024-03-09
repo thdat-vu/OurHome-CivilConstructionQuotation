@@ -1,108 +1,116 @@
 ﻿@model SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels.QuotationViewModel
 @{
-	ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details";
 }
 <div class="card mt-3 mb-3 w-100">
 
-	<div class="m-auto w-100">
+    <div class="m-auto w-100">
 
-		<div class="mt-3 mb-5 w-100 m-auto">
-			<div class="row mt-3">
-				<div class="ml-3 rounded-1 float-left">
-					<a href="/Seller/Quotation/ViewQuotation" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Back</a>
-				</div>
-			</div>
-			<h3 class="text-center"><b>Construct Detail</b></h3>
-			<hr class="w-75 m-auto"></hr>
-		</div>
+        <div class="mt-3 mb-5 w-100 m-auto">
+            <div class="row mt-3">
+                <div class="ml-3 rounded-1 float-left">
+                    <a href="/Seller/Quotation/ViewQuotation" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Back</a>
+                </div>
+            </div>
+            <h3 class="text-center"><b>Construct Detail</b></h3>
+            <hr class="w-75 m-auto"></hr>
+        </div>
 
-		<div class="row mt-3 text-center">
-			<div class="col-lg">
-				<label><b class="text-nowrap">QuotationId:</b></label>
-				<p>@Model.CustomQuotation.Id</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Date:</b></label>
-				<p>@Model.CustomQuotation.Date</p>
-			</div>
-			@* <div class="col-lg">
-				**************BUG************** 
-					<label><b class="text-nowrap">SubmissionDateSeller:</b></label>
-				<p>@Model.CustomQuotation.SubmissionDateSeller</p> 
-			</div> *@
-			<div class="col-lg">
-				<label><b class="text-nowrap">Location:</b></label>
-				<p>@Model.CustomQuotation.Location</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Acreage:</b></label>
-				<p>@Model.CustomQuotation.Acreage</p>
-			</div>
-		</div>
+        <div class="row mt-3 text-center">
+            <div class="col-lg">
+                <label><b class="text-nowrap">QuotationId:</b></label>
+                <p>@Model.CustomQuotation.Id</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Date:</b></label>
+                <p>@Model.CustomQuotation.Date</p>
+            </div>
+            @* <div class="col-lg">
+            **************BUG**************
+            <label><b class="text-nowrap">SubmissionDateSeller:</b></label>
+            <p>@Model.CustomQuotation.SubmissionDateSeller</p>
+            </div> *@
+            <div class="col-lg">
+                <label><b class="text-nowrap">Location:</b></label>
+                <p>@Model.CustomQuotation.Location</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Acreage:</b></label>
+                <p>@Model.CustomQuotation.Acreage</p>
+            </div>
+        </div>
 
-		<div class="row mt-3 text-center">
-			<div class="col-lg">
-				<label><b class="text-nowrap">Construction:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.ConstructionId</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Investment:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.InvestmentId</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Width:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.Width</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Length:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.Length</a>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Facade:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.Facade</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Alley:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.Alley</p>
-			</div>
-		</div>
+        <div class="row mt-3 text-center">
+            <div class="col-lg">
+                <label><b class="text-nowrap">Construction:</b></label>
+                <p>@Model.ContructionName</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Investment:</b></label>
+                <p>@Model.InvestmentName</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Width:</b></label>
+                <p>@Model.ConstructDetail.Width</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Length:</b></label>
+                <p>@Model.ConstructDetail.Length</a>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Facade:</b></label>
+                <p>@Model.ConstructDetail.Facade</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Alley:</b></label>
+                <p>@Model.ConstructDetail.Alley</p>
+            </div>
+        </div>
 
 
-		<div class="row text-center">
-			<div class="col-lg">
-				<label><b class="text-nowrap">Number of floors:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.Floor</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Mezzanine:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.Mezzanine</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Rooftop floor:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.RooftopFloor</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Balcony:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.Balcony</p>
-			</div>
-		</div>
+        <div class="row text-center">
+            <div class="col-lg">
+                <label><b class="text-nowrap">Number of floors:</b></label>
+                <p>@Model.ConstructDetail.Floor</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Mezzanine:</b></label>
+                <p>@Model.ConstructDetail.Mezzanine</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Rooftop floor:</b></label>
+                <p>@Model.ConstructDetail.RooftopFloor</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Balcony:</b></label>
+                @if (@Model.ConstructDetail.Balcony)
+                {
+                    <p>Có ban công</p>
+                }
+                else
+                {
+                    <p>Không có ban công</p>
+                }
+            </div>
+        </div>
 
-		<div class="row text-center">
-			<div class="col-lg">
-				<label><b class="text-nowrap">Foudation:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.FoundationId</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Basement:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.BasementId</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Roof:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.RooftopId</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Garden:</b></label>
-				<p>@Model.CustomQuotation.ConstructDetail.Garden</p>
-			</div>
-		</div>
-
+        <div class="row text-center">
+            <div class="col-lg">
+                <label><b class="text-nowrap">Foudation:</b></label>
+                <p>@Model.FoundationName</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Basement:</b></label>
+                <p>@Model.BasementName
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Roof:</b></label>
+                <p>@Model.RoofName</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Garden:</b></label>
+                <p>@Model.ConstructDetail.Garden</p>
+            </div>
+        </div>
+    </div>
+</div>
