@@ -4,12 +4,12 @@
 
 //Need an api method return json to use this
 function loadDataTableRequest() {
-    dataTable = $('#tblReject').DataTable({
-        "ajax": { url: '/Seller/Reject/GetAllReject' },
+    dataTable = $("#tblRequestRejected").DataTable({
+        "ajax": { url: '/Seller/Request/GetAllRequestRejected' },
         "columns": [
             { data: 'id', "width": "5%" },
             {
-                data: 'date',
+                data: 'generateDate',
                 "render": function (data) {
                     // Chuyển đổi ngày thành chuỗi định dạng dd/MM/yyyy
                     let date = new Date(data);
@@ -20,12 +20,17 @@ function loadDataTableRequest() {
                 },
                 "width": "15%"
             },
+            { data: 'cusName', "width": "15%" },
+            { data: 'cusGender', "width": "15%" },
+            { data: 'cusPhone', "width": "15%" },
+            { data: 'cusEmail', "width": "15%" },
+            { data: 'constructType', "width": "15%" },
             { data: 'acreage', "width": "15%" },
-            { data: 'location', "width": "5%" },
-            { data: 'description', "width": "35%" },
+            { data: 'location', "width": "15%" },
             {
-                data: 'status', "width": "10%"
+                data: 'status', "width": "15%"
             },
+            { data: 'description', "width": "25%" },
             {
                 data: 'id',
                 "render": function (data) {
@@ -38,4 +43,3 @@ function loadDataTableRequest() {
         ]
     });
 }
-
