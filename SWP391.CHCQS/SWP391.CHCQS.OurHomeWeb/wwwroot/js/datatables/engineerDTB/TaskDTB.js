@@ -35,21 +35,21 @@ function AddToQuoteTask(url) {
         url: url,
         success: function (data) {
             if (!data.success) {
-                dataTableCQT.ajax.reload();
-                dataTableT.ajax.reload();
-                dataTableCQB.ajax.reload();
+                dataTableCQT.ajax.reload(null, false);
+                dataTableT.ajax.reload(null, false);
+                dataTableCQB.ajax.reload(null, false);
                 toastr.error(data.message);
             } else {
-                dataTableCQT.ajax.reload();
-                dataTableT.ajax.reload();
-                dataTableCQB.ajax.reload();
+                dataTableCQT.ajax.reload(null, false);
+                dataTableT.ajax.reload(null, false);
+                dataTableCQB.ajax.reload(null, false);
                 toastr.success(data.message);
             }
         },
         error: function (data) {
-            dataTableCQT.ajax.reload();
-            dataTableT.ajax.reload();
-            dataTableCQB.ajax.reload();
+            dataTableCQT.ajax.reload(null, false);
+            dataTableT.ajax.reload(null, false);
+            dataTableCQB.ajax.reload(null, false);
             toastr.error(data.message);
         }
     });

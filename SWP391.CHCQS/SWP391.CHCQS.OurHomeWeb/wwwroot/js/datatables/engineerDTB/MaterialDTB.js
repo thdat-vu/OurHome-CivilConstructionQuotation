@@ -36,21 +36,21 @@ function AddToQuoteMaterial(url) {
         url: url,
         success: function (data) {
             if (!data.success) {
-                dataTableMD.ajax.reload();
-                dataTableM.ajax.reload(); 
-                dataTableCQB.ajax.reload();
+                dataTableMD.ajax.reload(null, false);
+                dataTableM.ajax.reload(null, false); 
+                dataTableCQB.ajax.reload(null, false);
                 toastr.error(data.message);
             } else {
-                dataTableMD.ajax.reload();
-                dataTableM.ajax.reload();
-                dataTableCQB.ajax.reload();
+                dataTableMD.ajax.reload(null, false);
+                dataTableM.ajax.reload(null, false);
+                dataTableCQB.ajax.reload(null, false);
                 toastr.success(data.message);
             }
         },
         error: function (data) {
-            dataTableMD.ajax.reload();
-            dataTableM.ajax.reload();
-            dataTableCQB.ajax.reload();
+            dataTableMD.ajax.reload(null, false);
+            dataTableM.ajax.reload(null, false);
+            dataTableCQB.ajax.reload(null, false);
             toastr.error(data.message);
         }
     });
