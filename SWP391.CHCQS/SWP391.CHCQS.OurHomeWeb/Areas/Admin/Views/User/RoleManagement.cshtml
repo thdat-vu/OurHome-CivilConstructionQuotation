@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="card-body p-4">
-        <form method="post" class="row">
+        <form method="post" class="row" >
             <input asp-for="ApplicationUser.Id" hidden />
             <div class="border p-3">
                 @* <div asp-validation-summary="ModelOnly"></div> *@
@@ -30,12 +30,12 @@
                 }
                 <div class="form-floating py-2 col-12">
                     <select asp-for="ApplicationUser.ManagerId" style="@managerVisible" asp-items="@Model.ManagerList" class="form-select"></select>
-                    <label asp-for="ApplicationUser.ManagerId" class="ms-2">Manager</label>
+                    <label asp-for="ApplicationUser.ManagerId" style="@managerVisible" class="ms-2" id="ApplicationUser_ManagerId_Label">Manager</label>
                 </div>
 
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
-                        <button asp-area="Admin" type="submit" class="btn btn-primary form-control">Update Role</button>
+                        <button type="submit" class="btn btn-primary form-control" >Update Role</button>
                     </div>
                     <div class="col-6 col-md-3">
                         <a asp-action="Index" class="btn btn-outline-primary border form-control text-dark">
@@ -58,8 +58,10 @@
                 var selectedRole = $('#ApplicationUser_Role Option:Selected').text();
                 if (selectedRole == "Engineer" || selectedRole == "Seller") {
                     $('#ApplicationUser_ManagerId').show();
+                    $('#ApplicationUser_ManagerId_Label').show();
                 } else {
                     $('#ApplicationUser_ManagerId').hide();
+                    $('#ApplicationUser_ManagerId_Label').hide();
                 }
             });
         });
