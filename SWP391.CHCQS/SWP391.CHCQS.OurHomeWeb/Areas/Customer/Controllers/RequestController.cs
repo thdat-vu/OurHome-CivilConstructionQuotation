@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Customer.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels;
 using SWP391.CHCQS.Services;
+using SWP391.CHCQS.Services.NotificationHub;
 using SWP391.CHCQS.Utility;
 using System.Net.WebSockets;
 using System.Security.Claims;
@@ -18,10 +20,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 	{
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly UserManager<IdentityUser> _userManager;
-		public RequestController(IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager)
+        private readonly IHubContext<NotificationHub> _hubContext;
+        public RequestController(IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager, IHubContext<NotificationHub> hubContext)
         {
             _unitOfWork = unitOfWork;
 			_userManager = userManager;
+            _hubContext = hubContext;
         }
         public async Task<IActionResult> Index()
 		{
@@ -97,7 +101,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 			_unitOfWork.WorkingReport.Add(managerReport);
 			_unitOfWork.Save();
 
-			TempData["Success"] = "Request has been sent successfully";
+            _hubContext.Clients.All.SendAsync("RecieveRequestFromCustomer");
+            TempData["Success"] = "Request has been sent successfully";
 			return RedirectToAction(nameof(RequestHistory));
 		}
 

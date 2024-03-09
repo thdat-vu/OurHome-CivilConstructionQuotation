@@ -1,11 +1,11 @@
-﻿
+﻿var dataTableRQ;
 $(document).ready(function () {
     loadDataTableRequest();
 });
 
 //Need an api method return json to use this
 function loadDataTableRequest() {
-    dataTable = $('#tblRequest').DataTable({
+    dataTableRQ = $('#tblRequest').DataTable({
         "ajax": { url: '/Seller/Request/GetAll' },
         "columns": [
             { data: 'id', "width": "5%" },
