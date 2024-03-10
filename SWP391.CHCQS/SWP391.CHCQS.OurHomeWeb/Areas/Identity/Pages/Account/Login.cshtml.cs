@@ -26,7 +26,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IHubContext<NotificationHub> _hubContext;
         private readonly IUnitOfWork _unitOfWork;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
@@ -35,14 +34,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             ILogger<LoginModel> logger, 
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            IUnitOfWork unitOfWork, IHubContext<NotificationHub> hubContext)
+            IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _unitOfWork = unitOfWork;
             _signInManager = signInManager;
             _logger = logger;
-            _hubContext = hubContext;
         }
 
         /// <summary>
@@ -82,8 +80,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            public string Username { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -128,15 +126,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
                                         
-                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    var user = await _userManager.FindByNameAsync(Input.Username);
                     var role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
 
-                    _hubContext.Clients.All.SendAsync("OnConnection");
 
                     return RedirectToAction("Index", "Home", new { area = role });
                     

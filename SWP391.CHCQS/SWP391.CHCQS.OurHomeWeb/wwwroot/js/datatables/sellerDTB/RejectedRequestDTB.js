@@ -4,9 +4,9 @@
 
 //Need an api method return json to use this
 function loadDataTableRequest() {
-    dataTable = $('#tblRequestCompleted').DataTable({
-        "ajax": { url: '/Seller/Request/GetAllRequestCompleted' },
-        "columns": [    
+    dataTable = $("#tblRequestRejected").DataTable({
+        "ajax": { url: '/Seller/Request/GetAllRequestRejected' },
+        "columns": [
             { data: 'id', "width": "5%" },
             {
                 data: 'generateDate',
@@ -28,9 +28,18 @@ function loadDataTableRequest() {
             { data: 'acreage', "width": "15%" },
             { data: 'location', "width": "15%" },
             {
-                data: 'status',"width": "15%"
+                data: 'status', "width": "15%"
             },
             { data: 'description', "width": "25%" },
+            {
+                data: 'id',
+                "render": function (data) {
+                    return `<div class="w-100 btn-group" role="group">
+                       <a href="/Seller/Request/UndoRejectRequest?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Undo Reject Request</a>
+                    </div >`
+                },
+                "width": "35%"
+            }
         ]
     });
 }

@@ -31,9 +31,10 @@ function loadDataTableRequest() {
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
                        <a href="/Seller/Quotation/Details?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> View Details</a>
+                       <a href="/Seller/Quotation/EditConstructDetails?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Edit Construct Details</a>
                     </div >`
                 },
-                "width": "25%"
+                "width": "35%"
             }
         ]
     });

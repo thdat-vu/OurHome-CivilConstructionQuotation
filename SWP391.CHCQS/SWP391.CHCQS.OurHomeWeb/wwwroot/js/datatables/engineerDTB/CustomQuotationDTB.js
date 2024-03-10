@@ -53,11 +53,11 @@ function SendQuoteToManager(url) {
                 type: 'GET',
                 success: function (data) {
                     if (!data.success) {
-                        dataTableCQ.ajax.reload();
+                        dataTableCQ.ajax.reload(null, false);
                         toastr.error(data.message);
                     }
                     else {
-                        dataTableCQ.ajax.reload();
+                        dataTableCQ.ajax.reload(null, false);
                         // From toastr message
                         toastr.success(data.message);
                     }

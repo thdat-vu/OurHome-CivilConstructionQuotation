@@ -1,11 +1,11 @@
-﻿
+﻿var dataTableRQ;
 $(document).ready(function () {
     loadDataTableRequest();
 });
 
 //Need an api method return json to use this
 function loadDataTableRequest() {
-    dataTable = $('#tblRequest').DataTable({
+    dataTableRQ = $('#tblRequest').DataTable({
         "ajax": { url: '/Seller/Request/GetAll' },
         "columns": [
             { data: 'id', "width": "5%" },
@@ -37,6 +37,7 @@ function loadDataTableRequest() {
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
                        <a href="/Seller/Quotation/CreateConstructDetails?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Create Construct Details</a>
+                       <a href="/Seller/Request/RequestReject?id=${data}" class = "btn btn-primary btn-danger border-0 m-1"><i class="bi bi-plus-square"></i> Reject Quotation</a>
                     </div >`
                 },
                 "width": "35%"

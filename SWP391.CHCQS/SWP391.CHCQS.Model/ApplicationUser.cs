@@ -24,5 +24,8 @@ namespace SWP391.CHCQS.Model
 		[ForeignKey("ManagerId")]
 
 		public virtual ApplicationUser? Manager { get; set; } = null!;
+
+		[NotMapped]
+		public string Role { get; set; } = null!;
 	}
 }

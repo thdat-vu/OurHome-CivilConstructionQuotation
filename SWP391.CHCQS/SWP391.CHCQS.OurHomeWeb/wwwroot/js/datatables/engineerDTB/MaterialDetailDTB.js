@@ -24,7 +24,7 @@ function loadDataTableMaterialDetail() {
                     var formId = 'updateQuantityForm' + data.material.id;
 
                     return `<form class="text-nowrap" id="${formId}" method="post">
-                        <input style="border: 1px solid #aaa;" class="rounded p-1" type="number" name="MaterialQuantity" value="${data.quantity}">
+                        <input style="border: 1px solid #aaa;" class="rounded p-1" type="number" name="MaterialQuantity" value="${data.quantity}" max="999999999">
                         <input type="text" name="MaterialId" hidden value="${data.material.id}">
                         <button class="btn-main text-white border-0 rounded p-1" type="button" onclick="UpdateMaterialQuantity('/Engineer/Material/UpdateQuantity', '${formId}')">
                             <i class="bi bi-arrow-clockwise"></i>
@@ -50,15 +50,15 @@ function DeleteMaterialFromQuote(url) {
         url: url,
         type: 'DELETE',
         success: function (data) {
-            dataTableMD.ajax.reload();
-            dataTableM.ajax.reload();
-            dataTableCQB.ajax.reload();
+            dataTableMD.ajax.reload(null, false);
+            dataTableM.ajax.reload(null, false);
+            dataTableCQB.ajax.reload(null, false);
             toastr.success(data.message);
         },
         error: function (data) {
-            dataTableMD.ajax.reload();
-            dataTableM.ajax.reload();
-            dataTableCQB.ajax.reload();
+            dataTableMD.ajax.reload(null, false);
+            dataTableM.ajax.reload(null, false);
+            dataTableCQB.ajax.reload(null, false);
             toastr.error(data.message);
         }
     });
@@ -72,18 +72,18 @@ function UpdateMaterialQuantity(url, formId) {
         data: formData,
         success: function (data) {
             if (!data.success) {
-                dataTableMD.ajax.reload();
-                dataTableCQB.ajax.reload();
+                dataTableMD.ajax.reload(null, false);
+                dataTableCQB.ajax.reload(null, false);
                 toastr.error(data.message);
             } else {
-                dataTableMD.ajax.reload();
-                dataTableCQB.ajax.reload();
+                dataTableMD.ajax.reload(null, false);
+                dataTableCQB.ajax.reload(null, false);
                 toastr.success(data.message);
             }
         },
         error: function (data) {
-            dataTableMD.ajax.reload();
-            dataTableCQB.ajax.reload();
+            dataTableMD.ajax.reload(null, false);
+            dataTableCQB.ajax.reload(null, false);
             toastr.error(data.message);
         }
     });
