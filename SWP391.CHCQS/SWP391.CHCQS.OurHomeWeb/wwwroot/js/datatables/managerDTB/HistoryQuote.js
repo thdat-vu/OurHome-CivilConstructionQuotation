@@ -1,12 +1,15 @@
-﻿var dataTableCQ;
-$(document).ready(function () {
-    loadDataTableCustomQuotationManager();
-});
+﻿
+
 
 //Need an api method return json to use this
-function loadDataTableCustomQuotationManager() {
-    dataTableCQ = $('#tblCustomQuotation').DataTable({
-        "ajax": { url: '/Manager/CustomQuotation/GetAll?filterStatus=3' },
+$(function loadDataTableHistory() {
+    dataTableCQ = $('#tblQuotation').DataTable({
+        "ajax": { url: '/Manager/CustomQuotation/GetAll' },
+        "lengthChange": false,
+        "paging": false,
+        "searching": false,
+        "ordering": false,
+        "info": false,
         "columns": [
             { data: 'id', "width": "5%" },
             {
@@ -39,4 +42,4 @@ function loadDataTableCustomQuotationManager() {
             }
         ]
     });
-} 
+}); 

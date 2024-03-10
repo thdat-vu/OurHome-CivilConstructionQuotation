@@ -32,7 +32,7 @@
 		<ul class="navbar-nav bg-main sidebar sidebar-dark accordion" id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+			<a style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center" href="/Manager/CustomQuotation/Index">
 				<div class="sidebar-brand-icon">
 					<img src="~/images/logo.png" width="100%"></img>
 				</div>
@@ -55,10 +55,17 @@
 
 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item">
-				<a class="nav-link" href="/Manager/CustomQuotation/Index">
-					<i class="bi bi-file-check-fill"></i>
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pendingPages"
+				   aria-expanded="true" aria-controls="pendingPages">
+					<i class="fas fa-fw fa-folder"></i>
 					<span>Quotation</span>
 				</a>
+				<div id="pendingPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" asp-area="Manager" asp-controller="CustomQuotation" asp-action="Index">Pending</a>
+						<a class="collapse-item" asp-area="Manager" asp-controller="CustomQuotation" asp-action="History">History</a>
+					</div>
+				</div>
 			</li>
 
 			<!-- Divider -->

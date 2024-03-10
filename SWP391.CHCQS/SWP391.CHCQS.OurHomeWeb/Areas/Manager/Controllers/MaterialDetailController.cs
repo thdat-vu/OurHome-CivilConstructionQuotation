@@ -35,8 +35,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
             //lấy note trong session, để load lại trang có note - nếu ko có thì tạo mới
             var rejectDetail = (HttpContext.Session.Get<RejectQuotationDetail>(quoteId));
-            List<MaterialDetailListViewModel> materialDetailVM = null;
-
+            //ko có thì tạo đối tượng rỗng với count = 0
             if (rejectDetail == null)
             {
                 rejectDetail = new RejectQuotationDetail()
@@ -45,8 +44,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                     TaskDetailNotes = new Dictionary<string, string>()
                 };
             }
+            List<MaterialDetailListViewModel> materialDetailVM = null;
             //lưu vào Session lại
-            HttpContext.Session.Set(quoteId, rejectDetail);
+           // HttpContext.Session.Set(quoteId, rejectDetail);
             var materialNote = rejectDetail.MaterialDetailNotes;
             //thêm thông tin material detail
             materialDetailVM = _unitOfWork.MaterialDetail.GetMaterialDetail(quoteId, "Material")

@@ -13,10 +13,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
     public class CustomQuotationTaskController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public CustomQuotationTaskController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _environment;
+        public CustomQuotationTaskController(IUnitOfWork unitOfWork, IWebHostEnvironment environment)
         {
             _unitOfWork = unitOfWork;
+            _environment = environment;
         }
         public IActionResult Index()
         {
@@ -30,8 +31,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         {
             //thêm thông tin task detail
             string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
+
+            //đọc note từ dưới file lên 
+
             //lấy note trong session, để load lại trang có note - nếu ko có thì tạo mới
             var rejectDetail = (HttpContext.Session.Get<RejectQuotationDetail>(quoteId));
+            //ko có thì tạo 1 dối tượng rỗng có count = 0
             if (rejectDetail == null)
             {
                 rejectDetail = new RejectQuotationDetail()
@@ -43,7 +48,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             List<TaskDetailListViewModel> taskDetailVM = null;
             var taskNote = rejectDetail.TaskDetailNotes;
             //lưu vào Session lại
-            HttpContext.Session.Set(quoteId, rejectDetail);
+            //HttpContext.Session.Set(quoteId, rejectDetail);
 
             taskDetailVM = _unitOfWork.TaskDetail.GetTaskDetail(quoteId)
                 .Select((x) => new ViewModels.TaskDetailListViewModel
