@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels;
+using SWP391.CHCQS.Services.NotificationHub;
 using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
@@ -13,22 +14,18 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
     public class RequestController : Controller
     {
         #region ============ DECLARE ============
+        //Declare _uniteOfWork represent to DBContext to get Data form Database.
         private readonly IUnitOfWork _unitOfWork;
-        public RequestController(IUnitOfWork unitOfWork)
+
+        //Declare NotificationHub
+        private readonly IHubContext<NotificationHub> _hubContext;
+        public RequestController(IUnitOfWork unitOfWork, IHubContext<NotificationHub> hubContext)
         {
             _unitOfWork = unitOfWork;
+            _hubContext = hubContext;
         }
 
         #endregion ============ DECLARE ============
-
-        #region ============ ACTIONS ============
-        public async Task<IActionResult> RejectRequest(int id)
-        {
-
-            return View(id);    
-        }
-
-		#endregion ============ ACTIONS ============
 
 		#region ============ API ============
 		/// <summary>
