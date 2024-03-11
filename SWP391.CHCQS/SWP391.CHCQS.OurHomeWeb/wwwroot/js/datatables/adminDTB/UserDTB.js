@@ -7,13 +7,16 @@ $(document).ready(function () {
 function loadDataTableRequest() {
     dataTable = $('#tblUser').DataTable({
         "ajax": { url: '/admin/user/getall' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
-            { data: 'name', "width": "10%" },   
-            { data: 'email', "width": "15%" },
-            { data: 'userName', "width": "10%" },
-            { data: 'phoneNumber', "width": "15%" },
-            { data: 'manager.name', "width": "15%" },
-            { data: 'role', "width": "15%" },
+            { data: 'name' },   
+            { data: 'email'},
+            { data: 'userName'},
+            { data: 'phoneNumber'},
+            { data: 'manager.name'},
+            { data: 'role'},
             {
                 data: { id: "id", lockoutEnd: "lockoutEnd" },
                 "render": function (data) {
@@ -24,10 +27,10 @@ function loadDataTableRequest() {
                         return `
                             <div class="text-center d-flex">
                                 <a onclick=LockUnlock('${data.id}') class = "btn btn-danger text-white mx-1" style="cursor:pointer; width:100px;">
-                                    <i class="bi bi-lock-fill"></i> Lock
+                                    <i class="bi bi-lock-fill"></i> Khóa
                                 </a>
                                 <a href="/admin/user/RoleManagement?userId=${data.id}" class = " btn btn-danger text-white mx-1" style="cursor:pointer; width:150px;">
-                                    <i class="bi bi-pencil-square"></i> Permission
+                                    <i class="bi bi-pencil-square"></i> Phân quyền
                                 </a>
                             </div>
                         `;
@@ -36,16 +39,15 @@ function loadDataTableRequest() {
                         return `
                             <div class="text-center d-flex">
                                 <a onclick=LockUnlock('${data.id}') class = " btn btn-success text-white mx-1" style="cursor:pointer; width:100px;">
-                                    <i class="bi bi-unlock-fill"></i> Unlock
+                                    <i class="bi bi-unlock-fill"></i> Mở khóa
                                 </a>
                                 <a href="/admin/user/RoleManagement?userId=${data.id}" class = " btn btn-danger text-white mx-1" style="cursor:pointer; width:150px;">
-                                    <i class="bi bi-pencil-square"></i> Permission
+                                    <i class="bi bi-pencil-square"></i> Phân quyền
                                 </a>
                             </div>
                         `;
                     }
                 },
-                "width": "20%"
             }
         ]
     });

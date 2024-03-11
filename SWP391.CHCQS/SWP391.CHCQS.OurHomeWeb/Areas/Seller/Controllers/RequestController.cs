@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿    using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
@@ -70,7 +70,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         {
             List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
-                .Where(t => t.Status == SD.RequestStatusApproved)
+				.OrderBy(x => x.GenerateDate)
+				.Where(t => t.Status == SD.RequestStatusApproved)
                 .Select(x => new RequestViewModel
                 {
                     Id = x.Id,
@@ -99,6 +100,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         {
             List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
+                .OrderBy(x => x.GenerateDate)
                 .Where(t => t.Status == SD.RequestStatusRejected)
                 .Select(x => new RequestViewModel
                 {
