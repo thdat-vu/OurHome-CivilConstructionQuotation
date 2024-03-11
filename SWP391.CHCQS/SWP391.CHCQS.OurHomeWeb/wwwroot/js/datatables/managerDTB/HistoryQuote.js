@@ -1,15 +1,9 @@
 ﻿
-
-
 //Need an api method return json to use this
 $(function loadDataTableHistory() {
     dataTableCQ = $('#tblQuotation').DataTable({
         "ajax": { url: '/Manager/CustomQuotation/GetAll' },
-        "lengthChange": false,
-        "paging": false,
-        "searching": false,
-        "ordering": false,
-        "info": false,
+        "order": [[1, "desc"]],
         "columns": [
             { data: 'id', "width": "5%" },
             {

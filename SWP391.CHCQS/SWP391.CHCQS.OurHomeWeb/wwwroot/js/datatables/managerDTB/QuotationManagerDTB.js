@@ -6,7 +6,8 @@ $(document).ready(function () {
 //Need an api method return json to use this
 function loadDataTableCustomQuotationManager() {
     dataTableCQ = $('#tblCustomQuotation').DataTable({
-        "ajax": { url: '/Manager/CustomQuotation/GetAll' },
+        "ajax": { url: '/Manager/CustomQuotation/GetAll?filterStatus=3' },
+        "order": [[1, "desc"]],
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
         },
@@ -42,4 +43,5 @@ function loadDataTableCustomQuotationManager() {
             }
         ]
     });
-} 
+}
+

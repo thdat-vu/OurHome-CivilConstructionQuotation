@@ -31,7 +31,7 @@ namespace SWP391.CHCQS.Utility.Helpers
             {
                 //Directory.CreateDirectory(targetFolder);
                 //File.Open(targetFolder, FileMode.Create, FileAccess.ReadWrite);
-                using (File.Create(targetFolder + $"\\{fileName.Trim()}")) ;
+                using (File.Create(targetFolder + $"\\{fileName.Trim()}"));
             }
             return targetFolder + $"\\{fileName.Trim()}";
         }
