@@ -25,11 +25,11 @@ function loadDataTableRequest() {
                     if (lockout > today) {
                         // user is currently locked
                         return `
-                            <div class="text-center d-flex">
-                                <a onclick=LockUnlock('${data.id}') class = "btn btn-danger text-white mx-1" style="cursor:pointer; width:100px;">
+                            <div class="w-100 btn-group" role="group">
+                                <a onclick=LockUnlock('${data.id}') class = "text-nowrap btn btn-danger border-0 m-1">
                                     <i class="bi bi-lock-fill"></i> Khóa
                                 </a>
-                                <a href="/admin/user/RoleManagement?userId=${data.id}" class = " btn btn-danger text-white mx-1" style="cursor:pointer; width:150px;">
+                                <a href="/admin/user/RoleManagement?userId=${data.id}" class = "text-nowrap btn btn-danger border-0 m-1">
                                     <i class="bi bi-pencil-square"></i> Phân quyền
                                 </a>
                             </div>
@@ -37,11 +37,11 @@ function loadDataTableRequest() {
                     }
                     else {
                         return `
-                            <div class="text-center d-flex">
-                                <a onclick=LockUnlock('${data.id}') class = " btn btn-success text-white mx-1" style="cursor:pointer; width:100px;">
+                            <div class="w-100 btn-group" role="group">
+                                <a onclick=LockUnlock('${data.id}') class = " text-nowrap btn btn-success border-0 m-1">
                                     <i class="bi bi-unlock-fill"></i> Mở khóa
                                 </a>
-                                <a href="/admin/user/RoleManagement?userId=${data.id}" class = " btn btn-danger text-white mx-1" style="cursor:pointer; width:150px;">
+                                <a href="/admin/user/RoleManagement?userId=${data.id}" class = "text-nowrap btn btn-danger border-0 m-1">
                                     <i class="bi bi-pencil-square"></i> Phân quyền
                                 </a>
                             </div>

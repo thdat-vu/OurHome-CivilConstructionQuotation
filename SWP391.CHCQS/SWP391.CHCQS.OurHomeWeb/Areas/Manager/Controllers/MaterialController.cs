@@ -218,6 +218,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         {
             List<Material> objMaterialList = _unitOfWork.Material.GetAllWithFilter(filter: m => m.Status == true, includeProperties: "Category").ToList();
             return Json(new { data = objMaterialList }); //json + material list for data table.
+
         }
 
 
