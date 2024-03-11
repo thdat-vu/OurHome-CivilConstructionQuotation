@@ -40,7 +40,7 @@
                                 <option>cái</option>
                             </select>
                             <label asp-for="Material.Unit" class="ms-2"></label>
-                            @* span asp-validation-for="Material.Unit" class="text-danger"></span> *@
+                            <span asp-validation-for="Material.Unit" class="text-danger"></span> 
                         </div>
                         <div class="form-floating py-2 col-12">
                             <select asp-for="Material.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
