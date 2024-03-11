@@ -10,16 +10,27 @@ namespace SWP391.CHCQS.Model
         [Key]
         [MaxLength(10)]
         public string QuotationId { get; set; } = null!;
+        [Required]
         public decimal Width { get; set; }
+        [Required]
         public decimal Length { get; set; }
+        [Required]
         public int Facade { get; set; }
         [MaxLength(50)]
+        [Required]
         public string Alley { get; set; } = null!;
+        [Required]
+        [Range(1, 100)]
         public int Floor { get; set; }
+        [Required]
+        [Range(1, 100)]
         public int Room { get; set; }
+        [Required]
         public decimal Mezzanine { get; set; }
+        [Required]
         public decimal RooftopFloor { get; set; }
         public bool Balcony { get; set; }
+        [Required]
         public decimal Garden { get; set; }
         [MaxLength(10)]
         public string ConstructionId { get; set; } = null!;

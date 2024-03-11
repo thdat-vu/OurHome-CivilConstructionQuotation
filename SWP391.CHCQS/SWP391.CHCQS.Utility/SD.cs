@@ -9,17 +9,16 @@ namespace SWP391.CHCQS.Utility
 {
     public class SD //static detail
     {
-        //từ khóa mở đầu cho request
-        public const string requestIdKey = "RF";
+		#region Prefix
+		//từ khóa mở đầu cho request
+		public const string requestIdKey = "RF";
         //từ khóa mở đầu cho quotation
         public const string quotationIdKey = "CQ";
-        //từ khóa mở đầu cho mỗi id staff tùy theo role
-        public const string SellerIdKey = "SL";
-        public const string EngineertIdKey = "EN";
-        public const string ManagerIdKey = "MG";
+		#endregion
 
-        //tempId for table <-> trigger will handle Id generating
-        public const string TempId = "id";
+
+		//tempId for table <-> trigger will handle Id generating
+		public const string TempId = "id";
 
 		#region CustomQuotation Status
 

@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Material";
-}
+﻿@model List<MaterialCategory>
 
 <div class="d-flex img-thumbnail justify-content-center">
     <div class="d-flex align-items-center">
@@ -21,7 +19,7 @@
 
 <div class="container-fluid mt-5 d-flex">
     <div class="row d-flex">
-        <div class="col-lg-4 order-lg-1">
+        <div class="col-lg-4 order-lg-1" style="position:">
             <div id="category-container">
                 <h3 class="text-uppercase font-weight-bold" style="color:#414141">Category List</h3>
                 <ul class="category-list">
@@ -44,71 +42,17 @@
                                 </strong>
                             </span>
                         </a>
+                        <ol>
+                            @foreach (var item in Model)
+                            {
+                                <li class="font-weight-bold">
+                                    <a href="#@item.Name">
+                                        <strong>@item.Name</strong>
+                                    </a>
+                                </li>
+                            }
+                        </ol>
                     </li>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#brick">
-                                2.1.
-                                <strong>1. Brick</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#cement">
-                                2.2.
-                                <strong>2. Cement</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#sand">
-                                2.3.
-                                <strong>3. Sand</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#stone">
-                                2.4.
-                                <strong>4. Stone</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#iron">
-                                2.5.
-                                <strong>5. Iron and Steel</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#concrete">
-                                2.6.
-                                <strong>6. Concrete</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#plaster">
-                                2.7.
-                                <strong>7. Plaster</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#plastic">
-                                2.8.
-                                <strong>8. Plastic</strong>
-                            </a>
-                        </li>
-                    </ul>
                     <li class="font-weight-bold">
                         <a href="#application">
                             3.
@@ -124,47 +68,39 @@
                                 <strong>Today's construction materials price list is updated to the latest in 2024</strong>
                             </span>
                         </a>
+                        <ul>
+                            <li class="font-weight-bold">
+                                <a href="#stone-price">
+                                    4.1
+                                    <strong>Price of construction stone</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#sand-price">
+                                    4.2
+                                    <strong>Price of construction sand</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#iron-price">
+                                    4.3
+                                    <strong>Price of construction iron</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#brick-price">
+                                    4.4
+                                    <strong>Price of construction brick</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#cement-price">
+                                    4.5
+                                    <strong>Price of construction cement</strong>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#stone-price">
-                                4.1
-                                <strong>Price of construction stone</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#sand-price">
-                                4.2
-                                <strong>Price of construction sand</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#iron-price">
-                                4.3
-                                <strong>Price of construction iron</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#brick-price">
-                                4.4
-                                <strong>Price of construction brick</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#cement-price">
-                                4.5
-                                <strong>Price of construction cement</strong>
-                            </a>
-                        </li>
-                    </ul>
                 </ul>
             </div>
         </div>
@@ -310,7 +246,7 @@
 
                     </tbody>
                 </table>
-                
+
                 <h3 id="iron-price" class="mt-3">
                     <strong>Price of construction Iron</strong>
                 </h3>
@@ -478,7 +414,7 @@
             </div>
 
         </div>
-        
+
     </div>
 </div>
 
