@@ -1,0 +1,46 @@
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK002": "",
+    "TSK003": "",
+    "TSK001": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT103": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK002": "",
+    "TSK003": "",
+    "TSK001": "hello"
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT103": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+

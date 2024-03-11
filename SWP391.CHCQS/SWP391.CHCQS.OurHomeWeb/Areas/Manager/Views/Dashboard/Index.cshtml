@@ -1,53 +1,131 @@
 ﻿@{
-    ViewData["Title"] = "Quotation Statistic";
+    ViewData["Title"] = "Tổng Quan";
 }
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Biểu đồ thanh</h6>
+<div class="container-fluid">
+
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Biểu đồ thanh</h6>
+        </div>
+        <div class="">
+            <select id="yearSelect" class="form-select" aria-label="Default select example">
+            </select>
+            <div class="chart-bar">
+                <canvas id="myQuoteBarChart"></canvas>
+            </div>
+        </div>
     </div>
-    <div class="">
-        <select  id="yearSelect" class="form-select" aria-label="Default select example">
-        </select>
-        <div class="chart-bar">
-            <canvas id="myQuoteBarChart"></canvas>
+
+    <div class="card shadow border-0 mb-4">
+        <div class="card-body p-4">
+            <div class="pl-1 container-fluid ">
+                <div class="p-1 mr-auto row w-25">
+
+                    <button id="quotation_button" class=" m-1 col-md-5 btn btn-main text-white">Báo giá</button>
+                    <button id="request_button" class="m-1 col-md-5 btn btn-main text-white">Yêu cầu báo giá</button>
+                </div>
+            </div>
+            <div class="table-responsive " id="quoteDiv">
+                <table id="tblAllCustomQuotation" class="table-bordered table-striped text-black" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                Mã
+                            </th>
+                            <th>
+                                Ngày tạo
+                            </th>
+                            <th>
+                                Diện tích
+                            </th>
+                            <th>
+                                Vị trí
+                            </th>
+                            <th>
+                                Loại công trình
+                            </th>
+                            <th>
+                                Trạng thái
+                            </th>
+                            <th>
+                                Seller
+                            </th>
+                            <th>
+                                Engineer
+                            </th>
+                            <th>
+                                Manager
+                            </th>
+                            <!--
+
+                            <th>
+                                Hành động
+                            </th>
+                            -->
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+            <div class="table-responsive " id="requestDiv">
+                <table id="tblAllRequest" class="table-bordered table-striped text-black" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                Mã
+                            </th>
+                            <th>
+                                Ngày tạo
+                            </th>
+                            <th>
+                                Tên khách hàng
+                            </th>
+                            <th>
+                                Giới tính
+                            </th>
+                            <th>
+                                SĐT
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Loại công trình
+                            </th>
+                            <th>
+                                Diện tich
+                            </th>
+                            <th>
+                                Vị trí
+                            </th>
+                            <th>
+                                Trạng thái
+                            </th>
+                            <th>
+                                Mô tả
+                            </th>
+                            <!--
+
+                             <th>
+                                 Hành động
+                             </th>
+                            -->
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+
         </div>
     </div>
 </div>
-	<div class="card-body p-3">
-		<div class="table-responsive">
-			<table id="tblQuotation" class="table-bordered table-striped text-black" style="width:100%">
-				<thead>
-					<tr>
-						<th>
-							Mã
-						</th>
-						<th>
-							Ngày tạo
-						</th>
-						<th>
-							Diện tích 
-						</th>
-						<th>
-							Vị trí
-						</th>
-						<th>
-							Mô tả
-						</th>
-						<th>
-							Trạng thái
-						</th>
-						
-					</tr>
-				</thead>
-			</table>
-		</div>
-	</div>
-</div>
-
 
 @section Scripts {
     <script src="~/js/charts/QuoteStatisticChart.js"></script>
-    <script src="~/js/event_load.js"></script>
+    <script src="~/js/datatables/managerDTB/AllDTB.js"></script>
+    <script src="~/js/Onload_Event.js"></script>
+
 }
-      
+
 

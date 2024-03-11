@@ -28,7 +28,7 @@ namespace SWP391.CHCQS.Utility
 		public const int Completed = 4;//Completed and be sent to customer
 		public const int Cancelled = -1; //customer not listen the call or not interested, this status is only available before Processing (2)
 		public const int Rejected = 0; //manager reject task
-
+		public const int GetAllFilterStatus = 5; //sử dụng cho việc query ra tất cả các custom quotation 
 		#endregion
 
 
