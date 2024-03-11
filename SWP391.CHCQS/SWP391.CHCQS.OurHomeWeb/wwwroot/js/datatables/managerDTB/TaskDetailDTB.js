@@ -1,14 +1,16 @@
-var dataTableTD;
+﻿var dataTableTDRS;
 $(document).ready(function () {
     loadDataTaskDetail();
 });
 
-
 //change name method - remember
 //Need an api method return json to use this
 function loadDataTaskDetail() {
-    dataTableTD = $('#tblTaskDetail').DataTable({
+    dataTableTDRS = $('#tblTaskDetail').DataTable({
         "ajax": { url: '/Manager/CustomQuotationTask/GetDetail' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             {
                 data: "taskId",
@@ -17,44 +19,43 @@ function loadDataTaskDetail() {
                 },
             },
             { data: 'taskName' },
-            { data: 'price'},
+            { data: 'price' },
             {
                 data: null,
+                // Generate a unique form ID using the material ID
                 "render": function (data) {
-                    // Generate a unique form ID using the material ID
-                    var formId = 'takeNoteTask' + data.taskId;
-                    var noteHere = data.note.value ?? "The reason in case of rejection";
-                    return `<form class="text-nowrap" action="/Manager/CustomQuotation/TakeNoteTask" id="${formId}" method="post">
-                       <textarea name="TaskNote" placeholder="${noteHere}" class="form-control" id="textAreaExample1" rows="4"></textarea>
-                        <input type="text" name="TaskId" hidden value="${data.taskId}"/>
-                        <button class="btn-main text-nowrap border-0 rounded p-1 w-100"/>
-                         <i class="bi bi-check-lg">Note</i>
-                        </button>
-                    </form>`
+                    return `<textarea class="form-control" row="2"
+                    onChange="InputNoteTaskEvent('/Manager/CustomQuotation/TakeNoteTaskToSession','${data.taskId}')" id=${data.taskId??""}>${data.note == null? "": data.note.value}</textarea>`
                 },
-            }
+            },
+            
         ]
     });
 }
+function InputNoteTaskEvent(url, taskId) {
+    var typingTimer
+    clearTimeout(typingTimer); // Xóa bỏ bất kỳ setTimeout đang chờ thực hiện động còn đang chạy
 
-//function takeNoteTask(url, formId) {
-//    var formData = $('#' + formId).serialize();
-//    $.ajax({
-//        url: url,
-//        type: 'POST',
-//        data: formData,
-//        success: function (data) {
-//            if (!data.success) {
-//                dataTableTD.ajax.reload();
-//                toastr.error(data.message);
-//            } else {
-//                dataTableTD.ajax.reload();
-//                toastr.success(data.message);
-//            }
-//        },
-//        error: function (data) {
-//            dataTableTD.ajax.reload();
-//            toastr.error(data.message);
-//        }
-//    });
-//};
+    // Lấy giá trị của textarea và nội dung của thẻ p
+    var note = document.getElementById(`${taskId}`).value;
+    //console.log(note);
+    typingTimer = setTimeout(function () {
+
+        // Thực hiện cuộc gọi AJAX
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: { taskId: taskId, note: note},
+            success: function () {
+                //console.log(response.add);
+                dataTableTDRS.ajax.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error('Ajax call failed:', error);
+            }
+        });
+        //console.log(materialId);
+        //console.log(quantity);
+        //console.log(note);
+    }, 100);
+} 

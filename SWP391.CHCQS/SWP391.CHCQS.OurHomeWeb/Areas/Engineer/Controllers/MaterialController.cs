@@ -138,13 +138,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				if (material == null)
 				{
 					////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-					//TempData["Error"] = $"Material not found with Id = {MaterialId}";
+					//TempData["Error"] = $"Không tìm thấy vật tư! Mã = {MaterialId}";
 
 					////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 					//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 					//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-					return Json(new { success = false, message = $"Material not found with Id = {MaterialId}" });
+					return Json(new { success = false, message = $"Không tìm thấy vật tư! Mã = {MaterialId}" });
 				}
 				else //if it not equal null
 				{
@@ -163,26 +163,26 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			else // if it already in session
 			{
 				////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				//TempData["Error"] = $"Material already in quote with Id = {MaterialId}";
+				//TempData["Error"] = $"Vật tư đã tồn tại! Mã = {MaterialId}";
 
 				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"Material already in quote with Id = {MaterialId}" });
+				return Json(new { success = false, message = $"Vật tư đã tồn tại! Mã = {MaterialId}" });
 			}
 
 			//Update MaterialListSession with materialCart  
 			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
 
 			////Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-			//TempData["Success"] = $"Add material successfully with Id = {MaterialId}";
+			//TempData["Success"] = $"Thêm vật tư thành công! Mã = {MaterialId}";
 
 			////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 			//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return Json(new { success = true, message = $"Add material successfully with Id = {MaterialId}" });
+			return Json(new { success = true, message = $"Thêm vật tư thành công! Mã = {MaterialId}" });
 		}
 
 		/// <summary>
@@ -203,13 +203,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			if (materialItem == null)
 			{
 				////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				//TempData["Error"] = $"Material not found with Id = {MaterialId}";
+				//TempData["Error"] = $"Không tìm thấy vật tư! Mã = {MaterialId}";
 
 				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"Material not found with Id = {MaterialId}" });
+				return Json(new { success = false, message = $"Không tìm thấy vật tư! Mã = {MaterialId}" });
 			}
 
 			//Delete materialItem in materialCart
@@ -219,18 +219,23 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			HttpContext.Session.Set(SessionConst.MATERIAL_LIST_KEY, materialCart);
 
 			////Return success message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-			//TempData["Success"] = $"Delete material successfully with Id = {MaterialId}";
+			//TempData["Success"] = $"Xóa vật tư thành công! Mã = {MaterialId}";
 
 			////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 			//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return Json(new { success = false, message = $"Delete material successfully with Id = {MaterialId}" });
+			return Json(new { success = false, message = $"Xóa vật tư thành công! Mã = {MaterialId}" });
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> UpdateQuantity([FromForm] string MaterialId, [FromForm] int MaterialQuantity)
 		{
+			if (MaterialQuantity > 999999999 || MaterialQuantity < 1)
+			{
+				return Json(new { success = false, message = $"Số lương của vật tư {MaterialId} không hợp lệ!" });
+			}
+
 			//Asign MaterialListSession to materialCart
 			var materialCart = MaterialListSession;
 
@@ -241,13 +246,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			if (materialItem == null)
 			{
 				////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				//TempData["Error"] = $"Material not found with Id = {MaterialId}";
+				//TempData["Error"] = $"Không tìm thấy vật tư! Mã = {MaterialId}";
 
 				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"Material not found with Id = {MaterialId}" });
+				return Json(new { success = false, message = $"Không tìm thấy vật tư! Mã = {MaterialId}" });
 			}
 
 			//Delete exist materialItem in materialCart
@@ -270,7 +275,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return Json(new { success = true, message = $"Update material quantity successfully with Id = {MaterialId}" });
+			return Json(new { success = true, message = $"Cập nhật số lượng vật tư thành công! Mã = {MaterialId}" });
 		}
 
 

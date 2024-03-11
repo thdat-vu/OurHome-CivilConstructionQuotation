@@ -6,8 +6,11 @@
 function loadDataTableRequest() {
     dataTable = $('#tblQuotation').DataTable({
         "ajax": { url: '/Seller/Quotation/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
-            { data: 'id', "width": "5%" },
+            { data: 'id', },
             {
                 data: 'date',
                 "render": function (data) {
@@ -20,21 +23,20 @@ function loadDataTableRequest() {
                 },
                 "width": "15%"
             },
-            { data: 'acreage', "width": "15%" },
-            { data: 'location', "width": "5%" },
-            { data: 'description', "width": "35%" },
+            { data: 'acreage', },
+            { data: 'location', },
+            { data: 'description', },
             {
-                data: 'status', "width": "10%"
+                data: 'status',
             },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Seller/Quotation/Details?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> View Details</a>
-                       <a href="/Seller/Quotation/EditConstructDetails?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Edit Construct Details</a>
+                       <a href="/Seller/Quotation/Details?id=${data}" class = "text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-eye"></i> Xem</a>
+                       <a href="/Seller/Quotation/EditConstructDetails?id=${data}" class = "text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-pencil-square"></i> Chỉnh sửa</a>
                     </div >`
                 },
-                "width": "35%"
             }
         ]
     });

@@ -153,7 +153,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 					//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 					//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-					return Json(new { success = false, message = $"Task not found with Id = {TaskId}" });
+					return Json(new { success = false, message = $"Không tìm thấy công việc! Mã = {TaskId}" });
 
 				}
 				else //if it not equal null
@@ -182,7 +182,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"Task already in quote with Id = {TaskId}" });
+				return Json(new { success = false, message = $"Công việc đã tồn tại! Mã = {TaskId}" });
 			}
 
 			//Update TaskListSession with taskCart  
@@ -195,7 +195,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return Json(new { success = true, message = $"Add task successfully with Id = {TaskId}" });
+			return Json(new { success = true, message = $"Thêm công việc thành công! Mã = {TaskId}" });
 		}
 
 
@@ -223,7 +223,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"Task not found with Id = {TaskId}" });
+				return Json(new { success = false, message = $"Không tìm thấy công việc! Mã = {TaskId}" });
 			}
 
 			//Delete taskItem in taskCart
@@ -236,7 +236,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//TempData["Success"] = $"Delete task successfully with Id = {TaskId}";
 
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return Json(new { success = true, message = $"Delete task successfully with Id = {TaskId}" });
+			return Json(new { success = true, message = $"Xóa công việc thành công! Mã = {TaskId}" });
 		}
 
 

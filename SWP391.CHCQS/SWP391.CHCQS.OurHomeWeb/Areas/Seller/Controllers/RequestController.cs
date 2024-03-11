@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿    using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels;
+using SWP391.CHCQS.Services.NotificationHub;
 using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
@@ -12,22 +14,18 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
     public class RequestController : Controller
     {
         #region ============ DECLARE ============
+        //Declare _uniteOfWork represent to DBContext to get Data form Database.
         private readonly IUnitOfWork _unitOfWork;
-        public RequestController(IUnitOfWork unitOfWork)
+
+        //Declare NotificationHub
+        private readonly IHubContext<NotificationHub> _hubContext;
+        public RequestController(IUnitOfWork unitOfWork, IHubContext<NotificationHub> hubContext)
         {
             _unitOfWork = unitOfWork;
+            _hubContext = hubContext;
         }
 
         #endregion ============ DECLARE ============
-
-        #region ============ ACTIONS ============
-        public async Task<IActionResult> RejectRequest(int id)
-        {
-
-            return View(id);    
-        }
-
-		#endregion ============ ACTIONS ============
 
 		#region ============ API ============
 		/// <summary>
@@ -39,6 +37,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         {
             List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
+                .OrderBy(x => x.GenerateDate)
                 .Where(t => t.Status == SD.RequestStatusPending)
                 .Select(x => new RequestViewModel
                 {
@@ -68,7 +67,38 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         {
             List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
-                .Where(t => t.Status == SD.RequestStatusApproved)
+				.OrderBy(x => x.GenerateDate)
+				.Where(t => t.Status == SD.RequestStatusApproved)
+                .Select(x => new RequestViewModel
+                {
+                    Id = x.Id,
+                    GenerateDate = x.GenerateDate,
+                    Description = x.Description,
+                    ConstructType = x.ConstructType,
+                    Acreage = x.Acreage,
+                    Location = x.Location,
+                    Status = x.Status,
+                    CusName = x.Customer.Name,
+                    CusPhone = x.Customer.PhoneNumber,
+                    CusEmail = x.Customer.Email,
+                    CusGender = x.Customer.Gender
+                })
+                .ToList();
+
+            return Json(new { data = RequestVMlList });
+        }
+
+        /// <summary>
+        /// This function get all Customer's Request in Database and return it into JSON, this function ne lib Datatables to show data
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAllRequestRejected()
+        {
+            List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
+                .GetAll(includeProperties: "Customer")
+                .OrderBy(x => x.GenerateDate)
+                .Where(t => t.Status == SD.RequestStatusRejected)
                 .Select(x => new RequestViewModel
                 {
                     Id = x.Id,
@@ -89,6 +119,42 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         }
         #endregion ============ API ============
 
+        #region ============ ACTIONS ============
+        public async Task<IActionResult> RequestReject(string id)
+        {
+            var requestForm = _unitOfWork.RequestForm.Get(x => x.Id == id);
+            if (requestForm.Status == SD.RequestStatusPending)
+            {
+                requestForm.Status = SD.RequestStatusRejected;
+                _unitOfWork.RequestForm.Update(requestForm);
+                _unitOfWork.Save();
+                TempData["success"] = "Rejected successfully";
+            }
+
+
+            return RedirectToAction(nameof(ViewRequestRejected));
+        }
+
+       
+
+        public async Task<IActionResult> UndoRejectRequest(string id)
+        {
+            var requestForm = _unitOfWork.RequestForm.Get(x => x.Id == id);
+            if(requestForm.Status == SD.RequestStatusRejected)
+            {
+                requestForm.Status = SD.RequestStatusPending;
+                _unitOfWork.RequestForm.Update(requestForm);
+                _unitOfWork.Save();
+                TempData["success"] = "Undo reject request successfully";
+            }
+           
+           
+            return RedirectToAction("ViewRequestRejected", "Request");
+        }
+
+
+        #endregion ============ ACTIONS ============
+
         #region ============ FUNCTIONS ============
         public async Task<IActionResult> Index()
         {
@@ -96,6 +162,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         }
 
         public async Task<IActionResult> ViewRequestCompleted()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> ViewRequestRejected()
         {
             return View();
         }

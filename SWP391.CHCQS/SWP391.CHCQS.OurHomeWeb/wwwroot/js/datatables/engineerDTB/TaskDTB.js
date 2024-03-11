@@ -7,6 +7,9 @@ $(document).ready(function () {
 function loadDataTableTask() {
     dataTableT = $('#tblTask').DataTable({
         "ajax": { url: '/Engineer/Task/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             {
                 data: "id",
@@ -21,7 +24,7 @@ function loadDataTableTask() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a onClick="AddToQuoteTask('/Engineer/Task/AddToQuote?TaskId=${data}')" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
+                       <a onClick="AddToQuoteTask('/Engineer/Task/AddToQuote?TaskId=${data}')" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Thêm</a>
                     </div>`
                 },
             }
@@ -35,21 +38,21 @@ function AddToQuoteTask(url) {
         url: url,
         success: function (data) {
             if (!data.success) {
-                dataTableCQT.ajax.reload();
-                dataTableT.ajax.reload();
-                dataTableCQB.ajax.reload();
+                dataTableCQT.ajax.reload(null, false);
+                dataTableT.ajax.reload(null, false);
+                dataTableCQB.ajax.reload(null, false);
                 toastr.error(data.message);
             } else {
-                dataTableCQT.ajax.reload();
-                dataTableT.ajax.reload();
-                dataTableCQB.ajax.reload();
+                dataTableCQT.ajax.reload(null, false);
+                dataTableT.ajax.reload(null, false);
+                dataTableCQB.ajax.reload(null, false);
                 toastr.success(data.message);
             }
         },
         error: function (data) {
-            dataTableCQT.ajax.reload();
-            dataTableT.ajax.reload();
-            dataTableCQB.ajax.reload();
+            dataTableCQT.ajax.reload(null, false);
+            dataTableT.ajax.reload(null, false);
+            dataTableCQB.ajax.reload(null, false);
             toastr.error(data.message);
         }
     });

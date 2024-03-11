@@ -183,7 +183,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 		public async Task<IActionResult> GetAll()
 		{
 			List<QuotationStatusViewModel> CustomQuotationList = _unitOfWork.CustomQuotation
-				.GetAll().Select(x => new QuotationStatusViewModel
+				.GetAll().OrderBy(x => x.Date).Select(x => new QuotationStatusViewModel
                 {
                     Id = x.Id,
                     Date = x.Date,

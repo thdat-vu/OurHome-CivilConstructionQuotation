@@ -2,14 +2,14 @@
 
 <div class="d-flex img-thumbnail justify-content-center">
 	<div class="d-flex align-items-center">
-		<h3 class="p-3"><a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a></h3>
+		<h3 class="p-3"><a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a></h3>
 		<i class="fa-solid fa-arrow-right-long"></i>
-		<h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Project" asp-action="Index">Project</a></h3>
+		<h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Project" asp-action="Index">Dự án</a></h3>
 	</div>
 </div>
 
 <div class="container mt-5">
-	<h1 style="font-weight:600">Design modern and super luxurious</h1>
+	<h1 style="font-weight:600">Thiết kế hiện đại và sang trọng</h1>
 	<p style="font-size:1.3em">Time: @Model.Date</p>
 </div>
 
@@ -26,20 +26,20 @@
 			<ul style="display:flex; list-style-type:none;justify-content:flex-start; margin-left: -2em">
 				<li>
 					<a href="#overview" style="font-size:18px;line-height:28px;font-weight: 600; display:block;">
-						Overview
-						<span style="font-size:12px;line-height:16px;font-weight:normal !important;display:block">Introducing the project</span>
+						Tổng quan
+						<span style="font-size:12px;line-height:16px;font-weight:normal !important;display:block">Giới thiệu</span>
 					</a>
 				</li>
 				<li>
 					<a href="#location" style="font-size:18px;line-height:28px;font-weight: 600; display:block;margin-left:2em">
-						Location
-						<span style="font-size:12px;line-height:16px;font-weight:normal !important;display:block">Geographical location</span>
+						Vị trí
+						<span style="font-size:12px;line-height:16px;font-weight:normal !important;display:block">Vị trí địa lý</span>
 					</a>
 				</li>
 				<li>
 					<a href="#detail" style="font-size:18px;line-height:28px;font-weight: 600; display:block;margin-left:2em">
-						House details
-						<span style="font-size:12px;line-height:16px;font-weight:normal !important;display:block">Outstanding features of the house</span>
+						Chi tiết dự án
+						<span style="font-size:12px;line-height:16px;font-weight:normal !important;display:block">Đặc điểm nổi bật của dự án</span>
 					</a>
 				</li>
 			</ul>
@@ -50,8 +50,8 @@
 			<div class="row d-flex">
 				<div class="col-lg-4 order-lg-1">
 					<div id="category-container">
-						<h3 style="text-align:center">Leave your information to receive a quote</h3>
-						<p>Please leave your information to receive the latest advice and updates on this project</p>
+						<h3 style="text-align:center">Để lại thông tin của bạn để nhận báo giá</h3>
+						<p>Hãy để lại thông tin của bạn để nhận được tư vấn và cập nhật mới nhất về dự án này</p>
 						<button style="background-color: #F27456; color:#fff; margin:0 auto; display:flex" class="btn btn-main" type="submit">Contact for Quote</button>
 					</div>
 				</div>
@@ -59,7 +59,7 @@
 					<div class="info-material">
 						<div class="mb-3">
 							<h2 id="overview">
-								<span class="title font-weight-bold">Overview of @Model.Name</span>
+								<span class="title font-weight-bold">Tổng quan về dự án @Model.Name</span>
 							</h2>
 							<p>@Model.Overview</p>
 							<img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%" />
@@ -69,29 +69,29 @@
 							<table class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>Information</th>
-										<th>Detail</th>
+										<th>Thông tin</th>
+										<th>Chi tiết</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td>Owner</td>
+										<td>Chủ sỡ hữu</td>
 										<td>@Model.Customer.Name</td>
 									</tr>
 									<tr>
-										<td>Location</td>
+										<td>Vị trí</td>
 										<td>@Model.Location</td>
 									</tr>
 									<tr>
-										<td>Scale</td>
+										<td>Quy mô</td>
 										<td>@Model.Scale</td>
 									</tr>
 									<tr>
-										<td>Size</td>
+										<td>Kích thước</td>
 										<td>@Model.Size</td>
 									</tr>
 									<tr>
-										<td>Description</td>
+										<td>Mô tả</td>
 										<td>@Model.Description</td>
 									</tr>
 								</tbody>

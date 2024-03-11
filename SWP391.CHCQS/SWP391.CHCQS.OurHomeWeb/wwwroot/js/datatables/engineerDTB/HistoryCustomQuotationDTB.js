@@ -7,6 +7,9 @@ $(document).ready(function () {
 function loadDataTableHistoryQuotation() {
     dataTableCQ = $('#tblCustomQuotation').DataTable({
         "ajax": { url: '/Engineer/Quotation/GetHistory' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             { data: 'id', },
             {
@@ -28,7 +31,7 @@ function loadDataTableHistoryQuotation() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                        <a href="/Engineer/Quotation/Detail?QuotationId=${data}" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-eye"></i> Detail</a>
+                        <a href="/Engineer/Quotation/Detail?QuotationId=${data}" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-eye"></i> Chi tiết</a>
                     </div >`
                 },
             }

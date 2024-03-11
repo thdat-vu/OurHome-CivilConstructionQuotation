@@ -10,6 +10,9 @@ function loadDataTableMaterial() {
     //create DOM element as a datatable type
     dataTableM = $('#tblMaterial').DataTable({
         "ajax": { url: '/Manager/Material/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             {
                 data: 'id',

@@ -7,8 +7,11 @@ $(document).ready(function () {
 function loadDataTableRequest() {
     dataTableRQ = $('#tblRequest').DataTable({
         "ajax": { url: '/Seller/Request/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
-            { data: 'id', "width": "5%" },
+            { data: 'id'},
             {
                 data: 'generateDate',
                 "render": function (data) {
@@ -19,28 +22,26 @@ function loadDataTableRequest() {
                     let year = date.getFullYear();
                     return `${day}/${month}/${year}`;
                 },
-                "width": "15%"
             },
-            { data: 'cusName', "width": "15%" },
-            { data: 'cusGender', "width": "15%" },
-            { data: 'cusPhone', "width": "15%" },
-            { data: 'cusEmail', "width": "15%" },   
-            { data: 'constructType', "width": "15%" },
-            { data: 'acreage', "width": "15%" },
-            { data: 'location', "width": "15%" },
+            { data: 'cusName' },
+            { data: 'cusGender'},
+            { data: 'cusPhone'},
+            { data: 'cusEmail'},   
+            { data: 'constructType'},
+            { data: 'acreage' },
+            { data: 'location' },
             {
-                data: 'status', "width": "15%"
+                data: 'status'
             },
-            { data: 'description', "width": "25%" },
+            { data: 'description'},
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Seller/Quotation/CreateConstructDetails?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Create Construct Details</a>
-                       <a href="/Seller/Request/RejectRequest?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Reject Quotation</a>
+                       <a href="/Seller/Quotation/CreateConstructDetails?id=${data}" class = "btn btn-primary btn-main border-0 m-1 text-nowrap"><i class="bi bi-plus-square"></i> Tạo báo giá</a>
+                       <a href="/Seller/Request/RequestReject?id=${data}" class = "btn btn-primary btn-danger border-0 m-1 text-nowrap"><i class="bi bi-x-circle-fill"></i> Từ chối</a>
                     </div >`
                 },
-                "width": "35%"
             }
         ]
     });

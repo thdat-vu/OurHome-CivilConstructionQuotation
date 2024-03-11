@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Đăng kí";
 }
 
 <h1 class="d-flex justify-content-center align-items-center">@ViewData["Title"]</h1>
@@ -19,15 +19,15 @@
             <div class="row align-items-center text-center">
                 @if (User.IsInRole(SD.Role_Admin))
                 {
-                    <h4>Register New User <br />
-                        ADMIN PORTAL
+                    <h4>Đăng ký người dùng mới <br />
+                        CỔNG THÔNG TIN CỦA ADMIN
                     </h4>
                 }
                 else
                 {
                     <div class="justify-content-center align-items-center">
-                        <h4>Welcome to our services</h4>
-                        <h4>We are happy to have you with us</h4>
+                        <h4 class="text-nowrap">Chào mừng bạn đến với Our Home</h4>
+                        <h4 class="text-nowrap">Đăng kí để nhận báo giá chi tiết</h4>
                     </div>
                 }
                 
@@ -95,14 +95,14 @@
                         <div class="mb-1">
                             <div class="form-floating mb-3">
                                 <select asp-for="Input.Role" asp-items="@Model.Input.Roles" class="form-select">
-                                    <option disabled selected>----Select Role----</option>
+                                    <option disabled selected>----Chọn vai trò----</option>
                                 </select>
                             </div>
                         </div>
                     }
 
                     <div class="mb-3">
-                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary fs-6">Register</button>
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary fs-6">Đăng kí</button>
 
                     </div>
                     
@@ -110,7 +110,7 @@
                 @if (!User.IsInRole(SD.Role_Admin))
                 {
                     <div class="row">
-                        <small>Already have an account? <a href="/Identity/Account/Login">Log in</a></small>
+                        <small>Bạn đã có tài khoản? <a href="/Identity/Account/Login">Đăng nhập</a></small>
                     </div>
                 }
 

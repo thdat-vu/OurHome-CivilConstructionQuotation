@@ -4,12 +4,15 @@
 
 //Need an api method return json to use this
 function loadDataTableRequest() {
-    dataTable = $('#tblReject').DataTable({
-        "ajax": { url: '/Seller/Reject/GetAllReject' },
+    dataTable = $("#tblRequestRejected").DataTable({
+        "ajax": { url: '/Seller/Request/GetAllRequestRejected' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
-            { data: 'id', "width": "5%" },
+            { data: 'id' },
             {
-                data: 'date',
+                data: 'generateDate',
                 "render": function (data) {
                     // Chuyển đổi ngày thành chuỗi định dạng dd/MM/yyyy
                     let date = new Date(data);
@@ -18,24 +21,26 @@ function loadDataTableRequest() {
                     let year = date.getFullYear();
                     return `${day}/${month}/${year}`;
                 },
-                "width": "15%"
             },
-            { data: 'acreage', "width": "15%" },
-            { data: 'location', "width": "5%" },
-            { data: 'description', "width": "35%" },
+            { data: 'cusName' },
+            { data: 'cusGender'},
+            { data: 'cusPhone'},
+            { data: 'cusEmail'},
+            { data: 'constructType'},
+            { data: 'acreage'},
+            { data: 'location'},
             {
-                data: 'status', "width": "10%"
+                data: 'status'
             },
+            { data: 'description'},
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Seller/Request/UndoRejectRequest?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Undo Reject Request</a>
+                       <a href="/Seller/Request/UndoRejectRequest?id=${data}" class = "btn btn-primary btn-danger border-0 m-1 text-nowrap"><i class="bi bi-arrow-clockwise"></i> Hoàn tác</a>
                     </div >`
                 },
-                "width": "35%"
             }
         ]
     });
 }
-

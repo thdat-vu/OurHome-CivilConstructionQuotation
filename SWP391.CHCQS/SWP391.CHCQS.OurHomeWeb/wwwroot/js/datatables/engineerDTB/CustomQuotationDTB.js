@@ -7,6 +7,9 @@ $(document).ready(function () {
 function loadDataTableQuotation() {
     dataTableCQ = $('#tblCustomQuotation').DataTable({
         "ajax": { url: '/Engineer/Quotation/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             { data: 'id', },
             {
@@ -28,8 +31,8 @@ function loadDataTableQuotation() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                        <a href="/Engineer/Quotation/Quote?QuotationId=${data}" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-folder2-open"></i> Quote</a>
-                        <a onClick="SendQuoteToManager('/Engineer/Quotation/SendQuoteToManager?QuotationId=${data}')" class="text-nowrap btn btn-primary m-1"><i class="bi bi-pencil-square"></i> Send</a>
+                        <a href="/Engineer/Quotation/Quote?QuotationId=${data}" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-folder2-open"></i> Báo giá</a>
+                        <a onClick="SendQuoteToManager('/Engineer/Quotation/SendQuoteToManager?QuotationId=${data}')" class="text-nowrap btn btn-primary m-1"><i class="bi bi-pencil-square"></i> Gửi</a>
                     </div >`
                 },
             }
@@ -39,13 +42,14 @@ function loadDataTableQuotation() {
 
 function SendQuoteToManager(url) {
     Swal.fire({
-        title: "Are want to send to Manager?",
-        text: "You won't be able to edit this!",
+        title: "Bạn có chắc chắn muốn gửi cho Quản Lý hay không?",
+        text: "Bạn sẽ không được chỉnh sửa nữa!",
         icon: "question",
         showCancelButton: true,
         confirmButtonColor: "#F27456",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Send it!"
+        confirmButtonText: "Vâng, cứ gửi!",
+        cancelButtonText: "Hủy",
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
@@ -53,11 +57,11 @@ function SendQuoteToManager(url) {
                 type: 'GET',
                 success: function (data) {
                     if (!data.success) {
-                        dataTableCQ.ajax.reload();
+                        dataTableCQ.ajax.reload(null, false);
                         toastr.error(data.message);
                     }
                     else {
-                        dataTableCQ.ajax.reload();
+                        dataTableCQ.ajax.reload(null, false);
                         // From toastr message
                         toastr.success(data.message);
                     }
