@@ -1,17 +1,19 @@
 ﻿
 $('#save_note').on('click', function () {
     var saveNoteActionUrl = '/Manager/CustomQuotation/SaveNote';
-    console.log("save nè");
+    //console.log("save nè");
     $.ajax({
         url: saveNoteActionUrl,
         method: 'GET',
         success: function (response) {
-            if (response.isSuccess) {
-                //gọi tới action thông báo thành công
-            }
+            if (response.isSuccess)
+                toastr.success(response.message);
+            else
+                toastr.error(response.message);
         },
         error: function (xhr, status, error) {
-            //gọi ajax đến action thông báo lỗi
+            console.log(error);
+            toastr.error("Call Server Fail");
         }
     })
 });

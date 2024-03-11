@@ -1,4 +1,4 @@
-﻿var dataTableTD;
+﻿var dataTableTDRS;
 $(document).ready(function () {
     loadDataTaskDetail();
 });
@@ -6,7 +6,7 @@ $(document).ready(function () {
 //change name method - remember
 //Need an api method return json to use this
 function loadDataTaskDetail() {
-    dataTableTD = $('#tblTaskDetail').DataTable({
+    dataTableTDRS = $('#tblTaskDetail').DataTable({
         "ajax": { url: '/Manager/CustomQuotationTask/GetDetail' },
         "columns": [
             {
@@ -19,9 +19,7 @@ function loadDataTaskDetail() {
             { data: 'price' },
             {
                 data: null,
-
                 // Generate a unique form ID using the material ID
-
                 "render": function (data) {
                     return `<textarea class="form-control" row="2"
                     onChange="InputNoteTaskEvent('/Manager/CustomQuotation/TakeNoteTaskToSession','${data.taskId}')" id=${data.taskId??""}>${data.note == null? "": data.note.value}</textarea>`
@@ -31,8 +29,6 @@ function loadDataTaskDetail() {
         ]
     });
 }
-
-
 function InputNoteTaskEvent(url, taskId) {
     var typingTimer
     clearTimeout(typingTimer); // Xóa bỏ bất kỳ setTimeout đang chờ thực hiện động còn đang chạy
@@ -49,17 +45,14 @@ function InputNoteTaskEvent(url, taskId) {
             data: { taskId: taskId, note: note},
             success: function () {
                 //console.log(response.add);
-                dataTableTD.ajax.reload();
+                dataTableTDRS.ajax.reload();
             },
             error: function (xhr, status, error) {
                 console.error('Ajax call failed:', error);
             }
         });
-
         //console.log(materialId);
         //console.log(quantity);
         //console.log(note);
-
     }, 100);
-
 } 

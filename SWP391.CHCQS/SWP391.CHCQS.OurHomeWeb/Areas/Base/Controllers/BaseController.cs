@@ -68,34 +68,46 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers
                 //đọc từ file lên, so sánh với lần note cuối cùng, với mỗi key tương ứng mà trong file có thì cập nhật vào session
                 var pathCreater = new PathCreater(_environment);
                 string targetFolder = pathCreater.CreateFilePathInRoot(quoteId.Trim() + ".txt", "note-reject-quotation-file");
-                var noteObj = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder).Last();
+                List<RejectQuotationDetail> noteObj = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
                 //Phải có take note dc lưu từ lần trước vào file thì kiểm tra nội dung được
-                if (noteObj != null)
+                if (noteObj.Count != 0)
                 {
+                    var note = noteObj.Last();
                     //kiểm tra note cho task
                     foreach (var key in rejectDetail.TaskDetailNotes.Keys)
                     {
                         //nếu trong note có chứa key thì mới kiểm tra nội dung
-                        if (noteObj.TaskDetailNotes.ContainsKey(key))
+                        if (note.TaskDetailNotes.ContainsKey(key))
                             //nếu nội dung khác thì cập nhật lại lên trên
-                            if (noteObj.TaskDetailNotes[key] != rejectDetail.TaskDetailNotes[key])
-                                rejectDetail.TaskDetailNotes[key] = noteObj.TaskDetailNotes[key];
+                            if (note.TaskDetailNotes[key] != rejectDetail.TaskDetailNotes[key])
+                                rejectDetail.TaskDetailNotes[key] = note.TaskDetailNotes[key];
                     }
 
                     //kiểm tra note cho material
                     foreach (var key in rejectDetail.MaterialDetailNotes.Keys)
                     {
                         //nếu trong note có chứa key thì mới kiểm tra nội dung
-                        if (noteObj.MaterialDetailNotes.ContainsKey(key))
+                        if (note.MaterialDetailNotes.ContainsKey(key))
                             //nếu nội dung khác thì cập nhật lại lên trên
-                            if (noteObj.MaterialDetailNotes[key].Note != rejectDetail.MaterialDetailNotes[key].Note)
-                                rejectDetail.MaterialDetailNotes[key].Note = noteObj.MaterialDetailNotes[key].Note;
+                            if (note.MaterialDetailNotes[key].Note != rejectDetail.MaterialDetailNotes[key].Note)
+                                rejectDetail.MaterialDetailNotes[key].Note = note.MaterialDetailNotes[key].Note;
                     }
                 }
             }
             //lưu trữ với Key tương ứng với Id của customquotation
             HttpContext.Session.Set<RejectQuotationDetail>(quoteId, rejectDetail);
             return rejectDetail;
+        }
+
+        
+        public void NotifySuccess(string notification)
+        {
+            TempData["Success"] = notification;
+        }
+
+        public void NotifyError(string notification)
+        {
+            TempData["Error"] = notification;
         }
     }
 }

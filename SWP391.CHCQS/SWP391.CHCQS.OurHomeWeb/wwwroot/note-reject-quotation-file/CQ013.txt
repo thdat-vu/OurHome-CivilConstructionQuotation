@@ -1,35 +1,5 @@
 {
-  "TaskDetailNotes": {
-    "TSK001": "1",
-    "TSK002": "3",
-    "TSK003": "4",
-    "TSK004": ""
-  },
-  "MaterialDetailNotes": {
-    "VT101": {
-      "Quantity": 12,
-      "Note": "12"
-    },
-    "VT104": {
-      "Quantity": 22,
-      "Note": "3"
-    },
-    "VT109": {
-      "Quantity": 22,
-      "Note": "ajaax"
-    },
-    "VT106": {
-      "Quantity": 33,
-      "Note": ""
-    },
-    "VT111": {
-      "Quantity": 11,
-      "Note": ""
-    }
-  }
-}
-
-{
+  "Total": null,
   "TaskDetailNotes": {
     "TSK001": "",
     "TSK002": "",
@@ -38,240 +8,151 @@
   },
   "MaterialDetailNotes": {
     "VT101": {
-      "Quantity": 12,
+      "Quantity": 0,
       "Note": ""
     },
     "VT104": {
-      "Quantity": 22,
+      "Quantity": 0,
       "Note": ""
     },
     "VT106": {
-      "Quantity": 33,
+      "Quantity": 0,
       "Note": ""
     },
     "VT109": {
-      "Quantity": 22,
+      "Quantity": 0,
       "Note": ""
     },
     "VT111": {
-      "Quantity": 11,
+      "Quantity": 0,
       "Note": ""
     }
   }
 }
 
 {
+  "Total": null,
   "TaskDetailNotes": {
-    "TSK001": "",
+    "TSK001": "test th\u00F4ng b\u00E1o",
     "TSK002": "",
     "TSK003": "",
     "TSK004": ""
   },
   "MaterialDetailNotes": {
     "VT101": {
-      "Quantity": 12,
+      "Quantity": 0,
       "Note": ""
     },
     "VT104": {
-      "Quantity": 22,
+      "Quantity": 0,
       "Note": ""
     },
     "VT106": {
-      "Quantity": 33,
+      "Quantity": 0,
       "Note": ""
     },
     "VT109": {
-      "Quantity": 22,
+      "Quantity": 0,
       "Note": ""
     },
     "VT111": {
-      "Quantity": 11,
+      "Quantity": 0,
       "Note": ""
     }
   }
 }
 
 {
+  "Total": null,
   "TaskDetailNotes": {
-    "TSK001": "",
+    "TSK001": "test th\u00F4ng b\u00E1o",
     "TSK002": "",
     "TSK003": "",
     "TSK004": ""
   },
   "MaterialDetailNotes": {
     "VT101": {
-      "Quantity": 12,
+      "Quantity": 0,
       "Note": ""
     },
     "VT104": {
-      "Quantity": 22,
+      "Quantity": 0,
       "Note": ""
     },
     "VT106": {
-      "Quantity": 33,
+      "Quantity": 0,
       "Note": ""
     },
     "VT109": {
-      "Quantity": 22,
+      "Quantity": 0,
       "Note": ""
     },
     "VT111": {
-      "Quantity": 11,
+      "Quantity": 0,
       "Note": ""
     }
   }
 }
 
 {
+  "Total": null,
   "TaskDetailNotes": {
-    "TSK001": "",
+    "TSK001": "test th\u00F4ng b\u00E1o",
     "TSK002": "",
     "TSK003": "",
     "TSK004": ""
   },
   "MaterialDetailNotes": {
     "VT101": {
-      "Quantity": 12,
+      "Quantity": 0,
       "Note": ""
     },
     "VT104": {
-      "Quantity": 22,
+      "Quantity": 0,
       "Note": ""
     },
     "VT106": {
-      "Quantity": 33,
+      "Quantity": 0,
       "Note": ""
     },
     "VT109": {
-      "Quantity": 22,
+      "Quantity": 0,
       "Note": ""
     },
     "VT111": {
-      "Quantity": 11,
+      "Quantity": 0,
       "Note": ""
     }
   }
 }
 
 {
+  "Total": null,
   "TaskDetailNotes": {
-    "TSK001": "",
+    "TSK001": "test th\u00F4ng b\u00E1o",
     "TSK002": "",
     "TSK003": "",
     "TSK004": ""
   },
   "MaterialDetailNotes": {
     "VT101": {
-      "Quantity": 12,
+      "Quantity": 0,
       "Note": ""
     },
     "VT104": {
-      "Quantity": 22,
+      "Quantity": 0,
       "Note": ""
     },
     "VT106": {
-      "Quantity": 33,
+      "Quantity": 0,
       "Note": ""
     },
     "VT109": {
-      "Quantity": 22,
+      "Quantity": 0,
       "Note": ""
     },
     "VT111": {
-      "Quantity": 11,
-      "Note": ""
-    }
-  }
-}
-
-{
-  "TaskDetailNotes": {
-    "TSK001": "",
-    "TSK002": "",
-    "TSK003": "",
-    "TSK004": ""
-  },
-  "MaterialDetailNotes": {
-    "VT101": {
-      "Quantity": 12,
-      "Note": ""
-    },
-    "VT104": {
-      "Quantity": 22,
-      "Note": ""
-    },
-    "VT106": {
-      "Quantity": 33,
-      "Note": ""
-    },
-    "VT109": {
-      "Quantity": 22,
-      "Note": ""
-    },
-    "VT111": {
-      "Quantity": 11,
-      "Note": ""
-    }
-  }
-}
-
-{
-  "TaskDetailNotes": {
-    "TSK001": "",
-    "TSK002": "",
-    "TSK003": "",
-    "TSK004": ""
-  },
-  "MaterialDetailNotes": {
-    "VT101": {
-      "Quantity": 12,
-      "Note": ""
-    },
-    "VT104": {
-      "Quantity": 22,
-      "Note": ""
-    },
-    "VT106": {
-      "Quantity": 33,
-      "Note": ""
-    },
-    "VT109": {
-      "Quantity": 22,
-      "Note": ""
-    },
-    "VT111": {
-      "Quantity": 11,
-      "Note": ""
-    }
-  }
-}
-
-{
-  "TaskDetailNotes": {
-    "TSK001": "",
-    "TSK002": "",
-    "TSK003": "",
-    "TSK004": ""
-  },
-  "MaterialDetailNotes": {
-    "VT101": {
-      "Quantity": 12,
-      "Note": ""
-    },
-    "VT104": {
-      "Quantity": 22,
-      "Note": ""
-    },
-    "VT106": {
-      "Quantity": 33,
-      "Note": ""
-    },
-    "VT109": {
-      "Quantity": 22,
-      "Note": ""
-    },
-    "VT111": {
-      "Quantity": 11,
+      "Quantity": 0,
       "Note": ""
     }
   }

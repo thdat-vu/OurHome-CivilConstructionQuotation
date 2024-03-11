@@ -20,15 +20,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         {
 
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        //hàm trả về material detail theo quotation mà Manager đang coi
-        //cụ thể là hàm lấy quoteId đã được lưu vào session - hành động này thực hiện ở GetDetail của CustomQuotationController
-        //MaterialDetailDTB sẽ gọi ajax đến đây để lấy dữ liệu 
-        [HttpGet]
+        #region GỌI API
+        /// <summary>
+        /// Action để gọi API trả về material detail
+        /// Các bước thực hiện:
+        /// 1. lấy quoteId đã được lưu vào session, đã dc lưu ghi người dùng GetDetail của Customquotation
+        /// 2. Lấy note dc lưu trong session và file
+        /// 3. Tiến hành đưa cho ViewModel trả về Json
+        /// </summary>
+        /// <returns></returns>
         public IActionResult GetDetail()
         {
             //thêm thông tin task detail
@@ -51,14 +51,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                     Price = x.Price,
                     Note = new KeyValuePair<string, MaterialNote>(x.MaterialId, new MaterialNote()
                     {
-                        //Quantity = materialNote[x.MaterialId].Quantity,
+                        Quantity = x.Quantity,
                         Note = materialNote[x.MaterialId].Note,
                     })
                 }).ToList();
-
-
             return Json(new { data = materialDetailVM });
         }
-
+        #endregion
     }
 }

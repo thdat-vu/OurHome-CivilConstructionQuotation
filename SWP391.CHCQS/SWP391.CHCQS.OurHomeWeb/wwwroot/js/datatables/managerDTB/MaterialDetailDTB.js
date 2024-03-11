@@ -1,4 +1,4 @@
-﻿var dataTableCQ;
+﻿var dataTableMDRS;
 
 $(document).ready(function () {
     //chạy datatable
@@ -22,7 +22,7 @@ function InputNoteMaterialEvent(url, materialId, quantity) {
             data: { materialId: materialId, note: note, quantity: quantity },
             success: function () {
                 //console.log(response.add);
-                dataTableCQ.ajax.reload();
+                dataTableMDRS.ajax.reload();
             },
             error: function (xhr, status, error) {
                 console.error('Ajax call failed:', error);
@@ -38,13 +38,13 @@ function InputNoteMaterialEvent(url, materialId, quantity) {
 }
 
 function loadDataMaterialDetail() {
-    dataTableCQ = $('#tblMaterialDetail').DataTable({
+    dataTableMDRS = $('#tblMaterialDetail').DataTable({
         "ajax": { url: '/Manager/MaterialDetail/GetDetail' },
         "columns": [
             {
                 data: "materialId",
                 "render": function (data) {
-                    return `<a class="text-main text-pointer" onKeyUp="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
+                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
                 },
             },
             { data: 'materialName' },
@@ -60,7 +60,7 @@ function loadDataMaterialDetail() {
             {
                 data: null,
                 "render": function (data) {
-                    return `<textarea class="form-control" row="4"
+                    return `<textarea class="form-control text-area-here" row="4"
                     onChange="InputNoteMaterialEvent('TakeNoteMaterialToSession','${data.materialId}', '${data.quantity}')" id=${data.materialId}>${data.note.value.note}</textarea>`
                 },
             }

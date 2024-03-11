@@ -41,22 +41,47 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _userManager = userManager;
             _hubContext = hubContext;
         }
-        //public IActionResult SaveNote()
-        //{
-
-        //    var url = Url.Action("/Manager/CustomQuotation/GetDetail", new { filterStatus = 3 });
-        //    return Redirect(url);
-        //}
+        /// <summary>
+        /// Action dẫn đến trang chính để coi quotation
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
+        /// <summary>
+        ///  Action dẫn đến trang chính để history - reject và completed quotation
+        /// </summary>
+        /// <returns></returns>
         public IActionResult History()
         {
             return View();
         }
+        /// <summary>
+        /// hàm lấy ra ClamsIdentity - full thông tin không che của User
+        /// </summary>
+        /// <returns></returns>
+        [NonAction]
+        private ClaimsIdentity GetCurrentIdentity()
+        {
+            return (ClaimsIdentity)User.Identity;
+        }
+        /// <summary>
+        /// hàm lấy ra id của Manager dang đăng nhập vào
+        /// </summary>
+        /// <returns></returns>
+        [NonAction]
+        private string GetCurrentUserId()
+        {
+            return GetCurrentIdentity().FindFirst(ClaimTypes.NameIdentifier).Value;
+        }
 
-        //Hàm trả về danh sách customQuotation cần dc xử lý bởi staff đang login
+        #region             GỌI API
+        /// <summary>
+        /// Action trả về JSON các quotation cần dc xử lý bởi staff đang login, dc hiển thị qua datatable
+        /// </summary>
+        /// <param name="filterStatus"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] int? filterStatus = null)
         {
@@ -122,8 +147,115 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
             return Json(new { data = customQuotationViewModels });
         }
+        #region    API để thực hiện TakeNote 
+        /// <summary>
+        /// Action để gọi API thực hiện take note cho task, có tác dụng theo từng dòng note, và những takenonte mới này sẽ được lưu vào session
+        /// Chỉ có tác dụng lưu trữ khi bấm "Save Note" để gọi tới Action SavNote()
+        /// </summary>
+        /// <param name="materialId"></param>
+        /// <param name="quantity"></param>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult TakeNoteMaterialToSession(string materialId, int quantity, string note)
+        {
+            string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
+            bool isSuccess = true;
+            RejectQuotationDetail rejectDetail = null;
+            try
+            {
+                //lấy rejectDetail có trong Session, key tương ứng với quotationId đang xử lý
+                rejectDetail = GetRejectQuotationDetailFromSessionAndFile();
+                //Tiến hành lưu trữ lại note theo materialId đưa xuống
+                //lưu trữ quantity
+                rejectDetail.MaterialDetailNotes[materialId].Quantity = quantity;
+                //lưu trữ lại note
+                rejectDetail.MaterialDetailNotes[materialId].Note = note;
+                //gán lại rejectDetail vừa dc cập nhật note
+                HttpContext.Session.Set<RejectQuotationDetail>(quoteId, rejectDetail);
+            }
+            catch (Exception)
+            {
+                return Json(new { isSuccess = !isSuccess });
+            }
+            return Json(new { isSuccess, add = rejectDetail });
+        }
 
-        //Hàm đi tới chi tiết của customQuotation mà Manager cần xem
+        /// <summary>
+        /// Action để gọi API để thực hiện take note material, có tác dụng theo từng dòng material, và những takenote mới này sẽ được lưu vào session
+        /// Chỉ có tác dụng lưu trữ khi bấm "Save Note" để gọi tới Action SavNote()
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult TakeNoteTaskToSession(string taskId, string note)
+        {
+            string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
+            var isSuccess = true;
+            RejectQuotationDetail rejectDetail = null;
+            try
+            {
+                //lấy rejectDetail có trong Session, key tương ứng với quotationId đang xử lý
+                rejectDetail = GetRejectQuotationDetailFromSessionAndFile();
+                //Tiến hành lưu trữ lại note theo taskId đưa xuống
+                rejectDetail.TaskDetailNotes[taskId] = note;
+
+                //gán lại rejectDetail vừa dc cập nhật note
+                HttpContext.Session.Set<RejectQuotationDetail>(quoteId, rejectDetail);
+            }
+            catch (Exception)
+            {
+                return Json(new { success = !isSuccess });
+            }//trả về để thử thôi
+            return Json(new { isSuccess, add = rejectDetail });
+        }
+
+        /// <summary>
+        /// Action để hoàn toàn lưu note xuống file txt để ở note-reject-quotation-file
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult SaveNote()
+        {
+            string message = "Save Note Successful";
+            var isSuccess = true;
+            try
+            {
+                //lấy quoteId trong session ra
+                string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
+                //lấy note từ trong session ra
+                var data = HttpContext.Session.Get<RejectQuotationDetail>(quoteId);
+                //nếu data null thì ko lưu
+                if (data != null)
+                {
+                    var pathCreater = new PathCreater(_environment);
+                    string targetFolder = pathCreater.CreateFilePathInRoot(quoteId.Trim() + ".txt", "note-reject-quotation-file");
+                    //Tiến hành lưu trữ
+                    FileManipulater<RejectQuotationDetail>.SaveJsonToFile(targetFolder, data);
+                    //khi đã bấm save thì xóa luôn dữ liệu trong session
+                    HttpContext.Session.Remove(quoteId);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                message = "Some thing happens. Save Fail";
+                return Json(new { isSuccess = !isSuccess, message });
+            }
+            return Json(new { isSuccess, message });
+        }
+        #endregion
+
+        #endregion
+
+
+        #region             ACTION 
+        /// <summary>
+        /// Action trả trang coi chi tiết của customQuotation mà Manager cần xem
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetDetail([FromQuery] string id)
         {
@@ -219,8 +351,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return View(quotationVM);
         }
         #region     Actions Xử lý Decision cho Manager 
-
-        //hàm xử lý quyết định của manager - từ chối detail của Engineer trong custom quotation
+        /// <summary>
+        /// Action cung cấp chức năng rejected cho Manager
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> RejectDetail(CustomQuotationVM model)
         {
@@ -251,6 +386,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //Thêm vào RejectionReports table 
             _unitOfWork.RejectedCustomQuotation.Add(rejectReport);
             #endregion
+
             #region    Cập nhật lại trạng thái dữ liệu cho CustomQuotations
             //lấy custom quotation bị reject ra từ CustomQquotations table
             var rejectCustomQuotation = _unitOfWork.CustomQuotation.Get((x) => x.Id == rejectQuotationId);
@@ -260,6 +396,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //Lưu xuống database
             _unitOfWork.CustomQuotation.Update(rejectCustomQuotation);
             #endregion
+
             #region     Reset lại working report cho Engineer và Manager
 
             //lấy ra workkingReport và thực hiện reset lại thời gian
@@ -275,19 +412,22 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _unitOfWork.WorkingReport.Update(engineerWorkReport);
             _unitOfWork.WorkingReport.Update(managerWorkReport);
             #endregion
-
-
             //LƯU LẠI
             _unitOfWork.Save();
 
             //Toast Info lên là reject thành công
-            TempData["Success"] = "Reject Successfull";
+            NotifySuccess("Reject Successfull");
 
             await _hubContext.Clients.All.SendAsync("RecieveRejectFromManager", "Manager", "You was recieve a new Quotation");
             //điều hướng người dùng lại trang index để coi List
             return RedirectToAction("Index");
         }
-
+        /// <summary>
+        /// Action cung cấp chức năng approve detail cho manager
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="managerId"></param>
+        /// <returns></returns>
         public async Task<IActionResult> ApproveDetailAsync(string id, string managerId)
         {
             var quotation = _unitOfWork.CustomQuotation.Get((x) => x.Id == id, "Request");
@@ -322,14 +462,17 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             if (!emailSender.SendInfoToEmail(customerMail, customerName, id))
             {
                 //Tiến hành toast info
-                TempData["Error"] = "Something is broken. Send email fail";
+                NotifyError("Something is broken. Send email fail");
             }
-            else TempData["Success"] = "Quotation has been sent";
+            else
+                NotifySuccess("Quotation has been sent");
 
             //điều hướng người dùng về danh sách pending approve
             return RedirectToAction("Index");
         }
         #endregion
+        #endregion
+
 
         #region     Actions đưa người dùng tới coi CustomQuotation đã tối giản cho giống PDF, có thể tải pdf xuống
         //Action được tạo ra để render ra 1 html template HỖ TRỢ cho việc tạo ra pdf - được sử dụng để attach theo email báo giá
@@ -391,103 +534,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         }
         #endregion
 
-        #region     Action để thực hiện TakeNote 
-        //Đây là non aciton để lưu trự đối tượng RejectQuotationDetail vào trong session với mỗi phiên truy cập vào customquotation
-        [HttpPost]
-        public IActionResult TakeNoteMaterialToSession(string materialId, int quantity, string note)
-        {
-            string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
-            var isSuccess = true;
-            RejectQuotationDetail rejectDetail = null;
-            try
-            {
-                //lấy rejectDetail có trong Session, key tương ứng với quotationId đang xử lý
-                rejectDetail = GetRejectQuotationDetailFromSessionAndFile();
-                //Tiến hành lưu trữ lại note theo materialId đưa xuống
-                //lưu trữ quantity
-                rejectDetail.MaterialDetailNotes[materialId].Quantity = quantity;
-                //lưu trữ lại note
-                rejectDetail.MaterialDetailNotes[materialId].Note = note;
-                //gán lại rejectDetail vừa dc cập nhật note
-                HttpContext.Session.Set<RejectQuotationDetail>(quoteId, rejectDetail);
-            }
-            catch (Exception)
-            {
-                isSuccess = false;
-                return Json(new { success = isSuccess });
-            }
-            return Json(new { success = isSuccess, add = rejectDetail });
-        }
-
-        //Đây là non aciton để lưu trự đối tượng RejectQuotationDetail vào trong session với mỗi phiên truy cập vào customquotation
-        [HttpPost]
-        public IActionResult TakeNoteTaskToSession(string taskId, string note)
-        {
-            string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
-            var isSuccess = true;
-            RejectQuotationDetail rejectDetail = null;
-            try
-            {
-                //lấy rejectDetail có trong Session, key tương ứng với quotationId đang xử lý
-                rejectDetail = GetRejectQuotationDetailFromSessionAndFile();
-                //Tiến hành lưu trữ lại note theo taskId đưa xuống
-                rejectDetail.TaskDetailNotes[taskId] = note;
-
-                //gán lại rejectDetail vừa dc cập nhật note
-                HttpContext.Session.Set<RejectQuotationDetail>(quoteId, rejectDetail);
-            }
-            catch (Exception)
-            {
-                isSuccess = false;
-                return Json(new { success = isSuccess });
-            }
-            return Json(new { success = isSuccess, add = rejectDetail });
-        }
-        #endregion
-
-        #region     NonAction để hỗ trợ các Action lớn
-        //hàm hỗ trợ cho actions
-        public IActionResult SaveNote()
-        {
-            var isSuccess = true;
-            try
-            {
-                //lấy quoteId trong session ra
-                string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
-                //lấy note từ trong session ra
-                var data = HttpContext.Session.Get<RejectQuotationDetail>(quoteId);
-                //nếu data null thì ko lưu
-                if (data != null)
-                {
-                    var pathCreater = new PathCreater(_environment);
-                    string targetFolder = pathCreater.CreateFilePathInRoot(quoteId.Trim() + ".txt", "note-reject-quotation-file");
-                    //Tiến hành lưu trữ
-                    FileManipulater<RejectQuotationDetail>.SaveJsonToFile(targetFolder, data);
-                    //khi đã bấm save thì xóa luôn dữ liệu trong session
-                    HttpContext.Session.Remove(quoteId);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                TempData["Error"] = "Something happens. Saving Rejected Quotation Detail Fail";
-                return Json(new { isSuccess = !isSuccess });
-            }
-            return Json(new { isSuccess });
-        }
-        [NonAction]
-        private ClaimsIdentity GetCurrentIdentity()
-        {
-            return (ClaimsIdentity)User.Identity;
-        }
-        [NonAction]
-        private string GetCurrentUserId()
-        {
-            return GetCurrentIdentity().FindFirst(ClaimTypes.NameIdentifier).Value;
-        }
-
-
-        #endregion
 
         #region     Test Place
         public IActionResult Test()
