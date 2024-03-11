@@ -1,0 +1,209 @@
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": ""
+  },
+  "MaterialDetailNotes": {
+    "VT1001": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT1002": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": ""
+  },
+  "MaterialDetailNotes": {
+    "VT1001": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT1002": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "hi ch\u00E0o c\u1EADu",
+    "TSK003": "",
+    "TSK005": "",
+    "TSK006": "",
+    "TSK007": ""
+  },
+  "MaterialDetailNotes": {
+    "VT106": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT101": {
+      "Quantity": 12,
+      "Note": "c\u1EADu nha"
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT105": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+null
+
+null
+
+null
+
+null
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "hi ch\u00E0o c\u1EADu",
+    "TSK003": "",
+    "TSK005": "",
+    "TSK006": "",
+    "TSK007": ""
+  },
+  "MaterialDetailNotes": {
+    "VT106": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT105": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "hi ch\u00E0o c\u1EADu",
+    "TSK003": "",
+    "TSK005": "",
+    "TSK006": "",
+    "TSK007": ""
+  },
+  "MaterialDetailNotes": {
+    "VT106": {
+      "Quantity": 0,
+      "Note": "Hi cậu nhé"
+    },
+    "VT101": {
+      "Quantity": 0,
+      "Note": "Tớ chào nè"
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT105": {
+      "Quantity": 0,
+      "Note": "Dễ thương ghê"
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "hi ch\u00E0o c\u1EADu",
+    "TSK003": "",
+    "TSK005": "",
+    "TSK006": "",
+    "TSK007": ""
+  },
+  "MaterialDetailNotes": {
+    "VT106": {
+      "Quantity": 0,
+      "Note": "Hi c\u1EADu nh\u00E9"
+    },
+    "VT101": {
+      "Quantity": 0,
+      "Note": "T\u1EDB ch\u00E0o n\u00E8"
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT105": {
+      "Quantity": 0,
+      "Note": "D\u1EC5 th\u01B0\u01A1ng gh\u00EA"
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "hi ch\u00E0o c\u1EADu",
+    "TSK003": "",
+    "TSK005": "ch\u00E0o nh\u00E9 cafe",
+    "TSK006": "c\u1EADu c\u00F2n \u0111\u00F3 ko",
+    "TSK007": ""
+  },
+  "MaterialDetailNotes": {
+    "VT106": {
+      "Quantity": 0,
+      "Note": "Hi c\u1EADu nh\u00E9"
+    },
+    "VT101": {
+      "Quantity": 0,
+      "Note": "T\u1EDB ch\u00E0o n\u00E8"
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT105": {
+      "Quantity": 0,
+      "Note": "D\u1EC5 th\u01B0\u01A1ng gh\u00EA"
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+

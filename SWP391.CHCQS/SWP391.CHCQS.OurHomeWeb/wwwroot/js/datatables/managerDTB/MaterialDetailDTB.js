@@ -61,7 +61,7 @@ function loadDataMaterialDetail() {
                 data: null,
                 "render": function (data) {
                     return `<textarea class="form-control" row="4"
-                    onChange="InputNoteMaterialEvent('TakeNoteMaterialToSession','${data.materialId}', '${data.quantity}')" id=${data.materialId}>${data.note== null? "" : data.note.value.note }</textarea>`
+                    onChange="InputNoteMaterialEvent('TakeNoteMaterialToSession','${data.materialId}', '${data.quantity}')" id=${data.materialId}>${data.note.value.note}</textarea>`
                 },
             }
         ]

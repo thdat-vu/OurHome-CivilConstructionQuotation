@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Models;
@@ -10,14 +11,11 @@ using SWP391.CHCQS.Utility.Helpers;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
     [Area("Manager")]
-    public class CustomQuotationTaskController : Controller
+    public class CustomQuotationTaskController : BaseController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IWebHostEnvironment _environment;
-        public CustomQuotationTaskController(IUnitOfWork unitOfWork, IWebHostEnvironment environment)
+        public CustomQuotationTaskController(IUnitOfWork unitOfWork, IWebHostEnvironment environment) : base(unitOfWork, environment)
         {
-            _unitOfWork = unitOfWork;
-            _environment = environment;
+
         }
         public IActionResult Index()
         {
@@ -32,34 +30,23 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //thêm thông tin task detail
             string quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
 
-            //đọc note từ dưới file lên 
 
-            //lấy note trong session, để load lại trang có note - nếu ko có thì tạo mới
-            var rejectDetail = (HttpContext.Session.Get<RejectQuotationDetail>(quoteId));
-            //ko có thì tạo 1 dối tượng rỗng có count = 0
-            if (rejectDetail == null)
-            {
-                rejectDetail = new RejectQuotationDetail()
-                {
-                    MaterialDetailNotes = new Dictionary<string, MaterialNote>(),
-                    TaskDetailNotes = new Dictionary<string, string>()
-                };
-            }
-            List<TaskDetailListViewModel> taskDetailVM = null;
+
+            //lấy note trong session
+            var rejectDetail = GetRejectQuotationDetailFromSessionAndFile();
+
             var taskNote = rejectDetail.TaskDetailNotes;
-            //lưu vào Session lại
-            //HttpContext.Session.Set(quoteId, rejectDetail);
 
-            taskDetailVM = _unitOfWork.TaskDetail.GetTaskDetail(quoteId)
+            List<TaskDetailListViewModel>  taskDetailVM = _unitOfWork.TaskDetail.GetTaskDetail(quoteId)
                 .Select((x) => new ViewModels.TaskDetailListViewModel
                 {
                     QuoteId = x.QuotationId,
                     TaskId = x.TaskId,
                     TaskName = _unitOfWork.Task.GetName(x.TaskId),
                     Price = x.Price,
-                    Note = new KeyValuePair<string, string>(x.TaskId, taskNote.ContainsKey(x.TaskId) ? taskNote[x.TaskId] : "" )
+                    Note = new KeyValuePair<string, string>(x.TaskId, taskNote[x.TaskId])
                 }).ToList();
-
+            
             return Json(new { data = taskDetailVM });
         }
 
