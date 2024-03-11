@@ -6,6 +6,9 @@
 function loadDataTableRequest() {
     dataTable = $("#tblRequestRejected").DataTable({
         "ajax": { url: '/Seller/Request/GetAllRequestRejected' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             { data: 'id', "width": "5%" },
             {
@@ -35,7 +38,7 @@ function loadDataTableRequest() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Seller/Request/UndoRejectRequest?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Undo Reject Request</a>
+                       <a href="/Seller/Request/UndoRejectRequest?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Hoàn tác yêu cầu từ chối</a>
                     </div >`
                 },
                 "width": "35%"

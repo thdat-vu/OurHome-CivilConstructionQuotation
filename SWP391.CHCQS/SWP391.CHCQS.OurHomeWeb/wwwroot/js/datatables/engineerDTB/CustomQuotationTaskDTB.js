@@ -1,4 +1,4 @@
-var dataTableCQT;
+﻿var dataTableCQT;
 $(document).ready(function () {
     loadDataTableCustomQuotationTask();
 });
@@ -7,6 +7,9 @@ $(document).ready(function () {
 function loadDataTableCustomQuotationTask() {
     dataTableCQT = $('#tblCustomQuotationTask').DataTable({
         "ajax": { url: '/Engineer/Task/GetTaskListSession' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             {
                 data: 'task.id',
@@ -21,7 +24,7 @@ function loadDataTableCustomQuotationTask() {
                 data: 'task.id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a onClick="DeleteTaskFromQuote('/Engineer/Task/DeleteFromQuote?TaskId=${data}')" class="text-nowrap btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Delete</a>
+                       <a onClick="DeleteTaskFromQuote('/Engineer/Task/DeleteFromQuote?TaskId=${data}')" class="text-nowrap btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Xóa</a>
                     </div >`
                 },
             }

@@ -35,9 +35,9 @@ namespace SWP391.CHCQS.Utility
 
 		#region Request Status
 
-		public const string RequestStatusPending = "Pending";
-        public const string RequestStatusApproved = "Approved";
-        public const string RequestStatusRejected = "Rejected";
+		public const string RequestStatusPending = "Đang xử lý";
+        public const string RequestStatusApproved = "Đã xác nhận";
+        public const string RequestStatusRejected = "Đã từ chối";
 
 		#endregion
 
@@ -53,7 +53,7 @@ namespace SWP391.CHCQS.Utility
 
 		#region QuickQuote Constants
 		//options for alley in QuickQuote
-		public static List<string> Alleys = new () { "Wider than 5m", "Width from 3m - 5m", "Less than 3m" };
+		public static List<string> Alleys = new () { "Lớn hơn 5m", "Từ 3m - 5m", "Nhỏ hơn 3m" };
 		//surcharge for alley less than 5m
 		public const int AlleySurcharge = 100_000;
 
@@ -98,17 +98,17 @@ namespace SWP391.CHCQS.Utility
             switch (status)
             {
                 case -1:
-                    return "Cancelled";
+                    return "Đã hủy";
                 case 0:
-                    return "Rejected";
+                    return "Đã từ chối";
                 case 1:
-                    return "Preparing";
+                    return "Chuẩn bị";
                 case 2:
-                    return "Processing";
+                    return "Đang xử lí";
                 case 3:
-                    return "Pending Approval";
+                    return "Đợi xác nhận";
                 case 4:
-                    return "Completed";
+                    return "Hoàn thành";
                 default:
                     return "";
             }
@@ -119,9 +119,9 @@ namespace SWP391.CHCQS.Utility
 		//gender list
 		public enum GenderList
         {
-            Male,
-            Female,
-            Other
+            Nam,
+            Nữ,
+            Khác
         }
 
        

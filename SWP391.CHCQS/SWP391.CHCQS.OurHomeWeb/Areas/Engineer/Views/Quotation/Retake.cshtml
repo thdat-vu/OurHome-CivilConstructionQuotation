@@ -10,10 +10,10 @@
 		<div class="mt-3 mb-5 w-100 m-auto">
 			<div class="row mt-3">
 				<div class="ml-3 rounded-1 float-left">
-					<a onClick="BackToIndex('/Engineer/Quotation/Rejected')" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Back</a>
+					<a onClick="BackToIndex('/Engineer/Quotation/Rejected')" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Trở lại</a>
 				</div>
 			</div>
-			<h3 class="text-center"><b>Construct Detail</b></h3>
+			<h3 class="text-center"><b>Chi tiết công trình</b></h3>
 			<hr class="w-75 m-auto"></hr>
 		</div>
 
@@ -21,27 +21,27 @@
 
 		<div class="row mt-3 text-center">
 			<div class="col-lg">
-				<label><b class="text-nowrap">Construction:</b></label>
+				<label><b class="text-nowrap">Loại công trình:</b></label>
 				<p>@Model.ConstructionTypeName</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Investment:</b></label>
+				<label><b class="text-nowrap">Mức đầu tư:</b></label>
 				<p>@Model.InvestmentTypeName</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Width:</b></label>
+				<label><b class="text-nowrap">Chiều rộng:</b></label>
 				<p>@Model.Width</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Length:</b></label>
+				<label><b class="text-nowrap">Chiều dài:</b></label>
 				<p>@Model.Length</a>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Facade:</b></label>
+				<label><b class="text-nowrap">Mặt tiền:</b></label>
 				<p>@Model.Facade</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Alley:</b></label>
+				<label><b class="text-nowrap">Hẻm:</b></label>
 				<p>@Model.Alley</p>
 			</div>
 		</div>
@@ -49,42 +49,42 @@
 
 		<div class="row text-center">
 			<div class="col-lg">
-				<label><b class="text-nowrap">Rooms:</b></label>
+				<label><b class="text-nowrap">Số phòng:</b></label>
 				<p>@Model.Room</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Number of floors:</b></label>
+				<label><b class="text-nowrap">Số tầng:</b></label>
 				<p>@Model.Floor</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Mezzanine:</b></label>
+				<label><b class="text-nowrap">Lửng:</b></label>
 				<p>@Model.Mezzanine</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Rooftop floor:</b></label>
+				<label><b class="text-nowrap">Tâng thượng:</b></label>
 				<p>@Model.RooftopFloor</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Balcony:</b></label>
+				<label><b class="text-nowrap">Ban công:</b></label>
 				<p>@Model.Balcony</p>
 			</div>
 		</div>
 
 		<div class="row text-center">
 			<div class="col-lg">
-				<label><b class="text-nowrap">Foudation:</b></label>
+				<label><b class="text-nowrap">Loại móng:</b></label>
 				<p>@Model.FoundationTypeName</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Basement:</b></label>
+				<label><b class="text-nowrap">Loại hầm:</b></label>
 				<p>@Model.BasementTypeName</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Roof:</b></label>
+				<label><b class="text-nowrap">Loại mái:</b></label>
 				<p>@Model.RooftopTypeName</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Garden:</b></label>
+				<label><b class="text-nowrap">Diện tích vườn:</b></label>
 				<p>@Model.Garden</p>
 			</div>
 		</div>
@@ -96,35 +96,35 @@
 				<table id="tblCustomQuotationBill" class="table-bordered table-striped text-black" style="width:100%">
 					<thead>
 						<tr>
-							<th>
-								Price on Acreage
+							<th class="text-nowrap">
+								Giá / m2
 							</th>
-							<th>
-								Acreage
+							<th class="text-nowrap">
+								Diện tích
 							</th>
-							<th>
-								Foundation
+							<th class="text-nowrap">
+								Móng
 							</th>
-							<th>
-								Basement
+							<th class="text-nowrap">
+								Tầng hầm
 							</th>
-							<th>
-								Rooftop
+							<th class="text-nowrap">
+								Tầng thượng
 							</th>
-							<th>
-								Balcony
+							<th class="text-nowrap">
+								Ban công
 							</th>
-							<th>
-								Total Acreage
+							<th class="text-nowrap">
+								Tổng diện tích
 							</th>
-							<th>
-								Price Task
+							<th class="text-nowrap">
+								Giá công việc
 							</th>
-							<th>
-								Price Material
+							<th class="text-nowrap">
+								Giá vật tư
 							</th>
-							<th>
-								Total Price
+							<th class="text-nowrap">
+								Tổng giá
 							</th>
 						</tr>
 					</thead>
@@ -140,7 +140,7 @@
 					<div class="card-header bg-main">
 						<div class="row">
 							<div class="col-12 text-center">
-								<h2 class="text-white m-0">Reason List</h2>
+								<h2 class="text-white m-0">Lí do từ chối</h2>
 							</div>
 						</div>
 					</div>
@@ -151,17 +151,17 @@
 							<table id="tblCustomQuotationReason" class="table-bordered table-striped text-black" style="width:100%">
 								<thead>
 									<tr>
-										<th>
-											Id
+										<th class="text-nowrap">
+											Mã
 										</th>
-										<th>
-											Name
+										<th class="text-nowrap">
+											Tên
 										</th>
-										<th>
-											Quantity
+										<th class="text-nowrap">
+											Số lượng
 										</th>
-										<th>
-											Reason
+										<th class="text-nowrap">
+											Lí do
 										</th>
 									</tr>
 								</thead>
@@ -182,7 +182,7 @@
 					<div class="card-header bg-main">
 						<div class="row">
 							<div class="col-12 text-center">
-								<h2 class="text-white m-0">Tasks of Quote</h2>
+								<h2 class="text-white m-0">Công việc cần làm</h2>
 							</div>
 						</div>
 					</div>
@@ -193,20 +193,20 @@
 							<table id="tblCustomQuotationTask" class="table-bordered table-striped text-black" style="width:100%">
 								<thead>
 									<tr>
-										<th>
-											Id
+										<th class="text-nowrap">
+											Mã
 										</th>
-										<th>
-											Name
+										<th class="text-nowrap">
+											Tên
 										</th>
-										<th>
-											Unit Price
+										<th class="text-nowrap">
+											Giá gốc
 										</th>
-										<th>
-											Price
+										<th class="text-nowrap">
+											Giá tổng
 										</th>
-										<th>
-											Actions
+										<th class="text-nowrap">
+											Hành động
 										</th>
 									</tr>
 								</thead>
@@ -223,7 +223,7 @@
 					<div class="card-header bg-main">
 						<div class="row">
 							<div class="col-12 text-center">
-								<h2 class="text-white m-0">Materials of Quote</h2>
+								<h2 class="text-white m-0">Vật tư cần dùng</h2>
 							</div>
 						</div>
 					</div>
@@ -234,26 +234,26 @@
 							<table id="tblMaterialDetail" class="table-bordered table-striped text-black" style="width:100%">
 								<thead>
 									<tr>
-										<th>
-											Id
+										<th class="text-nowrap">
+											Mã
 										</th>
-										<th>
-											Name
+										<th class="text-nowrap">
+											Tên
 										</th>
-										<th>
-											Unit Price
+										<th class="text-nowrap">
+											Giá gốc
 										</th>
-										<th>
-											Unit
+										<th class="text-nowrap">
+											Đơn vị
 										</th>
-										<th>
-											Quantity
+										<th class="text-nowrap">
+											Số lượng
 										</th>
-										<th>
-											Price
+										<th class="text-nowrap">
+											Giá tổng
 										</th>
-										<th>
-											Actions
+										<th class="text-nowrap">
+											Hành động
 										</th>
 									</tr>
 								</thead>
@@ -265,7 +265,7 @@
 		</div>
 
 		<div class="row w-75 m-auto">
-			<a asp-area="Engineer" asp-controller="Quotation" asp-action="SubmitQuote" class="btn btn-main text-white mb-3"><i class="bi bi-arrow-90deg-up"></i> Save Quote</a>
+			<a asp-area="Engineer" asp-controller="Quotation" asp-action="SubmitQuote" class="btn btn-main text-white mb-3"><i class="bi bi-arrow-90deg-up"></i> Lưu báo giá</a>
 		</div>
 
 	</div>
@@ -281,7 +281,7 @@
 			<div class="card-header bg-main">
 				<div class="row">
 					<div class="col-12 text-center">
-						<h2 class="text-white m-0">Available Tasks</h2>
+						<h2 class="text-white m-0">Cộng việc khả dụng</h2>
 					</div>
 				</div>
 			</div>
@@ -292,20 +292,20 @@
 					<table id="tblTask" class="table-bordered table-striped text-black" style="width:100%">
 						<thead>
 							<tr>
-								<th>
-									Id
+								<th class="text-nowrap">
+									Mã
 								</th>
-								<th>
+								<th class="text-nowrap">
 									Name
 								</th>
-								<th>
-									Unit Price
+								<th class="text-nowrap">
+									Giá gốc
 								</th>
-								<th>
-									Category
+								<th class="text-nowrap">
+									Phân loại
 								</th>
-								<th>
-									Actions
+								<th class="text-nowrap">
+									Hành động
 								</th>
 							</tr>
 						</thead>
@@ -321,7 +321,7 @@
 			<div class="card-header bg-main">
 				<div class="row">
 					<div class="col-12 text-center">
-						<h2 class="text-white m-0">Available Materials</h2>
+						<h2 class="text-white m-0">Vật tư khả dụng</h2>
 					</div>
 				</div>
 			</div>
@@ -332,23 +332,23 @@
 					<table id="tblMaterial" class="table-bordered table-striped text-black" style="width:100%">
 						<thead>
 							<tr>
-								<th>
-									Id
+								<th class="text-nowrap">
+									Mã
 								</th>
-								<th>
-									Name
+								<th class="text-nowrap">
+									Tên
 								</th>
-								<th>
-									Unit Price
+								<th class="text-nowrap">
+									Giá gốc
 								</th>
-								<th>
-									Unit
+								<th class="text-nowrap">
+									Đơn vị
 								</th>
-								<th>
-									Category
+								<th class="text-nowrap">
+									Loại
 								</th>
-								<th>
-									Actions
+								<th class="text-nowrap">
+									Hành động
 								</th>
 							</tr>
 						</thead>

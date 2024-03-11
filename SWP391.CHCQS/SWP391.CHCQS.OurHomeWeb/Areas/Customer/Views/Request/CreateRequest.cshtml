@@ -4,11 +4,11 @@
 }
 <div class="d-flex img-thumbnail justify-content-center">
 	<div class="d-flex align-items-center">
-		<h3 class="p-3"><a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a></h3>
+		<h3 class="p-3"><a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a></h3>
 		<i class="fa-solid fa-arrow-right-long"></i>
-		<h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Quotation" asp-action="Index">Quotation</a></h3>
+		<h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Quotation" asp-action="Index">Báo giá</a></h3>
 		<i class="fa-solid fa-arrow-right-long"></i>
-		<h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Quotation" asp-action="SendRequest">Send Request</a></h3>
+		<h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Quotation" asp-action="SendRequest">Tạo yêu cầu</a></h3>
 	</div>
 </div>
 
@@ -21,37 +21,37 @@
 	<form class="row m-auto" method="post">		
 
 		<div class="mt-5 mb-5 w-75 m-auto">
-			<h3 class="text-center"><b>Your Details</b></h3>
+			<h3 class="text-center"><b>Thông tin công trình</b></h3>
 			<hr></hr>
 		</div>
 
 		<div class="row">			
 			<div class="col-lg">
-				<label><b class="text-nowrap">Type of Construction:</b></label>
+				<label><b class="text-nowrap">Loại công trình:</b></label>
 				<select asp-for="ConstructType" asp-items="@Model.ConstructionTypes" class="form-select">
-					<option selected disabled>-- Select Construction Type --</option>
+					<option selected disabled>-- Chọn loại công trình --</option>
 				</select>
 			</div>
 			<div class="col-lg">
-				<label><b>Location:</b></label>
+				<label><b>Địa chỉ:</b></label>
 				<input asp-for="Location" class="form-control"></input>
 			</div>			
 			<div class="col-lg">
-				<label><b>Acreage:</b></label>
+				<label><b>Diện tích:</b></label>
 				<input asp-for="Acreage" class="form-control" placeholder="0m x 0m"></input>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-sm">
-				<label><b>Description:</b></label>
+				<label><b>Mô tả:</b></label>
 				<textarea asp-for="Description" rows="6" class="form-control"></textarea>
 			</div>
 		</div>
 
 		<div class="row mt-3 mb-2">
 			<div class="col-sm">
-				<button class="form-control text-white btn btn-main" style="background-color: #F27456" type="submit">Submit</button>
+				<button class="form-control text-white btn btn-main" style="background-color: #F27456" type="submit">Gửi yêu cầu</button>
 			</div>
 		</div>
 

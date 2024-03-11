@@ -19,38 +19,38 @@
                         <a asp-area="Manager" asp-controller="CustomQuotation" asp-action="Index" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Back</a>
                     </div>
                 </div>
-                <h3 class="text-center"><b>Construct Information</b></h3>
+                <h3 class="text-center"><b>Chi tiết công trình</b></h3>
                 <hr class="w-75 m-auto"></hr>
             </div>
             <!--Khu vực hiển thị thông tin custom quotation dc tạo bởi seller -->
 
             <div class="row mt-3 text-center ">
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Request Id:</b></label>
+                    <label><b class="text-nowrap">Mã yêu cầu:</b></label>
                     <p>@quotationDetailVM.RequestId</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Type of construction:</b></label>
+                    <label><b class="text-nowrap">Loại công trình:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.TypeOfConstruct</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Investment:</b></label>
+                    <label><b class="text-nowrap">Mức đầu tư:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Investment</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Width:</b></label>
+                    <label><b class="text-nowrap">Chiều rộng:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Width</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Length:</b></label>
+                    <label><b class="text-nowrap">Chiều loại:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Length</>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Facade:</b></label>
+                    <label><b class="text-nowrap">Mặt tiền:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Facade</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Alley:</b></label>
+                    <label><b class="text-nowrap">Hẻm:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Alley</p>
                 </div>
             </div>
@@ -58,43 +58,43 @@
 
             <div class="row text-center">
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Number of floors:</b></label>
+                    <label><b class="text-nowrap">Số tầng:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Floor</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Mezzanine:</b></label>
+                    <label><b class="text-nowrap">Lửng:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Mezzanine</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Rooftop floor:</b></label>
+                    <label><b class="text-nowrap">Tầng thượng:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.RooftopFloor</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Balcony:</b></label>
+                    <label><b class="text-nowrap">Ban công:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.BalconyStatus</p>
                 </div>
             </div>
 
             <div class="row text-center">
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Foudation:</b></label>
+                    <label><b class="text-nowrap">Loại móng:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Foundation</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Basement:</b></label>
+                    <label><b class="text-nowrap">Loại hầm:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Basement</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Roof:</b></label>
+                    <label><b class="text-nowrap">Loại mái:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Roof</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Garden:</b></label>
+                    <label><b class="text-nowrap">Diện tích vườn:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Garden</p>
 
                 </div>
                 <div class="col-lg" style="color:red">
-                    <label><b class="text-nowrap">Total:</b></label>
+                    <label><b class="text-nowrap">Tổng giá:</b></label>
                     <p>@quotationDetailVM.Total </p>
                 </div>
 
@@ -111,7 +111,7 @@
                     <div class="card-header bg-main">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <h2 class="text-white m-0">Tasks</h2>
+                                <h2 class="text-white m-0">Công việc</h2>
                             </div>
                         </div>
                     </div>
@@ -123,16 +123,16 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            Id
+                                            Mã
                                         </th>
                                         <th>
-                                            Name
+                                            Tên
                                         </th>
                                         <th>
-                                            Price
+                                            Gía
                                         </th>
                                         <th>
-                                            Actions
+                                            Hành động
                                         </th>
                                     </tr>
                                 </thead>
@@ -147,7 +147,7 @@
                     <div class="card-header bg-main">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <h2 class="text-white m-0">Materials </h2>
+                                <h2 class="text-white m-0">Vật liệu </h2>
                             </div>
                         </div>
                     </div>
@@ -159,26 +159,26 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            Id
+                                            Mã
                                         </th>
                                         <th>
-                                            Name
+                                            Tên
                                         </th>
                                         <th>
-                                            Category
+                                            Loại
                                         </th>
                                         <th>
-                                            Quantity
+                                            Số lượng
                                         </th>
 
                                         <th>
-                                            Price
+                                            Gía
                                         </th>
                                         <th>
-                                            Unit
+                                            Đơn vị
                                         </th>
                                         <th>
-                                            Actions
+                                            Hành động
                                         </th>
                                     </tr>
                                 </thead>
@@ -194,7 +194,7 @@
         <div class="row">
             <div class="container img-thumbnail mt-3 mb-5">
                 <div class="mt-3 mb-5 w-100 m-auto">
-                    <h3 class="text-center"><b>Working Time</b></h3>
+                    <h3 class="text-center"><b>Thời gian làm việc</b></h3>
                     <hr class="w-75 m-auto"></hr>
                 </div>
                 <div class="row mt-3">
