@@ -77,26 +77,26 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [Display(Name = "Name")]
+            [Required(ErrorMessage = "Tên không được để trống")]
+            [StringLength(100, ErrorMessage = "{0} phải chứa ít nhất {2} và nhiều nhất {1} ký tự.", MinimumLength = 6)]
+            [Display(Name = "Tên")]
             public string Name { get; set; }
             
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [Display(Name = "Username")]
+            [Required(ErrorMessage = "Tên đăng nhập không được để trống")]
+            [StringLength(100, ErrorMessage = "{0} phải chứa ít nhất {2} và nhiều nhất {1} ký tự.", MinimumLength = 6)]
+            [Display(Name = "Tên đăng nhập")]
             public string Username { get; set; }
             
-            [Required]
-            [Phone]
-            [Display(Name = "Phone")]
+            [Required(ErrorMessage = "Số điện thoại không được để trống")]
+            [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
+            [Display(Name = "Số điện thoại")]
             public string Phone { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email không được để trống")]
+            [EmailAddress(ErrorMessage = "Email không hợp lệ")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -104,10 +104,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Mật khẩu không được để trống")]
+            [StringLength(100, ErrorMessage = "{0} phải chứa ít nhất {2} và nhiều nhất {1} ký tự.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Mật Khẩu")]
             public string Password { get; set; }
 
             /// <summary>
@@ -115,12 +115,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Xác nhận mật khẩu")]
+            [Compare("Password", ErrorMessage = "Mật khẩu và Xác nhận mật khẩu phải trùng khớp.")]
             public string ConfirmPassword { get; set; }
 
             public string? Role { get; set; }
 
+            [Display(Name = "Giới tính")]
             public string? Gender { get; set; }
             [ValidateNever]
             public List<SelectListItem> GenderList { get; set; }
@@ -226,8 +227,35 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
+                    switch (error.Code)
+                    {
+                        case "PasswordRequiresNonAlphanumeric":
+                            error.Description = "Mật khẩu phải chứa ít nhất một ký tự đặc biệt";
+                            break;
+                        case "PasswordRequiresLower":
+                            error.Description = "Mật khẩu phải chứa ít nhất một ký tự thường";
+                            break;
+                        case "PasswordRequiresUpper":
+                            error.Description = "Mật khẩu phải chứa ít nhất một ký tự hoa";
+                            break;
+                        case "PasswordRequiresDigit":
+                            error.Description = "Mật khẩu phải chứa ít nhất một chữ số";
+                            break;
+                        default:
+                            error.Description = "Mật khẩu không hợp lệ";
+                            break;
+                    }
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+            }
+            Input.GenderList = new List<SelectListItem>();
+            foreach (var gender in Enum.GetValues(typeof(SD.GenderList)))
+            {
+                Input.GenderList.Add(new SelectListItem
+                {
+                    Text = gender.ToString(),
+                    Value = gender.ToString()
+                });
             }
 
             // If we got this far, something failed, redisplay form
