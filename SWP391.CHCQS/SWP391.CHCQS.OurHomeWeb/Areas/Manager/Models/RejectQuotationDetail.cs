@@ -4,9 +4,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models
 {
     public class RejectQuotationDetail
     {
-        public decimal? Total;
-        public Dictionary<string, string>? TaskDetailNotes { get; set; } = null!;
-        public Dictionary<string,MaterialNote>? MaterialDetailNotes { get; set; } = null!;
+        public decimal? Total { get; set; }
+        public Dictionary<string, string>? TaskDetailNotes { get; set; }
+        public Dictionary<string,MaterialNote>? MaterialDetailNotes { get; set; } 
 
     }
 }

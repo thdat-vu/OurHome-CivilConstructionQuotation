@@ -266,7 +266,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			try
 			{
 				var pathCreater = new PathCreater(_environment);
-				string targetFolder = pathCreater.CreateFilePathInRoot(CustomQuotationSession.Id.Trim() + ".txt", "reject-quotation-file");
+				string targetFolder = pathCreater.CreateFilePathInRoot(CustomQuotationSession.Id.Trim() + ".txt", "note-reject-quotation-file");
 				var reasons = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
 				var reason = reasons.LastOrDefault();
 
