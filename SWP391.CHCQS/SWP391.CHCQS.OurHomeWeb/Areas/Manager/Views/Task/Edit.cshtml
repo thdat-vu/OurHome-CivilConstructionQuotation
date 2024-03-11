@@ -1,10 +1,14 @@
 ﻿@model TaskVM
+@{
+    ViewData["Title"] = "Sửa công việc";
+}
+
 
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-main ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Edit Task</h2>
+                <h2 class="text-white py-2">Sửa công việc</h2>
             </div>
         </div>
     </div>
@@ -38,7 +42,7 @@
                         
                         <div class="form-floating py-2 col-12">
                             <select asp-for="Task.CategoryId" asp-items="@Model.TaskCategoryList" class="form-select border-0 shadow">
-                                <option disabled selected>--Select Category--</option>
+                                <option disabled selected>--Chọn loại--</option>
                             </select>
                             <label asp-for="Task.CategoryId" class="ms-2"></label>
                             <span asp-validation-for="Task.CategoryId" class="text-danger"></span>
@@ -46,11 +50,11 @@
 
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">
-                                <button type="submit" class="btn btn-primary form-control btn-main"> Save </button>
+                                <button type="submit" class="btn btn-primary form-control btn-main"> Lưu </button>
                             </div>
                             <div class="col-6 col-md-3">
                                 <a asp-controller="Material" asp-action="Index" class="btn btn-main border form-control">
-                                    Back to List
+                                    Trở lại
                                 </a>
                             </div>
                         </div>

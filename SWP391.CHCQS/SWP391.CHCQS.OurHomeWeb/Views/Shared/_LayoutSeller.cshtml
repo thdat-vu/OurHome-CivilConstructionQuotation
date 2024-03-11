@@ -36,7 +36,7 @@
 			<!-- Sidebar - Brand -->
 			<a asp-area="Seller" asp-controller="Home" asp-action="Index" style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center">
 				<div class="sidebar-brand-icon">
-					<img src="~/images/logo.png" width="100%"></img>
+					<img src="~/images/logo.png" width="100%"/>
 				</div>
 			</a>
 
@@ -49,13 +49,13 @@
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
 				   aria-expanded="true" aria-controls="collapseTwo">
 					<i class="fas fa-fw fa-cog"></i>
-					<span>Yêu cầu</span>
+					<span>Yêu cầu của khách hàng</span>
 				</a>
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" asp-area="Seller" asp-controller="Home" asp-action="Index">Đang chờ</a>
-						<a class="collapse-item" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestCompleted">Hoàn thành</a>
-						<a class="collapse-item" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestRejected">Từ chối</a>
+						<a class="collapse-item" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestCompleted">Đã hoàn thành</a>
+						<a class="collapse-item" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestRejected">Đã từ chối</a>
 					</div>
 				</div>
 			</li>
@@ -94,7 +94,6 @@
 
 						<!-- Nav Item - User Information -->
 							<partial name="_LoginPartial"></partial>
-
 					</div>
 
 				</nav>
