@@ -42,16 +42,60 @@
                                 </strong>
                             </span>
                         </a>
-                        <ol>
-                            @foreach (var item in Model)
-                            {
-                                <li class="font-weight-bold">
-                                    <a href="#@item.Name">
-                                        <strong>@item.Name</strong>
-                                    </a>
-                                </li>
-                            }
-                        </ol>
+                        <ul>
+                            <li class="font-weight-bold">
+                                <a href="#raw">
+                                    <strong>2.1 Vật tư thô</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#complete">
+                                    <strong>2.2 Vật tư hoàn thiện</strong>
+                                </a>
+                                <ul>
+                                    <li class="font-weight-bold">
+                                        <a href="#paint">
+                                            <strong>Sơn nước sơn dầu</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#electric">
+                                            <strong>Điện</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#sanitary">
+                                            <strong>Vệ sinh</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#kitchen">
+                                            <strong>Bếp</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#stair">
+                                            <strong>Cầu thang</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#door">
+                                            <strong>Cửa</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#ceramicTiles">
+                                            <strong>Gạch ốp lát</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#ceiling">
+                                            <strong>Trần</strong>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                     <li class="font-weight-bold">
                         <a href="#application">
@@ -70,27 +114,27 @@
                         </a>
                         <ul>
                             <li class="font-weight-bold">
-                                <a href="#stone-price">
+                                <a href="#raw-price">
                                     4.1
-                                    <strong>Price of construction stone</strong>
+                                    <strong>Giá vật tư thô</strong>
                                 </a>
                             </li>
                             <li class="font-weight-bold">
-                                <a href="#sand-price">
+                                <a href="#paint-price">
                                     4.2
-                                    <strong>Price of construction sand</strong>
+                                    <strong>Giá sơn nước sơn dầu</strong>
                                 </a>
                             </li>
                             <li class="font-weight-bold">
-                                <a href="#iron-price">
+                                <a href="#electric-price">
                                     4.3
-                                    <strong>Price of construction iron</strong>
+                                    <strong>Giá vật dụng điện</strong>
                                 </a>
                             </li>
                             <li class="font-weight-bold">
-                                <a href="#brick-price">
+                                <a href="#sanitary-price">
                                     4.4
-                                    <strong>Price of construction brick</strong>
+                                    <strong>Giá vật dụng vệ sinh</strong>
                                 </a>
                             </li>
                             <li class="font-weight-bold">
@@ -112,42 +156,53 @@
                         <span class="title font-weight-bold">Update construction material prices today</span>
                     </h1>
                 </header>
-
-                <p style="font-weight:500; font-size: 1.3em"><strong>What are construction materials? What types of construction materials are included? Their application in life? What is the latest price of construction materials today? We will answer all of these questions in the following article.</strong></p>
-                <h5>Nowadays, to build solid structures, we use construction materials that are durable and of high quality. To get the most general overview of construction materials, in this article we will explain to readers what construction materials are, what types of construction materials include, applications and price quotes. latest today.</h5>
-                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-
-                <h2 id="intro1" class="mt-3"><span style="color:#F27456"><strong>What are construction materials?</strong></span></h2>
-
-
-                <p>
-
-                    Construction materials is a general term used for all types of materials used for construction purposes. Many construction materials exist in nature, such as: clay, stone, sand, wood, even twigs and leaves. In addition to natural materials, there are now many artificial products such as bricks, cement, reinforced steel...
-
-                    <h2 id="intro2" class="mt-3"><span style="color:#F27456"><strong>What do construction materials include?</strong></span></h2>
-                </p>
-                <h3 id="brick"><strong>1. Brick</strong></h3>
+                <div>
+                    <p style="font-weight:500; font-size: 1.3em"><strong>What are construction materials? What types of construction materials are included? Their application in life? What is the latest price of construction materials today? We will answer all of these questions in the following article.</strong></p>
+                    <h5>Nowadays, to build solid structures, we use construction materials that are durable and of high quality. To get the most general overview of construction materials, in this article we will explain to readers what construction materials are, what types of construction materials include, applications and price quotes. latest today.</h5>
+                    <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
+                </div>
+                
+                <div>
+                    <h2 id="intro1" class="mt-3"><span style="color:#F27456"><strong>What are construction materials?</strong></span></h2>
+                    <p>
+                        Construction materials is a general term used for all types of materials used for construction purposes. Many construction materials exist in nature, such as: clay, stone, sand, wood, even twigs and leaves. In addition to natural materials, there are now many artificial products such as bricks, cement, reinforced steel...
+                    </p>
+                </div>
+                <h3 id="raw"><strong>2.1 Vật tư thô</strong></h3>
                 <p>To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="cement" class="mt-3"><strong>2. Cement</strong></h3>
+
+                <h3 id="complete"class="mt-5"><strong>2.2 Vật tư hoàn thiện</strong></h3>
+                <h3 id="paint" class="mt-3"><strong>A. Sơn nước sơn dầu</strong></h3>
                 <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="sand" class="mt-3"><strong>3. Sand</strong></h3>
+
+                <h3 id="electric" class="mt-3"><strong>B. Điện</strong></h3>
                 <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="stone" class="mt-3"><strong>4. Stone</strong></h3>
+
+                <h3 id="sanitary" class="mt-3"><strong>C. Vệ sinh</strong></h3>
                 <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="iron" class="mt-3"><strong>5. Iron and Steel</strong></h3>
+
+                <h3 id="kitchen" class="mt-3"><strong>D. Bếp</strong></h3>
                 <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="concrete" class="mt-3"><strong>6. Concrete</strong></h3>
+
+                <h3 id="stair" class="mt-3"><strong>E. Cầu thang</strong></h3>
                 <p class="mb-3">Concrete is also a synthetic construction material that plays an extremely important role in construction. Concrete is essentially a combination of aggregate and cement. We can mention a form of concrete that is commonly used in construction projects today such as: Portland cement concrete (component includes mineral aggregates, specifically sand and gravel combined with cement). portland and water. </p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="plaster" class="mt-3"><strong>7. Plaster</strong></h3>
+
+                <h3 id="door" class="mt-3"><strong>F. Cửa</strong></h3>
                 <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="plastic" class="mt-3"><strong>8. Plastic</strong></h3>
+
+                <h3 id="ceramicTiles" class="mt-3"><strong>G. Gạch ốp lát</strong></h3>
+                <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
+                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
+
+
+                <h3 id="ceiling" class="mt-3"><strong>H. Trần</strong></h3>
                 <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
 
@@ -163,14 +218,57 @@
                 <p>Bricks - terracotta tiles: Currently you can find other types of bricks besides bricks made from terracotta such as: bricks made from cement, ceramic bricks, etc. But no matter what material they are made from, bricks is also an important group of construction materials for each project.</p>
                 <p>Cement: is a type of hydraulic binder, considered an important construction material and extremely necessary for any project.</p>
                 <p>Metal: Including: iron, steel, stainless steel, aluminum, copper, etc. These materials are often used as structural frames for large buildings or exterior surface coatings.</p>
+
                 <h2 id="material-price" class="mt-3">
                     <span style="color:#F27456">
                         <strong>Today's construction materials price list is updated to the latest in 2024</strong>
                     </span>
                 </h2>
 
-                <h3 id="stone-price" class="mt-3">
-                    <strong>Price of construction stone</strong>
+                <h3 id="raw-price" class="mt-3">
+                    <strong>Giá vật liệu thô</strong>
+                </h3>
+
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td style="height:21px;">
+                                <p align="center" >
+                                    <strong>Product's name</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Unit </strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Price includes VAT <br /> (10%)</strong>
+                                </p>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var material in Model.Find(x => x.Id == SD.Category_Raw).Materials)
+                        {
+                            <tr>
+                                <td style="height:21px" >
+                                    <p align="left" class="text-black">@material.Name</p>
+                                </td>
+                                <td style="height:21px">
+                                    <p align="center" class="text-black">@material.Unit</p>
+                                </td>
+                                <td style="height:21px">
+                                    <p align="center" class="text-black">@material.UnitPrice.ToString("N0") VND</p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <h3 id="paint-price" class="mt-3">
+                    <strong>Giá sơn nước sơn dầu</strong>
                 </h3>
 
                 <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
@@ -208,8 +306,8 @@
                     </tbody>
                 </table>
 
-                <h3 id="sand-price" class="mt-3">
-                    <strong>Price of construction sand</strong>
+                <h3 id="electric-price" class="mt-3">
+                    <strong>Giá vật liệu điện</strong>
                 </h3>
 
                 <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
@@ -247,47 +345,8 @@
                     </tbody>
                 </table>
 
-                <h3 id="iron-price" class="mt-3">
-                    <strong>Price of construction Iron</strong>
-                </h3>
-
-                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
-                    <tbody>
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Product's name</strong>
-                                </p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Unit (M3)</strong>
-                                </p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Price includes VAT (10%)</strong>
-                                </p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-
-                <h3 id="brick-price" class="mt-3">
-                    <strong>Price of construction Brick</strong>
+                <h3 id="sanitary-price" class="mt-3">
+                    <strong>Giá vật dụng vệ sinh</strong>
                 </h3>
 
                 <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
