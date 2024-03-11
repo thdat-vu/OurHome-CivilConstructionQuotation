@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.CodeAnalysis;
@@ -12,6 +13,7 @@ using System.Text.Json;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 {
     [Area("Seller")]
+    [Authorize(Roles = SD.Role_Seller)]
     public class QuotationController : Controller
     {
         #region ============ DECLARE ============
@@ -28,6 +30,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             _hubContext = hubContext;
         }
         #endregion ============ DECLARE ============
+
 
         #region ============ ACTIONS ============
 
@@ -133,7 +136,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 _unitOfWork.Save();
 
 
-				TempData["success"] = "Construct Detail created successfully";
+				TempData["success"] = "Tạo thông tin chi tiết công trình thành công";
                 _hubContext.Clients.All.SendAsync("RecieveQuotationFromSeller");
                 return RedirectToAction("ViewQuotation", "Quotation");
             }
@@ -168,6 +171,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                     }),
                     ConstructDetail = new ConstructDetail()
                 };
+                TempData["error"] = "Tạo thông tin chi tiết công trình thất bại";
                 return View(ConstructDetailVM);
             }
 
@@ -183,7 +187,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 		public async Task<IActionResult> GetAll()
 		{
 			List<QuotationStatusViewModel> CustomQuotationList = _unitOfWork.CustomQuotation
-				.GetAll().Select(x => new QuotationStatusViewModel
+				.GetAll().OrderBy(x => x.Date).Select(x => new QuotationStatusViewModel
                 {
                     Id = x.Id,
                     Date = x.Date,
@@ -195,10 +199,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 })
 				.ToList();
 
-			return Json(new { data = CustomQuotationList });
+            //Return Json for datatables to read
+            return Json(new { data = CustomQuotationList });
 
         }
-        #endregion
+        #endregion============ API ============
+
 
         #region ============ FUNCTIONS ============ 
         public IActionResult ViewQuotation()

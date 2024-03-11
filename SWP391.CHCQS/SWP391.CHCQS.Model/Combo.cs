@@ -15,13 +15,22 @@ namespace SWP391.CHCQS.Model
         [MaxLength(10)]
         public string Id { get; set; } = null!;
         [MaxLength(200)]
-        public string Name { get; set; } = null!;
+		[Required(ErrorMessage = "Vui lòng nhập Tên Gói dịch vụ")]
+		[Display(Name = "Tên Gói dịch vụ")]
+		public string Name { get; set; } = null!;
         [MaxLength(500)]
-        public string? Description { get; set; }
-        public decimal Price { get; set; }
+		[Required(ErrorMessage = "Vui lòng nhập Mô tả")]
+		[Display(Name = "Mô tả")]
+		public string? Description { get; set; }
+		[Display(Name = "Giá")]
+		[Range(1, double.MaxValue, ErrorMessage = "Vui lòng nhập Giá lớn hơn 0.")]
+		[Required(ErrorMessage = "Giá không được để trống ")]
+		public decimal Price { get; set; }
         public bool Status { get; set; }
         [MaxLength(10)]
-        public string ConstructionId { get; set; } = null!;
+		[Required(ErrorMessage = "Vui lòng chọn Loại Công trình")]
+		[Display(Name = "Loại công trình")]
+		public string ConstructionId { get; set; } = null!;
         [ForeignKey("ConstructionId")]
         public virtual ConstructionType Construction { get; set; } = null!;
 

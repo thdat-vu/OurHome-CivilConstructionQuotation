@@ -1,6 +1,6 @@
 ﻿@model ComboDetailViewModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo gói dịch vụ";
 }
 <div class="card mt-3 mb-3 w-100">
     <div class="m-auto w-100">
@@ -9,24 +9,24 @@
         <div class="mt-3 mb-5 w-100 m-auto">
             <div class="row mt-3">
                 <div class="ml-3 rounded-1 float-left">
-                    <a onClick="BackToIndex('/Manager/Combo/Index')" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Back</a>
+                    <a onClick="BackToIndex('/Manager/Combo/Index')" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Trở lại</a>
                 </div>
             </div>
-            <h3 class="text-center"><b>Combo Detail</b></h3>
+            <h3 class="text-center"><b>Thông tin chi tiết các gói</b></h3>
             <hr class="w-75 m-auto"></hr>
         </div>
 
 		<div class="row mt-3 text-center">
 			<div class="col-lg">
-				<label><b class="text-nowrap">Name:</b></label>
+				<label><b class="text-nowrap">Tên:</b></label>
 				<p>@Model.Name</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Description:</b></label>
+				<label><b class="text-nowrap">Mô tả:</b></label>
 				<p>@Model.Description</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Price:</b></label>
+				<label><b class="text-nowrap">Giá:</b></label>
 				<p>@Model.Price</p>
 			</div>
 			

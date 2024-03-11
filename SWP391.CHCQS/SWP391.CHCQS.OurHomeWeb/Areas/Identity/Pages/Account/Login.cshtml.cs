@@ -79,23 +79,25 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Tên đăng nhập không được bỏ trống")]
+            [StringLength(100, ErrorMessage = "{0}phái chứa ít nhất {2} và nhiều nhất {1} ký tự.", MinimumLength = 6)]
+            [Display(Name = "Tên đăng nhập")]
             public string Username { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Mật khẩu không được bỏ trống")]
             [DataType(DataType.Password)]
+            [Display(Name = "Mật khẩu")]
             public string Password { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Lưu đăng nhập?")]
             public bool RememberMe { get; set; }
         }
 
@@ -150,7 +152,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Đăng nhập không hợp lệ.");
                     return Page();
                 }
             }

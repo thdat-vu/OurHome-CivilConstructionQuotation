@@ -9,7 +9,7 @@
         <a id="manage" class="col text-main text-nowrap fa-2x" style="margin: auto" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="bi bi-person-circle"></i></a>
 
         <form id="logoutForm" class="col" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-main text-nowrap">Đăng xuất</button>
+            <button id="logout" type="submit" style="height:3.375rem" class="nav-link btn btn-main text-nowrap">Đăng xuất</button>
         </form>
     </div>
 }

@@ -11,7 +11,7 @@ function loadDataTableRequest() {
             "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
         },
         "columns": [
-            { data: 'numberOfOrder', "width": "5%" },
+            { data: 'numberOfOrder'},
             {
                 data: 'generateDate',
                 "render": function (data) {
@@ -22,13 +22,12 @@ function loadDataTableRequest() {
                     let year = date.getFullYear();
                     return `${day}/${month}/${year}`;
                 },
-                "width": "10%"
             },
-            { data: 'constructType', "width": "10%" },
-            { data: 'acreage', "width": "10%" },
-            { data: 'location', "width": "15%" },
-            { data: 'status', "width": "15%" },
-            { data: 'description', "width": "25%" },
+            { data: 'constructType'},
+            { data: 'acreage'},
+            { data: 'location'},
+            { data: 'status'},
+            { data: 'description'},
             {
                 data: 'requestId',
                 "render": function (data) {
@@ -36,7 +35,6 @@ function loadDataTableRequest() {
                        <a href="/Customer/Request/ViewResponse?id=${data}" class = "text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-eye"></i> Xem kết quả</a>
                     </div >`
                 },
-                "width": "10%"
             }
         ]
     });
