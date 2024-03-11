@@ -69,6 +69,10 @@ namespace SWP391.CHCQS.Utility
 
 		#endregion
 
+		#region Material Constants
+		public static List<string> MaterialUnits = new() { "mét" , "mét vuông", "mét khối", "tấn", "thùng", "bao", "viên", "cái" };
+		#endregion
+
 		#region Functions
 
 		/// <summary>

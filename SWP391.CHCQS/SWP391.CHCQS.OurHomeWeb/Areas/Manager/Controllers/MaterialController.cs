@@ -46,9 +46,16 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
+                UnitList = new List<SelectListItem>(),
                 Material = new Material()
             };
-            return View(materialVM);
+            //add Unit List to materialVM's UnitList
+            SD.MaterialUnits.ForEach(item =>
+            {
+                materialVM.UnitList.Add(new SelectListItem() { Text = item, Value = item});
+			});
+            
+			return View(materialVM);
         }
 
         //Create request HttpPOST
@@ -75,7 +82,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             }
             _unitOfWork.Material.Add(materialVM.Material); //Add MaterialVM to Material table
             _unitOfWork.Save(); //keep track on change
-            TempData["success"] = "Material created successfully";
+            TempData["success"] = "Vật tư đã tạo thành công";
             return RedirectToAction("Index"); //after adding, return to previous action and reload the page
 
             //return View(materialVM); //return previous action + invalid object
@@ -104,8 +111,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
+                UnitList = new List<SelectListItem>(),
                 Material = new Material()
             };
+            //Add UnitList from SD.cs
+            SD.MaterialUnits.ForEach(item =>
+            {
+                materialVM.UnitList.Add(new SelectListItem() { Text = item, Value = item });
+            });
             //step 2.1: pass Material to MaterialViewModel
             materialVM.Material = materialFromDb;
             return View(materialVM); //return View + retrieved Material
@@ -144,7 +157,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //{
             _unitOfWork.Material.Update(materialVM.Material); //Update Material to Material table
             _unitOfWork.Save(); //keep track on change
-            TempData["success"] = "Material edited successfully";
+            TempData["success"] = "Chỉnh sửa vật tư thành công";
             return RedirectToAction("Index"); //after updating, return to previous action and reload the page
             //}
             //return View();//return previous action if model is invalid
@@ -186,7 +199,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //change the status in to false
             obj.Status = false;
             _unitOfWork.Save();//keep track on change
-            TempData["success"] = "Material deleted successfully";
+            TempData["success"] = "Xóa vật tư thành công";
             return RedirectToAction("Index"); //redirect to Index.cshtml
         }
 
