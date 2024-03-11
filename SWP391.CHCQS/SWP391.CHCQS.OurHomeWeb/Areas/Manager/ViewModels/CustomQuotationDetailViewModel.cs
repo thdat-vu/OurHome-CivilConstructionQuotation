@@ -13,6 +13,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 		public ApplicationUser? Manager { get; set; } = null!;
 		public ApplicationUser? Seller { get; set; } = null!;
 		public decimal Total {  get; set; }
+		public int Status { get; set; }	
 
 		//ghi lại thời gian và người dc ủy quyền xử lý custom quotation
 		//thời gian dc giao request và hoàn thành điền quotation của Seller

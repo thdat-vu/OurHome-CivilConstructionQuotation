@@ -51,31 +51,7 @@ namespace SWP391.CHCQS.Utility.Helpers
 			return client.SendEmailAsync(msg);
 
 		}
-		/*
-		public static Task SendInfoToEmail(string toEmail, string subject, string htmlMessage)
-		{
-
-			string fromMail = "ourhomeswp391@gmail.com";
-			string fromPassword = "kusvqhpurbksspvb";
-
-			MailMessage mess = new MailMessage();
-			mess.From = new MailAddress(fromMail);
-			mess.Subject = subject;
-			mess.To.Add(new MailAddress(toEmail));
-			mess.Body = htmlMessage;
-
-			mess.IsBodyHtml = true;
-
-			var smtp = new SmtpClient("smtp.gmail.com")
-			{
-				Port = 587,
-				Credentials = new NetworkCredential(fromMail, fromPassword),
-				EnableSsl = true
-			};
-			smtp.Send(mess);
-			return Task.CompletedTask;
-		}
-		*/
+	
 		/* HOW TO USE BODY BUILDER TO RENDER HTML
 				var builder = new BodyBuilder();
 		 Set the html version of the message text
@@ -91,6 +67,15 @@ namespace SWP391.CHCQS.Utility.Helpers
 		 Now we just need to set the message body and we're done
 		 message.Body = builder.ToMessageBody();
 		*/
+		/// <summary>
+		/// Hàm để gửi mail cho user với format sẵn, hàm trả về boolean
+		/// False: nếu có gì đó xảy ra trong lúc lỗi
+		/// True: nếu thành công, chạy ngon lành
+		/// </summary>
+		/// <param name="toEmail"></param>
+		/// <param name="customerName"></param>
+		/// <param name="quoteId"></param>
+		/// <returns></returns>
 		public bool SendInfoToEmail(string toEmail, string customerName, string quoteId)
 		{
 			try

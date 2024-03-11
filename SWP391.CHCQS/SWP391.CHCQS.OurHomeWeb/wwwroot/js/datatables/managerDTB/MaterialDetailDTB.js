@@ -1,15 +1,44 @@
-﻿
+﻿var dataTableMDRS;
 
-var dataTableCQ;
 $(document).ready(function () {
+    //chạy datatable
     loadDataMaterialDetail();
+
 });
 
+function InputNoteMaterialEvent(url, materialId, quantity) {
+    var typingTimer
+    clearTimeout(typingTimer); // Xóa bỏ bất kỳ setTimeout đang chờ thực hiện động còn đang chạy
 
-//change name method - remember
-//Need an api method return json to use this
+    // Lấy giá trị của textarea và nội dung của thẻ p
+    var note = document.getElementById(`${materialId}`).value;
+    //console.log(note);
+    typingTimer = setTimeout(function () {
+
+        // Thực hiện cuộc gọi AJAX
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: { materialId: materialId, note: note, quantity: quantity },
+            success: function () {
+                //console.log(response.add);
+                dataTableMDRS.ajax.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error('Ajax call failed:', error);
+            }
+        });
+
+        //console.log(materialId);
+        //console.log(quantity);
+        //console.log(note);
+
+    }, 100);
+
+}
+
 function loadDataMaterialDetail() {
-    dataTableCQ = $('#tblMaterialDetail').DataTable({
+    dataTableMDRS = $('#tblMaterialDetail').DataTable({
         "ajax": { url: '/Manager/MaterialDetail/GetDetail' },
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
@@ -20,58 +49,29 @@ function loadDataMaterialDetail() {
                 "render": function (data) {
                     return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
                 },
-       
             },
-            { data: 'materialName'},
+            { data: 'materialName' },
             { data: 'materialCateName' },
             {
                 data: null,
                 "render": function (data) {
-                    return `<p>${data.quantity ?? 0}</p>`
-                },
+                    return `<p>${data.quantity}</p>`
+                }
             },
-            { data: 'price'},
+            { data: 'price' },
             { data: 'unit' },
             {
                 data: null,
                 "render": function (data) {
-                    // Generate a unique form ID using the material ID
-                    //var formId = `takeNoteMaterial${data.materialId}`;
-                    var noteHere = data.note.value.note;
-                    return `<form class="text-nowrap" action="/Manager/CustomQuotation/TakeNoteMaterial" id="takeNoteMaterial${data.materialId}" method="post">
-                       <textarea name="materialNote" placeholder="${noteHere}" class="form-control" id="textAreaExample1" rows="4"></textarea>
-                        <input type="text" name="materialId" hidden value="${data.materialId}"/>
-                        <input type="text" name="quantity" hidden value="${data.quantity}"/>
-                        <button type="submit" class="btn-main text-nowrap border-0 rounded p-1 w-100">
-                         <i class="bi bi-check-lg">Note</i>
-                        </button>
-                    </form>`
+                    return `<textarea class="form-control text-area-here" row="4"
+                    onChange="InputNoteMaterialEvent('TakeNoteMaterialToSession','${data.materialId}', '${data.quantity}')" id=${data.materialId}>${data.note.value.note}</textarea>`
                 },
             }
         ]
     });
 }
 
-//function takeNoteMaterial(url, formId, quoteId) {
-//    var formData = $('#' + formId).serialize();
-//    $.ajax({
-//        url: url,
-//        type: 'POST',
-//        data: formData,
-//        success: function (data) {
-//            if (!data.success) {
-//                $(window).location.href = '/Manager/Home';
-//                toastr.error(data.message);
-//            } else {
-//                $(window).location.href = '/Manager/CustomQuotation/GetDetail?id=' + quoteId;
-//                toastr.success(data.message);
-//            }
-//        },
-//        error: function (data) {
-//            dataTableCQ.ajax.reload();
-//            toastr.error(data.message);
-//        }
-//    });
-//};
+
+
 
 
