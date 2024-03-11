@@ -1,10 +1,10 @@
-﻿@model Material
+﻿@model SWP391.CHCQS.Model.Task
 
 <form method="post">
     <input asp-for="Id" hidden />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Xóa vật liệu</h2>
+            <h2 class="text-primary">Delete Material</h2>
             <hr />
         </div>
 
@@ -14,13 +14,13 @@
 
         </div>
         <div class="form-floating py-2 col-12">
-            <input asp-for="UnitPrice" disabled class="form-control border-0 shadow" />
-            <label asp-for="UnitPrice" class="ms-2"></label>
+            <input asp-for="Description" disabled class="form-control border-0 shadow" />
+            <label asp-for="Description" class="ms-2"></label>
 
         </div>
         <div class="form-floating py-2 col-12">
-            <input asp-for="Unit" disabled class="form-control border-0 shadow" />
-            <label asp-for="Unit" class="ms-2"></label>
+            <input asp-for="UnitPrice" disabled class="form-control border-0 shadow" />
+            <label asp-for="UnitPrice" class="ms-2"></label>
 
         </div>
         <div class="form-floating py-2 col-12">
@@ -33,11 +33,11 @@
 
         <div class="row">
             <div class="col-6 col-md-3">
-                <button type="submit" class="btn btn-danger form-control">Xóa</button>
+                <button type="submit" class="btn btn-danger form-control">Delete</button>
             </div>
             <div class="col-6 col-md-3">
                 <a asp-controller="Material" asp-action="Index" class="btn btn-main border form-control">
-                    Trở lại
+                    Back to List
                 </a>
             </div>
         </div>

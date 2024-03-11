@@ -1,15 +1,12 @@
-﻿
-@{
-    ViewData["Title"] = "Material";
-    //Layout = "~/Views/Shared/_LayoutManager";
+﻿@{
+	ViewData["Title"] = "Task";
 }
-
 
 <div class="card shadow border-0 my-4">
 	<div class="card-header bg-main ml-0 py-3">
 		<div class="row">
 			<div class="col-12 text-center">
-				<h2 class="text-white py-2">Danh sách vật liệu</h2>
+				<h2 class="text-white py-2">Task List</h2>
 			</div>
 		</div>
 	</div>
@@ -19,33 +16,33 @@
 			<div class="col-6">
 			</div>
 			<div class="col-6 text-end">
-				<a asp-area="Manager" asp-controller="Material" asp-action="Create" class="btn btn-primary btn-main">
-					<i class="bi bi-plus-circle"></i>  Tạo vật liệu mới
+				<a asp-area="Manager" asp-controller="Task" asp-action="Create" class="btn btn-primary btn-main">
+					<i class="bi bi-plus-circle"></i>  Create New Task
 				</a>
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table id="tblMaterial" class="table-bordered table-striped text-black" style="width:100%">
+			<table id="tblTask" class="table-bordered table-striped text-black" style="width:100%">
 				<thead>
 					<tr>
 						<th>
-							Mã
+							Id
 						</th>
 						<th>
-							Tên
-						</th>
-						
-						<th>
-							Gía gốc
+							Name
 						</th>
 						<th>
-							Đơn vị
+							Description
+						</th>
+
+						<th>
+							Unit Price
 						</th>
 						<th>
-							Loại
+							Category
 						</th>
 						<th>
-							Hành động
+							Actions
 						</th>
 					</tr>
 				</thead>
@@ -55,5 +52,5 @@
 </div>
 
 @section Scripts {
-	<script src="~/js/datatables//managerDTB/MaterialDTB.js"></script>
+	<script src="~/js/datatables//managerDTB/TaskDTB.js"></script>
 }

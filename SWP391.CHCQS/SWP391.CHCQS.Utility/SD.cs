@@ -9,17 +9,16 @@ namespace SWP391.CHCQS.Utility
 {
     public class SD //static detail
     {
-        //từ khóa mở đầu cho request
-        public const string requestIdKey = "RF";
+		#region Prefix
+		//từ khóa mở đầu cho request
+		public const string requestIdKey = "RF";
         //từ khóa mở đầu cho quotation
         public const string quotationIdKey = "CQ";
-        //từ khóa mở đầu cho mỗi id staff tùy theo role
-        public const string SellerIdKey = "SL";
-        public const string EngineertIdKey = "EN";
-        public const string ManagerIdKey = "MG";
+		#endregion
 
-        //tempId for table <-> trigger will handle Id generating
-        public const string TempId = "id";
+
+		//tempId for table <-> trigger will handle Id generating
+		public const string TempId = "id";
 
 		#region CustomQuotation Status
 
@@ -35,9 +34,9 @@ namespace SWP391.CHCQS.Utility
 
 		#region Request Status
 
-		public const string RequestStatusPending = "Pending";
-        public const string RequestStatusApproved = "Approved";
-        public const string RequestStatusRejected = "Rejected";
+		public const string RequestStatusPending = "Đang xử lý";
+        public const string RequestStatusApproved = "Đã xác nhận";
+        public const string RequestStatusRejected = "Đã từ chối";
 
 		#endregion
 
@@ -53,7 +52,7 @@ namespace SWP391.CHCQS.Utility
 
 		#region QuickQuote Constants
 		//options for alley in QuickQuote
-		public static List<string> Alleys = new () { "Wider than 5m", "Width from 3m - 5m", "Less than 3m" };
+		public static List<string> Alleys = new () { "Lớn hơn 5m", "Từ 3m - 5m", "Nhỏ hơn 3m" };
 		//surcharge for alley less than 5m
 		public const int AlleySurcharge = 100_000;
 
@@ -98,17 +97,17 @@ namespace SWP391.CHCQS.Utility
             switch (status)
             {
                 case -1:
-                    return "Cancelled";
+                    return "Đã hủy";
                 case 0:
-                    return "Rejected";
+                    return "Đã từ chối";
                 case 1:
-                    return "Preparing";
+                    return "Chuẩn bị";
                 case 2:
-                    return "Processing";
+                    return "Đang xử lí";
                 case 3:
-                    return "Pending Approval";
+                    return "Đợi xác nhận";
                 case 4:
-                    return "Completed";
+                    return "Hoàn thành";
                 default:
                     return "";
             }
@@ -119,9 +118,9 @@ namespace SWP391.CHCQS.Utility
 		//gender list
 		public enum GenderList
         {
-            Male,
-            Female,
-            Other
+            Nam,
+            Nữ,
+            Khác
         }
 
        

@@ -107,7 +107,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 
 			List<CustomQuotationListViewModel> customQuotationVMList = _unitOfWork.CustomQuotation
 				.GetAll()
-				.Where(x => x.Status == SD.Pending_Approval || x.Status == SD.Completed)
+				.Where(x => x.Status == SD.Pending_Approval || x.Status == SD.Completed || x.Status == SD.Rejected)
 				.Where(cq => workingReports.Any(wr => wr.RequestId == cq.RequestId))
 				.OrderBy(x => x.Date)
 				.Select(x => new CustomQuotationListViewModel

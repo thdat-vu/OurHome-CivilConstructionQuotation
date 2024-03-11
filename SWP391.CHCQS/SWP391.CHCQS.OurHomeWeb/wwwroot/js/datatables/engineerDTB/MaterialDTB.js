@@ -7,6 +7,9 @@ $(document).ready(function () {
 function loadDataTableMaterial() {
     dataTableM = $('#tblMaterial').DataTable({
         "ajax": { url: '/Engineer/Material/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             {
                 data: "id",
@@ -22,7 +25,7 @@ function loadDataTableMaterial() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a onClick="AddToQuoteMaterial('/Engineer/Material/AddToQuote?MaterialId=${data}')" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Add</a>
+                       <a onClick="AddToQuoteMaterial('/Engineer/Material/AddToQuote?MaterialId=${data}')" class="text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> Thêm</a>
                     </div >`
                 },
             }

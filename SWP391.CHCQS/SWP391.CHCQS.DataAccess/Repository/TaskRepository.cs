@@ -21,8 +21,17 @@ namespace SWP391.CHCQS.DataAccess.Repository
 
         public void Update(Task obj)
         {
-            _db.Tasks.Update(obj);
-        }
+            //_db.Tasks.Update(obj);
+            //step1: retrieve Taskobj from DB
+            Task? objtaskFromDb = _db.Tasks.SingleOrDefault(u => u.Id == obj.Id);
+			if (objtaskFromDb != null)
+			{
+				objtaskFromDb.Name = obj.Name;
+				objtaskFromDb.Description = obj.Description;
+				objtaskFromDb.UnitPrice = obj.UnitPrice;
+				objtaskFromDb.CategoryId = obj.CategoryId;
+			}
+		}
         public string GetName(string id) => _db.Tasks.Find(id).Name;
     }
 }

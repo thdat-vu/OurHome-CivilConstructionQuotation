@@ -5,6 +5,9 @@
 function loadDataTableQuotationBill() {
     dataTableCQB = $('#tblCustomQuotationBill').DataTable({
         "ajax": { url: '/Engineer/Quotation/GetQuotationBill' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "lengthChange": false,
         "paging": false,
         "searching": false,
