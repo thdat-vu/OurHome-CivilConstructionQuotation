@@ -14,5 +14,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
         public double? Quantity { get; set; }
         public decimal? Price { get; set; }
         public KeyValuePair<string, MaterialNote> Note { get; set; }
+        
+ 
     }
 }

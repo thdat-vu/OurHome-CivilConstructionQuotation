@@ -65,26 +65,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             return Json(new { data = yearList });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllQuote()
-        {
-            List<OverViewQuotationViewModel> overViewCQList = _unitOfWork.CustomQuotation
-                .GetAll().Select(x => new OverViewQuotationViewModel
-                {
-                    Id = x.Id,
-                    Date = x.Date,
-                    Acreage = x.Acreage,
-                    Location = x.Location,
-                    Status = SD.GetQuotationStatusDescription(x.Status),
-                    Description = x.Description,
-
-                })
-                .ToList();
-
-            return Json(new { data = overViewCQList });
-
-        }
-
+       
 
     }
 }

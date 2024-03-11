@@ -35,7 +35,7 @@ namespace SWP391.CHCQS.Utility.Helpers
 			List<T> list = new List<T>();
 
 			// Kiểm tra xem tệp tin có tồn tại không
-			if (!File.Exists(filePath))
+			if (!File.Exists(filePath) || string.IsNullOrEmpty(File.ReadAllText(filePath)))
 			{
 				Console.WriteLine("File does not exist.");
 				return list;

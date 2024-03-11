@@ -170,21 +170,21 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			if (quotation == null)
 			{
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"Quotation not found with Id = {QuotationId}" });
+				return Json(new { success = false, message = $"Không tìm thấy báo giá với mã = {QuotationId}" });
 			}
 
 			var materialDetails = _unitOfWork.MaterialDetail.GetMaterialDetail(quotation.Id);
 			if (materialDetails.Count() == 0)
 			{
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"This quotation was not complete!" });
+				return Json(new { success = false, message = $"Báo giá này chưa hoàn thành!" });
 			}
 
 			var customQuotationTasks = _unitOfWork.TaskDetail.GetTaskDetail(quotation.Id);
 			if (customQuotationTasks.Count() == 0)
 			{
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"This quotation was not complete!" });
+				return Json(new { success = false, message = $"Báo giá này chưa hoàn thành!" });
 			}
 
 			try
@@ -196,7 +196,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			catch (Exception)
 			{
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-				return Json(new { success = false, message = $"Something went wrong" });
+				return Json(new { success = false, message = $"Có lỗi xảy ra, vui lòng thử lại sau!" });
 			}
 
 
@@ -213,14 +213,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			}
 			catch (Exception)
 			{
-				TempData["Error"] = $"Something went wrong!";
+				TempData["Error"] = $"Có lỗi xảy ra, vui lòng thử lại sau!";
 				return RedirectToAction("Index", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 			}
 
 			//Send notification to Manager
 			await _hubContext.Clients.All.SendAsync("RecieveQuotationFromEngineer", "Engineer", "You was recieve a new Quotation");
 			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
-			return Json(new { success = true, message = $"Send quotation successfully with Id = {QuotationId}" });
+			return Json(new { success = true, message = $"Gửi báo giá thành công! Mã báo giá = {QuotationId}" });
 		}
 
 		[HttpGet]
@@ -266,7 +266,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			try
 			{
 				var pathCreater = new PathCreater(_environment);
-				string targetFolder = pathCreater.CreateFilePathInRoot(CustomQuotationSession.Id.Trim() + ".txt", "reject-quotation-file");
+				string targetFolder = pathCreater.CreateFilePathInRoot(CustomQuotationSession.Id.Trim() + ".txt", "note-reject-quotation-file");
 				var reasons = FileManipulater<RejectQuotationDetail>.LoadJsonFromFile(targetFolder);
 				var reason = reasons.LastOrDefault();
 
@@ -364,7 +364,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			}
 			catch (Exception)
 			{
-				TempData["Error"] = $"Something went wrong!";
+				TempData["Error"] = $"Có lỗi xảy ra, vui lòng thử lại sau!";
 				return RedirectToAction("Index", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 			}
 
@@ -374,7 +374,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Check if constructDetail or customQuotationViewModel. Id not in database is true, it return error view. If not, is will execute next code.
 			if (constructDetail == null)
 			{
-				TempData["Error"] = $"Quotation not found";
+				TempData["Error"] = $"Không tìm thấy báo giá!";
 				return RedirectToAction("Index", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 			}
 
@@ -475,7 +475,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			}
 			catch (Exception)
 			{
-				TempData["Error"] = $"Something went wrong!";
+				TempData["Error"] = $"Có lỗi xảy ra, vui lòng thử lại sau!";
 				return RedirectToAction("Index", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 			}
 
@@ -485,7 +485,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Check if constructDetail or customQuotationViewModel. Id not in database is true, it return error view. If not, is will execute next code.
 			if (constructDetail == null)
 			{
-				TempData["Error"] = $"Quotation not found";
+				TempData["Error"] = $"Không tìm thấy báo giá!";
 				return RedirectToAction("Index", "Quotation", new { QuotationId = CustomQuotationSession.Id });
 			}
 
@@ -582,7 +582,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			if (taskCart.Count == 0)
 			{
 				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				TempData["Error"] = $"Task list of quote is empty";
+				TempData["Error"] = $"Danh sách công việc còn trống";
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
@@ -592,7 +592,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			if (materialCart.Count == 0)
 			{
 				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				TempData["Error"] = $"Material list of quote is empty";
+				TempData["Error"] = $"Danh sách vật tư còn trống!";
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
@@ -649,7 +649,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 				HttpContext.Session.Remove(SessionConst.CUSTOM_QUOTATION_KEY);
 
 				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				TempData["Success"] = $"Submit quote successfully";
+				TempData["Success"] = $"Lưu báo giá thành công";
 
 				//Return back to Index of QuotationController
 				if (customQuotation.Status == SD.Rejected)
@@ -662,7 +662,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			catch (Exception)
 			{
 				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				TempData["Error"] = $"Something went wrong";
+				TempData["Error"] = $"Có lỗi xảy ra, vui lòng thử lại sau";
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 				return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
@@ -684,7 +684,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			if (constructDetail == null)
 			{
 				//Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
-				TempData["Error"] = $"Quotation not found";
+				TempData["Error"] = $"Không tìm thấy báo giá!";
 
 				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
 				return RedirectToAction("Index", "Quotation", new { QuotationId = CustomQuotationSession.Id });
