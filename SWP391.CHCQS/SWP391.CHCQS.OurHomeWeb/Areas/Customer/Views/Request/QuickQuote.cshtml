@@ -39,10 +39,12 @@
 			<div class="col-sm">
 				<label><b class="text-nowrap">Width:</b></label>
 				<input class="form-control" asp-for="ConstructDetail.Width"></input>
+				<span asp-validation-for="ConstructDetail.Width" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Length:</b></label>
 				<input class="form-control" asp-for="ConstructDetail.Length"></input>
+				<span asp-validation-for="ConstructDetail.Length" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Facade:</b></label>
@@ -64,14 +66,17 @@
 			<div class="col-sm">
 				<label><b class="text-nowrap">Number of floors</b></label>
 				<input class="form-control" asp-for="ConstructDetail.Floor"></input>
+				<span asp-validation-for="ConstructDetail.Floor" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Mezzanine</b></label>
 				<input class="form-control" asp-for="ConstructDetail.Mezzanine"></input>
+				<span asp-validation-for="ConstructDetail.Mezzanine" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Rooftop floor:</b></label>
 				<input class="form-control" asp-for="ConstructDetail.RooftopFloor"></input>
+				<span asp-validation-for="ConstructDetail.RooftopFloor" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Balcony:</b></label>
@@ -105,6 +110,7 @@
 			<div class="col-sm">
 				<label><b class="text-nowrap">Garden:</b></label>
 				<input class="form-control" asp-for="ConstructDetail.Garden"></input>
+				<span asp-validation-for="ConstructDetail.Garden" class="text-danger"></span>
 			</div>
 		</div>
 
@@ -124,13 +130,13 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
-					<th colspan="4" class="text-center" style="text-transform: uppercase; text-align:center; font-size:20px;">Đơn giá xây nhà trọn gói</th>
+					<th colspan="4" class="text-center" style="text-transform: uppercase; text-align:center; font-size:20px;">Đơn giá xây nhà mẫu</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td colspan="4" class="text-right" style="text-align:right">
-						<strong>Đơn giá: @Model.ResponseBill.UnitPrice.ToString("0") VND</strong>
+						<strong>Đơn giá: @Model.ResponseBill.UnitPrice.ToString("N0") VND</strong>
 					</td>
 				</tr>
 				<tr class="label_table">
@@ -145,7 +151,7 @@
 						<td>@detail.NumberOfOrder</td>
 						<td>@detail.Type</td>
 						<td>@detail.ConstructionArea.ToString("0.00") m2</td>
-						<td>@detail.Price.ToString("0") VND</td>
+						<td>@detail.Price.ToString("N0") VND</td>
 					</tr>
 				}
 				<tr>
@@ -154,9 +160,13 @@
 				</tr>
 				<tr>
 					<td colspan="3" class="text-left"><strong>Tổng chi phí:</strong></td>
-					<td class="text-left"><strong>@Model.ResponseBill.TotalPrice.ToString("0") VND</strong></td>
+					<td class="text-left"><strong>@Model.ResponseBill.TotalPrice.ToString("N0") VND</strong></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+}
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
 }
