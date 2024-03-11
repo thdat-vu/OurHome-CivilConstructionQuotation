@@ -6,6 +6,9 @@
 function loadDataTableRequest() {
     dataTable = $('#tblRequestCompleted').DataTable({
         "ajax": { url: '/Seller/Request/GetAllRequestCompleted' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [    
             { data: 'id', "width": "5%" },
             {

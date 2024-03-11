@@ -6,19 +6,19 @@
 <div class="d-flex img-thumbnail justify-content-center">
 	<div class="d-flex align-items-center">
 		<h3 class="p-3">
-			<a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+			<a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a>
 		</h3>
 		<i class="fa-solid fa-arrow-right-long"></i>
 		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="Index">Quotation</a>
+			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="Index">Báo giá</a>
 		</h3>
 		<i class="fa-solid fa-arrow-right-long"></i>
 		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="ManageRequest">Manage Request</a>
+			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="ManageRequest">Lịch sử</a>
 		</h3>
 		<i class="fa-solid fa-arrow-right-long"></i>
 		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456">View Response</a>
+			<a class="text-decoration-none user-select-auto" style="color: #F27456">Xem kết quả</a>
 		</h3>
 	</div>
 </div>
@@ -27,34 +27,34 @@
 
 <partial name="_QuotationSubNav"></partial>
 
-<h1 class="text-center my-4" style="color: #F27456">Quotation Detail</h1>
+<h1 class="text-center my-4" style="color: #F27456">Chi tiết báo giá</h1>
 
 <div class="container img-thumbnail mt-3 mb-5">
 	
 	<div class="m-auto">
 		<div class="row mt-2">
 			<div class="col-lg">
-				<label><b class="text-nowrap">Type of construction:</b></label>
+				<label><b class="text-nowrap">Loại công trình:</b></label>
 				<p>@Model.ConstructionType</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Investment:</b></label>
+				<label><b class="text-nowrap">Mức đầu tư:</b></label>
 				<p>@Model.InvestmentType</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Width:</b></label>
+				<label><b class="text-nowrap">Chiều rộng:</b></label>
 				<p>@Model.Width m2</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Length:</b></label>
+				<label><b class="text-nowrap">Chiều dài:</b></label>
 				<p>@Model.Lenght m2</>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Facade:</b></label>
+				<label><b class="text-nowrap">Mặt tiền:</b></label>
 				<p>@Model.Facade</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Alley:</b></label>
+				<label><b class="text-nowrap">Hẻm:</b></label>
 				<p>@Model.Alley</p>
 			</div>
 		</div>
@@ -62,19 +62,19 @@
 
 		<div class="row">
 			<div class="col-lg">
-				<label><b class="text-nowrap">Number of floors:</b></label>
+				<label><b class="text-nowrap">Số tầng:</b></label>
 				<p>@Model.Floor</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Mezzanine:</b></label>
+				<label><b class="text-nowrap">Lửng:</b></label>
 				<p>@Model.Mezzanine</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Rooftop floor:</b></label>
+				<label><b class="text-nowrap">Tầng thượng:</b></label>
 				<p>@Model.RooftopFloor</p>
 			</div>
 			<div class="col-lg">
-				<label class="form-check-label text-nowrap">Has Balcony</label>
+				<label class="form-check-label text-nowrap">Có ban công</label>
 
 				@if (Model.Balcony)
 				{
@@ -90,40 +90,40 @@
 
 		<div class="row">
 			<div class="col-lg">
-				<label><b class="text-nowrap">Foundation:</b></label>
+				<label><b class="text-nowrap">Loại móng:</b></label>
 				<p>@Model.FoundationType</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Basement:</b></label>
+				<label><b class="text-nowrap">Tầng hầm:</b></label>
 				<p>@Model.BasementType</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Rooftop:</b></label>
+				<label><b class="text-nowrap">Loại mái:</b></label>
 				<p>@Model.RoofType</p>
 			</div>
 			<div class="col-lg">
-				<label><b class="text-nowrap">Garden:</b></label>
+				<label><b class="text-nowrap">Diện tích vườn:</b></label>
 				<p>@Model.Garden</p>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-lg">
-				<label><b>Description:</b></label>
+				<label><b>Chi tiết:</b></label>
 				<p>@Model.Description</p>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-lg">
-				<label><b>Total Price:</b></label>
+				<label><b>Tổng giá:</b></label>
 				<p>@Model.TotalPrice.ToString("c")</p>
 			</div>
 		</div>
 
 		<div class="row mt-3 mb-2">
 			<div class="col-sm m-1 rounded-1">
-				<a asp-area="Customer" asp-controller="Request" asp-action="RequestHistory" class="btn btn-main w-100">Back</a>
+				<a asp-area="Customer" asp-controller="Request" asp-action="RequestHistory" class="btn btn-main w-100">Trở lại</a>
 			</div>
 		</div>
 	</div>

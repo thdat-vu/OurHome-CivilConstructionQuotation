@@ -10,6 +10,9 @@ function loadDataTableStandardQuotation() {
     //create DOM element as a datatable type
     dataTableCombo = $('#tblCombo').DataTable({
         "ajax": { url: '/Manager/Combo/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             {
                 data: 'id', "width": "5%"

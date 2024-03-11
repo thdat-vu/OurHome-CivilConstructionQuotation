@@ -9,6 +9,9 @@ $(document).ready(function () {
 function loadDataTaskDetail() {
     dataTableTD = $('#tblTaskDetail').DataTable({
         "ajax": { url: '/Manager/CustomQuotationTask/GetDetail' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             {
                 data: "taskId",

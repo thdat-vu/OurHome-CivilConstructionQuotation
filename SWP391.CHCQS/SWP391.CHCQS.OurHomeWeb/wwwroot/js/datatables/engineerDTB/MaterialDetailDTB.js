@@ -7,6 +7,9 @@ $(document).ready(function () {
 function loadDataTableMaterialDetail() {
     dataTableMD = $('#tblMaterialDetail').DataTable({
         "ajax": { url: '/Engineer/Material/GetMaterialListSession' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             {
                 data: 'material.id',
@@ -37,7 +40,7 @@ function loadDataTableMaterialDetail() {
                 data: 'material.id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a onClick=DeleteMaterialFromQuote('/Engineer/Material/DeleteFromQuote?MaterialId=${data}') class="text-nowrap btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Delete</a>
+                       <a onClick=DeleteMaterialFromQuote('/Engineer/Material/DeleteFromQuote?MaterialId=${data}') class="text-nowrap btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Xóa</a>
                     </div>`
                 },
             }

@@ -11,6 +11,9 @@ $(document).ready(function () {
 function loadDataCustomer() {
     dataTableCM = $('#tblCustomer').DataTable({
         "ajax": { url: '/Manager/Customer/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
 
             {

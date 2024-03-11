@@ -11,6 +11,9 @@ $(document).ready(function () {
 function loadDataMaterialDetail() {
     dataTableCQ = $('#tblMaterialDetail').DataTable({
         "ajax": { url: '/Manager/MaterialDetail/GetDetail' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             {
                 data: "materialId",
