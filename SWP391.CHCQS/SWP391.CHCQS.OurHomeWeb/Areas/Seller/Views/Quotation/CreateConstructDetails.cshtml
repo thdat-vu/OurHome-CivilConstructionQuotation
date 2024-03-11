@@ -1,6 +1,6 @@
 ﻿@model SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels.ConstructDetailViewModel
 @{
-    ViewData["Title"] = "Create Construct Detail";
+    ViewData["Title"] = "Thông tin chi tiết công trình";
 }
 <div class="container img-thumbnail mt-5 mb-5">
 
@@ -17,13 +17,13 @@
 
         <div class="row mt-5">
             <div class="col-sm">
-                <label><b class="text-nowrap">Type of construction:</b></label>
+                <label><b class="text-nowrap">Loại công trình:</b></label>
                 <select asp-for="ConstructDetail.ConstructionId" asp-items="@Model.Construction" type="text" class="form-select">
                     <option disabled selected>--Chọn loại--</option>
                 </select>
             </div>
             <div class="col-sm">
-                <label><b class="text-nowrap">Investment:</b></label>
+                <label><b class="text-nowrap">Mức đầu tư:</b></label>
                 <select asp-for="ConstructDetail.InvestmentId" asp-items="@Model.Investment" type="text" class="form-select">
                     <option disabled selected>--Chọn mức--</option>
                 </select>

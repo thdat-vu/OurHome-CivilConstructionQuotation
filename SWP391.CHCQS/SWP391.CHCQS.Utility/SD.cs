@@ -31,9 +31,8 @@ namespace SWP391.CHCQS.Utility
 
 		#endregion
 
-
+		
 		#region Request Status
-
 		public const string RequestStatusPending = "Đang xử lí";
         public const string RequestStatusApproved = "Đã xác nhận";
         public const string RequestStatusRejected = "Đã từ chối";

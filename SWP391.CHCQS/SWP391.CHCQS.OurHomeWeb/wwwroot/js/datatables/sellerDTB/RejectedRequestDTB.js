@@ -37,7 +37,7 @@ function loadDataTableRequest() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Seller/Request/UndoRejectRequest?id=${data}" class = "btn btn-primary btn-main border-0 m-1 text-nowrap"><i class="bi bi-arrow-clockwise"></i> Hoàn tác</a>
+                       <a href="/Seller/Request/UndoRejectRequest?id=${data}" class = "btn btn-primary btn-danger border-0 m-1 text-nowrap"><i class="bi bi-arrow-clockwise"></i> Hoàn tác</a>
                     </div >`
                 },
             }
