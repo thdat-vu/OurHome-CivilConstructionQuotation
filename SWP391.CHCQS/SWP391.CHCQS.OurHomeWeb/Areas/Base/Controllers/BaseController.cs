@@ -4,9 +4,13 @@ using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
 using SWP391.CHCQS.OurHomeWeb.Models;
 using SWP391.CHCQS.Utility.Helpers;
 using SWP391.CHCQS.Utility;
+using SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers
 {
+    [Area("Base")]
+    [Authorize(Policy = "BasePolicy")]
     public class BaseController : Controller
     {
         protected readonly IUnitOfWork _unitOfWork;
@@ -37,7 +41,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers
             var quoteId = HttpContext.Session.GetString(SessionConst.QUOTATION_ID);
             // Kiểm tra xem trong session có note ko ???
             var rejectDetail = HttpContext.Session.Get<RejectQuotationDetail>(quoteId);
-            //Nếu ko có thì tiến hành ạp các taskdetail và material detail với key là id của task và material cùng default value
+            //Nếu ko có thì tiến hành nạp các taskdetail và material detail với key là id của task và material cùng default value
             if (rejectDetail == null)
             {
                 rejectDetail = new RejectQuotationDetail()
@@ -98,8 +102,35 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers
             HttpContext.Session.Set<RejectQuotationDetail>(quoteId, rejectDetail);
             return rejectDetail;
         }
+        /// <summary>
+		/// This function get all Customer's Request in Database and return it into JSON, this function ne lib Datatables to show data
+		/// </summary>
+		/// <returns></returns>
+		[HttpGet]
+        public async Task<IActionResult> GetAllRequest()
+        {
+            List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
+                .GetAll(includeProperties: "Customer")
+                .OrderBy(x => x.GenerateDate)
+                .Select(x => new RequestViewModel
+                {
+                    Id = x.Id,
+                    GenerateDate = x.GenerateDate,
+                    Description = x.Description,
+                    ConstructType = x.ConstructType,
+                    Acreage = x.Acreage,
+                    Location = x.Location,
+                    Status = x.Status,
+                    CusName = x.Customer.Name,
+                    CusPhone = x.Customer.PhoneNumber,
+                    CusEmail = x.Customer.Email,
+                    CusGender = x.Customer.Gender
+                })
+                .ToList();
 
-        
+            return Json(new { data = RequestVMlList });
+        }
+
         public void NotifySuccess(string notification)
         {
             TempData["Success"] = notification;

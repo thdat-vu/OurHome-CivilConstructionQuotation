@@ -28,7 +28,7 @@ namespace SWP391.CHCQS.Utility
 		public const int Completed = 4;//Completed and be sent to customer
 		public const int Cancelled = -1; //customer not listen the call or not interested, this status is only available before Processing (2)
 		public const int Rejected = 0; //manager reject task
-
+		public const int GetAllFilterStatus = 5; //sử dụng cho việc query ra tất cả các custom quotation 
 		#endregion
 
 		
@@ -112,10 +112,24 @@ namespace SWP391.CHCQS.Utility
             }
         }
 
-		#endregion
+        #endregion
 
-		//gender list
-		public enum GenderList
+        #region Material Category Id
+
+        public const string Category_Raw = "VT1";
+        public const string Category_Paint = "VT2";
+        public const string Category_Electric = "VT3";
+        public const string Category_Sanitary = "VT4";
+        public const string Category_Kitchen = "VT5";
+        public const string Category_Stair = "VT6";
+        public const string Category_Door = "VT7";
+        public const string Category_CeramicTiles = "VT8";
+        public const string Category_Ceiling = "VT9";
+
+        #endregion
+
+        //gender list
+        public enum GenderList
         {
             Nam,
             Nữ,

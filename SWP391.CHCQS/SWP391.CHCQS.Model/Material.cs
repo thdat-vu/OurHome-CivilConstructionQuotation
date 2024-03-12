@@ -15,14 +15,21 @@ namespace SWP391.CHCQS.Model
         [MaxLength(10)]
         public string Id { get; set; } = null!;
         [MaxLength(100)]
-        public string Name { get; set; } = null!;
-        [Display(Name = "Unit Price")]
-        public decimal UnitPrice { get; set; }
+        [Required(ErrorMessage ="Vui lòng nhập Tên Vật Liệu")]
+		[Display(Name = "Tên Vật Liệu")]
+		public string Name { get; set; } = null!;
+        [Display(Name = "Giá Gốc")]
+		[Range(1, double.MaxValue, ErrorMessage = "Vui lòng nhập Giá Gốc lớn hơn 0.")]
+		[Required(ErrorMessage = "Giá Gốc không được để trống ")]
+		public decimal UnitPrice { get; set; }
         [MaxLength(30)]
-        public string Unit { get; set; } = null!;
+		[Display(Name = "Đơn vị")]
+		[Required(ErrorMessage = "Vui lòng chọn Đơn Vị phù hợp")]
+		public string Unit { get; set; } = null!;
         public bool Status { get; set; }
         [MaxLength(10)]
-        [Display(Name = "Category Type")]
+		[Required(ErrorMessage = "Vui lòng chọn Loại Vật Liệu")]
+		[Display(Name = "Loại Vật Liệu")]
         public string CategoryId { get; set; } = null!;
         [ForeignKey("CategoryId")]
         public virtual MaterialCategory Category { get; set; } = null!;

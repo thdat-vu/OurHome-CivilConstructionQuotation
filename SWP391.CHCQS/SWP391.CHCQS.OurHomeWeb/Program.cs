@@ -61,6 +61,13 @@ namespace SWP391.CHCQS.OurHomeWeb
                 //Quan trọng khi cần tới Identity
                 options.Cookie.IsEssential = true;
             });
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("BasePolicy", policy =>
+                {
+                    policy.RequireRole("Manager", "Seller", "Engineer");
+                });
+            });
 
             var app = builder.Build();
             // Configure the HTTP request pipeline.
@@ -73,6 +80,7 @@ namespace SWP391.CHCQS.OurHomeWeb
 
 			app.UseRouting();
             app.UseAuthentication();//before authorization
+
 			app.UseAuthorization();
 			app.MapRazorPages();
             app.UseHttpsRedirection();
@@ -96,6 +104,7 @@ namespace SWP391.CHCQS.OurHomeWeb
                 );
 
             });
+			
 			app.Run();
 		}
 	}

@@ -9,7 +9,7 @@ namespace SWP391.CHCQS.Model
         public MaterialCategory()
         {
             
-            Materials = new HashSet<Material>();
+            //Materials = new HashSet<Material>();
         }
         [MaxLength(10)]
         public string Id { get; set; } = null!;
@@ -17,6 +17,6 @@ namespace SWP391.CHCQS.Model
         [Display(Name = "Category Type")]
         public string Name { get; set; } = null!;
 
-        public virtual ICollection<Material> Materials { get; set; }
+        //public virtual ICollection<Material> Materials { get; set; }
     }
 }
