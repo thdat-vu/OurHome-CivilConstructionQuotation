@@ -123,6 +123,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                     Room = constructDetailVM.ConstructDetail.Room,
                     FoundationId = constructDetailVM.ConstructDetail.FoundationId,
                     RooftopId = constructDetailVM.ConstructDetail.RooftopId,
+                    RooftopFloor = constructDetailVM.ConstructDetail.RooftopFloor,
                     QuotationId = customQuotation.Id
                   
                 };
@@ -190,7 +191,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 		public async Task<IActionResult> GetAll()
 		{
 			List<QuotationStatusViewModel> CustomQuotationList = _unitOfWork.CustomQuotation
-				.GetAll().OrderBy(x => x.Date).Select(x => new QuotationStatusViewModel
+				.GetAll().OrderByDescending(x => x.Date).Select(x => new QuotationStatusViewModel
                 {
                     Id = x.Id,
                     Date = x.Date,

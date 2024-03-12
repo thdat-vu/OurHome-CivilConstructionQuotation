@@ -16,5 +16,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
             var comboList = _unitOfWork.Combo.GetAll(includeProperties: "Materials,Tasks").ToList();
             return View(comboList);
         }
+
+        public async Task<IActionResult> Detail(string id)
+        {
+            var combo = _unitOfWork.Combo.Get(x => x.Id == id);
+            return View(combo);
+        }
     }
 }

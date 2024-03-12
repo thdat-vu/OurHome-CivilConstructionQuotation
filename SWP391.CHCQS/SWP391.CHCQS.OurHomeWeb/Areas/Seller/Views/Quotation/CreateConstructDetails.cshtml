@@ -10,59 +10,82 @@
         <input hidden id="hiddenData" name="hiddenData" value="@ViewBag.CustomQuotation" />
 
 
-        <div class="mt-3 mb-5 w-75 m-auto">
-            <h3 class="text-center"><b>Tạo thông tin báo giá chi tiết</b></h3>
-            <hr></hr>
+        <div class="mt-3 mb-5 w-100 m-auto">
+            <div class="row mt-3">
+                <div class="ml-3 rounded-1 float-left">
+                    <a href="/Seller/Request/Index" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Trở lại</a>
+                </div>
+            </div>
+            <h3 class="text-center"><b>Thông tin báo giá chi tiết</b></h3>
+            <hr class="w-75 m-auto"></hr>
         </div>
 
-        <div class="row mt-5">
+        <div class="row mt-5 mb-3">
+
             <div class="col-sm">
                 <label><b class="text-nowrap">Loại công trình:</b></label>
                 <select asp-for="ConstructDetail.ConstructionId" asp-items="@Model.Construction" type="text" class="form-select">
                     <option disabled selected>--Chọn loại--</option>
                 </select>
             </div>
+
             <div class="col-sm">
                 <label><b class="text-nowrap">Mức đầu tư:</b></label>
                 <select asp-for="ConstructDetail.InvestmentId" asp-items="@Model.Investment" type="text" class="form-select">
                     <option disabled selected>--Chọn mức--</option>
                 </select>
             </div>
+
             <div class="col-sm">
-                <label><b class="text-nowrap">Chiều rộng:</b></label>
-                <input asp-for="ConstructDetail.Width" required class="form-control"/>
+                <label><b class="text-nowrap">Loại móng:</b></label>
+                <select asp-for="ConstructDetail.FoundationId" asp-items="@Model.Foundation" type="text" class="form-select">
+                    <option disabled selected>--Chọn loại--</option>
+                </select>
             </div>
+
             <div class="col-sm">
-                <label><b class="text-nowrap">Chiều dài:</b></label>
-                <input asp-for="ConstructDetail.Length" required class="form-control"/>
+                <label><b class="text-nowrap">Tầng hầm:</b></label>
+                <select asp-for="ConstructDetail.BasementId" asp-items="@Model.Basement" type="text" class="form-select">
+                    <option disabled selected>--Chọn loại--</option>
+                </select>
             </div>
+
             <div class="col-sm">
-                <label><b class="text-nowrap">Mặt tiền:</b></label>
-                <input asp-for="ConstructDetail.Facade" required class="form-control"/>
+                <label><b class="text-nowrap">Loại mái:</b></label>
+                <select asp-for="ConstructDetail.RooftopId" asp-items="@Model.Rooftop" type="text" class="form-select">
+                    <option disabled selected>--Chọn loại--</option>
+                </select>
             </div>
+
             <div class="col-sm">
                 <label><b class="text-nowrap">Hẻm:</b></label>
                 <select asp-for="ConstructDetail.Alley" asp-items="@Model.Alleys" type="text" class="form-select">
                     <option disabled selected>--Chọn loại hẻm--</option>
                 </select>
+
             </div>
+            
 
 
         </div>
 
-        <div class="row">
+        <div class="row mb-3">
+
             <div class="col-sm">
-                <label><b class="text-nowrap">Số tầng:</b></label>
-                <input asp-for="ConstructDetail.Floor" required class="form-control"/>
+                <label><b class="text-nowrap">Chiều rộng:</b></label>
+                <input asp-for="ConstructDetail.Width" required class="form-control" />
             </div>
+
+            <div class="col-sm">
+                <label><b class="text-nowrap">Chiều dài:</b></label>
+                <input asp-for="ConstructDetail.Length" required class="form-control" />
+            </div>
+            
             <div class="col-sm">
                 <label><b class="text-nowrap">Tầng thượng:</b></label>
                 <input asp-for="ConstructDetail.RooftopFloor" required class="form-control"/>
             </div>
-            <div class="col-sm">
-                <label><b class="text-nowrap">Số phòng:</b></label>
-                <input asp-for="ConstructDetail.Room" required class="form-control"/>
-            </div>
+           
             <div class="col-sm">
                 <label><b class="text-nowrap">Diện tích lửng:</b></label>
                 <input asp-for="ConstructDetail.Mezzanine" required class="form-control"/>
@@ -72,51 +95,41 @@
                 <label><b class="text-nowrap">Diện tích vườn:</b></label>
                 <input asp-for="ConstructDetail.Garden" required class="form-control"/>
             </div>
-
         </div>
 
         <div class="row">
+
             <div class="col-sm">
-                <label><b class="text-nowrap">Loại móng:</b></label>
-                <select asp-for="ConstructDetail.FoundationId" asp-items="@Model.Foundation" type="text" class="form-select">
-                    <option disabled selected>--Chọn loại--</option>
-                </select>
+                <label><b class="text-nowrap">Số tầng:</b></label>
+                <input asp-for="ConstructDetail.Floor" required class="form-control" />
             </div>
+
             <div class="col-sm">
-                <label><b class="text-nowrap">Tầng hầm:</b></label>
-                <select asp-for="ConstructDetail.BasementId" asp-items="@Model.Basement" type="text" class="form-select">
-                    <option disabled selected>--Chọn loại--</option>
-                </select>
+                <label><b class="text-nowrap">Mặt tiền:</b></label>
+                <input asp-for="ConstructDetail.Facade" required class="form-control" />
             </div>
+
             <div class="col-sm">
-                <label><b class="text-nowrap">Loại mái:</b></label>
-                <select asp-for="ConstructDetail.RooftopId" asp-items="@Model.Rooftop" type="text" class="form-select">
-                    <option disabled selected>--Chọn loại--</option>
-                </select>
+                <label><b class="text-nowrap">Số phòng:</b></label>
+                <input asp-for="ConstructDetail.Room" required class="form-control" />
             </div>
-            
+
             <div class="col-sm">
                 <label><b class="text-nowrap">Ban công:</b></label>
                 <select type="text" class="form-control" asp-for="ConstructDetail.Balcony">
                     <option disabled selected>--Chọn loại--</option>
                     <option value="false">Không có ban công</option>
                     <option value="true">Có ban công</option>
-                </select>
+              </select>
             </div>
+
         </div>
 
-        <div class="row mt-5 mb-2">
+        <div class="mt-5 mb-3">
             <div class="col-sm">
                 <button class="form-control text-white btn btn-main" style="background-color: #F27456" type="submit">Lưu thông tin</button>
             </div>
         </div>
-
-
     </form>
-    <div class="row mt-5 mb-2">
-        <div class="col-sm">
-            <a class="form-control text-white btn btn-main" style="background-color: red !important" asp-area="Seller" asp-controller="Home" asp-action="Index" role="button">Trở lại</a>
-        </div>
-    </div>
-
+    
 </div>
