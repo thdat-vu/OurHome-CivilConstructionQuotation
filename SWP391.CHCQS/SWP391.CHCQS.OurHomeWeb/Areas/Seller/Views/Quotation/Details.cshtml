@@ -18,18 +18,14 @@
 
         <div class="row mt-3 text-center">
             <div class="col-lg">
-                <label><b class="text-nowrap">QuotationId:</b></label>
+                <label><b class="text-nowrap">Mã báo giá:</b></label>
                 <p>@Model.CustomQuotation.Id</p>
             </div>
             <div class="col-lg">
                 <label><b class="text-nowrap">Ngày tạo báo giá:</b></label>
                 <p>@Model.CustomQuotation.Date</p>
             </div>
-            @* <div class="col-lg">
-            **************BUG**************
-            <label><b class="text-nowrap">SubmissionDateSeller:</b></label>
-            <p>@Model.CustomQuotation.SubmissionDateSeller</p>
-            </div> *@
+
             <div class="col-lg">
                 <label><b class="text-nowrap">Vị trí:</b></label>
                 <p>@Model.CustomQuotation.Location</p>
@@ -38,6 +34,16 @@
                 <label><b class="text-nowrap">Diện tích:</b></label>
                 <p>@Model.CustomQuotation.Acreage</p>
             </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Số tầng:</b></label>
+                <p>@Model.ConstructDetail.Floor</p>
+            </div>
+
+            <div class="col-lg">
+                <label><b class="text-nowrap">Mặt tiền:</b></label>
+                <p>@Model.ConstructDetail.Facade</p>
+            </div>
+
         </div>
 
         <div class="row mt-3 text-center">
@@ -49,52 +55,7 @@
                 <label><b class="text-nowrap">Mức đầu tư:</b></label>
                 <p>@Model.InvestmentName</p>
             </div>
-            <div class="col-lg">
-                <label><b class="text-nowrap">Chiều rộng:</b></label>
-                <p>@Model.ConstructDetail.Width</p>
-            </div>
-            <div class="col-lg">
-                <label><b class="text-nowrap">Chiều dài:</b></label>
-                <p>@Model.ConstructDetail.Length</a>
-            </div>
-            <div class="col-lg">
-                <label><b class="text-nowrap">Mặt tiền:</b></label>
-                <p>@Model.ConstructDetail.Facade</p>
-            </div>
-            <div class="col-lg">
-                <label><b class="text-nowrap">Hẻm:</b></label>
-                <p>@Model.ConstructDetail.Alley</p>
-            </div>
-        </div>
 
-
-        <div class="row text-center">
-            <div class="col-lg">
-                <label><b class="text-nowrap">Số tầng:</b></label>
-                <p>@Model.ConstructDetail.Floor</p>
-            </div>
-            <div class="col-lg">
-                <label><b class="text-nowrap">Diện tích lửng:</b></label>
-                <p>@Model.ConstructDetail.Mezzanine</p>
-            </div>
-            <div class="col-lg">
-                <label><b class="text-nowrap">Tầng thượng:</b></label>
-                <p>@Model.ConstructDetail.RooftopFloor</p>
-            </div>
-            <div class="col-lg">
-                <label><b class="text-nowrap">Ban công:</b></label>
-                @if (@Model.ConstructDetail.Balcony)
-                {
-                    <p>Có ban công</p>
-                }
-                else
-                {
-                    <p>Không có ban công</p>
-                }
-            </div>
-        </div>
-
-        <div class="row text-center">
             <div class="col-lg">
                 <label><b class="text-nowrap">Loại móng:</b></label>
                 <p>@Model.FoundationName</p>
@@ -107,10 +68,58 @@
                 <label><b class="text-nowrap">Loại mái:</b></label>
                 <p>@Model.RoofName</p>
             </div>
+
+            <div class="col-lg">
+                <label><b class="text-nowrap">Ban công:</b></label>
+                @if (@Model.ConstructDetail.Balcony)
+                {
+                    <p>Có ban công</p>
+                }
+                else
+                {
+                    <p>Không có ban công</p>
+                }
+            </div>
+           
+            
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-lg">
+                <label><b class="text-nowrap">Chiều rộng:</b></label>
+                <p>@Model.ConstructDetail.Width</p>
+            </div>
+            <div class="col-lg">
+                <label><b class="text-nowrap">Chiều dài:</b></label>
+                <p>@Model.ConstructDetail.Length</a>
+            </div>
+            
+            <div class="col-lg">
+                <label><b class="text-nowrap">Tầng thượng:</b></label>
+                <p>@Model.ConstructDetail.RooftopFloor</p>
+            </div>
+
+            <div class="col-lg">
+                <label><b class="text-nowrap">Diện tích lửng:</b></label>
+                <p>@Model.ConstructDetail.Mezzanine</p>
+            </div>
+
             <div class="col-lg">
                 <label><b class="text-nowrap">Diện tích vườn:</b></label>
                 <p>@Model.ConstructDetail.Garden</p>
             </div>
+
+            <div class="col-lg">
+                <label><b class="text-nowrap">Số phòng:</b></label>
+                <p>@Model.ConstructDetail.Room</p>
+            </div>
+
+            <div class="col-lg">
+                <label><b class="text-nowrap">Hẻm:</b></label>
+                <p>@Model.ConstructDetail.Alley</p>
+            </div>
         </div>
+
     </div>
 </div>

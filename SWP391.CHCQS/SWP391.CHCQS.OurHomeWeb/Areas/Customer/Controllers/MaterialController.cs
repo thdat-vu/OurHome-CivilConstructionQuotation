@@ -16,5 +16,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
             var materialList = _unitOfWork.Material.GetAll(includeProperties: "Category").ToList();
             return View(materialList);
         }
+
     }
 }
