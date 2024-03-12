@@ -22,7 +22,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 
         public async Task<IActionResult> Index()
         {            
-            List<Project> projectList = _unitOfWork.Project.GetAll().Take(6).ToList();
+            List<Project> projectList = _unitOfWork.Project.GetAll().OrderByDescending(x => x.Date).Take(6).ToList();
             return View(projectList);
         }
 

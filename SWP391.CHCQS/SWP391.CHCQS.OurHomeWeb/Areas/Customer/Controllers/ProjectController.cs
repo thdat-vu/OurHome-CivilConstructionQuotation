@@ -14,7 +14,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<Project> projectList = _unitOfWork.Project.GetAll().ToList();
+            List<Project> projectList = _unitOfWork.Project.GetAll(includeProperties: "Customer").OrderByDescending(x => x.Date).ToList();
             return View(projectList);
         }
 
