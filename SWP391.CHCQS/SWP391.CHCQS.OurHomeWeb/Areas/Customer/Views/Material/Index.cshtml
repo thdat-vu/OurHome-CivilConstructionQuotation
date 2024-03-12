@@ -1,4 +1,11 @@
-﻿@model List<MaterialCategory>
+﻿@model List<Material>
+
+<style>
+    td {
+        color: black;
+        background-color:#f27456;
+    }
+</style>
 
 <div class="d-flex img-thumbnail justify-content-center">
     <div class="d-flex align-items-center">
@@ -138,53 +145,37 @@
                                 </a>
                             </li>
                             <li class="font-weight-bold">
-                                <a href="#cement-price">
+                                <a href="#kitchen-price">
                                     4.5
-                                    <strong>Price of construction cement</strong>
+                                    <strong>Giá bếp xây dựng</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#stair-price">
+                                    4.6
+                                    <strong>Giá cầu thang xây dựng</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#ceramic-price">
+                                    4.7
+                                    <strong>Giá gạch ốp xây dựng</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#door-price">
+                                    4.8
+                                    <strong>Giá cửa xây dựng</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#ceiling-price">
+                                    4.9
+                                    <strong>Giá trần xây dựng</strong>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#stone-price">
-                                4.1
-                                <strong>Giá đá xây dựng</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#sand-price">
-                                4.2
-                                <strong>Giá cát xây dựng</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#iron-price">
-                                4.3
-                                <strong>Giá sắt xây dựng</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#brick-price">
-                                4.4
-                                <strong>Giá gạch xây dự</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#cement-price">
-                                4.5
-                                <strong>Giá xi măng xây dựng</strong>
-                            </a>
-                        </li>
-                    </ul>
                 </ul>
             </div>
         </div>
@@ -272,36 +263,30 @@
                 <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
                     <thead>
                         <tr>
-                            <td style="height:21px;">
-                                <p align="center" >
-                                    <strong>Product's name</strong>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
                                 </p>
                             </td>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Unit </strong>
+                                    <strong>Đơn vị tính</strong>
                                 </p>
                             </td>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Price includes VAT <br /> (10%)</strong>
+                                    <strong>Giá có VAT (10%)</strong>
                                 </p>
                             </td>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var material in Model.Find(x => x.Id == SD.Category_Raw).Materials)
+                        @foreach(var material in Model.Where(x => x.CategoryId == SD.Category_Raw))
                         {
                             <tr>
-                                <td style="height:21px" >
-                                    <p align="left" class="text-black">@material.Name</p>
-                                </td>
-                                <td style="height:21px">
-                                    <p align="center" class="text-black">@material.Unit</p>
-                                </td>
-                                <td style="height:21px">
-                                    <p align="center" class="text-black">@material.UnitPrice.ToString("N0") VND</p>
-                                </td>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456">@material.Unit</td>
+                                <td style="color:#F27456">@material.UnitPrice</td>
                             </tr>
                         }
                     </tbody>
@@ -311,8 +296,8 @@
                     <strong>Giá sơn nước sơn dầu</strong>
                 </h3>
 
-                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
-                    <tbody>
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
                                 <p align="center">
@@ -321,7 +306,7 @@
                             </td>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Đơn vị tính (M3)</strong>
+                                    <strong>Đơn vị tính</strong>
                                 </p>
                             </td>
                             <td style="height:21px">
@@ -330,18 +315,17 @@
                                 </p>
                             </td>
                         </tr>
+                    </thead>
 
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Paint))
+                        {
+                            <tr>
+                                <td><a>@material.Name</a></td>
+                                <td style="color:#F27456">@material.Unit</td>
+                                <td style="color:#F27456">@material.UnitPrice</td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>
@@ -350,8 +334,8 @@
                     <strong>Giá vật liệu điện</strong>
                 </h3>
 
-                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
-                    <tbody>
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
                                 <p align="center">
@@ -360,7 +344,7 @@
                             </td>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Đơn vị tính (M3)</strong>
+                                    <strong>Đơn vị tính</strong>
                                 </p>
                             </td>
                             <td style="height:21px">
@@ -370,18 +354,18 @@
                             </td>
                         </tr>
 
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
 
+                    </thead>
+
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Electric))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456">@material.Unit</td>
+                                <td style="color:#F27456">@material.UnitPrice</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
 
@@ -389,8 +373,8 @@
                     <strong>Giá vật dụng vệ sinh</strong>
                 </h3>
 
-                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
-                    <tbody>
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
                                 <p align="center">
@@ -399,7 +383,7 @@
                             </td>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Đơn vị tính (M3)</strong>
+                                    <strong>Đơn vị tính</strong>
                                 </p>
                             </td>
                             <td style="height:21px">
@@ -409,27 +393,63 @@
                             </td>
                         </tr>
 
+
+                    </thead>
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Sanitary))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456">@material.Unit</td>
+                                <td style="color:#F27456">@material.UnitPrice</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <h3 id="kitchen-price" class="mt-3">
+                    <strong>Giá bếp xây dựng</strong>
+                </h3>
+
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
                             </td>
                         </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Kitchen))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456">@material.Unit</td>
+                                <td style="color:#F27456">@material.UnitPrice</td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>
 
-                <h3 id="cement-price" class="mt-3">
-                    <strong>Giá xi măng xây dựng</strong>
+                <h3 id="stair-price" class="mt-3">
+                    <strong>Giá cầu thang xây dựng</strong>
                 </h3>
 
-                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
-                    <tbody>
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
                                 <p align="center">
@@ -438,7 +458,7 @@
                             </td>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Đơn vị tính (M3)</strong>
+                                    <strong>Đơn vị tính</strong>
                                 </p>
                             </td>
                             <td style="height:21px">
@@ -447,66 +467,127 @@
                                 </p>
                             </td>
                         </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Stair))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456">@material.Unit</td>
+                                <td style="color:#F27456">@material.UnitPrice</td>
+                            </tr>
+                        }
 
+                    </tbody>
+                </table>
+
+                <h3 id="ceramic-price" class="mt-3">
+                    <strong>Giá gạch ốp lát xây dựng</strong>
+                </h3>
+
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
                             </td>
                         </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_CeramicTiles))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456">@material.Unit</td>
+                                <td style="color:#F27456">@material.UnitPrice</td>
+                            </tr>
+                        }
 
+                    </tbody>
+                </table>
+
+                <h3 id="door-price" class="mt-3">
+                    <strong>Giá cửa xây dựng</strong>
+                </h3>
+
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
                             </td>
                         </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Door))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456">@material.Unit</td>
+                                <td style="color:#F27456">@material.UnitPrice</td>
+                            </tr>
+                        }
 
+                    </tbody>
+                </table>
+
+                <h3 id="ceiling-price" class="mt-3">
+                    <strong>Giá trần xây dựng</strong>
+                </h3>
+
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Ceiling))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456">@material.Unit</td>
+                                <td style="color:#F27456">@material.UnitPrice</td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>
