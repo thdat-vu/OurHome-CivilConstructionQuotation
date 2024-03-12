@@ -31,16 +31,9 @@
                         </div>
                         <div class="form-floating py-2 col-12">
                             @* <input asp-for="Material.Unit" class="form-control border-0 shadow" /> *@
-                            <select asp-for="Material.Unit" class="form-select border-0 shadow">
+                            <select asp-for="Material.Unit" asp-items="@Model.UnitList" class="form-select border-0 shadow">
                                 <option disabled selected>--Chọn đơn vị--</option>
-                                <option>mét</option>
-                                <option>mét vuông</option>
-                                <option>mét khối</option>
-                                <option>tấn</option>
-                                <option>thùng</option>
-                                <option>bao</option>
-                                <option>viên</option>
-                                <option>cái</option>
+                                
                             </select>
                             <label asp-for="Material.Unit" class="ms-2"></label>
                             <span asp-validation-for="Material.Unit" class="text-danger"></span> 

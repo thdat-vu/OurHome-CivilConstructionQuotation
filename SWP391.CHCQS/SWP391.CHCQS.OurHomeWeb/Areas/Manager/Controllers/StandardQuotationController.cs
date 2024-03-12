@@ -77,7 +77,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             }
             _unitOfWork.Combo.Add(standardQuotationVM.StandardQuotation); //Add Combo to Combo table
             _unitOfWork.Save(); //keep track on change
-            TempData["success"] = "Combo added successfully";
+            TempData["success"] = "Thêm combo thành công";
             return RedirectToAction("Index"); //after adding, return to previous action and reload the page
                                               
                                               
@@ -151,7 +151,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             }
             _unitOfWork.Combo.Update(comboVM.StandardQuotation);//Update Combo to Combo table
             _unitOfWork.Save(); //keep track on change
-            TempData["success"] = "Combo edited successfully";
+            TempData["success"] = "Chỉnh sửa Combo thành công";
             return RedirectToAction("Index"); //after updating, return to previous action and reload the page
                                               //}
                                               //return View();//return previous action if model is invalid
@@ -193,7 +193,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //change the status in to false
             obj.Status = false;
             _unitOfWork.Save();//keep track on change
-            TempData["success"] = "Combo deleted successfully";
+            TempData["success"] = "Xóa Combo thành công";
             return RedirectToAction("Index"); //redirect to Index.cshtml
         }
 

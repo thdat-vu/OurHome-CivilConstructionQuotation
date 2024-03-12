@@ -83,7 +83,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
 			_unitOfWork.Task.Add(taskVM.Task); //Add Task to task table
 			_unitOfWork.Save(); //keep track on change
-			TempData["success"] = "Task created successfully";
+			TempData["success"] = "Thêm đầu mục công việc thành công";
 			return RedirectToAction("Index");
 		}
 
@@ -123,7 +123,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		{
 			_unitOfWork.Task.Update(taskVM.Task); //Update Material to Material table
 			_unitOfWork.Save(); //keep track on change
-			TempData["success"] = "Task edited successfully";
+			TempData["success"] = "Chỉnh sửa đầu mục công việc thành công";
 			return RedirectToAction("Index");
 		}
 
@@ -162,7 +162,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			//change the status in to false
 			obj.Status = false;
 			_unitOfWork.Save();//keep track on change
-			TempData["success"] = "Task deleted successfully";
+			TempData["success"] = "Xóa đầu mục công việc thành công";
 			return RedirectToAction("Index"); //redirect to Index.cshtml
 		}
 	}

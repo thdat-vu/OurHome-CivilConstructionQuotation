@@ -62,7 +62,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             }
             else
             {
-                ModelState.AddModelError("Date", "Invalid date format");
+                ModelState.AddModelError("Date", "Sai định dạng ngày tháng");
             }
 
 
@@ -84,7 +84,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             
             _unitOfWork.Project.Add(project); //Add ProjectVM to Project table
             _unitOfWork.Save(); //keep track on change
-            TempData["success"] = "Project created successfully";
+            TempData["success"] = "Thêm dự án thành công";
             return RedirectToAction("Index"); //after adding, return to previous action and reload the page
 
             //return View(projectVM); //return previous action + invalid object
@@ -148,7 +148,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             projectFromDb.Date = obj.Date;
             projectFromDb.CustomerId = obj.CustomerId;
             _unitOfWork.Save(); //keep track on change
-            TempData["success"] = "Project edited successfully";
+            TempData["success"] = "Chỉnh sửa dự án thành công";
             return RedirectToAction("Index"); //after updating, return to previous action and reload the page
                                               //    //}
                                               //    //return View();//return previous action if model is invalid
@@ -190,7 +190,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //change the status in to false
             obj.Status = false;
             _unitOfWork.Save();//keep track on change
-            TempData["success"] = "Project deleted successfully";
+            TempData["success"] = "Xóa dự án thành công";
             return RedirectToAction("Index"); //redirect to Index.cshtml
         }
 
