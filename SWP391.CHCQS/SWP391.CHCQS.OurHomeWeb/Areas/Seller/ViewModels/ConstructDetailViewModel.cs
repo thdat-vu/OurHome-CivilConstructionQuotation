@@ -25,5 +25,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels
 		[Required]
 		[ValidateNever]
         public IEnumerable<SelectListItem> Rooftop { get; set; }
+
+		[ValidateNever]
+		public List<SelectListItem> Alleys { get; set; }
 	}
 }

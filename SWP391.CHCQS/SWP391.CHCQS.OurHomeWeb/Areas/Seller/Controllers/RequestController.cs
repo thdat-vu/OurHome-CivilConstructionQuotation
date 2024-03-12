@@ -1,4 +1,4 @@
-﻿    using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
@@ -68,6 +68,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         {
             List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
+
 				.Where(t => t.Status == SD.RequestStatusApproved)
                 .OrderByDescending(x => x.GenerateDate)
                 .Select(x => new RequestViewModel
@@ -120,29 +121,51 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             //Return Json for datatables to read
             return Json(new { data = RequestVMlList });
         }
-        #endregion ============ API ============
+
+		[HttpGet]
+		public async Task<IActionResult> GetAllRequestSaved()
+		{
+			List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
+				.GetAll(includeProperties: "Customer")
+				.OrderBy(x => x.GenerateDate)
+				.Where(t => t.Status == SD.RequestStatusSaved)
+				.Select(x => new RequestViewModel
+				{
+					Id = x.Id,
+					GenerateDate = x.GenerateDate,
+					Description = x.Description,
+					ConstructType = x.ConstructType,
+					Acreage = x.Acreage,
+					Location = x.Location,
+					Status = x.Status,
+					CusName = x.Customer.Name,
+					CusPhone = x.Customer.PhoneNumber,
+					CusEmail = x.Customer.Email,
+					CusGender = x.Customer.Gender
+				})
+				.ToList();
+
+			//Return Json for datatables to read
+			return Json(new { data = RequestVMlList });
+		}
+		#endregion ============ API ============
 
 
-        #region ============ ACTIONS ============
-        /// <summary>
-        /// This function change status of customer's request from "đang xử lí" to "từ chối báo giá"
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<IActionResult> RequestReject(string id)
+		#region ============ ACTIONS ============
+		/// <summary>
+		/// This function change status of customer's request from "đang xử lí" to "từ chối báo giá"
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public async Task<IActionResult> RequestReject(string id)
         {
             var requestForm = _unitOfWork.RequestForm.Get(x => x.Id == id);
-            if (requestForm.Status == SD.RequestStatusPending)
-            {
-                requestForm.Status = SD.RequestStatusRejected;
-                _unitOfWork.RequestForm.Update(requestForm);
-                _unitOfWork.Save();
-                TempData["success"] = "Từ chối báo giá thành công";
-            }
-            else
-            {
-                TempData["error"] = "Từ chối báo giá thất bại";
-            }
+            var quotation = _unitOfWork.CustomQuotation.Get(x => x.RequestId == id);
+            requestForm.Status = SD.RequestStatusRejected;
+            _unitOfWork.RequestForm.Update(requestForm);
+            _unitOfWork.CustomQuotation.Remove(quotation);
+            _unitOfWork.Save();
+            TempData["success"] = "Từ chối báo giá thành công";
 
 
             return RedirectToAction(nameof(ViewRequestRejected));
@@ -168,12 +191,40 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             return RedirectToAction("ViewRequestRejected", "Request");
         }
 
+        public async Task<IActionResult> ViewConstructDetails(string id)
+        {
+            QuotationViewModel quotationViewModel = new QuotationViewModel
+            {
+                CustomQuotation = _unitOfWork.CustomQuotation.Get(x => x.RequestId == id)
+            };
+            quotationViewModel.ConstructDetail = _unitOfWork.ConstructDetail
+                .Get(x => x.QuotationId == quotationViewModel.CustomQuotation.Id, includeProperties: "Basement,Construction,Foundation,Investment,Rooftop");
+            quotationViewModel.BasementName = quotationViewModel.ConstructDetail.Basement.Name;
+            quotationViewModel.RoofName = quotationViewModel.ConstructDetail.Rooftop.Name;
+            quotationViewModel.ConstructionName = quotationViewModel.ConstructDetail.Construction.Name;
+            quotationViewModel.FoundationName = quotationViewModel.ConstructDetail.Foundation.Name;
+            quotationViewModel.InvestmentName = quotationViewModel.ConstructDetail.Investment.Name;
+            return View(quotationViewModel);
+        }
 
-        #endregion ============ ACTIONS ============
+        public async Task<IActionResult> SendQuotation(string id)
+        {
+            var quotation = _unitOfWork.CustomQuotation.Get(x => x.Id == id);
+            var request = _unitOfWork.RequestForm.Get(x => x.Id == quotation.RequestId);
+            quotation.Status = SD.Processing;
+            request.Status = SD.RequestStatusSent;
+            _unitOfWork.CustomQuotation.Update(quotation);
+            _unitOfWork.RequestForm.Update(request);
+            _unitOfWork.Save();
+            TempData["success"] = "Gửi báo giá thành công";
+            return RedirectToAction("ViewQuotation", "Quotation");
+        }
 
-
-        #region ============ FUNCTIONS ============
         public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+        public async Task<IActionResult> ViewRequestSaved()
         {
             return View();
         }
@@ -187,6 +238,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         {
             return View();
         }
+
+        
+
+        #endregion ============ ACTIONS ============
+
+
+        #region ============ FUNCTIONS ============
+
         #endregion ============ FUNCTIONS ============
     }
 }

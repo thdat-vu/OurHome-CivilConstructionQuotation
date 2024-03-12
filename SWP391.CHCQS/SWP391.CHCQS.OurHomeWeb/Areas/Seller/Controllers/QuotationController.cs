@@ -51,7 +51,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 Date = DateTime.Now,
                 Acreage = requestForm.Acreage,
                 Location = requestForm.Location,
-                Status = SD.Processing,
+                Status = SD.Preparing,
                 Description = requestForm.Description,
                 Total = 0,
                 RequestId = requestForm.Id
@@ -87,6 +87,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                     Text = u.Name,
                     Value = u.Id,
                 }),
+                Alleys = SD.Alleys.Select(x => new SelectListItem { Text = x, Value = x }).ToList(),
                 ConstructDetail = new ConstructDetail(), 
                 
             };
@@ -131,7 +132,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 _unitOfWork.ConstructDetail.Add(constructDetail);
 
                 var requestForm = _unitOfWork.RequestForm.Get(x => x.Id == customQuotation.RequestId);
-                requestForm.Status = SD.RequestStatusApproved;
+                requestForm.Status = SD.RequestStatusSaved;
                 _unitOfWork.RequestForm.Update(requestForm);
 
                 _unitOfWork.Save();
@@ -139,7 +140,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 
 				TempData["success"] = "Tạo thông tin chi tiết công trình thành công";
                 _hubContext.Clients.All.SendAsync("RecieveQuotationFromSeller");
-                return RedirectToAction("ViewQuotation", "Quotation");
+                return RedirectToAction("ViewRequestSaved", "Request");
             }
             else
             {
@@ -177,6 +178,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             }
 
         }
+
+
         #endregion ============ ACTIONS ============
 
         #region ============ API ============
