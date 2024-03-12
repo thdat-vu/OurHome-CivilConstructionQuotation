@@ -4,15 +4,15 @@
 
 //Need an api method return json to use this
 function loadDataTableRequest() {
-    dataTable = $('#tblQuotation').DataTable({
-        "ajax": { url: '/Seller/Quotation/GetAll' },
+    dataTable = $('#tblRequestSaved').DataTable({
+        "ajax": { url: '/Seller/Request/GetAllRequestSaved' },
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
         },
-        "columns": [
-            { data: 'id', },
+        "columns": [    
+            { data: 'id'},
             {
-                data: 'date',
+                data: 'generateDate',
                 "render": function (data) {
                     // Chuyển đổi ngày thành chuỗi định dạng dd/MM/yyyy
                     let date = new Date(data);
@@ -21,23 +21,27 @@ function loadDataTableRequest() {
                     let year = date.getFullYear();
                     return `${day}/${month}/${year}`;
                 },
-                "width": "15%"
             },
-            { data: 'acreage', },
-            { data: 'location', },
-            { data: 'description', },
+            { data: 'cusName'},
+            { data: 'cusGender'},
+            { data: 'cusPhone'},
+            { data: 'cusEmail' },
+            { data: 'constructType'},
+            { data: 'acreage'},
+            { data: 'location' },
             {
-                data: 'status',
+                data: 'status'
             },
+            { data: 'description' },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Seller/Quotation/Details?id=${data}" class = "text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-eye"></i> Xem</a>
+                       <a href="/Seller/Request/ViewConstructDetails?id=${data}" class = "btn btn-primary btn-main border-0 m-1 text-nowrap"><i class="bi bi-eye"></i> Xem</a>
+                       <a href="/Seller/Request/RequestReject?id=${data}" class = "btn btn-primary btn-danger border-0 m-1 text-nowrap"><i class="bi bi-x-circle-fill"></i> Từ chối</a>
                     </div >`
                 },
             }
         ]
     });
 }
-

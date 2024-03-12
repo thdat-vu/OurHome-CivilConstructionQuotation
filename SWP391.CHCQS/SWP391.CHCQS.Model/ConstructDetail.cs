@@ -49,5 +49,6 @@ namespace SWP391.CHCQS.Model
         public virtual InvestmentType Investment { get; set; } = null!;
         public virtual CustomQuotation? Quotation { get; set; } = null!;
         public virtual RooftopType Rooftop { get; set; } = null!;
+
     }
 }

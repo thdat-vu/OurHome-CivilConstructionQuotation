@@ -42,7 +42,9 @@
             </div>
             <div class="col-sm">
                 <label><b class="text-nowrap">Hẻm:</b></label>
-                <input asp-for="ConstructDetail.Alley" required class="form-control"/>
+                <select asp-for="ConstructDetail.Alley" asp-items="@Model.Alleys" type="text" class="form-select">
+                    <option disabled selected>--Chọn loại hẻm--</option>
+                </select>
             </div>
 
 
@@ -95,16 +97,17 @@
             
             <div class="col-sm">
                 <label><b class="text-nowrap">Ban công:</b></label>
-                <div class="form-check">
-                    <input asp-for="ConstructDetail.Balcony" class="form-check-input" />
-                    <label class="form-check-label">Có ban công</label>
-                </div>
+                <select type="text" class="form-control" asp-for="ConstructDetail.Balcony">
+                    <option disabled selected>--Chọn loại--</option>
+                    <option value="false">Không có ban công</option>
+                    <option value="true">Có ban công</option>
+                </select>
             </div>
         </div>
 
         <div class="row mt-5 mb-2">
             <div class="col-sm">
-                <button class="form-control text-white btn btn-main" style="background-color: #F27456" type="submit">Gửi thông tin</button>
+                <button class="form-control text-white btn btn-main" style="background-color: #F27456" type="submit">Lưu thông tin</button>
             </div>
         </div>
 
