@@ -7,6 +7,9 @@ $(document).ready(function () {
 function loadDataTableTask() {
     dataTableT = $('#tblTask').DataTable({
         "ajax": { url: '/Manager/Task/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "columns": [
             {
                 data: "id",

@@ -5,6 +5,9 @@
 $(function loadDataTableHistory() {
     dataTableCQ = $('#tblQuotation').DataTable({
         "ajax": { url: '/Manager/CustomQuotation/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "lengthChange": false,
         "paging": false,
         "searching": false,
