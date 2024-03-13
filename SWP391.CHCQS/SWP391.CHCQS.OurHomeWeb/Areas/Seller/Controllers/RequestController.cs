@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.SignalR;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
@@ -69,7 +70,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
 
-				.Where(t => t.Status == SD.RequestStatusApproved)
+				.Where(t => t.Status == SD.RequestStatusSent)
                 .OrderByDescending(x => x.GenerateDate)
                 .Select(x => new RequestViewModel
                 {
@@ -193,18 +194,18 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 
         public async Task<IActionResult> ViewConstructDetails(string id)
         {
-            QuotationViewModel quotationViewModel = new QuotationViewModel
+            var request = _unitOfWork.RequestForm.Get(x => x.Id == id, includeProperties: "CustomQuotation");
+            ConstructDetailViewModel constructDetailVM = new ConstructDetailViewModel()
             {
-                CustomQuotation = _unitOfWork.CustomQuotation.Get(x => x.RequestId == id)
+                Alleys = SD.Alleys.Select(x => new SelectListItem() { Text = x, Value = x }).ToList(),
+                Basement = _unitOfWork.BasementType.GetAll().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList(),
+                Investment = _unitOfWork.InvestmentType.GetAll().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList(),
+                Construction = _unitOfWork.ConstructionType.GetAll().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList(),
+                Foundation = _unitOfWork.FoundationType.GetAll().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList(),
+                Rooftop = _unitOfWork.RoofType.GetAll().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList(),
+                ConstructDetail = _unitOfWork.ConstructDetail.Get(x => x.QuotationId == request.CustomQuotation.Id, includeProperties: "Quotation")
             };
-            quotationViewModel.ConstructDetail = _unitOfWork.ConstructDetail
-                .Get(x => x.QuotationId == quotationViewModel.CustomQuotation.Id, includeProperties: "Basement,Construction,Foundation,Investment,Rooftop");
-            quotationViewModel.BasementName = quotationViewModel.ConstructDetail.Basement.Name;
-            quotationViewModel.RoofName = quotationViewModel.ConstructDetail.Rooftop.Name;
-            quotationViewModel.ConstructionName = quotationViewModel.ConstructDetail.Construction.Name;
-            quotationViewModel.FoundationName = quotationViewModel.ConstructDetail.Foundation.Name;
-            quotationViewModel.InvestmentName = quotationViewModel.ConstructDetail.Investment.Name;
-            return View(quotationViewModel);
+            return View(constructDetailVM);
         }
 
         public async Task<IActionResult> SendQuotation(string id)
