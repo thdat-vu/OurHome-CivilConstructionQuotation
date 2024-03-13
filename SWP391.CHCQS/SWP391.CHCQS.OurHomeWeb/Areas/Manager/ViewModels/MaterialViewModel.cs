@@ -11,5 +11,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 		[ValidateNever]
 		public IEnumerable<SelectListItem> CategoryList { get; set; }
 		public List<SelectListItem> UnitList { get; set; }
+		public string? CategoryName { get; set; }
 	}
 }

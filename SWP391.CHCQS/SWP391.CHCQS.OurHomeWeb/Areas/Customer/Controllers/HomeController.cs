@@ -24,6 +24,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
         {            
             List<Project> projectList = _unitOfWork.Project.GetAll().Take(6).ToList();
             return View(projectList);
+            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

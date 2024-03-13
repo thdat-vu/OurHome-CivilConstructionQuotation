@@ -1,12 +1,18 @@
-﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SWP391.CHCQS.Model;
+using Task = SWP391.CHCQS.Model.Task;
+
+namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 {
     public class ComboDetailViewModel
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price {  get; set; }
-        public bool Status { get; set; }
-        public string ConstructionId { get; set; } = null!;
-    }
+        public Combo Combo { get; set; }
+		[ValidateNever]
+		public IEnumerable<SelectListItem> ConstructionTypeList { get; set; }
+
+        public List<ComboMaterial> ComboMaterials { get; set; }
+        public List<ComboTask> ComboTasks { get; set; }
+
+	}
 }
