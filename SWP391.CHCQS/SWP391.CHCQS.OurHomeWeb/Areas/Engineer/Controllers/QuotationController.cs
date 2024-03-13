@@ -790,21 +790,28 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Engineer.Controllers
 			//Get price on one meter.
 			result.PriceOnAcreage = (decimal)_unitOfWork.Pricing.Get(x => x.ConstructTypeId == constructDetail.ConstructionId && x.InvestmentTypeId == constructDetail.InvestmentId).UnitPrice;
 
-
+			//Get acreage
 			result.Acreage = (decimal)(constructDetail.Length * constructDetail.Width);
 
+			//Get total foundation acreage.
 			result.FoundationAcreage = (decimal)(result.Acreage * constructDetail.Foundation.AreaFactor);
 
+			//Get total basement acreage.
 			result.BasementAcreage = (decimal)(result.Acreage * constructDetail.Basement.AreaFactor);
 
+			//Get total balcony acreage.
 			result.BalconyAcreage = (constructDetail.Balcony == false) ? 0 : ((decimal)0.3 * (decimal)(constructDetail.Floor * result.Acreage));
 
+			//Get total of all material that necessary
 			result.TotalPriceMaterial = (decimal)materialDetails.Sum(x => x.Price);
 
+			//Get total of all task that necessary
 			result.TotalPriceTask = (decimal)taskDetails.Sum(x => x.Price);
 
+			//Get total rooftop acreage
 			result.RooftopAcreage = (decimal)(result.Acreage * constructDetail.Rooftop.AreaFactor);
 
+			//Get the total acreage of rooftop, balcony, basement, foundation.
 			result.TotalAcreage = (decimal)(result.Acreage * constructDetail.Floor + constructDetail.Mezzanine + constructDetail.RooftopFloor + constructDetail.Garden + result.FoundationAcreage + result.BalconyAcreage + result.RooftopAcreage + result.BasementAcreage);
 
 			//result equal to price on 1 meter multiply with total acreage and plus with price of tasks and materials
