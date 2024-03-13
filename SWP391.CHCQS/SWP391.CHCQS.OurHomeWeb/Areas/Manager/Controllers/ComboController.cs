@@ -32,26 +32,38 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
 		//Create Action
 		public IActionResult Create()
+
 		{
-			ComboDetailViewModel comboDetailViewModel = new ComboDetailViewModel();
+			//set up empty ComboDetailViewModel + dropdown list of ConstructionTypeList
+			ComboDetailViewModel comboDetailViewModel = new ComboDetailViewModel()
+			{
+				ConstructionTypeList = _unitOfWork.ConstructionType.GetAll().Select(u
+				=> new SelectListItem
+				{
+					Text = u.Name,
+					Value = u.Id.ToString(),
+				}),
+				Combo = new Combo(),
+				ComboMaterials = new List<ComboMaterial>(),
+				ComboTasks = new List<Model.ComboTask>()
+			};
 			return View(comboDetailViewModel);
 
 		}
 
 		//Create request HttpPOST
 		[HttpPost]
-		public IActionResult Create(StandardQuotationViewModel obj)
+		public IActionResult Create(ComboDetailViewModel viewModel)
 		{
-			//if (ModelState.IsValid) //if obj is valid
-			//{
-			obj.StandardQuotation.Status = true;
-			obj.StandardQuotation.Id = SD.TempId;
-			_unitOfWork.Combo.Add(obj.StandardQuotation); //Add Combo to Combo table
+			
+                viewModel.Combo.Status = true;
+                viewModel.Combo.Id = SD.TempId;
+			_unitOfWork.Combo.Add(viewModel.Combo); //Add Combo to Combo table
 			_unitOfWork.Save(); //keep track on change
-			TempData["success"] = "Combo added successfully";
-			return RedirectToAction("Index"); //after adding, return to previous action and reload the page
-											  //}
-											  //return View(obj); //return previous action + invalid object
+                               
+			
+			TempData["success"] = "Combo đã thêm thành công";
+			return RedirectToAction("Index"); 
 		}
 		//Edit Action
 		public IActionResult Edit(string? id)
@@ -148,6 +160,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
 			return Json(new { data = objComboList });
 		}
+
+		
+
+
+
+
+
+
 		#endregion
 	}
 }

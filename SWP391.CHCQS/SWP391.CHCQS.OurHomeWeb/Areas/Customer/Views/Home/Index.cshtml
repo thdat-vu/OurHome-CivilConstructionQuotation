@@ -87,24 +87,28 @@
 			</div>
 		</div>
 	</div>
-	<div class="row m-auto">
-		@foreach (var project in Model)
-        {
-            <div class="col-sm-4 mb-5">
-                <div class="img-thumbnail">
-                    <img src="~/images/project_bg/project_bg_4.jpg" width="100%"></img>
-                    <div class="m-sm-3 text-dark">
-                        <h3><b>Name: </b>@project.Name</h3>
-                        <p><b>Location:</b> @project.Location</p>
-                        <p><b>Scale:</b> @project.Scale</p>
-                        <p><b>Size:</b> @project.Size</p>
-                    </div>
-                    <div class="col-sm m-1 btn-group rounded-1 w-100 m-auto" role="group">
-                        <a asp-area="Customer" asp-controller="Project" asp-action="Detail" class="btn btn-main">Chi tiết</a>
-                    </div>
-                </div>
-            </div>
-        }		
+	<div class="row m-auto"> 
+		@if(Model != null)
+		{
+			@foreach (var project in Model)
+			{
+				<div class="col-sm-4 mb-5">
+					<div class="img-thumbnail">
+						<img src="~/images/project_bg/project_bg_4.jpg" width="100%"></img>
+						<div class="m-sm-3 text-dark">
+							<h3><b>Name: </b>@project.Name</h3>
+							<p><b>Location:</b> @project.Location</p>
+							<p><b>Scale:</b> @project.Scale</p>
+							<p><b>Size:</b> @project.Size</p>
+						</div>
+						<div class="col-sm m-1 btn-group rounded-1 w-100 m-auto" role="group">
+							<a asp-area="Customer" asp-controller="Project" asp-action="Detail" class="btn btn-main">Chi tiết</a>
+						</div>
+					</div>
+				</div>
+			}
+		}
+		
 	</div>
 </div>
 

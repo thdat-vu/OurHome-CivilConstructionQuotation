@@ -24,7 +24,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         private readonly IUnitOfWork _unitOfWork;
         
         //ctor
-        public ProjectController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+        public ProjectController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             
@@ -50,7 +50,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
         //Create request HttpPOST
         [HttpPost]
-        public IActionResult Create(ProjectVM projectVM, IFormFile? file)
+        public IActionResult Create(ProjectVM projectVM)
         {
             
             projectVM.Status = true; //change status into true;

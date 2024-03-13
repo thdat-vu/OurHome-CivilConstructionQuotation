@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.Utility;
+using SWP391.CHCQS.Utility.Helpers;
 using System.Net.NetworkInformation;
 
 //DatVT
@@ -25,10 +27,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-
-
-
-        public IActionResult Index()
+		#region DECLARE SESSION
+		public List<MaterialViewModel> MaterialListSession => HttpContext.Session.Get<List<MaterialViewModel>>(SessionConst.COMBO_MATERIAL_LIST_KEY) ?? new List<MaterialViewModel>();
+		#endregion
+		public IActionResult Index()
         {
             List<Material> objMaterialList = _unitOfWork.Material.GetAll().ToList();
             //return View();
@@ -234,8 +236,89 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
         }
 
+		[HttpGet]
+		public async Task<IActionResult> GetMaterialListSession()
+		{
+			return Json(new { data = MaterialListSession.ToList()});
+		}
 
-        #endregion
-    }
+		public async Task<IActionResult> AddToList(string MaterialId)
+		{
+			//Assign MaterialListSession to materialCart
+			var materialCart = MaterialListSession;
+			//Get MaterialDetailViewModel and asign to materialItem from materialCart
+			var materialItem = materialCart.FirstOrDefault(x => x.Material.Id == MaterialId);
+
+			//If materialItem equal null mean the materialItem not in Session (not in session)
+			if (materialItem == null)
+			{
+				//Get a material from database by TaskId
+				var material = _unitOfWork.Material.Get(x => x.Id == MaterialId);
+
+				//Check if that material not in database
+				if (material == null)
+				{
+					
+					return Json(new { success = false, message = $"Không tìm thấy vật tư! Mã = {MaterialId}" });
+				}
+				else //if it not equal null
+				{
+					//Asign new MaterialDetailViewModel with projection from task for materialItem
+					materialItem = new MaterialViewModel
+					{
+						Material = material,
+						CategoryName = _unitOfWork.MaterialCategory.GetName(material.CategoryId)
+					};
+
+					//Add materialItem into materialCart
+					materialCart.Add(materialItem);
+				}
+			}
+			else // if it already in session
+			{
+				
+				return Json(new { success = false, message = $"Vật tư đã tồn tại! Mã = {MaterialId}" });
+			}
+
+			//Update MaterialListSession with materialCart  
+			HttpContext.Session.Set(SessionConst.COMBO_MATERIAL_LIST_KEY, materialCart);
+
+			return Json(new { success = true, message = $"Thêm vật tư thành công! Mã = {MaterialId}" });
+		}
+
+
+		[HttpDelete]
+		public async Task<IActionResult> DeleteFromList(string MaterialId)
+		{
+			//Asign MaterialListSession to materialCart
+			var materialCart = MaterialListSession;
+
+			//Get materialItem which exist in materialCart
+			var materialItem = materialCart.Where(x => x.Material.Id == MaterialId).FirstOrDefault();
+
+			//if materialItem not in materialCart
+			if (materialItem == null)
+			{
+				////Return error message to front-end show for customer. the scripts in ~/View/Shared/_Notification.cshml
+				//TempData["Error"] = $"Không tìm thấy vật tư! Mã = {MaterialId}";
+
+				////Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				//return RedirectToAction("Quote", "Quotation", new { QuotationId = CustomQuotationSession.Id });
+
+				//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+				return Json(new { success = false, message = $"Không tìm thấy vật tư! Mã = {MaterialId}" });
+			}
+
+			//Delete materialItem in materialCart
+			materialCart.Remove(materialItem);
+
+			//Update MaterialListSession with materialCart  
+			HttpContext.Session.Set(SessionConst.COMBO_MATERIAL_LIST_KEY, materialCart);
+
+			//Return back to the QuotationController with action Quote and pass a QuotationId get from CustomQuotationSession
+			return Json(new { success = false, message = $"Xóa vật tư thành công! Mã = {MaterialId}" });
+		}
+		#endregion
+	}
 
 }

@@ -40,6 +40,8 @@ namespace SWP391.CHCQS.DataAccess.Data
         public virtual DbSet<RooftopType> RooftopTypes { get; set; } = null!;
         
         public virtual DbSet<Combo> Combos { get; set; } = null!;
+       // public virtual DbSet<ComboTask> ComboTasks { get; set; } = null!;
+       // public virtual DbSet <ComboMaterial> ComboMaterials { get; set; } = null!;
         public virtual DbSet<Task> Tasks { get; set; } = null!;
         public virtual DbSet<TaskCategory> TaskCategories { get; set; } = null!;
         public virtual DbSet<RejectionReport> RejectionReports { get; set; } = null!;
