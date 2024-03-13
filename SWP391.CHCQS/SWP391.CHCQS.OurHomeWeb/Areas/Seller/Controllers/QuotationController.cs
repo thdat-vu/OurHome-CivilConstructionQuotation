@@ -179,6 +179,80 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult UpdateConstructDetails(ConstructDetailViewModel constructDetailVM)
+        {
+            if (ModelState.IsValid)
+            {
+
+                ConstructDetail constructDetail = new ConstructDetail
+                {
+                    ConstructionId = constructDetailVM.ConstructDetail.ConstructionId,
+                    InvestmentId = constructDetailVM.ConstructDetail.InvestmentId,
+                    Width = constructDetailVM.ConstructDetail.Width,
+                    Length = constructDetailVM.ConstructDetail.Length,
+                    BasementId = constructDetailVM.ConstructDetail.BasementId,
+                    Alley = constructDetailVM.ConstructDetail.Alley,
+                    Balcony = constructDetailVM.ConstructDetail.Balcony,
+                    Facade = constructDetailVM.ConstructDetail.Facade,
+                    Floor = constructDetailVM.ConstructDetail.Floor,
+                    Garden = constructDetailVM.ConstructDetail.Garden,
+                    Mezzanine = constructDetailVM.ConstructDetail.Mezzanine,
+                    Room = constructDetailVM.ConstructDetail.Room,
+                    FoundationId = constructDetailVM.ConstructDetail.FoundationId,
+                    RooftopId = constructDetailVM.ConstructDetail.RooftopId,
+                    RooftopFloor = constructDetailVM.ConstructDetail.RooftopFloor,
+                    QuotationId = constructDetailVM.ConstructDetail.QuotationId,
+
+                };
+                // lưu thay đổi
+                _unitOfWork.ConstructDetail.Update(constructDetail);
+                _unitOfWork.Save();
+
+
+                TempData["success"] = "Thay đổi thông tin chi tiết công trình thành công";
+                _hubContext.Clients.All.SendAsync("RecieveQuotationFromSeller");
+
+                
+            }
+            else
+            {
+                ConstructDetailViewModel ConstructDetailVM = new()
+                {
+                    Basement = _unitOfWork.BasementType.GetAll().Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id,
+                    }),
+                    Construction = _unitOfWork.ConstructionType.GetAll().Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id,
+                    }),
+                    Foundation = _unitOfWork.FoundationType.GetAll().Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id,
+                    }),
+                    Investment = _unitOfWork.InvestmentType.GetAll().Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id,
+                    }),
+                    Rooftop = _unitOfWork.RoofType.GetAll().Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id,
+                    }),
+                    ConstructDetail = new ConstructDetail()
+                };
+                TempData["error"] = "Thay đổi thông tin chi tiết công trình thất bại";                
+            }
+            //reload lại trang
+            var quotation = _unitOfWork.CustomQuotation.Get(x => x.Id == constructDetailVM.ConstructDetail.QuotationId);
+            return RedirectToAction("ViewConstructDetails", "Request", new { id = quotation.RequestId });
+        }
+
 
         #endregion ============ ACTIONS ============
 
@@ -191,7 +265,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 		public async Task<IActionResult> GetAll()
 		{
 			List<QuotationStatusViewModel> CustomQuotationList = _unitOfWork.CustomQuotation
-				.GetAll().OrderByDescending(x => x.Date).Select(x => new QuotationStatusViewModel
+				.GetAll().Where(x => x.Status == SD.Processing).OrderByDescending(x => x.Date).Select(x => new QuotationStatusViewModel
                 {
                     Id = x.Id,
                     Date = x.Date,
