@@ -17,10 +17,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 		public string? Description { get; set; }
 		public string? Overview { get; set; }
 		public DateTime Date { get; set; }
-		[Display(Name = "Customer Id")]
-		public string? CustomerId { get; set; }
-        [Display(Name = "Customer Name")]
-        public string? CustomerName { get; set; }
+		[Required(ErrorMessage = "Vui lòng chọn ID Khách hàng")]
+		[Display(Name = "ID Khách hàng")]
+		public string CustomerId { get; set; }
+		[Required(ErrorMessage = "Vui lòng chọn Tên Khách hàng")]
+		[Display(Name = "Tên khách hàng")]
+        public string CustomerName { get; set; }
 		public List<ProjectImage> Images { get; set; }
 	}
 }
