@@ -66,16 +66,25 @@ function loadDataTableAllRequest() {
                 "width": "15%"
             },
             { data: 'cusName', "width": "15%" },
-            { data: 'cusGender', "width": "15%" },
+            //{ data: 'cusGender', "width": "15%" },
             { data: 'cusPhone', "width": "15%" },
             { data: 'cusEmail', "width": "15%" },
-            { data: 'constructType', "width": "15%" },
-            { data: 'acreage', "width": "15%" },
-            { data: 'location', "width": "15%" },
+            //{ data: 'constructType', "width": "15%" },
+            //{ data: 'acreage', "width": "15%" },
+            //{ data: 'location', "width": "15%" },
             {
-                data: 'status', "width": "15%"
+                data: 'status'
             },
-            { data: 'description', "width": "25%" },
+            {
+                data: 'sellerName'
+            },
+            {
+                data: 'engineerName'
+            },
+            {
+                data: 'managerName'
+            },
+            //{ data: 'description', "width": "25%" },
             //{
             //    data: 'id',
             //    "render": function (data) {

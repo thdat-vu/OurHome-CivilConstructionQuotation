@@ -6,6 +6,9 @@ using SWP391.CHCQS.Utility.Helpers;
 using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using SWP391.CHCQS.Model;
+using System.Xml.Linq;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers
 {
@@ -15,11 +18,18 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers
     {
         protected readonly IUnitOfWork _unitOfWork;
         protected readonly IWebHostEnvironment _environment;
-        public BaseController(IUnitOfWork unitOfWork, IWebHostEnvironment environment)
+        protected readonly UserManager<IdentityUser>? _userManager;
+        public BaseController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, UserManager<IdentityUser>? userManager = null)
         {
             _unitOfWork = unitOfWork;
             _environment = environment;
+            _userManager = userManager;
         }
+        //public BaseController(IUnitOfWork unitOfWork, IWebHostEnvironment environment)
+        //{
+        //    _unitOfWork = unitOfWork;
+        //    _environment = environment;
+        //}
         /// <summary>
         /// Hàm lấy dữ liệu của note từ File và Session để đưa lên cho người dùng
         /// Trình tự hoạt động như sau:
@@ -109,26 +119,47 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers
 		[HttpGet]
         public async Task<IActionResult> GetAllRequest()
         {
-            List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
+            
+            
+            List<RequestViewModel> requestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
                 .OrderBy(x => x.GenerateDate)
                 .Select(x => new RequestViewModel
                 {
                     Id = x.Id,
                     GenerateDate = x.GenerateDate,
-                    Description = x.Description,
-                    ConstructType = x.ConstructType,
-                    Acreage = x.Acreage,
-                    Location = x.Location,
+                    //Description = x.Description,
+                    //ConstructType = x.ConstructType,
+                    //Acreage = x.Acreage,
+                   // Location = x.Location,
                     Status = x.Status,
                     CusName = x.Customer.Name,
                     CusPhone = x.Customer.PhoneNumber,
                     CusEmail = x.Customer.Email,
-                    CusGender = x.Customer.Gender
+                    //CusGender = x.Customer.Gender
                 })
                 .ToList();
-
-            return Json(new { data = RequestVMlList });
+            requestVMlList.ForEach(x =>
+            {
+                //lấy working report của rf đó ra
+                var workingReport = _unitOfWork.WorkingReport.GetAllWithFilter((x) => x.RequestId == x.RequestId);
+                //xác nhận role của nhân viên đó
+                foreach (var workReport in workingReport)
+                {
+                    //lấy nhân viên ra
+                    var staff = _userManager.FindByIdAsync(workReport.StaffId).GetAwaiter().GetResult() as ApplicationUser;
+                    //xác nhận role của nhân viên đó
+                    var role =  _userManager.GetRolesAsync(staff).GetAwaiter().GetResult();
+                    //gán cho biến name với staff role tương ứng
+                    if (role.First() == SD.Role_Seller)
+                        x.SellerName = staff.Name;
+                    if (role.First() == SD.Role_Engineer)
+                        x.EngineerName = staff.Name;
+                    if (role.First() == SD.Role_Manager)
+                        x.ManagerName = staff.Name;
+                }
+            });
+            return Json(new { data = requestVMlList });
         }
 
         public void NotifySuccess(string notification)

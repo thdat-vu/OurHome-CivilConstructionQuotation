@@ -27,14 +27,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 	public class CustomQuotationController : BaseController
 	{
 		//private readonly IUnitOfWork _unitOfWork;
-		private readonly UserManager<IdentityUser> _userManager;
+		//private readonly UserManager<IdentityUser> _userManager;
 		//private readonly IWebHostEnvironment _environment;
 		private readonly IConfiguration _configuration;
 		private readonly IHubContext<NotificationHub> _hubContext;
-		public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration, UserManager<IdentityUser> userManager, IHubContext<NotificationHub> hubContext) : base(unitOfWork, environment)
+		public CustomQuotationController(IUnitOfWork unitOfWork, IWebHostEnvironment environment, IConfiguration configuration, UserManager<IdentityUser> userManager, IHubContext<NotificationHub> hubContext) : base(unitOfWork, environment, userManager)
 		{
 			_configuration = configuration;
-			_userManager = userManager;
+			//_userManager = userManager;
 			_hubContext = hubContext;
 		}
 		/// <summary>
@@ -146,9 +146,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		}
 
 		/// <summary>
-		/// Action trả về JSON các quotation cần dc xử lý bởi staff đang login, dc hiển thị qua datatable
+		/// Action trả về JSON các quotation cần dc xử lý bởi staff đang login, dc hiển thị qua datatable, được sử dụng ở datatable ở dashboard View
 		/// </summary>
-		/// <param name="filterStatus"></param>
+		/// <param></param>
 		/// <returns></returns>
 		[HttpGet]
 		public async Task<IActionResult> GetAllQuote()
