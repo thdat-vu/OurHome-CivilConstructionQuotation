@@ -7,6 +7,7 @@ $(function () {
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
         },
+        "order": [[1, "desc"]], //sắp xếp theo cột thứ 2(cột ngày giảm dần)
         "pageLength": 5,
         "lengthChange": false,
         "info": true,
