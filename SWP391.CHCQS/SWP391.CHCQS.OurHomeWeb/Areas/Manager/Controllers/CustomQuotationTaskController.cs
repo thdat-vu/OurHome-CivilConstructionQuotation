@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers;

@@ -1,6 +1,6 @@
 ﻿namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels
 {
-    public class RequestViewModel
+    public partial class RequestViewModel
     {
         public string Id { get; set; }
         public DateTime GenerateDate { get; set; }
