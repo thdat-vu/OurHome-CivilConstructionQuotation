@@ -224,7 +224,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             _unitOfWork.RequestForm.Update(request);
             _unitOfWork.Save();
             TempData["success"] = "Gửi báo giá thành công";
-            return RedirectToAction("ViewQuotation", "Quotation");
+            return RedirectToAction(nameof(ViewRequestSaved));
         }
 
         public async Task<IActionResult> Index()
