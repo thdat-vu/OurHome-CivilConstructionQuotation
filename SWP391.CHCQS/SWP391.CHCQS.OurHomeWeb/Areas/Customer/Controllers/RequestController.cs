@@ -65,6 +65,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 					Value = i
 				});
 			});
+			quickQuote.Facades = new List<SelectListItem>();
+			SD.Facades.ForEach(i =>
+			{
+                quickQuote.Facades.Add(new SelectListItem
+				{
+                    Text = i.ToString(),
+                    Value = i.ToString()
+                });
+            });
 
 			return View(quickQuote);
 		}
@@ -113,6 +122,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 				{
 					Text = i,
 					Value = i
+				});
+			});
+			quickQuote.Facades = new List<SelectListItem>();
+			SD.Facades.ForEach(i =>
+			{
+				quickQuote.Facades.Add(new SelectListItem
+				{
+					Text = i.ToString(),
+					Value = i.ToString()
 				});
 			});
 

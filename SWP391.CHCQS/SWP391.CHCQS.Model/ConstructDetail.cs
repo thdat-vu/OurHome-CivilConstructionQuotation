@@ -8,29 +8,44 @@ namespace SWP391.CHCQS.Model
     {
 
         [Key]
-        [MaxLength(10)]
+        [Display(Name = "Mã công trình")]
+        [MaxLength(10, ErrorMessage = "Chiều dài {0} không được vượt quá {1} ký tự")]
         public string QuotationId { get; set; } = null!;
-        [Required]
+        [Display(Name = "Chiều rộng")]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Range(0,1000, ErrorMessage = "{0} phải lớn hơn {1}")]
         public decimal Width { get; set; }
-        [Required]
+        [Display(Name = "Chiều dài")]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Range(0, 1000, ErrorMessage = "{0} phải lớn hơn {1}")]
         public decimal Length { get; set; }
-        [Required]
+        [Display(Name = "Mặt tiền")]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
         public int Facade { get; set; }
-        [MaxLength(50)]
-        [Required]
-        public string Alley { get; set; } = null!;
-        [Required]
-        [Range(1, 100)]
+        [MaxLength(50, ErrorMessage = "{0} không được quá {1} ký tự")]
+		[Display(Name = "Hẻm")]
+		[Required(ErrorMessage = "{0} không được bỏ trống")]
+		public string Alley { get; set; } = null!;
+		[Display(Name = "Số tầng")]
+		[Required(ErrorMessage = "{0} không được bỏ trống")]
+		[Range(1, 100, ErrorMessage = "{0} trong khoảng từ {1} đến {2}")]
         public int Floor { get; set; }
-        [Required]
-        [Range(1, 100)]
+		[Display(Name = "Số phòng")]
+		[Required(ErrorMessage = "{0} không được bỏ trống")]
+		[Range(1, 100, ErrorMessage = "{0} trong khoảng từ {1} đến {2}")]
         public int Room { get; set; }
-        [Required]
+		[Display(Name = "Diện tích lửng")]
+		[Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Range(0, 1000, ErrorMessage = "{0} phải lớn hơn {1}")]
         public decimal Mezzanine { get; set; }
-        [Required]
+		[Display(Name = "Diện tích tầng thượng")]
+		[Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Range(0, 1000, ErrorMessage = "{0} phải lớn hơn {1}")]
         public decimal RooftopFloor { get; set; }
         public bool Balcony { get; set; }
-        [Required]
+		[Display(Name = "Diện tích vườn")]
+		[Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Range(0, 1000, ErrorMessage = "{0} phải lớn hơn {1}")]
         public decimal Garden { get; set; }
         [MaxLength(10)]
         public string ConstructionId { get; set; } = null!;
@@ -42,13 +57,13 @@ namespace SWP391.CHCQS.Model
         public string RooftopId { get; set; } = null!;
         [MaxLength(10)]
         public string BasementId { get; set; } = null!;
-
-        public virtual BasementType Basement { get; set; } = null!;
-        public virtual ConstructionType Construction { get; set; } = null!;
-        public virtual FoundationType Foundation { get; set; } = null!;
-        public virtual InvestmentType Investment { get; set; } = null!;
-        public virtual CustomQuotation? Quotation { get; set; } = null!;
-        public virtual RooftopType Rooftop { get; set; } = null!;
+ 
+        public virtual BasementType? Basement { get; set; } 
+        public virtual ConstructionType? Construction { get; set; }
+        public virtual FoundationType? Foundation { get; set; } 
+        public virtual InvestmentType? Investment { get; set; } 
+        public virtual CustomQuotation? Quotation { get; set; } 
+        public virtual RooftopType? Rooftop { get; set; } 
 
     }
 }

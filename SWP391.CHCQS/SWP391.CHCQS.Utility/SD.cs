@@ -53,6 +53,8 @@ namespace SWP391.CHCQS.Utility
 		#region QuickQuote Constants
 		//options for alley in QuickQuote
 		public static List<string> Alleys = new () { "Lớn hơn 5m", "Từ 3m - 5m", "Nhỏ hơn 3m" };
+        //options for facade in QuickQuote
+        public static List<int> Facades = new () { 0, 1, 2, 3, 4 };
 		//surcharge for alley less than 5m
 		public const int AlleySurcharge = 100_000;
 
@@ -133,6 +135,7 @@ namespace SWP391.CHCQS.Utility
 
         #endregion
 
+        #region Enum
         //gender list
         public enum GenderList
         {
@@ -141,7 +144,7 @@ namespace SWP391.CHCQS.Utility
             Khác
         }
 
-       
-        
+
+        #endregion
     }
 }
