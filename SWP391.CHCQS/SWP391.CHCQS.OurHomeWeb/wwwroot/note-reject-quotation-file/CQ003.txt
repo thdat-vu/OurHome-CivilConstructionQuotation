@@ -1,0 +1,16 @@
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK005": ""
+  },
+  "MaterialDetailNotes": {
+    "VT1003": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
