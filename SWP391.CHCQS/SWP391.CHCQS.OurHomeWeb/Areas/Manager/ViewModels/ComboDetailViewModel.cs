@@ -11,8 +11,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 		[ValidateNever]
 		public IEnumerable<SelectListItem> ConstructionTypeList { get; set; }
 
-        public List<ComboMaterial> ComboMaterials { get; set; }
-        public List<ComboTask> ComboTasks { get; set; }
+        public List<ComboMaterials> ComboMaterials { get; set; }
+        public List<ComboTasks> ComboTasks { get; set; }
 
 	}
 }

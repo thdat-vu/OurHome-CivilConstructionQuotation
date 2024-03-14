@@ -24,7 +24,7 @@ function submitData() {
 
     $.ajax({
         url: '/Manager/Combo/Create',
-        type: 'POST',
+        type: 'POST', 
         contentType: 'application/json',
         data: JSON.stringify(postData),
         success: function (response) {

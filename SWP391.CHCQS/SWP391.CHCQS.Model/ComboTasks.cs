@@ -11,15 +11,15 @@ namespace SWP391.CHCQS.Model
 {
     public partial class ComboTask
     {
-        [Key]
+        
         public string CombosId { get; set; }
         
-        [Key]
         public string TasksId  { get; set; }
         [ForeignKey("CombosId")]
-        public virtual Combo Combo { get; set; }
+        public virtual Combo Combo { get; set; } = null!;
         [ForeignKey("TasksId")]
-        public virtual Task Task { get; set; }
+        public virtual Task Task { get; set; } = null!;
+
 
 
     }
