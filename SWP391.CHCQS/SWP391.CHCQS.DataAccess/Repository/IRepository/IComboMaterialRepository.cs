@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {
-    public interface IComboMaterialRepository : IRepository<ComboMaterials>
+    public interface IComboMaterialRepository : IRepository<ComboMaterial>
     {
-        void Update(ComboMaterials obj);
-        void UpdateRange(List<ComboMaterials> obj);
-        IEnumerable<ComboMaterials> GetComboMaterial(string comboId, string? includeProp = null!);
+        void Update(ComboMaterial obj);
+        void UpdateRange(List<ComboMaterial> obj);
+        IEnumerable<ComboMaterial> GetComboMaterial(string comboId, string? includeProp = null!);
     }
 }

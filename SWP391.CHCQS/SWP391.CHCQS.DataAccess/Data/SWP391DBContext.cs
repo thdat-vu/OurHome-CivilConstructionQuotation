@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -40,8 +41,8 @@ namespace SWP391.CHCQS.DataAccess.Data
         public virtual DbSet<RooftopType> RooftopTypes { get; set; } = null!;
         
         public virtual DbSet<Combo> Combos { get; set; } = null!;
-       // public virtual DbSet<ComboTask> ComboTasks { get; set; } = null!;
-       // public virtual DbSet <ComboMaterial> ComboMaterials { get; set; } = null!;
+        public virtual DbSet<ComboTask> ComboTasks { get; set; } = null!;
+        public virtual DbSet <ComboMaterial> ComboMaterials { get; set; } = null!;
         public virtual DbSet<Task> Tasks { get; set; } = null!;
         public virtual DbSet<TaskCategory> TaskCategories { get; set; } = null!;
         public virtual DbSet<RejectionReport> RejectionReports { get; set; } = null!;
@@ -49,6 +50,9 @@ namespace SWP391.CHCQS.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<ComboMaterial>().HasKey(cm => new { cm.CombosId, cm.MaterialsId });
+            builder.Entity<ComboTask>().HasKey(cm => new { cm.CombosId, cm.TasksId });
+
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

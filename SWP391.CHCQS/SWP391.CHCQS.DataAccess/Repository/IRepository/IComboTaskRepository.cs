@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {
-    public interface IComboTaskRepository : IRepository<ComboTasks>
+    public interface IComboTaskRepository : IRepository<ComboTask>
     {
-        void Update(ComboTasks obj);
-        void UpdateRange(List<ComboTasks> obj);
-        IEnumerable<ComboTasks> GetComboTask(string comboId, string? includeProp = null!);
+        void Update(ComboTask obj);
+        void UpdateRange(List<ComboTask> obj);
+        IEnumerable<ComboTask> GetComboTask(string comboId, string? includeProp = null!);
     }
 }

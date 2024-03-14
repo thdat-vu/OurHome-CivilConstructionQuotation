@@ -299,7 +299,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ComboMaterial",
+                name: "ComboMaterials",
                 columns: table => new
                 {
                     CombosId = table.Column<string>(type: "nvarchar(10)", nullable: false),
@@ -307,15 +307,15 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ComboMaterial", x => new { x.CombosId, x.MaterialsId });
+                    table.PrimaryKey("PK_ComboMaterials", x => new { x.CombosId, x.MaterialsId });
                     table.ForeignKey(
-                        name: "FK_ComboMaterial_Combos_CombosId",
+                        name: "FK_ComboMaterials_Combos_CombosId",
                         column: x => x.CombosId,
                         principalTable: "Combos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ComboMaterial_Materials_MaterialsId",
+                        name: "FK_ComboMaterials_Materials_MaterialsId",
                         column: x => x.MaterialsId,
                         principalTable: "Materials",
                         principalColumn: "Id",
@@ -353,7 +353,7 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ComboTask",
+                name: "ComboTasks",
                 columns: table => new
                 {
                     CombosId = table.Column<string>(type: "nvarchar(10)", nullable: false),
@@ -361,15 +361,15 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ComboTask", x => new { x.CombosId, x.TasksId });
+                    table.PrimaryKey("PK_ComboTasks", x => new { x.CombosId, x.TasksId });
                     table.ForeignKey(
-                        name: "FK_ComboTask_Combos_CombosId",
+                        name: "FK_ComboTasks_Combos_CombosId",
                         column: x => x.CombosId,
                         principalTable: "Combos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ComboTask_Tasks_TasksId",
+                        name: "FK_ComboTasks_Tasks_TasksId",
                         column: x => x.TasksId,
                         principalTable: "Tasks",
                         principalColumn: "Id",
@@ -600,8 +600,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ComboMaterial_MaterialsId",
-                table: "ComboMaterial",
+                name: "IX_ComboMaterials_MaterialsId",
+                table: "ComboMaterials",
                 column: "MaterialsId");
 
             migrationBuilder.CreateIndex(
@@ -610,8 +610,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                 column: "ConstructionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ComboTask_TasksId",
-                table: "ComboTask",
+                name: "IX_ComboTasks_TasksId",
+                table: "ComboTasks",
                 column: "TasksId");
 
             migrationBuilder.CreateIndex(
@@ -749,10 +749,10 @@ namespace SWP391.CHCQS.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ComboMaterial");
+                name: "ComboMaterials");
 
             migrationBuilder.DropTable(
-                name: "ComboTask");
+                name: "ComboTasks");
 
             migrationBuilder.DropTable(
                 name: "ConstructDetails");
