@@ -140,7 +140,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 
 				TempData["success"] = "Tạo thông tin chi tiết công trình thành công";
                 _hubContext.Clients.All.SendAsync("RecieveQuotationFromSeller");
-                return RedirectToAction("ViewRequestSaved", "Request");
+                return RedirectToAction("Index", "Request");
             }
             else
             {

@@ -164,13 +164,19 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             var quotation = _unitOfWork.CustomQuotation.Get(x => x.RequestId == id);
             requestForm.Status = SD.RequestStatusRejected;
             _unitOfWork.RequestForm.Update(requestForm);
-            _unitOfWork.CustomQuotation.Remove(quotation);
-            _unitOfWork.Save();
-            TempData["success"] = "Từ chối báo giá thành công";
+			_unitOfWork.Save();
+			TempData["success"] = "Từ chối báo giá thành công";
+			if (quotation != null) // quotation khác null nghĩa là đã có báo giá nên phải xóa và trả về trang hiện tại là đã lưu
+            {
+				_unitOfWork.CustomQuotation.Remove(quotation);
+				_unitOfWork.Save();
+				TempData["success"] = "Từ chối báo giá thành công";
+				return RedirectToAction(nameof(Index));
+			}
+            //quotation == null nghĩa là chưa có báo giá nên trả về trang hiện tại là đang chờ
+			return RedirectToAction(nameof(ViewRequestSaved));
 
-
-            return RedirectToAction(nameof(ViewRequestRejected));
-        }
+		}
 
        
         public async Task<IActionResult> UndoRejectRequest(string id)
