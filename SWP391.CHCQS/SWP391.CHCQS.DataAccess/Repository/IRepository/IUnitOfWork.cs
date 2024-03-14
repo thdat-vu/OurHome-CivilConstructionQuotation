@@ -10,6 +10,8 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
     {
         IApplicationUserRepository ApplicationUser { get; }
         IComboRepository Combo { get; }
+        IComboMaterialRepository ComboMaterial { get; }
+        IComboTaskRepository ComboTask { get; }
         IProjectRepository Project { get; }
         ITaskDetailRepository TaskDetail { get; }
         ICustomQuotationRepository CustomQuotation { get; }
