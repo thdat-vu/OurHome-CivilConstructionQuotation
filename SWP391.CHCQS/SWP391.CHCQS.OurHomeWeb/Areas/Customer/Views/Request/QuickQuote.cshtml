@@ -48,10 +48,7 @@
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Mặt tiền:</b></label>
-				<select type="text" class="form-control" asp-for="ConstructDetail.Facade">
-					<option selected>0</option>
-					<option>1</option>
-					<option>2</option>
+				<select type="text" class="form-control" asp-for="ConstructDetail.Facade" asp-items="@Model.Facades">
 				</select>
 			</div>
 			<div class="col-sm">

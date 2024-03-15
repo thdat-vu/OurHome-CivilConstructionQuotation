@@ -162,14 +162,29 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         {
             var requestForm = _unitOfWork.RequestForm.Get(x => x.Id == id);
             var quotation = _unitOfWork.CustomQuotation.Get(x => x.RequestId == id);
-            requestForm.Status = SD.RequestStatusRejected;
-            _unitOfWork.RequestForm.Update(requestForm);
-            _unitOfWork.CustomQuotation.Remove(quotation);
-            _unitOfWork.Save();
-            TempData["success"] = "Từ chối báo giá thành công";
+            if (requestForm == null)
+            {
+                TempData["error"] = "Từ chối báo giá thất bại";
+            }
+            else
+            {
+                requestForm.Status = SD.RequestStatusRejected;
+                _unitOfWork.RequestForm.Update(requestForm);
+                _unitOfWork.Save();
+                if (quotation != null) 
+                // quotation khác null nghĩa là đã có báo giá nên phải xóa và trả về trang hiện tại là Saved
+                {
+                    _unitOfWork.CustomQuotation.Remove(quotation);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Từ chối báo giá thành công";
+                    return RedirectToAction(nameof(ViewRequestSaved));
+                }
 
-
-            return RedirectToAction(nameof(ViewRequestRejected));
+                TempData["success"] = "Từ chối báo giá thành công";
+                //quotation == null nghĩa là chưa có báo giá nên trả về trang hiện tại là Index
+                
+            }
+            return RedirectToAction(nameof(Index));
         }
 
        
@@ -198,6 +213,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             ConstructDetailViewModel constructDetailVM = new ConstructDetailViewModel()
             {
                 Alleys = SD.Alleys.Select(x => new SelectListItem() { Text = x, Value = x }).ToList(),
+                Facades = SD.Facades.Select(x => new SelectListItem() { Text = x.ToString(), Value = x.ToString() }).ToList(),
                 Basement = _unitOfWork.BasementType.GetAll().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList(),
                 Investment = _unitOfWork.InvestmentType.GetAll().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList(),
                 Construction = _unitOfWork.ConstructionType.GetAll().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id }).ToList(),
@@ -212,13 +228,19 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         {
             var quotation = _unitOfWork.CustomQuotation.Get(x => x.Id == id);
             var request = _unitOfWork.RequestForm.Get(x => x.Id == quotation.RequestId);
-            quotation.Status = SD.Processing;
-            request.Status = SD.RequestStatusSent;
-            _unitOfWork.CustomQuotation.Update(quotation);
-            _unitOfWork.RequestForm.Update(request);
-            _unitOfWork.Save();
-            TempData["success"] = "Gửi báo giá thành công";
-            return RedirectToAction("ViewQuotation", "Quotation");
+            if (quotation != null && request != null)
+            {
+                quotation.Status = SD.Processing;
+                request.Status = SD.RequestStatusSent;
+                _unitOfWork.CustomQuotation.Update(quotation);
+                _unitOfWork.RequestForm.Update(request);
+                _unitOfWork.Save();
+                TempData["success"] = "Gửi báo giá thành công";
+            } else
+            {
+                TempData["error"] = "Gửi báo giá thất bại";
+            }
+            return RedirectToAction(nameof(ViewRequestSaved));
         }
 
         public async Task<IActionResult> Index()

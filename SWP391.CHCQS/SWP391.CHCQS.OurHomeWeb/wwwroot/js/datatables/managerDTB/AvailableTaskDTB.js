@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 //Need an api method return json to use this
 function loadDataTableTask() {
-    dataTableT = $('#tblAvailableTask').DataTable({
+    dataTableAvailableTask = $('#tblAvailableTask').DataTable({
         "ajax": { url: '/Manager/Task/GetAll' },
         "columns": [
             {
