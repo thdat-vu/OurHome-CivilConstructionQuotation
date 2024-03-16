@@ -77,7 +77,7 @@ namespace SWP391.CHCQS.Utility.Helpers
 		/// <param name="quoteId"></param>
 		/// <returns></returns>
 		public bool SendInfoToEmail(string toEmail, string customerName, string quoteId)
-		{
+        {
 			try
 			{
 				if (toEmail == null || toEmail.Equals(String.Empty))

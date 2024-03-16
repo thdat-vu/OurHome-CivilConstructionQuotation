@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
-using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers;
-using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Models;
 using SWP391.CHCQS.Utility;
-using SWP391.CHCQS.Utility.Helpers;
-using System.Linq;
+using MaterialViewModel = SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels.MaterialViewModel;
+
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
@@ -55,6 +53,30 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                         Note = materialNote[x.MaterialId].Note,
                     })
                 }).ToList();
+            return Json(new { data = materialDetailVM });
+        }
+
+        /// <summary>
+		/// api call for onClick
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		[HttpGet]
+        [ActionName("Detail")]
+        public IActionResult GetDetail([FromQuery] string MaterialId)
+        {
+            var materialDetail = _unitOfWork.Material.Get((x) => x.Id == MaterialId, includeProperties: "Category");
+            var materialDetailVM = new MaterialViewModel()
+            {
+                Id = materialDetail.Id,
+                Name = materialDetail.Name,
+                UnitPrice = materialDetail.UnitPrice,
+                Unit = materialDetail.Unit,
+                Status = materialDetail.Status,
+                CategoryId = materialDetail.CategoryId,
+                CategoryName = materialDetail.Category.Name
+            };
+            //TODO: Test result
             return Json(new { data = materialDetailVM });
         }
         #endregion
