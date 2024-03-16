@@ -1,5 +1,6 @@
 ﻿using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
+using SWP391.CHCQS.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
@@ -13,7 +14,10 @@ namespace SWP391.CHCQS.DataAccess.Repository
     {
         private readonly SWP391DBContext _db;
         public IComboRepository Combo {  get; private set; }
+        public IComboMaterialRepository ComboMaterial { get; private set; }
+        public IComboTaskRepository ComboTask { get; private set; }
         public IProjectRepository Project {  get; private set; }
+        public IProjectImageRepository ProjectImage { get; private set; }
         public IMaterialDetailRepository MaterialDetail { get; private set; }
         public ITaskDetailRepository TaskDetail { get; private set; }
         public ICustomQuotationRepository CustomQuotation { get; private set; }
@@ -27,11 +31,9 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public IFoundationTypeRepository FoundationType { get; private set; }
         public IBasementTypeRepository BasementType { get; private set; }
         public IRoofTypeRepository RoofType { get; private set; }
-        public IStaffRepository Staff { get; private set; }
         public IMaterialCategoryRepository MaterialCategory { get; private set; }
         public IRejectedCustomQuotationRepository RejectedCustomQuotation { get; private set; }
 
-        public ICustomerRepository Customer { get; private set; }
         public IWorkingReportRepository WorkingReport { get; private set; }
 
         public IPricingRepository Pricing { get; private set; }
@@ -41,14 +43,14 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public UnitOfWork(SWP391DBContext db)
         {
             _db = db;
-            
+            ProjectImage = new ProjectImageRepository(_db);
             Project = new ProjectRepository(_db);
-            Staff = new StaffRepository(_db);
-			Customer = new CustomerRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
 
 			Combo = new ComboRepository(_db);
-            CustomQuotation = new CustomQuotationRepository(_db);
+            ComboMaterial = new ComboMaterialRepository(_db);
+			ComboTask = new ComboTaskRepository(_db);
+			CustomQuotation = new CustomQuotationRepository(_db);
 
             Task = new TaskRepository(_db);
             TaskDetail = new TaskDetailRepository(_db);

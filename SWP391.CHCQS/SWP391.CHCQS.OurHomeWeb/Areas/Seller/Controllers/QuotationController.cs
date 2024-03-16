@@ -45,7 +45,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             var requestForm = _unitOfWork.RequestForm.Get(u => u.Id == id);
             //phải có thằng này vì nó có khóa chung giữa 2 bảng là ConstructDetail và CustomQuotation, nếu muốn thêm thì phải thêm vào cả 2
             //hiểu nôm na là phải có CustomQuotation id trước khi có thằng ConstructDetail id
-            var customQuotation = JsonSerializer.Serialize(new CustomQuotation
+            var customQuotation = new CustomQuotation
             {
                 Id = CreateQuotationId(id),
                 Date = DateTime.Now,
@@ -55,8 +55,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 Description = requestForm.Description,
                 Total = 0,
                 RequestId = requestForm.Id
-            });
-            ViewBag.CustomQuotation = customQuotation;
+            };
+            var serializedData = JsonSerializer.Serialize(customQuotation);
+            ViewBag.CustomQuotation = serializedData;
 
             //new mới một object lấy ra những option với những id tương ứng
             ConstructDetailViewModel ConstructDetailVM = new()
@@ -88,8 +89,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                     Value = u.Id,
                 }),
                 Alleys = SD.Alleys.Select(x => new SelectListItem { Text = x, Value = x }).ToList(),
-                ConstructDetail = new ConstructDetail(), 
-                
+                Facades = SD.Facades.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }).ToList(),
+                QuotationId = customQuotation.Id 
             };
             return View(ConstructDetailVM);
         }
@@ -171,7 +172,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                         Text = u.Name,
                         Value = u.Id,
                     }),
-                    ConstructDetail = new ConstructDetail()
+                    Alleys = SD.Alleys.Select(x => new SelectListItem { Text = x, Value = x }).ToList(),
+                    Facades = SD.Facades.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }).ToList()
                 };
                 TempData["error"] = "Tạo thông tin chi tiết công trình thất bại";
                 return View(ConstructDetailVM);

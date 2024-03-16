@@ -19,7 +19,8 @@
 <div class="container img-thumbnail mt-5 mb-5">
 
 	<form class="row m-auto" method="post">		
-
+		<input asp-for="RequestId" value="@SD.TempId" hidden></input>
+		<input asp-for="Status" value="@SD.RequestStatusPending" hidden></input>
 		<div class="mt-5 mb-5 w-75 m-auto">
 			<h3 class="text-center"><b>Thông tin công trình</b></h3>
 			<hr></hr>
@@ -35,10 +36,12 @@
 			<div class="col-lg">
 				<label><b>Địa chỉ:</b></label>
 				<input asp-for="Location" class="form-control"></input>
+				<span asp-validation-for="Location" class="text-danger"></span>
 			</div>			
 			<div class="col-lg">
 				<label><b>Diện tích:</b></label>
 				<input asp-for="Acreage" class="form-control" placeholder="0m x 0m"></input>
+				<span asp-validation-for="Acreage" class="text-danger"></span>
 			</div>
 		</div>
 
@@ -46,6 +49,7 @@
 			<div class="col-sm">
 				<label><b>Mô tả:</b></label>
 				<textarea asp-for="Description" rows="6" class="form-control"></textarea>
+				<span asp-validation-for="Description" class="text-danger"></span>
 			</div>
 		</div>
 
@@ -58,8 +62,8 @@
 	</form>
 </div>
 
-@* @section Scripts {
-	<script>
+@section Scripts {
+	@* <script>
 		tinymce.init({
 			selector: 'textarea',
 			plugins: 'tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
@@ -72,8 +76,8 @@
 			],
 			ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
 		});
-	</script>
+	</script> *@
 	@{
 		<partial name="_ValidationScriptsPartial" />
 	}
-} *@
+}
