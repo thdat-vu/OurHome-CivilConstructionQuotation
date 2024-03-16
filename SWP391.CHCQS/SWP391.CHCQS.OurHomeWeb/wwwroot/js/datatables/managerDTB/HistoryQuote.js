@@ -3,9 +3,12 @@
 $(function loadDataTableHistory() {
     dataTableCQ = $('#tblQuotation').DataTable({
         "ajax": { url: '/Manager/CustomQuotation/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
         "order": [[1, "desc"]],
         "columns": [
-            { data: 'id', "width": "5%" },
+            { data: 'id' },
             {
                 data: 'generatRequestDate',
                 "render": function (data) {
@@ -16,23 +19,23 @@ $(function loadDataTableHistory() {
                     let year = date.getFullYear();
                     return `${day}/${month}/${year}`;
                 },
-                "width": "15%"
+              
             },
-            { data: 'acreage', "width": "15%" },
-            { data: 'location', "width": "5%" },
-            { data: 'construcType', "width": "5%" },
-            { data: 'status', "width": "5%" },
-            { data: 'sellerName', "width": "15%" },
-            { data: 'engineerName', "width": "15%" },
-            { data: 'managerName', "width": "15%" },
+            { data: 'acreage' },
+            { data: 'location'},
+            { data: 'construcType'},
+            { data: 'status' },
+            { data: 'sellerName'},
+            { data: 'engineerName' },
+            { data: 'managerName' },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Manager/CustomQuotation/GetDetail?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i>Detail</a>
+                       <a href="/Manager/CustomQuotation/GetDetail?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square">Chi tiết</i></a>
                     </div >`
                 },
-                "width": "15%"
+          
             }
         ]
     });

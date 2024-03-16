@@ -13,21 +13,21 @@ var myQuoteBarChart = new Chart(ctx, {
         labels: [],
         datasets: [
             {
-                label: "Request",
+                label: "Yêu cầu",
                 backgroundColor: "#0165b9",
                 hoverBackgroundColor: "rgb(1,101,185, 0.5)",
                 borderColor: "#000000 ",
                 data: [],
             },
             {
-                label: "Quotation",
+                label: "Báo giá",
                 backgroundColor: "#02afae",
                 hoverBackgroundColor: "rgb(2,175,174, 0.5)",
                 borderColor: "#000000 ",
                 data: [],
             },
             {
-                label: "Cancled",
+                label: "Yêu cầu đã hủy",
                 backgroundColor: "#612697",
                 hoverBackgroundColor: "rgb(97,38,151, 0.5)",
                 borderColor: "#000000 ",
