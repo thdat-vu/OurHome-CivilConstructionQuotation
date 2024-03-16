@@ -14,6 +14,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
         public async Task<IActionResult> Index()
         {
             var comboList = _unitOfWork.Combo.GetAll(includeProperties: "Materials,Tasks").ToList();
+            //TODO: lấy đc combo + MaterialList TaskList mỗi combo.
             return View(comboList);
         }
 
