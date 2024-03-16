@@ -170,7 +170,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             {
 				_unitOfWork.CustomQuotation.Remove(quotation);
 				_unitOfWork.Save();
-				TempData["success"] = "Từ chối yêu cầu thành công";
+				TempData["success"] = "Từ chối báo giá thành công";
 				return RedirectToAction(nameof(ViewRequestSaved));
 			}
             //quotation == null nghĩa là chưa có báo giá nên trả về trang hiện tại là đang chờ
