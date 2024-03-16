@@ -16,6 +16,7 @@ using SWP391.CHCQS.Services;
 using SWP391.CHCQS.Services.NotificationHub;
 using SWP391.CHCQS.Utility;
 using SWP391.CHCQS.Utility.Helpers;
+using System.Globalization;
 using System.Security.Claims;
 using EmailSender = SWP391.CHCQS.Utility.Helpers.EmailSender;
 
@@ -303,19 +304,19 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			}
 			return Json(new { isSuccess, message });
 		}
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
+        
 
+        #region             ACTION 
 
-		#region             ACTION 
-
-		/// <summary>
-		/// Action trả trang coi chi tiết của customQuotation mà Manager cần xem
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		[HttpGet]
+        /// <summary>
+        /// Action trả trang coi chi tiết của customQuotation mà Manager cần xem
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
 		public async Task<IActionResult> GetDetail([FromQuery] string id)
 		{
 			//lưu thông tin quoteId vào session
@@ -477,7 +478,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			//Toast Info lên là reject thành công
 			NotifySuccess("Từ chối thành công");
 
-			await _hubContext.Clients.All.SendAsync("RecieveRejectFromManager", "Manager", "You was recieve a new Quotation");
+			await _hubContext.Clients.All.SendAsync("RecieveRejectFromManager", "Manager", "Bạn đã nhận 1 báo giá mới");
 			//điều hướng người dùng lại trang index để coi List
 			return RedirectToAction("Index");
 		}

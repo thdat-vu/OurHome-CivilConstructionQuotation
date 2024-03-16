@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers;
+using SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Models;
@@ -45,6 +46,31 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                     Price = x.Price,
                     Note = new KeyValuePair<string, string>(x.TaskId, taskNote[x.TaskId])
                 }).ToList();
+            return Json(new { data = taskDetailVM });
+        }
+
+        /// <summary>
+		/// function to be called api for onclick event
+		/// </summary>
+		/// <param name="TaskId"></param>
+		/// <returns></returns>
+		[HttpGet]
+        [ActionName("Detail")]
+        public async Task<IActionResult> GetDetail([FromQuery] string TaskId)
+        {
+            var taskDetail = _unitOfWork.Task.Get((x) => x.Id == TaskId, "Category");
+            var taskDetailVM = new TaskViewModel
+            {
+                Id = taskDetail.Id,
+                Name = taskDetail.Name,
+                Description = taskDetail.Description,
+                UnitPrice = taskDetail.UnitPrice,
+                Status = taskDetail.Status,
+                CategoryId = taskDetail.CategoryId,
+                CategoryName = taskDetail.Category.Name
+
+            };
+            //TODO: Test result
             return Json(new { data = taskDetailVM });
         }
         #endregion

@@ -26,7 +26,7 @@ function loadDataTableQuotation() {
             },
             { data: 'acreage', },
             { data: 'location', },
-            { data: 'total', },
+            { data: 'total', render: formatCurrency },
             { data: 'status', },
             {
                 data: 'id',
@@ -73,5 +73,19 @@ function SendQuoteToManager(url) {
                 }
             });
         }
+    });
+}
+
+// Hàm định dạng giá tiền
+function formatCurrency(data, type, row) {
+    // Kiểm tra nếu dữ liệu không phải là số thì trả về dữ liệu nguyên thô
+    if (type !== 'display' || isNaN(data)) {
+        return data;
+    }
+
+    // Sử dụng hàm toLocaleString để định dạng giá tiền theo ngôn ngữ và quốc gia hiện tại
+    return Number(data).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
     });
 }

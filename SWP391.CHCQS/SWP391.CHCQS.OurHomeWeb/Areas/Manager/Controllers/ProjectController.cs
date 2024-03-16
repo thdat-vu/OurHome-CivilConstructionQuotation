@@ -52,81 +52,91 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         [HttpPost]
         public IActionResult Create(ProjectVM projectVM, List<IFormFile>? files)
         {
-            
-            projectVM.Status = true; //change status into true;
-            projectVM.Id = SD.TempId;
-            DateTime parsedDate;
-            if (DateTime.TryParseExact(Request.Form["Date"], "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate))
+            try
             {
-                projectVM.Date = parsedDate;
-            }
-            else
-            {
-                ModelState.AddModelError("Date", "Sai định dạng ngày tháng");
-            }
-
-
-            Project project = new Project()
-            {
-                Id = projectVM.Id,
-                Name = projectVM.Name,
-                Location = projectVM.Location,
-                Scale = projectVM.Scale,
-                Size = projectVM.Size,
-                Status = projectVM.Status,
-                Description = projectVM.Description,
-                Overview = projectVM.Overview,
-                Date = projectVM.Date,
-                CustomerId = projectVM.CustomerId
-
-            };
-            _unitOfWork.Project.Add(project); //Add ProjectVM to Project table
-            _unitOfWork.Save(); //keep track on change
-            string wwwRootPath = _webHostEnvironment.WebRootPath; //retrieve rootpath.
-            //handle file 
-            if (files != null)
-            {
-                foreach (IFormFile file in files)
+                projectVM.Status = true; //change status into true;
+                projectVM.Id = SD.TempId;
+                DateTime parsedDate;
+                if (DateTime.TryParseExact(Request.Form["Date"], "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate))
                 {
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//save a new name for filename
-                    string projectId = _unitOfWork.Project.Get(p => p.Name == projectVM.Name && p.Status == true && p.CustomerId == projectVM.CustomerId).Id;
-                    if (projectId != null)
+                    projectVM.Date = parsedDate;
+                }
+                else
+                {
+                    ModelState.AddModelError("Date", "Sai định dạng ngày tháng");
+                }
+
+
+                Project project = new Project()
+                {
+                    Id = projectVM.Id,
+                    Name = projectVM.Name,
+                    Location = projectVM.Location,
+                    Scale = projectVM.Scale,
+                    Size = projectVM.Size,
+                    Status = projectVM.Status,
+                    Description = projectVM.Description,
+                    Overview = projectVM.Overview,
+                    Date = projectVM.Date,
+                    CustomerId = projectVM.CustomerId
+
+                };
+                _unitOfWork.Project.Add(project); //Add ProjectVM to Project table
+                _unitOfWork.Save(); //keep track on change
+                string wwwRootPath = _webHostEnvironment.WebRootPath; //retrieve rootpath.
+                                                                      //handle file 
+                if (files != null)
+                {
+                    foreach (IFormFile file in files)
                     {
-                        string projectImagesPath = @"images\project\project-" + projectId;
-                        string finalPath = Path.Combine(wwwRootPath, projectImagesPath);
-                        //if the projectimagesPath does not exist -> Create the directory
-                        if (!Directory.Exists(finalPath))
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//save a new name for filename
+                        string projectId = _unitOfWork.Project.Get(p => p.Name == projectVM.Name && p.Status == true && p.CustomerId == projectVM.CustomerId).Id;
+                        if (projectId != null)
                         {
-                            Directory.CreateDirectory(finalPath);
-                        }
+                            string projectImagesPath = @"images\project\project-" + projectId;
+                            string finalPath = Path.Combine(wwwRootPath, projectImagesPath);
+                            //if the projectimagesPath does not exist -> Create the directory
+                            if (!Directory.Exists(finalPath))
+                            {
+                                Directory.CreateDirectory(finalPath);
+                            }
 
-                        using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
-                        {
-                            file.CopyTo(fileStream);
-                        }
-                        ProjectImage projectImage = new ProjectImage() 
-                        {
-                            ImageUrl = @"\" + projectImagesPath + @"\" + fileName,
-                            ProjectId = projectId,
-                        };
+                            using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
+                            {
+                                file.CopyTo(fileStream);
+                            }
+                            ProjectImage projectImage = new ProjectImage()
+                            {
+                                ImageUrl = @"\" + projectImagesPath + @"\" + fileName,
+                                ProjectId = projectId,
+                            };
 
-                        if(projectVM.Images == null)
-                        {
-                            projectVM.Images = new List<ProjectImage>();
+                            if (projectVM.Images == null)
+                            {
+                                projectVM.Images = new List<ProjectImage>();
+                            }
+                            projectVM.Images.Add(projectImage);
+                            _unitOfWork.ProjectImage.Add(projectImage); //add projectimages.
+                            _unitOfWork.Save(); //keep track on change
                         }
-                        projectVM.Images.Add(projectImage);
-                        _unitOfWork.ProjectImage.Add(projectImage); //add projectimages.
-                        _unitOfWork.Save(); //keep track on change
                     }
-                }               
+                }
+
+
+
+                TempData["success"] = "Thêm dự án thành công";
+                return RedirectToAction("Index"); //after adding, return to previous action and reload the page
+            }
+            catch (Exception ex)
+            {
+                // Handle exception if any
+                TempData["error"] = "Đã xảy ra lỗi trong quá trình thêm dự án: " + ex.Message;
+                return RedirectToAction("Index");
             }
 
+            
 
             
-            TempData["success"] = "Thêm dự án thành công";
-            return RedirectToAction("Index"); //after adding, return to previous action and reload the page
-
-            //return View(projectVM); //return previous action + invalid object
         }
         //Edit Action
         public IActionResult Edit(string? id)
@@ -173,67 +183,76 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         public IActionResult Edit(ProjectVM projectVM, List<IFormFile>? files)
         {
 
-
-
-            //step 1:retrieve Project from DB
-            Project? projectFromDb = _unitOfWork.Project.Get(u => u.Id == projectVM.Id, includeProperties: "Customer");
-            //catch not found exception
-            if (projectFromDb == null)
+            try
             {
-                return NotFound();//return status not found aka 404
-            }
-            projectFromDb.Name = projectVM.Name;
-            projectFromDb.Location = projectVM.Location;
-            projectFromDb.Scale = projectVM.Scale;
-            projectFromDb.Size = projectVM.Size;
-            projectFromDb.Description = projectVM.Description;
-            projectFromDb.Overview = projectVM.Overview;
-            projectFromDb.Date = projectVM.Date;
-            projectFromDb.CustomerId = projectVM.CustomerId;
-            _unitOfWork.Save(); //keep track on change
-
-            string wwwRootPath = _webHostEnvironment.WebRootPath; //retrieve rootpath.
-            //handle file 
-            if (files != null)
-            {
-                foreach (IFormFile file in files)
+                //step 1:retrieve Project from DB
+                Project? projectFromDb = _unitOfWork.Project.Get(u => u.Id == projectVM.Id, includeProperties: "Customer");
+                //catch not found exception
+                if (projectFromDb == null)
                 {
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//save a new name for filename
-                    string projectId = _unitOfWork.Project.Get(p => p.Name == projectVM.Name && p.Status == true && p.CustomerId == projectVM.CustomerId).Id;
-                    if (projectId != null)
+                    return NotFound();//return status not found aka 404
+                }
+                projectFromDb.Name = projectVM.Name;
+                projectFromDb.Location = projectVM.Location;
+                projectFromDb.Scale = projectVM.Scale;
+                projectFromDb.Size = projectVM.Size;
+                projectFromDb.Description = projectVM.Description;
+                projectFromDb.Overview = projectVM.Overview;
+                projectFromDb.Date = projectVM.Date;
+                projectFromDb.CustomerId = projectVM.CustomerId;
+                _unitOfWork.Save(); //keep track on change
+
+                string wwwRootPath = _webHostEnvironment.WebRootPath; //retrieve rootpath.
+                                                                      //handle file 
+                if (files != null)
+                {
+                    foreach (IFormFile file in files)
                     {
-                        string projectImagesPath = @"images\project\project-" + projectId;
-                        string finalPath = Path.Combine(wwwRootPath, projectImagesPath);
-                        //if the projectimagesPath does not exist -> Create the directory
-                        if (!Directory.Exists(finalPath))
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//save a new name for filename
+                        string projectId = _unitOfWork.Project.Get(p => p.Name == projectVM.Name && p.Status == true && p.CustomerId == projectVM.CustomerId).Id;
+                        if (projectId != null)
                         {
-                            Directory.CreateDirectory(finalPath);
-                        }
+                            string projectImagesPath = @"images\project\project-" + projectId;
+                            string finalPath = Path.Combine(wwwRootPath, projectImagesPath);
+                            //if the projectimagesPath does not exist -> Create the directory
+                            if (!Directory.Exists(finalPath))
+                            {
+                                Directory.CreateDirectory(finalPath);
+                            }
 
-                        using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
-                        {
-                            file.CopyTo(fileStream);
-                        }
-                        ProjectImage projectImage = new ProjectImage()
-                        {
-                            ImageUrl = @"\" + projectImagesPath + @"\" + fileName,
-                            ProjectId = projectId,
-                        };
+                            using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
+                            {
+                                file.CopyTo(fileStream);
+                            }
+                            ProjectImage projectImage = new ProjectImage()
+                            {
+                                ImageUrl = @"\" + projectImagesPath + @"\" + fileName,
+                                ProjectId = projectId,
+                            };
 
-                        if (projectVM.Images == null)
-                        {
-                            projectVM.Images = new List<ProjectImage>();
+                            if (projectVM.Images == null)
+                            {
+                                projectVM.Images = new List<ProjectImage>();
+                            }
+                            projectVM.Images.Add(projectImage);
+                            _unitOfWork.ProjectImage.Add(projectImage); //add projectimages.
+                            _unitOfWork.Save(); //keep track on change
                         }
-                        projectVM.Images.Add(projectImage);
-                        _unitOfWork.ProjectImage.Add(projectImage); //add projectimages.
-                        _unitOfWork.Save(); //keep track on change
                     }
                 }
+
+
+                TempData["success"] = "Chỉnh sửa dự án thành công";
+                return RedirectToAction("Index"); //after updating, return to previous action and reload the page
+            }
+            catch (Exception ex)
+            {
+                // Handle exception if any
+                TempData["error"] = "Đã xảy ra lỗi trong quá trình chỉnh sửa dự án: " + ex.Message;
+                return RedirectToAction("Index");
             }
 
 
-            TempData["success"] = "Chỉnh sửa dự án thành công";
-            return RedirectToAction("Index"); //after updating, return to previous action and reload the page
 
         }
         //Delete Action

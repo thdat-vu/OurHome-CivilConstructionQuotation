@@ -29,7 +29,7 @@ function loadDataCustomer() {
                 data: null,
                 render: function (data) {
                     return `<div class="text-center">
-                        <a class="btn btn-main" onclick="fillForm('${data.id}',' ${data.name}')">Add</a>
+                        <a class="btn btn-main" onclick="fillForm('${data.id}',' ${data.name}')"> Thêm </a>
                     </div>`
                 }
             }
