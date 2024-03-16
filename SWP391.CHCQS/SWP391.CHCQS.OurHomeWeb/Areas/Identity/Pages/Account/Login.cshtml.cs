@@ -80,7 +80,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required(ErrorMessage = "Tên đăng nhập không được bỏ trống")]
-            [StringLength(100, ErrorMessage = "{0}phái chứa ít nhất {2} và nhiều nhất {1} ký tự.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "{0} phải chứa ít nhất {2} và nhiều nhất {1} ký tự.", MinimumLength = 6)]
             [Display(Name = "Tên đăng nhập")]
             public string Username { get; set; }
 
