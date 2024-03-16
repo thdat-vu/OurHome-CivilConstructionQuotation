@@ -31,7 +31,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         //getAll() action
         public IActionResult Index()
         {
-
+            //Remove section after adding, editing, deleting
+            HttpContext.Session.Remove(SessionConst.COMBO_TASK_LIST_KEY);
+            HttpContext.Session.CommitAsync();
+            HttpContext.Session.Remove(SessionConst.COMBO_MATERIAL_LIST_KEY);
+            HttpContext.Session.CommitAsync();
 
             List<Combo> objStandardQuotationList = _unitOfWork.Combo.GetAll().ToList();
             //return View();
@@ -181,7 +185,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
                 ComboMaterials = comboMaterialsFromDb,
                 ComboTasks = comboTasksFromDb
             };
-            //step 2.1: pass Cômbo to ComboVM
+            //step 2.1: pass Combo to ComboVM
             comboDetailViewModel.Combo = comboFromDb;
             //load the Combo Material List and ComboTaskList
 
@@ -331,7 +335,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             }
             catch (Exception ex)
             {
-                TempData["error"] = "Đã xảy ra lỗi trong quá trình chỉnh sửa combo: " + ex.Message;
+                TempData["error"] = "Đã xảy ra lỗi trong quá trình chỉnh sửa gói dịch vụ: " + ex.Message;
             }
 
             return RedirectToAction("Index");
@@ -373,7 +377,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //change the status in to false
             obj.Status = false;
             _unitOfWork.Save();//keep track on change
-                               //TempData["success"] = "Product deleted successfully";
+            TempData["success"] = "Gói dịch vụ đã xóa thành công";
             return RedirectToAction("Index"); //redirect to Index.cshtml
         }
 
@@ -384,14 +388,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
             return Json(new { data = objComboList });
         }
-
-
-
-
-
-
-
-
         #endregion
     }
 }

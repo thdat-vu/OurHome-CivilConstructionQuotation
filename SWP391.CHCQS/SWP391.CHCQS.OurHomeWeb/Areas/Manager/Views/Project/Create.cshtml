@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <form method="post" class="row">
+    <form method="post" class="row" enctype="multipart/form-data">
         <div class="border p-3">
 
             <div class="form-floating py-2 col-12">
@@ -48,7 +48,7 @@
                
             </div>
             <div class="form-floating py-2 col-12">
-                <input asp-for="Date"value="@Model.Date.ToString("dd/MM/yyyy")" class="form-control border-0 shadow" />
+                <input asp-for="Date" value="@Model.Date.ToString("dd/MM/yyyy")" class="form-control border-0 shadow" />
                 <label asp-for="Date" class="ms-2"></label>
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
@@ -63,7 +63,10 @@
                 <label asp-for="CustomerName" class="ms-2"></label>
                 <span asp-validation-for="CustomerName" class="text-danger"></span>
             </div>
-
+            <div class="form-floating py-2 col-12">
+                <input type="file" name="files" class="form-control border-0 shadow" multiple />
+                 <label asp-for="Images" class="ms-2"></label> 
+            </div>
             <div class="row pt-2">
                 <div class="col-6 col-md-3">
                     <button type="submit" class="btn btn-primary form-control btn-main"> Tạo </button>
