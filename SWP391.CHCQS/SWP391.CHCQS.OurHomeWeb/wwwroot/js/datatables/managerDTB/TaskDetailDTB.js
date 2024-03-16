@@ -19,7 +19,7 @@ function loadDataTaskDetail() {
                 },
             },
             { data: 'taskName' },
-            { data: 'price' },
+            { data: 'price', render: formatCurrency },
             {
                 data: null,
                 // Generate a unique form ID using the material ID

@@ -32,7 +32,7 @@ $(function loadDataTableHistory() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Manager/CustomQuotation/GetDetail?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square">Chi tiết</i></a>
+                       <a href="/Manager/CustomQuotation/GetDetail?id=${data}" class = "text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square">Chi tiết</i></a>
                     </div >`
                 },
           
