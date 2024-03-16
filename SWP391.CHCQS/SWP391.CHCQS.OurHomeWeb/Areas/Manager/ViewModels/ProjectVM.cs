@@ -9,16 +9,30 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 	public class ProjectVM
 	{
 		public string Id { get; set; }
-		public string Name { get; set; }
-		public string Location { get; set; }
-		public string Scale { get; set; }
-		public string Size { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Tên Dự Án")]
+        [Display(Name = "Tên Dự Án")]
+        public string Name { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Vị trí")]
+        [Display(Name = "Vị trí")]
+        public string Location { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Quy mô")]
+        [Display(Name = "Quy mô")]
+        public string Scale { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Diện tích")]
+        [Display(Name = "Diện tích")]
+        public string Size { get; set; }
 		public bool Status { get; set; }
-		public string? Description { get; set; }
-		public string? Overview { get; set; }
-		public DateTime Date { get; set; }
+        [Display(Name = "Mô tả")]
+        public string? Description { get; set; }
+        [Display(Name = "Tổng quan")]
+        public string? Overview { get; set; }
+        [Required(ErrorMessage = "Vui lòng chọn Ngày phù hợp")]
+        [Display(Name = "Ngày")]
+
+        public DateTime Date { get; set; }
 		[Required(ErrorMessage = "Vui lòng chọn ID Khách hàng")]
 		[Display(Name = "ID Khách hàng")]
+		//public Project Project { get; set; }
 		public string CustomerId { get; set; }
 		[Required(ErrorMessage = "Vui lòng chọn Tên Khách hàng")]
 		[Display(Name = "Tên khách hàng")]

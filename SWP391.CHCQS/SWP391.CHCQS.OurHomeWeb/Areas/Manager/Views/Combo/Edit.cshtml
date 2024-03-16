@@ -53,6 +53,10 @@
                     <input asp-for="Combo.ImageUrl" type="file" name="file" class="form-control border-0 shadow" />
                     <label asp-for="Combo.ImageUrl" class="ms-2"></label>
                 </div>
+
+                <div class="form-floating py-2 col-12">
+                    <img src="@Model.Combo.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                </div>
             </div>
 
         </div>
@@ -247,5 +251,5 @@
     <script src="~/js/datatables/managerDTB/AvailableTaskDTB.js"></script>
     <script src="~/js/datatables/managerDTB/ComboMaterialListDTB.js"></script>
     <script src="~/js/datatables/managerDTB/ComboTaskListDTB.js"></script>
-   
+    <partial name="_ValidationScriptsPartial" />
 }

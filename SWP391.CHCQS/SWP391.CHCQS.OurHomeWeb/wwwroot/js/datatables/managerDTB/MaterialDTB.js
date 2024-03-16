@@ -29,8 +29,8 @@ function loadDataTableMaterial() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/manager/material/Edit?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-pencil"></i> Edit </a>
-                       <a href="/manager/material/Delete?id=${data}" class = "btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Delete </a>
+                       <a href="/manager/material/Edit?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-pencil"></i> Chỉnh sửa </a>
+                       <a href="/manager/material/Delete?id=${data}" class = "btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Xóa </a>
                     </div >`
                 },
                 "width": "15%"
