@@ -13,6 +13,7 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         IComboMaterialRepository ComboMaterial { get; }
         IComboTaskRepository ComboTask { get; }
         IProjectRepository Project { get; }
+        IProjectImageRepository ProjectImage { get; }
         ITaskDetailRepository TaskDetail { get; }
         ICustomQuotationRepository CustomQuotation { get; }
         ITaskRepository Task { get; }
@@ -27,10 +28,8 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         IBasementTypeRepository BasementType { get; }
         IRoofTypeRepository RoofType { get; }
         IMaterialCategoryRepository MaterialCategory { get; }
-        IStaffRepository Staff { get; }
         IRejectedCustomQuotationRepository RejectedCustomQuotation { get; }
 
-        ICustomerRepository Customer { get; }
         IWorkingReportRepository WorkingReport { get; }
         IPricingRepository Pricing { get; }
 
