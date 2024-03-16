@@ -1,65 +1,255 @@
-﻿@model StandardQuotationViewModel
+﻿@model ComboDetailViewModel
 @{
-    ViewData["Title"] = "Sửa gói dịch vụ";
+    ViewData["Title"] = "Chỉnh sửa gói dịch vụ";
 }
+<form method="post" enctype="multipart/form-data">
 
-<div class="card shadow border-0 my-4">
-    <div class="card-header bg-main ml-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">Vật liệu</h2>
+    <div class="card mt-3 mb-3 w-100">
+        <div class="m-auto w-100">
+            <div class="mt-3 mb-5 w-100 m-auto">
+                <div class="row mt-3">
+                    <div class="ml-3 rounded-1 float-left">
+                        <a onClick="BackToIndex('/Manager/Combo/Index')" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Trở lại</a>
+                    </div>
+                </div>
+                <h3 class="text-center"><b>Thông tin chi tiết gói dịch vụ</b></h3>
+                <hr class="w-75 m-auto"></hr>
+            </div>
+
+            <div class="row mt-3 text-center">
+
+                <div class="col-lg">
+                    <label><b class="text-nowrap">ID:</b></label>
+                    <input asp-for="Combo.Id" class="form-control border-0 shadow" disabled />
+                    <input asp-for="Combo.Id" type="hidden" />
+                    
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Tên:</b></label>
+                    <input asp-for="Combo.Name" class="form-control border-0 shadow" id="Combo_Name" />
+                    <span asp-validation-for="Combo.Name" class="text-danger"></span>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Mô tả:</b></label>
+                    <input asp-for="Combo.Description" class="form-control border-0 shadow" id="Combo_Description" />
+                    <span asp-validation-for="Combo.Description" class="text-danger"></span>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Giá:</b></label>
+                    <input asp-for="Combo.Price" class="form-control border-0 shadow" id="Combo_Price" />
+                    <span asp-validation-for="Combo.Price" class="text-danger"></span>
+                </div>
+
+
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Loại công trình:</b></label>
+                    <select asp-for="Combo.ConstructionId" asp-items="@Model.ConstructionTypeList" class="form-select border-0 shadow" id="Combo_ConstructionId">
+                        <option disabled selected>--Chọn loại công trình--</option>
+                    </select>
+                    <span asp-validation-for="Combo.ConstructionId" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Combo.ImageUrl" type="file" name="file" class="form-control border-0 shadow" />
+                    <label asp-for="Combo.ImageUrl" class="ms-2"></label>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <img src="@Model.Combo.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                </div>
+            </div>
+
+        </div>
+
+
+        <!--Hiện 2 bảng ComboTaskListSession và ComboMaterialListSession -->
+        <div class="row mb-3">
+
+            <!--TaskList-->
+            <div class="col-lg-5">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-main">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white m-0">Công việc cần làm</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table id="tblComboTaskList" class="table-bordered table-striped text-black" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-nowrap">
+                                            Mã
+                                        </th>
+                                        <th class="text-nowrap">
+                                            Tên
+                                        </th>
+                                        <th class="text-nowrap">
+                                            Giá gốc
+                                        </th>
+                                        <th class="text-nowrap">
+                                            Loại
+                                        </th>
+                                        <th class="text-nowrap">
+                                            Hành động
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--MaterialList-->
+            <div class="col-lg-7">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-main">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white m-0">Vật tư cần dùng</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table id="tblComboMaterialList" class="table-bordered table-striped text-black" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-nowrap">
+                                            Mã
+                                        </th>
+                                        <th class="text-nowrap">
+                                            Tên
+                                        </th>
+                                        <th class="text-nowrap">
+                                            Giá gốc
+                                        </th>
+                                        <th class="text-nowrap">
+                                            Đơn vị
+                                        </th>
+                                        <th class="text-nowrap">
+                                            Loại
+                                        </th>
+
+                                        <th class="text-nowrap">
+                                            Hành động
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row w-75 m-auto">
+                <button type="submit" class="btn btn-main text-white mb-3"><i class="bi bi-arrow-90deg-up"></i> Lưu </button>
             </div>
         </div>
     </div>
 
-    <div class="card-body p-4">
-        <form method="post" class="row">
-            <div class="border p-3">
-                @*<div asp-validation-summary="ModelOnly"></div>*@
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="StandardQuotation.Id" class="form-control border-0 shadow" disabled />
-                    <input asp-for="StandardQuotation.Id" type="hidden" />
-                    <label asp-for="StandardQuotation.Id" class="ms-2"></label>
-                    <span asp-validation-for="StandardQuotation.Id" class="text-danger"></span>
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="StandardQuotation.Name" class="form-control border-0 shadow" />
-                    <label asp-for="StandardQuotation.Name" class="ms-2"></label>
-                    <span asp-validation-for="StandardQuotation.Name" class="text-danger"></span>
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="StandardQuotation.Description" class="form-control border-0 shadow" />
-                    <label asp-for="StandardQuotation.Description" class="ms-2"></label>
-                    <span asp-validation-for="StandardQuotation.Description" class="text-danger"></span>
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="StandardQuotation.Price" class="form-control border-0 shadow" />
-                    <label asp-for="StandardQuotation.Price" class="ms-2"></label>
-                    <span asp-validation-for="StandardQuotation.Price" class="text-danger"></span>
-                </div>
-               
-                <div class="form-floating py-2 col-12">
-                    <select asp-for="StandardQuotation.ConstructionId" asp-items="@Model.ConstructionTypeList" class="form-select border-0 shadow">
-                        <option disabled selected>--Select Category--</option>
-                    </select>
-                    <label asp-for="StandardQuotation.ConstructionId" class="ms-2"></label>
-                    <span asp-validation-for="StandardQuotation.ConstructionId" class="text-danger"></span>
-                </div>
+</form>
 
-                <div class="row pt-2">
-                    <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-primary form-control btn-main"> Sửa </button>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <a asp-controller="StandardQuotation" asp-action="Index" class="btn btn-outline-primary border form-control">
-                            Trở lại
-                        </a>
+
+<!--Hiện 2 bảng TaskList và MaterialList-->
+<div class="row">
+    <!--TaskList-->
+    <div class="col-lg-5">
+        <div class="card shadow border-0">
+            <div class="card-header bg-main">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2 class="text-white m-0">Công việc khả dụng</h2>
                     </div>
                 </div>
-
-
             </div>
-        </form>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table id="tblAvailableTask" class="table-bordered table-striped text-black" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th class="text-nowrap">
+                                    Mã
+                                </th>
+                                <th class="text-nowrap">
+                                    Tên
+                                </th>
+                                <th class="text-nowrap">
+                                    Giá gốc
+                                </th>
+                                <th class="text-nowrap">
+                                    Loại
+                                </th>
+                                <th class="text-nowrap">
+                                    Hành động
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!--MaterialList-->
+    <div class="col-lg-7">
+        <div class="card shadow border-0">
+            <div class="card-header bg-main">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2 class="text-white m-0">Vật tư khả dụng</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table id="tblAvailableMaterial" class="table-bordered table-striped text-black" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th class="text-nowrap">
+                                    Mã
+                                </th>
+                                <th class="text-nowrap">
+                                    Tên
+                                </th>
+                                <th class="text-nowrap">
+                                    Giá gốc
+                                </th>
+                                <th class="text-nowrap">
+                                    Đơn vị
+                                </th>
+                                <th class="text-nowrap">
+                                    Loại
+                                </th>
+                                <th class="text-nowrap">
+                                    Hành động
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+@section Scripts {
+    <script src="~/js/datatables/managerDTB/AvailableMaterialDTB.js"></script>
+    <script src="~/js/datatables/managerDTB/AvailableTaskDTB.js"></script>
+    <script src="~/js/datatables/managerDTB/ComboMaterialListDTB.js"></script>
+    <script src="~/js/datatables/managerDTB/ComboTaskListDTB.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -10,14 +10,15 @@ namespace SWP391.CHCQS.Model
 {
     public partial class ComboMaterial
     {
-        [Key]
-        public string CombosId { get; set; }
 
-        [Key]
-        public string MaterialsId { get; set; }
+		
+		public string CombosId { get; set; }
+		
+		public string MaterialsId { get; set; }
+
         [ForeignKey("CombosId")]
-        public virtual Combo Combo { get; set; }
+        public virtual Combo Combo { get; set; } = null!;
         [ForeignKey("MaterialsId")]
-        public virtual Material Material { get; set; }
+        public virtual Material Material { get; set; } = null!;
     }
 }

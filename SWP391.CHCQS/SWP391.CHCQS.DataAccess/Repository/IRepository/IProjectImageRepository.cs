@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {
-    public interface ICustomerRepository: IRepository<Customer>
+    public interface IProjectImageRepository : IRepository<ProjectImage>
     {
-        void Update(Customer obj);
+        void Update(ProjectImage obj);
     }
 }

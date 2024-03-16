@@ -17,12 +17,11 @@
 <div class="container img-thumbnail mt-5 mb-5">
 
 	<form class="m-auto" method="post">
-
+		<input asp-for="ConstructDetail.QuotationId" value="@SD.TempId" hidden />
 		<div class="mt-3 mb-5 w-75 m-auto">
 			<h3 class="text-center"><b>Thông tin công trình</b></h3>
 			<hr></hr>
 		</div>
-
 		<div class="row mt-2">
 			<div class="col-sm">
 				<label><b class="text-nowrap">Loại công trình:</b></label>
@@ -64,6 +63,11 @@
 				<label><b class="text-nowrap">Số tầng</b></label>
 				<input class="form-control" asp-for="ConstructDetail.Floor"></input>
 				<span asp-validation-for="ConstructDetail.Floor" class="text-danger"></span>
+			</div>
+			<div class="col-sm">
+				<label><b class="text-nowrap">Số phòng</b></label>
+				<input class="form-control" asp-for="ConstructDetail.Room"></input>
+				<span asp-validation-for="ConstructDetail.Room" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Diện tích lửng</b></label>

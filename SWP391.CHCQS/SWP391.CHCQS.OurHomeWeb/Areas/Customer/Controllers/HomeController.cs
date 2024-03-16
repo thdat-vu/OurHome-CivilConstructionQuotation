@@ -21,10 +21,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
         }
 
         public async Task<IActionResult> Index()
-        {            
-            List<Project> projectList = _unitOfWork.Project.GetAll().OrderByDescending(x => x.Date).Take(6).ToList();
-            return View(projectList);
-            
+        {
+             List<Project> projectList = _unitOfWork.Project.GetAll().OrderByDescending(x => x.Date).Take(6).ToList();
+             return View(projectList);
+            //return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
