@@ -15,7 +15,7 @@ function loadDataTaskDetail() {
             {
                 data: "taskId",
                 "render": function (data) {
-                    return `<a class="text-main text-pointer" onClick="ShowTaskDetail('/Engineer/Task/Detail?TaskId=${data}')" >${data}</a>`
+                    return `<a class="text-main text-pointer" onClick="ShowTaskDetail('/Manager/CustomQuotationTask/Detail?TaskId=${data}')" >${data}</a>`
                 },
             },
             { data: 'taskName' },

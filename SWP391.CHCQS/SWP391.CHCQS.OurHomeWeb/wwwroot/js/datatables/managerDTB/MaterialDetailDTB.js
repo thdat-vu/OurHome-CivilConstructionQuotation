@@ -47,7 +47,7 @@ function loadDataMaterialDetail() {
             {
                 data: "materialId",
                 "render": function (data) {
-                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
+                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Manager/MaterialDetail/Detail?MaterialId=${data}')" >${data}</a>`
                 },
             },
             { data: 'materialName' },

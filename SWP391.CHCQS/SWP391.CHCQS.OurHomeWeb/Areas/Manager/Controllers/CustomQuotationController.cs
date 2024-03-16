@@ -477,7 +477,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 			//Toast Info lên là reject thành công
 			NotifySuccess("Từ chối thành công");
 
-			await _hubContext.Clients.All.SendAsync("RecieveRejectFromManager", "Manager", "You was recieve a new Quotation");
+			await _hubContext.Clients.All.SendAsync("RecieveRejectFromManager", "Manager", "Bạn đã nhận 1 báo giá mới");
 			//điều hướng người dùng lại trang index để coi List
 			return RedirectToAction("Index");
 		}
