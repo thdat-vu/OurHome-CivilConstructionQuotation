@@ -37,6 +37,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
 		[Required(ErrorMessage = "Vui lòng chọn Tên Khách hàng")]
 		[Display(Name = "Tên khách hàng")]
         public string CustomerName { get; set; }
-		public List<ProjectImage> Images { get; set; }
+        [Display(Name = "Hình ảnh")]
+        public List<ProjectImage> Images { get; set; }
 	}
 }
