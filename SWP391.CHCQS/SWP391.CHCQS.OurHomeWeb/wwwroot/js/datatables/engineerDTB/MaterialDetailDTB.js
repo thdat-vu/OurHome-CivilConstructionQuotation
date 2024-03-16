@@ -18,7 +18,7 @@ function loadDataTableMaterialDetail() {
                 },
             },
             { data: 'material.name', },
-            { data: 'material.unitPrice', },
+            { data: 'material.unitPrice', render: formatCurrency },
             { data: 'material.unit', },
             {
                 data: null,
@@ -35,7 +35,7 @@ function loadDataTableMaterialDetail() {
                     </form>`
                 }
             },
-            { data: 'price', },
+            { data: 'price', render: formatCurrency },
             {
                 data: 'material.id',
                 "render": function (data) {
@@ -89,5 +89,18 @@ function UpdateMaterialQuantity(url, formId) {
             dataTableCQB.ajax.reload(null, false);
             toastr.error(data.message);
         }
+    });
+}
+
+function formatCurrency(data, type, row) {
+    // Kiểm tra nếu dữ liệu không phải là số thì trả về dữ liệu nguyên thô
+    if (type !== 'display' || isNaN(data)) {
+        return data;
+    }
+
+    // Sử dụng hàm toLocaleString để định dạng giá tiền theo ngôn ngữ và quốc gia hiện tại
+    return Number(data).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
     });
 }
