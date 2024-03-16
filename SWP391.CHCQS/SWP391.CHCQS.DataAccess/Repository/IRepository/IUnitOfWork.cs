@@ -27,10 +27,8 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         IBasementTypeRepository BasementType { get; }
         IRoofTypeRepository RoofType { get; }
         IMaterialCategoryRepository MaterialCategory { get; }
-        IStaffRepository Staff { get; }
         IRejectedCustomQuotationRepository RejectedCustomQuotation { get; }
 
-        ICustomerRepository Customer { get; }
         IWorkingReportRepository WorkingReport { get; }
         IPricingRepository Pricing { get; }
 

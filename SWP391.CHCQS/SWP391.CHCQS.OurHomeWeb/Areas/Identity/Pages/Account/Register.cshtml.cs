@@ -90,7 +90,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Số điện thoại không được để trống")]
             [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
             [Display(Name = "Số điện thoại")]
-            public string Phone { get; set; }
+			[RegularExpression(@"^\d{9,16}$", ErrorMessage = "Số điện thoại phải có từ 9 đến 16 chữ số")]
+			public string Phone { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -98,7 +99,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Email không được để trống")]
             [EmailAddress(ErrorMessage = "Email không hợp lệ")]
             [Display(Name = "Email")]
-            public string Email { get; set; }
+			[MaxLength(100, ErrorMessage = "{0} không được vượt quá {1} ký tự")]
+			public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SWP391.CHCQS.Model;
 using System.ComponentModel.DataAnnotations;
 
@@ -24,6 +25,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.ViewModels
 
 		public string Status { get; set; } = null!;
 
+		[ValidateNever]
 		public IEnumerable<SelectListItem> ConstructionTypes { get; set; }
     }
 }

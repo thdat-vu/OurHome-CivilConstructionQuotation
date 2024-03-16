@@ -30,11 +30,9 @@ namespace SWP391.CHCQS.DataAccess.Repository
         public IFoundationTypeRepository FoundationType { get; private set; }
         public IBasementTypeRepository BasementType { get; private set; }
         public IRoofTypeRepository RoofType { get; private set; }
-        public IStaffRepository Staff { get; private set; }
         public IMaterialCategoryRepository MaterialCategory { get; private set; }
         public IRejectedCustomQuotationRepository RejectedCustomQuotation { get; private set; }
 
-        public ICustomerRepository Customer { get; private set; }
         public IWorkingReportRepository WorkingReport { get; private set; }
 
         public IPricingRepository Pricing { get; private set; }
@@ -46,8 +44,6 @@ namespace SWP391.CHCQS.DataAccess.Repository
             _db = db;
             
             Project = new ProjectRepository(_db);
-            Staff = new StaffRepository(_db);
-			Customer = new CustomerRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
 
 			Combo = new ComboRepository(_db);
