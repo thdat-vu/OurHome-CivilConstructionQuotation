@@ -1,6 +1,6 @@
 ﻿@model List<Project>
 @{
-	ViewData["Title"] = "Project";
+	ViewData["Title"] = "Dự án";
 }
 
 <div class="d-flex img-thumbnail justify-content-center">
@@ -19,8 +19,8 @@
 	</div>
 
 	<div class="container mt-2">
-		<form class="d-flex">
-			<input class="form-control rounded-pill me-2" type="search" placeholder="Tìm kiếm vật tư" />
+		<form class="d-flex" asp-action="Search">
+			<input class="form-control rounded-pill me-2" type="search" placeholder="Tìm kiếm vật tư" name="keyword"/>
 			<button class="btn btn-main text-nowrap" type="submit">Tìm kiếm</button>
 		</form>
 	</div>

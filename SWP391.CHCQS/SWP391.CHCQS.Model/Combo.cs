@@ -21,7 +21,7 @@ namespace SWP391.CHCQS.Model
         [MaxLength(500)]
 		[Required(ErrorMessage = "Vui lòng nhập Mô tả")]
 		[Display(Name = "Mô tả")]
-		public string? Description { get; set; }
+		public string Description { get; set; }
 		[Display(Name = "Giá")]
 		[Range(1, double.MaxValue, ErrorMessage = "Vui lòng nhập Giá lớn hơn 0.")]
 		[Required(ErrorMessage = "Giá không được để trống ")]
@@ -36,7 +36,7 @@ namespace SWP391.CHCQS.Model
 
         public virtual ICollection<Material> Materials { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
-
+        [Display(Name = "Hình ảnh")]
         public string? ImageUrl { get; set; }
     }
 }

@@ -1,5 +1,9 @@
 ﻿@model List<Material>
 
+    @{
+	ViewData["Title"] = "Vật liệu";
+}
+
 <style>
     td {
         color: black;
@@ -16,12 +20,6 @@
 </div>
 
 
-<div class="container mt-5">
-    <form class="d-flex">
-        <input class="form-control rounded-pill me-2" type="search" placeholder="Tìm vật liệu" />
-        <button class="btn btn-main text-nowrap" type="submit">Tìm kiếm</button>
-    </form>
-</div>
 
 
 <div class="container-fluid mt-5 d-flex">

@@ -19,28 +19,34 @@
             <div class="row mt-3 text-center">
                 <div class="col-lg">
                     <label><b class="text-nowrap">Tên:</b></label>
-                    <input asp-for="Combo.Name" class="form-control border-0 shadow" />
+                    <input asp-for="Combo.Name" class="form-control border-0 shadow" id="Combo_Name" />
                     <span asp-validation-for="Combo.Name" class="text-danger"></span>
                 </div>
                 <div class="col-lg">
                     <label><b class="text-nowrap">Mô tả:</b></label>
-                    <input asp-for="Combo.Description" class="form-control border-0 shadow" />
+                    <input asp-for="Combo.Description" class="form-control border-0 shadow" id="Combo_Description" />
                     <span asp-validation-for="Combo.Description" class="text-danger"></span>
                 </div>
                 <div class="col-lg">
                     <label><b class="text-nowrap">Giá:</b></label>
-                    <input asp-for="Combo.Price" class="form-control border-0 shadow" />
+                    <input asp-for="Combo.Price" class="form-control border-0 shadow" id="Combo_Price" />
                     <span asp-validation-for="Combo.Price" class="text-danger"></span>
                 </div>
 
 
                 <div class="col-lg">
                     <label><b class="text-nowrap">Loại công trình:</b></label>
-                    <select asp-for="Combo.ConstructionId" asp-items="@Model.ConstructionTypeList" class="form-select border-0 shadow">
+                    <select asp-for="Combo.ConstructionId" asp-items="@Model.ConstructionTypeList" class="form-select border-0 shadow" id="Combo_ConstructionId">
                         <option disabled selected>--Chọn loại công trình--</option>
                     </select>
                     <span asp-validation-for="Combo.ConstructionId" class="text-danger"></span>
                 </div>
+
+                <div class="form-floating py-2 col-12">
+                    <input type="file" name="file" class="form-control border-0 shadow" />
+                    <label asp-for="Combo.ImageUrl" class="ms-2"></label>
+                </div>
+
             </div>
 
         </div>
@@ -135,7 +141,7 @@
             </div>
 
             <div class="row w-75 m-auto">
-                <button type="button" onclick="submitData()" class="btn btn-main text-white mb-3"><i class="bi bi-arrow-90deg-up"></i> Tạo gói dịch vụ</button>
+                <button type="submit"  class="btn btn-main text-white mb-3"><i class="bi bi-arrow-90deg-up"></i> Tạo gói dịch vụ</button>
             </div>
         </div>
     </div>
@@ -231,9 +237,9 @@
 
 
 @section Scripts {
-    <script src="~/js/datatables/managerDTB/AvailableMaterialDTB.js"></script>
-    <script src="~/js/datatables/managerDTB/AvailableTaskDTB.js"></script>
     <script src="~/js/datatables/managerDTB/ComboMaterialListDTB.js"></script>
     <script src="~/js/datatables/managerDTB/ComboTaskListDTB.js"></script>
-    <script src="~/js/datatables/managerDTB/SumbitCombo.js"></script>
+    <script src="~/js/datatables/managerDTB/AvailableMaterialDTB.js"></script>
+    <script src="~/js/datatables/managerDTB/AvailableTaskDTB.js"></script>
+    <partial name="_ValidationScriptsPartial" />
 }

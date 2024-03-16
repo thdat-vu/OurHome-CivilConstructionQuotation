@@ -65,6 +65,15 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 					Value = i
 				});
 			});
+			quickQuote.Facades = new List<SelectListItem>();
+			SD.Facades.ForEach(i =>
+			{
+				quickQuote.Facades.Add(new SelectListItem
+				{
+					Text = i.ToString(),
+					Value = i.ToString()
+				});
+			});
 
 			return View(quickQuote);
 		}
@@ -73,13 +82,20 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 		[ActionName("QuickQuote")]
 		public IActionResult QuickQuotePost(QuickQuoteVM quickQuote)
 		{
-			quickQuote.ConstructDetail.Construction = _unitOfWork.ConstructionType.Get(x => x.Id == quickQuote.ConstructDetail.ConstructionId);
-			quickQuote.ConstructDetail.Foundation = _unitOfWork.FoundationType.Get(x => x.Id == quickQuote.ConstructDetail.FoundationId);
-			quickQuote.ConstructDetail.Investment = _unitOfWork.InvestmentType.Get(x => x.Id == quickQuote.ConstructDetail.InvestmentId);
-			quickQuote.ConstructDetail.Rooftop = _unitOfWork.RoofType.Get(x => x.Id == quickQuote.ConstructDetail.RooftopId);
-			quickQuote.ConstructDetail.Basement = _unitOfWork.BasementType.Get(x => x.Id == quickQuote.ConstructDetail.BasementId);
+			if (ModelState.IsValid)
+			{
+				quickQuote.ConstructDetail.Construction = _unitOfWork.ConstructionType.Get(x => x.Id == quickQuote.ConstructDetail.ConstructionId);
+				quickQuote.ConstructDetail.Foundation = _unitOfWork.FoundationType.Get(x => x.Id == quickQuote.ConstructDetail.FoundationId);
+				quickQuote.ConstructDetail.Investment = _unitOfWork.InvestmentType.Get(x => x.Id == quickQuote.ConstructDetail.InvestmentId);
+				quickQuote.ConstructDetail.Rooftop = _unitOfWork.RoofType.Get(x => x.Id == quickQuote.ConstructDetail.RooftopId);
+				quickQuote.ConstructDetail.Basement = _unitOfWork.BasementType.Get(x => x.Id == quickQuote.ConstructDetail.BasementId);
 
-			quickQuote.ResponseBill = GetBill(quickQuote);
+				quickQuote.ResponseBill = GetBill(quickQuote);
+			}
+			else
+			{
+				TempData["Error"] = "Thông tin báo giá không hợp lệ";
+			}
 
 			quickQuote.BasementTypes = _unitOfWork.BasementType.GetAll().Select(i => new SelectListItem
 			{
@@ -106,15 +122,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 				Text = i.Name,
 				Value = i.Id.ToString()
 			});
-			quickQuote.Alleys = new List<SelectListItem>();
-			SD.Alleys.ForEach(i =>
-			{
-				quickQuote.Alleys.Add(new SelectListItem
-				{
-					Text = i,
-					Value = i
-				});
-			});
+			quickQuote.Alleys = SD.Alleys.Select(i => new SelectListItem { Text = i, Value = i }).ToList();
+			quickQuote.Facades = SD.Facades.Select(i => new SelectListItem { 
+				Text = i.ToString(), 
+				Value = i.ToString() }).ToList();
+
 
 			return View(quickQuote);
 		}
@@ -132,33 +144,49 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 			};
 			return View(requestVM);
 		}
+
+
 		[Authorize(Roles = SD.Role_Customer)]
 		[HttpPost]
 		public async Task<IActionResult> CreateRequest(RequestVM requestVM)
 		{
-			RequestForm requestForm = new()
+			if (ModelState.IsValid)
 			{
-				Id = CreateRequestId(),
-				GenerateDate = DateTime.Now,
-				Status = SD.RequestStatusPending,
-				Description = requestVM.Description,
-				ConstructType = requestVM.ConstructType,
-				Acreage = requestVM.Acreage,
-				Location = requestVM.Location
+				RequestForm requestForm = new()
+				{
+					Id = CreateRequestId(),
+					GenerateDate = DateTime.Now,
+					Status = requestVM.Status,
+					Description = requestVM.Description,
+					ConstructType = requestVM.ConstructType,
+					Acreage = requestVM.Acreage,
+					Location = requestVM.Location
 
+				};
+
+				requestForm.CustomerId = SD.GetCurrentUserId(User);
+				requestForm.Customer = _unitOfWork.ApplicationUser.Get(u => u.Id == requestForm.CustomerId);
+
+				_unitOfWork.RequestForm.Add(requestForm);
+				_unitOfWork.Save();
+
+				DelegateRequest(requestForm.Id);
+
+				_hubContext.Clients.All.SendAsync("RecieveRequestFromCustomer");
+				TempData["Success"] = "Yêu cầu báo giá được gửi thành công";
+				return RedirectToAction(nameof(RequestHistory));
+			}
+			TempData["Error"] = "Gửi yêu cầu thất bại";
+			//reload lại trang
+			requestVM = new()
+			{
+				ConstructionTypes = _unitOfWork.ConstructionType.GetAll().Select(i => new SelectListItem
+				{
+					Text = i.Name,
+					Value = i.Name
+				})
 			};
-
-			requestForm.CustomerId = SD.GetCurrentUserId(User);
-			requestForm.Customer = _unitOfWork.ApplicationUser.Get(u => u.Id == requestForm.CustomerId);
-
-			_unitOfWork.RequestForm.Add(requestForm);
-			_unitOfWork.Save();
-
-			DelegateRequest(requestForm.Id);
-
-			_hubContext.Clients.All.SendAsync("RecieveRequestFromCustomer");
-			TempData["Success"] = "Request has been sent successfully";
-			return RedirectToAction(nameof(RequestHistory));
+			return View(requestVM);
 		}
 
 
@@ -168,41 +196,32 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 
 			return View();
 		}
+
+
 		[Authorize(Roles = SD.Role_Customer)]
 		public async Task<IActionResult> ViewResponse(string id)
 		{
-			QuotationVM quotationVM = new();
 			var quotation = _unitOfWork.CustomQuotation
 				.Get(t => t.RequestId == id && t.Status == SD.Completed,
-				includeProperties: "ConstructDetail,TaskDetails,MaterialDetails");
+				includeProperties: "Request,ConstructDetail,TaskDetails,MaterialDetails");
 			if (quotation != null)
 			{
-				quotationVM.Id = quotation.Id;
-				quotationVM.ConstructionType = quotation.ConstructDetail.Construction.Name;
-				quotationVM.InvestmentType = quotation.ConstructDetail.Investment.Name;
-				quotationVM.FoundationType = quotation.ConstructDetail.Foundation.Name;
-				quotationVM.RoofType = quotation.ConstructDetail.Rooftop.Name;
-				quotationVM.BasementType = quotation.ConstructDetail.Basement.Name;
-				quotationVM.Width = quotation.ConstructDetail.Width;
-				quotationVM.Lenght = quotation.ConstructDetail.Length;
-				quotationVM.Facade = quotation.ConstructDetail.Facade;
-				quotationVM.Alley = quotation.ConstructDetail.Alley;
-				quotationVM.Floor = quotation.ConstructDetail.Floor;
-				quotationVM.Mezzanine = quotation.ConstructDetail.Mezzanine;
-				quotationVM.RooftopFloor = quotation.ConstructDetail.RooftopFloor;
-				quotationVM.Balcony = quotation.ConstructDetail.Balcony;
-				quotationVM.Garden = quotation.ConstructDetail.Garden;
-				quotationVM.Description = quotation.Description;
-				quotationVM.TotalPrice = quotation.Total;
-				quotationVM.Materials = quotation.MaterialDetails.ToList();
-				quotationVM.Tasks = quotation.TaskDetails.ToList();
+				//đã có phản hồi
+				QuotationVM quotationVM = new()
+				{
+					Quotation = quotation,
+					ConstructDetail = quotation.ConstructDetail,
+					Materials = quotation.MaterialDetails.ToList(),
+					Tasks = quotation.TaskDetails.ToList(),
+					Request = quotation.Request
+				};
+				return View(quotationVM);
 			}
-			if (quotationVM.Id == null)
+			else
 			{
-				TempData["Error"] = "No response found";
+				TempData["Error"] = "Báo giá chưa có phản hồi";
 				return RedirectToAction(nameof(RequestHistory));
 			}
-			return View(quotationVM);
 		}
 
 
@@ -233,6 +252,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 		#endregion
 
 		#region FUNCTIONS
+
+		[NonAction]		
 		public void DelegateRequest(string requestId)
 		{
 			var delegationService = AppState.Instance(_userManager).GetDelegationIndex();
@@ -269,11 +290,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 			_unitOfWork.Save();
 		}
 
+		[NonAction]
 		public string CreateRequestId()
 		{
 			return SD.requestIdKey + String.Format("{0:D3}", _unitOfWork.RequestForm.GetAll().Count() + 1);
 		}
 
+		[NonAction]
 		public Bill GetBill(QuickQuoteVM quickQuote)
 		{
 			var count = 1;
@@ -380,10 +403,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 				});
 			}
 			//tính giá từng loại chi tiết => rồi tính tổng giá
-			bill.BillDetails.ForEach(i => { 
+			bill.BillDetails.ForEach(i =>
+			{
 				i.Price = i.ConstructionArea * (double)bill.UnitPrice;
 				bill.TotalPrice += i.Price;
-			}) ;
+			});
 			//tính tổng diện tích
 			bill.BillDetails.ForEach(i => bill.TotalArea += i.ConstructionArea);
 			return bill;

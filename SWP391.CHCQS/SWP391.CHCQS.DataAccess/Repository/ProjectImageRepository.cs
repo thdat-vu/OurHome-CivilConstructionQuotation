@@ -9,14 +9,17 @@ using System.Threading.Tasks;
 
 namespace SWP391.CHCQS.DataAccess.Repository
 {
-    public class CustomerRepository : Repository<Customer>, ICustomerRepository
+    public class ProjectImageRepository : Repository<ProjectImage>, IProjectImageRepository
     {
         private readonly SWP391DBContext _db;
-        public CustomerRepository(SWP391DBContext db) : base(db)
+        public ProjectImageRepository(SWP391DBContext db) : base(db)
         {
             _db = db;
         }
 
-        public void Update(Customer obj) => _db.Update(obj);
+        public void Update(ProjectImage obj)
+        {
+            _db.ProjectImages.Update(obj);
+        }
     }
 }

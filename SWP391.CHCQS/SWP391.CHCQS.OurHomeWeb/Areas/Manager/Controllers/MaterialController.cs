@@ -14,7 +14,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
     //register Area
     [Area(SD.Role_Manager)]
-    [Authorize(Roles = SD.Role_Manager)]
+    //[Authorize(Roles = SD.Role_Manager)]
     public class MaterialController : Controller
     {
         //init IUnitOfWork
@@ -64,7 +64,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         [HttpPost]
         public IActionResult Create(MaterialViewModel materialVM, IFormFile? file)
         {
-            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            string wwwRootPath = _webHostEnvironment.WebRootPath; //retrieve rootpath.
             materialVM.Material.Status = true; //change status into true;
             materialVM.Material.Id = SD.TempId;
             //handle the file
@@ -287,7 +287,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		}
 
 
-		[HttpDelete]
+        
+
+
+        [HttpDelete]
 		public async Task<IActionResult> DeleteFromList(string MaterialId)
 		{
 			//Asign MaterialListSession to materialCart
