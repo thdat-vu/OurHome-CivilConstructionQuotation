@@ -201,27 +201,28 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 		[Authorize(Roles = SD.Role_Customer)]
 		public async Task<IActionResult> ViewResponse(string id)
 		{
-			var quotation = _unitOfWork.CustomQuotation
-				.Get(t => t.RequestId == id && t.Status == SD.Completed,
-				includeProperties: "Request,ConstructDetail,TaskDetails,MaterialDetails");
-			if (quotation != null)
-			{
-				//đã có phản hồi
-				QuotationVM quotationVM = new()
-				{
-					Quotation = quotation,
-					ConstructDetail = quotation.ConstructDetail,
-					Materials = quotation.MaterialDetails.ToList(),
-					Tasks = quotation.TaskDetails.ToList(),
-					Request = quotation.Request
-				};
-				return View(quotationVM);
-			}
-			else
-			{
-				TempData["Error"] = "Báo giá chưa có phản hồi";
-				return RedirectToAction(nameof(RequestHistory));
-			}
+			//var quotation = _unitOfWork.CustomQuotation
+			//	.Get(t => t.RequestId == id && t.Status == SD.Completed,
+			//	includeProperties: "Request,ConstructDetail,TaskDetails,MaterialDetails");
+			//if (quotation != null)
+			//{
+			//	//đã có phản hồi
+			//	QuotationVM quotationVM = new()
+			//	{
+			//		Quotation = quotation,
+			//		ConstructDetail = quotation.ConstructDetail,
+			//		Materials = quotation.MaterialDetails.ToList(),
+			//		Tasks = quotation.TaskDetails.ToList(),
+			//		Request = quotation.Request
+			//	};
+			//	return View(quotationVM);
+			//}
+			//else
+			//{
+			//	TempData["Error"] = "Báo giá chưa có phản hồi";
+			//	return RedirectToAction(nameof(RequestHistory));
+			//}
+			return View();
 		}
 
 

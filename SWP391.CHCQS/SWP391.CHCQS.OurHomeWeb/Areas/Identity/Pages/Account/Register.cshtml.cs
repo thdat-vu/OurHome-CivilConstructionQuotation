@@ -135,14 +135,14 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
 
         public async System.Threading.Tasks.Task OnGetAsync(string returnUrl = null)
         {
-            if (!_roleManager.RoleExistsAsync(SD.Role_Customer).GetAwaiter().GetResult())
-            {
-				 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
-				 _roleManager.CreateAsync(new IdentityRole(SD.Role_Manager)).GetAwaiter().GetResult();
-				 _roleManager.CreateAsync(new IdentityRole(SD.Role_Engineer)).GetAwaiter().GetResult();
-				 _roleManager.CreateAsync(new IdentityRole(SD.Role_Seller)).GetAwaiter().GetResult();
-				 _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).GetAwaiter().GetResult();
-			}
+   //         if (!_roleManager.RoleExistsAsync(SD.Role_Customer).GetAwaiter().GetResult())
+   //         {
+			//	 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
+			//	 _roleManager.CreateAsync(new IdentityRole(SD.Role_Manager)).GetAwaiter().GetResult();
+			//	 _roleManager.CreateAsync(new IdentityRole(SD.Role_Engineer)).GetAwaiter().GetResult();
+			//	 _roleManager.CreateAsync(new IdentityRole(SD.Role_Seller)).GetAwaiter().GetResult();
+			//	 _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).GetAwaiter().GetResult();
+			//}
             Input = new InputModel
             {
                 Roles = _roleManager.Roles.Select(r => new SelectListItem

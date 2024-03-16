@@ -1,132 +1,181 @@
 ﻿@model QuotationVM
 
 @{
-	ViewData["Title"] = "Response Detail";
+    ViewData["Title"] = "Báo giá chi tiết";
 }
 <div class="d-flex img-thumbnail justify-content-center">
-	<div class="d-flex align-items-center">
-		<h3 class="p-3">
-			<a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a>
-		</h3>
-		<i class="fa-solid fa-arrow-right-long"></i>
-		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="Index">Báo giá</a>
-		</h3>
-		<i class="fa-solid fa-arrow-right-long"></i>
-		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="ManageRequest">Lịch sử</a>
-		</h3>
-		<i class="fa-solid fa-arrow-right-long"></i>
-		<h3 class="p-3">
-			<a class="text-decoration-none user-select-auto" style="color: #F27456">Xem kết quả</a>
-		</h3>
-	</div>
+    <div class="d-flex align-items-center">
+        <h3 class="p-3">
+            <a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a>
+        </h3>
+        <i class="fa-solid fa-arrow-right-long"></i>
+        <h3 class="p-3">
+            <a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="Index">Báo giá</a>
+        </h3>
+        <i class="fa-solid fa-arrow-right-long"></i>
+        <h3 class="p-3">
+            <a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="ManageRequest">Lịch sử</a>
+        </h3>
+        <i class="fa-solid fa-arrow-right-long"></i>
+        <h3 class="p-3">
+            <a class="text-decoration-none user-select-auto" style="color: #F27456">Xem kết quả</a>
+        </h3>
+    </div>
 </div>
 
 <hr></hr>
 
 <partial name="_QuotationSubNav"></partial>
 
-<h1 class="text-center my-4" style="color: #F27456">Chi tiết báo giá</h1>
+<h1 class="text-center my-4" style="color: #F27456">Bảng báo giá chi tiết</h1>
 
 <div class="container img-thumbnail mt-3 mb-5">
-	
-	<div class="m-auto">
-		<div class="row mt-2">
-			<div class="col-lg">
-				<label><b class="text-nowrap">Loại công trình:</b></label>
-				<p>@Model.ConstructDetail.Construction.Name</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Mức đầu tư:</b></label>
-				<p>@Model.ConstructDetail.Investment.Name</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Chiều rộng:</b></label>
-				<p>@Model.ConstructDetail.Width m2</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Chiều dài:</b></label>
-				<p>@Model.ConstructDetail.Length m2</>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Mặt tiền:</b></label>
-				<p>@Model.ConstructDetail.Facade</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Hẻm:</b></label>
-				<p>@Model.ConstructDetail.Alley</p>
-			</div>
-		</div>
 
+    <div class="m-auto">
+        <div class="row">
+            <div class="col-lg-4 text-center">Dự án:</div>
+            <div class="col-lg-8">Xây mới hoàn thiện nhà có tổng diện tích 268m2</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-center">Quy mô:</div>
+            <div class="col-lg-8">Trệt + lửng + 2 lầu + sân thượng + mái BTCT</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-center">Địa chỉ:</div>
+            <div class="col-lg-8">Trường Chinh phường 3 quận Tân Bình</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-center"><strong class="text-decoration-underline">Kính gửi:</strong></div>
+            <div class="col-lg-8"><strong>Chú Đài</strong></div>
+        </div>
+        <div class="row">
+            <p>Our Home xin được trân trọng báo giá thi công công trình tại địa điểm quận Tân Bình như sau: </p>
+        </div>
 
-		<div class="row">
-			<div class="col-lg">
-				<label><b class="text-nowrap">Số tầng:</b></label>
-				<p>@Model.ConstructDetail.Alley</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Lửng:</b></label>
-				<p>@Model.ConstructDetail.Mezzanine</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Tầng thượng:</b></label>
-				<p>@Model.ConstructDetail.RooftopFloor</p>
-			</div>
-			<div class="col-lg">
-				<label class="form-check-label text-nowrap">Có ban công</label>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="text-center">
+                    <tr>
+                        <th>STT</th>
+                        <th>Nội dung công việc</th>
+                        <th>Nhãn hiệu</th>
+                        <th>Đơn vị tính</th>
+                        <th>Khối lượng</th>
+                        <th colspan="2" class="text-center">Đơn giá SP</th>
+                        <th colspan="2" class="text-center">Thành tiền</th>
+                        <th>Ghi chú</th>
+                    </tr>
+                    <tr>
+                        <th colspan="5"></th>
+                        <th>Vật tư</th>
+                        <th>Nhân công</th>
+                        <th>Vật tư</th>
+                        <th>Nhân công</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-warning">
+                        <td>A</td>
+                        <td>Phần thô</td>
+                        <td></td>
+                        <td></td>
+                        <td>268,00</td>
+                        <td>1,800,000</td>
+                        <td>100,000</td>
+                        <td>10,000,000</td>
+                        <td>10,000,000</td>
+                        <td></td>
+                    </tr>
+                    <tr class="table-warning">
+                        <td>B</td>
+                        <td>Phần hoàn thiện</td>
+                        <td></td>
+                        <td></td>
+                        <td>268,00</td>
+                        <td>1,800,000</td>
+                        <td>100,000</td>
+                        <td>10,000,000</td>
+                        <td>10,000,000</td>
+                        <td></td>
+                    </tr>
+                    <tr class="table-info">
+                        <td>I</td>
+                        <td>Công tác xây</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>10,000,000</td>
+                        <td>10,000,000</td>
+                        <td></td>
+                    <tr>
+                        <td>1</td>
+                        <td>Đá xây dựng</td>
+                        <td>Đá xây dựng</td>
+                        <td>m3</td>
+                        <td>100</td>
+                        <td>100,000</td>
+                        <td>100,000</td>
+                        <td>10,000,000</td>
+                        <td>10,000,000</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Xi măng</td>
+                        <td>Xi măng Hà Tiên</td>
+                        <td>kg</td>
+                        <td>100</td>
+                        <td>100,000</td>
+                        <td>100,000</td>
+                        <td>10,000,000</td>
+                        <td>10,000,000</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Thép</td>
+                        <td>Thép Việt Nhật</td>
+                        <td>kg</td>
+                        <td>100</td>
+                        <td>100,000</td>
+                        <td>100,000</td>
+                        <td>10,000,000</td>
+                        <td>10,000,000</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Đá xây dựng</td>
+                        <td>Đá xây dựng</td>
+                        <td>m3</td>
+                        <td>100</td>
+                        <td>100,000</td>
+                        <td>100,000</td>
+                        <td>10,000,000</td>
+                        <td>10,000,000</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7" style="text-align: right">Tổng cộng</td>
+                        <td>1000,000</td>
+                        <td>1000,000</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
 
-				@if (Model.ConstructDetail.Balcony)
-				{
-					<p>Có</p>
-				}
-				else
-				{
-					<p>Không</p>
+        <div class="row mt-3 mb-2">
+            <div class="col-sm m-1 rounded-1">
+                <a asp-area="Customer" asp-controller="Request" asp-action="RequestHistory" class="btn btn-main w-100">Trở lại</a>
+            </div>
+        </div>
+    </div>
 
-				}
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-lg">
-				<label><b class="text-nowrap">Loại móng:</b></label>
-				<p>@Model.ConstructDetail.Foundation.Name</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Tầng hầm:</b></label>
-				<p>@Model.ConstructDetail.Basement.Name</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Loại mái:</b></label>
-				<p>@Model.ConstructDetail.Rooftop.Name</p>
-			</div>
-			<div class="col-lg">
-				<label><b class="text-nowrap">Diện tích vườn:</b></label>
-				<p>@Model.ConstructDetail.Garden</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-lg">
-				<label><b>Chi tiết:</b></label>
-				<p>@Model.Request.Description</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-lg">
-				<label><b>Tổng giá:</b></label>
-				<p>@Model.Quotation.Total.ToString("N0") VND</p>
-			</div>
-		</div>
-
-		<div class="row mt-3 mb-2">
-			<div class="col-sm m-1 rounded-1">
-				<a asp-area="Customer" asp-controller="Request" asp-action="RequestHistory" class="btn btn-main w-100">Trở lại</a>
-			</div>
-		</div>
-	</div>
-	
 </div>
 
