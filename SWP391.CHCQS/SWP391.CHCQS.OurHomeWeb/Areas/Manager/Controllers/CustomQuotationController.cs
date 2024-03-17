@@ -537,7 +537,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		#region     Actions đưa người dùng tới coi CustomQuotation đã tối giản cho giống PDF, có thể tải pdf xuống
 		//Action được tạo ra để render ra 1 html template HỖ TRỢ cho việc tạo ra pdf - được sử dụng để attach theo email báo giá
 		[ActionName("Review")]
-		//[Authorize(Roles = "Customer")]
+		[Authorize(Roles = "Customer")]
 		public async Task<IActionResult> ReviewQuotationPDF(string quoteId)
 		{
 			//Tiến hành lấy quotation đầy đủ ra

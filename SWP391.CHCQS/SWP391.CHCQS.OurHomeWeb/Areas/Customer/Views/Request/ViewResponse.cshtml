@@ -1,181 +1,203 @@
-﻿@model QuotationVM
-
+﻿@using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
+@model PDFQuotation;
 @{
-	ViewData["Title"] = "Phản hồi";
+    Layout = null;
+
+
 }
-<div class="d-flex img-thumbnail justify-content-center">
-    <div class="d-flex align-items-center">
-        <h3 class="p-3">
-            <a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a>
-        </h3>
-        <i class="fa-solid fa-arrow-right-long"></i>
-        <h3 class="p-3">
-            <a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="Index">Báo giá</a>
-        </h3>
-        <i class="fa-solid fa-arrow-right-long"></i>
-        <h3 class="p-3">
-            <a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Request" asp-action="ManageRequest">Lịch sử</a>
-        </h3>
-        <i class="fa-solid fa-arrow-right-long"></i>
-        <h3 class="p-3">
-            <a class="text-decoration-none user-select-auto" style="color: #F27456">Xem kết quả</a>
-        </h3>
-    </div>
-</div>
 
-<hr></hr>
 
-<partial name="_QuotationSubNav"></partial>
+<html lang="en">
 
-<h1 class="text-center my-4" style="color: #F27456">Bảng báo giá chi tiết</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="~/js/pdf.js"></script>
 
-<div class="container img-thumbnail mt-3 mb-5">
+    <style>
+        .container-fluid {
+            width: 700px;
+            align-items: center;
+            margin: auto;
+            width: 50%;
+        }
+        /* Áp dụng đường kẻ bên trong cơ của bảng */
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid black; /* Màu của đường kẻ */
+        }
+        /* Đảm bảo chiều ngang các cột trong bảng bằng nhau */
+        .table {
+            table-layout: fixed;
+        }
 
-    <div class="m-auto">
-        <div class="row">
-            <div class="col-lg-4 text-center">Dự án:</div>
-            <div class="col-lg-8">Xây mới hoàn thiện nhà có tổng diện tích 268m2</div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 text-center">Quy mô:</div>
-            <div class="col-lg-8">Trệt + lửng + 2 lầu + sân thượng + mái BTCT</div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 text-center">Địa chỉ:</div>
-            <div class="col-lg-8">Trường Chinh phường 3 quận Tân Bình</div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 text-center"><strong class="text-decoration-underline">Kính gửi:</strong></div>
-            <div class="col-lg-8"><strong>Chú Đài</strong></div>
-        </div>
-        <div class="row">
-            <p>Our Home xin được trân trọng báo giá thi công công trình tại địa điểm quận Tân Bình như sau: </p>
-        </div>
 
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead class="text-center">
-                    <tr>
-                        <th>STT</th>
-                        <th>Nội dung công việc</th>
-                        <th>Nhãn hiệu</th>
-                        <th>Đơn vị tính</th>
-                        <th>Khối lượng</th>
-                        <th colspan="2" class="text-center">Đơn giá SP</th>
-                        <th colspan="2" class="text-center">Thành tiền</th>
-                        <th>Ghi chú</th>
-                    </tr>
-                    <tr>
-                        <th colspan="5"></th>
-                        <th>Vật tư</th>
-                        <th>Nhân công</th>
-                        <th>Vật tư</th>
-                        <th>Nhân công</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="table-warning">
-                        <td>A</td>
-                        <td>Phần thô</td>
-                        <td></td>
-                        <td></td>
-                        <td>268,00</td>
-                        <td>1,800,000</td>
-                        <td>100,000</td>
-                        <td>10,000,000</td>
-                        <td>10,000,000</td>
-                        <td></td>
-                    </tr>
-                    <tr class="table-warning">
-                        <td>B</td>
-                        <td>Phần hoàn thiện</td>
-                        <td></td>
-                        <td></td>
-                        <td>268,00</td>
-                        <td>1,800,000</td>
-                        <td>100,000</td>
-                        <td>10,000,000</td>
-                        <td>10,000,000</td>
-                        <td></td>
-                    </tr>
-                    <tr class="table-info">
-                        <td>I</td>
-                        <td>Công tác xây</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>10,000,000</td>
-                        <td>10,000,000</td>
-                        <td></td>
-                    <tr>
-                        <td>1</td>
-                        <td>Đá xây dựng</td>
-                        <td>Đá xây dựng</td>
-                        <td>m3</td>
-                        <td>100</td>
-                        <td>100,000</td>
-                        <td>100,000</td>
-                        <td>10,000,000</td>
-                        <td>10,000,000</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Xi măng</td>
-                        <td>Xi măng Hà Tiên</td>
-                        <td>kg</td>
-                        <td>100</td>
-                        <td>100,000</td>
-                        <td>100,000</td>
-                        <td>10,000,000</td>
-                        <td>10,000,000</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Thép</td>
-                        <td>Thép Việt Nhật</td>
-                        <td>kg</td>
-                        <td>100</td>
-                        <td>100,000</td>
-                        <td>100,000</td>
-                        <td>10,000,000</td>
-                        <td>10,000,000</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Đá xây dựng</td>
-                        <td>Đá xây dựng</td>
-                        <td>m3</td>
-                        <td>100</td>
-                        <td>100,000</td>
-                        <td>100,000</td>
-                        <td>10,000,000</td>
-                        <td>10,000,000</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="7" style="text-align: right">Tổng cộng</td>
-                        <td>1000,000</td>
-                        <td>1000,000</td>
-                        <td></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+            /* Đảm bảo các cột trong bảng có chiều ngang bằng nhau */
+            .table th,
+            .table td {
+                width: 33.33%; /* Chia đều chiều rộng cho 3 cột */
+                word-wrap: break-word; /* Cho phép các từ dài tự động xuống dòng */
+            }
+    </style>
+</head>
+<body>
+    <div class="container-fluid" id="invoice" style="border:1px solid #ccc">
+        <div class="container col-xs-12 my-3" style="text-align:center">
+            <h1>Báo giá chi tiết</h1>
+            <div class="d-flex" style="text-align: left">
+                <h3 class="text-main">Mã đơn: @Model.Id</h3>
+                <h3>Mã yêu cầu: @Model.RequestId</h3>
+                <h3>Ngày gửi: @Model.GenerateDateRequest.ToShortDateString()</h3>
+            </div>
+            
+            
+            <div class="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+ 
+                    <div class="d-flex row mt-3">
+                        <div class="col">
+                            <label><b class="text-nowrap">Diện tích: </b></label>
+                            <p>@Model.Acreage</p>
+                        </div>
+                        <div class="col">
+                            <label><b class="text-nowrap">Vị trí: </b></label>
+                            <p>@Model.Location</p>
+                        </div>
+                        <div class="col">
+                            <label><b class="text-nowrap">Khách hàng: </b></label>
+                            <p>@Model.CustomerName</p>
+                        </div>
 
-        <div class="row mt-3 mb-2">
-            <div class="col-sm m-1 rounded-1">
-                <a asp-area="Customer" asp-controller="Request" asp-action="RequestHistory" class="btn btn-main w-100">Trở lại</a>
+                </div>
+                <div>
+                    <h3>Chi tiết công trình</h3>
+                    <div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Chiều rộng:</b></label>
+                            <p>@Model.ConstructDetail.Width</p>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Chiều dài:</b></label>
+                            <p>@Model.ConstructDetail.Length</p>
+                        </div><div class="col-lg">
+                            <label><b class="text-nowrap">Mặt tiền:</b></label>
+                            <p>@Model.ConstructDetail.Facade</p>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Hẻm:</b></label>
+                            <p>@Model.ConstructDetail.Alley</p>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Số phòng:</b></label>
+                            <p>@Model.ConstructDetail.Room</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Số tầng:</b></label>
+                            <p>@Model.ConstructDetail.Floor</p>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Diện tích lửng:</b></label>
+                            <p>@Model.ConstructDetail.Mezzanine</p>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Tầng thượng:</b></label>
+                            <p>@Model.ConstructDetail.RooftopFloor</p>
+                        </div><div class="col-lg">
+                            <label><b class="text-nowrap">Ban công:</b></label>
+                            <p>
+                                @(Model.ConstructDetail.Balcony ? "Có ban công" : "Không ban công")
+                            </p>
+                        </div><div class="col-lg">
+                            <label><b class="text-nowrap">Diện tích vườn:</b></label>
+                            <p>@Model.ConstructDetail.Garden</p>
+                        </div>
+                        <div>
+                            <div class="col-lg">
+                                <label><b class="text-nowrap">Loại hầm:</b></label>
+                                <p>@Model.ConstructDetail.Basement.Name</p>
+                            </div>
+                            <div class="col-lg">
+                                <label><b class="text-nowrap">Loại công trình:</b></label>
+                                <p>@Model.ConstructDetail.Construction.Name</p>
+                            </div><div class="col-lg">
+                                <label><b class="text-nowrap">Loại móng:</b></label>
+                                <p>@Model.ConstructDetail.Foundation.Name</p>
+                            </div><div class="col-lg">
+                                <label><b class="text-nowrap">Mức đầu tư:</b></label>
+                                <p>@Model.ConstructDetail.Investment.Name</p>
+                            </div><div class="col-lg">
+                                <label><b class="text-nowrap">Loại mái:</b></label>
+                                <p>@Model.ConstructDetail.Rooftop.Name</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3>Tasks</h3>
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Unit Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model.Tasks)
+                                {
+                                    <tr>
+                                        <td>@item.Task.Name</td>
+                                        <td>@item.Task.Description</td>
+                                        <td>@item.Task.UnitPrice</td>
+                                    </tr>
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <h3>Materials</h3>
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Unit Price</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model.Tasks)
+                                {
+                                    <tr>
+                                        <td>@item.Task.Name</td>
+                                        <td>@item.Task.Description</td>
+                                        <td>@item.Task.UnitPrice</td>
+                                        <td>@item.Price</td>
+                                    </tr>
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="mt-3 text-red">
+            <h3 style="color:red;">Báo giá tổng: @Model.Total</h3>
+        </div>
 
-</div>
+    </div>
+</body>
+</html>
+
+
 

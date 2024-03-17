@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using SWP391.CHCQS.OurHomeWeb.Areas.Customer.ViewModels;
+using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels;
 using SWP391.CHCQS.Services;
 using SWP391.CHCQS.Services.NotificationHub;
@@ -201,28 +202,77 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 		[Authorize(Roles = SD.Role_Customer)]
 		public async Task<IActionResult> ViewResponse(string id)
 		{
-			//var quotation = _unitOfWork.CustomQuotation
-			//	.Get(t => t.RequestId == id && t.Status == SD.Completed,
-			//	includeProperties: "Request,ConstructDetail,TaskDetails,MaterialDetails");
-			//if (quotation != null)
-			//{
-			//	//đã có phản hồi
-			//	QuotationVM quotationVM = new()
-			//	{
-			//		Quotation = quotation,
-			//		ConstructDetail = quotation.ConstructDetail,
-			//		Materials = quotation.MaterialDetails.ToList(),
-			//		Tasks = quotation.TaskDetails.ToList(),
-			//		Request = quotation.Request
-			//	};
-			//	return View(quotationVM);
-			//}
-			//else
-			//{
-			//	TempData["Error"] = "Báo giá chưa có phản hồi";
-			//	return RedirectToAction(nameof(RequestHistory));
-			//}
-			return View();
+			var quotation = _unitOfWork.CustomQuotation
+				.Get(t => t.RequestId == id && t.Status == SD.Completed);
+				//includeProperties: "Request,ConstructDetail,TaskDetails,MaterialDetails");
+			if (quotation != null)
+			{
+				//đã có phản hồi
+				//QuotationVM quotationVM = new()
+				//{
+				//	Quotation = quotation,
+				//	ConstructDetail = quotation.ConstructDetail,
+				//	Materials = quotation.MaterialDetails.ToList(),
+				//	Tasks = quotation.TaskDetails.ToList(),
+				//	Request = quotation.Request
+				//};
+				//Tiến hành lấy quotation đầy đủ ra
+				var info = _unitOfWork.CustomQuotation.Get((x) => x.Id == quotation.Id, "Request,ConstructDetail");
+
+				//Tiến hành fill thông tin cho PDFQuotation
+				var pdf = new PDFQuotation
+				{
+					Id = info.Id,
+					Date = info.Date,
+					Acreage = info.Acreage,
+					Location = info.Location,
+					Description = info.Description,
+					Total = info.Total,
+					GenerateDateRequest = info.Request.GenerateDate,
+					ConstructDetail = info.ConstructDetail
+				};
+
+				//bổ sung construct Detail
+				pdf.ConstructDetail.Basement = _unitOfWork.BasementType.Get((x) => x.Id == info.ConstructDetail.BasementId);
+
+				pdf.ConstructDetail.Foundation = _unitOfWork.FoundationType.Get((x) => x.Id == info.ConstructDetail.FoundationId);
+
+				pdf.ConstructDetail.Construction = _unitOfWork.ConstructionType.Get((x) => x.Id == info.ConstructDetail.ConstructionId);
+
+				pdf.ConstructDetail.Investment = _unitOfWork.InvestmentType.Get((x) => x.Id == info.ConstructDetail.InvestmentId);
+
+				pdf.ConstructDetail.Rooftop = _unitOfWork.RoofType.Get((x) => x.Id == info.ConstructDetail.RooftopId);
+
+				var workingReport = _unitOfWork.WorkingReport.GetAllWithFilter((x) => x.RequestId == info.RequestId);
+				foreach (var workReport in workingReport)
+				{
+					//lấy nhân viên ra
+					var staff = await _userManager.FindByIdAsync(info.Request.CustomerId) as ApplicationUser;
+					//xác nhận role của nhân viên đó
+					var role = await _userManager.GetRolesAsync(staff);
+					//gán cho biến name với staff role tương ứng
+					if (role.First() == SD.Role_Seller)
+						pdf.SellerName = staff.Name;
+					if (role.First() == SD.Role_Engineer)
+						pdf.EngineerName = staff.Name;
+					if (role.First() == SD.Role_Manager)
+						pdf.ManagerName = staff.Name;
+				}
+				//Lỗi đây nè ~ 
+				//pdf.CustomerName = _unitOfWork.Customer.Get((x) => x.Id == info.Request.CustomerId).Name;
+				//sửa lại lấy dc tên khách hàng ra
+				pdf.CustomerName = (_userManager.FindByIdAsync(info.Request.CustomerId).GetAwaiter().GetResult() as ApplicationUser).Name;
+				//tiên hành lấy taskdetail và materialdetail
+				pdf.Tasks = new List<TaskDetail>(_unitOfWork.TaskDetail.GetAllWithFilter((x) => x.QuotationId == info.Id, "Task"));
+				pdf.Materials = new List<MaterialDetail>(_unitOfWork.MaterialDetail.GetAllWithFilter((x) => x.QuotationId == info.Id, "Material"));
+
+				return View(pdf);
+			}
+			else
+			{
+				TempData["Error"] = "Báo giá chưa có phản hồi";
+				return RedirectToAction(nameof(RequestHistory));
+			}
 		}
 
 
