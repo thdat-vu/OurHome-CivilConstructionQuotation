@@ -12,7 +12,7 @@
                     <a href="/Seller/Quotation/ViewQuotation" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Trở lại</a>
                 </div>
             </div>
-            <h3 class="text-center"><b>Chi tiết báo giá</b></h3>
+            <h3 class="text-center"><b>Thông tin báo giá chi tiết</b></h3>
             <hr class="w-75 m-auto"></hr>
         </div>
 
@@ -23,7 +23,7 @@
             </div>
             <div class="col-lg">
                 <label><b class="text-nowrap">Ngày tạo báo giá:</b></label>
-                <p>@Model.CustomQuotation.Date</p>
+                <p>@Model.CustomQuotation.Date.Value.ToString("dd/MM/yyyy")</p>
             </div>
 
             <div class="col-lg">

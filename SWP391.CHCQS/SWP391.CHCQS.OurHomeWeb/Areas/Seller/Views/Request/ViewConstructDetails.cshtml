@@ -29,7 +29,7 @@
             </div>
             <div class="col-sm">
                 <label><b class="text-nowrap">Ngày tạo báo giá:</b></label>
-                <p>@Model.ConstructDetail.Quotation.Date</p>
+                <p>@Model.ConstructDetail.Quotation.Date.Value.ToString("dd/MM/yyyy")</p>
             </div>
 
             <div class="col-sm">
@@ -93,31 +93,31 @@
         <div class="row mb-3">
 
             <div class="col-sm">
-                <label><b class="text-nowrap">Chiều rộng:</b></label>
+                <label><b class="text-nowrap">Chiều rộng(m2):</b></label>
                 <input asp-for="ConstructDetail.Width" class="form-control" />
                 <span asp-validation-for="ConstructDetail.Width" class="text-danger"></span>
             </div>
 
             <div class="col-sm">
-                <label><b class="text-nowrap">Chiều dài:</b></label>
+                <label><b class="text-nowrap">Chiều dài(m2):</b></label>
                 <input asp-for="ConstructDetail.Length" class="form-control" />
                 <span asp-validation-for="ConstructDetail.Length" class="text-danger"></span>
             </div>
             
             <div class="col-sm">
-                <label><b class="text-nowrap">Tầng thượng:</b></label>
+                <label><b class="text-nowrap">Tầng thượng(m2):</b></label>
                 <input asp-for="ConstructDetail.RooftopFloor" class="form-control"/>
                 <span asp-validation-for="ConstructDetail.RooftopFloor" class="text-danger"></span>
             </div>
            
             <div class="col-sm">
-                <label><b class="text-nowrap">Diện tích lửng:</b></label>
+                <label><b class="text-nowrap">Diện tích lửng(m2):</b></label>
                 <input asp-for="ConstructDetail.Mezzanine" class="form-control"/>
                 <span asp-validation-for="ConstructDetail.Mezzanine" class="text-danger"></span>
             </div>
 
             <div class="col-sm">
-                <label><b class="text-nowrap">Diện tích vườn:</b></label>
+                <label><b class="text-nowrap">Diện tích vườn(m2):</b></label>
                 <input asp-for="ConstructDetail.Garden" class="form-control"/>
                 <span asp-validation-for="ConstructDetail.Garden" class="text-danger"></span>
             </div>
