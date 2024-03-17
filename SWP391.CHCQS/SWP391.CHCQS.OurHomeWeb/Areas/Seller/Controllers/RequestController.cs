@@ -196,11 +196,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 requestForm.Status = SD.RequestStatusPending;
                 _unitOfWork.RequestForm.Update(requestForm);
                 _unitOfWork.Save();
-                TempData["success"] = "Hoàn tác báo giá thành công";
+                TempData["success"] = "Hoàn tác yêu cầu thành công";
             }
             else
             {
-                TempData["error"] = "Hoàn tác báo giá thất bại";
+                TempData["error"] = "Hoàn tác yêu cầu thất bại";
             }
            
            
