@@ -11,6 +11,7 @@ using SWP391.CHCQS.Services;
 using SWP391.CHCQS.Services.NotificationHub;
 using NotificationHub = SWP391.CHCQS.Services.NotificationHub.NotificationHub;
 using SWP391.CHCQS.Model;
+using SWP391.CHCQS.DataAccess.DBInitializer;
 
 namespace SWP391.CHCQS.OurHomeWeb
 {
@@ -38,6 +39,7 @@ namespace SWP391.CHCQS.OurHomeWeb
 
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 			builder.Services.AddScoped<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
             //Thêm service SignalR
             builder.Services.AddSignalR();
@@ -95,7 +97,7 @@ namespace SWP391.CHCQS.OurHomeWeb
             //Khai báo app có sử dụng Session thì truy cập HttpContext.Session mới được
             //Khai báo trước app.UseRouting(); app.UseAuthorization(); sau app.UseEndpoints app.Run();
             app.UseSession();
-
+            SeedDatabase();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -106,6 +108,17 @@ namespace SWP391.CHCQS.OurHomeWeb
             });
 			
 			app.Run();
+
+			void SeedDatabase()
+			{
+				using (var scope = app.Services.CreateScope())
+                {
+                    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                    dbInitializer.Initialize();
+                }
+
+		    }   
 		}
+
 	}
 }

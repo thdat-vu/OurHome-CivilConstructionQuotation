@@ -70,6 +70,11 @@ namespace SWP391.CHCQS.Utility
         //Basement id of No Basement option
         public const string NoBasementId = "BT1";
 
+        //Construction type id
+        public const string ConstructionType_TownHouse = "CT1";
+        public const string ConstructionType_Mansion = "CT2";
+        public const string ConstructionType_Grade4House = "CT3";
+        
 		#endregion
 
 		#region Material Constants
