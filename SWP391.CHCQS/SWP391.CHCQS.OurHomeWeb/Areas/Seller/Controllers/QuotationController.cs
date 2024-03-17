@@ -297,12 +297,21 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 ConstructDetail = _unitOfWork.ConstructDetail.Get(x=> x.QuotationId == id, includeProperties: "Basement,Construction,Foundation,Investment,Rooftop"),
                 CustomQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == id)
             };
-            quotationViewModel.BasementName = quotationViewModel.ConstructDetail.Basement.Name;
-            quotationViewModel.RoofName = quotationViewModel.ConstructDetail.Rooftop.Name;
-            quotationViewModel.ConstructionName = quotationViewModel.ConstructDetail.Construction.Name;
-            quotationViewModel.FoundationName = quotationViewModel.ConstructDetail.Foundation.Name;
-            quotationViewModel.InvestmentName = quotationViewModel.ConstructDetail.Investment.Name;
-            return View(quotationViewModel);
+            if (quotationViewModel.ConstructDetail != null)
+            {
+				quotationViewModel.BasementName = quotationViewModel.ConstructDetail.Basement.Name;
+				quotationViewModel.RoofName = quotationViewModel.ConstructDetail.Rooftop.Name;
+				quotationViewModel.ConstructionName = quotationViewModel.ConstructDetail.Construction.Name;
+				quotationViewModel.FoundationName = quotationViewModel.ConstructDetail.Foundation.Name;
+				quotationViewModel.InvestmentName = quotationViewModel.ConstructDetail.Investment.Name;
+				return View(quotationViewModel);
+			}
+			else
+            {
+                TempData["Error"] = "Không tìm thấy báo giá";
+                return View(nameof(ViewQuotation));
+            }
+            
         }
 
         public string CreateQuotationId(string requestId)
