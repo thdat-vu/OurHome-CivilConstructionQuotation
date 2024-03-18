@@ -197,7 +197,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 					EngineerName = enName,
 					ManagerName = mgName,
 					ConstrucType = _unitOfWork.ConstructDetail.GetConstructTypeName(cq.ConstructDetail.ConstructionId),
-					GeneratRequestDate = cq.Request.GenerateDate
+					GeneratRequestDate = cq.Request.GenerateDate,
+					RequestId = cq.RequestId
 				};
 				customQuotationViewModels.Add(cqVM);
 			}
