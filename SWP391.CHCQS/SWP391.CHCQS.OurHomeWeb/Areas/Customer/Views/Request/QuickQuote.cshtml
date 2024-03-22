@@ -28,34 +28,34 @@
 		</div>
 		<div class="row mt-2">
 			<div class="col-sm">
-				<label><b class="text-nowrap">Loại công trình:</b></label>
+				<label><b class="text-nowrap">Loại công trình:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.ConstructionId" asp-items="@Model.ConstructionTypes">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Mức đầu tư:</b></label>
+				<label><b class="text-nowrap">Mức đầu tư:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.InvestmentId" asp-items="@Model.InvestmentTypes">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Chiều rộng:</b></label>
+				<label><b class="text-nowrap">Chiều rộng(m):</b><span class="text-danger">*</span></label>
 				<input class="form-control" asp-for="ConstructDetail.Width"></input>
 				<span asp-validation-for="ConstructDetail.Width" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Chiều dài:</b></label>
+				<label><b class="text-nowrap">Chiều dài(m):</b><span class="text-danger">*</span></label>
 				<input class="form-control" asp-for="ConstructDetail.Length"></input>
 				<span asp-validation-for="ConstructDetail.Length" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Mặt tiền:</b></label>
+				<label><b class="text-nowrap">Mặt tiền:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.Facade" asp-items="@Model.Facades">
 				</select>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Hẻm:</b></label>
+				<label><b class="text-nowrap">Hẻm:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.Alley" asp-items="@Model.Alleys">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
@@ -64,58 +64,59 @@
 
 		<div class="row">
 			<div class="col-sm">
-				<label><b class="text-nowrap">Số tầng</b></label>
+				<label><b class="text-nowrap">Số tầng</b><span class="text-danger">*</span></label>
 				<input class="form-control" asp-for="ConstructDetail.Floor"></input>
 				<span asp-validation-for="ConstructDetail.Floor" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Số phòng</b></label>
+				<label><b class="text-nowrap">Số phòng</b><span class="text-danger">*</span></label>
 				<input class="form-control" asp-for="ConstructDetail.Room"></input>
 				<span asp-validation-for="ConstructDetail.Room" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Diện tích lửng</b></label>
+				<label><b class="text-nowrap">Diện tích lửng(m):</b><span class="text-danger">*</span></label>
 				<input class="form-control" asp-for="ConstructDetail.Mezzanine"></input>
 				<span asp-validation-for="ConstructDetail.Mezzanine" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Tầng thượng:</b></label>
+				<label><b class="text-nowrap">Tầng thượng(m):</b><span class="text-danger">*</span></label>
 				<input class="form-control" asp-for="ConstructDetail.RooftopFloor"></input>
 				<span asp-validation-for="ConstructDetail.RooftopFloor" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Ban công:</b></label>
-				<select type="text" class="form-control" asp-for="ConstructDetail.Balcony">
-					<option disabled selected>--Chọn loại--</option>
-					<option value="false">Không có ban công</option>
-					<option value="true">Có ban công</option>
-				</select>
+				<label><b class="text-nowrap">Diện tích vườn(m):</b><span class="text-danger">*</span></label>
+				<input class="form-control" asp-for="ConstructDetail.Garden"></input>
+				<span asp-validation-for="ConstructDetail.Garden" class="text-danger"></span>
 			</div>
+			
 		</div>
 
 		<div class="row">
 			<div class="col-sm">
-				<label><b class="text-nowrap">Loại móng:</b></label>
+				<label><b class="text-nowrap">Loại móng:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.FoundationId" asp-items="@Model.FoundationTypes">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Tầng hầm:</b></label>
+				<label><b class="text-nowrap">Tầng hầm:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.BasementId" asp-items="@Model.BasementTypes">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Loại mái:</b></label>
+				<label><b class="text-nowrap">Loại mái:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.RooftopId" asp-items="@Model.RooftopTypes">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
 			</div>
 			<div class="col-sm">
-				<label><b class="text-nowrap">Diện tích vườn:</b></label>
-				<input class="form-control" asp-for="ConstructDetail.Garden"></input>
-				<span asp-validation-for="ConstructDetail.Garden" class="text-danger"></span>
+				<label><b class="text-nowrap">Ban công:</b><span class="text-danger">*</span></label>
+				<select type="text" class="form-control" asp-for="ConstructDetail.Balcony">
+					<option disabled selected>--Chọn loại--</option>
+					<option value="false">Không có ban công</option>
+					<option value="true">Có ban công</option>
+				</select>
 			</div>
 		</div>
 
