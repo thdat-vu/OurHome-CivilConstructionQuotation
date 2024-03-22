@@ -24,7 +24,7 @@ using EmailSender = SWP391.CHCQS.Utility.Helpers.EmailSender;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
 	[Area("Manager")]
-	[Authorize(Roles = "Manager")]
+	[Authorize(Roles = SD.Role_Manager)]
 	public class CustomQuotationController : BaseController
 	{
 		//private readonly IUnitOfWork _unitOfWork;

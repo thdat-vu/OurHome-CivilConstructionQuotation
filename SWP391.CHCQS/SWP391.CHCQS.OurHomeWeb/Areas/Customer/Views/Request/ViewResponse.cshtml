@@ -19,10 +19,9 @@
 
     <style>
         .container-fluid {
-            width: 700px;
+            width: 60em;
             align-items: center;
             margin: auto;
-            width: 50%;
         }
         /* Áp dụng đường kẻ bên trong cơ của bảng */
         .table-bordered th,
@@ -41,161 +40,170 @@
                 width: 33.33%; /* Chia đều chiều rộng cho 3 cột */
                 word-wrap: break-word; /* Cho phép các từ dài tự động xuống dòng */
             }
+            th{
+                background-color:#f27456
+            }
     </style>
 </head>
 <body>
     <div class="container-fluid" id="invoice" style="border:1px solid #ccc">
+        <div style="text-align: left;  margin-top:3em; display:flex">
+            <div style="margin-left:2em;">
+                <img src="~/images//Logo.png" style="width:70%" />
+
+            </div>
+            <div style="margin-right:2.3em; background-color:#f27456; width:120%; padding-left:1.3em; padding-right:1.3em; border-radius:5px">
+                <p style="font-size:1em; font-weight:600">Công ty xây dựng: OurHome</p>
+                <p style="font-size:1em; font-weight:600">Địa chỉ văn phòng: Lô E2a-7, Đường D1, Long Thạnh Mỹ, Thành Phố Thủ Đức</p>
+                <p style="font-size:1em; font-weight:600">Hotline: 0908176623</p>
+                <p style="font-size:1em; font-weight:600">Email: ourhome.construct@gmail.com</p>
+            </div>
+            
+        </div>
         <div class="container col-xs-12 my-3" style="text-align:center">
             <h1>Báo giá chi tiết</h1>
-            <div class="d-flex" style="text-align: left">
-                <h3 class="text-main">Mã đơn: @Model.Id</h3>
-                <h3>Mã yêu cầu: @Model.RequestId</h3>
-                <h3>Ngày gửi: @Model.GenerateDateRequest.ToShortDateString()</h3>
-            </div>
-            
-            
-            <div class="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
- 
-                    <div class="d-flex row mt-3">
-                        <div class="col">
-                            <label><b class="text-nowrap">Diện tích: </b></label>
-                            <p>@Model.Acreage</p>
-                        </div>
-                        <div class="col">
-                            <label><b class="text-nowrap">Vị trí: </b></label>
-                            <p>@Model.Location</p>
-                        </div>
-                        <div class="col">
-                            <label><b class="text-nowrap">Khách hàng: </b></label>
-                            <p>@Model.CustomerName</p>
-                        </div>
-
+            <div style="display:flex; justify-content:space-between">
+                <div style="text-align: left;margin-left:5em">
+                    <h3 class="text-main">Mã đơn: @Model.Id</h3>
+                    <h3>Mã yêu cầu: @Model.RequestId</h3>
+                    <h3>Ngày gửi: @Model.GenerateDateRequest.ToShortDateString()</h3>
                 </div>
-                <div>
-                    <h3>Chi tiết công trình</h3>
-                    <div>
-                        <div class="col-lg">
-                            <label><b class="text-nowrap">Chiều rộng:</b></label>
-                            <p>@Model.ConstructDetail.Width</p>
-                        </div>
-                        <div class="col-lg">
-                            <label><b class="text-nowrap">Chiều dài:</b></label>
-                            <p>@Model.ConstructDetail.Length</p>
-                        </div><div class="col-lg">
-                            <label><b class="text-nowrap">Mặt tiền:</b></label>
-                            <p>@Model.ConstructDetail.Facade</p>
-                        </div>
-                        <div class="col-lg">
-                            <label><b class="text-nowrap">Hẻm:</b></label>
-                            <p>@Model.ConstructDetail.Alley</p>
-                        </div>
-                        <div class="col-lg">
-                            <label><b class="text-nowrap">Số phòng:</b></label>
-                            <p>@Model.ConstructDetail.Room</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-lg">
-                            <label><b class="text-nowrap">Số tầng:</b></label>
-                            <p>@Model.ConstructDetail.Floor</p>
-                        </div>
-                        <div class="col-lg">
-                            <label><b class="text-nowrap">Diện tích lửng:</b></label>
-                            <p>@Model.ConstructDetail.Mezzanine</p>
-                        </div>
-                        <div class="col-lg">
-                            <label><b class="text-nowrap">Tầng thượng:</b></label>
-                            <p>@Model.ConstructDetail.RooftopFloor</p>
-                        </div><div class="col-lg">
-                            <label><b class="text-nowrap">Ban công:</b></label>
-                            <p>
-                                @(Model.ConstructDetail.Balcony ? "Có ban công" : "Không ban công")
-                            </p>
-                        </div><div class="col-lg">
-                            <label><b class="text-nowrap">Diện tích vườn:</b></label>
-                            <p>@Model.ConstructDetail.Garden</p>
-                        </div>
-                        <div>
-                            <div class="col-lg">
-                                <label><b class="text-nowrap">Loại hầm:</b></label>
-                                <p>@Model.ConstructDetail.Basement.Name</p>
-                            </div>
-                            <div class="col-lg">
-                                <label><b class="text-nowrap">Loại công trình:</b></label>
-                                <p>@Model.ConstructDetail.Construction.Name</p>
-                            </div><div class="col-lg">
-                                <label><b class="text-nowrap">Loại móng:</b></label>
-                                <p>@Model.ConstructDetail.Foundation.Name</p>
-                            </div><div class="col-lg">
-                                <label><b class="text-nowrap">Mức đầu tư:</b></label>
-                                <p>@Model.ConstructDetail.Investment.Name</p>
-                            </div><div class="col-lg">
-                                <label><b class="text-nowrap">Loại mái:</b></label>
-                                <p>@Model.ConstructDetail.Rooftop.Name</p>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3>Tasks</h3>
-                    <table class="table table-bordered">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Unit Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                                foreach (var item in Model.Tasks)
-                                {
-                                    <tr>
-                                        <td>@item.Task.Name</td>
-                                        <td>@item.Task.Description</td>
-                                        <td>@item.Task.UnitPrice</td>
-                                    </tr>
-                                }
-
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                <div class="text-center">
-                    <h3>Materials</h3>
-                    <table class="table table-bordered">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Unit Price</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                                foreach (var item in Model.Tasks)
-                                {
-                                    <tr>
-                                        <td>@item.Task.Name</td>
-                                        <td>@item.Task.Description</td>
-                                        <td>@item.Task.UnitPrice</td>
-                                        <td>@item.Price</td>
-                                    </tr>
-                                }
-
-                            }
-                        </tbody>
-                    </table>
+                <div style="text-align: left;margin-right:5em">
+                    <h3>Tên khách hàng: @Model.CustomerName</h3>
+                    <h3>Vị trí: @Model.Location</h3>
+                    <h3>Diện tích: @Model.Acreage</h3>
                 </div>
             </div>
-        </div>
-        <div class="mt-3 text-red">
-            <h3 style="color:red;">Báo giá tổng: @Model.Total</h3>
-        </div>
 
+            <h2>Chi tiết công trình</h2>
+            <div style="display:flex; gap:6em; justify-content:center">
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Chiều rộng:</b></label>
+                    <p>@Model.ConstructDetail.Width</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Chiều dài:</b></label>
+                    <p>@Model.ConstructDetail.Length</p>
+                </div><div class="col-lg">
+                    <label><b class="text-nowrap">Mặt tiền:</b></label>
+                    <p>@Model.ConstructDetail.Facade</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Hẻm:</b></label>
+                    <p>@Model.ConstructDetail.Alley</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Số phòng:</b></label>
+                    <p>@Model.ConstructDetail.Room</p>
+                </div>
+            </div>
+            <div style="display:flex; gap:6em; justify-content:center">
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Số tầng:</b></label>
+                    <p>@Model.ConstructDetail.Floor</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Diện tích lửng:</b></label>
+                    <p>@Model.ConstructDetail.Mezzanine</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Tầng thượng:</b></label>
+                    <p>@Model.ConstructDetail.RooftopFloor</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Ban công:</b></label>
+                    <p>
+                        @(Model.ConstructDetail.Balcony ? "Có ban công" : "Không ban công")
+                    </p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Diện tích vườn:</b></label>
+                    <p>@Model.ConstructDetail.Garden</p>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:6em; justify-content:center">
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Loại hầm:</b></label>
+                    <p>@Model.ConstructDetail.Basement.Name</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Loại công trình:</b></label>
+                    <p>@Model.ConstructDetail.Construction.Name</p>
+                </div><div class="col-lg">
+                    <label><b class="text-nowrap">Loại móng:</b></label>
+                    <p>@Model.ConstructDetail.Foundation.Name</p>
+                </div><div class="col-lg">
+                    <label><b class="text-nowrap">Mức đầu tư:</b></label>
+                    <p>@Model.ConstructDetail.Investment.Name</p>
+                </div><div class="col-lg">
+                    <label><b class="text-nowrap">Loại mái:</b></label>
+                    <p>@Model.ConstructDetail.Rooftop.Name</p>
+                </div>
+            </div>
+
+        </div>
+        <div style="text-align:center;font-size:2em;margin-top:1.3em">
+            <h3>Công việc</h3>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Mô tả</th>
+                        <th scope="col">Giá gốc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.Tasks)
+                        {
+                            <tr>
+                                <td>@item.Task.Name</td>
+                                <td>@item.Task.Description</td>
+                                <td style="text-align:right">@item.Task.UnitPrice.ToString("N0") VND</td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="text-align:center;font-size:2em;margin-top:1.3em">
+            <h3>Vật liệu</h3>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th style="width:25%" scope="col">Tên</th>
+                        <th style="width:25%" scope="col">Mô tả</th>
+                        <th style="width:25%" scope="col">Giá gốc</th>
+                        <th style="width:25%" scope="col">Tổng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.Tasks)
+                        {
+                            <tr>
+                                <td style="width:25%">@item.Task.Name</td>
+                                <td style="width:25%">@item.Task.Description</td>
+                                <td style="text-align:right;width:25%">@item.Task.UnitPrice.ToString("N0") VND</td>
+                                <td style="text-align:right;width:25%">@item.Price.ToString("N0") VND</td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style ="text-align:right;margin-right:1.3em;margin-bottom:2em">
+            @* trong .NET Framework, chuỗi định dạng "N" là một trong những chuỗi định dạng số chuẩn mà .NET cung cấp
+            .NET sẽ mặc định hiển thị hai chữ số sau dấu phẩy thập phân và tự động thêm dấu phẩy ngăn cách giữa các hàng nghìn.
+            nhưng ở đây ghi N0 tức là không chữ số thập phân nào xuất hiện *@
+            <h3 style="color:red;">Báo giá tổng: @Model.Total.ToString("N0") VND</h3>
+        </div>
     </div>
+    
 </body>
 </html>
 
