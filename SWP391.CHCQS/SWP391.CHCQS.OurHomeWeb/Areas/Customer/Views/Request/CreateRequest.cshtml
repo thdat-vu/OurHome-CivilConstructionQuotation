@@ -28,19 +28,19 @@
 
 		<div class="row">			
 			<div class="col-lg">
-				<label><b class="text-nowrap">Loại công trình:</b></label>
+				<label><b class="text-nowrap">Loại công trình:</b><span class="text-danger">*</span></label>
 				<select asp-for="ConstructType" asp-items="@Model.ConstructionTypes" class="form-select">
 					<option selected disabled>-- Chọn loại công trình --</option>
 				</select>
 			</div>
 			<div class="col-lg">
-				<label><b>Địa chỉ:</b></label>
+				<label><b>Địa điểm dự kiến:</b><span class="text-danger">*</span></label>
 				<input asp-for="Location" class="form-control"></input>
 				<span asp-validation-for="Location" class="text-danger"></span>
 			</div>			
 			<div class="col-lg">
-				<label><b>Diện tích:</b></label>
-				<input asp-for="Acreage" class="form-control" placeholder="0m x 0m"></input>
+				<label><b>Kích thước(m):</b><span class="text-danger">*</span></label>
+				<input asp-for="Acreage" class="form-control" placeholder="Chiều dài x Chiều rộng"></input>
 				<span asp-validation-for="Acreage" class="text-danger"></span>
 			</div>
 		</div>
