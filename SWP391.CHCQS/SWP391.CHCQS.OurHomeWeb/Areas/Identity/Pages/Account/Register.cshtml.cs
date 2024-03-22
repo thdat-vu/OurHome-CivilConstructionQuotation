@@ -243,8 +243,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
                         case "PasswordRequiresDigit":
                             error.Description = "Mật khẩu phải chứa ít nhất một chữ số";
                             break;
-                        default:
-                            error.Description = "Mật khẩu không hợp lệ";
+                        case "DuplicateUserName":
+                            error.Description = "Tên đăng nhập đã tồn tại";
                             break;
                     }
                     ModelState.AddModelError(string.Empty, error.Description);
