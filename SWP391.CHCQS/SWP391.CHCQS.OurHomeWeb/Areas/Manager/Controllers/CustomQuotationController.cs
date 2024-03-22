@@ -155,21 +155,20 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		public async Task<IActionResult> GetAllQuote()
 		{
 			var userId = GetCurrentUserId();
-			//lấy ra danh sách id của customquotation
-			List<string> cqsId = _unitOfWork.CustomQuotation.GetAll()
-				.Select(x => x.Id)
+			//lấy ra danh sách request id mà customquotation đã tồn tại
+			List<string> requestIdList = _unitOfWork.CustomQuotation.GetAll()
+				.Select(x => x.RequestId)
 				.ToList();
 
 			//khai báo list giữ các customquotationVm
 			List<CustomQuotationListViewModel> customQuotationViewModels = new List<CustomQuotationListViewModel>();
-			//lấy ra id của staff tham gia vào requestid
-			foreach (var id in cqsId)
+			//duyệt working request mà request Id đã tồn tại custom quotation
+			foreach (var rqId in requestIdList)
 			{
 				string slName = null;
 				string enName = null;
 				string mgName = null;
-				var requestId = SD.requestIdKey + id.Substring(2);
-				var workingReport = _unitOfWork.WorkingReport.GetAllWithFilter((x) => x.RequestId == requestId);
+				var workingReport = _unitOfWork.WorkingReport.GetAllWithFilter((x) => x.RequestId == rqId);
 				foreach (var workReport in workingReport)
 				{
 					//lấy nhân viên ra
@@ -184,8 +183,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 					if (role.First() == SD.Role_Manager)
 						mgName = staff.Name;
 				}
-				//thực hiện tạo 1 đối tượng customQuotation tương ứng
-				var cq = _unitOfWork.CustomQuotation.Get(x => x.Id == id, "ConstructDetail,Request");
+				//thực hiện lấy ra quotation đã dc tạo tương ứng với request Id
+				var cq = _unitOfWork.CustomQuotation.Get(x => x.RequestId == rqId, "ConstructDetail,Request");
 				//thực hiện chuyển dữ liệu qua customquotationVM
 				var cqVM = new CustomQuotationListViewModel()
 				{
@@ -198,7 +197,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 					EngineerName = enName,
 					ManagerName = mgName,
 					ConstrucType = _unitOfWork.ConstructDetail.GetConstructTypeName(cq.ConstructDetail.ConstructionId),
-					GeneratRequestDate = cq.Request.GenerateDate
+					GeneratRequestDate = cq.Request.GenerateDate,
+					RequestId = cq.RequestId
 				};
 				customQuotationViewModels.Add(cqVM);
 			}

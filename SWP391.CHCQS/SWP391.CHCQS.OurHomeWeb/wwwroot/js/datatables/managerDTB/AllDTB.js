@@ -12,6 +12,7 @@ function loadDataTableAllCustomQuotationManager() {
         "order": [[1, "desc"]], //sắp xếp theo cột thứ 2(cột ngày giảm dần)
         "columns": [
             { data: 'id' },
+            { data: 'requestId' },
             {
                 data: 'generatRequestDate',
                 "render": function (data) {
@@ -24,6 +25,7 @@ function loadDataTableAllCustomQuotationManager() {
                 },
                 "width": "15%"
             },
+            
             { data: 'acreage' },
             { data: 'location' },
             { data: 'construcType' },
