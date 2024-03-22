@@ -14,8 +14,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
     //register Area
     [Area(SD.Role_Manager)]
-    //[Authorize(Roles = SD.Role_Manager)]
-    public class MaterialController : Controller
+	[Authorize(Roles = SD.Role_Manager)]
+	public class MaterialController : Controller
     {
         //init IUnitOfWork
         private readonly IUnitOfWork _unitOfWork;

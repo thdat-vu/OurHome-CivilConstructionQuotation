@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
@@ -12,7 +13,8 @@ using Task = SWP391.CHCQS.Model.Task;
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
     [Area("Manager")]
-    public class TaskController : Controller
+	[Authorize(Roles = SD.Role_Manager)]
+	public class TaskController : Controller
     {
         //init IUnitOfWork
         private readonly IUnitOfWork _unitOfWork;

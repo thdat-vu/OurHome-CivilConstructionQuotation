@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.OurHomeWeb.Areas.Base.Controllers;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
@@ -10,7 +11,8 @@ using MaterialViewModel = SWP391.CHCQS.OurHomeWeb.Areas.Engineer.ViewModels.Mate
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
     [Area("Manager")]
-    public class MaterialDetailController : BaseController
+	[Authorize(Roles = SD.Role_Manager)]
+	public class MaterialDetailController : BaseController
     {
 
 
