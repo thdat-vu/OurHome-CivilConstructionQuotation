@@ -18,11 +18,11 @@ function loadDataTableRequest() {
             { data: 'manager.name'},
             { data: 'role'},
             {
-                data: { id: "id", lockoutEnd: "lockoutEnd" },
+                data: { id: "id", lockoutEnd: "lockoutEnd", role: "role"},
                 "render": function (data) {
                     var today = new Date().getTime();
                     var lockout = new Date(data.lockoutEnd).getTime();
-                    if (lockout > today) {
+                    if (lockout > today && data.role != "Admin") {
                         // user is currently locked
                         return `
                             <div class="w-100 btn-group" role="group">
@@ -35,7 +35,7 @@ function loadDataTableRequest() {
                             </div>
                         `;
                     }
-                    else {
+                    else if (data.role != "Admin") {
                         return `
                             <div class="w-100 btn-group" role="group">
                                 <a onclick=LockUnlock('${data.id}') class = " text-nowrap btn btn-success border-0 m-1">
@@ -46,6 +46,9 @@ function loadDataTableRequest() {
                                 </a>
                             </div>
                         `;
+                    }
+                    else {
+                        return '';
                     }
                 },
             }
