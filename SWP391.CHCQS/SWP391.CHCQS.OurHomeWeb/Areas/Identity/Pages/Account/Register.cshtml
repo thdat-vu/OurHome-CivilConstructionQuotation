@@ -1,7 +1,17 @@
 ﻿@page
+@using System.Security.Claims
 @model RegisterModel
 @{
     ViewData["Title"] = "Đăng kí";
+
+    var userRoles = ((ClaimsIdentity)User.Identity).Claims
+            .Where(c => c.Type == ClaimTypes.Role)
+            .Select(c => c.Value);
+
+    if (userRoles.Contains("Admin"))
+    {
+        Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+    }
 }
 
 <h1 class="d-flex justify-content-center align-items-center">@ViewData["Title"]</h1>

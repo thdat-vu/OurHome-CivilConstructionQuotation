@@ -33,6 +33,11 @@ body {
     cursor: pointer;
 }
 
+.text-hover:hover {
+    color: #F27456 !important;
+    transition: 0.2s;
+}
+
 
 /*Style for main BTN*/
 .btn-main {
@@ -56,13 +61,16 @@ body {
     padding: 2px 4px;
     font-size: 12px;
 }
+
 #tblTaskDetail {
     padding: 2px 4px;
     font-size: 12px;
 }
+
 #tblTaskDetail_wrapper label {
     font-size: 12px;
 }
+
 #tblMaterialDetail td, th {
     padding: 2px 4px;
     font-size: 12px;
@@ -102,7 +110,7 @@ body {
 
 /* Style for login logout button */
 .btn {
-    color: white !important; 
+    color: white !important;
 }
 
     .btn.login {
@@ -131,8 +139,8 @@ body {
 .navbar-nav .nav-item .nav-link.active,
 .dropdown-menu .dropdown-item.active,
 .dropdown-menu .dropdown-item:hover {
-    color: #F27456 !important; 
-    background-color: #ffffff !important; 
+    color: #F27456 !important;
+    background-color: #ffffff !important;
 }
 
 #manage {
@@ -141,5 +149,5 @@ body {
 
     #manage:hover {
         transform: scale(1.3);
-        color:#F27456
+        color: #F27456
     }
