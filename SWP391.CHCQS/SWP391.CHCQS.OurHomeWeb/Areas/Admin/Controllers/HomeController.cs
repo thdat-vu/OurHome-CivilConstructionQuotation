@@ -12,7 +12,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Admin.Controllers
 	{		
 		public IActionResult Index()
 		{
-			return View();
+			return RedirectToAction("Index", "User");
 		}
 	}
 }
