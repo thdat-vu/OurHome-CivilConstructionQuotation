@@ -135,6 +135,23 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 		[Authorize(Roles = SD.Role_Customer)]
 		public async Task<IActionResult> CreateRequest()
 		{
+			var sellerCount = _userManager.GetUsersInRoleAsync(SD.Role_Seller)
+                .GetAwaiter().GetResult()
+                .Where(x => x.LockoutEnd.Value <= DateTime.Now || x.LockoutEnd == null)
+                .Count();
+			var engineerCount = _userManager.GetUsersInRoleAsync(SD.Role_Engineer)
+				.GetAwaiter().GetResult()
+                .Where(x => x.LockoutEnd.Value <= DateTime.Now || x.LockoutEnd == null)
+                .Count();
+			var managerCount = _userManager.GetUsersInRoleAsync(SD.Role_Manager)
+				.GetAwaiter().GetResult()
+                .Where(x => x.LockoutEnd.Value <= DateTime.Now || x.LockoutEnd == null)
+                .Count();
+			if (sellerCount == 0 || engineerCount == 0 || managerCount == 0)
+			{
+				TempData["Error"] = "Chức năng hiện không khả dụng";
+				return RedirectToAction("Index", "Home");
+			}
 			RequestVM requestVM = new()
 			{
 				ConstructionTypes = _unitOfWork.ConstructionType.GetAll().Select(i => new SelectListItem
