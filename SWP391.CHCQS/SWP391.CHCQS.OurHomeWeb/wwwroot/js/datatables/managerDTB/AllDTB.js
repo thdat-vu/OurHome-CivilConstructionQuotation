@@ -23,9 +23,8 @@ function loadDataTableAllCustomQuotationManager() {
                     let year = date.getFullYear();
                     return `${day}/${month}/${year}`;
                 },
-                "width": "15%"
             },
-            
+
             { data: 'acreage' },
             { data: 'location' },
             { data: 'construcType' },

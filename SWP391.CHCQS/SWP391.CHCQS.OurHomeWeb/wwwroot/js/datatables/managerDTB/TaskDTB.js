@@ -11,19 +11,19 @@ function loadDataTableTask() {
             {
                 data: "id",
                 "render": function (data) {
-                    return `<a class="text-main text-pointer" onClick="ShowTaskDetail('/Engineer/Task/Detail?TaskId=${data}')" >${data}</a>`
-                },
+                    return `<a class="text-main text-pointer">${data}</a>`
+                }, 
             },
             { data: 'name', },
             { data: 'description', },
-            { data: 'unitPrice', },
+            { data: 'unitPrice', render: formatCurrency },
             { data: 'category.name', },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href='/Manager/Task/Edit?id=${data}' class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-pencil"></i> Chỉnh sửa </a>
-                       <a href='/Manager/Task/Delete?id=${data}' class="btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Xóa </a>
+                       <a href='/Manager/Task/Edit?id=${data}' class="btn btn-primary btn-main border-0 m-1 text-nowrap"><i class="bi bi-pencil"></i> Chỉnh sửa </a>
+                       <a href='/Manager/Task/Delete?id=${data}' class="btn btn-danger border-0 m-1 text-nowrap"><i class="bi bi-trash"></i> Xóa </a>
                     </div>`
                 },
             }

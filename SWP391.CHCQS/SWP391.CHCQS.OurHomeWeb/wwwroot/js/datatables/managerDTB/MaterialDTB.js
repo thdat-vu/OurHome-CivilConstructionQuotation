@@ -17,23 +17,21 @@ function loadDataTableMaterial() {
             {
                 data: 'id',
                 "render": function (data) {
-                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
-                }
-                , "width": "5%"
+                    return `<a class="text-main text-pointer">${data}</a>`
+                },
             },
-            { data: 'name', "width": "15%" },
-            { data: 'unitPrice', "width": "5%" },
-            { data: 'unit', "width": "5%" },
-            { data: 'category.name', "width": "15%" },
+            { data: 'name',  },
+            { data: 'unitPrice', render: formatCurrency },
+            { data: 'unit', },
+            { data: 'category.name',},
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/manager/material/Edit?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-pencil"></i> Chỉnh sửa </a>
-                       <a href="/manager/material/Delete?id=${data}" class = "btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Xóa </a>
+                       <a href="/manager/material/Edit?id=${data}" class = "btn btn-primary btn-main border-0 m-1 text-nowrap"><i class="bi bi-pencil"></i> Chỉnh sửa </a>
+                       <a href="/manager/material/Delete?id=${data}" class = "btn btn-danger border-0 m-1 text-nowrap"><i class="bi bi-trash"></i> Xóa </a>
                     </div >`
                 },
-                "width": "15%"
             }
         ]
     });

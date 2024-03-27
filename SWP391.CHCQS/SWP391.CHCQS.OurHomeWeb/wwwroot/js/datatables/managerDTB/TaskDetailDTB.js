@@ -25,10 +25,10 @@ function loadDataTaskDetail() {
                 // Generate a unique form ID using the material ID
                 "render": function (data) {
                     return `<textarea class="form-control" row="2"
-                    onChange="InputNoteTaskEvent('/Manager/CustomQuotation/TakeNoteTaskToSession','${data.taskId}')" id=${data.taskId??""}>${data.note == null? "": data.note.value}</textarea>`
+                    onChange="InputNoteTaskEvent('/Manager/CustomQuotation/TakeNoteTaskToSession','${data.taskId}')" id=${data.taskId ?? ""}>${data.note == null ? "" : data.note.value}</textarea>`
                 },
             },
-            
+
         ]
     });
 }
@@ -45,7 +45,7 @@ function InputNoteTaskEvent(url, taskId) {
         $.ajax({
             url: url,
             method: 'POST',
-            data: { taskId: taskId, note: note},
+            data: { taskId: taskId, note: note },
             success: function () {
                 //console.log(response.add);
                 dataTableTDRS.ajax.reload(null, false);

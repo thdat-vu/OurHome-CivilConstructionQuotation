@@ -17,16 +17,15 @@ function loadDataTableProject() {
             {
                 data: 'id',
                 "render": function (data) {
-                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
-                }
-                , "width": "5%"
+                    return `<a class="text-main text-pointer">${data}</a>`
+                }, 
             },
-            { data: 'name', "width": "10%" },
-            { data: 'location', "width": "10%" },
-            { data: 'scale', "width": "10%" },
-            { data: 'size', "width": "10%" },
-            { data: 'description', "width": "10%" },
-            { data: 'overview', "width": "10%" },
+            { data: 'name',  },
+            { data: 'location',  },
+            { data: 'scale', },
+            { data: 'size',  },
+            { data: 'description',  },
+            { data: 'overview', },
             {
                 data: 'date',
                 "render": function (data) {
@@ -37,18 +36,18 @@ function loadDataTableProject() {
                     let year = date.getFullYear();
                     return `${day}/${month}/${year}`;
                 },
-                "width": "10%"
+                
             },
-            { data: 'customer.name', "width": "10%" },
+            { data: 'customer.name',},
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Manager/Project/Edit?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-pencil"></i> Chỉnh sửa </a>
-                       <a href="/Manager/Project/Delete?id=${data}" class = "btn btn-danger border-0 m-1"><i class="bi bi-trash"></i> Xóa </a>
+                       <a href="/Manager/Project/Edit?id=${data}" class = "btn btn-primary btn-main border-0 m-1 text-nowrap"><i class="bi bi-pencil"></i> Chỉnh sửa </a>
+                       <a href="/Manager/Project/Delete?id=${data}" class = "btn btn-danger border-0 m-1 text-nowrap"><i class="bi bi-trash"></i> Xóa </a>
                     </div >`
                 },
-                "width": "15%"
+                
             }
         ]
     });

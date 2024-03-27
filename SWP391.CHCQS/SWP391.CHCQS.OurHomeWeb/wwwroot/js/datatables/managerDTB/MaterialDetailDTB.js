@@ -71,13 +71,13 @@ function loadDataMaterialDetail() {
                     return `<p>${data.quantity}</p>`
                 }
             },
-            { data: 'price', render: formatCurrency  },
+            { data: 'price', render: formatCurrency },
             { data: 'unit' },
             {
                 data: null,
                 "render": function (data) {
                     return `<textarea class="form-control text-area-here" row="4"
-                    onChange="InputNoteMaterialEvent('TakeNoteMaterialToSession','${data.materialId}', '${data.quantity}')" id=${data.materialId}>${data.note.value.note?? ""}</textarea>`
+                    onChange="InputNoteMaterialEvent('TakeNoteMaterialToSession','${data.materialId}', '${data.quantity}')" id=${data.materialId}>${data.note.value.note ?? ""}</textarea>`
                 },
             }
         ]
