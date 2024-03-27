@@ -28,18 +28,6 @@
         .table-bordered td {
             border: 1px solid black; /* Màu của đường kẻ */
         }
-        /* Đảm bảo chiều ngang các cột trong bảng bằng nhau */
-        .table {
-            table-layout: fixed;
-        }
-
-
-            /* Đảm bảo các cột trong bảng có chiều ngang bằng nhau */
-            .table th,
-            .table td {
-                width: 33.33%; /* Chia đều chiều rộng cho 3 cột */
-                word-wrap: break-word; /* Cho phép các từ dài tự động xuống dòng */
-            }
 
         th {
             background-color: #f27456
@@ -70,7 +58,7 @@
                     <h3>Ngày gửi: @Model.GenerateDateRequest.ToShortDateString()</h3>
                 </div>
 
-                <div style="text-align: left;margin-right:5em">
+                <div style="text-align: left;margin-right:13em">
                     <h3>Tên khách hàng: @Model.CustomerName</h3>
                     <h3>Vị trí: @Model.Location</h3>
                     <h3>Diện tích: @Model.Acreage</h3>
@@ -147,12 +135,12 @@
         </div>
         <div style="text-align:center;font-size:2em;margin-top:1.3em">
             <h3>Công việc</h3>
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="width:100%">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">Tên</th>
-                        <th scope="col">Mô tả</th>
-                        <th scope="col">Giá gốc</th>
+                        <th style="width: 25%" scope="col">Tên</th>
+                        <th style="width: 55%" scope="col">Mô tả</th>
+                        <th style="width: 25%" scope="col">Giá gốc</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -160,9 +148,9 @@
                         foreach (var item in Model.Tasks)
                         {
                             <tr>
-                                <td>@item.Task.Name</td>
-                                <td>@item.Task.Description</td>
-                                <td style="text-align:right">@item.Task.UnitPrice.ToString("N0") VND</td>
+                                <td style="width:25%">@item.Task.Name</td>
+                                <td style="width:55%">@item.Task.Description</td>
+                                <td style="text-align:right;width:25%">@item.Task.UnitPrice.ToString("N0") VND</td>
                             </tr>
                         }
 
@@ -172,12 +160,12 @@
         </div>
         <div style="text-align:center;font-size:2em;margin-top:1.3em">
             <h3>Vật liệu</h3>
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="width:100%">
                 <thead class="thead-light">
                     <tr>
-                        <th style="width:25%" scope="col">Tên</th>
-                        <th style="width:25%" scope="col">Mô tả</th>
-                        <th style="width:25%" scope="col">Giá gốc</th>
+                        <th style="width:20%" scope="col">Tên</th>
+                        <th style="width:35%" scope="col">Mô tả</th>
+                        <th style="width:20%" scope="col">Giá gốc</th>
                         <th style="width:25%" scope="col">Tổng</th>
                     </tr>
                 </thead>
@@ -186,9 +174,9 @@
                         foreach (var item in Model.Tasks)
                         {
                             <tr>
-                                <td style="width:25%">@item.Task.Name</td>
-                                <td style="width:25%">@item.Task.Description</td>
-                                <td style="text-align:right;width:25%">@item.Task.UnitPrice.ToString("N0") VND</td>
+                                <td style="width:20%">@item.Task.Name</td>
+                                <td style="width:35%">@item.Task.Description</td>
+                                <td style="text-align:right;width:20%">@item.Task.UnitPrice.ToString("N0") VND</td>
                                 <td style="text-align:right;width:25%">@item.Price.ToString("N0") VND</td>
                             </tr>
                         }
