@@ -15,7 +15,6 @@ function loadDataCustomer() {
             "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
         },
         "columns": [
-
             {
                 data: 'id',
                 "render": function (data) {
@@ -38,13 +37,11 @@ function loadDataCustomer() {
     });
 }
 
-
-
 function fillForm(id, name) {
     var idField = document.getElementById('CustomerId');
     var nameField = document.getElementById('CustomerName');
     idField.value = id;
     nameField.value = name;
-    idField.ajax.reload();
-    nameField.ajax.reload();
+    idField.ajax.reload(null, false);
+    nameField.ajax.reload(null,false);
 }

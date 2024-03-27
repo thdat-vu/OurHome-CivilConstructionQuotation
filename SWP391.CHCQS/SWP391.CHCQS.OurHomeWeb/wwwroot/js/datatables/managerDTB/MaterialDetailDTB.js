@@ -22,7 +22,7 @@ function InputNoteMaterialEvent(url, materialId, quantity) {
             data: { materialId: materialId, note: note, quantity: quantity },
             success: function () {
                 //console.log(response.add);
-                dataTableMDRS.ajax.reload();
+                dataTableMDRS.ajax.reload(null, false);
             },
             error: function (xhr, status, error) {
                 console.error('Ajax call failed:', error);

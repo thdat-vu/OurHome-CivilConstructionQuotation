@@ -48,7 +48,7 @@ function InputNoteTaskEvent(url, taskId) {
             data: { taskId: taskId, note: note},
             success: function () {
                 //console.log(response.add);
-                dataTableTDRS.ajax.reload();
+                dataTableTDRS.ajax.reload(null, false);
             },
             error: function (xhr, status, error) {
                 console.error('Ajax call failed:', error);
