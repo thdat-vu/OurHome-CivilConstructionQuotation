@@ -36,9 +36,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 		[HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            var requestIdList = GetWaitingRequestIdList();
             List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
-                .Where(t => t.Status == SD.RequestStatusPending)
+                .Where(t => t.Status == SD.RequestStatusPending && requestIdList.Contains(t.Id))
                 .OrderByDescending(x => x.GenerateDate)
                 .Select(x => new RequestViewModel
                 {
@@ -67,10 +68,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllRequestCompleted()
         {
-            List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
+			var requestIdList = GetWaitingRequestIdList();
+			List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
 
-				.Where(t => t.Status == SD.RequestStatusSent)
+				.Where(t => t.Status == SD.RequestStatusSent && requestIdList.Contains(t.Id))
                 .OrderByDescending(x => x.GenerateDate)
                 .Select(x => new RequestViewModel
                 {
@@ -99,9 +101,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllRequestRejected()
         {
-            List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
+			var requestIdList = GetWaitingRequestIdList();
+			List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
                 .GetAll(includeProperties: "Customer")
-                .Where(t => t.Status == SD.RequestStatusRejected)
+                .Where(t => t.Status == SD.RequestStatusRejected && requestIdList.Contains(t.Id))
                 .OrderByDescending(x => x.GenerateDate)
                 .Select(x => new RequestViewModel
                 {
@@ -126,10 +129,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAllRequestSaved()
 		{
+            var requestIdList = GetWaitingRequestIdList();
 			List<RequestViewModel> RequestVMlList = _unitOfWork.RequestForm
 				.GetAll(includeProperties: "Customer")
-				.OrderBy(x => x.GenerateDate)
-				.Where(t => t.Status == SD.RequestStatusSaved)
+				.OrderByDescending(x => x.GenerateDate)
+				.Where(t => t.Status == SD.RequestStatusSaved && requestIdList.Contains(t.Id))
 				.Select(x => new RequestViewModel
 				{
 					Id = x.Id,
@@ -268,7 +272,11 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 
 
         #region ============ FUNCTIONS ============
-
+        public List<string> GetWaitingRequestIdList()
+        {
+            var userId = SD.GetCurrentUserId(User);
+            return _unitOfWork.WorkingReport.GetAll(x => x.StaffId == userId).Select(x => x.RequestId).ToList();
+        }
         #endregion ============ FUNCTIONS ============
     }
 }

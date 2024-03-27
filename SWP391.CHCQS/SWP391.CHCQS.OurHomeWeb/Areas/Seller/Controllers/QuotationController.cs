@@ -255,19 +255,51 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
             return RedirectToAction("ViewConstructDetails", "Request", new { id = quotation.RequestId });
         }
 
+		public IActionResult ViewQuotation()
+		{
+			return View();
+		}
+		public IActionResult Details(string id)
+		{
+			QuotationViewModel quotationViewModel = new QuotationViewModel
+			{
+				ConstructDetail = _unitOfWork.ConstructDetail.Get(x => x.QuotationId == id, includeProperties: "Basement,Construction,Foundation,Investment,Rooftop"),
+				CustomQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == id)
+			};
+			if (quotationViewModel.ConstructDetail != null)
+			{
+				quotationViewModel.BasementName = quotationViewModel.ConstructDetail.Basement.Name;
+				quotationViewModel.RoofName = quotationViewModel.ConstructDetail.Rooftop.Name;
+				quotationViewModel.ConstructionName = quotationViewModel.ConstructDetail.Construction.Name;
+				quotationViewModel.FoundationName = quotationViewModel.ConstructDetail.Foundation.Name;
+				quotationViewModel.InvestmentName = quotationViewModel.ConstructDetail.Investment.Name;
+				return View(quotationViewModel);
+			}
+			else
+			{
+				TempData["Error"] = "Không tìm thấy báo giá";
+				return View(nameof(ViewQuotation));
+			}
 
-        #endregion ============ ACTIONS ============
+		}
 
-        #region ============ API ============
-        /// <summary>
-        /// This function get all Quotation in Database and return it into JSON, this function ne lib Datatables to show data
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
+
+		#endregion ============ ACTIONS ============
+
+		#region ============ API ============
+		/// <summary>
+		/// This function get all Quotation in Database and return it into JSON, this function ne lib Datatables to show data
+		/// </summary>
+		/// <returns></returns>
+		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
+            var requestIdList = GetRequestIdList();
 			List<QuotationStatusViewModel> CustomQuotationList = _unitOfWork.CustomQuotation
-				.GetAll().Where(x => x.Status == SD.Processing).OrderByDescending(x => x.Date).Select(x => new QuotationStatusViewModel
+				.GetAll(x => x.Status == SD.Processing)
+                .Where(x => requestIdList.Contains(x.RequestId))
+                .OrderByDescending(x => x.Date)
+                .Select(x => new QuotationStatusViewModel
                 {
                     Id = x.Id,
                     Date = x.Date,
@@ -287,31 +319,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
 
 
         #region ============ FUNCTIONS ============ 
-        public IActionResult ViewQuotation()
+        public List<string> GetRequestIdList()
         {
-            return View();
-        }
-		public IActionResult Details(string id)
-        {
-            QuotationViewModel quotationViewModel = new QuotationViewModel{
-                ConstructDetail = _unitOfWork.ConstructDetail.Get(x=> x.QuotationId == id, includeProperties: "Basement,Construction,Foundation,Investment,Rooftop"),
-                CustomQuotation = _unitOfWork.CustomQuotation.Get(x => x.Id == id)
-            };
-            if (quotationViewModel.ConstructDetail != null)
-            {
-				quotationViewModel.BasementName = quotationViewModel.ConstructDetail.Basement.Name;
-				quotationViewModel.RoofName = quotationViewModel.ConstructDetail.Rooftop.Name;
-				quotationViewModel.ConstructionName = quotationViewModel.ConstructDetail.Construction.Name;
-				quotationViewModel.FoundationName = quotationViewModel.ConstructDetail.Foundation.Name;
-				quotationViewModel.InvestmentName = quotationViewModel.ConstructDetail.Investment.Name;
-				return View(quotationViewModel);
-			}
-			else
-            {
-                TempData["Error"] = "Không tìm thấy báo giá";
-                return View(nameof(ViewQuotation));
-            }
-            
+            var userId = SD.GetCurrentUserId(User);
+            return _unitOfWork.WorkingReport.GetAll(x => x.StaffId == userId).Select(x => x.RequestId).ToList();
         }
 
         public string CreateQuotationId(string requestId)
