@@ -18,7 +18,7 @@ function loadDataTableTaskListSession() {
                 },
             },
             { data: 'task.name', },
-            { data: 'task.unitPrice', },
+            { data: 'task.unitPrice', render: formatCurrency },
            
             { data: 'categoryName', },
             {

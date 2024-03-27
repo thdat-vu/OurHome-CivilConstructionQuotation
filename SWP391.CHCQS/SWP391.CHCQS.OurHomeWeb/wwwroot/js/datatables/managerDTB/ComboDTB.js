@@ -15,22 +15,25 @@ function loadDataTableStandardQuotation() {
         },
         "columns": [
             {
-                data: 'id', "width": "5%"
+                data: 'id', 
+                "render": function (data) {
+                    return `<a class="text-main text-pointer">${data}</a>`
+                },
             },
-            { data: 'name', "width": "15%" },
-            { data: 'description', "width": "5%" },
-            { data: 'price', "width": "5%" },
+            { data: 'name',  },
+            { data: 'description',  },
+            { data: 'price', render: formatCurrency },
            
-            { data: 'construction.name', "width": "15%" },
+            { data: 'construction.name',  },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/manager/combo/Edit?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-pencil"></i> Chỉnh sửa </a>
-                       <a href="/manager/combo/Delete?id=${data}" class = "btn btn-danger border-0 m-1"><i class="bi bi-pencil"></i> Xóa </a>
+                       <a href="/manager/combo/Edit?id=${data}" class = "btn btn-primary btn-main border-0 m-1 text-nowrap"><i class="bi bi-pencil"></i> Chỉnh sửa </a>
+                       <a href="/manager/combo/Delete?id=${data}" class = "btn btn-danger border-0 m-1 text-nowrap"><i class="bi bi-pencil"></i> Xóa </a>
                     </div >`
                 },
-                "width": "15%"
+                
             }
         ]
     });

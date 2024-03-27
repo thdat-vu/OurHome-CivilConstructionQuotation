@@ -18,7 +18,7 @@ function loadDataTableMaterialListSession() {
                 },
             },
             { data: 'material.name', },
-            { data: 'material.unitPrice', },
+            { data: 'material.unitPrice', render: formatCurrency },
             { data: 'material.unit', },
             { data: 'categoryName', },
             {

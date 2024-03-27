@@ -36,7 +36,7 @@ function loadDataTableCustomQuotationManager() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Manager/CustomQuotation/GetDetail?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i>Chi tiết</a>
+                       <a href="/Manager/CustomQuotation/GetDetail?id=${data}" class = "btn btn-main border-0 m-1 text-nowrap"><i class="bi bi-eye"></i> Chi tiết</a>
                     </div >`
                 },
             

@@ -19,20 +19,20 @@ function loadDataTableMaterial() {
                 "render": function (data) {
                     return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
                 }
-                , "width": "5%"
+                ,
             },
-            { data: 'name', "width": "15%" },
-            { data: 'unitPrice', "width": "5%" },
-            { data: 'unit', "width": "5%" },
-            { data: 'category.name', "width": "15%" },
+            { data: 'name', },
+            { data: 'unitPrice', render: formatCurrency },
+            { data: 'unit', },
+            { data: 'category.name', },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a onClick="AddToListMaterial('/Manager/Material/AddToList?MaterialId=${data}')"  class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-circle"></i> Thêm </a>
+                       <a onClick="AddToListMaterial('/Manager/Material/AddToList?MaterialId=${data}')"  class = "btn btn-main border-0 m-1 text-nowrap"><i class="bi bi-plus-circle"></i> Thêm </a>
                     </div >`
                 },
-                "width": "15%"
+
             }
         ]
     });
@@ -46,19 +46,19 @@ function AddToListMaterial(url) {
             if (!data.success) {
                 comboMaterialListDTB.ajax.reload(null, false);
                 dataTableAvailableMaterial.ajax.reload(null, false);
-                
+
                 toastr.error(data.message);
             } else {
                 comboMaterialListDTB.ajax.reload(null, false);
                 dataTableAvailableMaterial.ajax.reload(null, false);
-                
+
                 toastr.success(data.message);
             }
         },
         error: function (data) {
             comboMaterialListDTB.ajax.reload(null, false);
             dataTableAvailableMaterial.ajax.reload(null, false);
-            
+
             toastr.error(data.message);
         }
     });
