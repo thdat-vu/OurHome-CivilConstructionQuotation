@@ -64,30 +64,38 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         [HttpPost]
         public IActionResult Create(MaterialViewModel materialVM, IFormFile? file)
         {
-            string wwwRootPath = _webHostEnvironment.WebRootPath; //retrieve rootpath.
-            materialVM.Material.Status = true; //change status into true;
-            materialVM.Material.Id = SD.TempId;
-            //handle the file
-            //step1: check if the file name null or not
-            if (file != null)
+            try
             {
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//save a new name for filename
-                //product image location
-                string materialPath = Path.Combine(wwwRootPath, @"images\material");
-                //copy file's content to fileStream
-                using (var fileStream = new FileStream(Path.Combine(materialPath, fileName), FileMode.Create))
+                string wwwRootPath = _webHostEnvironment.WebRootPath; //retrieve rootpath.
+                materialVM.Material.Status = true; //change status into true;
+                materialVM.Material.Id = SD.TempId;
+                //handle the file
+                //step1: check if the file name null or not
+                if (file != null)
                 {
-                    file.CopyTo(fileStream);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//save a new name for filename
+                                                                                                   //product image location
+                    string materialPath = Path.Combine(wwwRootPath, @"images\material");
+                    //copy file's content to fileStream
+                    using (var fileStream = new FileStream(Path.Combine(materialPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    //pass the filename path to ImageUrl Property
+                    materialVM.Material.ImageUrl = @"\images\material\" + fileName;
                 }
-                //pass the filename path to ImageUrl Property
-                materialVM.Material.ImageUrl = @"\images\material\" + fileName;
-            }
-            _unitOfWork.Material.Add(materialVM.Material); //Add MaterialVM to Material table
-            _unitOfWork.Save(); //keep track on change
-            TempData["success"] = "Vật tư đã tạo thành công";
-            return RedirectToAction("Index"); //after adding, return to previous action and reload the page
+                _unitOfWork.Material.Add(materialVM.Material); //Add MaterialVM to Material table
+                _unitOfWork.Save(); //keep track on change
+                TempData["success"] = "Vật tư đã tạo thành công";//after adding, return to previous action and reload the page
 
-            //return View(materialVM); //return previous action + invalid object
+                //return View(materialVM); //return previous action + invalid object
+                return RedirectToAction("Index");
+            } catch(Exception ex)
+            {
+                TempData["error"] = "Đã có lỗi xảy ra trong lúc tạo vật tư" + ex.Message;
+                return RedirectToAction("Index");
+            }
+           
         }
         //Edit Action
         public IActionResult Edit(string? id)
@@ -131,38 +139,47 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         [HttpPost]
         public IActionResult Edit(MaterialViewModel materialVM, IFormFile? file)
         {
-            string wwwRootPath = _webHostEnvironment.WebRootPath;
-            if (file != null)
+            try
             {
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//save a new name for filename
-                //product image location
-                string materialPath = Path.Combine(wwwRootPath, @"images\material");
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//save a new name for filename
+                                                                                                   //product image location
+                    string materialPath = Path.Combine(wwwRootPath, @"images\material");
 
-                if(!string.IsNullOrEmpty(materialVM.Material.ImageUrl))
-                {
-                    //delete the old image
-                    var oldImagePath = Path.Combine(wwwRootPath, materialVM.Material.ImageUrl.TrimStart('\\'));
-                    if (System.IO.File.Exists(oldImagePath))
+                    if (!string.IsNullOrEmpty(materialVM.Material.ImageUrl))
                     {
-                        System.IO.File.Delete(oldImagePath);
+                        //delete the old image
+                        var oldImagePath = Path.Combine(wwwRootPath, materialVM.Material.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
                     }
+                    //copy file's content to fileStream
+                    using (var fileStream = new FileStream(Path.Combine(materialPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    //pass the filename path to ImageUrl Property
+                    materialVM.Material.ImageUrl = @"\images\material\" + fileName;
                 }
-                //copy file's content to fileStream
-                using (var fileStream = new FileStream(Path.Combine(materialPath, fileName), FileMode.Create))
-                {
-                    file.CopyTo(fileStream);
-                }
-                //pass the filename path to ImageUrl Property
-                materialVM.Material.ImageUrl = @"\images\material\" + fileName;
+                // if (ModelState.IsValid) //model is valid
+                //{
+                _unitOfWork.Material.Update(materialVM.Material); //Update Material to Material table
+                _unitOfWork.Save(); //keep track on change
+                TempData["success"] = "Chỉnh sửa vật tư thành công";
+                return RedirectToAction("Index");  //after updating, return to previous action and reload the page
+                                                   //}
+                                                   //return View();//return previous action if model is invalid
             }
-            // if (ModelState.IsValid) //model is valid
-            //{
-            _unitOfWork.Material.Update(materialVM.Material); //Update Material to Material table
-            _unitOfWork.Save(); //keep track on change
-            TempData["success"] = "Chỉnh sửa vật tư thành công";
-            return RedirectToAction("Index"); //after updating, return to previous action and reload the page
-            //}
-            //return View();//return previous action if model is invalid
+            catch (Exception ex) 
+            {
+                TempData["error"] = "Đã có lỗi xảy ra trong quá trình chỉnh sửa vật tư" + ex.Message;
+                return RedirectToAction("Index");
+            }
+
         }
 
         //Delete Action

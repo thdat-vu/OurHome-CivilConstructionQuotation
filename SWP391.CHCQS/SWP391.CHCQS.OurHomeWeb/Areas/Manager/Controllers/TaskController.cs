@@ -164,14 +164,24 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         [HttpPost]
         public IActionResult Create(TaskVM taskVM)
         {
-			taskVM.Task.Status = true; //change status into true;
-			taskVM.Task.Id = SD.TempId; //assign temp ID
+			try
+			{
+                taskVM.Task.Status = true; //change status into true;
+                taskVM.Task.Id = SD.TempId; //assign temp ID
 
 
-			_unitOfWork.Task.Add(taskVM.Task); //Add Task to task table
-			_unitOfWork.Save(); //keep track on change
-			TempData["success"] = "Thêm đầu mục công việc thành công";
-			return RedirectToAction("Index");
+                _unitOfWork.Task.Add(taskVM.Task); //Add Task to task table
+                _unitOfWork.Save(); //keep track on change
+                TempData["success"] = "Thêm đầu mục công việc thành công";
+                return RedirectToAction("Index");
+            }
+			catch (Exception ex) 
+			{
+                TempData["error"] = "Đã xảy ra lỗi trong quá trình thêm đầu mục công việc" + ex.Message;
+                return RedirectToAction("Index");
+
+            }
+			
 		}
 
 		//Edit Action
@@ -208,10 +218,19 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 		[HttpPost]
 		public IActionResult Edit(TaskVM taskVM) 
 		{
-			_unitOfWork.Task.Update(taskVM.Task); //Update Material to Material table
-			_unitOfWork.Save(); //keep track on change
-			TempData["success"] = "Chỉnh sửa đầu mục công việc thành công";
-			return RedirectToAction("Index");
+			try
+			{
+                _unitOfWork.Task.Update(taskVM.Task); //Update Material to Material table
+                _unitOfWork.Save(); //keep track on change
+                TempData["success"] = "Chỉnh sửa đầu mục công việc thành công";
+                return RedirectToAction("Index");
+            }
+			catch(Exception ex)
+			{
+				TempData["error"] = "Đã xảy ra lỗi trong quá trình chỉnh sửa đầu mục công việc" + ex.Message;
+                return RedirectToAction("Index");
+            }
+			
 		}
 
 		//Delete Action
