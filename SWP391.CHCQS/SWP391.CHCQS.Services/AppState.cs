@@ -23,9 +23,10 @@ namespace SWP391.CHCQS.Services
 
         private AppState(UserManager<IdentityUser> userManager) {
             _userManager = userManager;
-            SLMax =  userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Count();
-            ENMax = userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Count();
-            MGMax = userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Count();
+            
+            SLMax =  userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Where(x => x.LockoutEnd > DateTime.Now || x.LockoutEnd == null).Count();
+            ENMax = userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Where(x => x.LockoutEnd > DateTime.Now || x.LockoutEnd == null).Count();
+            MGMax = userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Where(x => x.LockoutEnd > DateTime.Now || x.LockoutEnd == null).Count();
 
             SLIndex =  _random.Next(1, SLMax);
             ENIndex = _random.Next(1, ENMax);
@@ -54,17 +55,17 @@ namespace SWP391.CHCQS.Services
             {
                 lock (_lock)
                 {
-                    if (_instance.SLMax != userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Count())
+                    if (_instance.SLMax != userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Where(x => x.LockoutEnd > DateTime.Now || x.LockoutEnd == null).Count())
                     {
-                        _instance.SLMax = userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Count();
+                        _instance.SLMax = userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Where(x => x.LockoutEnd > DateTime.Now || x.LockoutEnd == null).Count();
                     }
-                    if (_instance.ENMax != userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Count())
+                    if (_instance.ENMax != userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Where(x => x.LockoutEnd > DateTime.Now || x.LockoutEnd == null).Count())
                     {
-                        _instance.ENMax = userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Count();
+                        _instance.ENMax = userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Where(x => x.LockoutEnd > DateTime.Now || x.LockoutEnd == null).Count();
                     }
-                    if (_instance.MGMax != userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Count())
+                    if (_instance.MGMax != userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Where(x => x.LockoutEnd > DateTime.Now || x.LockoutEnd == null).Count())
                     {
-                        _instance.MGMax = userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Count();
+                        _instance.MGMax = userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Where(x => x.LockoutEnd > DateTime.Now || x.LockoutEnd == null).Count();
                     }
                 }
 
@@ -95,12 +96,18 @@ namespace SWP391.CHCQS.Services
             return Tuple.Create(sl, en, mg);
         }
 
+        //private Tuple<string, string, string> GetStaffIdDelegation()
+        //{
+
+        //    return Tuple.Create(null, null, null);
+        //}
+
 		//Cách gọi ra AppState: 
 		//var delegationService = AppState.Instance(_userManager).GetDelegationIndex()
 		//demo.Item1
 		//demo.Item2
 		//demo.Item3
 
-		//để lấy StaffId cho seller  thì query:  _unitOfWork.Staff.Where((x) = >x.Id.Contains(SD.SelerIdKey)).SkipWhile((entity, index) => index < demo.Item1).FirstOrdefault().Id;
+		//để lấy StaffId cho seller  thì query:  _unitOfWork.Staff.Where((x) = >x.Id.Contains(SD.SelerIdKey)).SkipWhile((entity, index) => index < demo.Item1 - 1).FirstOrdefault().Id;
 	}
 }
