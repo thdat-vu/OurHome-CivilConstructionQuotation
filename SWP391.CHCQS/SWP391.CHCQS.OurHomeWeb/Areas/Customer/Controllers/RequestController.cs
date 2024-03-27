@@ -308,20 +308,21 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 		public void DelegateRequest(string requestId)
 		{
 			var delegationService = AppState.Instance(_userManager).GetDelegationIndex();
-			var sellerId = _userManager.GetUsersInRoleAsync(SD.Role_Seller)
-				.GetAwaiter().GetResult()
-				.Where(x => x.LockoutEnd.Value <= DateTime.Now)
-				.SkipWhile((entity, index) => index < delegationService.Item1 - 1)
+			var slList = _userManager.GetUsersInRoleAsync(SD.Role_Seller)
+				.GetAwaiter().GetResult();
+			slList = slList.Where(x => x.LockoutEnd == null || x.LockoutEnd.Value <= DateTime.Now).ToList();
+            var sellerId = slList
+				.SkipWhile((entity, index) => index < delegationService.Item1)
 				.FirstOrDefault().Id;
 			var engineerId = _userManager.GetUsersInRoleAsync(SD.Role_Engineer)
 				.GetAwaiter().GetResult()
-				.Where(x => x.LockoutEnd.Value <= DateTime.Now)
-				.SkipWhile((entity, index) => index < delegationService.Item2 - 1)
+				.Where(x => x.LockoutEnd.Value <= DateTime.Now || x.LockoutEnd == null)
+				.SkipWhile((entity, index) => index < delegationService.Item2)
 				.FirstOrDefault().Id;
 			var managerId = _userManager.GetUsersInRoleAsync(SD.Role_Manager)
 				.GetAwaiter().GetResult()
-				.Where(x => x.LockoutEnd.Value <= DateTime.Now)
-				.SkipWhile((entity, index) => index < delegationService.Item3 - 1)
+				.Where(x => x.LockoutEnd.Value <= DateTime.Now || x.LockoutEnd == null)
+				.SkipWhile((entity, index) => index < delegationService.Item3)
 				.FirstOrDefault().Id;
 			var sellerReport = new WorkingReport
 			{

@@ -93,7 +93,7 @@ namespace SWP391.CHCQS.Services
                 MGIndex = 1;
             else MGIndex++;
 
-            return Tuple.Create(sl, en, mg);
+            return Tuple.Create(sl -1 , en -1 , mg - 1);
         }
 
         //private Tuple<string, string, string> GetStaffIdDelegation()
