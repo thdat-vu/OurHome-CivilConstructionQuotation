@@ -7,9 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Base\Data\**" />
+    <Compile Remove="Areas\Base\Models\**" />
+    <Compile Remove="Areas\Base\Views\**" />
     <Compile Remove="SWP391.CHCQS.OurHomeWeb\**" />
+    <Content Remove="Areas\Base\Data\**" />
+    <Content Remove="Areas\Base\Models\**" />
+    <Content Remove="Areas\Base\Views\**" />
     <Content Remove="SWP391.CHCQS.OurHomeWeb\**" />
+    <EmbeddedResource Remove="Areas\Base\Data\**" />
+    <EmbeddedResource Remove="Areas\Base\Models\**" />
+    <EmbeddedResource Remove="Areas\Base\Views\**" />
     <EmbeddedResource Remove="SWP391.CHCQS.OurHomeWeb\**" />
+    <None Remove="Areas\Base\Data\**" />
+    <None Remove="Areas\Base\Models\**" />
+    <None Remove="Areas\Base\Views\**" />
     <None Remove="SWP391.CHCQS.OurHomeWeb\**" />
   </ItemGroup>
 
@@ -46,9 +58,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Base\Data\" />
-    <Folder Include="Areas\Base\Models\" />
-    <Folder Include="Areas\Base\Views\" />
     <Folder Include="wwwroot\images\material\" />
     <Folder Include="wwwroot\images\combo\" />
     <Folder Include="wwwroot\images\project\" />
