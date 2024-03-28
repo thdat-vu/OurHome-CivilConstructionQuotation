@@ -94,7 +94,14 @@
 			{
 				<div class="col-sm-4 mb-5">
 					<div class="img-thumbnail">
-						<img src="@project.Images.ElementAt(0).ImageUrl" width="100%"></img>
+						@if(project.Images!=null&& project.Images.Count > 0)
+						{
+							<img src="@project.Images.ElementAt(0).ImageUrl" width="100%"></img>
+						}
+						else
+						{
+							<img src="~/images/background.jpg" width="100%"></img>
+						}
 						<div class="m-sm-3 text-dark">
 							<h3><b>Name: </b>@project.Name</h3>
 							<p><b>Location:</b> @project.Location</p>
@@ -136,6 +143,7 @@
 			foreach(var combo in Model.Combos)
 			{
 				<div class="row p-1">
+
 					<div class="col img-thumbnail">
 						<img src="@combo.ImageUrl" class="w-100"></img>
 					</div>
