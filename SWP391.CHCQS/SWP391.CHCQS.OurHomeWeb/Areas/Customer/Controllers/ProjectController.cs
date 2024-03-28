@@ -15,7 +15,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
         }
         public async Task<IActionResult> Index(int page = 1)
         {
-            int pageSize = 2; // Số lượng dự án trên mỗi trang
+            int pageSize = 10; // Số lượng dự án trên mỗi trang
                                // Tính toán offset để lấy dữ liệu từ database cho trang hiện tại
             int offset = (page - 1) * pageSize;
 
@@ -57,7 +57,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var keyTrim = keyword.Trim().ToLower();
-            int pageSize = 2; // Số lượng dự án trên mỗi trang
+            int pageSize = 10; // Số lượng dự án trên mỗi trang
                               // Tính toán offset để lấy dữ liệu từ database cho trang hiện tại
             int offset = (page - 1) * pageSize;
 
