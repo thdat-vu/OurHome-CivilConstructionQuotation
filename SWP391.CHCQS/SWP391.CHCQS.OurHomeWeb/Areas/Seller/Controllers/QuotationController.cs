@@ -42,7 +42,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         [HttpGet]
         public IActionResult CreateConstructDetails(string? id)
         {
-            var requestForm = _unitOfWork.RequestForm.Get(u => u.Id == id);
+            var requestForm = _unitOfWork.RequestForm.Get(u => u.Id == id, includeProperties: "Customer");
             //phải có thằng này vì nó có khóa chung giữa 2 bảng là ConstructDetail và CustomQuotation, nếu muốn thêm thì phải thêm vào cả 2
             //hiểu nôm na là phải có CustomQuotation id trước khi có thằng ConstructDetail id
             var customQuotation = new CustomQuotation
@@ -56,6 +56,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 Total = 0,
                 RequestId = requestForm.Id
             };
+            requestForm.CustomQuotation = customQuotation;
+            //Serialize dữ liệu để truyền qua view
             var serializedData = JsonSerializer.Serialize(customQuotation);
             ViewBag.CustomQuotation = serializedData;
 
@@ -90,7 +92,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 }),
                 Alleys = SD.Alleys.Select(x => new SelectListItem { Text = x, Value = x }).ToList(),
                 Facades = SD.Facades.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }).ToList(),
-                QuotationId = customQuotation.Id 
+                Request = requestForm
             };
             return View(ConstructDetailVM);
         }
@@ -99,10 +101,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
         [ActionName("CreateConstructDetails")]
         public IActionResult CreateConstructDetailsPost(ConstructDetailViewModel constructDetailVM, string hiddenData)
         {
+            // Tạo một đối tượng ConstructDetail mới với các giá trị đã chọn từ ViewModel
+            CustomQuotation? customQuotation = JsonSerializer.Deserialize<CustomQuotation>(hiddenData);
             if (ModelState.IsValid)
             {
-                // Tạo một đối tượng ConstructDetail mới với các giá trị đã chọn từ ViewModel
-                CustomQuotation? customQuotation = JsonSerializer.Deserialize<CustomQuotation>(hiddenData);
 
                 //***********BUG***********
                 //customQuotation.SubmissionDateSeller = DateTime.Now;
@@ -173,8 +175,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                         Value = u.Id,
                     }),
                     Alleys = SD.Alleys.Select(x => new SelectListItem { Text = x, Value = x }).ToList(),
-                    Facades = SD.Facades.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }).ToList()
-                };
+                    Facades = SD.Facades.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }).ToList(),
+                    Request =  _unitOfWork.RequestForm.Get(u => u.Id == customQuotation.RequestId, includeProperties: "Customer")
+            };
                 TempData["error"] = "Tạo thông tin chi tiết công trình thất bại";
                 return View(ConstructDetailVM);
             }

@@ -74,7 +74,8 @@
                 <div class="col-lg">
                     <label><b class="text-nowrap">Chiều dài:</b></label>
                     <p>@Model.ConstructDetail.Length</p>
-                </div><div class="col-lg">
+                </div>
+                <div class="col-lg">
                     <label><b class="text-nowrap">Mặt tiền:</b></label>
                     <p>@Model.ConstructDetail.Facade</p>
                 </div>
@@ -150,7 +151,7 @@
                             <tr>
                                 <td style="width:25%">@item.Task.Name</td>
                                 <td style="width:55%">@item.Task.Description</td>
-                                <td style="text-align:right;width:25%">@item.Task.UnitPrice.ToString("N0") VND</td>
+                                <td style="text-align:right;width:25%">@item.Task.UnitPrice.ToString("#,##0") VND</td>
                             </tr>
                         }
 
@@ -176,8 +177,8 @@
                             <tr>
                                 <td style="width:20%">@item.Task.Name</td>
                                 <td style="width:35%">@item.Task.Description</td>
-                                <td style="text-align:right;width:20%">@item.Task.UnitPrice.ToString("N0") VND</td>
-                                <td style="text-align:right;width:25%">@item.Price.ToString("N0") VND</td>
+                                <td style="text-align:right;width:20%">@item.Task.UnitPrice.ToString("#,##0") VND</td>
+                                <td style="text-align:right;width:25%">@item.Price.ToString("#,##0") VND</td>
                             </tr>
                         }
 
@@ -186,10 +187,7 @@
             </table>
         </div>
         <div style="text-align:right;margin-right:1.3em;margin-bottom:2em">
-            @* trong .NET Framework, chuỗi định dạng "N" là một trong những chuỗi định dạng số chuẩn mà .NET cung cấp
-            .NET sẽ mặc định hiển thị hai chữ số sau dấu phẩy thập phân và tự động thêm dấu phẩy ngăn cách giữa các hàng nghìn.
-            nhưng ở đây ghi N0 tức là không chữ số thập phân nào xuất hiện *@
-            <h3 style="color:red;">Báo giá tổng: @Model.Total.ToString("N0") VND</h3>
+            <h3 style="color:red;">Báo giá tổng: @Model.Total.ToString("#,##0") VND</h3>
         </div>
     </div>
 
