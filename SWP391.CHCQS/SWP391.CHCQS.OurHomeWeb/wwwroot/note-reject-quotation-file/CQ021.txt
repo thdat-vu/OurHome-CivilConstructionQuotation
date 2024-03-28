@@ -60,3 +60,127 @@
   }
 }
 
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "Kh\u00F4ng c\u1EA7n t\u1ED5 ch\u1EE9c c\u00F4ng tr\u01B0\u1EDDng",
+    "TSK002": "",
+    "TSK003": "\u0110\u00E0o m\u00F3ng \u0111\u00E3 c\u00F3 \u0111\u01A1n v\u1ECB kh\u00E1c thi c\u00F4ng",
+    "TSK004": "",
+    "TSK005": "",
+    "TSK006": "X\u00E2y t\u01B0\u1EDDng g\u1EA1ch ch\u01B0a h\u1EE3p l\u1EC7",
+    "TSK007": "",
+    "TSK008": "",
+    "TSK009": "",
+    "TSK010": "",
+    "TSK011": "Nh\u00E0 c\u00F3 d\u00E2y c\u00E1p r\u1ED3i b\u1EA1n \u01A1i",
+    "TSK012": "",
+    "TSK013": "",
+    "TSK014": "",
+    "TSK015": "",
+    "TSK016": "",
+    "TSK017": "",
+    "TSK018": "",
+    "TSK020": ""
+  },
+  "MaterialDetailNotes": {
+    "VT1010": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "Kh\u00F4ng c\u1EA7n t\u1ED5 ch\u1EE9c c\u00F4ng tr\u01B0\u1EDDng",
+    "TSK002": "",
+    "TSK003": "\u0110\u00E0o m\u00F3ng \u0111\u00E3 c\u00F3 \u0111\u01A1n v\u1ECB kh\u00E1c thi c\u00F4ng",
+    "TSK004": "",
+    "TSK005": "",
+    "TSK006": "X\u00E2y t\u01B0\u1EDDng g\u1EA1ch ch\u01B0a h\u1EE3p l\u1EC7",
+    "TSK007": "",
+    "TSK008": "",
+    "TSK009": "Kh\u00F4ng c\u1EA7n l\u1EAFp \u0111\u1EB7t \u1ED1ng n\u01B0\u1EDBc",
+    "TSK010": "",
+    "TSK011": "Nh\u00E0 c\u00F3 d\u00E2y c\u00E1p r\u1ED3i b\u1EA1n \u01A1i",
+    "TSK012": "",
+    "TSK013": "",
+    "TSK014": "",
+    "TSK015": "",
+    "TSK016": "",
+    "TSK017": "",
+    "TSK018": "",
+    "TSK020": ""
+  },
+  "MaterialDetailNotes": {
+    "VT1010": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "Kh\u00F4ng c\u1EA7n t\u1ED5 ch\u1EE9c c\u00F4ng tr\u01B0\u1EDDng",
+    "TSK002": "",
+    "TSK003": "\u0110\u00E0o m\u00F3ng \u0111\u00E3 c\u00F3 \u0111\u01A1n v\u1ECB kh\u00E1c thi c\u00F4ng",
+    "TSK004": "",
+    "TSK005": "",
+    "TSK006": "X\u00E2y t\u01B0\u1EDDng g\u1EA1ch ch\u01B0a h\u1EE3p l\u1EC7",
+    "TSK007": "",
+    "TSK008": "",
+    "TSK009": "Kh\u00F4ng c\u1EA7n l\u1EAFp \u0111\u1EB7t \u1ED1ng n\u01B0\u1EDBc",
+    "TSK010": "",
+    "TSK011": "Nh\u00E0 c\u00F3 d\u00E2y c\u00E1p r\u1ED3i",
+    "TSK012": "",
+    "TSK013": "",
+    "TSK014": "",
+    "TSK015": "",
+    "TSK016": "",
+    "TSK017": "",
+    "TSK018": "",
+    "TSK020": ""
+  },
+  "MaterialDetailNotes": {
+    "VT1010": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "Kh\u00F4ng c\u1EA7n t\u1ED5 ch\u1EE9c c\u00F4ng tr\u01B0\u1EDDng",
+    "TSK002": "",
+    "TSK003": "\u0110\u00E0o m\u00F3ng \u0111\u00E3 c\u00F3 \u0111\u01A1n v\u1ECB kh\u00E1c thi c\u00F4ng",
+    "TSK004": "",
+    "TSK005": "",
+    "TSK006": "X\u00E2y t\u01B0\u1EDDng g\u1EA1ch ch\u01B0a h\u1EE3p l\u1EC7",
+    "TSK007": "",
+    "TSK008": "",
+    "TSK009": "Kh\u00F4ng c\u1EA7n l\u1EAFp \u0111\u1EB7t \u1ED1ng n\u01B0\u1EDBc",
+    "TSK010": "",
+    "TSK011": "Nh\u00E0 c\u00F3 d\u00E2y c\u00E1p r\u1ED3i",
+    "TSK012": "",
+    "TSK013": "",
+    "TSK014": "",
+    "TSK015": "",
+    "TSK016": "",
+    "TSK017": "",
+    "TSK018": "",
+    "TSK020": ""
+  },
+  "MaterialDetailNotes": {
+    "VT1010": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
