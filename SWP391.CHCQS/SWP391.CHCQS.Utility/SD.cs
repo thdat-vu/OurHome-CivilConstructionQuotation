@@ -52,7 +52,7 @@ namespace SWP391.CHCQS.Utility
 
 		#region QuickQuote Constants
 		//options for alley in QuickQuote
-		public static List<string> Alleys = new () { "Lớn hơn 5m", "Từ 3m - 5m", "Nhỏ hơn 3m" };
+		public static List<string> Alleys = new () { "Lớn hơn 5m", "Từ 3m - 5m", "Nhỏ hơn 3m", "Không có hẻm" };
         //options for facade in QuickQuote
         public static List<int> Facades = new () { 0, 1, 2, 3, 4 };
 		//surcharge for alley less than 5m

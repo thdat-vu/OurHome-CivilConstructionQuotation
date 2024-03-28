@@ -1,0 +1,18 @@
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "Kh\u00F4ng c\u1EA7n t\u1ED5 ch\u1EE9c ",
+    "TSK002": "M\u1EB7t b\u1EB1ng \u0111\u00E3 s\u1EA1ch"
+  },
+  "MaterialDetailNotes": {
+    "VT0003": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT1001": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+

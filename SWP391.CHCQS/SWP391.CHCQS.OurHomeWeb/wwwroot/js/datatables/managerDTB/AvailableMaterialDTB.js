@@ -16,10 +16,6 @@ function loadDataTableMaterial() {
         "columns": [
             {
                 data: 'id',
-                "render": function (data) {
-                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
-                }
-                ,
             },
             { data: 'name', },
             { data: 'unitPrice', render: formatCurrency },

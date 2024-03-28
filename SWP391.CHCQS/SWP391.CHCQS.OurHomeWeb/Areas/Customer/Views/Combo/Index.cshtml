@@ -36,7 +36,7 @@
                     </div>
                     <div class="col">
                         <h3><br />@combo.Name</h3>
-                        <p><br />Giá: @combo.Price</p>
+                        <p><br />Giá: @combo.Price.ToString("#,##0") VND</p>
                         <div class="col-sm m-1 btn-group rounded-1 w-100" role="group">
                             <a asp-area="Customer" asp-controller="Combo" asp-action="Detail" asp-route-id="@combo.Id" class="btn btn-main">Chi tiết</a>
                         </div>

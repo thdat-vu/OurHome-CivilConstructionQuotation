@@ -38,14 +38,14 @@
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div class="form-floating py-2 col-12">
-                <input asp-for="Description" class="form-control border-0 shadow" />
+                <textarea rows="5" asp-for="Description" class="form-control border-0 shadow" ></textarea>
                 <label asp-for="Description" class="ms-2"></label>
-                
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-floating py-2 col-12">
-                <input asp-for="Overview" class="form-control border-0 shadow" />
+                <textarea rows="5" asp-for="Overview" class="form-control border-0 shadow"></textarea>
                 <label asp-for="Overview" class="ms-2"></label>
-               
+                <span asp-validation-for="Overview" class="text-danger"></span>
             </div>
             <div class="form-floating py-2 col-12">
                 <input asp-for="Date" value="@Model.Date.ToString("dd/MM/yyyy")" class="form-control border-0 shadow" />
@@ -96,6 +96,9 @@
                         </th>
                         <th>
                             Tên
+                        </th>
+                        <th>
+                            Số điện thoại
                         </th>
                         <th>
                             Hành động

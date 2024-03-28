@@ -69,7 +69,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 
             //dùng phép chiếu đưa application user về VM bằng cách chỉ lấy thuộc tính cần sử dụng
             List<CustomerVM> list = new List<CustomerVM>();
-            applicationUserList.ForEach(x => list.Add(new CustomerVM { Id = x.Id, Name = x.Name }));
+            applicationUserList.ForEach(x => list.Add(new CustomerVM { Id = x.Id, Name = x.Name , PhoneNumber = x.PhoneNumber}));
 
             return Json(new { data = list });
         }

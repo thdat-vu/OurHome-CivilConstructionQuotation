@@ -23,8 +23,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
         public string Size { get; set; }
 		public bool Status { get; set; }
         [Display(Name = "Mô tả")]
+        [Required(ErrorMessage = "Vui lòng nhập Mô tả")]
         public string? Description { get; set; }
         [Display(Name = "Tổng quan")]
+        [Required(ErrorMessage = "Vui lòng nhập Tổng quan")]
         public string? Overview { get; set; }
         [Required(ErrorMessage = "Vui lòng chọn Ngày phù hợp")]
         [Display(Name = "Ngày")]
