@@ -2,6 +2,7 @@
 using Microsoft.Build.ObjectModelRemoting;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
+using SWP391.CHCQS.OurHomeWeb.Areas.Customer.ViewModels;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 {
@@ -24,11 +25,23 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
                 .Where(x => x.Status == true)
                 .OrderByDescending(x => x.Date)
                 .Skip(offset)
-                .Take(pageSize)
+			    .Take(pageSize)
                 .ToList();
+			if (projectList != null && projectList.Count > 0)
+			{
+				foreach (var project in projectList)
+				{
+					var firstImages = _unitOfWork.ProjectImage.GetAll(x => x.ProjectId == project.Id).FirstOrDefault();
+					if (firstImages != null)
+					{
+						project.Images = new List<ProjectImage>();
+						project.Images.Add(firstImages);
+					}
+				}
+			}
 
-            // Tính toán tổng số trang dựa trên tổng số dự án
-            int totalProjects = _unitOfWork.Project.GetAll().Count();
+			// Tính toán tổng số trang dựa trên tổng số dự án
+			int totalProjects = _unitOfWork.Project.GetAll().Count();
             int totalPages = (int)Math.Ceiling((double)totalProjects / pageSize);
 
             ViewBag.CurrentPage = page;
@@ -42,7 +55,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
             Project? project = _unitOfWork.Project.Get(filter: u => u.Id == id, includeProperties: "Customer");
             if (project == null)
             {
-                return NotFound();
+                TempData["Error"] = "Không thể xem dự án lúc này";
+                return RedirectToAction(nameof(Index));
             }
             else
             {

@@ -56,7 +56,7 @@
         {
             <div class="col-sm-4 mb-5">
                 <div class="img-thumbnail">
-                    <img src="~/images/project_bg/project_bg_4.jpg" width="100%"></img>
+                    <img src="@project.Images.ElementAt(0).ImageUrl" width="100%"></img>
                     <div class="m-sm-3 text-dark">
                         <h3><b>Tên dự án: </b>@project.Name</h3>
                         <p><b>Vị trí:</b> @project.Location</p>
@@ -79,7 +79,7 @@
 		{
             //đánh dấu trang hiện tại
             string cssClass = (i == ViewBag.CurrentPage) ? "pagination-link active current" : "pagination-link";
-            <a class="cssClass p-2" href="@currentUrl?page=@i">@i</a>
+            <a class="cssClass p-2" href="@currentUrl?page=@i&keyword=@ViewBag.LastSearch">@i</a>
 		}
 		
 	</div>
