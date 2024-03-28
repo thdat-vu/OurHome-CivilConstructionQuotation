@@ -32,12 +32,14 @@
 				<select type="text" class="form-control" asp-for="ConstructDetail.ConstructionId" asp-items="@Model.ConstructionTypes">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
+				<span asp-validation-for="ConstructDetail.ConstructionId" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Mức đầu tư:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.InvestmentId" asp-items="@Model.InvestmentTypes">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
+				<span asp-validation-for="ConstructDetail.InvestmentId" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Chiều rộng(m):</b><span class="text-danger">*</span></label>
@@ -53,12 +55,14 @@
 				<label><b class="text-nowrap">Mặt tiền:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.Facade" asp-items="@Model.Facades">
 				</select>
+				<span asp-validation-for="ConstructDetail.Facade" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Hẻm:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.Alley" asp-items="@Model.Alleys">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
+				<span asp-validation-for="ConstructDetail.Alley" class="text-danger"></span>
 			</div>
 		</div>
 
@@ -97,18 +101,21 @@
 				<select type="text" class="form-control" asp-for="ConstructDetail.FoundationId" asp-items="@Model.FoundationTypes">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
+				<span asp-validation-for="ConstructDetail.FoundationId" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Tầng hầm:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.BasementId" asp-items="@Model.BasementTypes">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
+				<span asp-validation-for="ConstructDetail.BasementId" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Loại mái:</b><span class="text-danger">*</span></label>
 				<select type="text" class="form-control" asp-for="ConstructDetail.RooftopId" asp-items="@Model.RooftopTypes">
 					<option disabled selected>--Chọn loại--</option>
 				</select>
+				<span asp-validation-for="ConstructDetail.RooftopId" class="text-danger"></span>
 			</div>
 			<div class="col-sm">
 				<label><b class="text-nowrap">Ban công:</b><span class="text-danger">*</span></label>
@@ -117,6 +124,7 @@
 					<option value="false">Không có ban công</option>
 					<option value="true">Có ban công</option>
 				</select>
+				<span asp-validation-for="ConstructDetail.Balcony" class="text-danger"></span>
 			</div>
 		</div>
 

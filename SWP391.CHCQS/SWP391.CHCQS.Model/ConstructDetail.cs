@@ -32,8 +32,8 @@ namespace SWP391.CHCQS.Model
 
 
         [MaxLength(50, ErrorMessage = "{0} không được quá {1} ký tự")]
-		[Display(Name = "Hẻm")]
-		[Required(ErrorMessage = "{0} không được bỏ trống")]
+		[Display(Name = "loại hẻm")]
+		[Required(ErrorMessage = "Cần chọn {0}")]
 		public string Alley { get; set; } = null!;
 
 
@@ -63,23 +63,34 @@ namespace SWP391.CHCQS.Model
         [RegularExpression(@"^-?\d+(\.\d+)?$", ErrorMessage = "Giá trị nhập phải là chữ số")]
 		public decimal RooftopFloor { get; set; }
 
-
-        public bool Balcony { get; set; }
+		[Display(Name = "loại ban công")]
+		[Required(ErrorMessage = "Cần chọn {0}")]
+		public bool Balcony { get; set; }
 		[Display(Name = "Diện tích vườn")]
 		[Required(ErrorMessage = "{0} không được bỏ trống")]
         [Range(0.00000001, 1000, ErrorMessage = "{0} phải lớn hơn 0")]
         [RegularExpression(@"^-?\d+(\.\d+)?$", ErrorMessage = "Giá trị nhập phải là chữ số")]
         public decimal Garden { get; set; }
         [MaxLength(10)]
-        public string ConstructionId { get; set; } = null!;
+		[Display(Name = "loại công trình")]
+		[Required(ErrorMessage = "Cần chọn {0}")]
+		public string ConstructionId { get; set; } = null!;
         [MaxLength(10)]
-        public string InvestmentId { get; set; } = null!;
+		[Display(Name = "loại đầu tư")]
+		[Required(ErrorMessage = "Cần chọn {0}")]
+		public string InvestmentId { get; set; } = null!;
         [MaxLength(10)]
-        public string FoundationId { get; set; } = null!;
+		[Display(Name = "loại móng")]
+		[Required(ErrorMessage = "Cần chọn {0}")]
+		public string FoundationId { get; set; } = null!;
         [MaxLength(10)]
-        public string RooftopId { get; set; } = null!;
+		[Display(Name = "loại mái")]
+		[Required(ErrorMessage = "Cần chọn {0}")]
+		public string RooftopId { get; set; } = null!;
         [MaxLength(10)]
-        public string BasementId { get; set; } = null!;
+		[Display(Name = "loại hầm")]
+		[Required(ErrorMessage = "Cần chọn {0}")]
+		public string BasementId { get; set; } = null!;
  
         public virtual BasementType? Basement { get; set; } 
         public virtual ConstructionType? Construction { get; set; }
