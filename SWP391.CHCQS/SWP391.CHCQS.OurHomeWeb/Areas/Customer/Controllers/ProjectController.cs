@@ -46,7 +46,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
             }
             else
             {
-                return View(project);
+				var images = _unitOfWork.ProjectImage.GetAll(x => x.ProjectId == id).ToList();
+				if (images.Count > 0)
+				{
+					project.Images = images;
+				}
+				return View(project);
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SWP391.CHCQS.Model.ValidationModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -39,15 +40,18 @@ namespace SWP391.CHCQS.Model
 
 		[Display(Name = "Số tầng")]
 		[Required(ErrorMessage = "{0} không được bỏ trống")]
-		[Range(1, 100, ErrorMessage = "{0} trong khoảng từ {1} đến {2}")]
+        [MustBeInteger(ErrorMessage = "Giá trị nhập phải là số nguyên")]
+        [Range(1, 100, ErrorMessage = "{0} trong khoảng từ {1} đến {2}")]
+        [RegularExpression(@"^-?\d+(\.\d+)?$", ErrorMessage = "Giá trị nhập phải là chữ số")]
         public int Floor { get; set; }
 
 
 		[Display(Name = "Số phòng")]
 		[Required(ErrorMessage = "{0} không được bỏ trống")]
-		[Range(1, 100, ErrorMessage = "{0} trong khoảng từ {1} đến {2}")]
-		[RegularExpression(@"^-?\d+$", ErrorMessage = "Giá trị nhập phải là chữ số")]
-		public int Room { get; set; }
+        [MustBeInteger(ErrorMessage = "Giá trị nhập phải là số nguyên")]
+        [Range(1, 100, ErrorMessage = "{0} trong khoảng từ {1} đến {2}")]
+        [RegularExpression(@"^-?\d+(\.\d+)?$", ErrorMessage = "Giá trị nhập phải là chữ số")]
+        public int Room { get; set; }
 
 
 		[Display(Name = "Diện tích lửng")]

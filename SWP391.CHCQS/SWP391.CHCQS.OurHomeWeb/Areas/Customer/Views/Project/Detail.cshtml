@@ -22,15 +22,31 @@
 		<div id="overview" class="col-lg-5" style="max-width:40em">
 			<div id="carouselExample" class="carousel slide">
 				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img style="border-radius:5px" src="~/images/project_bg/project_bg_4.jpg" width="100%" height="50%" />
-					</div>
-					<div class="carousel-item">
-						<img style="border-radius:5px" src="~/images/project_bg/project_bg_1.jpg" width="100%" height="50%" />
-					</div>
-					<div class="carousel-item">
-						<img style="border-radius:5px" src="~/images/project_bg/project_bg_2.jpg" width="100%" height="50%" />
-					</div>
+					@if (Model.Images != null && Model.Images.Count > 0)
+                    {
+						var isFirstImage = true;
+						foreach (var image in Model.Images)
+						{
+							var activeClass = isFirstImage ? "active" : "";
+							isFirstImage = false;
+							<div class="carousel-item @activeClass">
+								<img style="border-radius:5px" src="@image.ImageUrl" width="100%" height="50%" />
+							</div>
+						}
+					}
+					else
+					{
+						<div class="carousel-item active">
+							<img style="border-radius:5px" src="~/images/project_bg/project_bg_4.jpg" width="100%" height="50%" />
+						</div>
+						<div class="carousel-item">
+							<img style="border-radius:5px" src="~/images/project_bg/project_bg_1.jpg" width="100%" height="50%" />
+						</div>
+						<div class="carousel-item">
+							<img style="border-radius:5px" src="~/images/project_bg/project_bg_2.jpg" width="100%" height="50%" />
+						</div>
+					}
+
 				</div>
 				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
