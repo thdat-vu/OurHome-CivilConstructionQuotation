@@ -19,7 +19,8 @@ namespace SWP391.CHCQS.Model
 		[Display(Name = "Tên Vật Liệu")]
 		public string Name { get; set; } = null!;
         [Display(Name = "Giá Gốc")]
-		[Range(1, double.MaxValue, ErrorMessage = "Vui lòng nhập Giá Gốc lớn hơn 0.")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Vui lòng nhập một số hợp lệ.")]
+        [Range(1, double.MaxValue, ErrorMessage = "Vui lòng nhập Giá Gốc lớn hơn 0.")]
 		[Required(ErrorMessage = "Giá Gốc không được để trống ")]
 		public decimal UnitPrice { get; set; }
         [MaxLength(30)]
@@ -36,7 +37,7 @@ namespace SWP391.CHCQS.Model
         //public virtual ICollection<MaterialDetail> MaterialDetails { get; set; }
         [MaxLength(200)]
 
-        [Display(Name = "Image")]
+        [Display(Name = "Hình ảnh")]
         public string? ImageUrl { get; set; }
         public virtual ICollection<Combo> Combos { get; set; }        
 

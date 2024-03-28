@@ -22,7 +22,8 @@ namespace SWP391.CHCQS.Model
 		[Required(ErrorMessage = "Vui lòng nhập mô tả")]
 		public string? Description { get; set; }
 		[Display(Name = "Giá Gốc")]
-		[Range(1, double.MaxValue, ErrorMessage = "Vui lòng nhập Giá Gốc lớn hơn 0.")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Vui lòng nhập một số hợp lệ.")]
+        [Range(1, double.MaxValue, ErrorMessage = "Vui lòng nhập Giá Gốc lớn hơn 0.")]
 		[Required(ErrorMessage = "Vui lòng nhập giá gốc ")]
 		public decimal UnitPrice { get; set; }
         public bool Status { get; set; }

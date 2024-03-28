@@ -22,8 +22,9 @@ namespace SWP391.CHCQS.Model
 		[Required(ErrorMessage = "Vui lòng nhập Mô tả")]
 		[Display(Name = "Mô tả")]
 		public string Description { get; set; }
-		[Display(Name = "Giá")]
-		[Range(1, double.MaxValue, ErrorMessage = "Vui lòng nhập Giá lớn hơn 0.")]
+		[Display(Name = "Giá tham khảo")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Vui lòng nhập một số hợp lệ.")]
+        [Range(1, double.MaxValue, ErrorMessage = "Vui lòng nhập Giá lớn hơn 0.")]
 		[Required(ErrorMessage = "Giá không được để trống ")]
 		public decimal Price { get; set; }
         public bool Status { get; set; }
