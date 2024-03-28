@@ -246,7 +246,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 					Description = info.Description,
 					Total = info.Total,
 					GenerateDateRequest = info.Request.GenerateDate,
-					ConstructDetail = info.ConstructDetail
+					ConstructDetail = info.ConstructDetail,
+					RequestId = info.RequestId
 				};
 
 				//bổ sung construct Detail
