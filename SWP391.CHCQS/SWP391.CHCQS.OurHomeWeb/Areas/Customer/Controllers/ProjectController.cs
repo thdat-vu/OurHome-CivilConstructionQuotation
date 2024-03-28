@@ -21,6 +21,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 
             // Lấy danh sách dự án từ database
             List<Project> projectList = _unitOfWork.Project.GetAll(includeProperties: "Customer")
+                .Where(x => x.Status == true)
                 .OrderByDescending(x => x.Date)
                 .Skip(offset)
                 .Take(pageSize)
@@ -60,7 +61,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
                               // Tính toán offset để lấy dữ liệu từ database cho trang hiện tại
             int offset = (page - 1) * pageSize;
 
-            var projectList = _unitOfWork.Project.GetAll(includeProperties: "Customer")
+            var projectList = _unitOfWork.Project.GetAll(x => x.Status == true, includeProperties: "Customer")
                 .Where(x =>
                     (!string.IsNullOrEmpty(x.Overview) && x.Overview.ToLower().Contains(keyTrim)) ||
                     (!string.IsNullOrEmpty(x.Description) && x.Description.ToLower().Contains(keyTrim)) ||

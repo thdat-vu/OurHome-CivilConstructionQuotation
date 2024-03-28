@@ -13,7 +13,10 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var materialList = _unitOfWork.Material.GetAll(includeProperties: "Category").ToList();
+            var materialList = _unitOfWork.Material
+                .GetAll(includeProperties: "Category")
+                .Where(x => x.Status == true)
+                .ToList();
             return View(materialList);
         }
 

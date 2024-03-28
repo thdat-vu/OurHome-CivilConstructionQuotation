@@ -22,7 +22,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
             //TODO: lấy đc combo + MaterialList TaskList mỗi combo.
 
             // Retrieve all combos with their associated materials and tasks
-           var comboList =  _unitOfWork.Combo.GetAll().ToList();
+           var comboList =  _unitOfWork.Combo.GetAll(x => x.Status == true).ToList();
             //DatVT, bruce-force way.
             //step1: retrieve the ComboMaterials<ComboIds, MaterialsId> and ComboTask<CombosId, TasksId> according to ComboId
             //Step2: mapping corresponding MaterialsId and TasksId to retrieve MaterialList and TaskList based on Id
