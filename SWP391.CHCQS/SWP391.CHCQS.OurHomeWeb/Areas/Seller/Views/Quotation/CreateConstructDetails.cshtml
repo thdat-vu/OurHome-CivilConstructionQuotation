@@ -10,13 +10,61 @@
         @* <input hidden asp-route-hiddenData="@ViewBag.CustomQuotation" /> *@
         <input hidden id="hiddenData" name="hiddenData" value="@ViewBag.CustomQuotation" />
         
-        <input hidden asp-for="ConstructDetail.QuotationId" value="@Model.QuotationId" />
+        <input hidden asp-for="ConstructDetail.QuotationId" value="@Model.Request.CustomQuotation.Id" />
         <div class="mt-3 mb-5 w-100 m-auto">
             <div class="row mt-3">
                 <div class="ml-3 rounded-1 float-left">
                     <a href="/Seller/Request/Index" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Trở lại</a>
                 </div>
             </div>
+            <h3 class="text-center"><b>Thông tin khách hàng</b></h3>
+            <hr class="w-75 m-auto"></hr>
+            <div class="row mt-2 mb-2 text-center">
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Tên khách hàng:</b></label>
+                    <p>@Model.Request.Customer.Name</p>
+                </div>
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Giới tính:</b></label>
+                    <p>@Model.Request.Customer.Gender</p>
+                </div>
+
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Số điện thoại:</b></label>
+                    <p>@Model.Request.Customer.PhoneNumber</p>
+                </div>
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Email:</b></label>
+                    <p>@Model.Request.Customer.Email</p>
+                </div>
+            </div>
+            <div class="row mb-2 text-center">
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Mã yêu cầu:</b></label>
+                    <p>@Model.Request.Id</p>
+                </div>
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Ngày nhận yêu cầu:</b></label>
+                    <p>@Model.Request.GenerateDate.ToString("dd/MM/yyyy")</p>
+                </div>
+
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Vị trí:</b></label>
+                    <p>@Model.Request.Location</p>
+                </div>
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Diện tích:</b></label>
+                    <p>@Model.Request.Acreage</p>
+                </div>
+            </div>
+            @if (Model.Request.Description != null)
+            {
+                <div class="row mb-2 px-5 d-flex">
+                    <label><b class="text-nowrap">Mô tả:</b></label>
+                    <p class="mx-5">@Model.Request.Description</p>
+                </div>
+            }
+            
             <h3 class="text-center"><b>Thông tin báo giá chi tiết</b></h3>
             <hr class="w-75 m-auto"></hr>
         </div>
