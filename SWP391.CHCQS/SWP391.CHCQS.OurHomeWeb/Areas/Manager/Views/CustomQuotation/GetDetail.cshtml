@@ -221,7 +221,7 @@
                         </div>
                         <div class="col-lg">
                             <label><b class="text-nowrap">Ngày nhận: </b></label>
-                            <p>@quotationDetailVM.DelegationDateSeller</p>
+                            <p>@(quotationDetailVM.DelegationDateSeller)</p>
                         </div>
                         <div class="col-lg">
                             <label><b class="text-nowrap">Ngày nộp:</b></label>
@@ -284,18 +284,14 @@
                     <form asp-area="Manager" asp-controller="CustomQuotation" asp-action="RejectDetail" method="post">
                         <!--quotation id sẽ dc reject-->
                         <input asp-for="@rejectReportVM.RejectQuotationId" type="hidden" value="@quotationDetailVM.QuoteId" />
-                        <!--manager id - người đã thực hiện reject-->
-                        <input asp-for="@rejectReportVM.RejecterId" type="hidden" value="@quotationDetailVM.Manager.Id" />
-                        <!--engineer id - người đã làm detail cho customquotation-->
-                        <input asp-for="@rejectReportVM.SubcriberId" type="hidden" value="@quotationDetailVM.Enginneer.Id" />
                         <!--ngày submit của engineer-->
                         <input asp-for="@rejectReportVM.SubmissionEngineerDate" type="hidden" value="@quotationDetailVM.SubmissionDateEngineer" />
                         <!--ngày recieve của manager-->
                         <input asp-for="@rejectReportVM.RecieveManagerDate" type="hidden" value="@quotationDetailVM.RecieveDateManager" />
                         <!--manager id-->
-                        <input asp-for="@rejectReportVM.ManagerId" type="hidden" value="@quotationDetailVM.Manager.Id" />
+                        <input asp-for="@rejectReportVM.ManagerId" type="hidden" value="@(quotationDetailVM.Manager?.Id??"")" />
                         <!--engineer id-->
-                        <input asp-for="@rejectReportVM.EngineerId" type="hidden" value="@quotationDetailVM.Enginneer.Id" />
+                        <input asp-for="@rejectReportVM.EngineerId" type="hidden" value="@(quotationDetailVM.Enginneer?.Id??"")" />
                         <!--reason - cần dài hơn 20 ký tự -->
                         <div class="form-outline mt-3">
                             <label><b class="text-nowrap" for="textAreaExample">Lý do</b></label>
@@ -309,7 +305,7 @@
                                 <button id="reject_button" type="submit" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-x">Từ chối</i></button>
                             </div>
                             <div class="w-100 btn-group mb-3 mt-3 col-md-6" role="group">
-                                <a href="/Manager/CustomQuotation/ApproveDetail?id=@quotationDetailVM.QuoteId&managerId=@quotationDetailVM.Manager.Id" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check">Chấp nhận</i></a>
+                                <a href="/Manager/CustomQuotation/ApproveDetail?id=@quotationDetailVM.QuoteId&managerId=@(quotationDetailVM?.Manager?.Id??"")" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check">Chấp nhận</i></a>
                             </div>
                         </div>
                     </form>
