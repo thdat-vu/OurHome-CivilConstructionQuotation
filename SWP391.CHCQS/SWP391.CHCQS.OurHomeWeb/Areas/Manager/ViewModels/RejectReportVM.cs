@@ -17,9 +17,9 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
         public string EngineerId { get; set; }
         public DateTime? SubmissionEngineerDate { get; set; }
         //chứa lý do của manager reject/ chỉnh sửa
-        [Required(ErrorMessage = "Reason is required")]
-        [MinLength(20, ErrorMessage = "The reason should be longer, upper 20 charaters")] //lý do nên có ít nhất 20 ký tự để thể hiện rõ ý 
-        [MaxLength(500, ErrorMessage = "The reason should be shorter, under 500 charaters")] //lý do chỉ nên có nhiều nhất 500 ký tự
+        [Required(ErrorMessage = "Lý do không thể để trống")]
+        [MinLength(20, ErrorMessage = "Lý do nên dài hơn 20 ký tự")] //lý do nên có ít nhất 20 ký tự để thể hiện rõ ý 
+        [MaxLength(500, ErrorMessage = "Lý do nên ngắn hơn 500 ký tự")] //lý do chỉ nên có nhiều nhất 500 ký tự
         public string Reason { get; set; }
         public DateTime Date { get; set; }
     }
