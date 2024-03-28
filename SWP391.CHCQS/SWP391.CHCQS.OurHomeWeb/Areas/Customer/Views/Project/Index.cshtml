@@ -2,6 +2,32 @@
 @{
 	ViewData["Title"] = "Dự án";
 }
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination-link {
+        padding: 5px 10px;
+        margin: 0 5px;
+        text-decoration: none;
+        color: black;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+        .pagination-link.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .pagination-link.current {
+            background-color: darkblue;
+            font-weight: bold;
+        }
+</style>
 
 <div class="d-flex img-thumbnail justify-content-center">
 	<div class="d-flex align-items-center">
@@ -20,7 +46,7 @@
 
 	<div class="container mt-2 mb-3">
 		<form class="d-flex" asp-action="Search">
-			<input class="form-control rounded-pill me-2" type="search" placeholder="Tìm kiếm vật tư" name="keyword"/>
+			<input class="form-control rounded-pill me-2" type="search" placeholder="Tìm kiếm dự án" name="keyword" value="@ViewBag.LastSearch"/>
 			<button class="btn btn-main text-nowrap" type="submit">Tìm kiếm</button>
 		</form>
 	</div>
@@ -44,10 +70,17 @@
             </div>
         }
 	</div>
+	@{
+		var currentUrl = Context.Request.Path;
+	}
 
-	<div class="d-flex justify-content-center">
-		<p class="p-2"><a class="text-black" href="">1</a></p>
-		<p class="p-2"><a class="text-black" href="">2</a></p>
-		<p class="p-2"><a class="text-black" href="">3</a></p>
+	<div class="d-flex justify-content-center pagination">
+		@for (int i = 1; i <= ViewBag.TotalPages; i++)
+		{
+            //đánh dấu trang hiện tại
+            string cssClass = (i == ViewBag.CurrentPage) ? "pagination-link active current" : "pagination-link";
+            <a class="cssClass p-2" href="@currentUrl?page=@i">@i</a>
+		}
+		
 	</div>
 </div>
