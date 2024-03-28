@@ -124,6 +124,24 @@ namespace SWP391.CHCQS.Utility
             }
         }
 
+        public static string GetRoleInVietNamese(string role)
+        {
+            switch (role)
+            {
+                case Role_Admin:
+                    return "Quản trị viên";
+                case Role_Manager:
+                    return "Quản lý";
+                case Role_Engineer:
+                    return "Kỹ sư";
+                case Role_Seller:
+                    return "Tư vấn viên";
+                case Role_Customer:
+                    return "Khách hàng";
+                default:
+                    return "";
+            }
+        }
         #endregion
 
         #region Material Category Id

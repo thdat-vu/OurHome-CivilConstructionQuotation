@@ -214,7 +214,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account
                     {
                         if (User.IsInRole(SD.Role_Admin))
                         {
-                            TempData["success"] = "New User Created Successfully";
+                            TempData["success"] = "Tạo tài khoản mới thành công";
                             return RedirectToAction("Index", "User", new { area = SD.Role_Admin});
                         }
                         else
