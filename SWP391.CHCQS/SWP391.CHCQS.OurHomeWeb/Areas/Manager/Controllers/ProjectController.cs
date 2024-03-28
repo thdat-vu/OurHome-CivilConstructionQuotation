@@ -182,7 +182,6 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
         [HttpPost]
         public IActionResult Edit(ProjectVM projectVM, List<IFormFile>? files)
         {
-
             try
             {
                 //step 1:retrieve Project from DB
