@@ -24,9 +24,9 @@ namespace SWP391.CHCQS.Services
         private AppState(UserManager<IdentityUser> userManager) {
             _userManager = userManager;
             
-            SLMax =  userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Where(x => x.LockoutEnd <= DateTime.Now || x.LockoutEnd == null).Count();
-            ENMax = userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Where(x => x.LockoutEnd <= DateTime.Now || x.LockoutEnd == null).Count();
-            MGMax = userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Where(x => x.LockoutEnd <= DateTime.Now || x.LockoutEnd == null).Count();
+            SLMax =  userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Where(x => x.LockoutEnd == null || x.LockoutEnd <= DateTimeOffset.Now).Count();
+            ENMax = userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Where(x => x.LockoutEnd == null || x.LockoutEnd <= DateTimeOffset.Now).Count();
+            MGMax = userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Where(x => x.LockoutEnd == null || x.LockoutEnd <= DateTimeOffset.Now).Count();
 
             SLIndex =  _random.Next(1, SLMax);
             ENIndex = _random.Next(1, ENMax);
@@ -55,17 +55,21 @@ namespace SWP391.CHCQS.Services
             {
                 lock (_lock)
                 {
-                    if (_instance.SLMax != userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Where(x => x.LockoutEnd <= DateTime.Now || x.LockoutEnd == null).Count())
+                    var SLCount = userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Where(x => x.LockoutEnd == null || x.LockoutEnd <= DateTimeOffset.Now).Count();
+                    var ENCount = userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Where(x => x.LockoutEnd == null || x.LockoutEnd <= DateTimeOffset.Now).Count();
+                    var MGCount = userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Where(x => x.LockoutEnd == null || x.LockoutEnd <= DateTimeOffset.Now).Count();
+
+                    if (_instance.SLMax != SLCount)
                     {
-                        _instance.SLMax = userManager.GetUsersInRoleAsync(SD.Role_Seller).GetAwaiter().GetResult().Where(x => x.LockoutEnd <= DateTime.Now || x.LockoutEnd == null).Count();
+                        _instance.SLMax = SLCount;
                     }
-                    if (_instance.ENMax != userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Where(x => x.LockoutEnd <= DateTime.Now || x.LockoutEnd == null).Count())
+                    if (_instance.ENMax != ENCount)
                     {
-                        _instance.ENMax = userManager.GetUsersInRoleAsync(SD.Role_Engineer).GetAwaiter().GetResult().Where(x => x.LockoutEnd <= DateTime.Now || x.LockoutEnd == null).Count();
+                        _instance.ENMax = ENCount;
                     }
-                    if (_instance.MGMax != userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Where(x => x.LockoutEnd <= DateTime.Now || x.LockoutEnd == null).Count())
+                    if (_instance.MGMax != MGCount)
                     {
-                        _instance.MGMax = userManager.GetUsersInRoleAsync(SD.Role_Manager).GetAwaiter().GetResult().Where(x => x.LockoutEnd <= DateTime.Now || x.LockoutEnd == null).Count();
+                        _instance.MGMax = MGCount;
                     }
                 }
 

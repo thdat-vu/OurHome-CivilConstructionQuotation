@@ -38,6 +38,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        [Display(Name = "Tên đăng nhập")]
         public string Username { get; set; }
 
         /// <summary>
@@ -65,10 +66,13 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Phone]
-            [Display(Name = "Phone number")]
+            [Required(ErrorMessage = "{0} không được bỏ trống")]
+            [Display(Name = "Số điện thoại")]
             public string PhoneNumber { get; set; }
-            [Required]
+            [Required(ErrorMessage = "{0} không được bỏ trống")]
+            [Display(Name = "Tên")]
             public string Name { get; set; }
+            [Display(Name = "Giới tính")]
             public string Gender { get; set; }
 
             [ValidateNever]
