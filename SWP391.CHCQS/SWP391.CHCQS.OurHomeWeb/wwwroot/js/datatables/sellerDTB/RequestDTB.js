@@ -39,7 +39,7 @@ function loadDataTableRequest() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Seller/Quotation/CreateConstructDetails?id=${data}" class = "btn btn-primary btn-main border-0 m-1 text-nowrap"><i class="bi bi-plus-square"></i> Tạo báo giá</a>
+                       <a href="/Seller/Quotation/CreateConstructDetails?id=${data}" class = "btn btn-primary btn-main border-0 m-1 text-nowrap"><i class="bi bi-plus-square"></i> Tạo yêu cầu</a>
                        <a href="/Seller/Request/RequestReject?id=${data}" class = "btn btn-primary btn-danger border-0 m-1 text-nowrap"><i class="bi bi-x-circle-fill"></i> Từ chối</a>
                     </div >`
                 },
