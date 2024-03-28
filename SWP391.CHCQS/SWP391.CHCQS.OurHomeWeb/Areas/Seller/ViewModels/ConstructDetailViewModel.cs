@@ -9,7 +9,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels
 	{
         public ConstructDetail ConstructDetail { get; set; } = null!;
 		[ValidateNever]
-		public string QuotationId { get; set; } = null!;
+		public RequestForm Request { get; set; } = null!;
 
 		[ValidateNever]
 		public IEnumerable<SelectListItem> Basement { get; set; }
