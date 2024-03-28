@@ -1,0 +1,62 @@
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": "",
+    "TSK005": "",
+    "TSK006": "",
+    "TSK007": "",
+    "TSK008": "",
+    "TSK009": "",
+    "TSK010": "",
+    "TSK011": "",
+    "TSK012": "",
+    "TSK013": "",
+    "TSK014": "",
+    "TSK015": "",
+    "TSK016": "",
+    "TSK017": "",
+    "TSK018": "",
+    "TSK020": ""
+  },
+  "MaterialDetailNotes": {
+    "VT1010": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": "",
+    "TSK005": "",
+    "TSK006": "",
+    "TSK007": "",
+    "TSK008": "",
+    "TSK009": "",
+    "TSK010": "",
+    "TSK011": "Nh\u00E0 c\u00F3 d\u00E2y c\u00E1p r\u1ED3i b\u1EA1n \u01A1i",
+    "TSK012": "",
+    "TSK013": "",
+    "TSK014": "",
+    "TSK015": "",
+    "TSK016": "",
+    "TSK017": "",
+    "TSK018": "",
+    "TSK020": ""
+  },
+  "MaterialDetailNotes": {
+    "VT1010": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
