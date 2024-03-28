@@ -25,11 +25,13 @@ namespace SWP391.CHCQS.Model
 		[Required(ErrorMessage = "Vui lòng nhập Diện tích")]
 		[Display(Name = "Diện tích")]
 		public string Size { get; set; } = null!;
-        [MaxLength(500)]                                                                                                                                                     
-		[Display(Name = "Mô tả")]
+        [MaxLength(500)]
+        [Required(ErrorMessage = "Vui lòng nhập Mô tả")]
+        [Display(Name = "Mô tả")]
 		public string? Description { get; set; }
 		[Display(Name = "Tổng quan")]
-		public string? Overview { get; set; }        
+        [Required(ErrorMessage = "Vui lòng nhập Tổng quan")]
+        public string? Overview { get; set; }        
         public bool Status { get; set; }
 		[Required(ErrorMessage = "Vui lòng chọn Ngày phù hợp")]
 		[Display(Name = "Ngày")]

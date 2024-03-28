@@ -30,8 +30,8 @@
                             <span asp-validation-for="Task.Name" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Task.Description" class="form-control border-0 shadow" />
                             <label asp-for="Task.Description" class="ms-2"></label>
+                            <textarea asp-for="Task.Description" rows="10" class="form-control"></textarea>
                             <span asp-validation-for="Task.Description" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
