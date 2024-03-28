@@ -38,29 +38,37 @@
                     <p>@Model.Request.Customer.Email</p>
                 </div>
             </div>
+            <div class="row mb-2 text-center">
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Mã yêu cầu:</b></label>
+                    <p>@Model.Request.Id</p>
+                </div>
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Ngày nhận yêu cầu:</b></label>
+                    <p>@Model.Request.GenerateDate.ToString("dd/MM/yyyy")</p>
+                </div>
 
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Vị trí:</b></label>
+                    <p>@Model.Request.Location</p>
+                </div>
+                <div class="col-sm">
+                    <label><b class="text-nowrap">Diện tích:</b></label>
+                    <p>@Model.Request.Acreage</p>
+                </div>
+            </div>
+            @if (Model.Request.Description != null)
+            {
+                <div class="row mb-2 px-5 d-flex">
+                    <label><b class="text-nowrap">Mô tả:</b></label>
+                    <p class="mx-5">@Model.Request.Description</p>
+                </div>
+            }
+            
             <h3 class="text-center"><b>Thông tin báo giá chi tiết</b></h3>
             <hr class="w-75 m-auto"></hr>
         </div>
-        <div class="row mt-5 mb-3 text-center">
-            <div class="col-sm">
-                <label><b class="text-nowrap">Mã yêu cầu:</b></label>
-                <p>@Model.Request.Id</p>
-            </div>
-            <div class="col-sm">
-                <label><b class="text-nowrap">Ngày nhận yêu cầu:</b></label>
-                <p>@Model.Request.GenerateDate.ToString("dd/MM/yyyy")</p>
-            </div>
-
-            <div class="col-sm">
-                <label><b class="text-nowrap">Vị trí:</b></label>
-                <p>@Model.Request.Location</p>
-            </div>
-            <div class="col-sm">
-                <label><b class="text-nowrap">Diện tích:</b></label>
-                <p>@Model.Request.Acreage</p>
-            </div>
-        </div>
+        
         <div class="row mt-5 mb-3">
 
             <div class="col-sm">
