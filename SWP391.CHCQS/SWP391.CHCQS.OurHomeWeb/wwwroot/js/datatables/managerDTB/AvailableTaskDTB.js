@@ -10,9 +10,7 @@ function loadDataTableTask() {
         "columns": [
             {
                 data: "id",
-                "render": function (data) {
-                    return `<a class="text-main text-pointer" onClick="ShowTaskDetail('/Engineer/Task/Detail?TaskId=${data}')" >${data}</a>`
-                },
+                
             },
             { data: 'name', },
             { data: 'unitPrice', render: formatCurrency },

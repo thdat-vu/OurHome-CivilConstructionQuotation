@@ -16,9 +16,7 @@ function loadDataTableStandardQuotation() {
         "columns": [
             {
                 data: 'id', 
-                "render": function (data) {
-                    return `<a class="text-main text-pointer">${data}</a>`
-                },
+                
             },
             { data: 'name',  },
             { data: 'description',  },

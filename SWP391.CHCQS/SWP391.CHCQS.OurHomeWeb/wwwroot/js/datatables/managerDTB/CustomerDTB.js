@@ -17,13 +17,12 @@ function loadDataCustomer() {
         "columns": [
             {
                 data: 'id',
-                "render": function (data) {
-                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Customer/Detail?CustomerId=${data}')" >${data}</a>`
-                },
+                
                 
                 
             },
-            { data: 'name',  },
+            { data: 'name', },
+            { data: 'phoneNumber', },
             {
                 data: null,
                 render: function (data) {

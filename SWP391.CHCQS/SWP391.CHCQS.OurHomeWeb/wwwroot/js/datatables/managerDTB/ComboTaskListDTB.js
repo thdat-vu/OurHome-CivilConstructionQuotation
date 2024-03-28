@@ -13,9 +13,7 @@ function loadDataTableTaskListSession() {
         "columns": [
             {
                 data: 'task.id',
-                "render": function (data) {
-                    return `<a class="text-main text-pointer" onClick="ShowMaterialDetail('/Engineer/Material/Detail?MaterialId=${data}')" >${data}</a>`
-                },
+                
             },
             { data: 'task.name', },
             { data: 'task.unitPrice', render: formatCurrency },
