@@ -94,7 +94,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Admin.Controllers
 			var userFromDb = _db.ApplicationUsers.FirstOrDefault(u => u.Id == id);
 			if (userFromDb == null)
 			{
-				return Json(new { success = false, message = "Error while Locking/Unlocking" });
+				return Json(new { success = false, message = "Đã xảy ra lỗi khi khóa / mở khóa tài khoản" });
 			}
 			if (userFromDb.LockoutEnd != null && userFromDb.LockoutEnd > DateTime.Now)
 			{
@@ -106,7 +106,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Admin.Controllers
 				userFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
 			}
 			_db.SaveChanges();
-			return Json(new { success = true, message = "Operation Successful" });
+			return Json(new { success = true, message = "Cập nhật thành công" });
 		}
 		#endregion
 	}

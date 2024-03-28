@@ -1,4 +1,4 @@
-﻿@model List<Project>
+﻿@model HomeVM
 
 @{
 	ViewData["Title"] = "Trang chủ";
@@ -88,13 +88,13 @@
 		</div>
 	</div>
 	<div class="row m-auto"> 
-		@if(Model != null)
+		@if(Model.Projects != null && Model.Projects.Count > 0)
 		{
-			@foreach (var project in Model)
+			@foreach (var project in Model.Projects)
 			{
 				<div class="col-sm-4 mb-5">
 					<div class="img-thumbnail">
-						<img src="~/images/project_bg/project_bg_4.jpg" width="100%"></img>
+						<img src="@project.Images.ElementAt(0).ImageUrl" width="100%"></img>
 						<div class="m-sm-3 text-dark">
 							<h3><b>Name: </b>@project.Name</h3>
 							<p><b>Location:</b> @project.Location</p>
@@ -102,7 +102,7 @@
 							<p><b>Size:</b> @project.Size</p>
 						</div>
 						<div class="col-sm m-1 btn-group rounded-1 w-100 m-auto" role="group">
-							<a asp-area="Customer" asp-controller="Project" asp-action="Detail" class="btn btn-main">Chi tiết</a>
+							<a asp-area="Customer" asp-controller="Project" asp-action="Detail" asp-route-id="@project.Id" class="btn btn-main">Chi tiết</a>
 						</div>
 					</div>
 				</div>
@@ -131,13 +131,32 @@
 	</div>
 
 	<div class="col-sm-6 align-items-center">
-
-		<div class="row p-1">
+		@if (Model.Combos != null && Model.Combos.Count > 0)
+		{
+			foreach(var combo in Model.Combos)
+			{
+				<div class="row p-1">
+					<div class="col img-thumbnail">
+						<img src="@combo.ImageUrl" class="w-100"></img>
+					</div>
+					<div class="col">
+						<h3><b></b>@combo.Name</h3>
+						<p><b>Price:</b> @combo.Price</p>
+						<div class="col-sm m-1 btn-group rounded-1 w-100 m-auto" role="group">
+							<a asp-area="Customer" asp-controller="Combo" asp-action="Detail" asp-route-id="@combo.Id" class="btn btn-main">Chi tiết</a>
+						</div>
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+			<div class="row p-1">
 			<div class="col img-thumbnail">
 				<img src="~/images/combo_bg/combo_bg_1.jpg" class="w-100"></img>
 			</div>
 			<div class="col">
-				<h3></b>Residential Construction</h3>
+				<h3><b>Residential Construction</b></h3>
 				<p><b>Price:</b> 2 Tỷ</p>
 				<div class="col-sm m-1 btn-group rounded-1 w-100 m-auto" role="group">
 					<a asp-area="Customer" asp-controller="Project" asp-action="Detail" class="btn btn-main">Chi tiết</a>
@@ -150,7 +169,7 @@
 				<img src="~/images/combo_bg/combo_bg_1.jpg" class="w-100"></img>
 			</div>
 			<div class="col">
-				<h3></b>Residential Construction</h3>
+				<h3><b>Residential Construction</b></h3>
 				<p><b>Price:</b> 2 Tỷ</p>
 				<div class="col-sm m-1 btn-group rounded-1 w-100 m-auto" role="group">
 					<a asp-area="Customer" asp-controller="Combo" asp-action="Detail" class="btn btn-main">Chi tiết</a>
@@ -163,7 +182,7 @@
 				<img src="~/images/combo_bg/combo_bg_1.jpg" class="w-100"></img>
 			</div>
 			<div class="col">
-				<h3></b>Residential Construction</h3>
+				<h3><b>Residential Construction</b></h3>
 				<p><b>Price:</b> 2 Tỷ</p>
 				<div class="col-sm m-1 btn-group rounded-1 w-100 m-auto" role="group">
 					<a asp-area="Customer" asp-controller="Combo" asp-action="Detail" class="btn btn-main">Chi tiết</a>
@@ -176,13 +195,15 @@
 				<img src="~/images/combo_bg/combo_bg_1.jpg" class="w-100"></img>
 			</div>
 			<div class="col">
-				<h3></b>Residential Construction</h3>
+				<h3><b>Residential Construction</b></h3>
 				<p><b>Price:</b> 2 Tỷ</p>
 				<div class="col-sm m-1 btn-group rounded-1 w-100 m-auto" role="group">
 					<a asp-area="Customer" asp-controller="Combo" asp-action="Detail" class="btn btn-main">Chi tiết</a>
 				</div>
 			</div>
 		</div>
+		}
+		
 
 	</div>
 </div>

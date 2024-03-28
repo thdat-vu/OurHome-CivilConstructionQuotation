@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
+using SWP391.CHCQS.OurHomeWeb.Areas.Customer.ViewModels;
 using SWP391.CHCQS.OurHomeWeb.Models;
 using SWP391.CHCQS.Utility;
 using System.Diagnostics;
@@ -22,8 +23,26 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Customer.Controllers
 
         public async Task<IActionResult> Index()
         {
-             List<Project> projectList = _unitOfWork.Project.GetAll().OrderByDescending(x => x.Date).Take(6).ToList();
-             return View(projectList);
+            HomeVM homeVM = new HomeVM();
+             homeVM.Projects = _unitOfWork.Project.GetAll()
+				.Where(x => x.Status == true)
+				.OrderByDescending(x => x.Date).Take(6).ToList();
+            if (homeVM.Projects != null && homeVM.Projects.Count > 0)
+            {
+				foreach (var project in homeVM.Projects)
+				{
+					var firstImages = _unitOfWork.ProjectImage.GetAll(x => x.ProjectId == project.Id).FirstOrDefault();
+					if (firstImages != null)
+					{
+						project.Images = new List<ProjectImage>();
+                        project.Images.Add(firstImages);
+					}
+				}
+			}
+            homeVM.Combos = _unitOfWork.Combo.GetAll()
+                .Where(x => x.Status == true)
+                .Take(4).ToList();
+             return View(homeVM);
             //return View();
         }
 

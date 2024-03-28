@@ -57,6 +57,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                 RequestId = requestForm.Id
             };
             requestForm.CustomQuotation = customQuotation;
+
             //Serialize dữ liệu để truyền qua view
             var serializedData = JsonSerializer.Serialize(customQuotation);
             ViewBag.CustomQuotation = serializedData;
@@ -176,8 +177,12 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Seller.Controllers
                     }),
                     Alleys = SD.Alleys.Select(x => new SelectListItem { Text = x, Value = x }).ToList(),
                     Facades = SD.Facades.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }).ToList(),
-                    Request =  _unitOfWork.RequestForm.Get(u => u.Id == customQuotation.RequestId, includeProperties: "Customer")
-            };
+                    Request = _unitOfWork.RequestForm.Get(u => u.Id == customQuotation.RequestId, includeProperties: "Customer")
+                };
+                ConstructDetailVM.Request.CustomQuotation = customQuotation;
+                //Serialize dữ liệu để truyền qua view
+                var serializedData = JsonSerializer.Serialize(customQuotation);
+                ViewBag.CustomQuotation = serializedData;
                 TempData["error"] = "Tạo thông tin chi tiết công trình thất bại";
                 return View(ConstructDetailVM);
             }
