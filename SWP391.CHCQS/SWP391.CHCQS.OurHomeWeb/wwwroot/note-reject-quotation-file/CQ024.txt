@@ -1,0 +1,23 @@
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": ""
+  },
+  "MaterialDetailNotes": {
+    "VT0003": {
+      "Quantity": 2000,
+      "Note": "tung nay gach khong du xay con trinh"
+    },
+    "VT0006": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT1001": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
