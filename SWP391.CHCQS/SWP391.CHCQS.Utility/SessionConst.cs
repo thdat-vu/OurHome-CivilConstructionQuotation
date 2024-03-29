@@ -11,6 +11,13 @@ namespace SWP391.CHCQS.Utility
 		public const string TASK_LIST_KEY = "TaskListKey";
 		public const string MATERIAL_LIST_KEY = "MaterialListKey";
 		public const string CUSTOM_QUOTATION_KEY = "CustomQuotationKey";
+
 		public const string QUOTATION_ID = "QuoteId";
+
+		
+		// Manager: Manage Combo 
+		public const string COMBO_MATERIAL_LIST_KEY = "ComboMaterialList";
+		public const string COMBO_TASK_LIST_KEY = "ComboTaskList";
+
 	}
 }

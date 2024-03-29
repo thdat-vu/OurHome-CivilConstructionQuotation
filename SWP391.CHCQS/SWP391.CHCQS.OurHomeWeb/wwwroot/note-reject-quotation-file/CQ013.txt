@@ -1,0 +1,186 @@
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "test th\u00F4ng b\u00E1o",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "test th\u00F4ng b\u00E1o",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "test th\u00F4ng b\u00E1o",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "test th\u00F4ng b\u00E1o",
+    "TSK002": "",
+    "TSK003": "",
+    "TSK004": ""
+  },
+  "MaterialDetailNotes": {
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT106": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT111": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "test th\u00F4ng b\u00E1o"
+  },
+  "MaterialDetailNotes": {
+    "VT0003": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "test th\u00F4ng b\u00E1o"
+  },
+  "MaterialDetailNotes": {
+    "VT0003": {
+      "Quantity": 20,
+      "Note": "test ghi ch\u00FA"
+    }
+  }
+}
+

@@ -1,22 +1,129 @@
-﻿@{
-    ViewData["Title"] = "Quotation Statistic";
+@{
+
+    ViewData["Title"] = "Tổng Quan";
 }
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+<div class="container-fluid">
+
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Thống kê yêu cầu/ báo giá/ yêu cầu bị hủy</h6>
+        </div>
+        <div class="">
+            <select id="yearSelect" class="form-select" aria-label="Default select example">
+            </select>
+            <div class="chart-bar">
+                <canvas id="myQuoteBarChart"></canvas>
+            </div>
+        </div>
+
     </div>
-    <div class="">
-        <select  id="yearSelect" class="form-select" aria-label="Default select example">
-        </select>
-        <div class="chart-bar">
-            <canvas id="myQuoteBarChart"></canvas>
+
+    <div class="card shadow border-0 mb-4">
+        <div class="card-body p-4">
+            <div class="pl-1 container-fluid ">
+                <div class="p-1 mr-auto row w-50">
+
+                    <button id="quotation_button" class=" m-1 col btn btn-main text-white text-nowrap">Báo giá</button>
+                    <button id="request_button" class="m-1 col btn btn-main text-nowrap">Yêu cầu báo giá</button>
+                </div>
+            </div>
+            <div class="table-responsive " id="quoteDiv">
+                <table id="tblAllCustomQuotation" class="table-bordered table-striped text-black" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="text-nowrap">
+                                Mã
+                            </th>
+                            <th class="text-nowrap">
+                                Mã yêu cầu
+                            </th>
+                            <th class="text-nowrap">
+                                Ngày tạo
+                            </th>
+                            <th class="text-nowrap">
+                                Diện tích
+                            </th>
+                            <th class="text-nowrap">
+                                Vị trí
+                            </th>
+                            <th class="text-nowrap">
+                                Loại công trình
+                            </th>
+                            <th class="text-nowrap">
+                                Trạng thái
+                            </th>
+                            <th class="text-nowrap">
+                                Tư vấn viên
+                            </th>
+                            <th class="text-nowrap">
+                                Kỹ sư
+                            </th>
+                            <th class="text-nowrap">
+                                Quản lý
+                            </th>
+                            <!--
+
+                            <th>
+                                Hành động
+                            </th>
+                            -->
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+            <div class="table-responsive " id="requestDiv">
+                <table id="tblAllRequest" class="table-bordered table-striped text-black" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="text-nowrap">
+                                Mã
+                            </th>
+                         
+                            <th class="text-nowrap">
+                                Ngày tạo
+                            </th>
+                            <th class="text-nowrap">
+                                Tên khách hàng
+                            </th>
+                            <th class="text-nowrap">
+                                Số điện thoại
+                            </th>
+                            <th class="text-nowrap">
+                                Email
+                            </th>
+
+                            <th class="text-nowrap">
+                                Trạng thái
+                            </th>
+                            <th class="text-nowrap">
+                                Tư vấn viên
+                            </th>
+
+                            <th class="text-nowrap">
+                                Kỹ sư
+
+                            </th>
+                            <th class="text-nowrap">
+                                Quản lý
+                            </th>
+
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+
         </div>
     </div>
 </div>
 
 @section Scripts {
     <script src="~/js/charts/QuoteStatisticChart.js"></script>
-    <script src="~/js/event_load.js"></script>
+    <script src="~/js/datatables/managerDTB/AllDTB.js"></script>
+    <script src="~/js/Onload_Event.js"></script>
+
 }
-      
+
 

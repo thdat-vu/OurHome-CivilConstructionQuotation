@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Danh sách người dùng";
+}
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-main ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Danh sách người dùng</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-main">
+                    <i class="bi bi-plus-circle"></i>  Tạo tài khoản mới
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="tblUser" class="table-bordered table-striped text-black" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Mã</th>
+                        <th>Email</th>
+                        <th>Tên tài khoản</th>
+                        <th>SĐT</th>
+                        <th>Manager</th>
+                        <th>Vai trò</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/datatables/adminDTB/UserDTB.js"></script>
+}
+

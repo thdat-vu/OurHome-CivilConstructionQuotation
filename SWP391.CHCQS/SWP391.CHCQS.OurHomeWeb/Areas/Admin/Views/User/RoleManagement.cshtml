@@ -1,0 +1,69 @@
+﻿@model RoleManagementVM
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Quản lý vai trò người dùng</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input asp-for="ApplicationUser.Id" hidden />
+            <div class="border p-3">
+                @* <div asp-validation-summary="ModelOnly"></div> *@
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="ApplicationUser.Name" readonly type="text" class="form-control border-0 shadow" />
+                    <label asp-for="ApplicationUser.Name" class="ms-2"></label>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="ApplicationUser.Role" asp-items="@Model.RoleList" class="form-select"></select>
+                    <label asp-for="ApplicationUser.Role" class="ms-2"></label>
+                </div>
+                @{
+                    var managerVisible = "display: none;";
+                }
+                @if (Model.ApplicationUser.Role == SD.Role_Engineer || Model.ApplicationUser.Role == SD.Role_Seller)
+                {
+                    managerVisible = "display: block;";
+                }
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="ApplicationUser.ManagerId" style="@managerVisible" asp-items="@Model.ManagerList" class="form-select"></select>
+                    <label asp-for="ApplicationUser.ManagerId" style="@managerVisible" class="ms-2" id="ApplicationUser_ManagerId_Label"></label>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="form-control text-white btn btn-main">Cập nhật vai trò</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-action="Index" class="btn btn-primary border  form-control">
+                            Trở lại danh sách
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        $(document).ready(function () {
+            $('#ApplicationUser_Role').change(function () {
+                var selectedRole = $('#ApplicationUser_Role Option:Selected').text();
+                if (selectedRole == "Engineer" || selectedRole == "Seller") {
+                    $('#ApplicationUser_ManagerId').show();
+                    $('#ApplicationUser_ManagerId_Label').show();
+                } else {
+                    $('#ApplicationUser_ManagerId').hide();
+                    $('#ApplicationUser_ManagerId_Label').hide();
+                }
+            });
+        });
+    </script>
+}

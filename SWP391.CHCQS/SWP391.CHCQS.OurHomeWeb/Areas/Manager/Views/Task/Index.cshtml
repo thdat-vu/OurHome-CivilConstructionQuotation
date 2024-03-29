@@ -1,0 +1,56 @@
+﻿@{
+	ViewData["Title"] = "Công việc";
+}
+
+<div class="card shadow border-0 my-4">
+	<div class="card-header bg-main ml-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-white py-2">Danh sách công việc</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="card-body p-4">
+		<div class="row pb-3">
+			<div class="col-6">
+			</div>
+			<div class="col-6 text-end">
+				<a asp-area="Manager" asp-controller="Task" asp-action="Create" class="btn btn-main">
+					<i class="bi bi-plus-circle"></i>  Tạo công việc mới
+				</a>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table id="tblTask" class="table-bordered table-striped text-black" style="width:100%">
+				<thead>
+					<tr>
+						<th>
+							Mã
+						</th>
+						<th>
+							Tên
+						</th>
+						<th>
+							Mô tả
+						</th>
+
+						<th>
+							Giá gốc
+						</th>
+						<th>
+							Phân loại
+						</th>
+						<th>
+							Hành động
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="~/js/datatables//managerDTB/TaskDTB.js"></script>
+}

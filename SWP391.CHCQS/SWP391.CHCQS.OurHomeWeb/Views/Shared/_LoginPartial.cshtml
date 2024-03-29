@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="nav-item row">
+        <a id="manage" class="col text-main text-nowrap fa-2x" style="margin: auto" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="bi bi-person-circle"></i></a>
+
+        <form id="logoutForm" class="col" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button id="logout" type="submit" style="height:3.375rem" class="nav-link btn btn-main text-nowrap">Đăng xuất</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="nav-item row w-25">
+        <div class="col m-1 btn-group rounded-1">
+            <a class="btn login text-nowrap" id="login" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+        </div>
+        <div class="col m-1 btn-group rounded-1">
+            <a class="btn register text-nowrap" id="register" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a>
+        </div>
+    </div>
+}

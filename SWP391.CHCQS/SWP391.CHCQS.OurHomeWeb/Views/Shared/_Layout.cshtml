@@ -1,0 +1,152 @@
+﻿@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@inject IWebHostEnvironment Environment
+@inject ICompositeViewEngine Engine
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SWP391.CHCQS.OurHomeWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SWP391.CHCQS.OurHomeWeb.styles.css" asp-append-version="true" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/Identity/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+              integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"
+              asp-fallback-href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/Identity/css/site.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" width="150px"></img></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Combo" asp-action="Index">Dịch vụ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Project" asp-action="Index">Dự án</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Material" asp-action="Index">Vật liệu</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Báo giá
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="dropdown-item" asp-area="Customer" asp-controller="Request" asp-action="QuickQuote">Báo giá nhanh</a>
+                                </li>
+                                <li class="">
+                                    <a class="dropdown-item" asp-area="Customer" asp-controller="Request" asp-action="CreateRequest">Báo giá chi tiết</a>
+                                </li>
+                                <li class="">
+                                    <a class="dropdown-item" asp-area="Customer" asp-controller="Request" asp-action="RequestHistory">Lịch sử báo giá</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                    <partial name="_LoginPartial" />
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <partial name="_CookieConsentPartial" optional />
+        <main role="main" class="pb-1">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top text-muted">
+        <div class="container">
+            <div class="col text-center mt-2">
+                <img src="~/images/logo.png" width="200px"></img>
+            </div>
+            <div class="row mt-5 mb-5 align-items-center">
+                <div class="col-sm-8 mb-3 ">
+                    <h5>Công ty xây dựng: OurHome</h5>
+                    <h5 class="text-wrap">Địa chỉ văn phòng: Lô E2a-7, Đường D1, Long Thạnh Mỹ, Thành Phố Thủ Đức</h5>
+                    <h5>Hotline: 0908176623</h5>
+                    <h5>Email: ourhome.construct@gmail.com</h5>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <h6><b>Truy cập nhanh</b></h6>
+                            <ul class="lh-lg">
+                                <li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                                <li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Combo" asp-action="Index">Dịch vụ</a></li>
+                                <li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Project" asp-action="Index">Dự án</a></li>
+                                <li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Material" asp-action="Index">Vật liệu</a></li>
+                                <li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Quotation" asp-action="Index">Báo giá</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <h6><b>Mạng xã hội</b></h6>
+                            <ul class="lh-lg list-unstyled">
+                                <li><a class="text-decoration-none text-dark" href=""><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                                <li><a class="text-decoration-none text-dark" href=""><i class="fa-brands fa-x-twitter"></i> Twitter</a></li>
+                                <li><a class="text-decoration-none text-dark" href=""><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                            </ul>
+                            <div class="col-sm btn-group rounded-1 w-100" role="group">
+                                <a asp-area="Customer" asp-controller="Request" asp-action="QuickQuote" class="btn btn-main">Báo giá ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>r>
+
+    <environment include="Development">
+        <script src="~/Identity/lib/jquery/dist/jquery.js"></script>
+        <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/Identity/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+                asp-fallback-src="~/Identity/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj">
+        </script>
+        <script src="~/Identity/js/site.js" asp-append-version="true"></script>
+    </environment>
+    
+    <!-- SignalR -->
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/signalr/CustomQuotationNotification.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

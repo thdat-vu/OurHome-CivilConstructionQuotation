@@ -1,0 +1,198 @@
+﻿@using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels
+@model PDFQuotation;
+@{
+    Layout = null;
+
+
+}
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="~/js/pdf.js"></script>
+
+    <style>
+        .container-fluid {
+            width: 60em;
+            align-items: center;
+            margin: auto;
+        }
+        /* Áp dụng đường kẻ bên trong cơ của bảng */
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid black; /* Màu của đường kẻ */
+        }
+
+        th {
+            background-color: #f27456
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid" id="invoice" style="border:1px solid #ccc">
+        <div style="text-align: left;  margin-top:3em; display:flex">
+            <div style="margin-left:2em;">
+                <img src="~/images//Logo.png" style="width:70%" />
+
+            </div>
+            <div style="margin-right:2.3em; background-color:#f27456; width:120%; padding-left:1.3em; padding-right:1.3em; border-radius:5px">
+                <p style="font-size:1em; font-weight:600">Công ty xây dựng: OurHome</p>
+                <p style="font-size:1em; font-weight:600">Địa chỉ văn phòng: Lô E2a-7, Đường D1, Long Thạnh Mỹ, Thành Phố Thủ Đức</p>
+                <p style="font-size:1em; font-weight:600">Hotline: 0908176623</p>
+                <p style="font-size:1em; font-weight:600">Email: ourhome.construct@gmail.com</p>
+            </div>
+
+        </div>
+        <div class="container col-xs-12 my-3" style="text-align:center">
+            <h1>Báo giá chi tiết</h1>
+            <div style="display:flex; justify-content:space-between">
+                <div style="text-align: left;margin-left:5em">
+                    <h3 class="text-main">Mã đơn: @Model.Id</h3>
+                    <h3>Mã yêu cầu: @Model.RequestId</h3>
+                    <h3>Ngày gửi: @Model.GenerateDateRequest.ToShortDateString()</h3>
+                </div>
+
+                <div style="text-align: left;margin-right:13em">
+                    <h3>Tên khách hàng: @Model.CustomerName</h3>
+                    <h3>Vị trí: @Model.Location</h3>
+                    <h3>Diện tích: @Model.Acreage</h3>
+                </div>
+            </div>
+
+            <h2>Chi tiết công trình</h2>
+            <div style="display:flex; gap:6em; justify-content:center">
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Chiều rộng:</b></label>
+                    <p>@Model.ConstructDetail.Width</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Chiều dài:</b></label>
+                    <p>@Model.ConstructDetail.Length</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Mặt tiền:</b></label>
+                    <p>@Model.ConstructDetail.Facade</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Hẻm:</b></label>
+                    <p>@Model.ConstructDetail.Alley</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Số phòng:</b></label>
+                    <p>@Model.ConstructDetail.Room</p>
+                </div>
+            </div>
+            <div style="display:flex; gap:6em; justify-content:center">
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Số tầng:</b></label>
+                    <p>@Model.ConstructDetail.Floor</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Diện tích lửng:</b></label>
+                    <p>@Model.ConstructDetail.Mezzanine</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Tầng thượng:</b></label>
+                    <p>@Model.ConstructDetail.RooftopFloor</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Ban công:</b></label>
+                    <p>
+                        @(Model.ConstructDetail.Balcony ? "Có ban công" : "Không ban công")
+                    </p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Diện tích vườn:</b></label>
+                    <p>@Model.ConstructDetail.Garden</p>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:6em; justify-content:center">
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Loại hầm:</b></label>
+                    <p>@Model.ConstructDetail.Basement.Name</p>
+                </div>
+                <div class="col-lg">
+                    <label><b class="text-nowrap">Loại công trình:</b></label>
+                    <p>@Model.ConstructDetail.Construction.Name</p>
+                </div><div class="col-lg">
+                    <label><b class="text-nowrap">Loại móng:</b></label>
+                    <p>@Model.ConstructDetail.Foundation.Name</p>
+                </div><div class="col-lg">
+                    <label><b class="text-nowrap">Mức đầu tư:</b></label>
+                    <p>@Model.ConstructDetail.Investment.Name</p>
+                </div><div class="col-lg">
+                    <label><b class="text-nowrap">Loại mái:</b></label>
+                    <p>@Model.ConstructDetail.Rooftop.Name</p>
+                </div>
+            </div>
+
+        </div>
+        <div style="text-align:center;font-size:2em;margin-top:1.3em">
+            <h3>Công việc</h3>
+            <table class="table table-bordered" style="width:100%">
+                <thead class="thead-light">
+                    <tr>
+                        <th style="width: 25%" scope="col">Tên</th>
+                        <th style="width: 55%" scope="col">Mô tả</th>
+                        <th style="width: 25%" scope="col">Giá gốc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.Tasks)
+                        {
+                            <tr>
+                                <td style="width:25%">@item.Task.Name</td>
+                                <td style="width:55%">@item.Task.Description</td>
+                                <td style="text-align:right;width:25%">@item.Task.UnitPrice.ToString("#,##0") VND</td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="text-align:center;font-size:2em;margin-top:1.3em">
+            <h3>Vật liệu</h3>
+            <table class="table table-bordered" style="width:100%">
+                <thead class="thead-light">
+                    <tr>
+                        <th style="width:20%" scope="col">Tên</th>
+                        <th style="width:35%" scope="col">Mô tả</th>
+                        <th style="width:20%" scope="col">Giá gốc</th>
+                        <th style="width:25%" scope="col">Tổng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model.Tasks)
+                        {
+                            <tr>
+                                <td style="width:20%">@item.Task.Name</td>
+                                <td style="width:35%">@item.Task.Description</td>
+                                <td style="text-align:right;width:20%">@item.Task.UnitPrice.ToString("#,##0") VND</td>
+                                <td style="text-align:right;width:25%">@item.Price.ToString("#,##0") VND</td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="text-align:right;margin-right:1.3em;margin-bottom:2em">
+            <h3 style="color:red;">Báo giá tổng: @Model.Total.ToString("#,##0") VND</h3>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+

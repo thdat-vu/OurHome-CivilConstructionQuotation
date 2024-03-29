@@ -1,36 +1,39 @@
-﻿@{
-    ViewData["Title"] = "Material";
+﻿@model List<Material>
+
+    @{
+	ViewData["Title"] = "Vật liệu";
 }
+
+<style>
+    td {
+        color: black;
+        background-color:#f27456;
+    }
+</style>
 
 <div class="d-flex img-thumbnail justify-content-center">
     <div class="d-flex align-items-center">
-        <h3 class="p-3"><a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a></h3>
+        <h3 class="p-3"><a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a></h3>
         <i class="fa-solid fa-arrow-right-long"></i>
-        <h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Material" asp-action="Index">Material</a></h3>
+        <h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Material" asp-action="Index">Vật liệu</a></h3>
     </div>
 </div>
 
 
-<div class="container mt-5">
-    <form class="d-flex">
-        <input class="form-control rounded-pill me-2" type="search" placeholder="Search Material" />
-        <button class="btn btn-main" type="submit">Search</button>
-    </form>
-</div>
 
 
 <div class="container-fluid mt-5 d-flex">
     <div class="row d-flex">
-        <div class="col-lg-4 order-lg-1">
+        <div class="col-lg-4 order-lg-1" style="position:">
             <div id="category-container">
-                <h3 class="text-uppercase font-weight-bold" style="color:#414141">Category List</h3>
+                <h3 class="text-uppercase font-weight-bold" style="color:#414141">Danh sách</h3>
                 <ul class="category-list">
                     <li class="font-weight-bold">
                         <a href="#intro1">
                             1.
                             <span>
                                 <strong>
-                                    What are construction materials?
+                                    Vật liệu xây dựng là gì?
                                 </strong>
                             </span>
                         </a>
@@ -40,80 +43,70 @@
                             2.
                             <span>
                                 <strong>
-                                    What do construction materials include?
+                                    Vật liệu xây dựng gồm những gì?
                                 </strong>
                             </span>
                         </a>
+                        <ul>
+                            <li class="font-weight-bold">
+                                <a href="#raw">
+                                    <strong>2.1 Vật tư thô</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#complete">
+                                    <strong>2.2 Vật tư hoàn thiện</strong>
+                                </a>
+                                <ul>
+                                    <li class="font-weight-bold">
+                                        <a href="#paint">
+                                            <strong>Sơn nước sơn dầu</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#electric">
+                                            <strong>Điện</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#sanitary">
+                                            <strong>Vệ sinh</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#kitchen">
+                                            <strong>Bếp</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#stair">
+                                            <strong>Cầu thang</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#door">
+                                            <strong>Cửa</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#ceramicTiles">
+                                            <strong>Gạch ốp lát</strong>
+                                        </a>
+                                    </li>
+                                    <li class="font-weight-bold">
+                                        <a href="#ceiling">
+                                            <strong>Trần</strong>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#brick">
-                                2.1.
-                                <strong>1. Brick</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#cement">
-                                2.2.
-                                <strong>2. Cement</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#sand">
-                                2.3.
-                                <strong>3. Sand</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#stone">
-                                2.4.
-                                <strong>4. Stone</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#iron">
-                                2.5.
-                                <strong>5. Iron and Steel</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#concrete">
-                                2.6.
-                                <strong>6. Concrete</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#plaster">
-                                2.7.
-                                <strong>7. Plaster</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#plastic">
-                                2.8.
-                                <strong>8. Plastic</strong>
-                            </a>
-                        </li>
-                    </ul>
                     <li class="font-weight-bold">
                         <a href="#application">
                             3.
                             <span>
-                                <strong>Application of construction materials in life</strong>
+                                <strong>Ứng dụng của vật liệu xây dựng trong cuộc sống</strong>
                             </span>
                         </a>
                     </li>
@@ -121,50 +114,66 @@
                         <a href="#material-price">
                             4.
                             <span>
-                                <strong>Today's construction materials price list is updated to the latest in 2024</strong>
+                                <strong>Bảng báo giá vật liệu xây dựng hôm nay cập nhật mới nhất 2024</strong>
                             </span>
                         </a>
+                        <ul>
+                            <li class="font-weight-bold">
+                                <a href="#raw-price">
+                                    4.1
+                                    <strong>Giá vật tư thô</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#paint-price">
+                                    4.2
+                                    <strong>Giá sơn nước sơn dầu</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#electric-price">
+                                    4.3
+                                    <strong>Giá vật dụng điện</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#sanitary-price">
+                                    4.4
+                                    <strong>Giá vật dụng vệ sinh</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#kitchen-price">
+                                    4.5
+                                    <strong>Giá bếp xây dựng</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#stair-price">
+                                    4.6
+                                    <strong>Giá cầu thang xây dựng</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#ceramic-price">
+                                    4.7
+                                    <strong>Giá gạch ốp xây dựng</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#door-price">
+                                    4.8
+                                    <strong>Giá cửa xây dựng</strong>
+                                </a>
+                            </li>
+                            <li class="font-weight-bold">
+                                <a href="#ceiling-price">
+                                    4.9
+                                    <strong>Giá trần xây dựng</strong>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#stone-price">
-                                4.1
-                                <strong>Price of construction stone</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#sand-price">
-                                4.2
-                                <strong>Price of construction sand</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#iron-price">
-                                4.3
-                                <strong>Price of construction iron</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#brick-price">
-                                4.4
-                                <strong>Price of construction brick</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="font-weight-bold">
-                            <a href="#cement-price">
-                                4.5
-                                <strong>Price of construction cement</strong>
-                            </a>
-                        </li>
-                    </ul>
                 </ul>
             </div>
         </div>
@@ -173,312 +182,417 @@
             <div class="info-material">
                 <header class="mb-3">
                     <h1>
-                        <span class="title font-weight-bold">Update construction material prices today</span>
+                        <span class="title font-weight-bold">Cập nhật giá vật liệu hôm nay</span>
                     </h1>
                 </header>
-
-                <p style="font-weight:500; font-size: 1.3em"><strong>What are construction materials? What types of construction materials are included? Their application in life? What is the latest price of construction materials today? We will answer all of these questions in the following article.</strong></p>
-                <h5>Nowadays, to build solid structures, we use construction materials that are durable and of high quality. To get the most general overview of construction materials, in this article we will explain to readers what construction materials are, what types of construction materials include, applications and price quotes. latest today.</h5>
+                <div>
+                    <p style="font-weight:500; font-size: 1.3em"><strong>Vật liệu xây dựng là gì? Vật liệu xây dựng bao gồm những loại nào? Ứng dụng của chúng trong cuộc sống? Giá vật liệu xây dựng mới nhất hiện nay là bao nhiêu? Chúng tôi sẽ giải đáp tất cả những câu hỏi này trong bài viết sau.</strong></p>
+                    <h5>Ngày nay, để xây dựng những công trình kiên cố, chúng ta sử dụng những vật liệu xây dựng có độ bền cao và chất lượng cao. Để có cái nhìn tổng quát nhất về VLXD, trong bài viết này chúng tôi sẽ giải thích cho bạn đọc VLXD là gì, VLXD gồm những loại nào, ứng dụng và báo giá. mới nhất ngày hôm nay.</h5>
+                    <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
+                </div>
+                
+                <div>
+                    <h2 id="intro1" class="mt-3"><span style="color:#F27456"><strong>Vật liệu xây dựng là gì?</strong></span></h2>
+                    <p>
+                        Vật liệu xây dựng là thuật ngữ chung dùng để chỉ tất cả các loại vật liệu được sử dụng cho mục đích xây dựng. Trong tự nhiên có rất nhiều loại vật liệu xây dựng như: đất sét, đá, cát, gỗ, thậm chí cả cành cây, lá cây. Ngoài vật liệu tự nhiên, hiện nay còn có nhiều sản phẩm nhân tạo như gạch, xi măng, cốt thép...
+                    </p>
+                </div>
+                <h3 id="raw"><strong>2.1 Vật tư thô</strong></h3>
+                <p>Để phục vụ cho nhiều mục đích sử dụng khác nhau, trên thị trường hiện nay có rất nhiều loại gạch lát nền. Ví dụ, đối với các dự án nhà ở dân dụng, gạch đất nung thường được lựa chọn nhưng xét về vị trí và nhu cầu sử dụng thì gạch sẽ được lựa chọn tùy theo mong muốn của chủ đầu tư.</p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
 
-                <h2 id="intro1" class="mt-3"><span style="color:#F27456"><strong>What are construction materials?</strong></span></h2>
+                <h3 id="complete"class="mt-5"><strong>2.2 Vật tư hoàn thiện</strong></h3>
+                <h3 id="paint" class="mt-3"><strong>A. Sơn nước sơn dầu</strong></h3>
+                <p class="mb-3">Để phục vụ cho nhiều mục đích sử dụng khác nhau, trên thị trường hiện nay có rất nhiều loại gạch lát nền. Ví dụ, đối với các dự án nhà ở dân dụng, gạch đất nung thường được lựa chọn nhưng xét về vị trí và nhu cầu sử dụng thì gạch sẽ được lựa chọn tùy theo mong muốn của chủ đầu tư.</p>
+                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
+
+                <h3 id="electric" class="mt-3"><strong>B. Điện</strong></h3>
+                <p class="mb-3">Để phục vụ cho nhiều mục đích sử dụng khác nhau, trên thị trường hiện nay có rất nhiều loại gạch lát nền. Ví dụ, đối với các dự án nhà ở dân dụng, gạch đất nung thường được lựa chọn nhưng xét về vị trí và nhu cầu sử dụng thì gạch sẽ được lựa chọn tùy theo mong muốn của chủ đầu tư.</p>
+                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
+
+                <h3 id="sanitary" class="mt-3"><strong>C. Vệ sinh</strong></h3>
+                <p class="mb-3">Để phục vụ cho nhiều mục đích sử dụng khác nhau, trên thị trường hiện nay có rất nhiều loại gạch lát nền. Ví dụ, đối với các dự án nhà ở dân dụng, gạch đất nung thường được lựa chọn nhưng xét về vị trí và nhu cầu sử dụng thì gạch sẽ được lựa chọn tùy theo mong muốn của chủ đầu tư.</p>
+                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
+
+                <h3 id="kitchen" class="mt-3"><strong>D. Bếp</strong></h3>
+                <p class="mb-3">Để phục vụ cho nhiều mục đích sử dụng khác nhau, trên thị trường hiện nay có rất nhiều loại gạch lát nền. Ví dụ, đối với các dự án nhà ở dân dụng, gạch đất nung thường được lựa chọn nhưng xét về vị trí và nhu cầu sử dụng thì gạch sẽ được lựa chọn tùy theo mong muốn của chủ đầu tư.</p>
+                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
+
+                <h3 id="stair" class="mt-3"><strong>E. Cầu thang</strong></h3>
+                <p class="mb-3">Bê tông còn là loại vật liệu xây dựng tổng hợp có vai trò vô cùng quan trọng trong xây dựng. Bê tông thực chất là sự kết hợp giữa cốt liệu và xi măng. Có thể kể đến một dạng bê tông được sử dụng phổ biến trong các công trình xây dựng hiện nay như: Bê tông xi măng Portland (thành phần bao gồm cốt liệu khoáng sản, cụ thể là cát sỏi kết hợp với xi măng). Portland và nước.</p>
+                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
+
+                <h3 id="door" class="mt-3"><strong>F. Cửa</strong></h3>
+                <p class="mb-3">Để phục vụ cho nhiều mục đích sử dụng khác nhau, trên thị trường hiện nay có rất nhiều loại gạch lát nền. Ví dụ, đối với các dự án nhà ở dân dụng, gạch đất nung thường được lựa chọn nhưng xét về vị trí và nhu cầu sử dụng thì gạch sẽ được lựa chọn tùy theo mong muốn của chủ đầu tư.</p>
+                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
+
+                <h3 id="ceramicTiles" class="mt-3"><strong>G. Gạch ốp lát</strong></h3>
+                <p class="mb-3">Để phục vụ cho nhiều mục đích sử dụng khác nhau, trên thị trường hiện nay có rất nhiều loại gạch lát nền. Ví dụ, đối với các dự án nhà ở dân dụng, gạch đất nung thường được lựa chọn nhưng xét về vị trí và nhu cầu sử dụng thì gạch sẽ được lựa chọn tùy theo mong muốn của chủ đầu tư.</p>
+                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
 
 
-                <p>
-
-                    Construction materials is a general term used for all types of materials used for construction purposes. Many construction materials exist in nature, such as: clay, stone, sand, wood, even twigs and leaves. In addition to natural materials, there are now many artificial products such as bricks, cement, reinforced steel...
-
-                    <h2 id="intro2" class="mt-3"><span style="color:#F27456"><strong>What do construction materials include?</strong></span></h2>
-                </p>
-                <h3 id="brick"><strong>1. Brick</strong></h3>
-                <p>To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
-                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="cement" class="mt-3"><strong>2. Cement</strong></h3>
-                <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
-                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="sand" class="mt-3"><strong>3. Sand</strong></h3>
-                <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
-                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="stone" class="mt-3"><strong>4. Stone</strong></h3>
-                <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
-                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="iron" class="mt-3"><strong>5. Iron and Steel</strong></h3>
-                <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
-                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="concrete" class="mt-3"><strong>6. Concrete</strong></h3>
-                <p class="mb-3">Concrete is also a synthetic construction material that plays an extremely important role in construction. Concrete is essentially a combination of aggregate and cement. We can mention a form of concrete that is commonly used in construction projects today such as: Portland cement concrete (component includes mineral aggregates, specifically sand and gravel combined with cement). portland and water. </p>
-                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="plaster" class="mt-3"><strong>7. Plaster</strong></h3>
-                <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
-                <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <h3 id="plastic" class="mt-3"><strong>8. Plastic</strong></h3>
-                <p class="mb-3">To serve different uses, there are many types of tiles on the market today. For example, for residential housing projects, terra cotta bricks are usually chosen, but in terms of location and usage needs, bricks will be chosen depending on the investor's wishes. </p>
+                <h3 id="ceiling" class="mt-3"><strong>H. Trần</strong></h3>
+                <p class="mb-3">Để phục vụ cho nhiều mục đích sử dụng khác nhau, trên thị trường hiện nay có rất nhiều loại gạch lát nền. Ví dụ, đối với các dự án nhà ở dân dụng, gạch đất nung thường được lựa chọn nhưng xét về vị trí và nhu cầu sử dụng thì gạch sẽ được lựa chọn tùy theo mong muốn của chủ đầu tư.</p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
 
                 <h2 id="application" class="mt-3">
                     <span>
-                        <strong>Application of construction materials in life</strong>
+                        <strong>Ứng dụng của vật liệu xây dựng trong cuộc sống</strong>
                     </span>
                 </h2>
-                <p>Mud, soil, clay: In the past, walls were created using a mixture of mud or clay then kneaded with water. Soil and especially clay have the ability to adapt to heat very well and keep the temperature at a constant level. Therefore, houses built with earth or clay are often cool in the summer and warm in the winter. Later, people also made bricks from terracotta, and now it has become an indispensable construction material in every project.</p>
+                <p>Bùn, đất, đất sét: Trước đây, các bức tường đều được tạo ra bằng cách sử dụng hỗn hợp bùn hoặc đất sét sau đó nhào với nước. Đất và đặc biệt là đất sét có khả năng thích ứng nhiệt rất tốt và giữ nhiệt độ ở mức không đổi. Bởi vậy mà những ngôi nhà được xây dựng bằng đất hoặc đất sét thường mát mẻ vào mùa hè và ấm áp vào mùa đông. Sau này, người ta còn chế tạo ra gạch từ đất nung, và đến nay nó đã trở thành vật liệu xây dựng không thể trong mỗi công trình.</p>
                 <img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%"></img>
-                <p class="mt-3">Sand: Often used with cement and lime to make mortar for construction and plaster. In addition, sand is also used to make concrete mixture.</p>
-                <p>Stone and gravel: are construction materials that have existed for a long time. Currently, there are many types of stone used for construction in the world. For example, monolithic stones, evidence of which still exists today, are the Egyptian pyramids. Surely you can see the durability of stone, right?</p>
-                <p>Bricks - terracotta tiles: Currently you can find other types of bricks besides bricks made from terracotta such as: bricks made from cement, ceramic bricks, etc. But no matter what material they are made from, bricks is also an important group of construction materials for each project.</p>
-                <p>Cement: is a type of hydraulic binder, considered an important construction material and extremely necessary for any project.</p>
-                <p>Metal: Including: iron, steel, stainless steel, aluminum, copper, etc. These materials are often used as structural frames for large buildings or exterior surface coatings.</p>
+                <p class="mt-3">Cát: Thường được sử dụng cùng với xi măng, vôi để làm vữa xây dựng, trát tường. Ngoài ra, cát còn được sử dụng để làm hỗn hợp bê tông.</p>
+                <p>Đá, sỏi: là loại vật liệu xây dựng đã có từ rất lâu đời. Hiện nay trên thế giới có rất nhiều loại đá được sử dụng trong xây dựng. Ví dụ, những tảng đá nguyên khối mà bằng chứng vẫn còn tồn tại cho đến ngày nay là các kim tự tháp Ai Cập. Chắc hẳn bạn có thể thấy được độ bền của đá phải không?</p>
+                <p>Gạch – gạch đất nung: Hiện nay bạn có thể tìm thấy các loại gạch khác ngoài gạch được làm từ đất nung như: gạch làm từ xi măng, gạch ceramic,… Nhưng dù được làm từ chất liệu gì thì gạch cũng là một nhóm vật liệu xây dựng quan trọng cho từng dự án.</p>
+                <p>Xi măng: là loại chất kết dính thủy lực, được coi là vật liệu xây dựng quan trọng và vô cùng cần thiết cho bất kỳ công trình nào.</p>
+                <p>Kim loại: Bao gồm: sắt, thép, inox, nhôm, đồng,… Những vật liệu này thường được sử dụng làm khung kết cấu cho các công trình lớn hoặc lớp phủ bề mặt bên ngoài.</p>
+
                 <h2 id="material-price" class="mt-3">
                     <span style="color:#F27456">
-                        <strong>Today's construction materials price list is updated to the latest in 2024</strong>
+                        <strong>Bảng báo giá vật liệu xây dựng hôm nay cập nhật mới nhất 2024</strong>
                     </span>
                 </h2>
 
-                <h3 id="stone-price" class="mt-3">
-                    <strong>Price of construction stone</strong>
+                <h3 id="raw-price" class="mt-3">
+                    <strong>Giá vật liệu thô</strong>
                 </h3>
 
-                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
+                            </td>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Product's name</strong>
-                                </p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Unit (M3)</strong>
-                                </p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Price includes VAT (10%)</strong>
-                                </p>
-                            </td>
-                        </tr>
+                        @foreach(var material in Model.Where(x => x.CategoryId == SD.Category_Raw))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456;text-align:center">@material.Unit</td>
+                                <td style="color:#F27456; text-align:right">@material.UnitPrice.ToString("#,##0") VND</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
 
+                <h3 id="paint-price" class="mt-3">
+                    <strong>Giá sơn nước sơn dầu</strong>
+                </h3>
+
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
                             </td>
                         </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Paint))
+                        {
+                            <tr>
+                                <td><a>@material.Name</a></td>
+                                <td style="color:#F27456;text-align:center">@material.Unit</td>
+                                <td style="color:#F27456;text-align:right">@material.UnitPrice.ToString("#,##0") VND</td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>
 
-                <h3 id="sand-price" class="mt-3">
-                    <strong>Price of construction sand</strong>
+                <h3 id="electric-price" class="mt-3">
+                    <strong>Giá vật liệu điện</strong>
                 </h3>
 
-                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
-                    <tbody>
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Product's name</strong>
+                                    <strong>Tên sản phẩm</strong>
                                 </p>
                             </td>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Unit (M3)</strong>
+                                    <strong>Đơn vị tính</strong>
                                 </p>
                             </td>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Price includes VAT (10%)</strong>
+                                    <strong>Giá có VAT (10%)</strong>
                                 </p>
                             </td>
                         </tr>
 
+
+                    </thead>
+
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Electric))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456;text-align:center">@material.Unit</td>
+                                <td style="color:#F27456;text-align:right">@material.UnitPrice.ToString("#,##0") VND</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <h3 id="sanitary-price" class="mt-3">
+                    <strong>Giá vật dụng vệ sinh</strong>
+                </h3>
+
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
                             </td>
                             <td style="height:21px">
-                                <p align="center">Product's name</p>
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
                             </td>
                         </tr>
+
+
+                    </thead>
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Sanitary))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456;text-align:center">@material.Unit</td>
+                                <td style="color:#F27456;text-align:right">@material.UnitPrice.ToString("#,##0") VND</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <h3 id="kitchen-price" class="mt-3">
+                    <strong>Giá bếp xây dựng</strong>
+                </h3>
+
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Kitchen))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456;text-align:center">@material.Unit</td>
+                                <td style="color:#F27456;text-align:right">@material.UnitPrice.ToString("#,##0") VND</td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>
 
-                <h3 id="iron-price" class="mt-3">
-                    <strong>Price of construction Iron</strong>
+                <h3 id="stair-price" class="mt-3">
+                    <strong>Giá cầu thang xây dựng</strong>
                 </h3>
 
-                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
+                            </td>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Product's name</strong>
-                                </p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Unit (M3)</strong>
-                                </p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Price includes VAT (10%)</strong>
-                                </p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Stair))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456;text-align:center">@material.Unit</td>
+                                <td style="color:#F27456;text-align:right">@material.UnitPrice.ToString("#,##0") VND</td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>
 
-                <h3 id="brick-price" class="mt-3">
-                    <strong>Price of construction Brick</strong>
+                <h3 id="ceramic-price" class="mt-3">
+                    <strong>Giá gạch ốp lát xây dựng</strong>
                 </h3>
 
-                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
+                            </td>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Product's name</strong>
-                                </p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Unit (M3)</strong>
-                                </p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">
-                                    <strong>Price includes VAT (10%)</strong>
-                                </p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_CeramicTiles))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456;text-align:center">@material.Unit</td>
+                                <td style="color:#F27456;text-align:right">@material.UnitPrice.ToString("#,##0") VND</td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>
 
-                <h3 id="cement-price" class="mt-3">
-                    <strong>Price of construction cement</strong>
+                <h3 id="door-price" class="mt-3">
+                    <strong>Giá cửa xây dựng</strong>
                 </h3>
 
-                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" style="width:286px" width="286">
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Tên sản phẩm</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Đơn vị tính</strong>
+                                </p>
+                            </td>
+                            <td style="height:21px">
+                                <p align="center">
+                                    <strong>Giá có VAT (10%)</strong>
+                                </p>
+                            </td>
+                        </tr>
+                    </thead>
                     <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Door))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456;text-align:center">@material.Unit</td>
+                                <td style="color:#F27456;text-align:right">@material.UnitPrice.ToString("#,##0") VND</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+                <h3 id="ceiling-price" class="mt-3">
+                    <strong>Giá trần xây dựng</strong>
+                </h3>
+
+                <table class="table table-bordered" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Product's name</strong>
+                                    <strong>Tên sản phẩm</strong>
                                 </p>
                             </td>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Unit (M3)</strong>
+                                    <strong>Đơn vị tính</strong>
                                 </p>
                             </td>
                             <td style="height:21px">
                                 <p align="center">
-                                    <strong>Price includes VAT (10%)</strong>
+                                    <strong>Giá có VAT (10%)</strong>
                                 </p>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                            <td style="height:21px">
-                                <p align="center">Product's name</p>
-                            </td>
-                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var material in Model.Where(x => x.CategoryId == SD.Category_Ceiling))
+                        {
+                            <tr>
+                                <td><a class="font-weight-bold">@material.Name</a></td>
+                                <td style="color:#F27456;text-align:center">@material.Unit</td>
+                                <td style="color:#F27456;text-align:right">@material.UnitPrice.ToString("#,##0") VND</td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>
             </div>
 
         </div>
-        
+
     </div>
 </div>
 

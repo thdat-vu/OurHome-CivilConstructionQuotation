@@ -1,105 +1,96 @@
 ﻿@model Project
+@{
+	ViewData["Title"] = "Chi tiết dự án";
+}
 
 <div class="d-flex img-thumbnail justify-content-center">
 	<div class="d-flex align-items-center">
-		<h3 class="p-3"><a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a></h3>
+		<h3 class="p-3"><a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a></h3>
 		<i class="fa-solid fa-arrow-right-long"></i>
-		<h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Project" asp-action="Index">Project</a></h3>
+		<h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Project" asp-action="Index">Dự án</a></h3>
 	</div>
 </div>
 
 <div class="container mt-5">
-	<h1 style="font-weight:600">Design modern and super luxurious</h1>
+	<h1 style="font-weight:600">Dự án @Model.Name</h1>
 	<p style="font-size:1.3em">Time: @Model.Date</p>
 </div>
 
 
 <div class="container-fluid d-flex">
 	<div class="row d-flex">
-		<div class="col-lg-6">
-			<img style="border-radius:5px" src="~/images/project_bg/project_bg_4.jpg" width="100%" height="90%" />
-		</div>
-		<div class="col-lg-6">
-			<img style="border-radius:5px" src="~/images/project_bg/project_bg_4.jpg" width="100%" height="90%" />
-		</div>
-		<div class="container mb-2">
-			<ul style="display:flex; list-style-type:none;justify-content:flex-start; margin-left: -2em">
-				<li>
-					<a href="#overview" style="font-size:18px;line-height:28px;font-weight: 600; display:block;">
-						Overview
-						<span style="font-size:12px;line-height:16px;font-weight:normal !important;display:block">Introducing the project</span>
-					</a>
-				</li>
-				<li>
-					<a href="#location" style="font-size:18px;line-height:28px;font-weight: 600; display:block;margin-left:2em">
-						Location
-						<span style="font-size:12px;line-height:16px;font-weight:normal !important;display:block">Geographical location</span>
-					</a>
-				</li>
-				<li>
-					<a href="#detail" style="font-size:18px;line-height:28px;font-weight: 600; display:block;margin-left:2em">
-						House details
-						<span style="font-size:12px;line-height:16px;font-weight:normal !important;display:block">Outstanding features of the house</span>
-					</a>
-				</li>
-			</ul>
-		</div>
-		<hr />
-
-		<div class="container-fluid mt-5 d-flex">
-			<div class="row d-flex">
-				<div class="col-lg-4 order-lg-1">
-					<div id="category-container">
-						<h3 style="text-align:center">Leave your information to receive a quote</h3>
-						<p>Please leave your information to receive the latest advice and updates on this project</p>
-						<button style="background-color: #F27456; color:#fff; margin:0 auto; display:flex" class="btn btn-main" type="submit">Contact for Quote</button>
-					</div>
-				</div>
-				<div class="col-lg-8">
-					<div class="info-material">
-						<div class="mb-3">
-							<h2 id="overview">
-								<span class="title font-weight-bold">Overview of @Model.Name</span>
-							</h2>
-							<p>@Model.Overview</p>
-							<img src="~/images/project_bg/project_bg_4.jpg" width="100%" height="100%" />
+		<div id="overview" class="col-lg-5" style="max-width:40em">
+			<div id="carouselExample" class="carousel slide">
+				<div class="carousel-inner">
+					@if (Model.Images != null && Model.Images.Count > 0)
+                    {
+						var isFirstImage = true;
+						foreach (var image in Model.Images)
+						{
+							var activeClass = isFirstImage ? "active" : "";
+							isFirstImage = false;
+							<div class="carousel-item @activeClass">
+								<img style="border-radius:5px" src="@image.ImageUrl" width="100%" height="50%" />
+							</div>
+						}
+					}
+					else
+					{
+						<div class="carousel-item active">
+							<img style="border-radius:5px" src="~/images/project_bg/project_bg_4.jpg" width="100%" height="50%" />
 						</div>
-						<div class="mt-2 table-responsive">
-							<h2 id="detail">Thông tin chi tiết của mẫu nhà @Model.Scale</h2>
-							<table class="table table-bordered table-striped">
-								<thead>
-									<tr>
-										<th>Information</th>
-										<th>Detail</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Owner</td>
-										<td>@Model.Customer.Name</td>
-									</tr>
-									<tr>
-										<td>Location</td>
-										<td>@Model.Location</td>
-									</tr>
-									<tr>
-										<td>Scale</td>
-										<td>@Model.Scale</td>
-									</tr>
-									<tr>
-										<td>Size</td>
-										<td>@Model.Size</td>
-									</tr>
-									<tr>
-										<td>Description</td>
-										<td>@Model.Description</td>
-									</tr>
-								</tbody>
-							</table>
+						<div class="carousel-item">
+							<img style="border-radius:5px" src="~/images/project_bg/project_bg_1.jpg" width="100%" height="50%" />
 						</div>
-					</div>
+						<div class="carousel-item">
+							<img style="border-radius:5px" src="~/images/project_bg/project_bg_2.jpg" width="100%" height="50%" />
+						</div>
+					}
 
 				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		</div>
+		<div class="col-lg-7">
+			<div class="mt-2 table-responsive">
+				<h2 id="detail">Thông tin chi tiết của mẫu nhà @Model.Scale</h2>
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Thông tin</th>
+							<th>Chi tiết</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Chủ sỡ hữu</td>
+							<td>@Model.Customer.Name</td>
+						</tr>
+						<tr>
+							<td>Vị trí</td>
+							<td>@Model.Location</td>
+						</tr>
+						<tr>
+							<td>Quy mô</td>
+							<td>@Model.Scale</td>
+						</tr>
+						<tr>
+							<td>Kích thước</td>
+							<td>@Model.Size</td>
+						</tr>
+						<tr>
+							<td>Mô tả</td>
+							<td>@Model.Description</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

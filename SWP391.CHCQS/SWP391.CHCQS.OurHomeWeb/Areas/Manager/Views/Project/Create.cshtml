@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Tạo dự án";
+    //Layout = "~/Views/Shared/_LayoutManager";
+}
+@model ProjectVM
+
+<div class="card-body p-4">
+    <div class="card-header bg-main ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Tạo dự án</h2>
+            </div>
+        </div>
+    </div>
+    <form method="post" class="row" enctype="multipart/form-data">
+        <div class="border p-3">
+
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Name" class="form-control border-0 shadow" />
+                <label asp-for="Name" class="ms-2"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+           
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Location" class="form-control border-0 shadow" />
+                <label asp-for="Location" class="ms-2"></label>
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Scale" class="form-control border-0 shadow" />
+                <label asp-for="Scale" class="ms-2"></label>
+                <span asp-validation-for="Scale" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Size" class="form-control border-0 shadow" />
+                <label asp-for="Size" class="ms-2"></label>
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-12">
+                <textarea rows="5" asp-for="Description" class="form-control border-0 shadow" ></textarea>
+                <label asp-for="Description" class="ms-2"></label>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-12">
+                <textarea rows="5" asp-for="Overview" class="form-control border-0 shadow"></textarea>
+                <label asp-for="Overview" class="ms-2"></label>
+                <span asp-validation-for="Overview" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Date" value="@Model.Date.ToString("dd/MM/yyyy")" class="form-control border-0 shadow" />
+                <label asp-for="Date" class="ms-2"></label>
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-12">
+                <input asp-for="CustomerId" class="form-control border-0 shadow" id="CustomerId" readonly />
+                <label asp-for="CustomerId" class="ms-2"></label>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating py-2 col-12">
+                <input asp-for="CustomerName" class="form-control border-0 shadow" id="CustomerName" readonly/>
+                <label asp-for="CustomerName" class="ms-2"></label>
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-floating py-2 col-12">
+                <input type="file" name="files" class="form-control border-0 shadow" multiple />
+                 <label asp-for="Images" class="ms-2"></label> 
+            </div>
+            <div class="row pt-2">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn form-control btn-main"> Tạo </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-controller="Project" asp-action="Index" class="btn btn-primary border form-control">
+                        Trở lại
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+<div class="row mb-3">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+            <table id="tblCustomer" class="table-bordered table-striped text-black" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Mã
+                        </th>
+                        <th>
+                            Tên
+                        </th>
+                        <th>
+                            Số điện thoại
+                        </th>
+                        <th>
+                            Hành động
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/js/datatables/managerDTB/CustomerDTB.js"></script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

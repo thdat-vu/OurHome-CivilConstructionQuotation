@@ -10,5 +10,7 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 	public interface ITaskCategoryRepository : IRepository<TaskCategory>
 	{
 		void Update(TaskCategory obj);
+
+		string GetName(string id);
 	}
 }

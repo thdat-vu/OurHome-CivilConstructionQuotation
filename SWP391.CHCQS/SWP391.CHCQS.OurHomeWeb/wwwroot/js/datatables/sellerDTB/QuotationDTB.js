@@ -6,30 +6,39 @@
 function loadDataTableRequest() {
     dataTable = $('#tblQuotation').DataTable({
         "ajax": { url: '/Seller/Quotation/GetAll' },
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+        },
+        "order": [[1, "desc"]], //sắp xếp theo cột thứ 2(cột ngày giảm dần)
         "columns": [
-            { data: 'id', "width": "5%" },
-            { data: 'date', "width": "15%" },
-            { data: 'acreage', "width": "15%" },
-            { data: 'location', "width": "15%" },
-            { data: 'description', "width": "35%" },
+            { data: 'id', },
             {
-                data: 'status',
+                data: 'date',
                 "render": function (data) {
-                    if (data == 2) {
-                        return 'Processing';
-                    }
+                    // Chuyển đổi ngày thành chuỗi định dạng dd/MM/yyyy
+                    let date = new Date(data);
+                    let day = ("0" + date.getDate()).slice(-2);
+                    let month = ("0" + (date.getMonth() + 1)).slice(-2);
+                    let year = date.getFullYear();
+                    return `${day}/${month}/${year}`;
                 },
                 "width": "15%"
+            },
+            { data: 'acreage', },
+            { data: 'location', },
+            { data: 'description', },
+            {
+                data: 'status',
             },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                       <a href="/Seller/Quotation/Details?id=${data}" class = "btn btn-primary btn-main border-0 m-1"><i class="bi bi-plus-square"></i> View Details</a>
+                       <a href="/Seller/Quotation/Details?id=${data}" class = "text-nowrap btn btn-primary btn-main border-0 m-1"><i class="bi bi-eye"></i> Xem</a>
                     </div >`
                 },
-                "width": "15%"
             }
         ]
     });
 }
+

@@ -17,356 +17,368 @@ namespace SWP391.CHCQS.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.26")
+                .HasAnnotation("ProductVersion", "6.0.27")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("RequestFormMaterial", b =>
+            modelBuilder.Entity("ComboMaterial", b =>
                 {
-                    b.Property<string>("RequestId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("requestId")
-                        .IsFixedLength();
+                    b.Property<string>("CombosId")
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("MaterialId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("materialId")
-                        .IsFixedLength();
+                    b.Property<string>("MaterialsId")
+                        .HasColumnType("nvarchar(10)");
 
-                    b.HasKey("RequestId", "MaterialId")
-                        .HasName("PK__RequestF__2A5EBB0EE35F5BBE");
+                    b.HasKey("CombosId", "MaterialsId");
 
-                    b.HasIndex("MaterialId");
+                    b.HasIndex("MaterialsId");
 
-                    b.ToTable("RequestFormMaterial", (string)null);
+                    b.ToTable("ComboMaterial");
                 });
 
-            modelBuilder.Entity("StandardQuotationMaterial", b =>
+            modelBuilder.Entity("ComboTask", b =>
                 {
-                    b.Property<string>("QuotationId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("quotationId")
-                        .IsFixedLength();
+                    b.Property<string>("CombosId")
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("MaterialId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("materialId")
-                        .IsFixedLength();
+                    b.Property<string>("TasksId")
+                        .HasColumnType("nvarchar(10)");
 
-                    b.HasKey("QuotationId", "MaterialId")
-                        .HasName("PK__Standard__BCAD866D662F5E93");
+                    b.HasKey("CombosId", "TasksId");
 
-                    b.HasIndex("MaterialId");
+                    b.HasIndex("TasksId");
 
-                    b.ToTable("StandardQuotationMaterial", (string)null);
+                    b.ToTable("ComboTask");
                 });
 
-            modelBuilder.Entity("StandardQuotationTask", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<string>("QuotationId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("quotationId")
-                        .IsFixedLength();
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("TaskId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("taskId")
-                        .IsFixedLength();
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("QuotationId", "TaskId")
-                        .HasName("PK__Standard__48E336F665A8BFCB");
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.HasIndex("TaskId");
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.ToTable("StandardQuotationTask", (string)null);
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("SWP391.CHCQS.Model.Account", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.Property<string>("Username")
-                        .HasMaxLength(20)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(20)")
-                        .HasColumnName("username");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("Password")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(20)")
-                        .HasColumnName("password");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Role")
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("role");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Username")
-                        .HasName("PK__Account__F3DBC5731230846A");
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.ToTable("Account", (string)null);
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
 
-                    b.HasData(
-                        new
-                        {
-                            Username = "thao123",
-                            Password = "1",
-                            Role = "customer"
-                        },
-                        new
-                        {
-                            Username = "maitran1",
-                            Password = "1",
-                            Role = "customer"
-                        },
-                        new
-                        {
-                            Username = "lvm123",
-                            Password = "1",
-                            Role = "customer"
-                        },
-                        new
-                        {
-                            Username = "ngocanh85",
-                            Password = "1",
-                            Role = "customer"
-                        },
-                        new
-                        {
-                            Username = "dtuan",
-                            Password = "1",
-                            Role = "customer"
-                        },
-                        new
-                        {
-                            Username = "datnt",
-                            Password = "1",
-                            Role = "engineer"
-                        },
-                        new
-                        {
-                            Username = "datnx",
-                            Password = "1",
-                            Role = "manager"
-                        },
-                        new
-                        {
-                            Username = "duclm",
-                            Password = "1",
-                            Role = "seller"
-                        },
-                        new
-                        {
-                            Username = "anhnth",
-                            Password = "1",
-                            Role = "admin"
-                        },
-                        new
-                        {
-                            Username = "bthuong",
-                            Password = "1",
-                            Role = "customer"
-                        },
-                        new
-                        {
-                            Username = "phai789",
-                            Password = "1",
-                            Role = "customer"
-                        },
-                        new
-                        {
-                            Username = "lanly22",
-                            Password = "1",
-                            Role = "customer"
-                        },
-                        new
-                        {
-                            Username = "vnam",
-                            Password = "1",
-                            Role = "customer"
-                        },
-                        new
-                        {
-                            Username = "hoanguyen",
-                            Password = "1",
-                            Role = "customer"
-                        });
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.BasementType", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<decimal>("AreaFactor")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("description");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("name");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("money")
-                        .HasColumnName("unitPrice");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("BasementType", (string)null);
+                    b.ToTable("BasementTypes");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "BT1",
-                            Description = "Không có hầm",
-                            Name = "Không Hầm",
-                            UnitPrice = 0m
-                        },
-                        new
-                        {
-                            Id = "BT2",
-                            Description = "Hầm Độ Sâu 1.0 - 1.3 m",
-                            Name = "Độ Sâu 1.0 - 1.3",
-                            UnitPrice = 3400000m
-                        },
-                        new
-                        {
-                            Id = "BT3",
-                            Description = "Hầm Độ Sâu 1.3 - 1.7 m",
-                            Name = "Độ Sâu 1.3 - 1.7",
-                            UnitPrice = 4400000m
-                        },
-                        new
-                        {
-                            Id = "BT4",
-                            Description = "Hầm Độ Sâu 1.7 - 2.0 m",
-                            Name = "Độ sâu 1.7 - 2.0",
-                            UnitPrice = 5400000m
-                        },
-                        new
-                        {
-                            Id = "BT5",
-                            Description = "Hầm Độ sâu Lớn Hơn 2.0 m",
-                            Name = "Độ Sâu >2.0",
-                            UnitPrice = 6400000m
-                        });
+            modelBuilder.Entity("SWP391.CHCQS.Model.Combo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ConstructionId")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConstructionId");
+
+                    b.ToTable("Combos");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.ConstructDetail", b =>
                 {
                     b.Property<string>("QuotationId")
-                        .HasMaxLength(6)
-                        .IsUnicode(false)
-                        .HasColumnType("char(6)")
-                        .HasColumnName("quotationId")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Alley")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("alley");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("Balcony")
-                        .HasColumnType("bit")
-                        .HasColumnName("balcony");
+                        .HasColumnType("bit");
 
                     b.Property<string>("BasementId")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("basementId")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ConstructionId")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("constructionId")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("Facade")
-                        .HasColumnType("int")
-                        .HasColumnName("facade");
+                        .HasColumnType("int");
 
                     b.Property<int>("Floor")
-                        .HasColumnType("int")
-                        .HasColumnName("floor");
+                        .HasColumnType("int");
 
                     b.Property<string>("FoundationId")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("foundationId")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<decimal>("Garden")
-                        .HasColumnType("decimal(6,1)")
-                        .HasColumnName("garden");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("InvestmentId")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("investmentId")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<decimal>("Length")
-                        .HasColumnType("decimal(7,2)")
-                        .HasColumnName("length");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Mezzanine")
-                        .HasColumnType("decimal(7,2)")
-                        .HasColumnName("mezzanine");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RooftopFloor")
-                        .HasColumnType("decimal(7,2)")
-                        .HasColumnName("rooftopFloor");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("RooftopId")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("rooftopId")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("Room")
-                        .HasColumnType("int")
-                        .HasColumnName("room");
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Width")
-                        .HasColumnType("decimal(7,2)")
-                        .HasColumnName("width");
+                        .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("QuotationId")
-                        .HasName("PK__Construc__7536E3527BF2F7DA");
+                    b.HasKey("QuotationId");
 
                     b.HasIndex("BasementId");
 
@@ -378,1133 +390,338 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
                     b.HasIndex("RooftopId");
 
-                    b.ToTable("ConstructDetail", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            QuotationId = "CQ001",
-                            Alley = "3m",
-                            Balcony = true,
-                            BasementId = "BT1",
-                            ConstructionId = "CT1",
-                            Facade = 1,
-                            Floor = 2,
-                            FoundationId = "FT1",
-                            Garden = 20m,
-                            InvestmentId = "IT1",
-                            Length = 200m,
-                            Mezzanine = 30m,
-                            RooftopFloor = 40m,
-                            RooftopId = "RT1",
-                            Room = 5,
-                            Width = 100m
-                        },
-                        new
-                        {
-                            QuotationId = "CQ002",
-                            Alley = "3m",
-                            Balcony = true,
-                            BasementId = "BT2",
-                            ConstructionId = "CT2",
-                            Facade = 1,
-                            Floor = 2,
-                            FoundationId = "FT2",
-                            Garden = 20m,
-                            InvestmentId = "IT2",
-                            Length = 200m,
-                            Mezzanine = 30m,
-                            RooftopFloor = 40m,
-                            RooftopId = "RT2",
-                            Room = 5,
-                            Width = 100m
-                        },
-                        new
-                        {
-                            QuotationId = "CQ003",
-                            Alley = "3m",
-                            Balcony = true,
-                            BasementId = "BT3",
-                            ConstructionId = "CT3",
-                            Facade = 1,
-                            Floor = 2,
-                            FoundationId = "FT3",
-                            Garden = 20m,
-                            InvestmentId = "IT3",
-                            Length = 200m,
-                            Mezzanine = 30m,
-                            RooftopFloor = 40m,
-                            RooftopId = "RT3",
-                            Room = 5,
-                            Width = 100m
-                        });
+                    b.ToTable("ConstructDetails");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.ConstructionType", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("description");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("name");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ConstructionType", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "CT1",
-                            Description = "Nhà ở thành phố đông đúc, diện tích đất hẹp.",
-                            Name = "Nhà Phố"
-                        },
-                        new
-                        {
-                            Id = "CT2",
-                            Description = "Quy mô lớn, kiến trúc đẹp, đất rộng.",
-                            Name = "Biệt thự"
-                        },
-                        new
-                        {
-                            Id = "CT3",
-                            Description = "Nhà cơ bản, chi phí rẻ, thông dụng, đất dài.",
-                            Name = "Nhà cấp bốn "
-                        });
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(35)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(35)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("Gender")
-                        .HasMaxLength(6)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(6)")
-                        .HasColumnName("gender");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("PhoneNum")
-                        .HasMaxLength(15)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(15)")
-                        .HasColumnName("phoneNum");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(20)")
-                        .HasColumnName("username");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Username");
-
-                    b.ToTable("Customer", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "ID001",
-                            Email = "thaonguyen123@gmail.com",
-                            Gender = "female",
-                            Name = "Nguyễn Trần Phương Thảo",
-                            PhoneNum = "0512369874",
-                            Username = "thao123"
-                        },
-                        new
-                        {
-                            Id = "ID002",
-                            Email = "mai.tran@email.com",
-                            Gender = "female",
-                            Name = "Trần Thị Mai",
-                            PhoneNum = "0987654321",
-                            Username = "maitran1"
-                        },
-                        new
-                        {
-                            Id = "ID003",
-                            Email = "minh.le@example.com",
-                            Gender = "male",
-                            Name = "Lê Văn Minh",
-                            PhoneNum = "0123456789",
-                            Username = "lvm123"
-                        },
-                        new
-                        {
-                            Id = "ID004",
-                            Email = "ngocanh.nguyen@email.com",
-                            Gender = "female",
-                            Name = "Ngọc Anh Nguyễn",
-                            PhoneNum = "0765432198",
-                            Username = "ngocanh85"
-                        },
-                        new
-                        {
-                            Id = "ID005",
-                            Email = "tuan.minh@example.com",
-                            Gender = "male",
-                            Name = "Đỗ Minh Tuấn",
-                            PhoneNum = "0345678901",
-                            Username = "dtuan"
-                        },
-                        new
-                        {
-                            Id = "ID006",
-                            Email = "huong.bui@email.com",
-                            Gender = "female",
-                            Name = "Bùi Thị Hương",
-                            PhoneNum = "0876543210",
-                            Username = "bthuong"
-                        },
-                        new
-                        {
-                            Id = "ID007",
-                            Email = "hai.pham@email.com",
-                            Gender = "male",
-                            Name = "Phạm Văn Hải",
-                            PhoneNum = "0567890123",
-                            Username = "phai789"
-                        },
-                        new
-                        {
-                            Id = "ID008",
-                            Email = "lan.ly@example.com",
-                            Gender = "female",
-                            Name = "Lý Thị Lan",
-                            PhoneNum = "0234567890",
-                            Username = "lanly22"
-                        },
-                        new
-                        {
-                            Id = "ID009",
-                            Email = "nam.vu@email.com",
-                            Gender = "male",
-                            Name = "Vũ Thanh Nam",
-                            PhoneNum = "0987654321",
-                            Username = "vnam"
-                        },
-                        new
-                        {
-                            Id = "ID010",
-                            Email = "hoa.nguyen@email.com",
-                            Gender = "female",
-                            Name = "Nguyễn Thị Hoa",
-                            PhoneNum = "0456789012",
-                            Username = "hoanguyen"
-                        });
+                    b.ToTable("ConstructionTypes");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotation", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(6)
-                        .IsUnicode(false)
-                        .HasColumnType("char(6)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
-
-                    b.Property<DateTime?>("AcceptanceDateManager")
-                        .HasColumnType("datetime2");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Acreage")
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("acreage");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("DelegationDateSeller")
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("description");
-
-                    b.Property<string>("EngineerId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("engineerId")
-                        .IsFixedLength();
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasColumnName("location");
-
-                    b.Property<string>("ManagerId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("managerId")
-                        .IsFixedLength();
-
-                    b.Property<DateTime?>("RecieveDateEngineer")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("RecieveDateManager")
-                        .HasColumnType("datetime2");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RequestId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("requestId")
-                        .IsFixedLength();
-
-                    b.Property<string>("SellerId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("sellerId")
-                        .IsFixedLength();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("Status")
-                        .HasColumnType("int")
-                        .HasColumnName("status");
-
-                    b.Property<DateTime?>("SubmissionDateEngineer")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("SubmissionDateSeller")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("money")
-                        .HasColumnName("total");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EngineerId");
-
-                    b.HasIndex("ManagerId");
-
                     b.HasIndex("RequestId")
-                        .IsUnique()
-                        .HasFilter("[requestId] IS NOT NULL");
+                        .IsUnique();
 
-                    b.HasIndex("SellerId");
-
-                    b.ToTable("CustomQuotation", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "CQ001",
-                            Acreage = "240m2",
-                            Date = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6415),
-                            Description = "I want to build this house for my son and his wife, so i can live with them.",
-                            EngineerId = "EN001",
-                            Location = "Dĩ An, Bình Dương",
-                            ManagerId = "MG001",
-                            RequestId = "RF001",
-                            SellerId = "SL001",
-                            Status = 2,
-                            Total = 0m
-                        },
-                        new
-                        {
-                            Id = "CQ002",
-                            Acreage = "340m2",
-                            Date = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6418),
-                            Description = "This house must be great, so i can live with it for 500 years.",
-                            EngineerId = "EN001",
-                            Location = "Quận 5, TP. Hồ Chí Minh",
-                            ManagerId = "MG001",
-                            RequestId = "RF002",
-                            SellerId = "SL001",
-                            Status = 2,
-                            Total = 0m
-                        },
-                        new
-                        {
-                            Id = "CQ003",
-                            Acreage = "740m2",
-                            Date = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6421),
-                            Description = "This house for president to live, it must be nice.",
-                            EngineerId = "EN001",
-                            Location = "Long Thạnh Mỹ, TP. Thủ Đức",
-                            ManagerId = "MG001",
-                            RequestId = "RF003",
-                            SellerId = "SL001",
-                            Status = 2,
-                            Total = 0m
-                        });
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotationTask", b =>
-                {
-                    b.Property<string>("TaskId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("taskId")
-                        .IsFixedLength();
-
-                    b.Property<string>("QuotationId")
-                        .HasMaxLength(6)
-                        .IsUnicode(false)
-                        .HasColumnType("char(6)")
-                        .HasColumnName("quotationId")
-                        .IsFixedLength();
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("money")
-                        .HasColumnName("price");
-
-                    b.HasKey("TaskId", "QuotationId")
-                        .HasName("PK__CustomQu__EA0E34779FFE6727");
-
-                    b.HasIndex("QuotationId");
-
-                    b.ToTable("CustomQuotaionTask", (string)null);
+                    b.ToTable("CustomQuotations");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.FoundationType", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<decimal?>("AreaRatio")
-                        .HasColumnType("decimal(4,2)")
-                        .HasColumnName("areaRatio");
+                    b.Property<decimal?>("AreaFactor")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("description");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("name");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("money")
-                        .HasColumnName("unitPrice");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("FoundationType", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "FT1",
-                            AreaRatio = 0.30m,
-                            Description = "Móng đơn",
-                            Name = "Móng Đơn",
-                            UnitPrice = 3200000m
-                        },
-                        new
-                        {
-                            Id = "FT2",
-                            AreaRatio = 0.65m,
-                            Description = "Móng bằng",
-                            Name = "Móng Bằng",
-                            UnitPrice = 4200000m
-                        },
-                        new
-                        {
-                            Id = "FT3",
-                            AreaRatio = 0.50m,
-                            Description = "Móng đài cọc",
-                            Name = "Móng Đài Cọc",
-                            UnitPrice = 5200000m
-                        });
+                    b.ToTable("FoundationTypes");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.InvestmentType", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("description");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("name");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("InvestmentType", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "IT1",
-                            Description = "Xây nhà phần thô",
-                            Name = "Xây nhà phần thô"
-                        },
-                        new
-                        {
-                            Id = "IT2",
-                            Description = "Xây nhà trọn gói",
-                            Name = "Xây nhà trọn gói"
-                        },
-                        new
-                        {
-                            Id = "IT3",
-                            Description = "Mức trung bình",
-                            Name = "Mức TB"
-                        },
-                        new
-                        {
-                            Id = "IT4",
-                            Description = "Mức khá",
-                            Name = "Mức Khá"
-                        },
-                        new
-                        {
-                            Id = "IT5",
-                            Description = "Mức khá +",
-                            Name = "Mức Khá +"
-                        });
+                    b.ToTable("InvestmentTypes");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Material", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("CategoryId")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("categoryId")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("InventoryQuantity")
-                        .HasColumnType("int")
-                        .HasColumnName("inventoryQuantity");
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)")
-                        .HasColumnName("name");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("bit")
-                        .HasColumnName("status");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Unit")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(5)")
-                        .HasColumnName("unit");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<decimal>("UnitPrice")
-                        .HasColumnType("money")
-                        .HasColumnName("unitPrice");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Material", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "VT101",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Sắt thép Việt Nhật",
-                            Status = true,
-                            Unit = "m",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT102",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Xi măng đổ bê tông Holcim",
-                            Status = true,
-                            Unit = "bao",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT103",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Xi măng xây tô tường Hà Tiên",
-                            Status = true,
-                            Unit = "bao",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT104",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Bê tông tươi Lê Phan - Hoàng Sở M250",
-                            Status = true,
-                            Unit = "m3",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT105",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Cát hạt lớn",
-                            Status = true,
-                            Unit = "m3",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT106",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Cát hạt vàng trung",
-                            Status = true,
-                            Unit = "m3",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT107",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Đá xanh Đồng Nai",
-                            Status = true,
-                            Unit = "ton",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT108",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Gạch đinh 8x8x18 Tuynel Bình Dương",
-                            Status = true,
-                            Unit = "viên",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT109",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Gạch định 4x8x18 Tuynel Bình Dương",
-                            Status = true,
-                            Unit = "viên",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT110",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Cáp TV Sino",
-                            Status = true,
-                            Unit = "m",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT111",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Cáp TV Sino (Panasonic)",
-                            Status = true,
-                            Unit = "m",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT112",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Cáp mạng Sino",
-                            Status = true,
-                            Unit = "m",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT113",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Cáp mạng Sino (Panasonic)",
-                            Status = true,
-                            Unit = "m",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT114",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Đế âm tường Sino",
-                            Status = true,
-                            Unit = "cái",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT115",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Đường ống nóng âm tường Vesbo",
-                            Status = true,
-                            Unit = "m",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT116",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Đường ống cấp nước, thoát nước Bình Minh",
-                            Status = true,
-                            Unit = "m",
-                            UnitPrice = 0.0000m
-                        },
-                        new
-                        {
-                            Id = "VT117",
-                            CategoryId = "VT1",
-                            InventoryQuantity = 5000,
-                            Name = "Hóa chất chống thấm ban công, sân thượng, WC Kova CF-11A, Sika - 1F",
-                            Status = true,
-                            Unit = "thùng",
-                            UnitPrice = 0.0000m
-                        });
+                    b.ToTable("Materials");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.MaterialCategory", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("name");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("MaterialCategory", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "VT1",
-                            Name = "Vật tư thô"
-                        },
-                        new
-                        {
-                            Id = "VT2",
-                            Name = "Sơn nước sơn dầu"
-                        },
-                        new
-                        {
-                            Id = "VT3",
-                            Name = "Điện"
-                        },
-                        new
-                        {
-                            Id = "VT4",
-                            Name = "Vệ sinh"
-                        },
-                        new
-                        {
-                            Id = "VT5",
-                            Name = "Bếp"
-                        },
-                        new
-                        {
-                            Id = "VT6",
-                            Name = "Cầu thang"
-                        },
-                        new
-                        {
-                            Id = "VT7",
-                            Name = "Cửa"
-                        },
-                        new
-                        {
-                            Id = "VT8",
-                            Name = "Gạch ốp lát"
-                        },
-                        new
-                        {
-                            Id = "VT9",
-                            Name = "Trần"
-                        });
+                    b.ToTable("MaterialCategories");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.MaterialDetail", b =>
                 {
-                    b.Property<string>("QuotationId")
-                        .HasMaxLength(6)
-                        .IsUnicode(false)
-                        .HasColumnType("char(6)")
-                        .HasColumnName("quotationId")
-                        .IsFixedLength();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("MaterialId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("materialId")
-                        .IsFixedLength();
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<decimal?>("Price")
-                        .HasColumnType("money")
-                        .HasColumnName("price");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int")
-                        .HasColumnName("quantity");
+                        .HasColumnType("int");
 
-                    b.HasKey("QuotationId", "MaterialId")
-                        .HasName("PK__Material__BCAD866D29D0C3FC");
+                    b.Property<string>("QuotationId")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("MaterialId");
 
-                    b.ToTable("MaterialDetail", (string)null);
+                    b.HasIndex("QuotationId");
+
+                    b.ToTable("MaterialDetails");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Pricing", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
                     b.Property<string>("ConstructTypeId")
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("ConstructTypeId")
-                        .IsFixedLength();
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("InvestmentTypeId")
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("InvestmentTypeId")
-                        .IsFixedLength();
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<decimal?>("UnitPrice")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("ConstructTypeId", "InvestmentTypeId")
-                        .HasName("PK__Pricing__82221887E948CB0C");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConstructTypeId");
 
                     b.HasIndex("InvestmentTypeId");
 
-                    b.ToTable("Pricing", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ConstructTypeId = "CT1",
-                            InvestmentTypeId = "IT1",
-                            UnitPrice = 3400000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT1",
-                            InvestmentTypeId = "IT2",
-                            UnitPrice = 6000000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT1",
-                            InvestmentTypeId = "IT3",
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT1",
-                            InvestmentTypeId = "IT4",
-                            UnitPrice = 5400000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT1",
-                            InvestmentTypeId = "IT5",
-                            UnitPrice = 6000000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT2",
-                            InvestmentTypeId = "IT1",
-                            UnitPrice = 3600000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT2",
-                            InvestmentTypeId = "IT2",
-                            UnitPrice = 6400000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT2",
-                            InvestmentTypeId = "IT3",
-                            UnitPrice = 5000000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT2",
-                            InvestmentTypeId = "IT4",
-                            UnitPrice = 5700000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT2",
-                            InvestmentTypeId = "IT5",
-                            UnitPrice = 6400000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT3",
-                            InvestmentTypeId = "IT1",
-                            UnitPrice = 2400000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT3",
-                            InvestmentTypeId = "IT2",
-                            UnitPrice = 4700000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT3",
-                            InvestmentTypeId = "IT3",
-                            UnitPrice = 4700000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT3",
-                            InvestmentTypeId = "IT4",
-                            UnitPrice = 4700000.00m
-                        },
-                        new
-                        {
-                            ConstructTypeId = "CT3",
-                            InvestmentTypeId = "IT5",
-                            UnitPrice = 4700000.00m
-                        });
+                    b.ToTable("Pricings");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Project", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("customerId")
-                        .IsFixedLength();
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("description");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("location");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("name");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Overview")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Scale")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("scale");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Size")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("size");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("bit")
-                        .HasColumnName("status");
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Project", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "PRJ01",
-                            CustomerId = "ID001",
-                            Date = new DateTime(2021, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Nhà ở gia đình",
-                            Location = "Phường Hố Nai, thành phố Biên Hòa, tỉnh Đồng Nai",
-                            Name = "NHÀ PHỐ CHỊ THẢO TẠI ĐỒNG NAI",
-                            Overview = "Mô hình nhà phố hiện đại vẫn được ưa chuộng nhất qua các năm bởi vẻ đẹp đơn giản nhưng gian trọng và thanh lịch. Và chị Thảo là một trong rất nhiều khách hàng lựa chọn phong cách nhà này.\r\n\r\nVới dịch vụ hoàn thiện nhà trọn gói, chị đã sở hữu cho mình được căn nhà phố hiện đại 1 trệt 2 lầu đầy đủ tiện nghi, đảm bảo thẩm mỹ và độ bền. Cùng khám phá hình ảnh của ngôi nhà qua bài viết sau nhé!",
-                            Scale = "1 trệt, 2 lầu",
-                            Size = "5x12",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = "PRJ02",
-                            CustomerId = "ID002",
-                            Date = new DateTime(2021, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Nhà ở gia đình",
-                            Location = "huyện Bến Lức, tỉnh Long An",
-                            Name = "NHÀ PHỐ CHỊ MAI",
-                            Overview = "Mô hình nhà phố hiện đại đang ngày càng trở nên phổ biến ở Việt Nam nhờ vẻ ngoài thẩm mỹ, sang trọng và chi phí xây dựng hợp lý.\r\n\r\nDưới sự hỗ trợ của dịch vụ thi công nhà trọn gói, gia đình Chị Mai tỉnh Long An thành công hoàn thiện ngôi nhà diện tích 105m2 với 1 trệt, 2 lầu theo phong cách hiện đại. Căn nhà không chỉ đáp ứng những công năng cần thiết chủ nhà yêu cầu mà còn đảm bảo yếu tố thẩm mỹ, phong thủy, chi phí tối ưu",
-                            Scale = "1 trệt, 2 lầu, sân thượng",
-                            Size = "5x21",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = "PRJ03",
-                            CustomerId = "ID003",
-                            Date = new DateTime(2021, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Nhà ở gia đình",
-                            Location = "Phường An Phú Đông, Quận 12",
-                            Name = "NHÀ PHỐ HIỆN ĐẠI 5 TẦNG CỦA ANH MINH",
-                            Overview = "Nhà ở không chỉ để ở, mà còn là nơi thể hiện phong cách, cá tính của gia chủ. Mỗi công trình nhà là một sản phẩm sáng tạo, mang dấu ấn riêng của người kiến trúc sư và chủ nhà.\r\n\r\nTọa lạc tại KDC Nam Long, Quận 12, ngôi nhà của anh Minh là một trong những công trình hiện đại nổi bật trong khu vực. Kiến trúc 5 tầng với kết cấu 1 trệt + 1 lửng + 2 tầng + 1 tum, căn nhà vừa đáp ứng được không gian sống thoải mái cho các thành viên, vừa tối ưu được chi phí thi công. Cùng Hưng Phú Thịnh ngắm nhìn hình ảnh thực tế của công trình này nhé.",
-                            Scale = "1 trệt + 1 lửng + 2 lầu + 1 tum, sân thượng",
-                            Size = "4.5x18",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = "PRJ04",
-                            CustomerId = "ID004",
-                            Date = new DateTime(2022, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Nhà ở gia đình",
-                            Location = "Phường Hiệp Bình Chánh, TP. Thủ Đức",
-                            Name = "NHÀ CHỊ NGỌC ANH",
-                            Overview = "Nằm giữa lòng thành phố Thủ Đức, ngôi nhà của chị Ngọc Anh là một điểm nhấn nổi bật với phong cách hiện đại, trẻ trung. Với diện tích gần 85m2, quy mô 1 trệt, 2 lầu và 1 tum sân thượng, căn nhà hoàn thiện không chỉ đáp ứng được công năng mà còn thỏa mãn được những yếu tố về thẩm mỹ, phong thủy, đem lại sự hài lòng cho gia chủ.",
-                            Scale = "1 trệt + 2 lầu + 1 tum, sân thượng",
-                            Size = "4.35x19.5",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = "PRJ05",
-                            CustomerId = "ID005",
-                            Date = new DateTime(2022, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Nhà ở gia đình",
-                            Location = "Quận 5, TP. HCM",
-                            Name = "NHÀ 1 TRỆT 3 LẦU ANH TUẤN ",
-                            Overview = "Nằm giữa lòng thành phố Thủ Đức, ngôi nhà của chị Ngọc Anh là một điểm nhấn nổi bật với phong cách hiện đại, trẻ trung. Với diện tích gần 85m2, quy mô 1 trệt, 2 lầu và 1 tum sân thượng, căn nhà hoàn thiện không chỉ đáp ứng được công năng mà còn thỏa mãn được những yếu tố về thẩm mỹ, phong thủy, đem lại sự hài lòng cho gia chủ.",
-                            Scale = "Nhà 1 trệt 3 lầu có sân thượng",
-                            Size = "4x17",
-                            Status = true
-                        });
+                    b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("SWP391.CHCQS.Model.RejectedCustomQuotation", b =>
+            modelBuilder.Entity("SWP391.CHCQS.Model.ProjectImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("ProjectId")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectImages");
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.RejectionReport", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("EngineerId")
                         .IsRequired()
-                        .HasColumnType("char(5)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ManagerId")
                         .IsRequired()
-                        .HasColumnType("char(5)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("ReceiveDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("RejectedDay")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("RejectedQuotationId")
                         .IsRequired()
-                        .HasColumnType("char(6)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime?>("SubmitDay")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -1514,587 +731,299 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
                     b.HasIndex("RejectedQuotationId");
 
-                    b.ToTable("RejectedCustomQuotations");
+                    b.ToTable("RejectionReports");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Acreage")
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("acreage");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("ConstructType")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("constructType");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("customerId")
-                        .IsFixedLength();
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("description");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("GenerateDate")
-                        .HasColumnType("datetime")
-                        .HasColumnName("generateDate");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasColumnName("location");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit")
-                        .HasColumnName("status");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("RequestForm", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "RF001",
-                            Acreage = "240m2",
-                            ConstructType = "CT2",
-                            CustomerId = "ID001",
-                            Description = "Customer said that this project must be finished on 3 month",
-                            GenerateDate = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6112),
-                            Location = "Dĩ An, Bình Dương",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = "RF002",
-                            Acreage = "340m2",
-                            ConstructType = "CT1",
-                            CustomerId = "ID002",
-                            Description = "Customer said that this project must be finished on 6 month",
-                            GenerateDate = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6120),
-                            Location = "Quận 5, TP. Hồ Chí Minh",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = "RF003",
-                            Acreage = "340m2",
-                            ConstructType = "CT3",
-                            CustomerId = "ID003",
-                            Description = "Customer said that this project must be finished on 12 month",
-                            GenerateDate = new DateTime(2024, 2, 29, 13, 3, 39, 304, DateTimeKind.Local).AddTicks(6121),
-                            Location = "Long Thạnh Mỹ, TP. Thủ Đức",
-                            Status = true
-                        });
+                    b.ToTable("RequestForms");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RooftopType", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<decimal>("AreaFactor")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("description");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("name");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("money")
-                        .HasColumnName("unitPrice");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RooftopType", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "RT1",
-                            Description = "Mái tôn",
-                            Name = "Mái tôn",
-                            UnitPrice = 3300000.00m
-                        },
-                        new
-                        {
-                            Id = "RT2",
-                            Description = "Mái BTCT",
-                            Name = "Mái BTCT",
-                            UnitPrice = 330000.00m
-                        },
-                        new
-                        {
-                            Id = "RT3",
-                            Description = "Mái ngói + Xà gồ",
-                            Name = "Mái ngói + Xà gồ",
-                            UnitPrice = 3300000.00m
-                        },
-                        new
-                        {
-                            Id = "RT4",
-                            Description = "Mái ngói + BTCT",
-                            Name = "Mái ngói + BTCT",
-                            UnitPrice = 3300000.00m
-                        });
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.Staff", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(35)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(35)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasMaxLength(6)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(6)")
-                        .HasColumnName("gender");
-
-                    b.Property<string>("ManagerId")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("managerId")
-                        .IsFixedLength();
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("PhoneNum")
-                        .HasMaxLength(15)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(15)")
-                        .HasColumnName("phoneNum");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit")
-                        .HasColumnName("status");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(20)")
-                        .HasColumnName("username");
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ManagerId");
-
-                    b.HasIndex("Username");
-
-                    b.ToTable("Staff");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "MG001",
-                            Email = "datnx@gmail.com",
-                            Gender = "male",
-                            Name = "Nguyen Xuan Dat",
-                            PhoneNum = "0987654321",
-                            Status = true,
-                            Username = "datnx"
-                        },
-                        new
-                        {
-                            Id = "SL001",
-                            Email = "duclm@gmail.com",
-                            Gender = "male",
-                            ManagerId = "MG001",
-                            Name = "Le Minh Duc",
-                            PhoneNum = "0987654321",
-                            Status = true,
-                            Username = "duclm"
-                        },
-                        new
-                        {
-                            Id = "EN001",
-                            Email = "datnt@gmail.com",
-                            Gender = "male",
-                            ManagerId = "MG001",
-                            Name = "Nguyen Thanh Dat",
-                            PhoneNum = "0987654321",
-                            Status = true,
-                            Username = "datnt"
-                        },
-                        new
-                        {
-                            Id = "ADMIN",
-                            Email = "anhnth@gmail.com",
-                            Gender = "female",
-                            Name = "Nguyen Thach Ha Anh",
-                            PhoneNum = "0987654321",
-                            Status = true,
-                            Username = "anhnth"
-                        });
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.StandardQuotation", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
-
-                    b.Property<string>("ConstructionId")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("constructionId")
-                        .IsFixedLength();
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("description");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("name");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("money")
-                        .HasColumnName("price");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit")
-                        .HasColumnName("status");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ConstructionId");
-
-                    b.ToTable("StandardQuotation", (string)null);
+                    b.ToTable("RooftopTypes");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Task", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("CategoryId")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("categoryId")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("description");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)")
-                        .HasColumnName("name");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("bit")
-                        .HasColumnName("status");
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("UnitPrice")
-                        .HasColumnType("money")
-                        .HasColumnName("unitPrice");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Task", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "TKS11",
-                            CategoryId = "TKB",
-                            Description = "Lắp đặt hệ thống đường dây truyền hình cáp, internet",
-                            Name = "Lắp đặt đường dây cáp",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK01",
-                            CategoryId = "TKB",
-                            Description = "Tổ chức công trường, làm lán trại cho công nhân",
-                            Name = "Tổ chức công trường",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK02",
-                            CategoryId = "TKB",
-                            Description = "Vệ sinh mặt bằng thi công, định vị móng, cột",
-                            Name = "Vệ sinh mặt bằng",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK03",
-                            CategoryId = "TKB",
-                            Description = "Đào đất hố móng",
-                            Name = "Đào móng",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK04",
-                            CategoryId = "TKB",
-                            Description = "Thi công theo bản vẽ thiết kế",
-                            Name = "Thi công phần trên",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK05",
-                            CategoryId = "TKB",
-                            Description = "Thi công coffa, cốt thép, đổ bê tông móng, đà kiềng, dầm sàn các lầu, cột,... theo bản thiết kế",
-                            Name = "Thi công coffa, cốt thép, đổ bê tông móng",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK06",
-                            CategoryId = "TKB",
-                            Description = "Xây tường gạch 100mm, 8x8x18 theo bản thiết kế",
-                            Name = "Xây tường gạch",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK07",
-                            CategoryId = "TKB",
-                            Description = "Cán nền các nền lầu, sân thượng, mái và nhà vệ sinh",
-                            Name = "Cán nền",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK08",
-                            CategoryId = "TKB",
-                            Description = "Thi công chống thấm Sê nô, sàn mái, sàn vệ sinh, sân thượng,...",
-                            Name = "Thi công chống thấm",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK09",
-                            CategoryId = "TKB",
-                            Description = "Lắp đặt hệ thống đường ống cấp và thoát nước nóng lạnh",
-                            Name = "Lắp đặt ống nước",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK10",
-                            CategoryId = "TKB",
-                            Description = "Lắp đặt hệ thống đường dây diện chiếu sáng, đế âm, hộp nối",
-                            Name = "Lắp đặt đường dây điện",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK12",
-                            CategoryId = "TKB",
-                            Description = "Vệ sinh công trình",
-                            Name = "Vệ sinh công trình",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK13",
-                            CategoryId = "TKC",
-                            Description = "Ốp lát gạch toàn bộ sàn của nhà, phòng bếp, tường bếp vệ sinh theo bản thiết kế",
-                            Name = "Ốp gạch sàn nhà, bếp, tường",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK14",
-                            CategoryId = "TKC",
-                            Description = "Ốp gạch, đá trang trí",
-                            Name = "Ốp gạch trang trí",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK15",
-                            CategoryId = "TKC",
-                            Description = "Lắp đặt hệ thống điện và chiếu sáng: công tắc, ổ cắm, bóng đèn ",
-                            Name = "Lắp đặt hệ thống điện và chiếu sáng",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK16",
-                            CategoryId = "TKC",
-                            Description = "Lắp đặt thiết bị vệ sinh: bàn cầu, lavabo, vòi nước,...",
-                            Name = "Lắp đặt thiết bị vệ sinh",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK17",
-                            CategoryId = "TKC",
-                            Description = "Dựng bao cửa gỗ, cửa sắt",
-                            Name = "Dựng cửa",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        },
-                        new
-                        {
-                            Id = "TSK18",
-                            CategoryId = "TKC",
-                            Description = "Trét mát tít và sơn nước toàn bộ bên trong và bên ngoài nhà",
-                            Name = "Trét mát tít và sơn nước",
-                            Status = true,
-                            UnitPrice = 4800000.00m
-                        });
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.TaskCategory", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(3)
-                        .IsUnicode(false)
-                        .HasColumnType("char(3)")
-                        .HasColumnName("id")
-                        .IsFixedLength();
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("name");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TaskCategory", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "TKB",
-                            Name = "Đầu mục cơ bản"
-                        },
-                        new
-                        {
-                            Id = "TKC",
-                            Name = "Đầu mục hoàn thiện"
-                        });
+                    b.ToTable("TaskCategories");
                 });
 
-            modelBuilder.Entity("RequestFormMaterial", b =>
+            modelBuilder.Entity("SWP391.CHCQS.Model.TaskDetail", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("QuotationId")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("TaskId")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuotationId");
+
+                    b.HasIndex("TaskId");
+
+                    b.ToTable("TaskDetails");
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.WorkingReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("ReceiveDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RequestId")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("StaffId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("SubmitDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestId");
+
+                    b.HasIndex("StaffId");
+
+                    b.ToTable("WorkingReports");
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("ConnectionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ManagerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasIndex("ManagerId");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("ComboMaterial", b =>
+                {
+                    b.HasOne("SWP391.CHCQS.Model.Combo", null)
+                        .WithMany()
+                        .HasForeignKey("CombosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SWP391.CHCQS.Model.Material", null)
                         .WithMany()
-                        .HasForeignKey("MaterialId")
-                        .IsRequired()
-                        .HasConstraintName("FK__RequestFo__mater__5CD6CB2B");
-
-                    b.HasOne("SWP391.CHCQS.Model.RequestForm", null)
-                        .WithMany()
-                        .HasForeignKey("RequestId")
-                        .IsRequired()
-                        .HasConstraintName("FK__RequestFo__reque__619B8048");
+                        .HasForeignKey("MaterialsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("StandardQuotationMaterial", b =>
+            modelBuilder.Entity("ComboTask", b =>
                 {
-                    b.HasOne("SWP391.CHCQS.Model.Material", null)
+                    b.HasOne("SWP391.CHCQS.Model.Combo", null)
                         .WithMany()
-                        .HasForeignKey("MaterialId")
-                        .IsRequired()
-                        .HasConstraintName("FK__StandardQ__mater__619B8048");
-
-                    b.HasOne("SWP391.CHCQS.Model.StandardQuotation", null)
-                        .WithMany()
-                        .HasForeignKey("QuotationId")
-                        .IsRequired()
-                        .HasConstraintName("FK__StandardQ__quota__66603565");
-                });
-
-            modelBuilder.Entity("StandardQuotationTask", b =>
-                {
-                    b.HasOne("SWP391.CHCQS.Model.StandardQuotation", null)
-                        .WithMany()
-                        .HasForeignKey("QuotationId")
-                        .IsRequired()
-                        .HasConstraintName("FK__StandardQ__quota__6754599E");
+                        .HasForeignKey("CombosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SWP391.CHCQS.Model.Task", null)
                         .WithMany()
-                        .HasForeignKey("TaskId")
-                        .IsRequired()
-                        .HasConstraintName("FK__StandardQ__taskI__6477ECF3");
+                        .HasForeignKey("TasksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.Combo", b =>
+                {
+                    b.HasOne("SWP391.CHCQS.Model.ConstructionType", "Construction")
+                        .WithMany()
+                        .HasForeignKey("ConstructionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Construction");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.ConstructDetail", b =>
@@ -2126,8 +1055,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasOne("SWP391.CHCQS.Model.CustomQuotation", "Quotation")
                         .WithOne("ConstructDetail")
                         .HasForeignKey("SWP391.CHCQS.Model.ConstructDetail", "QuotationId")
-                        .IsRequired()
-                        .HasConstraintName("FK__Construct__quota__5165187F");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SWP391.CHCQS.Model.RooftopType", "Rooftop")
                         .WithMany()
@@ -2148,61 +1077,15 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.Navigation("Rooftop");
                 });
 
-            modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
-                {
-                    b.HasOne("SWP391.CHCQS.Model.Account", "UsernameNavigation")
-                        .WithMany("Customers")
-                        .HasForeignKey("Username")
-                        .IsRequired()
-                        .HasConstraintName("FK__Customer__userna__534D60F1");
-
-                    b.Navigation("UsernameNavigation");
-                });
-
             modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotation", b =>
                 {
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Engineer")
-                        .WithMany()
-                        .HasForeignKey("EngineerId");
-
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Manager")
-                        .WithMany()
-                        .HasForeignKey("ManagerId");
-
                     b.HasOne("SWP391.CHCQS.Model.RequestForm", "Request")
                         .WithOne("CustomQuotation")
-                        .HasForeignKey("SWP391.CHCQS.Model.CustomQuotation", "RequestId");
-
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Seller")
-                        .WithMany()
-                        .HasForeignKey("SellerId");
-
-                    b.Navigation("Engineer");
-
-                    b.Navigation("Manager");
-
-                    b.Navigation("Request");
-
-                    b.Navigation("Seller");
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotationTask", b =>
-                {
-                    b.HasOne("SWP391.CHCQS.Model.CustomQuotation", "Quotation")
-                        .WithMany("CustomQuotaionTasks")
-                        .HasForeignKey("QuotationId")
-                        .IsRequired()
-                        .HasConstraintName("FK__CustomQuo__quota__5441852A");
-
-                    b.HasOne("SWP391.CHCQS.Model.Task", "Task")
-                        .WithMany()
-                        .HasForeignKey("TaskId")
+                        .HasForeignKey("SWP391.CHCQS.Model.CustomQuotation", "RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Quotation");
-
-                    b.Navigation("Task");
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Material", b =>
@@ -2227,8 +1110,8 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasOne("SWP391.CHCQS.Model.CustomQuotation", "Quotation")
                         .WithMany("MaterialDetails")
                         .HasForeignKey("QuotationId")
-                        .IsRequired()
-                        .HasConstraintName("FK__MaterialD__quota__5BE2A6F2");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Material");
 
@@ -2240,14 +1123,14 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.HasOne("SWP391.CHCQS.Model.ConstructionType", "ConstructType")
                         .WithMany("Pricings")
                         .HasForeignKey("ConstructTypeId")
-                        .IsRequired()
-                        .HasConstraintName("FK__Pricing__Constru__5CD6CB2B");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SWP391.CHCQS.Model.InvestmentType", "InvestmentType")
                         .WithMany("Pricings")
                         .HasForeignKey("InvestmentTypeId")
-                        .IsRequired()
-                        .HasConstraintName("FK__Pricing__Investm__5DCAEF64");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ConstructType");
 
@@ -2256,24 +1139,35 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Project", b =>
                 {
-                    b.HasOne("SWP391.CHCQS.Model.Customer", "Customer")
-                        .WithMany("Projects")
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Customer")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
-                        .IsRequired()
-                        .HasConstraintName("FK__Project__custome__5AEE82B9");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("SWP391.CHCQS.Model.RejectedCustomQuotation", b =>
+            modelBuilder.Entity("SWP391.CHCQS.Model.ProjectImage", b =>
                 {
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Engineer")
+                    b.HasOne("SWP391.CHCQS.Model.Project", "Project")
+                        .WithMany("Images")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.RejectionReport", b =>
+                {
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Engineer")
                         .WithMany()
                         .HasForeignKey("EngineerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Manager")
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Manager")
                         .WithMany()
                         .HasForeignKey("ManagerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2294,41 +1188,13 @@ namespace SWP391.CHCQS.DataAccess.Migrations
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>
                 {
-                    b.HasOne("SWP391.CHCQS.Model.Customer", "Customer")
-                        .WithMany("RequestForms")
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Customer")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
-                        .IsRequired()
-                        .HasConstraintName("FK__RequestFo__custo__5FB337D6");
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.Staff", b =>
-                {
-                    b.HasOne("SWP391.CHCQS.Model.Staff", "Manager")
-                        .WithMany()
-                        .HasForeignKey("ManagerId");
-
-                    b.HasOne("SWP391.CHCQS.Model.Account", "UsernameNavigation")
-                        .WithMany("Staff")
-                        .HasForeignKey("Username")
-                        .IsRequired()
-                        .HasConstraintName("FK__Staff__username__6383C8BA");
-
-                    b.Navigation("Manager");
-
-                    b.Navigation("UsernameNavigation");
-                });
-
-            modelBuilder.Entity("SWP391.CHCQS.Model.StandardQuotation", b =>
-                {
-                    b.HasOne("SWP391.CHCQS.Model.ConstructionType", "Construction")
-                        .WithMany()
-                        .HasForeignKey("ConstructionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Construction");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.Task", b =>
@@ -2342,11 +1208,51 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("SWP391.CHCQS.Model.Account", b =>
+            modelBuilder.Entity("SWP391.CHCQS.Model.TaskDetail", b =>
                 {
-                    b.Navigation("Customers");
+                    b.HasOne("SWP391.CHCQS.Model.CustomQuotation", "Quotation")
+                        .WithMany("TaskDetails")
+                        .HasForeignKey("QuotationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SWP391.CHCQS.Model.Task", "Task")
+                        .WithMany()
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quotation");
+
+                    b.Navigation("Task");
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.WorkingReport", b =>
+                {
+                    b.HasOne("SWP391.CHCQS.Model.RequestForm", "RequestForm")
+                        .WithMany()
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RequestForm");
 
                     b.Navigation("Staff");
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.ApplicationUser", b =>
+                {
+                    b.HasOne("SWP391.CHCQS.Model.ApplicationUser", "Manager")
+                        .WithMany()
+                        .HasForeignKey("ManagerId");
+
+                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.ConstructionType", b =>
@@ -2354,25 +1260,23 @@ namespace SWP391.CHCQS.DataAccess.Migrations
                     b.Navigation("Pricings");
                 });
 
-            modelBuilder.Entity("SWP391.CHCQS.Model.Customer", b =>
-                {
-                    b.Navigation("Projects");
-
-                    b.Navigation("RequestForms");
-                });
-
             modelBuilder.Entity("SWP391.CHCQS.Model.CustomQuotation", b =>
                 {
                     b.Navigation("ConstructDetail");
 
-                    b.Navigation("CustomQuotaionTasks");
-
                     b.Navigation("MaterialDetails");
+
+                    b.Navigation("TaskDetails");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.InvestmentType", b =>
                 {
                     b.Navigation("Pricings");
+                });
+
+            modelBuilder.Entity("SWP391.CHCQS.Model.Project", b =>
+                {
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("SWP391.CHCQS.Model.RequestForm", b =>

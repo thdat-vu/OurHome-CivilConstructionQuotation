@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.OurHomeWeb.Areas.Manager.Models;
+using SWP391.CHCQS.OurHomeWeb.Areas.Manager.ViewModels;
+using SWP391.CHCQS.OurHomeWeb.Areas.Seller.ViewModels;
+using SWP391.CHCQS.Utility;
 
 namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
 {
     //[XuanDat]   
     //Mục tiêu của controller: tập hợp dữ liệu thống kê vào 1 nơi để dễ dàng truy xuất
     [Area("Manager")]
+    [Authorize(Roles = SD.Role_Manager)]
     public class DashboardController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -28,7 +33,7 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             //tạo danh sách chứa đối tượng lưu data
             var list = new List<QuoteSummary>();
             //tạo mảng 12 tháng
-            string[] timeLine = new string[12] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            string[] timeLine = new string[12] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" };
             //vòng lặp để lưu thông tin vào 12 đối tượng QuoteSummary
             for (int i = 0; i < timeLine.Length; i++)
             {
@@ -59,5 +64,8 @@ namespace SWP391.CHCQS.OurHomeWeb.Areas.Manager.Controllers
             var yearList = _unitOfWork.RequestForm.GetYearList();
             return Json(new { data = yearList });
         }
+
+       
+
     }
 }

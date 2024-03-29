@@ -7,13 +7,14 @@
 //This function will show a box to ask use for comfirm action before execute.
 function BackToIndex(url) {
     Swal.fire({
-        title: "Are you sure?",
-        text: "Any unsaved information will be lost!",
+        title: "Bạn có chắc chắn không?",
+        text: "Bất kì thay đổi nào sẽ không được lưu lại!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#F27456",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, I understand!"
+        confirmButtonText: "Vâng, tôi hiểu!",
+        cancelButtonText: "Hủy",
     }).then((result) => {
         if (result.isConfirmed) {
             window.location.href = url;
@@ -33,12 +34,12 @@ function ShowTaskDetail(url) {
         <div class="card">
             <div class="card-body">
                 <ul class="list-group">
-                    <li class="list-group-item"><strong>Id:</strong> ${data.data.id}</li>
-                    <li class="list-group-item"><strong>Name:</strong> ${data.data.name}</li>
-                    <li class="list-group-item"><strong>Description:</strong> ${data.data.description}</li>
-                    <li class="list-group-item"><strong>Unit Price:</strong> ${data.data.unitPrice}</li>
-                    <li class="list-group-item"><strong>Category Id:</strong> ${data.data.categoryId}</li>
-                    <li class="list-group-item"><strong>Category:</strong> ${data.data.categoryName}</li>
+                    <li class="list-group-item"><strong>Mã:</strong> ${data.data.id}</li>
+                    <li class="list-group-item"><strong>Tên:</strong> ${data.data.name}</li>
+                    <li class="list-group-item"><strong>Mô tả:</strong> ${data.data.description}</li>
+                    <li class="list-group-item"><strong>Giá gốc:</strong> ${data.data.unitPrice}</li>
+                    <li class="list-group-item"><strong>Mã loại Id:</strong> ${data.data.categoryId}</li>
+                    <li class="list-group-item"><strong>Loại:</strong> ${data.data.categoryName}</li>
                 </ul>
             </div>
         </div>
@@ -63,13 +64,13 @@ function ShowMaterialDetail(url) {
         <div class="card">
             <div class="card-body">
                 <ul class="list-group">
-                    <li class="list-group-item"><strong>Id:</strong> ${data.data.id}</li>
-                    <li class="list-group-item"><strong>Name:</strong> ${data.data.name}</li>
-                    <li class="list-group-item"><strong>Description:</strong> ${data.data.description}</li>
-                    <li class="list-group-item"><strong>Unit Price:</strong> ${data.data.unitPrice}</li>
-                    <li class="list-group-item"><strong>Unit:</strong> ${data.data.unit}</li>
-                    <li class="list-group-item"><strong>Category Id:</strong> ${data.data.categoryId}</li>
-                    <li class="list-group-item"><strong>Category:</strong> ${data.data.categoryName}</li>
+                    <li class="list-group-item"><strong>Mã:</strong> ${data.data.id}</li>
+                    <li class="list-group-item"><strong>Tên:</strong> ${data.data.name}</li>
+                    <li class="list-group-item"><strong>Mô tả:</strong> ${data.data.description}</li>
+                    <li class="list-group-item"><strong>Giá gốc:</strong> ${data.data.unitPrice}</li>
+                    <li class="list-group-item"><strong>Đơn vị:</strong> ${data.data.unit}</li>
+                    <li class="list-group-item"><strong>Mã loại:</strong> ${data.data.categoryId}</li>
+                    <li class="list-group-item"><strong>Loại:</strong> ${data.data.categoryName}</li>
                 </ul>
             </div>
         </div>
@@ -79,5 +80,18 @@ function ShowMaterialDetail(url) {
                 focusConfirm: false,
             });
         },
+    });
+}
+
+function formatCurrency(data, type, row) {
+    // Kiểm tra nếu dữ liệu không phải là số thì trả về dữ liệu nguyên thô
+    if (type !== 'display' || isNaN(data)) {
+        return data;
+    }
+
+    // Sử dụng hàm toLocaleString để định dạng giá tiền theo ngôn ngữ và quốc gia hiện tại
+    return Number(data).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
     });
 }

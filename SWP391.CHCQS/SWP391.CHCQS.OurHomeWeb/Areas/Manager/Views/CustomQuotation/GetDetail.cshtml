@@ -1,96 +1,98 @@
 ﻿@model CustomQuotationVM
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = "Chi tiết báo giá";
     //biến để hiển thị lên view
     var quotationDetailVM = Model.QuotationDetailVM;
     //biến có chủ đích đưa dữ liệu xuống dưới
     var rejectQuotationDetailVM = Model.RejectQuotationDetailVM;
 }
 
-<div class="row">
+<div class=" contain-fluid row ">
 
-    <div class="container img-thumbnail mb-3">
+    <div class="p-3 img-thumbnail mb-3">
 
         <div class="">
 
             <div class="mt-3 mb-5 w-100 m-auto">
                 <div class="row mt-3">
                     <div class="m-1 rounded-1 float-left">
-                        <a asp-area="Manager" asp-controller="CustomQuotation" asp-action="Index" class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Back</a>
+
+                        <a @((Model.QuotationDetailVM.Status == 0 || Model.QuotationDetailVM.Status == 4) ? "href=/Manager/CustomQuotation/History" : "onClick=BackToIndex('/Manager/CustomQuotation/Index')") class="btn btn-main text-white "><i class="bi bi-arrow-left"></i> Trở lại</a>
                     </div>
                 </div>
-                <h3 class="text-center"><b>Construct Information</b></h3>
+                <h3 class="text-center"><b>Chi tiết báo giá</b></h3>
                 <hr class="w-75 m-auto"></hr>
             </div>
             <!--Khu vực hiển thị thông tin custom quotation dc tạo bởi seller -->
 
-            <div class="row mt-3">
+            <div class="row mt-3 text-center ">
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Request Id:</b></label>
+                    <label><b class="text-nowrap">Mã yêu cầu:</b></label>
                     <p>@quotationDetailVM.RequestId</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Type of construction:</b></label>
+                    <label><b class="text-nowrap">Loại công trình:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.TypeOfConstruct</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Investment:</b></label>
+                    <label><b class="text-nowrap">Mức đầu tư:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Investment</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Width:</b></label>
+                    <label><b class="text-nowrap">Chiều rộng:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Width</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Length:</b></label>
+                    <label><b class="text-nowrap">Chiều dài:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Length</>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Facade:</b></label>
+                    <label><b class="text-nowrap">Mặt tiền:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Facade</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Alley:</b></label>
+                    <label><b class="text-nowrap">Hẻm:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Alley</p>
                 </div>
             </div>
 
 
-            <div class="row">
+            <div class="row text-center">
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Number of floors:</b></label>
+                    <label><b class="text-nowrap">Số tầng:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Floor</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Mezzanine:</b></label>
+                    <label><b class="text-nowrap">Lửng:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Mezzanine</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Rooftop floor:</b></label>
+                    <label><b class="text-nowrap">Tầng thượng:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.RooftopFloor</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Balcony:</b></label>
+                    <label><b class="text-nowrap">Ban công:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.BalconyStatus</p>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row text-center">
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Foudation:</b></label>
+                    <label><b class="text-nowrap">Loại móng:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Foundation</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Basement:</b></label>
+                    <label><b class="text-nowrap">Loại hầm:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Basement</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Roof:</b></label>
+                    <label><b class="text-nowrap">Loại mái:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Roof</p>
                 </div>
                 <div class="col-lg">
-                    <label><b class="text-nowrap">Garden:</b></label>
+                    <label><b class="text-nowrap">Diện tích vườn:</b></label>
                     <p>@quotationDetailVM.ConstructDetailVM.Garden</p>
+<<<<<<< HEAD
                 </div>
             </div>
 
@@ -288,3 +290,237 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
      }
  }
+=======
+
+                </div>
+                <div class="col-lg" style="color:red">
+                    <label><b class="text-nowrap">Tổng giá:</b></label>
+                    
+                    @{
+                        string FormatTotal(decimal data)
+                        {
+                            // Tạo một CultureInfo với định dạng số mong muốn (Ví dụ: vi-VN cho tiền tệ Việt Nam)
+                            System.Globalization.CultureInfo cultureInfo = new System.Globalization.CultureInfo("vi-VN");
+
+                            // Thay đổi cách ngăn cách số thập phân từ dấu phẩy thành dấu chấm
+                            cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
+                            cultureInfo.NumberFormat.NumberGroupSeparator = ".";
+
+                            // Sử dụng CultureInfo đã tạo để định dạng số
+                            return data.ToString("N1") + " ₫";
+                           
+                        }
+                            var totalStr = FormatTotal(quotationDetailVM.Total);
+                        }
+                    <p > @totalStr</p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!--Hiện 2 bảng TaskListSession và MaterialListSession -->
+        <div class="row mb-3 ">
+
+            <!--TaskList-->
+            <div class="col-lg-5">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-main">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white m-0">Công việc</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table id="tblTaskDetail" class="border-1 table-bordered table-striped text-black" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Mã
+                                        </th>
+                                        <th>
+                                            Tên
+                                        </th>
+                                        <th>
+                                            Giá
+                                        </th>
+                                        <th>
+                                            Ghi chú
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--MaterialList-->
+            <div class="col-lg-7">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-main">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white m-0">Vật liệu </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table id="tblMaterialDetail" class="table-bordered table-striped text-black" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Mã
+                                        </th>
+                                        <th>
+                                            Tên
+                                        </th>
+                                        <th>
+                                            Loại
+                                        </th>
+                                        <th>
+                                            Số lượng
+                                        </th>
+
+                                        <th>
+                                            Giá
+                                        </th>
+                                        <th>
+                                            Đơn vị
+                                        </th>
+                                        <th>
+                                            Ghi chú
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div @((Model.QuotationDetailVM.Status == 0 || Model.QuotationDetailVM.Status == 4) ? "hidden" : "") class="row w-75 m-auto">
+                <a id="save_note" class="btn btn-main text-white mb-3"><i class="bi bi-journal-arrow-down"></i> Lưu ghi chú</a>
+            </div>
+            <!--Khu vực hiển thị thời gian làm việc và kết thúc của seller và engineer-->
+            <div class="row">
+                <div class="container-fluid img-thumbnail m-3">
+                    <div class="mt-3 mb-5 w-100 m-auto">
+                        <h3 class="text-center"><b>Thời gian làm việc</b></h3>
+                        <hr class="w-75 m-auto"></hr>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg">
+                            <b class="text-nowrap">Tư vấn viên</b>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Ngày nhận: </b></label>
+                            <p>@(quotationDetailVM.DelegationDateSeller)</p>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Ngày nộp:</b></label>
+                            <p>@quotationDetailVM.SubmissionDateSeller</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg">
+                            <b class="text-nowrap">Kỹ sư</b>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Ngày nhận:</b></label>
+                            <p>@quotationDetailVM.RecieveDateEngineer</p>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Ngày nộp:</b></label>
+                            <p>@quotationDetailVM.SubmissionDateEngineer</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <b class="text-nowrap">Quản lý</b>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Ngày nhận:</b></label>
+                            <p>@quotationDetailVM.RecieveDateManager</p>
+                        </div>
+                        <div class="col-lg">
+                            <label><b class="text-nowrap">Ngày nộp:</b></label>
+                            <p>@quotationDetailVM.AcceptanceDateManager</p>
+                        </div>
+                    </div>
+
+
+                    <!--Khu vực hiển thị nhân viên đảm nhiệm -->
+                    <div class="row m-2">
+                        <div class="col-md-4 col-sm-12 border">
+                            <div class="col text-center mt-3">
+                                <p class="mb-0 text-center"><b>Tư vấn viên</b></p>
+                            </div>
+                            <partial name="~/Areas/Manager/Views/StaffProfilePartial.cshtml" model="@quotationDetailVM.Seller">
+                        </div>
+                        <div class="col-md-4 col-sm-12 border">
+                            <div class=" col text-center mt-3">
+                                <p class="mb-0"><b>Kỹ sư</b></p>
+                            </div>
+                            <partial name="~/Areas/Manager/Views/StaffProfilePartial.cshtml" model="@quotationDetailVM.Enginneer">
+                        </div>
+                        <div class="col-md-4 col-sm-12 border">
+                            <div class="col text-center mt-3">
+                                <p class="mb-0"><b>Quản lý</b></p>
+                            </div>
+                            <partial name="~/Areas/Manager/Views/StaffProfilePartial.cshtml" model="@quotationDetailVM.Manager">
+                        </div>
+                    </div>
+
+
+                    <!--khi reject dữ liệu ở form sẽ dc đẩy xuống-->
+                    <form asp-area="Manager" asp-controller="CustomQuotation" asp-action="RejectDetail" method="post">
+                        <!--quotation id sẽ dc reject-->
+                        <input asp-for="@rejectReportVM.RejectQuotationId" type="hidden" value="@quotationDetailVM.QuoteId" />
+                        <!--ngày submit của engineer-->
+                        <input asp-for="@rejectReportVM.SubmissionEngineerDate" type="hidden" value="@quotationDetailVM.SubmissionDateEngineer" />
+                        <!--ngày recieve của manager-->
+                        <input asp-for="@rejectReportVM.RecieveManagerDate" type="hidden" value="@quotationDetailVM.RecieveDateManager" />
+                        <!--manager id-->
+                        <input asp-for="@rejectReportVM.ManagerId" type="hidden" value="@(quotationDetailVM.Manager?.Id??"")" />
+                        <!--engineer id-->
+                        <input asp-for="@rejectReportVM.EngineerId" type="hidden" value="@(quotationDetailVM.Enginneer?.Id??"")" />
+                        <!--reason - cần dài hơn 20 ký tự -->
+                        <div class="form-outline mt-3">
+                            <label><b class="text-nowrap" for="textAreaExample">Lý do</b></label>
+
+                            <textarea asp-for="@rejectReportVM.Reason" placeholder="Lý do trong trường hợp từ chối " class="form-control" id="textAreaExample1" rows="4"></textarea>
+                            <span asp-validation-for="@rejectReportVM.Reason" class="text-danger text-nowrap"></span>
+                        </div>
+                        <!--Nút reject và approve-->
+                        <div @((Model.QuotationDetailVM.Status == 0 || Model.QuotationDetailVM.Status == 4) ? "hidden" : "") class="row">
+                            <div class="w-100 btn-group mb-3 mt-3 col-md-6" role="group">
+                                <button id="reject_button" type="submit" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-x">Từ chối</i></button>
+                            </div>
+                            <div class="w-100 btn-group mb-3 mt-3 col-md-6" role="group">
+                                <a href="/Manager/CustomQuotation/ApproveDetail?id=@quotationDetailVM.QuoteId&managerId=@(quotationDetailVM?.Manager?.Id??"")" class="btn btn-primary btn-main border-0 m-1"><i class="bi bi-check">Chấp nhận</i></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @section Scripts {
+                <script src="~/js/datatables/managerDTB/TaskDetailDTB.js"></script>
+                <script src="~/js/datatables/managerDTB/MaterialDetailDTB.js"></script>
+                <script src="~/js/SaveNote.js"></script>
+                <script src="~/js/site.js"></script>
+
+            }
+
+            @section ValidationScripts {
+                @{
+                    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+                }
+            }
+>>>>>>> Demostration

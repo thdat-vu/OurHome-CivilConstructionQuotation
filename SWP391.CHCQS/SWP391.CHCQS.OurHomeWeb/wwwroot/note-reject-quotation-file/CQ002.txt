@@ -1,0 +1,171 @@
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "c\u00F3 th\u1EC3 kh\u00F4ng c\u1EA7n t\u1ED5 ch\u1EE9c",
+    "TSK003": "khu v\u1EF1c \u0111\u00F3 \u0111\u00E3 \u0111\u00E0o m\u00F3ng s\u1EB5n",
+    "TSK005": "",
+    "TSK006": "",
+    "TSK007": ""
+  },
+  "MaterialDetailNotes": {
+    "VT106": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT105": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT015": {
+      "Quantity": 1,
+      "Note": "t\u00EAn b\u1ECB sai r\u1ED3i"
+    },
+    "VT103": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT107": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT108": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT110": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "c\u00F3 th\u1EC3 kh\u00F4ng c\u1EA7n t\u1ED5 ch\u1EE9c",
+    "TSK003": "khu v\u1EF1c \u0111\u00F3 \u0111\u00E3 \u0111\u00E0o m\u00F3ng s\u1EB5n",
+    "TSK005": "",
+    "TSK006": "",
+    "TSK007": ""
+  },
+  "MaterialDetailNotes": {
+    "VT106": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT105": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT015": {
+      "Quantity": 0,
+      "Note": "t\u00EAn b\u1ECB sai r\u1ED3i"
+    },
+    "VT103": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT107": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT108": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT110": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+
+{
+  "Total": null,
+  "TaskDetailNotes": {
+    "TSK001": "c\u00F3 th\u1EC3 kh\u00F4ng c\u1EA7n t\u1ED5 ch\u1EE9c",
+    "TSK003": "khu v\u1EF1c \u0111\u00F3 \u0111\u00E3 \u0111\u00E0o m\u00F3ng s\u1EB5n",
+    "TSK005": "",
+    "TSK006": "",
+    "TSK007": ""
+  },
+  "MaterialDetailNotes": {
+    "VT106": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT101": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT102": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT105": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT104": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT015": {
+      "Quantity": 0,
+      "Note": "t\u00EAn b\u1ECB sai r\u1ED3i"
+    },
+    "VT103": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT107": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT108": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT109": {
+      "Quantity": 0,
+      "Note": ""
+    },
+    "VT110": {
+      "Quantity": 0,
+      "Note": ""
+    }
+  }
+}
+

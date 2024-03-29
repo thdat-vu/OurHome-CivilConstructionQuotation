@@ -29,6 +29,11 @@ namespace SWP391.CHCQS.DataAccess.Repository
 				objFromDb.Description = obj.Description;
 				objFromDb.Price = obj.Price;
 				objFromDb.ConstructionId = obj.ConstructionId;
+				if (obj.ImageUrl != null)
+				{
+					objFromDb.ImageUrl= obj.ImageUrl;
+
+                }
 			}
 		}
     }

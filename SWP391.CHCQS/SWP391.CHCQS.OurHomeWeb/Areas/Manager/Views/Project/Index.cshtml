@@ -1,0 +1,71 @@
+﻿@{
+	ViewData["Title"] = "Danh sách dự án";
+	//Layout = "~/Views/Shared/_LayoutManager";
+}
+
+
+<div class="card shadow border-0 my-4">
+	<div class="card-header bg-main ml-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-white py-2">Danh sách dự án</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="card-body p-4">
+		<div class="row pb-3">
+			<div class="col-6">
+			</div>
+			<div class="col-6 text-end">
+				<a asp-area="Manager" asp-controller="Project" asp-action="Create" class="btn btn-main">
+					<i class="bi bi-plus-circle"></i> Thêm dự án
+				</a>
+			</div>
+		</div>
+		@* Table of Project List *@
+		<div class="table-responsive">
+			<table id="tblProject" class="table-bordered table-striped text-black" style="width:100%">
+				<thead>
+					<tr>
+						<th class="text-nowrap">
+							Mã
+						</th>
+						<th class="text-nowrap">
+							Tên 
+						</th>
+
+						<th class="text-nowrap">
+							Vị trí
+						</th>
+						<th class="text-nowrap">
+							Quy mô
+						</th>
+						<th class="text-nowrap">
+							Kích thước
+						</th>
+						<th class="text-nowrap">
+							Mô tả
+						</th>
+						<th class="text-nowrap">
+							Tổng quan
+						</th>
+						<th class="text-nowrap">
+							Ngày tạo
+						</th>
+						<th class="text-nowrap">
+							Tên khách hàng 
+						</th>
+						<th class="text-nowrap">
+							Hành động
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="~/js/datatables//managerDTB/ProjectDTB.js"></script>
+}

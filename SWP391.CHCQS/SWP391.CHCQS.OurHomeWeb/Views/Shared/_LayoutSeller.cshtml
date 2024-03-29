@@ -22,6 +22,9 @@
 
 	<!-- Link datatables css -->
 	<link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" asp-append-version="true" />
+
+	<!--Link sweet alert-->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -31,9 +34,9 @@
 		<ul class="navbar-nav bg-main sidebar sidebar-dark accordion" id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+			<a asp-area="Seller" asp-controller="Home" asp-action="Index" style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center">
 				<div class="sidebar-brand-icon">
-					<img src="~/images/logo.png" width="100%"></img>
+					<img src="~/images/logo.png" width="100%"/>
 				</div>
 			</a>
 
@@ -41,28 +44,28 @@
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Customer Request -->
-			<li class="nav-item active">
-				<a class="nav-link" asp-area="Seller" asp-controller="Home" asp-action="Index">
-					<i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>Customer Request</span>
-				</a>
-			</li>
 
+			<li class="nav-item active">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+				   aria-expanded="true" aria-controls="collapseTwo">
+					<i class="fas fa-tasks"></i>
+					<span>Yêu cầu của khách hàng</span>
+				</a>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" asp-area="Seller" asp-controller="Home" asp-action="Index">Đang chờ</a>
+						<a class="collapse-item" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestSaved">Đã lưu</a>
+						<a class="collapse-item" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestCompleted">Đã hoàn thành</a>
+						<a class="collapse-item" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestRejected">Đã từ chối</a>
+					</div>
+				</div>
+			</li>
 			<hr class="sidebar-divider my-0">
 
 			<li class="nav-item active">
 				<a class="nav-link" asp-area="Seller" asp-controller="Quotation" asp-action="ViewQuotation">
-					<i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>View Custom Quotation</span>
-				</a>
-			</li>
-
-			<hr class="sidebar-divider my-0">
-
-			<li class="nav-item active">
-				<a class="nav-link" asp-area="Seller" asp-controller="Request" asp-action="ViewRequestCompleted">
-					<i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>Customer Request completed</span>
+					<i class="fas fa-paper-plane"></i>
+					<span>Xem yêu cầu đã gửi</span>
 				</a>
 			</li>
 
@@ -88,33 +91,11 @@
 					</button>
 
 					<!-- Topbar Navbar -->
-					<ul class="navbar-nav ml-auto">
+					<div class="navbar-nav" style="justify-content:end; width:100%; margin-right: 1em ">
 
 						<!-- Nav Item - User Information -->
-						<li class="nav-item dropdown no-arrow">
-							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-							   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-								<img class="img-profile rounded-circle"
-									 src="img/undraw_profile.svg">
-							</a>
-							<!-- Dropdown - User Information -->
-							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-								 aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#">
-									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-									Profile
-								</a>
-
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-									Logout
-								</a>
-							</div>
-						</li>
-
-					</ul>
+							<partial name="_LoginPartial"></partial>
+					</div>
 
 				</nav>
 				<!-- End of Topbar -->
@@ -162,6 +143,13 @@
 
 	<!-- Datatable scripts -->
 	<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+
+	<!-- Sweet Alert 2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<!-- SignalR -->
+	<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+	<script src="~/js/signalr/CustomQuotationNotification.js"></script>
 
 	@await RenderSectionAsync("Scripts", required: false)
 </body>

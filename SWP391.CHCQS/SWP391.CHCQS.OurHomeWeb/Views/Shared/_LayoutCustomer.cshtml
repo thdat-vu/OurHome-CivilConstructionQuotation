@@ -6,7 +6,7 @@
 	<title>@ViewData["Title"]</title>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/css/material.css" asp-append-version="true"/>
+	<link rel="stylesheet" href="~/css/material.css" asp-append-version="true" />
 
 	<link rel="stylesheet" href="~/SWP391.CHCQS.OurHomeWeb.styles.css" asp-append-version="true" />
 
@@ -16,6 +16,10 @@
 	<!-- Link toast Notification -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" />
+
+	<!-- Link datatables css -->
+	<link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" asp-append-version="true" />
+
 </head>
 <body>
 	<header class="sticky-top">
@@ -29,47 +33,40 @@
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 					<ul class="navbar-nav flex-grow-1">
 						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+							<a class="nav-link text-dark text-hover" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="Customer" asp-controller="Combo" asp-action="Index">Combo</a>
+							<a class="nav-link text-dark text-hover" asp-area="Customer" asp-controller="Combo" asp-action="Index">Dịch vụ</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="Customer" asp-controller="Project" asp-action="Index">Project</a>
+							<a class="nav-link text-dark text-hover" asp-area="Customer" asp-controller="Project" asp-action="Index">Dự án</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="Customer" asp-controller="Material" asp-action="Index">Material</a>
+							<a class="nav-link text-dark text-hover" asp-area="Customer" asp-controller="Material" asp-action="Index">Vật liệu</a>
 						</li>
 
 						<li class="nav-item dropdown">
 
-							<a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Quotation
+							<a class="nav-link dropdown-toggle text-dark text-hover" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Báo giá
 							</a>
 
 							<ul class="dropdown-menu">
 								<li class="">
-									<a class="dropdown-item" asp-area="Customer" asp-controller="Quotation" asp-action="Index">Quick Quote</a>
+									<a class="dropdown-item" asp-area="Customer" asp-controller="Request" asp-action="QuickQuote">Báo giá nhanh</a>
 								</li>
 								<li class="">
-									<a class="dropdown-item" asp-area="Customer" asp-controller="Quotation" asp-action="CreateRequest">Create Request</a>
+									<a class="dropdown-item" asp-area="Customer" asp-controller="Request" asp-action="CreateRequest">Báo giá chi tiết</a>
 								</li>
 								<li class="">
-									<a class="dropdown-item" asp-area="Customer" asp-controller="Quotation" asp-action="ManageRequest">Manage Request</a>
+									<a class="dropdown-item" asp-area="Customer" asp-controller="Request" asp-action="RequestHistory">Lịch sử báo giá</a>
 								</li>
 							</ul>
 						</li>
 
 					</ul>
 
-					<div class="nav-item row w-25">
-						<div class="col m-1 btn-group rounded-1">
-							<a asp-area="Customer" asp-controller="Project" asp-action="Detail" class="btn btn-main text-nowrap">Sign Up</a>
-						</div>
-						<div class="col m-1 btn-group rounded-1">
-							<a asp-area="Customer" asp-controller="Project" asp-action="Detail" class="btn btn-main text-nowrap">Login</a>
-						</div>
-					</div>
+					<partial name="_LoginPartial" />
 
 				</div>
 			</div>
@@ -89,32 +86,32 @@
 			</div>
 			<div class="row mt-5 mb-5 align-items-center">
 				<div class="col-sm-8 mb-3 ">
-					<h5>Contruction Company: OurHome</h5>
-					<h5 class="text-wrap">Office Address: District 9, Thu Duc City, Ho Chi Minh city</h5>
+					<h5>Công ty xây dựng: OurHome</h5>
+					<h5 class="text-wrap">Địa chỉ văn phòng: Lô E2a-7, Đường D1, Long Thạnh Mỹ, Thành Phố Thủ Đức</h5>
 					<h5>Hotline: 0908176623</h5>
 					<h5>Email: ourhome.construct@gmail.com</h5>
 				</div>
 				<div class="col-sm-4">
 					<div class="row">
 						<div class="col-6">
-							<h6><b>Quick Link</b></h6>
+							<h6><b>Truy cập nhanh</b></h6>
 							<ul class="lh-lg">
-								<li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a></li>
-								<li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Combo" asp-action="Index">Combo</a></li>
-								<li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Project" asp-action="Index">Project</a></li>
-								<li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Material" asp-action="Index">Material</a></li>
-								<li><a class="text-decoration-none text-dark" asp-area="Customer" asp-controller="Quotation" asp-action="Index">Quotation</a></li>
+								<li><a class="text-decoration-none text-dark text-hover" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+								<li><a class="text-decoration-none text-dark text-hover" asp-area="Customer" asp-controller="Combo" asp-action="Index">Dịch vụ</a></li>
+								<li><a class="text-decoration-none text-dark text-hover" asp-area="Customer" asp-controller="Project" asp-action="Index">Dự án</a></li>
+								<li><a class="text-decoration-none text-dark text-hover" asp-area="Customer" asp-controller="Material" asp-action="Index">Vật liệu</a></li>
+								<li><a class="text-decoration-none text-dark text-hover" asp-area="Customer" asp-controller="Request" asp-action="CreateRequest">Báo giá chi tiết</a></li>
 							</ul>
 						</div>
 						<div class="col-6">
-							<h6><b>Socical Media</b></h6>
+							<h6><b>Mạng xã hội</b></h6>
 							<ul class="lh-lg list-unstyled">
-								<li><a class="text-decoration-none text-dark" href=""><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-								<li><a class="text-decoration-none text-dark" href=""><i class="fa-brands fa-x-twitter"></i> Twitter</a></li>
-								<li><a class="text-decoration-none text-dark" href=""><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+								<li><a class="text-decoration-none text-dark text-hover" href=""><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+								<li><a class="text-decoration-none text-dark text-hover" href=""><i class="fa-brands fa-x-twitter"></i> Twitter</a></li>
+								<li><a class="text-decoration-none text-dark text-hover" href=""><i class="fa-brands fa-facebook"></i> Facebook</a></li>
 							</ul>
 							<div class="col-sm btn-group rounded-1 w-100" role="group">
-								<a asp-area="Customer" asp-controller="Quotation" asp-action="Index" class="btn btn-main">Get Quote Now</a>
+								<a asp-area="Customer" asp-controller="Request" asp-action="QuickQuote" class="btn btn-main">Báo giá nhanh</a>
 							</div>
 						</div>
 					</div>
@@ -125,7 +122,20 @@
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
-	<script src="https://cdn.tiny.cloud/1/9v3f6801xkjbo5g8uijy1kuncu1ltgp0khqtlsn6d9oulwdj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<!-- Bootstrap core JavaScript-->
+	<script src="~/vendor/jquery/jquery.min.js"></script>
+	<script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+	<!-- Datatable scripts -->
+	<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" asp-append-version="true"></script>
 	@await RenderSectionAsync("Scripts", required: false)
+
+	<!-- Sweet Alert 2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<!-- SignalR -->
+	<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+	<script src="~/js/signalr/CustomQuotationNotification.js"></script>
 </body>
 </html>

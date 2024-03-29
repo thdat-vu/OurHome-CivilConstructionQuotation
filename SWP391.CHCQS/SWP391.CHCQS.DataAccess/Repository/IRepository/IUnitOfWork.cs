@@ -8,9 +8,19 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
 {    
     public interface IUnitOfWork
     {
+<<<<<<< HEAD
         IStandardQuotationRepository StandardQuotation { get; }
         IProjectRepository Project { get; }
         ICustomQuotaionTaskRepository CustomQuotaionTask { get; }
+=======
+        IApplicationUserRepository ApplicationUser { get; }
+        IComboRepository Combo { get; }
+        IComboMaterialRepository ComboMaterial { get; }
+        IComboTaskRepository ComboTask { get; }
+        IProjectRepository Project { get; }
+        IProjectImageRepository ProjectImage { get; }
+        ITaskDetailRepository TaskDetail { get; }
+>>>>>>> Demostration
         ICustomQuotationRepository CustomQuotation { get; }
         ITaskRepository Task { get; }
         IMaterialRepository Material { get; }
@@ -24,8 +34,14 @@ namespace SWP391.CHCQS.DataAccess.Repository.IRepository
         IBasementTypeRepository BasementType { get; }
         IRoofTypeRepository RoofType { get; }
         IMaterialCategoryRepository MaterialCategory { get; }
-        IStaffRepository Staff { get; }
         IRejectedCustomQuotationRepository RejectedCustomQuotation { get; }
+<<<<<<< HEAD
+=======
+
+        IWorkingReportRepository WorkingReport { get; }
+        IPricingRepository Pricing { get; }
+
+>>>>>>> Demostration
         void Save();
     }
 }

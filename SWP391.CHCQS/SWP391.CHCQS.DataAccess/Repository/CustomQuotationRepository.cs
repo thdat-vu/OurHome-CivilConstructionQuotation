@@ -1,4 +1,5 @@
-﻿using SWP391.CHCQS.DataAccess.Data;
+﻿using Newtonsoft.Json.Linq;
+using SWP391.CHCQS.DataAccess.Data;
 using SWP391.CHCQS.DataAccess.Repository.IRepository;
 using SWP391.CHCQS.Model;
 using System;
@@ -22,20 +23,26 @@ namespace SWP391.CHCQS.DataAccess.Repository
         {
             _db.CustomQuotations.Update(obj);
         }
-        
-        //function trả về số quotation dc tạo ra trong tháng
-        public int CountCustomQuotationInMonthAndYear(int month, int year)
-        {
-            //DateTime? thì có thể null nên cần làm khác 1 chút
-            Expression<Func<CustomQuotation, bool>> filter = (x) =>x.SubmissionDateSeller.Value.Month == month && x.SubmissionDateSeller.Value.Year == year;
-            return GetAllWithFilter(filter).Count() ;
-        }
-        //public void UpdateStatus(string id, int status)
-        //{
-        //    var target = Get((x) => x.Id == id);
-        //    target.Status = status;
-        //    //thực hiện update đối tượng
-        //    Update(target);
-        //}
-    }
+
+		//function trả về số quotation dc tạo ra trong tháng
+		public int CountCustomQuotationInMonthAndYear(int month, int year)
+		{
+			//lấy ra tất cả working report
+
+			var cqSubmited = _db.WorkingReports.ToList();
+			//DateTime thì có thể null nên cần làm khác 1 chút
+			Expression<Func<CustomQuotation, bool>> filter = (x) => x.Date.Value.Month == month && x.Date.Value.Year == year;
+			return GetAllWithFilter(filter).Count();
+
+		}
+
+
+		//public void UpdateStatus(string id, int status)
+		//{
+		//    var target = Get((x) => x.Id == id);
+		//    target.Status = status;
+		//    //thực hiện update đối tượng
+		//    Update(target);
+		//}
+	}
 }

@@ -1,0 +1,58 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Thông tin tài khoản";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3 class="d-flex justify-content-center">@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="container d-flex justify-content-center align-items-center min-vh-30 mb-3">
+    <div class="row rounded-3 p-3 bg-white">
+        <div class="col-md-6 m-auto rounded-3 d-flex justify-content-center align-items-center flex-column">
+            <form id="profile-form" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3">
+                    <div class="form-floating" style="width: 30em">
+                        <input asp-for="Username" class="form-control form-control-lg bg-light fs-6" disabled />
+                        <label asp-for="Username" class="form-label"></label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-floating" style="width: 30em">
+                        <input asp-for="Input.PhoneNumber" class="form-control form-control-lg bg-light fs-6" />
+                        <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-floating" style="width: 30em">
+                        <input asp-for="Input.Name" class="form-control form-control-lg bg-light fs-6" />
+                        <label asp-for="Input.Name" class="form-label"></label>
+                        <span asp-validation-for="Input.Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-floating" style="width: 30em">
+
+                        <select asp-for="Input.Gender" asp-items="@Model.Input.GenderList" class="form-select">
+                        </select>
+                        <label asp-for="Input.Gender" class="form-label"></label>
+                    </div>
+                </div>
+                <div class="mb-3" style="width: 30em">
+                    <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-main my-2">Lưu</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

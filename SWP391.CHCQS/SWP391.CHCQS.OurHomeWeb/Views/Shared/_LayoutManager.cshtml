@@ -32,7 +32,7 @@
 		<ul class="navbar-nav bg-main sidebar sidebar-dark accordion" id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+			<a style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center" href="/Manager/CustomQuotation/Index">
 				<div class="sidebar-brand-icon">
 					<img src="~/images/logo.png" width="100%"></img>
 				</div>
@@ -41,11 +41,11 @@
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
-			<!-- Nav Item - Dashboard -->
+			<!-- Nav Item - Overview -->
 			<li class="nav-item">
 				<a class="nav-link" href="/Manager/Home/Index">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>Dashboard</span>
+					<span>Tổng quan</span>
 				</a>
 			</li>
 			
@@ -55,10 +55,17 @@
 
 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item">
-				<a class="nav-link" href="/Manager/CustomQuotation/Index">
-					<i class="bi bi-file-check-fill"></i>
-					<span>Quotation</span>
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pendingPages"
+				   aria-expanded="true" aria-controls="pendingPages">
+					<i class="fas fa-fw fa-folder"></i>
+					<span>Các báo giá</span>
 				</a>
+				<div id="pendingPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" asp-area="Manager" asp-controller="CustomQuotation" asp-action="Index">Đang xử lí</a>
+						<a class="collapse-item" asp-area="Manager" asp-controller="CustomQuotation" asp-action="History">Lịch sử</a>
+					</div>
+				</div>
 			</li>
 
 			<!-- Divider -->
@@ -68,15 +75,15 @@
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
 				   aria-expanded="true" aria-controls="collapsePages">
-					<i class="fas fa-fw fa-folder"></i>
-					<span>Resource</span>
+					<i class="bi bi-archive-fill"></i>
+					<span>Hạng mục</span>
 				</a>
 				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" asp-area="Manager" asp-controller="StandardQuotation" asp-action="Index">Standard Quotation</a>
-						<a class="collapse-item" asp-area="" asp-controller="" asp-action="">Project</a>
-						<a class="collapse-item" asp-area="Manager" asp-controller="StandardQuotation" asp-action="Index">Combo</a>
-						<a class="collapse-item" asp-area="Manager" asp-controller="Material" asp-action="Index">Material</a>
+						<a class="collapse-item" asp-area="Manager" asp-controller="Project" asp-action="Index">Dự án</a>
+						<a class="collapse-item" asp-area="Manager" asp-controller="Combo" asp-action="Index">Gói dịch vụ</a>
+						<a class="collapse-item" asp-area="Manager" asp-controller="Material" asp-action="Index">Vật liệu</a>
+						<a class="collapse-item" asp-area="Manager" asp-controller="Task" asp-action="Index">Đầu mục công việc</a>
 					</div>
 				</div>
 			</li>
@@ -106,33 +113,11 @@
 					</button>
 
 					<!-- Topbar Navbar -->
-					<ul class="navbar-nav ml-auto">
+					<div class="navbar-nav" style="justify-content:end; width:100%; margin-right: 1em ">
 
 						<!-- Nav Item - User Information -->
-						<li class="nav-item dropdown no-arrow">
-							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-							   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-								<img class="img-profile rounded-circle"
-									 src="img/undraw_profile.svg">
-							</a>
-							<!-- Dropdown - User Information -->
-							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-								 aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#">
-									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-									Profile
-								</a>
-
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-									Logout
-								</a>
-							</div>
-						</li>
-
-					</ul>
+						<partial name="_LoginPartial"></partial>
+					</div>
 
 				</nav>
 				<!-- End of Topbar -->
@@ -178,8 +163,12 @@
 	<script src="~/js/demo/chart-pie-demo.js"></script>
 	<script src="https://cdn.tiny.cloud/1/9v3f6801xkjbo5g8uijy1kuncu1ltgp0khqtlsn6d9oulwdj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
+	
 	<!-- Datatable scripts -->
 	<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	<!-- Sweet Alert 2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<!--Client side validation-->
 	@await RenderSectionAsync("ValidationScripts", required: false)

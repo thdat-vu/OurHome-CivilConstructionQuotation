@@ -7,21 +7,39 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\**" />
+    <Compile Remove="Areas\Base\Data\**" />
+    <Compile Remove="Areas\Base\Models\**" />
+    <Compile Remove="Areas\Base\Views\**" />
     <Compile Remove="SWP391.CHCQS.OurHomeWeb\**" />
-    <Content Remove="Controllers\**" />
+    <Content Remove="Areas\Base\Data\**" />
+    <Content Remove="Areas\Base\Models\**" />
+    <Content Remove="Areas\Base\Views\**" />
     <Content Remove="SWP391.CHCQS.OurHomeWeb\**" />
-    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="Areas\Base\Data\**" />
+    <EmbeddedResource Remove="Areas\Base\Models\**" />
+    <EmbeddedResource Remove="Areas\Base\Views\**" />
     <EmbeddedResource Remove="SWP391.CHCQS.OurHomeWeb\**" />
-    <None Remove="Controllers\**" />
+    <None Remove="Areas\Base\Data\**" />
+    <None Remove="Areas\Base\Models\**" />
+    <None Remove="Areas\Base\Views\**" />
     <None Remove="SWP391.CHCQS.OurHomeWeb\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.3.0" />
+<<<<<<< HEAD
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.26" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.26" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.26">
+=======
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.27" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.27" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.27">
+>>>>>>> Demostration
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -33,6 +51,11 @@
     <ProjectReference Include="..\SWP391.CHCQS.DataAccess\SWP391.CHCQS.DataAccess.csproj">
       <Private>True</Private>
     </ProjectReference>
+<<<<<<< HEAD
+=======
+    <ProjectReference Include="..\SWP391.CHCQS.Model\SWP391.CHCQS.Model.csproj" />
+    <ProjectReference Include="..\SWP391.CHCQS.Services\SWP391.CHCQS.Services.csproj" />
+>>>>>>> Demostration
     <ProjectReference Include="..\SWP391.CHCQS.Utility\SWP391.CHCQS.Utility.csproj">
       <Private>True</Private>
     </ProjectReference>
@@ -42,6 +65,12 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\material\" />
+    <Folder Include="wwwroot\images\combo\" />
+    <Folder Include="wwwroot\images\project\" />
   </ItemGroup>
 
 </Project>

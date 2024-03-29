@@ -16,7 +16,9 @@ namespace SWP391.CHCQS.Utility.Helpers
 			var value = session.GetString(key);
 			return value == null ? default : JsonSerializer.Deserialize<T>(value);
 		}
-		public static void SetBoolean(this ISession session, string key, bool value)
+     
+
+        public static void SetBoolean(this ISession session, string key, bool value)
 		{
 			session.SetString(key, value.ToString());
 		}

@@ -1,4 +1,4 @@
-html {
+﻿html {
     font-size: 14px;
 }
 
@@ -33,6 +33,11 @@ body {
     cursor: pointer;
 }
 
+.text-hover:hover {
+    color: #F27456 !important;
+    transition: 0.2s;
+}
+
 
 /*Style for main BTN*/
 .btn-main {
@@ -48,22 +53,26 @@ body {
 
 /*Style for datatables*/
 #tblTask td, th {
-    padding: 2px 4px;
     font-size: 12px;
 }
 
 #tblCustomQuotationTask td, th {
-    padding: 2px 4px;
+    font-size: 12px;
+}
+
+#tblTaskDetail {
+    font-size: 12px;
+}
+
+#tblTaskDetail_wrapper label {
     font-size: 12px;
 }
 
 #tblMaterialDetail td, th {
-    padding: 2px 4px;
     font-size: 12px;
 }
 
 #tblMaterial td, th {
-    padding: 2px 4px;
     font-size: 12px;
 }
 
@@ -84,7 +93,81 @@ body {
 }
 
 
-/*Stype for toast notification*/
+#tblCombo {
+    font-size: 12px;
+}
+
+    #tblCombo td, th {
+        font-size: 12px;
+    }
+
+#tblCombo_wrapper label {
+    font-size: 12px;
+}
+
+#tblCustomQuotation {
+    font-size: 12px;
+}
+
+    #tblCustomQuotation td, th {
+        font-size: 12px;
+    }
+
+#tblCustomQuotation_wrapper label {
+    font-size: 12px;
+}
+
+
+#tblProject {
+    font-size: 12px;
+}
+
+    #tblProject td, th {
+        font-size: 12px;
+    }
+
+#tblProject_wrapper label {
+    font-size: 12px;
+}
+
+#tblQuotation {
+    font-size: 12px;
+}
+
+    #tblQuotation td, th {
+        font-size: 12px;
+    }
+
+#tblQuotation_wrapper label {
+    font-size: 12px;
+}
+
+#tblAllCustomQuotation {
+    font-size: 12px;
+}
+
+    #tblAllCustomQuotation td, th {
+        font-size: 12px;
+    }
+
+#tblAllCustomQuotation_wrapper label {
+    font-size: 12px;
+}
+
+#tblAllRequest {
+    font-size: 12px;
+}
+
+    #tblAllRequest th, td {
+        font-size: 12px;
+    }
+
+#tblAllRequest_wrapper label {
+    font-size: 12px;
+}
+
+
+/*Style for toast notification*/
 .toast-success {
     color: white;
     border: none !important;
@@ -92,4 +175,48 @@ body {
 
     .toast-success:hover {
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+    }
+
+/* Style for login logout button */
+.btn {
+    color: white !important;
+}
+
+    .btn.login {
+        color: #F27456 !important;
+        background-color: white !important;
+        border: 1px solid;
+    }
+
+    .btn.register {
+        background-color: #F27456 !important;
+        border: 1px solid;
+    }
+
+    .btn.login:hover {
+        color: white !important;
+        background-color: #F27456 !important;
+        transition: ease 0.3s;
+    }
+
+    .btn.register:hover {
+        color: #F27456 !important;
+        background-color: white !important;
+        transition: ease 0.3s;
+    }
+
+.navbar-nav .nav-item .nav-link.active,
+.dropdown-menu .dropdown-item.active,
+.dropdown-menu .dropdown-item:hover {
+    color: #F27456 !important;
+    background-color: #ffffff !important;
+}
+
+#manage {
+    transition: transform 0.3s ease;
+}
+
+    #manage:hover {
+        transform: scale(1.3);
+        color: #F27456
     }

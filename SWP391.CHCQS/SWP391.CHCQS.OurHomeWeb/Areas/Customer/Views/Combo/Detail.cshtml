@@ -1,0 +1,99 @@
+﻿@model Combo
+
+@{
+    ViewData["Title"] = "Chi tiết dịch vụ";
+}
+
+<style>
+    tr{
+        color:black
+    }
+</style>
+
+<div class="d-flex img-thumbnail justify-content-center">
+    <div class="d-flex align-items-center">
+        <h3 class="p-3"><a class="text-decoration-none text-black user-select-auto" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a></h3>
+        <i class="fa-solid fa-arrow-right-long"></i>
+        <h3 class="p-3"><a class="text-decoration-none user-select-auto" style="color: #F27456" asp-area="Customer" asp-controller="Combo" asp-action="Index">Dịch vụ</a></h3>
+    </div>
+</div>
+
+<div class="mt-5 text-center">
+    <h1 style="font-weight:600; text-transform:uppercase">@Model.Name</h1>
+</div>
+
+<div class="container-fluid d-flex ">
+    <div class="row d-flex">
+        <div class="col-lg-8">
+            <img style="border-radius:5px; max-height:29em;max-width:50em" src="@Model.ImageUrl" width="100%" height="100%" />
+        </div>
+        <div class="col-lg-4">
+            <div>
+                <h2 style="text-align:justify">Mô tả</h2>
+                <p style="text-align:justify; word-wrap: break-word;">@Model.Description</p>
+            </div>
+        </div>
+        <hr class=" mt-3" />
+
+        <div class="text-center mb-3">
+            <h2 id="overview">
+                <span class="title font-weight-bold">Thông tin gói dịch vụ</span>
+            </h2>
+            <div class="text-center" style="margin:.5em auto 20px;height:3px;max-width:100px;background-color:rgb(237,50,55)">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="text-center">Vật liệu</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Đơn vị</th>
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var material in Model.Materials)
+                            {
+                                <tr>
+                                    <td style="text-align:left;color:#f27456">@material.Name</td>
+                                    <td style="color:#f27456">@material.Unit</td>
+                                    <td style="text-align:right;color:#f27456">@material.UnitPrice.ToString("#,##0") VND</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h3 class="text-center">Công việc</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var task in Model.Tasks)
+                            {
+                                <tr>
+                                    <td style="text-align:left;color:#f27456">@task.Name</td>
+                                    <td style="text-align:right;color:#f27456">@task.UnitPrice.ToString("#,##0") VND</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

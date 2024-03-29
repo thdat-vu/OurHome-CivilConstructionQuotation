@@ -17,6 +17,11 @@ namespace SWP391.CHCQS.DataAccess.Repository
 			_db = db;
 		}
 
+		public string GetName(string id)
+		{
+			return _db.TaskCategories.Find(id).Name;
+		}
+
 		public void Update(TaskCategory obj)
 		{
 			_db.TaskCategories.Update(obj);

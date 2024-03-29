@@ -6,6 +6,7 @@
 	<title>@ViewData["Title"]</title>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/material.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/SWP391.CHCQS.OurHomeWeb.styles.css" asp-append-version="true" />
 
 	<!-- Custom fonts for this template-->
@@ -17,8 +18,8 @@
 	<link href="~/css/sb-admin-2.min.css" rel="stylesheet" asp-append-version="true">
 
 	<!-- Link toast Notification -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" asp-append-version="true">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" asp-append-version="true" />
 
 	<!-- Link datatables css -->
 	<link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
@@ -31,113 +32,25 @@
 		<ul class="navbar-nav bg-main sidebar sidebar-dark accordion" id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+			<a asp-area="Admin" asp-controller="User" asp-action="Index" style="background-color: white" class="sidebar-brand d-flex align-items-center justify-content-center">
 				<div class="sidebar-brand-icon">
 					<img src="~/images/logo.png" width="100%"></img>
 				</div>
 			</a>
 
-			<!-- Divider -->
-			<hr class="sidebar-divider my-0">
-
-			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active">
-				<a class="nav-link" href="index.html">
+				<a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>Dashboard</span>
+					<span>Quản lí người dùng</span>
+				</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Tạo người dùng mới</span>
 				</a>
 			</li>
 
-			<!-- Divider -->
-			<hr class="sidebar-divider">
-
-			<!-- Heading -->
-			<div class="sidebar-heading">
-				Interface
-			</div>
-
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-				   aria-expanded="true" aria-controls="collapseTwo">
-					<i class="fas fa-fw fa-cog"></i>
-					<span>Components</span>
-				</a>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Custom Components:</h6>
-						<a class="collapse-item" href="buttons.html">Buttons</a>
-						<a class="collapse-item" href="cards.html">Cards</a>
-					</div>
-				</div>
-			</li>
-
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-				   aria-expanded="true" aria-controls="collapseUtilities">
-					<i class="fas fa-fw fa-wrench"></i>
-					<span>Utilities</span>
-				</a>
-				<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-					 data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Custom Utilities:</h6>
-						<a class="collapse-item" href="utilities-color.html">Colors</a>
-						<a class="collapse-item" href="utilities-border.html">Borders</a>
-						<a class="collapse-item" href="utilities-animation.html">Animations</a>
-						<a class="collapse-item" href="utilities-other.html">Other</a>
-					</div>
-				</div>
-			</li>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider">
-
-			<!-- Heading -->
-			<div class="sidebar-heading">
-				Addons
-			</div>
-
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-				   aria-expanded="true" aria-controls="collapsePages">
-					<i class="fas fa-fw fa-folder"></i>
-					<span>Pages</span>
-				</a>
-				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Login Screens:</h6>
-						<a class="collapse-item" href="login.html">Login</a>
-						<a class="collapse-item" href="register.html">Register</a>
-						<a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-						<div class="collapse-divider"></div>
-						<h6 class="collapse-header">Other Pages:</h6>
-						<a class="collapse-item" href="404.html">404 Page</a>
-						<a class="collapse-item" href="blank.html">Blank Page</a>
-					</div>
-				</div>
-			</li>
-
-			<!-- Nav Item - Charts -->
-			<li class="nav-item">
-				<a class="nav-link" href="charts.html">
-					<i class="fas fa-fw fa-chart-area"></i>
-					<span>Charts</span>
-				</a>
-			</li>
-
-			<!-- Nav Item - Tables -->
-			<li class="nav-item">
-				<a class="nav-link" href="tables.html">
-					<i class="fas fa-fw fa-table"></i>
-					<span>Tables</span>
-				</a>
-			</li>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider d-none d-md-block">
 
 			<!-- Sidebar Toggler (Sidebar) -->
 			<div class="text-center d-none d-md-inline">
@@ -160,33 +73,11 @@
 					</button>
 
 					<!-- Topbar Navbar -->
-					<ul class="navbar-nav ml-auto">
+					<div class="navbar-nav" style="justify-content:end; width:100%; margin-right: 1em ">
 
 						<!-- Nav Item - User Information -->
-						<li class="nav-item dropdown no-arrow">
-							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-							   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-								<img class="img-profile rounded-circle"
-									 src="img/undraw_profile.svg">
-							</a>
-							<!-- Dropdown - User Information -->
-							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-								 aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#">
-									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-									Profile
-								</a>
-
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-									Logout
-								</a>
-							</div>
-						</li>
-
-					</ul>
+						<partial name="_LoginPartial"></partial>
+					</div>
 
 				</nav>
 				<!-- End of Topbar -->
@@ -209,7 +100,8 @@
 
 
 
-
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

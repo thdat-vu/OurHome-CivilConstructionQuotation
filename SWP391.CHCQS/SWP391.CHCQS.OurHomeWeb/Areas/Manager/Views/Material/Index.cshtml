@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Danh sách vật liệu";
     //Layout = "~/Views/Shared/_LayoutManager";
 }
 
@@ -9,7 +9,7 @@
 	<div class="card-header bg-main ml-0 py-3">
 		<div class="row">
 			<div class="col-12 text-center">
-				<h2 class="text-white py-2">Material List</h2>
+				<h2 class="text-white py-2">Danh sách vật liệu</h2>
 			</div>
 		</div>
 	</div>
@@ -19,8 +19,8 @@
 			<div class="col-6">
 			</div>
 			<div class="col-6 text-end">
-				<a asp-area="Manager" asp-controller="Material" asp-action="Create" class="btn btn-primary btn-main">
-					<i class="bi bi-plus-circle"></i>  Create New Material
+				<a asp-area="Manager" asp-controller="Material" asp-action="Create" class="btn btn-main">
+					<i class="bi bi-plus-circle"></i>  Tạo vật liệu mới
 				</a>
 			</div>
 		</div>
@@ -28,26 +28,23 @@
 			<table id="tblMaterial" class="table-bordered table-striped text-black" style="width:100%">
 				<thead>
 					<tr>
-						<th>
-							Id
+						<th class="text-nowrap">
+							Mã
 						</th>
-						<th>
-							Name
+						<th class="text-nowrap">
+							Tên
 						</th>
-						<th>
-							Quantity
+						<th class="text-nowrap">
+							Giá gốc
 						</th>
-						<th>
-							Unit Price
+						<th class="text-nowrap">
+							Đơn vị
 						</th>
-						<th>
-							Unit
+						<th class="text-nowrap">
+							Loại
 						</th>
-						<th>
-							Category
-						</th>
-						<th>
-							Actions
+						<th class="text-nowrap">
+							Hành động
 						</th>
 					</tr>
 				</thead>
